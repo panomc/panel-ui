@@ -1,0 +1,241 @@
+<!-- Dashboard Page -->
+<article class="content">
+
+  <!-- Dashboard: Welcome Alerts -->
+  <section class="row">
+    <div class="col-lg-8 d-flex">
+      <div class="flex-fill w-100 alert bg-white border alert-dismissible show border-primary" role="alert"
+           v-if="getting_started_blocks.welcome_board">
+        <button @click="onCloseGettingStartedCard" class="close" data-dismiss="alert" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+        <h4 class="card-title">Hoş Geldiniz</h4>
+
+        <p>
+          Pano kullanıma hazır! İşte başlarken yapabileceklerinizden bazıları:
+        </p>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <ul class="list-unstyled mb-1">
+              <h5 class="text-muted">Başlarken</h5>
+              <li>
+                <a data-target="#showServers" data-toggle="modal" href="javascript:void(0);">
+                  <i aria-hidden="true" class="fa fa-plus fa-fw"></i>
+                  Sunucunuzu Bağlayın
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">
+                  <i aria-hidden="true" class="fa fa-brush fa-fw"></i>
+                  Sitenizin Görünümünü Belirleyin
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">
+                  <i aria-hidden="true" class="fa fa-pen fa-fw"></i> İlk
+                  Blog Yazınızı Yayınlayın
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">
+                  <i aria-hidden="true" class="fa fa-user-cog fa-fw"></i>
+                  Oyuncularınızı Yönetin
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-6">
+            <ul class="list-unstyled mb-1">
+              <h5 class="text-muted">Daha Fazlası</h5>
+              <li>
+                <a href="javascript:void(0);">
+                  <i aria-hidden="true" class="fa fa-puzzle-piece fa-fw"></i>
+                  Daha Fazla Eklenti Ekleyin
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">
+                  <i aria-hidden="true" class="fa fa-palette fa-fw"></i>
+                  Daha Fazla Tema Ekleyin
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">
+                  <i aria-hidden="true" class="fa fa-book-open fa-fw"></i>
+                  Dökümantasyonlara Gidin
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">
+                  <i aria-hidden="true" class="fab fa-discord fa-fw"></i>
+                  Discord Topluluğumuza Katılın
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 d-flex">
+      <div class="alert bg-white border alert-dismissible show border-primary" role="alert"
+           v-if="getting_started_blocks.connect_board">
+        <div class="align-self-center">
+
+          <button @click="onCloseConnectServerCard" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+          <h4 class="card-title">Sunucu Bağla</h4>
+          <p>
+            Minecraft sunucunuzu platforma bağlayın. Böylece sunucu ve oyuncu bilgileri gibi verileri gerekli yerlerde
+            görüntüleyebiliriz.
+          </p>
+          <button class="btn btn-outline-primary" data-target="#connectServer" data-toggle="modal">
+            <i aria-hidden="true" class="fa fa-plus fa-fw"></i> Sunucu Bağla
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard: Title  -->
+  <section class="row justify-content-between align-items-center">
+    <div class="col-6">
+      <h3 class="text-muted badge badge-lightprimary panel-subtitle">
+        Website
+      </h3>
+    </div>
+  </section>
+
+  <!-- Website: Activity -->
+  <section class="row justify-content-around align-items-stretch">
+
+    <!-- Dashboard > Website: 3 Content Statics Blocks -->
+    <div class="d-flex col-lg-9">
+      <div class="d-flex flex-fill card">
+        <div class="card-body h-100">
+          <div class="row justify-content-between">
+            <div class="col-4 text-left">
+              <h5 class="card-title">Ziyaretler</h5>
+            </div>
+            <div class="col-8 text-right">
+              <div class="btn-group">
+                <button class="btn btn-sm btn-outline-light btn-link active">
+                  Haftalık
+                </button>
+                <button class="btn btn-sm btn-outline-light btn-link">
+                  Aylık
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center h-100">
+            <canvas height="110" id="myChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-fill col-lg-3">
+      <div class="d-flex flex-column align-items-stretch w-100 h-100">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              Oyuncular
+            </h5>
+            <div class="text-mint d-flex flex-row align-items-center justify-content-between h-75">
+              <i class="fas fa-users fa-3x"></i>
+              <h1 class="card-text font-weight-lighter">{{ registered_player_count }}</h1>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              Talepler
+            </h5>
+            <div class="text-bittersweet d-flex flex-row align-items-center justify-content-between h-75">
+              <i class="fas fa-ticket-alt fa-3x"></i>
+              <h1 class="card-text font-weight-lighter">0</h1>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              Yazılar
+            </h5>
+            <div class="text-sunflower d-flex flex-row align-items-center justify-content-between h-75">
+              <i class="fas fa-sticky-note fa-3x"></i>
+              <h1 class="card-text font-weight-lighter">{{ post_count }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Statistic Table -->
+  <section class="row justify-content-around">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row justify-content-between pb-2">
+            <div class="col">
+              <h5 class="card-title">
+                İstatistikler
+              </h5>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm m-0">
+              <thead>
+              <tr class="text-primary">
+                <th scope="col">İstatistik</th>
+                <th scope="col">Veri</th>
+              </tr>
+              </thead>
+              <tbody class="text-muted">
+              <tr>
+                <th scope="row">
+                  Yazılar:
+                </th>
+                <td>0</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  Sayfalar:
+                </th>
+                <td>0</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  Kayıtlı Oyuncular:
+                </th>
+                <td v-text="registered_player_count"></td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  Açık Talepler:
+                </th>
+                <td>0</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  Kayıtlı Talepler:
+                </th>
+                <td>0</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</article>

@@ -1,0 +1,14 @@
+{
+  "pre-scripts": [
+    "assets/js/md5.min.js",
+    "assets/js/quill.min.js"
+  ],
+  "post-scripts": [
+    "assets/js/vue-toasted.min.js",
+    "assets/js/router.js",
+    "assets/js/api.util.js",
+    "assets/js/storage.util.js",
+    "assets/js/vuex-store.js",
+    "assets/js/i18n.js"
+  ]
+}

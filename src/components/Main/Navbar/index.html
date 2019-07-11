@@ -1,0 +1,65 @@
+<!-- Top Navbar -->
+<nav class="navbar navbar-expand navbar-light bg-white sticky-top border border-bottom" id="main-navbar">
+  <ul class="nav navbar-nav mr-auto">
+    <li class="nav-item">
+      <a @click="onSideBarCollapseClick" class="icon-link nav-link" href="javascript:void(0);" title="Menüyü Aç/Kapa">
+        <i aria-hidden="true" class="fa fa-bars"></i>
+      </a>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav m-auto">
+    <div class="navbar-brand text-muted collapse multi-collapse fade show" id="title">
+      <span title="Sayfa Başlığı">Panel</span>
+    </div>
+  </ul>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown">
+      <a aria-expanded="false" aria-haspopup="true" class="icon-link nav-link position-relative"
+         data-toggle="dropdown" href="javascript:void(0);" id="navbarDropdownMenuLink" role="button"
+         title="Bildirimler">
+        <i aria-hidden="true" class="far fa-bell"></i>
+        <span class="notification"></span>
+      </a>
+      <div class="dropdown-menu animated fadeIn faster dropdown-menu-right notifications">
+        <h6 class="dropdown-header">
+          Bildirimler
+          <a class="float-right" href="javascript:void(0);" title="Tümünü Temizle">
+            <i aria-hidden="true" class="fa fa-align-right fa-xs"></i>
+            <i aria-hidden="true" class="fas fa-broom"></i>
+          </a>
+        </h6>
+        <a class="dropdown-item py-3 alert-primary" href="javascript:void(0);">
+          <i aria-hidden="true" class="fa fa-check text-primary fa-fw"></i>
+          Bu bir okunmamış bildirim.
+        </a>
+        <a class="dropdown-item py-3" href="javascript:void(0);">
+          <i aria-hidden="true" class="fa fa-check text-primary fa-fw"></i>
+          Bu bir okunmuş bildirim.
+        </a>
+        <a class="dropdown-item py-3" href="javascript:void(0);">
+          <i aria-hidden="true" class="fa fa-check text-primary fa-fw"></i>
+          Bu bir okunmuş bildirim.
+        </a>
+      </div>
+    </li>
+
+    <li class="nav-item dropdown">
+      <a aria-expanded="false" aria-haspopup="true"
+         class="icon-link nav-link position-relative d-flex align-items-center" data-toggle="dropdown"
+         href="javascript:void(0);" id="navbarDropdownMenuLink" title="Oturum">
+        <span class="d-lg-inline d-none" v-text="username"></span>
+        <img :src=" 'https://www.gravatar.com/avatar/' + md5(email.trim().toLocaleLowerCase()) + '/64'"
+             class="img-fluid ml-lg-3 p-0 rounded border"
+             width="24"/>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right animated fadeIn faster notifications">
+        <h6 class="dropdown-header">
+          <span title="Kullanıcı Adı">{{ email }}</span>
+          <a @click="logout" class="text-danger float-right" href="javascript:void(0)" v-tooltip:top="'Çıkış Yap'">
+            <i aria-hidden="true" class="fas fa-sign-out-alt fa-fw float-right"></i>
+          </a>
+        </h6>
+      </div>
+    </li>
+  </ul>
+</nav>
