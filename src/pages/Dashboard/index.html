@@ -21,28 +21,28 @@
             <ul class="list-unstyled mb-1">
               <h5 class="text-muted">Başlarken</h5>
               <li>
-                <a data-target="#showServers" data-toggle="modal" href="javascript:void(0);">
+                <a data-target="#connectServer" data-toggle="modal" href="javascript:void(0);">
                   <i aria-hidden="true" class="fa fa-plus fa-fw"></i>
-                  Sunucunuzu Bağlayın
+                  Oyun Sunucunuzu Bağlayın
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0);">
+                <router-link to="panel/view">
                   <i aria-hidden="true" class="fa fa-brush fa-fw"></i>
                   Sitenizin Görünümünü Belirleyin
-                </a>
+                </router-link>
               </li>
               <li>
-                <a href="javascript:void(0);">
+                <router-link to="panel/posts/create-post">
                   <i aria-hidden="true" class="fa fa-pen fa-fw"></i> İlk
-                  Blog Yazınızı Yayınlayın
-                </a>
+                  İlk Yazınızı Yayınlayın
+                </router-link>
               </li>
               <li>
-                <a href="javascript:void(0);">
+                <router-link to="panel/players">
                   <i aria-hidden="true" class="fa fa-user-cog fa-fw"></i>
-                  Oyuncularınızı Yönetin
-                </a>
+                  Oyuncularınızı İnceleyin
+                </router-link>
               </li>
             </ul>
           </div>
@@ -68,7 +68,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0);">
+                <a href="https://panomc.com/discord" target="_blank">
                   <i aria-hidden="true" class="fab fa-discord fa-fw"></i>
                   Discord Topluluğumuza Katılın
                 </a>

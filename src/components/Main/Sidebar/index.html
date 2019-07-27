@@ -112,16 +112,22 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="card-body">
+          <div class="card-body text-center">
 
-            <h5 class="text-primary" for="downloadPlugin">1. Eklentiyi İndirin ve Sunucunuza
-              Kurun:</h5>
+            <div class="mb-3">
+              <i class="fa fa-download fa-3x text-primary" aria-hidden="true"></i>
+            </div>
+
+            <h5 class="text-primary" for="downloadPlugin">1. Çekirdek Eklentiyi Sunucunuza İndirin:</h5>
             <button class="btn btn-link bg-light btn-block" data-placement="top" data-toggle="tooltip"
                     id="downloadPlugin" title="Resmi Web Sitesinden İndir">
-              <i aria-hidden="true" class="fas fa-file-download fa-fw"></i> Pano Minecraft Eklentisi 1.0
+              <i aria-hidden="true" class="fas fa-file-download fa-fw"></i> Pano Minecraft Eklentisi
             </button>
 
-            <hr>
+            
+            <div class="my-4">
+              <i class="fa fa-terminal fa-3x text-primary" aria-hidden="true"></i>
+            </div>
 
             <h5 class="text-primary" for="platformToken">2. Bağlantı Komutunu Çalıştırın:</h5>
             <div class="input-group">
@@ -139,10 +145,13 @@
               {{ timeToRefreshKey }}{{ timeToRefreshKey === '...' ? '' : ' saniye'}} sonra yenilenecek.
             </small>
 
-            <hr>
+            
+            <div class="my-4">
+              <i class="fa fa-check-circle fa-3x text-primary" aria-hidden="true"></i>
+            </div>
 
             <h5 class="text-primary">3. Bağlantı İsteğine Onay Verin:</h5>
-            <p class="mb-0">(<i aria-hidden="true" class="fa fa-bell"></i>) Bildirim panelinden sunucu
+            <p class="mb-0">(<i aria-hidden="true" class="far fa-bell"></i>) Bildirim panelinden sunucu
               bağlantısı bildirimini açarak, bağlantı isteğine onay verin.</p>
 
           </div>
