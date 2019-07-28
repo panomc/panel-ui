@@ -14,11 +14,9 @@
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown">
-      <a aria-expanded="false" aria-haspopup="true" class="icon-link nav-link position-relative"
-         data-toggle="dropdown" href="javascript:void(0);" id="navbarDropdownMenuLink" role="button"
-         title="Bildirimler">
+      <a aria-expanded="false" aria-haspopup="true" class="icon-link nav-link position-relative dropdown-toggle"
+        data-toggle="dropdown" href="javascript:void(0);" id="navbarDropdownMenuLink" role="button" title="Bildirimler">
         <i aria-hidden="true" class="far fa-bell"></i>
-        <span class="notification"></span>
       </a>
       <div class="dropdown-menu animated fadeIn faster dropdown-menu-right notifications">
         <h6 class="dropdown-header">
@@ -44,21 +42,32 @@
     </li>
 
     <li class="nav-item dropdown">
-      <a aria-expanded="false" aria-haspopup="true"
-         class="icon-link nav-link position-relative d-flex align-items-center" data-toggle="dropdown"
-         href="javascript:void(0);" id="navbarDropdownMenuLink" title="Oturum">
-        <span class="d-lg-inline d-none" v-text="username"></span>
-        <img :src=" 'https://www.gravatar.com/avatar/' + md5(email.trim().toLocaleLowerCase()) + '/64'"
-             class="img-fluid ml-lg-3 p-0 rounded border"
-             width="24"/>
+      <a aria-expanded="false" aria-haspopup="true" class="icon-link nav-link dropdown-toggle" data-toggle="dropdown"
+        href="javascript:void(0);" id="navbarDropdownMenuLink" title="Oturum">
+        <i class="far fa-user" aria-hidden="true"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-right animated fadeIn faster notifications">
-        <h6 class="dropdown-header">
-          <span title="Kullanıcı Adı">{{ email }}</span>
-          <a @click="logout" class="text-danger float-right" href="javascript:void(0)" v-tooltip:top="'Çıkış Yap'">
-            <i aria-hidden="true" class="fas fa-sign-out-alt fa-fw float-right"></i>
-          </a>
-        </h6>
+        <div class="px-2 py-2">
+          <router-link to="panel/admins/admin" class="px-3">
+            <img :src=" 'https://www.gravatar.com/avatar/' + md5(email.trim().toLocaleLowerCase()) + '/64'" width="32"
+              class="rounded mr-2" alt="">
+            <span class="text-muted" title="Full E Mail">{{ email }}</span>
+            <a @click="logout" class="btn btn-link btn-sm text-danger d-inline-block float-right"
+              href="javascript:void(0)" v-tooltip:top="'Çıkış Yap'">
+              <i aria-hidden="true" class="fas fa-sign-out-alt fa-lg"></i>
+            </a>
+          </router-link>
+          <hr>
+          <ul class="nav flex-column p-0 m-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-user-cog fa-fw" aria-hidden="true"></i> Hesabı Yönet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-primary" href="#"><i class="fa fa-plus fa-fw" aria-hidden="true"></i> Yönetici
+                Ekle</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </li>
   </ul>

@@ -5,7 +5,7 @@
   <section class="row">
     <div class="col-lg-8 d-flex">
       <div class="flex-fill w-100 alert bg-white border alert-dismissible show border-primary" role="alert"
-           v-if="getting_started_blocks.welcome_board">
+        v-if="getting_started_blocks.welcome_board">
         <button @click="onCloseGettingStartedCard" class="close" data-dismiss="alert" type="button">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -81,7 +81,7 @@
 
     <div class="col-lg-4 d-flex">
       <div class="alert bg-white border alert-dismissible show border-primary" role="alert"
-           v-if="getting_started_blocks.connect_board">
+        v-if="getting_started_blocks.connect_board">
         <div class="align-self-center">
 
           <button @click="onCloseConnectServerCard" class="close" data-dismiss="alert" type="button">
@@ -118,7 +118,7 @@
       <div class="d-flex flex-fill card">
         <div class="card-body h-100">
           <div class="row justify-content-between">
-            <div class="col-4 text-left">
+            <div class="col-4">
               <h5 class="card-title">Ziyaretler</h5>
             </div>
             <div class="col-8 text-right">
@@ -180,7 +180,7 @@
   </section>
 
   <!-- Statistic Table -->
-  <section class="row justify-content-around">
+  <section class="row justify-content-around d-none">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
@@ -194,42 +194,42 @@
           <div class="table-responsive">
             <table class="table table-sm m-0">
               <thead>
-              <tr class="text-primary">
-                <th scope="col">İstatistik</th>
-                <th scope="col">Veri</th>
-              </tr>
+                <tr class="text-primary">
+                  <th scope="col">İstatistik</th>
+                  <th scope="col">Veri</th>
+                </tr>
               </thead>
               <tbody class="text-muted">
-              <tr>
-                <th scope="row">
-                  Yazılar:
-                </th>
-                <td>0</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  Sayfalar:
-                </th>
-                <td>0</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  Kayıtlı Oyuncular:
-                </th>
-                <td v-text="registered_player_count"></td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  Açık Talepler:
-                </th>
-                <td>0</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  Kayıtlı Talepler:
-                </th>
-                <td>0</td>
-              </tr>
+                <tr>
+                  <th scope="row">
+                    Yazılar:
+                  </th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    Sayfalar:
+                  </th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    Kayıtlı Oyuncular:
+                  </th>
+                  <td v-text="registered_player_count"></td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    Açık Talepler:
+                  </th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    Kayıtlı Talepler:
+                  </th>
+                  <td>0</td>
+                </tr>
               </tbody>
             </table>
           </div>
