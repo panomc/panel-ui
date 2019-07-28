@@ -32,14 +32,14 @@ body {
   margin-bottom: 1rem;
 }
 
-#sidebar-logo {
+.sidebar-logo {
   height: 73px;
   display: flex;
   align-items: center;
   background: $lightglass;
 }
 
-#sidebar-head {
+.sidebar-head {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,7 +60,7 @@ body {
   }
 }
 
-#sidebar {
+.sidebar {
   position: relative;
   display: block;
   width: 240px;
@@ -76,17 +76,17 @@ body {
   }
 }
 
-#sidebar:not(.active) {
+.sidebar:not(.active) {
   margin-left: -250px;
 }
 
-#sidebar.active {
+.sidebar.active {
   @include media-breakpoint-down(md) {
     box-shadow: 5px 0 0 0 $glass;
   }
 }
 
-#sidebar-inner {
+.sidebar-inner {
   overflow-y: auto;
   height: calc(100vh - 130px);
 }
@@ -95,18 +95,18 @@ body {
   padding: .2rem 2rem;
 }
 
-#sidebar-tab {
+.sidebar-tab {
   padding: 0.5rem 1rem;
 }
 
-#sidebar-bottom {
+.sidebar-bottom {
   position: absolute;
   bottom: 0;
   width: 100%;
   padding-bottom: 0.5rem;
 }
 
-#panel-content {
+.panel-content {
   display: block;
   height: 100vh;
   min-width: 300px;
@@ -160,7 +160,7 @@ body {
   }
 }
 
-#management-tab > li.nav-item {
+.management-tab > li.nav-item {
   a.nav-link.active {
     background: $glass;
     color: $sunflower;
@@ -173,10 +173,20 @@ body {
   margin-bottom: 1rem;
 }
 
-#page-category {
+.page-category {
   background: $white;
   width: 100%;
   padding: 1rem 1.5rem;
+}
+
+.page-category-v {
+  background: $white;
+  width: 100%;
+  height: calc(100vh - 74px);
+  padding: 1rem 1.5rem;
+  @include media-breakpoint-down(md) {
+    padding: 0.5rem 0.5rem;
+  }
 }
 
 .settings-form {

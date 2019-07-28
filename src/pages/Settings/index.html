@@ -2,22 +2,22 @@
 <div>
 
   <!-- Settings Categories Navigation -->
-  <nav class="border-bottom border-glass" id="page-category">
+  <nav class="border-bottom border-glass page-category">
     <div class="nav nav-pills d-flex flex-row w-100">
       <router-link :class="{ 'active': currentActiveNavLink === 1 }" class="nav-item nav-link" to="/panel/settings">
         Genel
       </router-link>
       <router-link :class="{ 'active': currentActiveNavLink === 2 }" class="nav-item nav-link"
-                   to="/panel/settings/site-settings">
+        to="/panel/settings/site-settings">
         Website
       </router-link>
       <router-link :class="{ 'active': currentActiveNavLink === 3 }"
-                   class="nav-item nav-link ml-sm-auto position-relative" to="/panel/settings/updates">
+        class="nav-item nav-link ml-sm-auto position-relative" to="/panel/settings/updates">
         Güncellemeler
         <span class="notification"></span>
       </router-link>
       <router-link :class="{ 'active': currentActiveNavLink === 4 }" class="nav-item nav-link"
-                   to="/panel/settings/about">
+        to="/panel/settings/about">
         Hakkında
       </router-link>
     </div>

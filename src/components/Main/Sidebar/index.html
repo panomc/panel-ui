@@ -7,7 +7,7 @@
         <div class="modal-header">
           <h5 class="modal-title">Sunucular</h5>
           <button class="btn btn-outline-primary btn-sm ml-3" data-dismiss="modal" data-target="#connectServer"
-                  data-toggle="modal" type="button">
+            data-toggle="modal" type="button">
             <i aria-hidden="true" class="fa fa-plus fa-fw"></i> Suncuu Bağla
           </button>
           <button aria-label="Kapat" class="close" data-dismiss="modal" title="Pencereyi Kapat" type="button">
@@ -21,14 +21,14 @@
 
             <!-- Server Card -->
             <div :key="index" class="col-lg-4 col-md-6" v-for="(server, index) in servers"
-                 v-if="!serverListLoading && servers.length > 0">
+              v-if="!serverListLoading && servers.length > 0">
               <div :class="{ 'selected': selected_server.id === server.id }" class="card w-100">
                 <a @click="selectServer(server)" href="javascript:void(0);">
                   <div class="card-img-top bg-primary border-0" style="height: 100px;">
                     <div class="card-body">
                       <h4 class="card-title text-white lead">
                         <i aria-hidden="true" class="fa fa-home fa-fw text-primary fa-xs"
-                           v-if="main_server.id === server.id"></i>
+                          v-if="main_server.id === server.id"></i>
                         {{ server.name }}</h4>
                       <h5 class="badge badge-sunflower">Spigot</h5>
                     </div>
@@ -36,7 +36,7 @@
                   <div class="position-relative">
                     <div class="position-absolute w-100" style="top: -60px;">
                       <img :src="server.favicon" alt=" Sever İkon"
-                           class="d-block m-auto border rounded-circle shadow-sm bg-white p-1 text-center">
+                        class="d-block m-auto border rounded-circle shadow-sm bg-white p-1 text-center">
                     </div>
                     <div class="mt-4 card-body text-center text-dark d-flex flex-row justify-content-between">
                       <div>
@@ -63,8 +63,7 @@
                 <div class="card-footer bg-lightprimary text-center">
                   <div class="dropup">
                     <button aria-expanded="false" aria-haspopup="true" class="btn btn-link btn-block"
-                            data-toggle="dropdown"
-                            id="serverOptions" title="Seçenekler" type="button">
+                      data-toggle="dropdown" id="serverOptions" title="Seçenekler" type="button">
                       <i aria-hidden="true" class="fa fa-cog fa-fw"></i>
                     </button>
                     <div aria-labelledby="serverOptions" class="dropdown-menu">
@@ -80,7 +79,7 @@
                       </a>
 
                       <a @click="onRemoveClick(server)" class="dropdown-item" data-dismiss="modal"
-                         data-target="#confirmRemoveServer" data-toggle="modal" href="javascript:void(0);">
+                        data-target="#confirmRemoveServer" data-toggle="modal" href="javascript:void(0);">
                         <i aria-hidden="true" class="fa fa-times fa-fw text-danger"></i> Sunucuyu Kaldır
                       </a>
                     </div>
@@ -120,11 +119,11 @@
 
             <h5 class="text-primary" for="downloadPlugin">1. Çekirdek Eklentiyi Sunucunuza İndirin:</h5>
             <button class="btn btn-link bg-light btn-block" data-placement="top" data-toggle="tooltip"
-                    id="downloadPlugin" title="Resmi Web Sitesinden İndir">
+              id="downloadPlugin" title="Resmi Web Sitesinden İndir">
               <i aria-hidden="true" class="fas fa-file-download fa-fw"></i> Pano Minecraft Eklentisi
             </button>
 
-            
+
             <div class="my-4">
               <i class="fa fa-terminal fa-3x text-primary" aria-hidden="true"></i>
             </div>
@@ -132,10 +131,10 @@
             <h5 class="text-primary" for="platformToken">2. Bağlantı Komutunu Çalıştırın:</h5>
             <div class="input-group">
               <input :value="'/pano connect ' + platformAddress + ' ' + key" class="form-control" id="platformToken"
-                     type="text">
+                type="text">
               <div class="input-group-append">
                 <button @click="onCopyPlatformMatchKeyClick" class="btn btn-primary" id="copyPlatformToken"
-                        type="button" v-tooltip:top="isPlatformMatchKeyCopied ? 'Kopyalandı!' : 'Kopyala'">
+                  type="button" v-tooltip:top="isPlatformMatchKeyCopied ? 'Kopyalandı!' : 'Kopyala'">
                   <i aria-hidden="true" class="fa fa-clipboard fa-fw"></i>
                 </button>
               </div>
@@ -145,7 +144,7 @@
               {{ timeToRefreshKey }}{{ timeToRefreshKey === '...' ? '' : ' saniye'}} sonra yenilenecek.
             </small>
 
-            
+
             <div class="my-4">
               <i class="fa fa-check-circle fa-3x text-primary" aria-hidden="true"></i>
             </div>
@@ -173,10 +172,10 @@
             <div class="container d-block m-auto">
               <label for="confirmRemoveServerPassword">Onaylamak için lütfen şifrenizi girin:</label>
               <input :class="{ 'border-danger': removingServerForm.error.password }" aria-describedby="helpId"
-                     class="form-control text-center mb-2" id="confirmRemoveServerPassword"
-                     placeholder="Pano Hesabı Şifreniz" type="password" v-model="removingServerForm.password">
+                class="form-control text-center mb-2" id="confirmRemoveServerPassword"
+                placeholder="Pano Hesabı Şifreniz" type="password" v-model="removingServerForm.password">
 
-              <small class="form-text text-danger d-inline" id="helpId" v-if="removingServerForm.error.code !== ''">
+              <small class="form-text text-danger d-inline" v-if="removingServerForm.error.code !== ''">
                 <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i> {{ removingServerForm.error.code }}
               </small>
             </div>
@@ -186,11 +185,11 @@
           </div>
           <div class="modal-footer">
             <button :disabled="removingServerForm.removing" class="btn btn-outline-primary w-100" data-dismiss="modal"
-                    type="button">Hayır
+              type="button">Hayır
             </button>
 
             <button :disabled="removingServerForm.removing || removingServerForm.password === ''"
-                    class="btn btn-danger w-100" type="submit">
+              class="btn btn-danger w-100" type="submit">
               <div class="spinner-border spinner-border-sm text-white" role="status" v-if="removingServerForm.removing">
               </div>
               <span v-if="!removingServerForm.removing">Evet</span>
@@ -202,25 +201,25 @@
   </div>
 
   <!-- Sidebar -->
-  <aside :class="{ 'active': isSidebarOpen }" class="bg-primary" id="sidebar">
+  <aside :class="{ 'active': isSidebarOpen }" class="sidebar bg-primary">
 
     <!-- Sidebar Logo -->
-    <div class="border-bottom border-glass justify-content-lg-center" id="sidebar-logo">
+    <div class="sidebar-logo border-bottom border-glass justify-content-lg-center">
       <button @click="onMobileSideBarCollapseClick"
-              class="btn text-light ml-2 mr-4 d-lg-none d-block animated fadeIn fast" type="button">
+        class="btn text-light ml-2 mr-4 d-lg-none d-block animated fadeIn fast" type="button">
         <i aria-hidden="true" class="fa fa-bars"></i>
       </button>
-      <img alt="" class="mr-3" src="/panel/assets/img/logo.svg" width="20"/>
+      <img alt="" class="mr-3" src="/panel/assets/img/logo.svg" width="20" />
       <h5 class="text-light mb-0">Pano</h5>
     </div>
 
-    <div id="sidebar-inner">
+    <div class="sidebar-inner">
 
       <!-- Sidebar Head Website -->
-      <div id="sidebar-head">
+      <div class="sidebar-head">
         <div class="rounded-circle border border-light border-lg shadow p-1 mb-2" style="z-index: 1;">
           <img alt="Server İkon" class="rounded-circle" height="64"
-               src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" width="64"/>
+            src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" width="64" />
         </div>
 
         <!-- Sidebar Title Website -->
@@ -240,19 +239,17 @@
       </div>
 
       <!-- Sidebar Tabs -->
-      <nav id="sidebar-tab">
-        <ul class="nav nav-pills nav-fill flex-row flex-nowrap" id="management-tab">
+      <nav class="sidebar-tab">
+        <ul class="management-tab nav nav-pills nav-fill flex-row flex-nowrap">
           <li class="nav-item">
             <a :class="{ 'active': currentActive === 'website', 'text-light': currentActive !== 'website' }"
-               @click="onWebsiteClick"
-               class="nav-link" href="javascript:void(0)" v-tooltip:top="'Website'">
+              @click="onWebsiteClick" class="nav-link" href="javascript:void(0)" v-tooltip:top="'Website'">
               <i aria-hidden="true" class="fa fa-globe fa-fw fa-lg"></i>
             </a>
           </li>
           <li class="nav-item">
             <a :class="{ 'active': currentActive === 'game', 'text-light': currentActive !== 'game' }"
-               @click="onGameClick"
-               class="nav-link" href="javascript:void(0)" v-tooltip:top="'Sunucular'">
+              @click="onGameClick" class="nav-link" href="javascript:void(0)" v-tooltip:top="'Sunucular'">
               <i aria-hidden="true" class="fa fa-cube fa-fw fa-lg"></i>
             </a>
           </li>
@@ -323,7 +320,7 @@
     </div>
 
     <!-- Sidebar Bottom -->
-    <div class="border-top border-glass" id="sidebar-bottom">
+    <div class="border-top border-glass" class="sidebar-bottom">
       <div class="row no-gutters align-items-center pt-2 m-0">
         <div class="col-4">
           <router-link to="/panel/settings" v-tooltip:top="'Ayarlar'">

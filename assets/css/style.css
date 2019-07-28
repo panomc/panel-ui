@@ -12555,7 +12555,7 @@ body {
   margin-bottom: 1rem;
 }
 
-#sidebar-logo {
+.sidebar-logo {
   height: 73px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -12566,7 +12566,7 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 
-#sidebar-head {
+.sidebar-head {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12587,7 +12587,7 @@ body {
   background-size: 150%;
 }
 
-#sidebar-head:before {
+.sidebar-head:before {
   position: absolute;
   bottom: 0;
   content: "";
@@ -12597,7 +12597,7 @@ body {
   background: linear-gradient(180deg, rgba(25, 118, 210, 0.05) 0%, #1976d2 66%);
 }
 
-#sidebar {
+.sidebar {
   position: relative;
   display: block;
   width: 240px;
@@ -12610,25 +12610,25 @@ body {
 }
 
 @media (max-width: 991.98px) {
-  #sidebar {
+  .sidebar {
     position: fixed;
     left: 0;
     z-index: 9999;
   }
 }
 
-#sidebar:not(.active) {
+.sidebar:not(.active) {
   margin-left: -250px;
 }
 
 @media (max-width: 991.98px) {
-  #sidebar.active {
+  .sidebar.active {
     -webkit-box-shadow: 5px 0 0 0 rgba(0, 0, 0, 0.1);
             box-shadow: 5px 0 0 0 rgba(0, 0, 0, 0.1);
   }
 }
 
-#sidebar-inner {
+.sidebar-inner {
   overflow-y: auto;
   height: calc(100vh - 130px);
 }
@@ -12637,18 +12637,18 @@ body {
   padding: .2rem 2rem;
 }
 
-#sidebar-tab {
+.sidebar-tab {
   padding: 0.5rem 1rem;
 }
 
-#sidebar-bottom {
+.sidebar-bottom {
   position: absolute;
   bottom: 0;
   width: 100%;
   padding-bottom: 0.5rem;
 }
 
-#panel-content {
+.panel-content {
   display: block;
   height: 100vh;
   min-width: 300px;
@@ -12711,7 +12711,7 @@ body {
   transition: .3s all;
 }
 
-#management-tab > li.nav-item a.nav-link.active {
+.management-tab > li.nav-item a.nav-link.active {
   background: rgba(0, 0, 0, 0.1);
   color: #F6BB42;
   font-weight: bolder;
@@ -12722,10 +12722,23 @@ body {
   margin-bottom: 1rem;
 }
 
-#page-category {
+.page-category {
   background: #fff;
   width: 100%;
   padding: 1rem 1.5rem;
+}
+
+.page-category-v {
+  background: #fff;
+  width: 100%;
+  height: calc(100vh - 74px);
+  padding: 1rem 1.5rem;
+}
+
+@media (max-width: 991.98px) {
+  .page-category-v {
+    padding: 0.5rem 0.5rem;
+  }
 }
 
 .settings-form {
