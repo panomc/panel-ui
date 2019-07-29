@@ -25,11 +25,13 @@
       <div class="row">
 
         <div class="col-8">
-          <img class="img-fluid mr-3 rounded border float-left" src="https://www.gravatar.com/avatar/" width="48"/>
+          <router-link to="/" title="Butlu">
+            <img class="img-fluid mr-3 rounded border float-left" src="https://www.gravatar.com/avatar/" width="48" />
+          </router-link>
           <h5 class="text-dark mb-0 pb-1">
-            <span class="text-primary">#4513</span> Bu bir talep konusu
+            <router-link to="/">#4513</router-link> Bu bir talep konusu
           </h5>
-          <span class="text-muted">17 saat önce <a href="#">Butlu</a>
+          <span class="text-muted">17 saat önce <router-link to="/">Butlu</router-link>
             tarafından <a href="#">Genel</a> kategorisine açıldı.</span>
         </div>
 
@@ -69,7 +71,9 @@
         <div class="media-body">
           <div class="mb-2">
             <span class="text-muted float-right">1 dakika önce</span>
-            <h5 class="mb-0">Butlu</h5>
+            <router-link to="/">
+              <h5 class="mb-0">Butlu</h5>
+            </router-link>
           </div>
           <div class="px-2 py-2 bg-lightprimary rounded border">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique voluptas nam dolor rerum ipsa distinctio
@@ -86,7 +90,9 @@
         <div class="media-body">
           <div class="mb-2">
             <span class="text-muted float-right">1 dakika önce</span>
-            <h5 class="mb-0">Butlu</h5>
+            <router-link to="/">
+              <h5 class="mb-0">Butlu</h5>
+            </router-link>
           </div>
           <div class="px-2 py-2 rounded border">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique voluptas nam dolor rerum ipsa distinctio.
@@ -131,7 +137,7 @@
         <div class="modal-footer">
           <button class="btn btn-outline-primary w-100" data-dismiss="modal" type="button">Hayır</button>
           <button :disabled="deleting" @click="page_type === 'trash' ? deletePost() : moveToTrash()"
-                  class="btn btn-danger w-100" type="button">
+            class="btn btn-danger w-100" type="button">
             <div class="spinner-border spinner-border-sm text-white" role="status" v-if="deleting"></div>
             <span v-if="!deleting">Evet</span>
           </button>
@@ -154,7 +160,7 @@
         <div class="modal-footer">
           <button class="btn btn-outline-primary w-100" data-dismiss="modal" type="button">Hayır</button>
           <button :disabled="deleting" @click="page_type === 'trash' ? deletePost() : moveToTrash()"
-                  class="btn btn-danger w-100" type="button">
+            class="btn btn-danger w-100" type="button">
             <div class="spinner-border spinner-border-sm text-white" role="status" v-if="deleting"></div>
             <span v-if="!deleting">Evet</span>
           </button>
