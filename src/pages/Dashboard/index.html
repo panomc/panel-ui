@@ -119,7 +119,7 @@
         <div class="card-body h-100">
           <div class="row justify-content-between">
             <div class="col-4">
-              <h5 class="card-title">Ziyaretler</h5>
+              <h5 class="card-title mb-0">Ziyaretler</h5>
             </div>
             <div class="col-8 text-right">
               <div class="btn-group">
@@ -133,7 +133,7 @@
             </div>
           </div>
           <div class="d-flex align-items-center h-100">
-            <canvas height="110" id="myChart"></canvas>
+            <canvas height="120" id="myChart"></canvas>
           </div>
         </div>
       </div>
@@ -146,9 +146,11 @@
             <h5 class="card-title">
               Oyuncular
             </h5>
-            <div class="text-mint d-flex flex-row align-items-center justify-content-between h-75">
-              <i class="fas fa-users fa-3x"></i>
-              <h1 class="card-text font-weight-lighter">{{ registered_player_count }}</h1>
+            <div class="d-flex flex-row align-items-center justify-content-between h-75">
+              <div>
+                <canvas width="120" id="playersChart"></canvas>
+              </div>
+              <h1 class="text-mint font-weight-bolder">{{ registered_player_count }}</h1>
             </div>
           </div>
         </div>
@@ -157,9 +159,11 @@
             <h5 class="card-title">
               Talepler
             </h5>
-            <div class="text-bittersweet d-flex flex-row align-items-center justify-content-between h-75">
-              <i class="fas fa-ticket-alt fa-3x"></i>
-              <h1 class="card-text font-weight-lighter">0</h1>
+            <div class="d-flex flex-row align-items-center justify-content-between h-75">
+              <div>
+                <canvas width="120" id="ticketsChart"></canvas>
+              </div>
+              <h1 class="text-bittersweet font-weight-bolder">0</h1>
             </div>
           </div>
         </div>
@@ -168,9 +172,11 @@
             <h5 class="card-title">
               Yazılar
             </h5>
-            <div class="text-sunflower d-flex flex-row align-items-center justify-content-between h-75">
-              <i class="fas fa-sticky-note fa-3x"></i>
-              <h1 class="card-text font-weight-lighter">{{ post_count }}</h1>
+            <div class="d-flex flex-row align-items-center justify-content-between h-75">
+              <div>
+                <canvas width="120" id="postsChart"></canvas>
+              </div>
+              <h1 class="text-sunflower font-weight-bolder">{{ post_count }}</h1>
             </div>
           </div>
         </div>

@@ -441,7 +441,7 @@ hr {
 
 small,
 .small {
-  font-size: 80%;
+  font-size: 85%;
   font-weight: 400;
 }
 
@@ -481,7 +481,7 @@ mark,
 
 .blockquote-footer {
   display: block;
-  font-size: 80%;
+  font-size: 85%;
   color: #6c757d;
 }
 
@@ -2470,7 +2470,7 @@ textarea.form-control {
   display: none;
   width: 100%;
   margin-top: 0.25rem;
-  font-size: 80%;
+  font-size: 85%;
   color: #28a745;
 }
 
@@ -2597,7 +2597,7 @@ textarea.form-control {
   display: none;
   width: 100%;
   margin-top: 0.25rem;
-  font-size: 80%;
+  font-size: 85%;
   color: #dc3545;
 }
 
