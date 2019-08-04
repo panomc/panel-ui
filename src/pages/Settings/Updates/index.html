@@ -3,7 +3,14 @@
 
   <!-- Action Menu -->
   <section class="row justify-content-between align-items-center mb-3">
-    <div class="col text-right">
+    <div class="col text-left">
+      <a class="btn btn-link" role="button" href="#availableUpdates" data-toggle="collapse"
+        aria-controls="availableUpdates">
+        <strong>5 Güncelleme Mevcut</strong>
+      </a>
+    </div>
+    <div class="col text-right d-flex align-items-center justify-content-end">
+      <span class="text-muted mr-3">Son Denetleme: 14:23, 01.01.2019</span>
       <button class="btn btn-primary" type="button">
         <i aria-hidden="true" class="fa fa-sync fa-fw"></i> Güncellemeleri Denetle
       </button>
@@ -40,57 +47,64 @@
     </div>
   </section>
 
-  <!-- Action Menu -->
-  <section class="row justify-content-between align-items-center mb-3">
-    <div class="col-4">
-      <h3 class="text-muted badge badge-lightprimary panel-subtitle mb-0">
-        Mevcut Güncellemeler
-      </h3>
-    </div>
-    <div class="col text-right">
-      <button class="btn btn-secondary" type="button">
-        <i aria-hidden="true" class="fa fa-download fa-fw"></i>
-        <span class="d-md-inline d-none">Tümünü Kur</span>
-      </button>
-    </div>
-  </section>
+  <br>
 
-  <!-- Available Updates -->
-  <section>
-    <div class="card">
-      <div class="card-body position-relative">
-        <span class="notification"></span>
-        <h5 class="card-title">Platform Güncellemesi Mevcut: <a href="#">Pano 1.2</a></h5>
-        <h6 class="text-muted font-weight-normal">Yayınlanma Tarihi: <b>01.01.2019</b></h6>
-        <h6 class="text-muted font-weight-normal">Dosya Boyutu: <b>5 MB.</b></h6>
-        <p>Pano'nun altyapısını sağlayan çekirdek sistemlerin yeni özelliklerini ve mevcut
-          özelliklerinin iyileştirmesini sağlayan önemli güncellemelerdir.</p>
-        <button class="btn btn-primary" type="button"><i aria-hidden="true" class="fa fa-download fa-fw"></i>
-          Kur
-        </button>
-        <button class="btn btn-outline-primary" type="button"><i class="fas fa-external-link-alt fa-fw"></i>
-          Değişiklikler
+  <div class="collapse" id="availableUpdates">
+
+    <!-- Action Menu -->
+    <section class="row justify-content-between align-items-center mb-3">
+      <div class="col-4">
+        <h3 class="text-muted badge badge-lightprimary panel-subtitle mb-0">
+          Mevcut Güncellemeler
+        </h3>
+      </div>
+      <div class="col text-right">
+        <button class="btn btn-secondary" type="button">
+          <i aria-hidden="true" class="fa fa-download fa-fw"></i>
+          <span class="d-md-inline d-none">Tümünü Kur</span>
         </button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <div class="card">
-      <div class="card-body position-relative">
-        <span class="notification"></span>
-        <h5 class="card-title">Eklenti Güncellemesi Mevcut: <a href="#">Sayfalar 1.1</a>
-        </h5>
-        <h6 class="text-muted font-weight-normal">Yayınlanma Tarihi: <b>01.01.2019</b></h6>
-        <h6 class="text-muted font-weight-normal">Dosya Boyutu: <b>5 MB.</b></h6>
-        <button class="btn btn-primary" type="button"><i aria-hidden="true" class="fa fa-download fa-fw"></i>
-          Kur
-        </button>
-        <button class="btn btn-outline-primary" type="button"><i class="fas fa-external-link-alt fa-fw"></i>
-          Değişiklikler
-        </button>
+    <!-- Available Updates -->
+    <section>
+      <div class="card">
+        <div class="card-body position-relative">
+          <span class="notification"></span>
+          <h5 class="card-title">Platform Güncellemesi Mevcut: <a href="#">Pano 1.2</a></h5>
+          <h6 class="text-muted font-weight-normal">Yayınlanma Tarihi: <b>01.01.2019</b></h6>
+          <h6 class="text-muted font-weight-normal">Dosya Boyutu: <b>5 MB.</b></h6>
+          <p>Pano'nun altyapısını sağlayan çekirdek sistemlerin yeni özelliklerini ve mevcut
+            özelliklerinin iyileştirmesini sağlayan önemli güncellemelerdir.</p>
+          <button class="btn btn-primary" type="button"><i aria-hidden="true" class="fa fa-download fa-fw"></i>
+            Kur
+          </button>
+          <button class="btn btn-outline-primary" type="button"><i class="fas fa-external-link-alt fa-fw"></i>
+            Değişiklikler
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section>
+      <div class="card">
+        <div class="card-body position-relative">
+          <span class="notification"></span>
+          <h5 class="card-title">Eklenti Güncellemesi Mevcut: <a href="#">Sayfalar 1.1</a>
+          </h5>
+          <h6 class="text-muted font-weight-normal">Yayınlanma Tarihi: <b>01.01.2019</b></h6>
+          <h6 class="text-muted font-weight-normal">Dosya Boyutu: <b>5 MB.</b></h6>
+          <button class="btn btn-primary" type="button"><i aria-hidden="true" class="fa fa-download fa-fw"></i>
+            Kur
+          </button>
+          <button class="btn btn-outline-primary" type="button"><i class="fas fa-external-link-alt fa-fw"></i>
+            Değişiklikler
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
 
 </div>

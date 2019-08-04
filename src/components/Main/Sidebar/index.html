@@ -318,30 +318,18 @@
     </div>
 
     <!-- Sidebar Bottom -->
-    <div class="border-top border-glass" class="sidebar-bottom">
-      <div class="row no-gutters align-items-center pt-2 m-0">
-        <div class="col-4">
-          <router-link to="/panel/settings" v-tooltip:top="'Ayarlar'">
-            <button class="btn text-light btn-block" type="button">
-              <i aria-hidden="true" class="fa fa-cog"></i>
-            </button>
-          </router-link>
-        </div>
-        <div class="col-4">
-          <router-link to="/panel/settings/updates" v-tooltip:top="'Güncellemeler'">
-            <button class="btn text-light btn-block" type="button">
-              <i aria-hidden="true" class="fa fa-download"></i>
-            </button>
-          </router-link>
-        </div>
-        <div class="col-4">
-          <a href="https://panomc.com/discord" target="_blank" v-tooltip:top="'Pano Discord'">
-            <button class="btn text-light btn-block" type="button">
-              <i aria-hidden="true" class="fab fa-discord"></i>
-            </button>
-          </a>
-        </div>
-      </div>
+    <div
+      class="sidebar-bottom px-2 py-2 w-100 d-flex align-items-center justify-content-between border-top border-glass">
+      <router-link class="btn btn-link text-light" to="/panel/settings" v-tooltip:top="'Ayarlar'">
+        <i aria-hidden="true" class="fa fa-cog"></i>
+      </router-link>
+      <router-link class="btn btn-link text-light" to="/panel/settings/updates" v-tooltip:top="'Güncellemeler'">
+        <i aria-hidden="true" class="fa fa-download"></i>
+      </router-link>
+      <a class="btn btn-link text-light" href="https://panomc.com/discord" target="_blank"
+        v-tooltip:top="'Pano Discord'">
+        <i aria-hidden="true" class="fab fa-discord"></i>
+      </a>
     </div>
   </aside>
 </div>
