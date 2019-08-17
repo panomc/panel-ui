@@ -6,6 +6,12 @@
         <i aria-hidden="true" class="fa fa-bars"></i>
       </a>
     </li>
+    <li class="nav-item">
+      <a class="icon-link nav-link" href="javascript:void(0);" v-tooltip:right="'Web Mağaza
+      '">
+        <i class="far fa-gem fa-fw"></i>
+      </a>
+    </li>
   </ul>
   <ul class="nav navbar-nav m-auto">
     <div class="navbar-brand text-muted collapse multi-collapse fade show">
@@ -50,7 +56,7 @@
     <li class="nav-item dropdown">
       <a aria-expanded="false" aria-haspopup="true" class="icon-link nav-link dropdown-toggle text-capitalize"
         data-toggle="dropdown" href="javascript:void(0);" id="navbarDropdownMenuLink" title="Oturum">
-        <i class="far fa-user fa-fw" aria-hidden="true"></i> {{ username }}
+        <i class="far fa-user fa-fw" aria-hidden="true"></i> <span class="d-lg-inline d-none">{{ username }}</span>
       </a>
       <div class="dropdown-menu dropdown-menu-right animated fadeIn faster notifications">
         <div class="px-2 py-2">

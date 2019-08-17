@@ -294,7 +294,7 @@
           </li>
           <li :class="{ 'active': path.startsWith('/panel/tools') }" class="nav-item">
             <router-link class="nav-link" to="/panel/tools">
-              <i aria-hidden="true" class="fa fa-th fa-fw"></i> Araçlar
+              <i aria-hidden="true" class="fa fa-tools fa-fw"></i> Araçlar
             </router-link>
           </li>
         </ul>
@@ -303,7 +303,16 @@
       <!-- Sidebar Server Navigation Menu -->
       <nav class="sidebar-nav navbar-dark" v-if="currentActive === 'game'">
         <ul class="menu navbar-nav">
-          <!-- Server Menu Links Here -->
+          <li :class="{ 'active': path.startsWith('/panel/server-panel') }" class="nav-item">
+            <router-link class="nav-link" to="/panel/tools">
+              <i aria-hidden="true" class="fa fa-tachometer-alt fa-fw"></i> Sunucu Durumu
+            </router-link>
+          </li>
+          <li :class="{ 'active': path.startsWith('/panel/server-preferences') }" class="nav-item">
+            <router-link class="nav-link" to="/panel/tools">
+              <i aria-hidden="true" class="fa fa-cogs fa-fw"></i> Konfigürasyon
+            </router-link>
+          </li>
         </ul>
         <div class="container text-center">
           <i aria-hidden="true" class="fa fa-cube fa-3x text-lightglass m-3"></i>
@@ -324,7 +333,7 @@
         <i aria-hidden="true" class="fa fa-cog"></i>
       </router-link>
       <router-link class="btn btn-link text-light" to="/panel/settings/updates" v-tooltip:top="'Güncellemeler'">
-        <i aria-hidden="true" class="fa fa-download"></i>
+        <i aria-hidden="true" class="fa fa-sync"></i>
       </router-link>
       <a class="btn btn-link text-light" href="https://panomc.com/discord" target="_blank"
         v-tooltip:top="'Pano Discord'">
