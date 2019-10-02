@@ -32,115 +32,136 @@ function LoadCSS(cssURL) {
   });
 }
 
+
+function LoadJS(jsURL) {
+
+  return new Promise(function (resolve, reject) {
+
+    const link = document.createElement('script');
+
+    link.src = jsURL;
+
+    document.head.appendChild(link);
+
+    link.onload = function () {
+      resolve();
+    };
+  });
+}
+
 const span = document.createElement('span');
 
 function extractContent(s) {
   span.innerHTML = s;
   return span.textContent || span.innerText;
-};
+}
 
-ApiUtil.init();
+requirejs(["/panel/assets/js/vue-toasted.min.js", "/panel/assets/js/router.js", "/panel/assets/js/api.util.js", "/panel/assets/js/storage.util.js", "/panel/assets/js/vuex-store.js", "/panel/assets/js/i18n.js"], function () {
+  LoadCSS('/panel/assets/css/style.css').then(function () {
+    ApiUtil.init();
 
-Vue.use(Toasted);
+    Vue.use(Toasted);
 
-const app = new Vue({
-  el: '#app',
-  template: PANO.UI,
-  router,
-  i18n,
-  store,
-  data: {
-    splashLoading: true,
-    waitAnimation: true
-  },
-  components: {
-    Main: function (resolve, reject) {
-      loadComponent('Main', '/panel/src/components/Main').then(resolve, reject);
-    }
-  },
-  metaInfo() {
-    return {
-      title: this.$t("Common.Page.title"),
-      meta: [
-        {name: 'description', content: this.$t("Common.Page.description")}
-      ]
-    }
-  },
-  methods: {
-    setLang(lang) {
-      this.$store.dispatch('setLang', lang)
-    },
+    const app = new Vue({
+      el: '#app',
+      template: PANO.UI,
+      router,
+      i18n,
+      store,
+      data: {
+        splashLoading: true,
+        waitAnimation: true
+      },
+      components: {
+        Main: function (resolve, reject) {
+          loadComponent('Main', '/panel/src/components/Main').then(resolve, reject);
+        }
+      },
+      metaInfo() {
+        return {
+          title: this.$t("Common.Page.title"),
+          meta: [
+            {name: 'description', content: this.$t("Common.Page.description")}
+          ]
+        }
+      },
+      methods: {
+        setLang(lang) {
+          this.$store.dispatch('setLang', lang)
+        },
 
-    getBasicUserData() {
-      this.$store.dispatch('getBasicUserData')
-        .then(() => {
-          this.splashLoading = false
-          // this.$store.state.toastStatus = "SUCCESSFULLY_LOGIN"
-          //
-          // this.resetFormButtonStatus()
-        })
-        .catch(() => {
-          // this.$refs.recaptcha.reset();
-          //
-          // this.resetFormButtonStatus()
-          //
-          // if (typeof error != "undefined")
-          //     this.showLoginError(error)
-        })
-    }
-  },
-  computed: {
-    langLoading() {
-      return this.$store.state.langLoading
-    },
+        getBasicUserData() {
+          this.$store.dispatch('getBasicUserData')
+            .then(() => {
+              this.splashLoading = false
+              // this.$store.state.toastStatus = "SUCCESSFULLY_LOGIN"
+              //
+              // this.resetFormButtonStatus()
+            })
+            .catch(() => {
+              // this.$refs.recaptcha.reset();
+              //
+              // this.resetFormButtonStatus()
+              //
+              // if (typeof error != "undefined")
+              //     this.showLoginError(error)
+            })
+        }
+      },
+      computed: {
+        langLoading() {
+          return this.$store.state.langLoading
+        },
 
-    routePageLoading() {
-      return this.$store.state.routePageLoading
-    },
+        routePageLoading() {
+          return this.$store.state.routePageLoading
+        },
 
-    splashLoadedForRoutePageLoading() {
-      return this.$store.state.splashLoadedForRoutePageLoading
-    },
+        splashLoadedForRoutePageLoading() {
+          return this.$store.state.splashLoadedForRoutePageLoading
+        },
 
-    initialPageDataLoading() {
-      return this.$store.state.initialPageDataLoading
-    },
+        initialPageDataLoading() {
+          return this.$store.state.initialPageDataLoading
+        },
 
-    splashLoadedForPageDataInitializationLoading() {
-      return this.$store.state.splashLoadedForPageDataInitializationLoading
-    },
+        splashLoadedForPageDataInitializationLoading() {
+          return this.$store.state.splashLoadedForPageDataInitializationLoading
+        },
 
-    splashLoadedForLanguage() {
-      return this.$store.state.splashLoadedForLanguage
-    },
+        splashLoadedForLanguage() {
+          return this.$store.state.splashLoadedForLanguage
+        },
 
-    logoutLoading() {
-      return this.$store.state.logoutLoading
-    },
+        logoutLoading() {
+          return this.$store.state.logoutLoading
+        },
 
-    showSplash() {
-      return this.waitAnimation || (this.splashLoading || (this.routePageLoading && !this.splashLoadedForRoutePageLoading) || (this.initialPageDataLoading && !this.splashLoadedForPageDataInitializationLoading) || (this.langLoading && !this.splashLoadedForLanguage)) || this.logoutLoading
-    }
-  },
-  beforeMount() {
-    let loadLanguage;
+        showSplash() {
+          return this.waitAnimation || (this.splashLoading || (this.routePageLoading && !this.splashLoadedForRoutePageLoading) || (this.initialPageDataLoading && !this.splashLoadedForPageDataInitializationLoading) || (this.langLoading && !this.splashLoadedForLanguage)) || this.logoutLoading
+        }
+      },
+      beforeMount() {
+        let loadLanguage;
 
-    if (LanguageUtil.isThereLanguage())
-      loadLanguage = LanguageUtil.getLanguage();
-    else if (navigator.language.toUpperCase() === "tr".toUpperCase() || navigator.language.toUpperCase() === "tr-tr".toUpperCase())
-      loadLanguage = "tr";
-    else
-      loadLanguage = "en";
+        if (LanguageUtil.isThereLanguage())
+          loadLanguage = LanguageUtil.getLanguage();
+        else if (navigator.language.toUpperCase() === "tr".toUpperCase() || navigator.language.toUpperCase() === "tr-tr".toUpperCase())
+          loadLanguage = "tr";
+        else
+          loadLanguage = "en";
 
-    loadLanguageAsync(loadLanguage);
+        loadLanguageAsync(loadLanguage);
 
-    this.getBasicUserData();
-  },
-  mounted() {
-    const vue = this;
+        this.getBasicUserData();
+      },
+      mounted() {
+        const vue = this;
 
-    setTimeout(function () {
-      vue.waitAnimation = false;
-    }, 1500);
-  }
+        setTimeout(function () {
+          vue.waitAnimation = false;
+        }, 1500);
+      }
+    });
+  });
 });
