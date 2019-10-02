@@ -56,7 +56,26 @@ function extractContent(s) {
   return span.textContent || span.innerText;
 }
 
-requirejs(["/panel/assets/js/vue-toasted.min.js", "/panel/assets/js/router.js", "/panel/assets/js/api.util.js", "/panel/assets/js/storage.util.js", "/panel/assets/js/vuex-store.js", "/panel/assets/js/i18n.js"], function () {
+requirejs.config({
+  paths: {
+    'vue-toasted': '/panel/assets/js/vue-toasted.min',
+    'router': '/panel/assets/js/router',
+    'api-util': '/panel/assets/js/api.util',
+    'storage-util': '/panel/assets/js/storage.util',
+    'vuex-store': '/panel/assets/js/vuex-store',
+    'i18n': '/panel/assets/js/i18n'
+  },
+  shim: {
+    'router': ['vue-toasted'],
+    'api-util': ['router'],
+    'storage-util': ['api-util'],
+    'vuex-store': ['storage-util'],
+    'i18n': ['vuex-store'],
+    'app-dependencies': ['i18n']
+  }
+});
+
+requirejs(["app-dependencies"], function () {
   LoadCSS('/panel/assets/css/style.css').then(function () {
     ApiUtil.init();
 
