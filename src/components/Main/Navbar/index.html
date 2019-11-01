@@ -1,5 +1,5 @@
 <!-- Top Navbar -->
-<nav class="navbar navbar-expand navbar-light bg-white sticky-top border border-bottom">
+<nav class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom">
   <ul class="nav navbar-nav mr-auto">
     <li class="nav-item">
       <a @click="onSideBarCollapseClick" class="icon-link nav-link" href="javascript:void(0);" title="Menüyü Aç/Kapa">
@@ -7,8 +7,8 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="#" target="_blank" class="btn btn-link text-secondary">
-        <i class="far fa-gem fa-fw d-lg-none d-inline"></i> <span class="d-lg-inline d-none">Web Market</span>
+      <a href="#" target="_blank" class="btn btn-link border-lightprimary text-secondary">
+        <i class="fa fa-store fa-fw d-lg-none d-inline"></i> <span class="d-lg-inline d-none">Web Market</span>
       </a>
     </li>
   </ul>
@@ -59,16 +59,16 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right animated fadeIn faster notifications">
         <div class="px-2 py-2">
-          <router-link to="panel/admins/admin" class="px-3">
-            <img :src=" 'https://www.gravatar.com/avatar/' + md5(email.trim().toLocaleLowerCase()) + '/64'" width="32"
-              class="rounded mr-2" alt="">
-            <span class="text-muted" title="Full E Mail">{{ email }}</span>
-            <a @click="logout" class="btn btn-link btn-sm text-danger d-inline-block float-right"
-              href="javascript:void(0)" v-tooltip:top="'Çıkış Yap'">
-              <i aria-hidden="true" class="fas fa-sign-out-alt fa-lg"></i>
-            </a>
-          </router-link>
-          <hr>
+          <img :src=" 'https://www.gravatar.com/avatar/' + md5(email.trim().toLocaleLowerCase()) + '/64'" width="32"
+          class="rounded mx-2" alt="">
+          <span class="text-muted">Yerel Hesap</span>
+          <a @click="logout" class="btn btn-link btn-sm text-danger d-inline-block float-right"
+            href="javascript:void(0)" v-tooltip:top="'Çıkış Yap'">
+            <i aria-hidden="true" class="fas fa-sign-out-alt fa-lg"></i>
+          </a>
+        </div>
+        <hr class="mt-2 mb-0 pb-2">
+        <div class="px-2 pb-2">
           <ul class="nav flex-column p-0 m-0">
             <li class="nav-item">
               <a class="nav-link" href="#"><i class="fa fa-user-cog fa-fw" aria-hidden="true"></i> Hesabı Yönet</a>
