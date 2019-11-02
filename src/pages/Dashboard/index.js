@@ -74,7 +74,7 @@ Vue.component('Dashboard',
         const playersChart = new Chart(ctx1, {
           type: 'line',
           data: {
-            labels: ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"],
+            labels: ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"],
             datasets: [{
               data: [8, 5, 9, 7, 12, 8, 9],
               backgroundColor: 'rgba(72, 207, 173, .08)',
@@ -105,7 +105,7 @@ Vue.component('Dashboard',
         const ticketsChart = new Chart(ctx2, {
           type: 'line',
           data: {
-            labels: ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"],
+            labels: ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"],
             datasets: [{
               data: [8, 5, 9, 7, 12, 8, 9],
               backgroundColor: 'rgba(252, 110, 81, .08)',
@@ -137,7 +137,7 @@ Vue.component('Dashboard',
         const postsChart = new Chart(ctx3, {
           type: 'line',
           data: {
-            labels: ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"],
+            labels: ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"],
             datasets: [{
               data: [8, 5, 9, 7, 12, 8, 9],
               backgroundColor: 'rgba(246, 187, 66, .08)',
@@ -168,7 +168,7 @@ Vue.component('Dashboard',
         const myChart = new Chart(ctx, {
           type: 'line',
           data: {
-            labels: ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"],
+            labels: ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"],
             datasets: [{
               data: [39, 45, 83, 53, 89, 72, 99],
               backgroundColor: 'rgba(0, 123, 255, .08)',
