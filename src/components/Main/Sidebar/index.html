@@ -6,7 +6,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Sunucular</h5>
-          <button class="btn btn-outline-primary btn-sm ml-3" data-dismiss="modal" data-target="#connectServer"
+          <button class="btn btn-link bg-light btn-sm ml-3" data-dismiss="modal" data-target="#connectServer"
             data-toggle="modal" type="button">
             <i aria-hidden="true" class="fa fa-plus fa-fw"></i> Suncuu Bağla
           </button>
@@ -128,11 +128,11 @@
             </div>
 
             <h5 class="text-primary" for="platformToken">2. Bağlantı Komutunu Çalıştırın:</h5>
-            <div class="input-group">
-              <input :value="'/pano connect ' + platformAddress + ' ' + key" class="form-control" id="platformToken"
+            <div class="input-group mb-2">
+              <input :value="'/pano connect ' + platformAddress + ' ' + key" class="form-control shadow-sm" id="platformToken"
                 type="text">
               <div class="input-group-append">
-                <button @click="onCopyPlatformMatchKeyClick" class="btn btn-primary" id="copyPlatformToken"
+                <button @click="onCopyPlatformMatchKeyClick" class="btn btn-link bg-light border shadow-sm" id="copyPlatformToken"
                   type="button" v-tooltip:top="isPlatformMatchKeyCopied ? 'Kopyalandı!' : 'Kopyala'">
                   <i aria-hidden="true" class="fa fa-clipboard fa-fw"></i>
                 </button>
