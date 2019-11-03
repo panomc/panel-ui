@@ -1,14 +1,26 @@
 <!-- Top Navbar -->
-<nav class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom">
+<nav
+  class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom"
+>
   <ul class="nav navbar-nav mr-auto">
     <li class="nav-item mr-3">
-      <a @click="onSideBarCollapseClick" class="icon-link nav-link" href="javascript:void(0);" title="Menüyü Aç/Kapa">
+      <a
+        @click="onSideBarCollapseClick"
+        class="icon-link nav-link"
+        href="javascript:void(0);"
+        title="Menüyü Aç/Kapa"
+      >
         <i aria-hidden="true" class="fa fa-bars"></i>
       </a>
     </li>
     <li class="nav-item">
-      <a href="#" target="_blank" class="btn btn-link border-lightprimary text-secondary">
-        <i class="fa fa-store fa-fw d-lg-none d-inline"></i> <span class="d-lg-inline d-none">Web Market</span>
+      <a
+        href="#"
+        target="_blank"
+        class="btn btn-link border-lightprimary text-secondary"
+      >
+        <i class="fa fa-store fa-fw d-lg-none d-inline"></i>
+        <span class="d-lg-inline d-none">Web Market</span>
       </a>
     </li>
   </ul>
@@ -19,14 +31,28 @@
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown">
-      <a aria-expanded="false" aria-haspopup="true" class="icon-link nav-link position-relative dropdown-toggle"
-        data-toggle="dropdown" href="javascript:void(0);" id="navbarDropdownMenuLink" role="button" title="Bildirimler">
+      <a
+        aria-expanded="false"
+        aria-haspopup="true"
+        class="icon-link nav-link position-relative dropdown-toggle"
+        data-toggle="dropdown"
+        href="javascript:void(0);"
+        id="navbarDropdownMenuLink"
+        role="button"
+        title="Bildirimler"
+      >
         <i aria-hidden="true" class="far fa-bell"></i>
       </a>
-      <div class="dropdown-menu animated fadeIn faster dropdown-menu-right notifications">
+      <div
+        class="dropdown-menu animated fadeIn faster dropdown-menu-right notifications"
+      >
         <h6 class="dropdown-header">
           Bildirimler
-          <a class="float-right" href="javascript:void(0);" title="Tümünü Temizle">
+          <a
+            class="float-right"
+            href="javascript:void(0);"
+            title="Tümünü Temizle"
+          >
             <i aria-hidden="true" class="fa fa-align-right fa-xs"></i>
             <i aria-hidden="true" class="fas fa-broom"></i>
           </a>
@@ -43,7 +69,7 @@
           <i aria-hidden="true" class="fa fa-check text-primary fa-fw"></i>
           Bu bir okunmuş bildirim.
         </a>
-        <hr class="m-0 pb-2">
+        <hr class="m-0 pb-2" />
         <div class="text-center">
           <router-link to="#" class="small">
             Bildirim Geçmişini Görüntüle
@@ -53,30 +79,52 @@
     </li>
 
     <li class="nav-item dropdown">
-      <a aria-expanded="false" aria-haspopup="true" class="icon-link nav-link dropdown-toggle text-capitalize"
-        data-toggle="dropdown" href="javascript:void(0);" id="navbarDropdownMenuLink" title="Oturum">
-        <i class="far fa-user fa-fw" aria-hidden="true"></i> <span class="d-lg-inline d-none">{{ username }}</span>
+      <a
+        aria-expanded="false"
+        aria-haspopup="true"
+        class="icon-link nav-link dropdown-toggle text-capitalize"
+        data-toggle="dropdown"
+        href="javascript:void(0);"
+        id="navbarDropdownMenuLink"
+        title="Oturum"
+      >
+        <i class="far fa-user fa-fw" aria-hidden="true"></i>
+        <span class="d-lg-inline d-none">{{ username }}</span>
       </a>
-      <div class="dropdown-menu dropdown-menu-right animated fadeIn faster notifications">
+      <div
+        class="dropdown-menu dropdown-menu-right animated fadeIn faster notifications"
+      >
         <div class="px-2 py-2">
-          <img :src=" 'https://www.gravatar.com/avatar/' + md5(email.trim().toLocaleLowerCase()) + '/64'" width="32"
-          class="rounded mx-2" alt="">
+          <img
+            :src=" 'https://www.gravatar.com/avatar/' + md5(email.trim().toLocaleLowerCase()) + '/64'"
+            width="32"
+            class="rounded mx-2"
+            alt=""
+          />
           <span class="text-muted">Yerel Hesap</span>
-          <a @click="logout" class="btn btn-link btn-sm text-danger d-inline-block float-right"
-            href="javascript:void(0)" v-tooltip:top="'Çıkış Yap'">
+          <a
+            @click="logout"
+            class="btn btn-link btn-sm text-danger d-inline-block float-right"
+            href="javascript:void(0)"
+            v-tooltip:top="'Çıkış Yap'"
+          >
             <i aria-hidden="true" class="fas fa-sign-out-alt fa-lg"></i>
           </a>
         </div>
-        <hr class="mt-2 mb-0 pb-2">
+        <hr class="mt-2 mb-0 pb-2" />
         <div class="px-2 pb-2">
           <ul class="nav flex-column p-0 m-0">
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa fa-user-cog fa-fw" aria-hidden="true"></i> Hesabı Yönet</a>
+              <a class="nav-link" href="#"
+                ><i class="fa fa-user-cog fa-fw" aria-hidden="true"></i> Hesabı
+                Yönet</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link text-primary" href="#"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>
-                Yönetici
-                Ekle</a>
+              <a class="nav-link text-primary" href="#"
+                ><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>
+                Yönetici Ekle</a
+              >
             </li>
           </ul>
         </div>
