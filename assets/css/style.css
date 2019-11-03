@@ -12563,7 +12563,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: #fff;
 }
 
 .sidebar-head {
@@ -12594,8 +12594,8 @@ body {
   content: "";
   width: 100%;
   height: 100%;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(25, 118, 210, 0.05)), color-stop(66%, #1976d2));
-  background: linear-gradient(180deg, rgba(25, 118, 210, 0.05) 0%, #1976d2 66%);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.05)), color-stop(66%, #fff));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, #fff 66%);
 }
 
 .alert-welcome {

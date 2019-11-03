@@ -202,26 +202,26 @@
   <aside :class="{ 'active': isSidebarOpen }" class="sidebar bg-primary">
 
     <!-- Sidebar Logo -->
-    <div class="sidebar-logo border-bottom border-glass justify-content-lg-center">
+    <div class="sidebar-logo border-bottom border-right border-glass justify-content-lg-center">
       <button @click="onMobileSideBarCollapseClick"
         class="btn text-light ml-2 mr-4 d-lg-none d-block animated fadeIn fast" type="button">
         <i aria-hidden="true" class="fa fa-bars"></i>
       </button>
-      <img alt="" class="mr-3" src="/panel/assets/img/logo.svg" width="20" />
-      <h5 class="text-light mb-0">Pano</h5>
+      <img alt="" class="mr-3" src="/panel/assets/img/logo-blue.svg" width="20" />
+      <h5 class="text-black mb-0">Pano</h5>
     </div>
 
-    <div class="sidebar-inner">
+    <div class="sidebar-inner bg-white border-right">
 
       <!-- Sidebar Head Website -->
       <div class="sidebar-head">
-        <div class="rounded-circle border border-light border-lg shadow p-1 mb-2" style="z-index: 1;">
+        <div class="rounded-circle border border-lg border-white shadow p-1 mb-2" style="z-index: 1;">
           <img alt="Server İkon" class="rounded-circle" height="64"
             src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" width="64" />
         </div>
 
         <!-- Sidebar Title Website -->
-        <h6 class="text-white" style="z-index: 1;" v-text="websiteName"></h6>
+        <h6 class="text-dark" style="z-index: 1;" v-text="websiteName"></h6>
 
         <a href="/" style="z-index: 1;" target="_blank" v-if="currentActive === 'website'">
           <button class="btn btn-secondary" type="button">
@@ -240,13 +240,13 @@
       <nav class="sidebar-tab">
         <ul class="management-tab nav nav-pills nav-fill flex-row flex-nowrap">
           <li class="nav-item">
-            <a :class="{ 'active': currentActive === 'website', 'text-light': currentActive !== 'website' }"
+            <a :class="{ 'active': currentActive === 'website', 'text-dark': currentActive !== 'website' }"
               @click="onWebsiteClick" class="nav-link" href="javascript:void(0)" v-tooltip:top="'Website'">
               <i aria-hidden="true" class="fa fa-globe fa-fw fa-lg"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a :class="{ 'active': currentActive === 'game', 'text-light': currentActive !== 'game' }"
+            <a :class="{ 'active': currentActive === 'game', 'text-dark': currentActive !== 'game' }"
               @click="onGameClick" class="nav-link" href="javascript:void(0)" v-tooltip:top="'Sunucular'">
               <i aria-hidden="true" class="fa fa-cube fa-fw fa-lg"></i>
             </a>
@@ -255,7 +255,7 @@
       </nav>
 
       <!-- Sidebar Site Navigation Menu -->
-      <nav class="sidebar-nav navbar-dark" v-if="currentActive === 'website'">
+      <nav class="sidebar-nav navbar-light" v-if="currentActive === 'website'">
         <ul class="menu navbar-nav">
           <li :class="{ 'active': path === '/panel' || path === '/panel/' }" class="nav-item">
             <router-link class="nav-link" to="/panel">
@@ -301,7 +301,7 @@
       </nav>
 
       <!-- Sidebar Server Navigation Menu -->
-      <nav class="sidebar-nav navbar-dark" v-if="currentActive === 'game'">
+      <nav class="sidebar-nav navbar-light" v-if="currentActive === 'game'">
         <ul class="menu navbar-nav">
           <li :class="{ 'active': path.startsWith('/panel/server-panel') }" class="nav-item">
             <router-link class="nav-link" to="/panel/tools">
@@ -328,14 +328,14 @@
 
     <!-- Sidebar Bottom -->
     <div
-      class="sidebar-bottom px-2 py-2 w-100 d-flex align-items-center justify-content-between border-top border-glass">
-      <router-link class="btn btn-link text-light" to="/panel/settings" v-tooltip:top="'Ayarlar'">
+      class="sidebar-bottom px-2 py-2 w-100 d-flex align-items-center justify-content-between bg-white border-top border-right border-glass">
+      <router-link class="btn btn-link text-dark" to="/panel/settings" v-tooltip:top="'Ayarlar'">
         <i aria-hidden="true" class="fa fa-cog"></i>
       </router-link>
-      <router-link class="btn btn-link text-light" to="/panel/settings/updates" v-tooltip:top="'Güncellemeler'">
+      <router-link class="btn btn-link text-dark" to="/panel/settings/updates" v-tooltip:top="'Güncellemeler'">
         <i aria-hidden="true" class="fa fa-sync"></i>
       </router-link>
-      <a class="btn btn-link text-light" href="https://panomc.com/discord" target="_blank"
+      <a class="btn btn-link text-dark" href="https://panomc.com/discord" target="_blank"
         v-tooltip:top="'Pano Discord'">
         <i aria-hidden="true" class="fab fa-discord"></i>
       </a>
