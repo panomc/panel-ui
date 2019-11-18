@@ -89,8 +89,8 @@ Vue.component(
             datasets: [
               {
                 data: [8, 5, 9, 7, 12, 8, 9],
-                backgroundColor: 'rgba(72, 207, 173, .08)',
-                borderColor: '#fff',
+                backgroundColor: 'rgba(114, 192, 118, .08)',
+                borderColor: '#72c076',
                 borderWidth: 2.5,
                 pointRadius: 0
               }
@@ -200,9 +200,9 @@ Vue.component(
             datasets: [
               {
                 data: [39, 45, 83, 53, 89, 72, 99],
-                borderColor: '#fff',
+                borderColor: '#1976d2',
                 backgroundColor: 'transparent',
-                borderWidth: 4
+                borderWidth: 2.5
               }
             ]
           },
@@ -211,7 +211,7 @@ Vue.component(
               yAxes: [
                 {
                   ticks: {
-                    fontColor: 'rgba(255,255,255, 0.8)',
+                    fontColor: '#1976d2',
                     beginAtZero: true,
                     maxTicksLimit: 10,
                     padding: 20
@@ -226,7 +226,7 @@ Vue.component(
               xAxes: [
                 {
                   ticks: {
-                    fontColor: 'rgba(255,255,255, 0.8)',
+                    fontColor: '#1976d2',
                     beginAtZero: true,
                     maxTicksLimit: 10,
                     padding: 20
