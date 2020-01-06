@@ -9,8 +9,7 @@ Vue.component(
         return {
           registered_player_count: 0,
           getting_started_blocks: {
-            welcome_board: false,
-            connect_board: false
+            welcome_board: false
           },
           post_count: 0
         };
@@ -41,14 +40,6 @@ Vue.component(
           ).catch(() => {
             // reject(NETWORK_ERROR);
           });
-        },
-
-        onCloseConnectServerCard() {
-          ApiUtil.post('/api/panel/dashboard/closeConnectServerCard', {}).catch(
-            () => {
-              // reject(NETWORK_ERROR);
-            }
-          );
         }
       },
       beforeMount() {
