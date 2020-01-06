@@ -69,7 +69,7 @@ Vue.component('Categories', new Promise(function (resolve) {
                   this.$router.push('/panel/tickets/categories/' + page);
               })
               .catch(error => {
-                if (error === 'page_not_found') {
+                if (error === 'PAGE_NOT_FOUND') {
                   this.$store.state.initialPageDataLoading = false;
 
                   if (this.$store.state.splashLoadedForPageDataInitializationLoading === false) {
