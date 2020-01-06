@@ -64,7 +64,7 @@ Vue.component('AllTickets', new Promise(function (resolve) {
                   this.$router.push('/panel/tickets/' + this.page_type + '/' + page);
               })
               .catch(error => {
-                if (error === 'page_not_found') {
+                if (error === 'PAGE_NOT_FOUND') {
                   this.$store.state.initialPageDataLoading = false;
 
                   if (this.$store.state.splashLoadedForPageDataInitializationLoading === false) {
