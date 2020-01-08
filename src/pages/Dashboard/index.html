@@ -1,10 +1,10 @@
 <!-- Dashboard Page -->
-<article class="content">
+<div class="content">
   <!-- Welcome Alerts -->
   <div
-          class="alert flex-fill w-100 rounded alert-welcome alert-dismissible show border mb-4"
-          role="alert"
-          v-if="getting_started_blocks.welcome_board"
+    class="alert flex-fill w-100 rounded alert-welcome alert-dismissible show border mb-4"
+    role="alert"
+    v-if="getting_started_blocks.welcome_board"
   >
     <button
       @click="onCloseGettingStartedCard"
@@ -33,7 +33,8 @@
             data-target="#connectServer"
             data-toggle="modal"
           >
-            <i aria-hidden="true" class="fa fa-plus fa-fw"></i> Sunucu Bağla
+            <i aria-hidden="true" class="fa fa-plus fa-fw"></i>
+            Sunucu Bağla
           </button>
         </div>
         <div class="col-lg-4 mb-lg-0 mb-3">
@@ -99,16 +100,12 @@
   </div>
 
   <!-- Dashboard Title  -->
-  <section class="row justify-content-between align-items-center">
-    <div class="col-6">
-      <h3 class="text-muted badge badge-lightprimary panel-subtitle">
-        Website
-      </h3>
-    </div>
-  </section>
+  <h3 class="text-muted badge badge-lightprimary panel-subtitle">
+    Website
+  </h3>
 
   <!-- Website Activity -->
-  <section class="row justify-content-around align-items-stretch">
+  <div class="row justify-content-around align-items-stretch">
     <!-- Statics Blocks -->
     <div class="d-flex col-lg-9">
       <div class="d-flex flex-fill card">
@@ -168,73 +165,14 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Statistic Table -->
-  <!-- <section class="row justify-content-around d-none">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <div class="row justify-content-between pb-2">
-              <div class="col">
-                <h5 class="card-title">
-                  İstatistikler
-                </h5>
-              </div>
-            </div>
-            <div class="table-responsive">
-              <table class="table table-sm m-0">
-                <thead>
-                  <tr class="text-primary">
-                    <th scope="col">İstatistik</th>
-                    <th scope="col">Veri</th>
-                  </tr>
-                </thead>
-                <tbody class="text-muted">
-                  <tr>
-                    <th scope="row">
-                      Yazılar:
-                    </th>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      Sayfalar:
-                    </th>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      Kayıtlı Oyuncular:
-                    </th>
-                    <td v-text="registered_player_count"></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      Açık Talepler:
-                    </th>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      Kayıtlı Talepler:
-                    </th>
-                    <td>0</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> -->
-
-  <!-- Bla bla -->
-  <section class="row justify-content-around">
+  <!-- Latest Tickets -->
+  <div class="row justify-content-around">
     <div class="col-lg-6">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title pb-2">
+          <h5 class="card-title">
             Son Talepler
           </h5>
           <div>
@@ -249,13 +187,12 @@
               <router-link to="/" class="text-primary">#4513</router-link>
               Bu bir talep konusu
             </strong>
-            <span class="badge badge-pill badge-warning float-right">
-              Yanıtlanmadı
-            </span>
             <br />
             <small class="text-muted">
-              <a href="#">Butlu</a> tarafından
-              <a href="#">Genel</a> kategorisine açıldı.
+              <a href="#">Butlu</a>
+              tarafından
+              <a href="#">Genel</a>
+              kategorisine açıldı.
             </small>
           </div>
 
@@ -273,13 +210,12 @@
               <router-link to="/" class="text-primary">#4513</router-link>
               Bu bir talep konusu
             </strong>
-            <span class="badge badge-pill badge-warning float-right">
-              Yanıtlanmadı
-            </span>
             <br />
             <small class="text-muted">
-              <a href="#">Butlu</a> tarafından
-              <a href="#">Genel</a> kategorisine açıldı.
+              <a href="#">Butlu</a>
+              tarafından
+              <a href="#">Genel</a>
+              kategorisine açıldı.
             </small>
           </div>
 
@@ -297,13 +233,12 @@
               <router-link to="/" class="text-primary">#4513</router-link>
               Bu bir talep konusu
             </strong>
-            <span class="badge badge-pill badge-warning float-right">
-              Yanıtlanmadı
-            </span>
             <br />
             <small class="text-muted">
-              <a href="#">Butlu</a> tarafından
-              <a href="#">Genel</a> kategorisine açıldı.
+              <a href="#">Butlu</a>
+              tarafından
+              <a href="#">Genel</a>
+              kategorisine açıldı.
             </small>
           </div>
         </div>
@@ -313,9 +248,60 @@
     <div class="col-lg-6 d-flex">
       <div class="card d-flex flex-fill">
         <div class="card-body">
-          <h5 class="card-title pb-2">Etkinlik Takvimi</h5>
+          <h5 class="card-title">Etkinlik Takvimi</h5>
         </div>
       </div>
     </div>
-  </section>
-</article>
+  </div>
+
+  <!-- Statistic Table -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">
+        Tüm İstatistikler
+      </h5>
+      <div class="table-responsive">
+        <table class="table table-sm m-0">
+          <thead>
+            <tr class="text-primary">
+              <th scope="col">İstatistik</th>
+              <th scope="col">Veri</th>
+            </tr>
+          </thead>
+          <tbody class="text-muted">
+            <tr>
+              <th scope="row">
+                Yazılar:
+              </th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th scope="row">
+                Sayfalar:
+              </th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th scope="row">
+                Kayıtlı Oyuncular:
+              </th>
+              <td v-text="registered_player_count"></td>
+            </tr>
+            <tr>
+              <th scope="row">
+                Açık Talepler:
+              </th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th scope="row">
+                Kayıtlı Talepler:
+              </th>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,31 +1,21 @@
 <!-- General Settings Sub Page -->
 <div class="tab-pane">
-
-  <section>
-    <div class="card">
-      <div class="card-body">
-        <div class="row justify-content-between pb-2">
-          <div class="col-6 text-left">
-            <h5 class="card-title">Platform Ayarları</h5>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Platform Ayarları</h5>
+      <form>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-labeel" for="platformLangueage">
+            Platform Dili:
+          </label>
+          <div class="col-md-10">
+            <select class="form-control" id="platformLanguage">
+              <option id="setPlatformLangueageTR" selected>Türkçe</option>
+              <option id="setPlatformLangueageEN">İngilizce</option>
+            </select>
           </div>
         </div>
-        <form>
-          <div class="form-group row">
-            <label class="col-md-2 col-form-labeel" for="platformLangueage">Platform Dili:</label>
-            <div class="col-md-10">
-              <select class="form-control" id="platformLanguage">
-                <option id="setPlatformLangueageTR" selected>Türkçe</option>
-                <option id="setPlatformLangueageEN">İngilizce</option>
-              </select>
-            </div>
-          </div>
-          <br>
-          <div class="form-group mb-0">
-            <button class="btn btn-secondary" type="submit">Değişiklikleri Kaydet</button>
-          </div>
-        </form>
-      </div>
+      </form>
     </div>
-  </section>
-
+  </div>
 </div>

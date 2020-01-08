@@ -1,56 +1,80 @@
 <!-- Site Settings Sub Page -->
 <div class="tab-pane">
-
-  <section>
-    <div class="card">
-      <div class="card-body">
-        <div class="row justify-content-between pb-2">
-          <div class="col-6 text-left">
-            <h5 class="card-title">Website Ayarları</h5>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Website Ayarları</h5>
+      <form>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-labeel" for="siteTitle">
+            Site Başlığı:
+          </label>
+          <div class="col-md-10">
+            <input
+              :value="websiteName"
+              aria-describedby="siteTitle"
+              class="form-control"
+              id="siteTitle"
+              type="text"
+            />
           </div>
         </div>
-        <form>
-          <div class="form-group row">
-            <label class="col-md-2 col-form-labeel" for="siteTitle">Site Başlığı:</label>
-            <div class="col-md-10">
-              <input :value="websiteName" aria-describedby="siteTitle" class="form-control" id="siteTitle" type="text">
-            </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-labeel" for="siteDesc">
+            Site Açıklaması:
+          </label>
+          <div class="col-md-10">
+            <textarea
+              :value="websiteDescription"
+              aria-describedby="siteDesc"
+              class="form-control"
+              id="siteDesc"
+              rows="2"
+            ></textarea>
           </div>
-          <div class="form-group row">
-            <label class="col-md-2 col-form-labeel" for="siteDesc">Site Açıklaması:</label>
-            <div class="col-md-10">
-              <textarea :value="websiteDescription" aria-describedby="siteDesc" class="form-control" id="siteDesc"
-                        rows="2"></textarea>
-            </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-labeel" for="siteKeywords">
+            Anahtar Kelimeler:
+          </label>
+          <div class="col-md-10">
+            <textarea
+              aria-describedby="siteKeywords"
+              class="form-control"
+              id="siteKeywords"
+              rows="2"
+            ></textarea>
+            <small>
+              Anahtar kelimeleri virgül ile ayırın. Örnek: panocraft, minecraft,
+              server
+            </small>
           </div>
-          <div class="form-group row">
-            <label class="col-md-2 col-form-labeel" for="siteKeywords">Anahtar Kelimeler:</label>
-            <div class="col-md-10">
-              <textarea aria-describedby="siteKeywords" class="form-control" id="siteKeywords" rows="2"></textarea>
-              <small>Anahtar kelimeleri virgül ile ayırın. Örnek: panocraft, minecraft, server</small>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-2 col-form-labeel" for="siteFavicon">Favicon:</label>
-            <div class="col-md-8">
-              <div class="row">
-                <div class="col-auto">
-                  <img alt="Mevcut Favicon" class="d-block ml-auto" height="48" src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" width="48">
-                </div>
-                <div class="col">
-                  <input class="form-control-file" id="siteFavicon" type="file">
-                  <small>Favicon PNG, ICO formatında ve minimum 16x16 boyutlarında olmalıdır.</small>
-                </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-labeel" for="siteFavicon">
+            Favicon:
+          </label>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-auto">
+                <img
+                  alt="Mevcut Favicon"
+                  class="d-block ml-auto"
+                  height="48"
+                  src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
+                  width="48"
+                />
+              </div>
+              <div class="col">
+                <input class="form-control-file" id="siteFavicon" type="file" />
+                <small>
+                  Favicon PNG, ICO formatında ve minimum 16x16 boyutlarında
+                  olmalıdır.
+                </small>
               </div>
             </div>
           </div>
-          <br>
-          <div class="form-group mb-0">
-            <button class="btn btn-secondary" type="submit">Değişiklikleri Kaydet</button>
-          </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
-  </section>
-
+  </div>
 </div>
