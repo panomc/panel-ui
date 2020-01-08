@@ -26,7 +26,6 @@
   </div>
 
   <!-- All Tickets -->
-
   <div class="card">
     <div class="card-body">
       <div class="row justify-content-between">
@@ -112,24 +111,24 @@
                 </router-link>
               </td>
               <td>
-                <p
-                  class="text-center rounded border mb-0"
+                <span
+                  class="text-center rounded border"
                   v-if="ticket.status === 1"
                 >
                   Yanıtlandı
-                </p>
-                <p
-                  class="text-center rounded bg-success text-white mb-0"
+                </span>
+                <span
+                  class="text-center rounded bg-success text-white"
                   v-if="ticket.status === 2"
                 >
                   Yeni
-                </p>
-                <p
-                  class="text-center rounded bg-danger text-white mb-0"
+                </span>
+                <span
+                  class="text-center rounded bg-danger text-white"
                   v-if="ticket.status === 0"
                 >
                   Kapalı
-                </p>
+                </span>
               </td>
               <td>{{ ticket.category.title }}</td>
               <td>{{ ticket.writer.username }}</td>
