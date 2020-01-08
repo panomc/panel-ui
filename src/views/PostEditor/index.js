@@ -123,7 +123,7 @@ Vue.component('PostEditor', new Promise(function (resolve) {
           },
 
           initPost(id) {
-            this.post.id = this.$route.params.post_id;
+            this.post.id = parseInt(this.$route.params.post_id);
             this.$store.state.initialPageDataLoading = true;
 
             this.initCategories()
@@ -138,7 +138,7 @@ Vue.component('PostEditor', new Promise(function (resolve) {
 
                     this.post.title = response.data.post.title;
                     this.post.text = response.data.post.post;
-                    this.post.category = response.data.post.category_id;
+                    this.post.category = parseInt(response.data.post.category_id);
                     this.post.writer_user_id = response.data.post.writer_user_id;
                     this.post.date = response.data.post.date;
                     this.post.status = parseInt(response.data.post.status);
