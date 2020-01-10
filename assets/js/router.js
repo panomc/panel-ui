@@ -295,6 +295,13 @@ const router = new VueRouter({
       component: function (resolve, reject) {
         loadComponent('Tools', '/panel/src/pages/Tools').then(resolve, reject);
       }
+    },
+    {
+      path: '/panel/notifications',
+      name: 'Notifications',
+      component: function (resolve, reject) {
+        loadComponent('Notifications', '/panel/src/pages/Notifications').then(resolve, reject);
+      }
     }
   ]
 });
