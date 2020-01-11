@@ -33,8 +33,6 @@ Vue.component('Navbar', new Promise(function (resolve) {
             .then(response => {
               if (response.data.result === "ok") {
                 this.quickNotifications = response.data.notifications
-
-                console.log(this.quickNotifications)
               }
 
               this.startQuickNotificationsCountDown()
