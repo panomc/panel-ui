@@ -17,7 +17,8 @@ const store = new Vuex.Store({
     selected_server: [],
     main_server: [],
     serverListLoading: false,
-    isSidebarOpen: PanelSidebarStorageUtil.isThereSideBarOpenStatus() ? PanelSidebarStorageUtil.getSidebarOpenStatus() : true
+    isSidebarOpen: PanelSidebarStorageUtil.isThereSideBarOpenStatus() ? PanelSidebarStorageUtil.getSidebarOpenStatus() : true,
+    quickNotifications: []
   },
 
   mutations: {
@@ -32,6 +33,7 @@ const store = new Vuex.Store({
       state.currentServerPlatformMatchKey = data.platform_server_match_key;
       state.platformAddress = data.platform_host_address;
       state.servers = data.servers;
+      state.quickNotifications = data.quick_notifications;
     }
   },
 

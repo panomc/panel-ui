@@ -37,7 +37,6 @@
         class="icon-link nav-link position-relative dropdown-toggle"
         data-toggle="dropdown"
         href="javascript:void(0);"
-        id="navbarDropdownMenuLink"
         role="button"
         title="Bildirimler"
       >
@@ -57,17 +56,10 @@
             <i aria-hidden="true" class="fas fa-broom"></i>
           </a>
         </h6>
-        <a class="dropdown-item py-3" href="javascript:void(0);">
-          <i aria-hidden="true" class="fa fa-check text-primary fa-fw"></i>
-          <strong class="text-muted">Bu bir okunmamış bildirim.</strong>
-        </a>
-        <a class="dropdown-item py-3" href="javascript:void(0);">
-          <i aria-hidden="true" class="fa fa-check text-primary fa-fw"></i>
-          Bu bir okunmuş bildirim.
-        </a>
-        <a class="dropdown-item py-3" href="javascript:void(0);">
-          <i aria-hidden="true" class="fa fa-check text-primary fa-fw"></i>
-          Bu bir okunmuş bildirim.
+        <a :key="index" class="dropdown-item py-3" href="javascript:void(0);"
+           v-for="(notification, index) in quickNotifications">
+            <i aria-hidden="true" class="fa fa-check text-primary fa-fw"></i>
+            <strong class="text-muted" v-text="notification.type_ID"></strong>
         </a>
         <hr class="m-0 pb-2" />
         <div class="text-center">
@@ -85,7 +77,6 @@
         class="icon-link nav-link dropdown-toggle text-capitalize"
         data-toggle="dropdown"
         href="javascript:void(0);"
-        id="navbarDropdownMenuLink"
         title="Oturum"
       >
         <i class="far fa-user fa-fw" aria-hidden="true"></i>

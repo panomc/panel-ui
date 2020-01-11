@@ -26,6 +26,36 @@ Vue.component('Navbar', new Promise(function (resolve) {
             .catch(() => {
               window.location.href = '/';
             });
+        },
+
+        getQuickNotifications() {
+          ApiUtil.get("/api/panel/quickNotifications")
+            .then(response => {
+              if (response.data.result === "ok") {
+                this.quickNotifications = response.data.notifications
+
+                console.log(this.quickNotifications)
+              }
+
+              this.startQuickNotificationsCountDown()
+            })
+            .catch(() => {
+              this.startQuickNotificationsCountDown()
+            });
+        },
+
+        startQuickNotificationsCountDown() {
+          let timeToRefreshKey = 1;
+
+          const timer = setInterval(() => {
+            if (timeToRefreshKey > 0) {
+              timeToRefreshKey--
+            } else {
+              clearInterval(timer);
+
+              this.getQuickNotifications();
+            }
+          }, 1000)
         }
       },
       computed: {
@@ -39,7 +69,19 @@ Vue.component('Navbar', new Promise(function (resolve) {
 
         email() {
           return this.$store.state.user.email
+        },
+
+        quickNotifications: {
+          get() {
+            return this.$store.state.quickNotifications
+          },
+          set(value) {
+            this.$store.state.quickNotifications = value
+          }
         }
+      },
+      mounted() {
+        this.startQuickNotificationsCountDown();
       }
     });
   })
