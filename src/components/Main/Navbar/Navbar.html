@@ -48,24 +48,26 @@
         <h6 class="dropdown-header">
           Bildirimler
           <a
-            class="float-right"
-            href="javascript:void(0);"
-            title="Tümünü Temizle"
+                  class="float-right"
+                  href="javascript:void(0);"
+                  title="Tümünü Temizle"
+                  v-if="quickNotifications.length !== 0"
           >
             <i aria-hidden="true" class="fas fa-broom"></i>
           </a>
         </h6>
         <a :key="index" class="dropdown-item py-3" href="javascript:void(0);"
            v-for="(notification, index) in quickNotifications">
-            <i aria-hidden="true" class="fa fa-check text-primary fa-fw"></i>
-            <strong class="text-muted" v-text="notification.type_ID"></strong>
+          <i aria-hidden="true" class="fa fa-check text-primary fa-fw"></i>
+          <strong class="text-muted" v-text="notification.type_ID"></strong>
         </a>
-        
-        <div class="d-flex flex-column align-items-center justify-content-center">
+
+        <div class="d-flex flex-column align-items-center justify-content-center"
+             v-if="quickNotifications.length === 0">
           <i aria-hidden="true" class="far fa-bell fa-3x text-glass m-3"></i>
           <p class="text-gray">Yeni bildirim yok.</p>
         </div>
-        <hr class="m-0 pb-2" />
+        <hr class="m-0 pb-2"/>
         <div class="text-center">
           <router-link to="/panel/notifications" class="small">
             Bildirim Geçmişini Görüntüle
