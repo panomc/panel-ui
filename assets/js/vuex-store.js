@@ -18,6 +18,7 @@ const store = new Vuex.Store({
     main_server: [],
     serverListLoading: false,
     isSidebarOpen: PanelSidebarStorageUtil.isThereSideBarOpenStatus() ? PanelSidebarStorageUtil.getSidebarOpenStatus() : true,
+    sidebarTabsState: PanelSidebarStorageUtil.isThereSideBarTabsState() ? PanelSidebarStorageUtil.getSidebarTabsState() : "website",
     quickNotifications: []
   },
 
@@ -65,6 +66,12 @@ const store = new Vuex.Store({
       context.state.isSidebarOpen = !context.state.isSidebarOpen;
 
       PanelSidebarStorageUtil.savePanelSidebarStorageUtil(context.state.isSidebarOpen.toString());
+    },
+
+    setSidebarTabsState(context, state) {
+      context.state.sidebarTabsState = state;
+
+      PanelSidebarStorageUtil.setSidebarTabsState(state);
     }
   },
 

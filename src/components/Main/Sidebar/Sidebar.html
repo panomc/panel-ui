@@ -24,13 +24,13 @@
         <!-- Sidebar Title Website -->
         <h6 class="text-white" v-text="websiteName"></h6>
 
-        <a href="/" style="z-index: 1;" target="_blank" v-if="currentActive === 'website'">
+        <a href="/" style="z-index: 1;" target="_blank" v-if="sidebarTabsState === 'website'">
           <button class="btn btn-secondary btn-sm" type="button">
             Websiteyi Görüntüle
           </button>
         </a>
 
-        <a href="javascript:void(0);" style="z-index: 1;" v-if="currentActive === 'game'">
+        <a href="javascript:void(0);" style="z-index: 1;" v-if="sidebarTabsState === 'game'">
           <button class="btn btn-aqua btn-sm text-white" data-target="#showServers" data-toggle="modal" type="button">
             Sunucuları Görüntüle
           </button>
@@ -41,14 +41,14 @@
       <nav class="sidebar-tab py-2">
         <ul class="management-tab nav nav-pills nav-fill flex-row flex-nowrap">
           <li class="nav-item">
-            <a :class="{ 'active': currentActive === 'website', 'text-light': currentActive !== 'website' }"
-              @click="onWebsiteClick" class="nav-link" href="javascript:void(0)" v-tooltip:top="'Website'">
+            <a :class="{ 'active': sidebarTabsState === 'website', 'text-light': sidebarTabsState !== 'website' }"
+               @click="onWebsiteClick" class="nav-link" href="javascript:void(0)" v-tooltip:top="'Website'">
               <i aria-hidden="true" class="fa fa-globe fa-fw fa-lg"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a :class="{ 'active': currentActive === 'game', 'text-light': currentActive !== 'game' }"
-              @click="onGameClick" class="nav-link" href="javascript:void(0)" v-tooltip:top="'Sunucular'">
+            <a :class="{ 'active': sidebarTabsState === 'game', 'text-light': sidebarTabsState !== 'game' }"
+               @click="onGameClick" class="nav-link" href="javascript:void(0)" v-tooltip:top="'Sunucular'">
               <i aria-hidden="true" class="fa fa-cube fa-fw fa-lg"></i>
             </a>
           </li>
@@ -56,7 +56,7 @@
       </nav>
 
       <!-- Sidebar Site Navigation Menu -->
-      <nav class="sidebar-nav navbar-dark" v-if="currentActive === 'website'">
+      <nav class="sidebar-nav navbar-dark" v-if="sidebarTabsState === 'website'">
         <ul class="menu navbar-nav">
           <li :class="{ 'active': path === '/panel' || path === '/panel/' }" class="nav-item">
             <router-link class="nav-link" to="/panel">
@@ -102,7 +102,7 @@
       </nav>
 
       <!-- Sidebar Server Navigation Menu -->
-      <nav class="sidebar-nav navbar-dark" v-if="currentActive === 'game'">
+      <nav class="sidebar-nav navbar-dark" v-if="sidebarTabsState === 'game'">
         <ul class="menu navbar-nav">
           <li :class="{ 'active': path.startsWith('/panel/server-panel') }" class="nav-item">
             <router-link class="nav-link" to="/panel/tools">
