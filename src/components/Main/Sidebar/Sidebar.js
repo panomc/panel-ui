@@ -8,7 +8,6 @@ Vue.component('Sidebar', new Promise(function (resolve) {
         template: PANO.UI,
         data() {
           return {
-            currentActive: "website",
             timeToRefreshKey: 30,
             isPlatformAddressCopied: false,
             isPlatformMatchKeyCopied: false,
@@ -27,11 +26,11 @@ Vue.component('Sidebar', new Promise(function (resolve) {
         },
         methods: {
           onWebsiteClick() {
-            this.currentActive = 'website'
+            this.$store.dispatch("setSidebarTabsState", "website")
           },
 
           onGameClick() {
-            this.currentActive = 'game'
+            this.$store.dispatch("setSidebarTabsState", "game")
           },
 
           onMobileSideBarCollapseClick() {
@@ -225,6 +224,10 @@ Vue.component('Sidebar', new Promise(function (resolve) {
 
           isSidebarOpen() {
             return this.$store.state.isSidebarOpen
+          },
+
+          sidebarTabsState() {
+            return this.$store.state.sidebarTabsState
           }
         },
         mounted() {

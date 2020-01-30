@@ -1,5 +1,6 @@
 const LANGUAGE = 'language';
 const SIDEBAR_STORAGE_STATUS = 'sidebar_storage_status';
+const SIDEBAR_TABS_STORAGE_STATE = 'sidebar_tabs_storage_state';
 
 
 const LanguageUtil = {
@@ -27,5 +28,17 @@ const PanelSidebarStorageUtil = {
 
   isThereSideBarOpenStatus() {
     return !!localStorage.getItem(SIDEBAR_STORAGE_STATUS)
+  },
+
+  getSidebarTabsState() {
+    return localStorage.getItem(SIDEBAR_TABS_STORAGE_STATE)
+  },
+
+  setSidebarTabsState(state) {
+    localStorage.setItem(SIDEBAR_TABS_STORAGE_STATE, state)
+  },
+
+  isThereSideBarTabsState() {
+    return !!localStorage.getItem(SIDEBAR_TABS_STORAGE_STATE)
   }
 };
