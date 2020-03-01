@@ -98,24 +98,20 @@
       <div class="card">
         <div class="card-body">
           <form>
-            <div class="form-group mb-1">
-              <label class="h6">
-                <i aria-hidden="true" class="far fa-sticky-note text-primary fa-fw"></i> Durum:
-              </label>
-              <span class="text-muted">{{ status }}</span>
-            </div>
-            <div class="form-group mb-1">
-              <label class="h6">
-                <i aria-hidden="true" class="fa fa-pencil-alt text-primary fa-fw"></i> Son Düzenleme:
-              </label>
-              <span class="text-muted">{{ post.date === 0 ? '-' : getFormattedDate(post.date) }}</span>
-            </div>
-            <div class="form-group mb-0">
-              <label class="h6">
-                <i aria-hidden="true" class="far fa-eye text-primary fa-fw"></i> Görüntülenme:
-              </label>
-              <span class="text-muted">0</span>
-            </div>
+            <ul class="list-group">
+              <li class="list-group-item px-0 pt-0" v-tooltip:left="'Durum'">
+                <i aria-hidden="true" class="far fa-sticky-note text-primary fa-fw"></i>
+                <span class="font-weight-normal">{{ status }}</span>
+              </li>
+              <li class="list-group-item px-0" v-tooltip:left="'Son Düzenleme'">
+                <i aria-hidden="true" class="fa fa-pencil-alt text-primary fa-fw"></i>
+                <span class="font-weight-normal">{{ post.date === 0 ? '-' : getFormattedDate(post.date) }}</span>
+              </li>
+              <li class="list-group-item px-0 pb-0" v-tooltip:left="'Görüntülenme'">
+                <i aria-hidden="true" class="far fa-eye text-primary fa-fw"></i>
+                <span class="font-weight-normal">0</span>
+              </li>
+            </ul>
           </form>
         </div>
       </div>
