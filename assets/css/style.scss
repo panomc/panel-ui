@@ -102,6 +102,8 @@ body {
 .sidebar-inner {
   overflow-y: auto;
   height: calc(100vh - 130px);
+  scrollbar-color: $lightglass $primary;
+  scrollbar-width: thin;
 }
 
 .menu.navbar-nav li.nav-item {
