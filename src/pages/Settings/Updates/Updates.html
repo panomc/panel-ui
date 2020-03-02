@@ -1,64 +1,30 @@
 <!-- Updates Sub Page -->
 <div class="tab-pane">
-  <!-- Action Menu -->
-  <div class="row justify-content-between align-items-center  mb-3">
-    <div class="col">
-      <a
-        class="btn btn-outline-primary"
-        role="button"
-        href="#availableUpdates"
-        data-toggle="collapse"
-        aria-controls="availableUpdates"
-      >
-        <strong>
-          <i class="fa fa-download fa-fw"></i>
-          5 Güncelleme Mevcut
-        </strong>
-      </a>
-    </div>
-    <div class="col text-right d-flex align-items-center justify-content-end">
-      <span class="text-muted mr-3">Son Denetleme: 14:23, 01.01.2019</span>
-      <button class="btn btn-primary" type="button">
-        <i aria-hidden="true" class="fa fa-sync fa-fw"></i>
-        Güncellemeleri Denetle
-      </button>
-    </div>
-  </div>
 
-  <!-- Updates Preferences -->
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Güncelleme Tercihleri</h5>
-      <form>
-        <div class="form-group row mb-0">
-          <label class="col-md-4 col-form-labeel" for="platformLangueage">
-            Otomatik güncellemeleri denetle:
-          </label>
-          <div class="col-md-8">
-            <select class="form-control" id="autoUpdatesOptions">
-              <option id="autoUpdatesOption1" selected>Asla</option>
-              <option id="autoUpdatesOption2" selected>Günde bir kez</option>
-              <option id="autoUpdatesOption3">Haftada bir kez</option>
-              <option id="autoUpdatesOption3">Ayda bir kez</option>
-            </select>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="collapse" id="availableUpdates">
+  <div>
     <!-- Action Menu -->
     <section class="row justify-content-between align-items-center mb-3">
-      <div class="col-4">
-        <h3 class="text-muted badge badge-lightprimary panel-subtitle mb-0">
-          Mevcut Güncellemeler
-        </h3>
+      <div class="col-md-4">
+        <a
+        class="btn btn-link"
+        role="button"
+        >
+          <strong class="text-muted">
+            5 Güncelleme Mevcut
+          </strong>
+        </a>
       </div>
       <div class="col text-right">
         <button class="btn btn-secondary" type="button">
           <i aria-hidden="true" class="fa fa-download fa-fw"></i>
           <span class="d-md-inline d-none">Tümünü Kur</span>
+        </button>      
+        <button class="btn btn-primary" type="button" 
+          href="#availableUpdates"
+          data-toggle="collapse"
+          aria-controls="availableUpdates">
+          <i aria-hidden="true" class="fa fa-sync"></i>
+          <br>
         </button>
       </div>
     </section>
@@ -84,7 +50,7 @@
           ve mevcut özelliklerinin iyileştirmesini sağlayan önemli
           güncellemelerdir.
         </p>
-        <button class="btn btn-primary" type="button">
+        <button class="btn btn-secondary" type="button">
           <i aria-hidden="true" class="fa fa-download fa-fw"></i>
           Kur
         </button>
@@ -110,7 +76,7 @@
           Dosya Boyutu:
           <b>5 MB.</b>
         </h6>
-        <button class="btn btn-primary" type="button">
+        <button class="btn btn-secondary" type="button">
           <i aria-hidden="true" class="fa fa-download fa-fw"></i>
           Kur
         </button>

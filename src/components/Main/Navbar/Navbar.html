@@ -25,8 +25,8 @@
     </li>
   </ul>
   <ul class="nav navbar-nav m-auto">
-    <div class="navbar-brand text-primary">
-      <span title="Sayfa Başlığı">Panel</span>
+    <div class="navbar-brand">
+      <span class="font-weight-normal">Panel</span>
     </div>
   </ul>
   <ul class="nav navbar-nav ml-auto">
@@ -91,7 +91,7 @@
       <div
         class="dropdown-menu dropdown-menu-right animated fadeIn faster notifications"
       >
-        <div class="px-2 py-2">
+        <div class="px-2 py-2 d-flex align-items-center">
           <img
             :src=" 'https://www.gravatar.com/avatar/' + md5(email.trim().toLocaleLowerCase()) + '/64'"
             width="32"
@@ -101,7 +101,7 @@
           <span class="text-muted">Yerel Hesap</span>
           <a
             @click="logout"
-            class="btn btn-link btn-sm text-danger d-inline-block float-right"
+            class="btn btn-link btn-sm text-danger ml-auto"
             href="javascript:void(0)"
             v-tooltip:top="'Çıkış Yap'"
           >
@@ -109,22 +109,20 @@
           </a>
         </div>
         <hr class="mt-2 mb-0 pb-2" />
-        <div class="px-2 pb-2">
-          <ul class="nav flex-column p-0 m-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#"
-                ><i class="fa fa-user-cog fa-fw" aria-hidden="true"></i> Hesabı
-                Yönet</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-primary" href="#"
-                ><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>
-                Yönetici Ekle</a
-              >
-            </li>
-          </ul>
-        </div>
+        <ul class="nav font-weight-normal flex-column p-0 m-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              ><i class="fa fa-user-cog fa-fw" aria-hidden="true"></i> Hesabı
+              Yönet</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              ><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>
+              Yönetici Ekle</a
+            >
+          </li>
+        </ul>
       </div>
     </li>
   </ul>
