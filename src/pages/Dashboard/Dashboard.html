@@ -2,7 +2,7 @@
 <div class="content">
   <!-- Welcome Alerts -->
   <div
-    class="alert flex-fill w-100 rounded alert-welcome alert-dismissible show border mb-4"
+    class="alert card rounded alert-welcome alert-dismissible flex-fill w-100 show border mb-4"
     role="alert"
     v-if="getting_started_blocks.welcome_board"
   >
@@ -14,16 +14,16 @@
     >
       <span aria-hidden="true">&times;</span>
     </button>
-    <div class="card-body rounded">
-      <h4 class="card-title text-primary">Hoş Geldiniz</h4>
-
-      <p class="text-black">
-        Pano kullanıma hazır! İşte başlarken yapabileceklerinizden bazıları:
-      </p>
-
+    <div class="card-body">
       <div class="row">
+        <div class="col-12">
+          <h4 class="card-title text-primary">Hoş Geldiniz</h4>
+          <p>
+            Pano kullanıma hazır! İşte başlarken yapabileceklerinizden bazıları:
+          </p>
+        </div>
         <div class="col-lg-4 mb-lg-0 mb-3">
-          <h5>Sunucunu Bağlayın</h5>
+          <h5>Sunucu Bağlayın</h5>
           <p>
             Minecraft sunucunuzu platforma bağlayın ve sunucu bilgilerine panel
             üzerinden erişin.
