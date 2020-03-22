@@ -3,13 +3,13 @@
   <div class="row mb-3">
     <div class="col-md-4 col-6">
       <h3 class="text-muted badge badge-lightprimary panel-subtitle">
-        Tüm Bildirimler
+        Bildirimler
       </h3>
     </div>
     <div class="col text-right">
-      <button type="button" class="btn btn-outline-primary" disabled>
-        <i aria-hidden="true" class="fas fa-broom fa-fw"></i>
-        <span class="d-md-inline d-none">Tümünü Temizle</span>
+      <button type="button" class="btn btn-link text-danger">
+        <i aria-hidden="true" class="fas fa-trash fa-fw"></i>
+        <span class="d-md-inline d-none">Tümünü Sil</span>
       </button>
     </div>
   </div>
@@ -19,23 +19,32 @@
   <div class="card">
     <div class="card-body">
       <div class="border rounded">
-        <a class="dropdown-item py-3 border-bottom" href="javascript:void(0);">
-          <i aria-hidden="true" class="far fa-dot-circle text-primary fa-fw"></i>
-          <span class="text-muted">Okunmuş bildirim</span>
-          <small class="text-muted float-right">01.01.2019</small>
-        </a>
-        <a :key="index" class="dropdown-item py-3 bg-lightprimary border-bottom" href="javascript:void(0);">
-          <i aria-hidden="true" class="far fa-dot-circle text-primary fa-fw"></i>
-          <span class="text-muted font-weight-bolder">Bildirim başlığı</span>
-          <small class="text-muted float-right">01.01.2019</small>
-        </a>
-        <a :key="index" class="dropdown-item py-3 bg-lightprimary border-bottom" href="javascript:void(0);">
-          <i aria-hidden="true" class="far fa-dot-circle text-primary fa-fw"></i>
-          <span class="text-muted font-weight-bolder">Bildirim başlığı</span>
-          <small class="text-muted float-right">01.01.2019</small>
-        </a>
-        
-        <div class="d-flex flex-column align-items-center justify-content-center">
+        <router-link
+          class="dropdown-item border-bottom py-3 bg-lightprimary"
+          to="#"
+        >
+          <h6 class="text-muted m-0">
+            <i class="far fa-dot-circle fa-fw text-primary"></i>
+            Bu okunmamış bildirim başlığı
+          </h6>
+          <small class="text-muted font-weight-lighter">
+            15 dk. önce, Butlu
+          </small>
+        </router-link>
+
+        <router-link class="dropdown-item border-bottom py-3" to="#">
+          <h6 class="text-muted m-0 font-weight-normal">
+            <i class="far fa-dot-circle fa-fw text-primary"></i>
+            Bu okunmuş bildirim başlığı
+          </h6>
+          <small class="text-muted font-weight-lighter">
+            15 dk. önce, Butlu
+          </small>
+        </router-link>
+
+        <div
+          class="d-flex flex-column align-items-center justify-content-center"
+        >
           <i aria-hidden="true" class="far fa-bell fa-3x text-glass m-3"></i>
           <p class="text-gray">Yeni bildirim yok.</p>
         </div>
