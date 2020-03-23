@@ -29,6 +29,7 @@
       <span class="font-weight-normal">Panel</span>
     </div>
   </ul>
+
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown">
       <a
@@ -46,36 +47,33 @@
       >
         <h6 class="dropdown-header">
           Bildirimler (8)
-          <a
-            class="float-right"
-            href="javascript:void(0);"
-            title="Tümünü Temizle"
-            v-if="quickNotifications.length !== 0"
-          >
-            <i aria-hidden="true" class="fas fa-broom"></i>
+          <a class="float-right" href="javascript:void(0);" title="Tümünü Oku">
+            Tümünü Oku
           </a>
         </h6>
 
         <router-link
-          class="dropdown-item border-bottom py-3 bg-lightprimary"
+          class="dropdown-item d-flex w-100 justify-content-between border-bottom py-3 bg-lightprimary"
           to="#"
         >
-          <h6 class="text-muted m-0">
+          <h6 class="text-muted m-0 text-wrap d-inline">
             <i class="far fa-dot-circle fa-fw text-primary"></i>
-            Bu okunmamış bildirim başlığı
+            Yeni platform bağlantısı isteği (#1111)
           </h6>
-          <small class="text-muted font-weight-lighter">
-            15 dk. önce, Butlu
+          <small class="text-muted text-right font-weight-lighter">
+            15 dk
           </small>
         </router-link>
-
-        <router-link class="dropdown-item border-bottom py-3" to="#">
-          <h6 class="text-muted m-0 font-weight-normal">
+        <router-link
+          class="dropdown-item d-flex w-100 justify-content-between border-bottom py-3"
+          to="#"
+        >
+          <h6 class="text-muted m-0 text-wrap d-inline">
             <i class="far fa-dot-circle fa-fw text-primary"></i>
-            Bu okunmuş bildirim başlığı
+            Yeni platform bağlantısı isteği (#1111)
           </h6>
-          <small class="text-muted font-weight-lighter">
-            15 dk. önce, Butlu
+          <small class="text-muted text-right font-weight-lighter">
+            15 dk
           </small>
         </router-link>
 

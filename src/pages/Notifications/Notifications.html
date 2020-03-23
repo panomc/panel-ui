@@ -20,33 +20,113 @@
     <div class="card-body">
       <div class="border rounded">
         <router-link
-          class="dropdown-item border-bottom py-3 bg-lightprimary"
+          class="dropdown-item d-flex w-100 justify-content-between border-bottom py-3 bg-lightprimary"
           to="#"
         >
-          <h6 class="text-muted m-0">
+          <h6 class="text-muted m-0 text-wrap d-inline">
             <i class="far fa-dot-circle fa-fw text-primary"></i>
-            Bu okunmamış bildirim başlığı
+            Yeni platform bağlantısı isteği (#1111)
           </h6>
-          <small class="text-muted font-weight-lighter">
-            15 dk. önce, Butlu
-          </small>
-        </router-link>
+          <div class="d-flex flex-row align-items-center">
+            <small class="text-muted text-right font-weight-lighter">
+              15 dk
+            </small>
 
-        <router-link class="dropdown-item border-bottom py-3" to="#">
-          <h6 class="text-muted m-0 font-weight-normal">
+            <div class="dropdown ml-3">
+              <a
+                aria-expanded="false"
+                aria-haspopup="true"
+                class="icon-link d-block m-auto"
+                data-toggle="dropdown"
+                href="javascript:void(0);"
+                title="Eylemler"
+              >
+                <i aria-hidden="true" class="fa fa-ellipsis-v px-3"></i>
+              </a>
+              <div
+                aria-labelledby="postAction"
+                class="dropdown-menu dropdown-menu-right"
+              >
+                <a class="dropdown-item" href="javascript:void(0);">
+                  <i
+                    aria-hidden="true"
+                    class="fa fa-eye fa-fw text-primary"
+                  ></i>
+                  Okundu İşaretle
+                </a>
+                <a
+                  class="dropdown-item"
+                  data-target="#conformBanTickets"
+                  data-toggle="modal"
+                  href="javascript:void(0);"
+                >
+                  <i
+                    aria-hidden="true"
+                    class="fa fa-times fa-fw text-danger"
+                  ></i>
+                  Kaldır
+                </a>
+              </div>
+            </div>
+          </div>
+        </router-link>
+        <router-link
+          class="dropdown-item d-flex w-100 justify-content-between border-bottom py-3"
+          to="#"
+        >
+          <h6 class="text-muted m-0 text-wrap d-inline">
             <i class="far fa-dot-circle fa-fw text-primary"></i>
-            Bu okunmuş bildirim başlığı
+            Yeni platform bağlantısı isteği (#1111)
           </h6>
-          <small class="text-muted font-weight-lighter">
-            15 dk. önce, Butlu
-          </small>
+          <div class="d-flex flex-row align-items-center">
+            <small class="text-muted text-right font-weight-lighter">
+              15 dk
+            </small>
+
+            <div class="dropdown ml-3">
+              <a
+                aria-expanded="false"
+                aria-haspopup="true"
+                class="icon-link d-block m-auto"
+                data-toggle="dropdown"
+                href="javascript:void(0);"
+                title="Eylemler"
+              >
+                <i aria-hidden="true" class="fa fa-ellipsis-v px-3"></i>
+              </a>
+              <div
+                aria-labelledby="postAction"
+                class="dropdown-menu dropdown-menu-right"
+              >
+                <a class="dropdown-item" href="javascript:void(0);">
+                  <i
+                    aria-hidden="true"
+                    class="fa fa-eye fa-fw text-primary"
+                  ></i>
+                  Okundu İşaretle
+                </a>
+                <a
+                  class="dropdown-item"
+                  data-target="#conformBanTickets"
+                  data-toggle="modal"
+                  href="javascript:void(0);"
+                >
+                  <i
+                    aria-hidden="true"
+                    class="fa fa-times fa-fw text-danger"
+                  ></i>
+                  Kaldır
+                </a>
+              </div>
+            </div>
+          </div>
         </router-link>
 
         <div
           class="d-flex flex-column align-items-center justify-content-center"
         >
           <i aria-hidden="true" class="far fa-bell fa-3x text-glass m-3"></i>
-          <p class="text-gray">Yeni bildirim yok.</p>
+          <p class="text-gray">Bildirim yok.</p>
         </div>
       </div>
     </div>
