@@ -10,6 +10,7 @@
 
   import PageLoading from "./components/PageLoading.svelte";
   import Navbar from "./components/Navbar.svelte"
+  import Sidebar from "./components/Sidebar.svelte"
 
   const Chunk = ChunkGenerator(ChunkComponent);
 
@@ -52,7 +53,7 @@
   <!--  <Main v-show="!showSplash"></Main>-->
 
 
-  <!--    <Sidebar/>-->
+  <Sidebar/>
   <!--  Main  -->
   <main class="panel-content">
     <Navbar/>
