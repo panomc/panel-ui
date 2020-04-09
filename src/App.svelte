@@ -39,8 +39,7 @@
 <!-- Splash Animation -->
 {#if showSplash}
   <div class="d-flex justify-content-center align-items-center w-100 min-vh-100" role="status">
-    <img class="animated fadeIn infinite slow" src={basePath() + "assets/img/logo-blue.svg"} style="visibility: hidden;"
-         width="32">
+    <img class="animated fadeIn infinite slow" src={basePath() + "assets/img/logo-blue.svg"} width="32">
   </div>
 {/if}
 
@@ -77,5 +76,3 @@
   <!--{#if $isPageLoading}-->
 <!--  <PageLoading/>-->
 <!--{/if}-->
-
-<svelte:component this={props.component} {...props}/>
