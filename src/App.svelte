@@ -30,7 +30,7 @@
 </script>
 
 <style lang="scss" global>
-  @import "commons/scss/main";
+  @import "styles/main";
 </style>
 
 {#if $isPageLoading}
