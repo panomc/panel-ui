@@ -1,23 +1,23 @@
 <script>
   import router from "page";
-  import page from "page"
-  import {ChunkGenerator} from "svelte-spa-chunk";
+  import page from "page";
+  import { ChunkGenerator } from "svelte-spa-chunk";
 
-  import {basePath} from "./util/path.util";
+  import { basePath } from "./util/path.util";
 
   import ChunkComponent from "./Chunk.svelte";
-  import {isPageLoading} from "./ChunkStore";
+  import { isPageLoading } from "./ChunkStore";
 
   import PageLoading from "./components/PageLoading.svelte";
-  import Navbar from "./components/Navbar.svelte"
-  import Sidebar from "./components/Sidebar.svelte"
+  import Navbar from "./components/Navbar.svelte";
+  import Sidebar from "./components/Sidebar.svelte";
 
   const Chunk = ChunkGenerator(ChunkComponent);
 
   let props = {};
   let showSplash = false;
 
-  page.base("/panel")
+  page.base("/panel");
 
   router("/", () => {
     props = {
@@ -40,29 +40,33 @@
 
 <!-- Splash Animation -->
 {#if showSplash}
-  <div class="d-flex justify-content-center align-items-center w-100 min-vh-100" role="status">
-    <img class="animated fadeIn infinite slow" src={basePath() + "assets/img/logo-blue.svg"} width="32">
+  <div
+    class="d-flex justify-content-center align-items-center w-100 min-vh-100"
+    role="status">
+    <img
+      class="animated fadeIn infinite slow"
+      alt="Pano"
+      src={basePath() + 'assets/img/logo-blue.svg'}
+      width="32" />
   </div>
 {/if}
 
-
-  <!-- Main Contents Hidden -->
+<!-- Main Contents Hidden -->
 <!--{#if !showSplash}-->
-<div hidden={showSplash}>
+<div hidden={showSplash} class="d-flex">
   <!--  :class="{ 'd-flex': !showSplash }"-->
   <!--  <Main v-show="!showSplash"></Main>-->
 
-
-  <Sidebar/>
+  <Sidebar />
   <!--  Main  -->
   <main class="panel-content">
-    <Navbar/>
+    <Navbar />
 
     <!-- Content  -->
     <!--    <router-view-->
     <!--            v-show="!routePageLoading && !initialPageDataLoading"-->
     <!--    ></router-view>-->
-    <svelte:component this={props.component} {...props}/>
+    <svelte:component this={props.component} {...props} />
 
     <!--    <div-->
     <!--            :class="{ 'd-flex': routePageLoading || initialPageDataLoading }"-->
@@ -74,7 +78,6 @@
   </main>
 </div>
 <!--{/if}-->
-
 
 <!--{#if $isPageLoading}-->
 <!--  <PageLoading/>-->
