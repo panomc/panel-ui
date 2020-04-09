@@ -1,3 +1,9 @@
+/node_modules/
+
+/public/build/
+/public/assets/
+/public/commons/
+
 .DS_Store
 node_modules/
 /dist/
@@ -12,3 +18,6 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+yarn.lock
+package-lock.json
