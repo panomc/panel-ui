@@ -9,11 +9,12 @@
   import {isPageLoading} from "./ChunkStore";
 
   import PageLoading from "./components/PageLoading.svelte";
+  import Navbar from "./components/Navbar.svelte"
 
   const Chunk = ChunkGenerator(ChunkComponent);
 
   let props = {};
-  let showSplash = true;
+  let showSplash = false;
 
   page.base("/panel")
 
@@ -43,6 +44,7 @@
   </div>
 {/if}
 
+
   <!-- Main Contents Hidden -->
 <!--{#if !showSplash}-->
 <div hidden={showSplash}>
@@ -50,10 +52,10 @@
   <!--  <Main v-show="!showSplash"></Main>-->
 
 
-  <!--  <Sidebar></Sidebar>-->
+  <!--    <Sidebar/>-->
   <!--  Main  -->
   <main class="panel-content">
-    <!--    <Navbar></Navbar>-->
+    <Navbar/>
 
     <!-- Content  -->
     <!--    <router-view-->
@@ -73,6 +75,6 @@
 <!--{/if}-->
 
 
-  <!--{#if $isPageLoading}-->
+<!--{#if $isPageLoading}-->
 <!--  <PageLoading/>-->
 <!--{/if}-->
