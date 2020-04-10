@@ -1,4 +1,6 @@
 <script>
+  import {toggleSidebar} from "../Store"
+
   import Icon from "svelte-awesome";
   import {
     faBell,
@@ -12,6 +14,10 @@
     faUserPlus,
     faSignOutAlt
   } from "@fortawesome/free-solid-svg-icons";
+
+  function onSideBarCollapseClick() {
+    toggleSidebar();
+  }
 </script>
 
 <!-- Top Navbar -->
@@ -19,12 +25,12 @@
   class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom">
   <ul class="nav navbar-nav mr-auto">
     <li class="nav-item mr-3">
-      <!--        @click="onSideBarCollapseClick"-->
       <a
         class="icon-link nav-link"
         href="javascript:void(0);"
-        title="Menüyü Aç/Kapa">
-        <Icon data={faBars} />
+        title="Menüyü Aç/Kapa"
+        on:click={onSideBarCollapseClick}>
+        <Icon data={faBars}/>
       </a>
     </li>
     <li class="nav-item">
@@ -32,7 +38,7 @@
         href="javascript:void(0);"
         target="_blank"
         class="btn btn-link border-lightprimary text-secondary">
-        <Icon data={faStore} class="d-lg-none d-inline" />
+        <Icon data={faStore} class="d-lg-none d-inline"/>
         <span class="d-lg-inline d-none">Web Market</span>
       </a>
     </li>
@@ -49,8 +55,8 @@
         href="javascript:void(0);"
         role="button"
         title="Bildirimler">
-        <div class="notification" v-if="notificationsCount != 0" />
-        <Icon data={faBell} />
+        <div class="notification" v-if="notificationsCount != 0"/>
+        <Icon data={faBell}/>
       </a>
       <div
         class="dropdown-menu animated fadeIn faster dropdown-menu-right
@@ -74,8 +80,8 @@
           :key="index"
           v-for="(notification, index) in quickNotifications">
           <h6 class="text-muted m-0 text-wrap d-inline">
-            <Icon data={faDotCircle} class="text-primary" />
-            <span v-text="notification.type_ID" />
+            <Icon data={faDotCircle} class="text-primary"/>
+            <span v-text="notification.type_ID"/>
           </h6>
           <small class="text-muted text-right font-weight-lighter">15 dk</small>
         </router-link>
@@ -83,7 +89,7 @@
         <div
           class="d-flex flex-column align-items-center justify-content-center"
           v-if="quickNotifications.length === 0">
-          <Icon data={faBell} scale="3" class="text-glass m-3" />
+          <Icon data={faBell} scale="3" class="text-glass m-3"/>
           <p class="text-gray">Yeni bildirim yok.</p>
         </div>
 
@@ -103,7 +109,7 @@
         data-toggle="dropdown"
         href="javascript:void(0);"
         title="Oturum">
-        <Icon data={faUser} />
+        <Icon data={faUser}/>
         <span class="d-lg-inline d-none">
           <!--            {{ username }}-->
         </span>
@@ -112,19 +118,19 @@
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" href="javascript:void(0);">
-              <Icon data={faUserCog} class="mr-1" />
+              <Icon data={faUserCog} class="mr-1"/>
               Hesabı Yönet
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="javascript:void(0);">
-              <Icon data={faUserPlus} class="mr-1" />
+              <Icon data={faUserPlus} class="mr-1"/>
               Yönetici Ekle
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-danger" href="javascript:void(0);">
-              <Icon data={faSignOutAlt} class="mr-1" />
+              <Icon data={faSignOutAlt} class="mr-1"/>
               Çıkış Yap
             </a>
           </li>

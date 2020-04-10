@@ -1,5 +1,6 @@
 <script>
   import {basePath} from "../util/path.util";
+  import {toggleSidebar, isSidebarOpen} from "../Store"
 
   import Bottom from "./sidebar/Bottom.svelte"
   import SiteNavigationMenu from "./sidebar/SiteNavigationMenu.svelte";
@@ -12,20 +13,22 @@
     faCube
   } from "@fortawesome/free-solid-svg-icons";
 
+  function onMobileSideBarCollapseClick() {
+    toggleSidebar();
+  }
 </script>
 
 <!-- Sidebar -->
-<!--:class="{ 'active': isSidebarOpen }"-->
-<aside class="active sidebar bg-primary">
+<aside class="sidebar bg-primary" class:active={$isSidebarOpen}>
 
   <!-- Sidebar Logo -->
   <div
     class="sidebar-logo bg-lightglass border-bottom border-glass
     justify-content-lg-center">
-    <!--    @click="onMobileSideBarCollapseClick"-->
     <a
       href="javascript:void(0);"
-      class="text-light nav-link ml-3 mr-5 d-lg-none d-block">
+      class="text-light nav-link ml-3 mr-5 d-lg-none d-block"
+      on:click={onMobileSideBarCollapseClick}>
       <Icon data={faBars}/>
     </a>
     <img alt="Pano" src={basePath() + 'assets/img/logo.svg'} width="20"/>
