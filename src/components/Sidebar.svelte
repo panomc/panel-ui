@@ -1,3 +1,7 @@
+<script>
+  import {basePath} from "../util/path.util"
+</script>
+
 <!-- Sidebar -->
 <!--:class="{ 'active': isSidebarOpen }"-->
 <aside class="active sidebar bg-primary">
@@ -9,7 +13,7 @@
        class="icon-link text-light nav-link ml-3 mr-5 d-lg-none d-block animated fadeIn fast">
       <i aria-hidden="true" class="fa fa-bars"></i>
     </a>
-    <img alt="Pano" src="/panel/assets/img/logo.svg" width="20"/>
+    <img alt="Pano" src={basePath() + "assets/img/logo.svg"} width="20"/>
   </div>
 
   <div class="sidebar-inner bg-primary">
@@ -229,8 +233,8 @@
                       <i aria-hidden="true" class="fa fa-times fa-fw text-primary"></i> Ana
                       Sunuculuğunu Kaldır
                     </a>
-<!--                    @click="onRemoveClick(server)"-->
-                    <a  class="dropdown-item" data-dismiss="modal"
+                    <!--                    @click="onRemoveClick(server)"-->
+                    <a class="dropdown-item" data-dismiss="modal"
                        data-target="#confirmRemoveServer" data-toggle="modal" href="javascript:void(0);">
                       <i aria-hidden="true" class="fa fa-times fa-fw text-danger"></i> Sunucuyu Kaldır
                     </a>
@@ -286,8 +290,8 @@
                    id="platformToken"
                    type="text">
             <div class="input-group-append">
-<!--              @click="onCopyPlatformMatchKeyClick"-->
-              <button  class="btn btn-link bg-light border shadow-sm"
+              <!--              @click="onCopyPlatformMatchKeyClick"-->
+              <button class="btn btn-link bg-light border shadow-sm"
                       id="copyPlatformToken"
                       type="button" v-tooltip:top="isPlatformMatchKeyCopied ? 'Kopyalandı!' : 'Kopyala'">
                 <i aria-hidden="true" class="fa fa-clipboard fa-fw"></i>
@@ -296,7 +300,7 @@
           </div>
           <small class="text-muted ml-2">
             <i aria-hidden="true" class="fa fa-hourglass-half fa-fw"></i> Kod
-<!--              {{ timeToRefreshKey }}{{ timeToRefreshKey === '...' ? '' : ' saniye'}} -->
+            <!--              {{ timeToRefreshKey }}{{ timeToRefreshKey === '...' ? '' : ' saniye'}} -->
             sonra yenilenecek.
           </small>
 
@@ -318,7 +322,7 @@
 <div aria-hidden="true" class="modal fade" id="confirmRemoveServer" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
-<!--      @submit.prevent="submitRemoveServer"-->
+      <!--      @submit.prevent="submitRemoveServer"-->
       <form>
         <div class="modal-body text-center">
           <div class="pb-3">
@@ -327,14 +331,14 @@
           Bu sunucuyu kaldırmak istediğinizden emin misiniz?
           <div class="container d-block m-auto">
             <label for="confirmRemoveServerPassword">Onaylamak için lütfen şifrenizi girin:</label>
-<!--            :class="{ 'border-danger': removingServerForm.error.password }"-->
-            <input  aria-describedby="helpId"
+            <!--            :class="{ 'border-danger': removingServerForm.error.password }"-->
+            <input aria-describedby="helpId"
                    class="form-control text-center mb-2" id="confirmRemoveServerPassword"
                    placeholder="Pano Hesabı Şifreniz" type="password" v-model="removingServerForm.password">
 
             <small class="form-text text-danger d-inline" v-if="removingServerForm.error.code !== ''">
               <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i>
-<!--              {{ removingServerForm.error.code }}-->
+              <!--              {{ removingServerForm.error.code }}-->
             </small>
           </div>
           <span class="text-danger">
