@@ -1,1 +1,1 @@
-Welcome to dashboard Bruh!
+<div class="content">Svelte is awesome!</div>
