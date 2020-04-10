@@ -58,55 +58,58 @@
   <div class="sidebar-inner bg-primary">
 
     <!-- Sidebar Head Website -->
-    <div class="sidebar-head">
-      <div class="sidebar-icon">
-        <img
-          alt="Server İkon"
-          class="rounded-circle"
-          height="64"
-          src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
-          width="64"/>
-      </div>
-
-      <!-- Sidebar Title Website -->
-      <h5 class="text-white">Panocraft</h5>
-
-      <a
-        href="/"
-        class="z-1"
-        target="_blank"
-        v-if="sidebarTabsState === 'website'">
-        <button class="btn btn-secondary btn-sm" type="button">
-          Websiteyi Görüntüle
-        </button>
-      </a>
-
-      <!-- <a
-        href="javascript:void(0);"
-        class="z-1"
-        v-if="sidebarTabsState === 'game'">
-        <button
-          class="btn btn-aqua btn-sm text-white"
-          data-target="#showServers"
-          data-toggle="modal"
-          type="button">
-          Sunucuları Görüntüle
-        </button>
-      </a> -->
+  <div class="sidebar-head">
+    <div class="sidebar-icon">
+      <img
+        alt="Server İkon"
+        class="rounded-circle"
+        height="64"
+        src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
+        width="64"/>
     </div>
+
+    <!-- Sidebar Title Website -->
+    <h5 class="text-white">Panocraft</h5>
+      {#if $sidebarTabsState === "website"}
+        <a
+          href="/"
+          class="z-1"
+          target="_blank">
+          <button class="btn btn-secondary btn-sm" type="button">
+            Websiteyi Görüntüle
+          </button>
+        </a>
+      {/if}
+
+      {#if $sidebarTabsState === "game"}
+        <a
+          href="javascript:void(0);"
+          class="z-1">
+          <button
+            class="btn btn-aqua btn-sm text-white"
+            data-target="#showServers"
+            data-toggle="modal"
+            type="button">
+            Sunucuları Görüntüle
+          </button>
+        </a>
+      {/if}
+  </div>
 
     <!-- Sidebar Tabs -->
     <nav class="sidebar-tab py-2">
       <ul class="management-tab nav nav-pills nav-fill lex-row flex-nowrap">
         <li class="nav-item">
           <!--          :class="{ 'active': sidebarTabsState === 'website', 'text-light': sidebarTabsState !== 'website' }"-->
-          <a href="javascript:void(0)" class="nav-link"  on:click={onWebsiteMenuClick} class:active={$sidebarTabsState === "website"} class:text-light={$sidebarTabsState !== "website"}>
+          <a href="javascript:void(0)" class="nav-link" on:click={onWebsiteMenuClick}
+             class:active={$sidebarTabsState === "website"} class:text-light={$sidebarTabsState !== "website"}>
             <Icon data={faGlobe} scale="1.3"/>
           </a>
         </li>
         <li class="nav-item">
           <!--          :class="{ 'active': sidebarTabsState === 'game', 'text-light': sidebarTabsState !== 'game' }"-->
-          <a href="javascript:void(0)" class="nav-link" on:click={onGameMenuClick} class:active={$sidebarTabsState === "game"} class:text-light={$sidebarTabsState !== "game"}>
+          <a href="javascript:void(0)" class="nav-link" on:click={onGameMenuClick}
+             class:active={$sidebarTabsState === "game"} class:text-light={$sidebarTabsState !== "game"}>
             <Icon data={faCube} scale="1.3"/>
           </a>
         </li>
