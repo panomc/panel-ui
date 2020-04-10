@@ -14,6 +14,10 @@
     faCube
   } from "@fortawesome/free-solid-svg-icons";
 
+  import ServersModal from "./modals/ServersModal.svelte";
+  import ConnectServerModal from "./modals/ConnectServerModal.svelte";
+  import DeleteCategoryConfirmationModal from "./modals/DeleteCategoryConfirmationModal.svelte";
+
   let menuComponent = SiteNavigationMenu;
 
   function onMobileSideBarCollapseClick() {
@@ -38,6 +42,10 @@
     setSidebarTabsState("game")
   }
 </script>
+
+<ServersModal/>
+<ConnectServerModal/>
+<DeleteCategoryConfirmationModal/>
 
 <!-- Sidebar -->
 <aside class="sidebar bg-primary" class:active={$isSidebarOpen}>
