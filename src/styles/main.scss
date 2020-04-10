@@ -58,10 +58,11 @@ body {
 
 .alert-welcome {
   position: relative;
-  background: url("/panel/assets/img/header-bg.jpg") no-repeat top;
+  background: url("../img/header-bg.jpg") no-repeat top;
   background-size: cover;
   padding: 0;
   margin: 0;
+
   &:before {
     position: absolute;
     bottom: 0;
@@ -221,8 +222,7 @@ body {
     right: 3px;
     width: 30px;
     height: 30px;
-    background: url("../panel/assets/img/check-solid.svg") no-repeat top 3px
-      right 3px;
+    background: url("../img/check-solid.svg") no-repeat top 3px right 3px;
     background-size: 16px;
     background-color: $primary;
     border-bottom-left-radius: 75px;
