@@ -1,6 +1,6 @@
 <script>
   import {basePath} from "../util/path.util";
-  import {toggleSidebar, isSidebarOpen, setSidebarTabsState, sidebarTabsState} from "../Store"
+  import {toggleSidebar, isSidebarOpen, setSidebarTabsState, sidebarTabsState, website} from "../Store"
   import {onDestroy} from "svelte"
 
   import Bottom from "./sidebar/Bottom.svelte"
@@ -77,7 +77,8 @@
     </div>
 
     <!-- Sidebar Title Website -->
-    <h5 class="text-white">Panocraft</h5>
+    <h5 class="text-white">{$website.name}</h5>
+
       {#if $sidebarTabsState === "website"}
         <a
           href="/"
@@ -108,14 +109,12 @@
     <nav class="sidebar-tab py-2">
       <ul class="management-tab nav nav-pills nav-fill lex-row flex-nowrap">
         <li class="nav-item">
-          <!--          :class="{ 'active': sidebarTabsState === 'website', 'text-light': sidebarTabsState !== 'website' }"-->
           <a href="javascript:void(0)" class="nav-link" on:click={onWebsiteMenuClick}
              class:active={$sidebarTabsState === "website"} class:text-light={$sidebarTabsState !== "website"}>
             <Icon data={faGlobe} scale="1.3"/>
           </a>
         </li>
         <li class="nav-item">
-          <!--          :class="{ 'active': sidebarTabsState === 'game', 'text-light': sidebarTabsState !== 'game' }"-->
           <a href="javascript:void(0)" class="nav-link" on:click={onGameMenuClick}
              class:active={$sidebarTabsState === "game"} class:text-light={$sidebarTabsState !== "game"}>
             <Icon data={faCube} scale="1.3"/>
