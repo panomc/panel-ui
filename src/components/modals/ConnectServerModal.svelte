@@ -70,7 +70,7 @@
 
     const id = copyClickIDForCommandText;
 
-    copy(get(platformAddress));
+    copy(commandText);
 
     isCommandTextCopied = true;
 
