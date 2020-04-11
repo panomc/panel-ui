@@ -1,11 +1,21 @@
 <script>
-  import {currentServerPlatformMatchKey, platformAddress} from "../../Store";
-  import {ApiUtil} from "../../util/api.util";
+  import { currentServerPlatformMatchKey, platformAddress } from "../../Store";
+  import { ApiUtil } from "../../util/api.util";
   import tooltip from "../../util/tooltip.util";
+  import Icon from "svelte-awesome";
+  import {
+    faDownload,
+    faTerminal,
+    faFileDownload,
+    faHourglassHalf,
+    faClipboard,
+    faCheckCircle
+  } from "@fortawesome/free-solid-svg-icons";
+  import { faBell } from "@fortawesome/free-regular-svg-icons";
 
-  import {onMount, onDestroy} from "svelte";
-  import {get} from "svelte/store"
-  import copy from 'copy-to-clipboard'
+  import { onMount, onDestroy } from "svelte";
+  import { get } from "svelte/store";
+  import copy from "copy-to-clipboard";
 
   let timeToRefreshKey = "...";
   let commandText;
@@ -17,7 +27,7 @@
 
     const timer = setInterval(() => {
       if (timeToRefreshKey > 0) {
-        timeToRefreshKey--
+        timeToRefreshKey--;
       } else {
         clearInterval(timer);
 
@@ -25,7 +35,7 @@
 
         refreshKey();
       }
-    }, 1000)
+    }, 1000);
   }
 
   function refreshKey() {
@@ -34,33 +44,39 @@
         if (response.data.result === "ok") {
           currentServerPlatformMatchKey.set(response.data.key);
         } else {
-          currentServerPlatformMatchKey.set("")
+          currentServerPlatformMatchKey.set("");
         }
 
-        startCountDown()
+        startCountDown();
       })
       .catch(() => {
         currentServerPlatformMatchKey.set("");
 
-        startCountDown()
+        startCountDown();
       });
   }
 
   onMount(async () => {
     startCountDown();
-  })
+  });
 
   function updateCommandText() {
-    commandText = "/pano connect " + get(platformAddress) + " " + get(currentServerPlatformMatchKey);
+    commandText =
+      "/pano connect " +
+      get(platformAddress) +
+      " " +
+      get(currentServerPlatformMatchKey);
   }
 
   const platformAddressUnsubscribe = platformAddress.subscribe(() => {
     updateCommandText();
   });
 
-  const currentServerPlatformMatchKeyUnsubscribe = currentServerPlatformMatchKey.subscribe(() => {
-    updateCommandText();
-  });
+  const currentServerPlatformMatchKeyUnsubscribe = currentServerPlatformMatchKey.subscribe(
+    () => {
+      updateCommandText();
+    }
+  );
 
   onDestroy(platformAddressUnsubscribe);
   onDestroy(currentServerPlatformMatchKeyUnsubscribe);
@@ -74,7 +90,7 @@
 
     isCommandTextCopied = true;
 
-    setTimeout(function () {
+    setTimeout(function() {
       if (copyClickIDForCommandText === id) {
         isCommandTextCopied = false;
       }
@@ -105,23 +121,23 @@
         <div class="card-body text-center">
 
           <div class="mb-3">
-            <i class="fa fa-download fa-3x text-primary" aria-hidden="true"/>
+            <Icon data={faDownload} scale="3" class="text-primary" />
           </div>
 
           <h5 class="text-primary" for="downloadPlugin">
             1. Oyun Eklentisini Sunucunuza İndirin:
           </h5>
           <button class="btn btn-link bg-light">
-            <i aria-hidden="true" class="fas fa-file-download fa-fw"/>
+            <Icon data={faFileDownload} class="mr-1" />
             Pano Minecraft Eklentisini İndir
-            <br/>
+            <br />
             <span class="font-weight-normal small">
               BungeeCord, Bukkit, Spigot, PaperSpigot
             </span>
           </button>
 
           <div class="my-4">
-            <i class="fa fa-terminal fa-3x text-primary" aria-hidden="true"/>
+            <Icon data={faTerminal} scale="3" class="text-primary" />
           </div>
 
           <h5 class="text-primary" for="platformToken">
@@ -132,33 +148,32 @@
               bind:value={commandText}
               class="form-control shadow-sm"
               id="platformToken"
-              type="text"/>
+              type="text" />
             <div class="input-group-append">
               <button
                 on:click={onCopyCommandTextClick}
                 class="btn btn-link bg-light border shadow-sm"
                 id="copyPlatformToken"
                 type="button"
-                use:tooltip={["top", isCommandTextCopied ? "Kopyalandı!" : "Kopyala"]}>
-                <i aria-hidden="true" class="fa fa-clipboard fa-fw"/>
+                use:tooltip={['top', isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala']}>
+                <Icon data={faClipboard} />
               </button>
             </div>
           </div>
           <small class="text-muted ml-2">
-            <i aria-hidden="true" class="fa fa-hourglass-half fa-fw"/>
-            Kod {timeToRefreshKey}{timeToRefreshKey === '...' ? '' : ' saniye'} sonra yenilenecek.
+            <Icon data={faHourglassHalf} />
+            Kod {timeToRefreshKey}{timeToRefreshKey === '...' ? '' : ' saniye'}
+            sonra yenilenecek.
           </small>
 
           <div class="my-4">
-            <i
-              class="fa fa-check-circle fa-3x text-primary"
-              aria-hidden="true"/>
+            <Icon data={faCheckCircle} scale="3" class="text-primary" />
           </div>
 
           <h5 class="text-primary">3. Bağlantı İsteğine Onay Verin:</h5>
           <p class="mb-0">
             Bildirim panelinden (
-            <i aria-hidden="true" class="far fa-bell"/>
+            <Icon data={faBell} />
             ) "Sunucu Bağlantısı İsteği" bildirimini açarak, onay verin.
           </p>
 
