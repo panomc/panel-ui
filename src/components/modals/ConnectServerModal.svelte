@@ -1,11 +1,16 @@
 <script>
   import {currentServerPlatformMatchKey, platformAddress} from "../../Store";
   import {ApiUtil} from "../../util/api.util";
+  import tooltip from "../../util/tooltip.util";
 
   import {onMount, onDestroy} from "svelte";
+  import {get} from "svelte/store"
+  import copy from 'copy-to-clipboard'
 
   let timeToRefreshKey = "...";
   let commandText;
+  let isCommandTextCopied = false;
+  let copyClickIDForCommandText = 0;
 
   function startCountDown() {
     timeToRefreshKey = 30;
@@ -46,7 +51,7 @@
   })
 
   function updateCommandText() {
-    commandText = "/pano connect " + $platformAddress + " " + $currentServerPlatformMatchKey;
+    commandText = "/pano connect " + get(platformAddress) + " " + get(currentServerPlatformMatchKey);
   }
 
   const platformAddressUnsubscribe = platformAddress.subscribe(() => {
@@ -59,6 +64,22 @@
 
   onDestroy(platformAddressUnsubscribe);
   onDestroy(currentServerPlatformMatchKeyUnsubscribe);
+
+  function onCopyCommandTextClick() {
+    copyClickIDForCommandText++;
+
+    const id = copyClickIDForCommandText;
+
+    copy(get(platformAddress));
+
+    isCommandTextCopied = true;
+
+    setTimeout(function () {
+      if (copyClickIDForCommandText === id) {
+        isCommandTextCopied = false;
+      }
+    }, 1000);
+  }
 </script>
 
 <!-- Connect Server Modal -->
@@ -113,13 +134,12 @@
               id="platformToken"
               type="text"/>
             <div class="input-group-append">
-              <!--              @click="onCopyPlatformMatchKeyClick"-->
               <button
+                on:click={onCopyCommandTextClick}
                 class="btn btn-link bg-light border shadow-sm"
                 id="copyPlatformToken"
                 type="button"
-                v-tooltip:top="isPlatformMatchKeyCopied ? 'Kopyalandı!' :
-                'Kopyala'">
+                use:tooltip={["top", isCommandTextCopied ? "Kopyalandı!" : "Kopyala"]}>
                 <i aria-hidden="true" class="fa fa-clipboard fa-fw"/>
               </button>
             </div>
