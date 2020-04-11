@@ -1,38 +1,63 @@
 <script>
-  import {onMount, onDestroy} from "svelte"
-  import {isPageInitialized, getBasicData} from "./Store"
+  import {onMount, onDestroy} from "svelte";
+  import {get} from "svelte/store";
+  import {
+    isPageInitialized,
+    getBasicData,
+    networkErrorCallbacks,
+    showNetworkErrorOnCatch
+  } from "./Store";
 
-  import Splash from "./components/Splash.svelte"
+  import Splash from "./components/Splash.svelte";
 
   let showSplash = true;
   let waitAnimation = true;
   let basicDataInitialized = false;
 
   const isPageInitializedUnsubscribe = isPageInitialized.subscribe(value => {
-    if (value && !waitAnimation && basicDataInitialized)
+    if (value && !waitAnimation && basicDataInitialized && get(networkErrorCallbacks).length === 0) {
       showSplash = false;
+    }
   });
 
-  onDestroy(isPageInitializedUnsubscribe)
+  const networkErrorCallbacksUnsubscribe = networkErrorCallbacks.subscribe(value => {
+    if (!showSplash && value.length !== 0) {
+      showSplash = true;
+    } else if (showSplash && value.length === 0 && !waitAnimation && get(isPageInitialized) && basicDataInitialized) {
+      showSplash = false;
+    }
+  });
+
+  onDestroy(isPageInitializedUnsubscribe);
+  onDestroy(networkErrorCallbacksUnsubscribe);
 
   onMount(async () => {
     setTimeout(function () {
       waitAnimation = false;
 
-      if (showSplash && $isPageInitialized && basicDataInitialized)
+      if (showSplash && get(isPageInitialized) && basicDataInitialized && get(networkErrorCallbacks).length === 0) {
         showSplash = false;
+      }
     }, 1500);
   });
 
-  getBasicData()
-    .then(() => {
-      basicDataInitialized = true;
+  let first = true;
 
-      if (showSplash && $isPageInitialized && !waitAnimation)
-        showSplash = false;
-    })
-    .catch(() => {
-    })
+  showNetworkErrorOnCatch(() => new Promise((resolve, reject) => {
+    getBasicData()
+      .then(() => {
+        basicDataInitialized = true;
+
+        if (showSplash && get(isPageInitialized) && !waitAnimation && get(networkErrorCallbacks).length === 0) {
+          showSplash = false;
+        }
+
+        resolve();
+      })
+      .catch(() => {
+        reject();
+      });
+  }));
 
 </script>
 

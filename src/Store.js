@@ -1,7 +1,11 @@
-import {writable} from "svelte/store";
+import {get, writable} from "svelte/store";
 
 import {PanelSidebarStorageUtil} from "./util/storage.util"
 import {ApiUtil, NETWORK_ERROR} from "./util/api.util";
+
+
+export const networkErrorCallbacks = writable([]);
+export const retryingNetworkErrors = writable(false);
 
 export const isSidebarOpen = writable(PanelSidebarStorageUtil.isThereSideBarOpenStatus() ? PanelSidebarStorageUtil.getSidebarOpenStatus() : true);
 export const sidebarTabsState = writable(PanelSidebarStorageUtil.isThereSideBarTabsState() ? PanelSidebarStorageUtil.getSidebarTabsState() : "website");
@@ -53,6 +57,48 @@ export function getBasicData() {
     });
   });
 }
+
+export function showNetworkErrorOnCatch(callback) {
+  callback().catch(() => {
+    networkErrorCallbacks.update(value => value.concat(callback));
+  });
+}
+
+export function resumeAfterNetworkError() {
+  retryingNetworkErrors.set(true);
+
+  const currentList = get(networkErrorCallbacks).concat();
+  const doneList = [];
+
+  function check() {
+    let callbacksDone = true;
+
+    currentList.forEach(item => {
+      if (doneList.indexOf(item) === -1) {
+        callbacksDone = false;
+      }
+    });
+
+    if (callbacksDone) {
+      retryingNetworkErrors.set(false);
+    }
+  }
+
+  currentList.forEach((callback) => {
+    doneList.push(callback);
+
+    callback()
+      .then(() => {
+        networkErrorCallbacks.update(list => list.filter(item => item !== callback));
+
+        check();
+      })
+      .catch(() => {
+        check();
+      });
+  })
+}
+
 
 function initializeBasicData(data) {
   user.set(data.user);
