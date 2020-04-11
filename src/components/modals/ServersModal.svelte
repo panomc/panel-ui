@@ -1,3 +1,15 @@
+<script>
+  import Icon from "svelte-awesome";
+  import {
+    faPlus,
+    faCog,
+    faTimes,
+    faHome,
+    faCube
+  } from "@fortawesome/free-solid-svg-icons";
+  import { faBell } from "@fortawesome/free-regular-svg-icons";
+</script>
+
 <!-- Servers Modal -->
 <div
   aria-hidden="true"
@@ -15,8 +27,8 @@
           data-target="#connectServer"
           data-toggle="modal"
           type="button">
-          <i aria-hidden="true" class="fa fa-plus fa-fw" />
-          Suncuu Bağla
+          <Icon data={faPlus} class="mr-2" />
+          Sunucu Bağla
         </button>
         <button
           aria-label="Kapat"
@@ -31,7 +43,7 @@
         <div class="row">
 
           <div
-            class="spinner-border text-primary"
+            class="spinner-border text-primary mr-2"
             role="status"
             v-if="serverListLoading" />
 
@@ -45,16 +57,12 @@
             <div class="card w-100">
               <!--              @click="selectServer(server)"-->
               <a href="javascript:void(0);">
-                <div
-                  class="card-img-top bg-primary border-0"
-                  style="height: 100px;">
+                <div class="card-img-top bg-primary border-0">
                   <div class="card-body">
                     <h4 class="card-title text-white lead">
-                      <i
-                        aria-hidden="true"
-                        class="fa fa-home fa-fw text-primary fa-xs"
-                        v-if="main_server.id === server.id" />
+                      <Icon data={faHome} class="mr-1 text-light" />
                       <!--                        {{ server.name }}-->
+                      Panocraft
                     </h4>
                     <h5 class="badge badge-sunflower">Spigot</h5>
                   </div>
@@ -62,7 +70,9 @@
                 <div class="position-relative">
                   <div class="position-absolute w-100" style="top: -60px;">
                     <img
-                      :src="server.favicon"
+                      src=""
+                      width="72"
+                      height="72"
                       alt=" Sever İkon"
                       class="d-block m-auto border rounded-circle shadow-sm
                       bg-white p-1 text-center" />
@@ -104,7 +114,8 @@
                     id="serverOptions"
                     title="Seçenekler"
                     type="button">
-                    <i aria-hidden="true" class="fa fa-cog fa-fw" />
+                    <Icon data={faCog} class="mr-1" />
+
                   </button>
                   <div aria-labelledby="serverOptions" class="dropdown-menu">
 
@@ -112,9 +123,7 @@
                       class="dropdown-item"
                       href="javascript:void(0);"
                       v-if="main_server.id !== server.id">
-                      <i
-                        aria-hidden="true"
-                        class="fa fa-home fa-fw text-primary" />
+                      <Icon data={faHome} class="mr-1 text-primary" />
                       Ana Sunucu Olarak Belirle
                     </a>
 
@@ -122,9 +131,7 @@
                       class="dropdown-item"
                       href="javascript:void(0);"
                       v-if="main_server.id === server.id">
-                      <i
-                        aria-hidden="true"
-                        class="fa fa-times fa-fw text-primary" />
+                      <Icon data={faTimes} class="mr-1 text-primary" />
                       Ana Sunuculuğunu Kaldır
                     </a>
                     <!--                    @click="onRemoveClick(server)"-->
@@ -134,9 +141,8 @@
                       data-target="#confirmRemoveServer"
                       data-toggle="modal"
                       href="javascript:void(0);">
-                      <i
-                        aria-hidden="true"
-                        class="fa fa-times fa-fw text-danger" />
+
+                      <Icon data={faTimes} class="mr-1 text-danger" />
                       Sunucuyu Kaldır
                     </a>
                   </div>
@@ -147,7 +153,7 @@
 
           <!-- No Server -->
           <div class="container text-center" v-if="servers.length === 0">
-            <i aria-hidden="true" class="fas fa-cube fa-4x text-glass m-3" />
+            <Icon data={faCube} scale="4" class="m-3 text-glass" />
             <p class="text-gray">Bağlı sunucu yok.</p>
           </div>
 

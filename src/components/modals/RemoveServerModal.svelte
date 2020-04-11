@@ -1,4 +1,4 @@
-<!-- Confirm Delete Category Modal -->
+<!-- Confirm Remove Server Modal -->
 <div
   aria-hidden="true"
   class="modal fade"
