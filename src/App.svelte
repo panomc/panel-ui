@@ -25,6 +25,10 @@
 
 </script>
 
+<style lang="scss" global>
+  @import "styles/main";
+</style>
+
 <!-- Splash Animation -->
 {#if showSplash}
   <Splash/>
@@ -32,7 +36,7 @@
 
   <!-- Main Contents Hidden -->
 {#await import('./components/Main.svelte') then MainComponent}
-  <svelte:component this={MainComponent.default} hidden={showSplash}/>
+<!--  <svelte:component this={MainComponent.default} hidden={showSplash}/>-->
 {/await}
 
 <!--{#if $isPageLoading}-->

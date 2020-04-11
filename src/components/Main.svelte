@@ -6,10 +6,6 @@
   export let hidden;
 </script>
 
-<style lang="scss" global>
-  @import "../styles/main";
-</style>
-
 <div class="d-flex" hidden={hidden}>
   <Sidebar/>
   <!--  Main  -->
