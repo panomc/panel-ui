@@ -24,6 +24,10 @@
   });
 
   router.start();
+
+  export let hidden;
 </script>
 
-<svelte:component this={props.component} {...props}/>
+<div hidden={hidden}>
+  <svelte:component this={props.component} {...props}/>
+</div>

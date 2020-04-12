@@ -1,7 +1,10 @@
 <script>
   import Navbar from "./Navbar.svelte";
   import Sidebar from "./Sidebar.svelte";
-  import Router from "./Router.svelte"
+  import Router from "./Router.svelte";
+  import PageLoading from "./PageLoading.svelte";
+
+  import {isPageLoading} from "../ChunkStore";
 
   export let hidden;
 </script>
@@ -12,18 +15,8 @@
   <main class="panel-content">
     <Navbar/>
 
-    <!-- Content  -->
-    <!--    <router-view-->
-    <!--            v-show="!routePageLoading && !initialPageDataLoading"-->
-    <!--    ></router-view>-->
-    <Router/>
+    <Router hidden={$isPageLoading}/>
 
-    <!--    <div-->
-    <!--            :class="{ 'd-flex': routePageLoading || initialPageDataLoading }"-->
-    <!--            class="align-items-center justify-content-center w-100 h-75"-->
-    <!--            v-show="routePageLoading"-->
-    <!--    >-->
-    <!--      <div class="spinner-border text-primary" role="status"></div>-->
-    <!--    </div>-->
+    <PageLoading show={$isPageLoading}/>
   </main>
 </div>
