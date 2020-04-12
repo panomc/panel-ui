@@ -23,10 +23,7 @@
   }
 </script>
 
-<div
-  class="d-flex flex-column justify-content-center align-items-center w-100
-  min-vh-100 splash"
-  role="status">
+<div class="splash" role="status">
   <img
     class="animated fadeIn infinite slow"
     alt="Pano"
