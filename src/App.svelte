@@ -1,6 +1,6 @@
 <script>
-  import {onMount, onDestroy} from "svelte";
-  import {get} from "svelte/store";
+  import { onMount, onDestroy } from "svelte";
+  import { get } from "svelte/store";
   import {
     isPageInitialized,
     getBasicData,
@@ -15,27 +15,45 @@
   let basicDataInitialized = false;
 
   const isPageInitializedUnsubscribe = isPageInitialized.subscribe(value => {
-    if (value && !waitAnimation && basicDataInitialized && get(networkErrorCallbacks).length === 0) {
+    if (
+      value &&
+      !waitAnimation &&
+      basicDataInitialized &&
+      get(networkErrorCallbacks).length === 0
+    ) {
       showSplash = false;
     }
   });
 
-  const networkErrorCallbacksUnsubscribe = networkErrorCallbacks.subscribe(value => {
-    if (!showSplash && value.length !== 0) {
-      showSplash = true;
-    } else if (showSplash && value.length === 0 && !waitAnimation && get(isPageInitialized) && basicDataInitialized) {
-      showSplash = false;
+  const networkErrorCallbacksUnsubscribe = networkErrorCallbacks.subscribe(
+    value => {
+      if (!showSplash && value.length !== 0) {
+        showSplash = true;
+      } else if (
+        showSplash &&
+        value.length === 0 &&
+        !waitAnimation &&
+        get(isPageInitialized) &&
+        basicDataInitialized
+      ) {
+        showSplash = false;
+      }
     }
-  });
+  );
 
   onDestroy(isPageInitializedUnsubscribe);
   onDestroy(networkErrorCallbacksUnsubscribe);
 
   onMount(async () => {
-    setTimeout(function () {
+    setTimeout(function() {
       waitAnimation = false;
 
-      if (showSplash && get(isPageInitialized) && basicDataInitialized && get(networkErrorCallbacks).length === 0) {
+      if (
+        showSplash &&
+        get(isPageInitialized) &&
+        basicDataInitialized &&
+        get(networkErrorCallbacks).length === 0
+      ) {
         showSplash = false;
       }
     }, 1500);
@@ -43,38 +61,45 @@
 
   let first = true;
 
-  showNetworkErrorOnCatch(() => new Promise((resolve, reject) => {
-    getBasicData()
-      .then(() => {
-        basicDataInitialized = true;
+  showNetworkErrorOnCatch(
+    () =>
+      new Promise((resolve, reject) => {
+        getBasicData()
+          .then(() => {
+            basicDataInitialized = true;
 
-        if (showSplash && get(isPageInitialized) && !waitAnimation && get(networkErrorCallbacks).length === 0) {
-          showSplash = false;
-        }
+            if (
+              showSplash &&
+              get(isPageInitialized) &&
+              !waitAnimation &&
+              get(networkErrorCallbacks).length === 0
+            ) {
+              showSplash = false;
+            }
 
-        resolve();
+            resolve();
+          })
+          .catch(() => {
+            reject();
+          });
       })
-      .catch(() => {
-        reject();
-      });
-  }));
-
+  );
 </script>
 
 <style lang="scss" global>
-  @import "styles/main";
+  @import "styles/style";
 </style>
 
 <!-- Splash Animation -->
 {#if showSplash}
-  <Splash/>
+  <Splash />
 {/if}
 
-  <!-- Main Contents Hidden -->
+<!-- Main Contents Hidden -->
 {#await import('./components/Main.svelte') then MainComponent}
-  <svelte:component this={MainComponent.default} hidden={showSplash}/>
+  <svelte:component this={MainComponent.default} hidden={showSplash} />
 {/await}
 
-  <!--{#if $isPageLoading}-->
+<!--{#if $isPageLoading}-->
 <!--  <PageLoading/>-->
 <!--{/if}-->
