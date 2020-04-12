@@ -53,7 +53,7 @@
 <div class="sidebar" class:active={$isSidebarOpen}>
 
   <!-- Sidebar Logo -->
-  <div class="sidebar-logo">
+  <div class="sidebar-logo border-bottom border-glass">
     <a
       href="javascript:void(0);"
       class="sidebar-toggler btn btn-link text-light"
@@ -97,8 +97,7 @@
     </div>
 
     <!-- Sidebar Tabs -->
-    <ul
-      class="sidebar-tab nav nav-pills nav-fill flex-row flex-nowrap px-2 py-2">
+    <ul class="sidebar-tab nav nav-pills nav-fill flex-row flex-nowrap p-2">
       <li class="nav-item">
         <a
           href="javascript:void(0)"

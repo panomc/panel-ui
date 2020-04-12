@@ -132,6 +132,11 @@ body {
 }
 
 .sidebar-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
   position: absolute;
   bottom: 0;
 }

@@ -29,7 +29,7 @@
 <nav
   class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom">
   <ul class="nav navbar-nav mr-auto">
-    <li class="nav-item mr-3">
+    <li class="nav-item mr-2">
       <a
         class="icon-link nav-link"
         href="javascript:void(0);"
@@ -48,9 +48,8 @@
       </a>
     </li>
   </ul>
-  <div class="navbar-brand">
-    <span class="font-weight-normal">Panel</span>
-  </div>
+
+  <div class="navbar-brand">Panel</div>
 
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown">
