@@ -33,29 +33,6 @@ body {
   margin-bottom: 1rem;
 }
 
-.sidebar-logo {
-  height: 73px;
-  display: flex;
-  align-items: center;
-  background: $white;
-}
-
-.sidebar-head {
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1.5rem 0.5rem;
-  padding-bottom: 1rem;
-}
-
-.sidebar-icon {
-  border: 10px solid $lightglass;
-  border-radius: 75%;
-  margin-bottom: 1rem;
-}
-
 .alert-welcome {
   position: relative;
   background: url("../img/header-bg.jpg") no-repeat top;
@@ -76,23 +53,36 @@ body {
 }
 
 .sidebar {
-  position: relative;
-  display: block;
-  width: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 250px;
+  max-width: 250px;
   height: 100vh;
-  transition: 0.5s all;
-  z-index: 1;
+  position: relative;
   top: 0;
   left: 0;
+  z-index: 1;
+  transition: 0.5s all;
+  background: $primary;
+  z-index: 1021;
   @include media-breakpoint-down(md) {
     position: fixed;
     left: 0;
-    z-index: 9999;
   }
 }
 
 .sidebar:not(.active) {
   margin-left: -250px;
+}
+
+.sidebar-toggler {
+  position: absolute;
+  left: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  align-self: center;
 }
 
 .sidebar.active {
@@ -101,19 +91,41 @@ body {
   }
 }
 
+.sidebar-logo {
+  height: 73px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $lightglass;
+}
+
 .sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: flex-start;
   overflow-y: auto;
+  width: 100%;
   height: calc(100vh - 130px);
   scrollbar-color: $lightglass $primary;
   scrollbar-width: thin;
 }
 
-.menu.navbar-nav li.nav-item {
-  padding: 0.2rem 2rem;
+.sidebar-info {
+  padding: 0.5rem 0;
+  text-align: center;
 }
 
-.sidebar-tab {
-  padding: 0.5rem 1rem;
+.sidebar-server-icon {
+  display: block;
+  margin: 1rem auto;
+  border: 10px solid $lightglass;
+  border-radius: 100%;
+}
+
+.menu.navbar-nav li.nav-item {
+  padding: 0.2rem 2rem;
 }
 
 .sidebar-bottom {
@@ -175,7 +187,7 @@ body {
   }
 }
 
-.management-tab > li.nav-item {
+.sidebar-tab > li.nav-item {
   a.nav-link.active {
     background: $glass;
     color: $sunflower;
@@ -244,4 +256,21 @@ body {
 .tool-card {
   width: 100px;
   height: 100px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba($color: $glass, $alpha: 0.1);
+  border-radius: 8px;
 }

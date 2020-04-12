@@ -50,35 +50,29 @@
 <RemoveServerModal />
 
 <!-- Sidebar -->
-<aside class="sidebar bg-primary" class:active={$isSidebarOpen}>
+<div class="sidebar" class:active={$isSidebarOpen}>
 
   <!-- Sidebar Logo -->
-  <div
-    class="sidebar-logo bg-lightglass border-bottom border-glass
-    justify-content-lg-center">
+  <div class="sidebar-logo">
     <a
       href="javascript:void(0);"
-      class="text-light nav-link ml-3 mr-5 d-lg-none d-block"
+      class="sidebar-toggler btn btn-link text-light"
       on:click={onMobileSideBarCollapseClick}>
       <Icon data={faBars} />
     </a>
     <img alt="Pano" src={basePath() + 'assets/img/logo.svg'} width="20" />
   </div>
 
-  <div class="sidebar-inner bg-primary">
+  <div class="sidebar-inner">
 
-    <!-- Sidebar Head Website -->
-    <div class="sidebar-head">
-      <div class="sidebar-icon">
-        <img
-          alt="Server İkon"
-          class="rounded-circle"
-          height="64"
-          src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
-          width="64" />
-      </div>
-
-      <!-- Sidebar Title Website -->
+    <!-- Sidebar Info Section -->
+    <div class="sidebar-info">
+      <img
+        alt="Server İkon"
+        class="sidebar-server-icon"
+        width="80"
+        height="80"
+        src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" />
       <h5 class="text-white">{$website.name}</h5>
 
       {#if $sidebarTabsState === 'website'}
@@ -103,30 +97,29 @@
     </div>
 
     <!-- Sidebar Tabs -->
-    <nav class="sidebar-tab py-2">
-      <ul class="management-tab nav nav-pills nav-fill lex-row flex-nowrap">
-        <li class="nav-item">
-          <a
-            href="javascript:void(0)"
-            class="nav-link"
-            on:click={onWebsiteMenuClick}
-            class:active={$sidebarTabsState === 'website'}
-            class:text-light={$sidebarTabsState !== 'website'}>
-            <Icon data={faGlobe} scale="1.3" />
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            href="javascript:void(0)"
-            class="nav-link"
-            on:click={onGameMenuClick}
-            class:active={$sidebarTabsState === 'game'}
-            class:text-light={$sidebarTabsState !== 'game'}>
-            <Icon data={faCube} scale="1.3" />
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <ul
+      class="sidebar-tab nav nav-pills nav-fill flex-row flex-nowrap px-2 py-2">
+      <li class="nav-item">
+        <a
+          href="javascript:void(0)"
+          class="nav-link"
+          on:click={onWebsiteMenuClick}
+          class:active={$sidebarTabsState === 'website'}
+          class:text-light={$sidebarTabsState !== 'website'}>
+          <Icon data={faGlobe} scale="1.3" />
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="javascript:void(0)"
+          class="nav-link"
+          on:click={onGameMenuClick}
+          class:active={$sidebarTabsState === 'game'}
+          class:text-light={$sidebarTabsState !== 'game'}>
+          <Icon data={faCube} scale="1.3" />
+        </a>
+      </li>
+    </ul>
 
     <!-- Sidebar Site Navigation Menu || Sidebar Server Navigation Menu -->
     <svelte:component this={menuComponent} />
@@ -134,4 +127,4 @@
 
   <!-- Sidebar Bottom -->
   <Bottom />
-</aside>
+</div>
