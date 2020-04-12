@@ -1,5 +1,5 @@
 <script>
-  import {toggleSidebar} from "../Store"
+  import {toggleSidebar, notificationsCount, quickNotifications, user} from "../Store"
 
   import Icon from "svelte-awesome";
   import {
@@ -55,7 +55,9 @@
         href="javascript:void(0);"
         role="button"
         title="Bildirimler">
-        <div class="notification" v-if="notificationsCount != 0"/>
+          {#if $notificationsCount !== 0}
+            <div class="notification"></div>
+          {/if}
         <Icon data={faBell}/>
       </a>
       <div
@@ -63,14 +65,15 @@
         notifications">
         <h6 class="dropdown-header">
           Bildirimler
-          <!--          ({{ notificationsCount }})-->
-          <a
-            class="float-right"
-            href="javascript:void(0);"
-            title="Tümünü Oku"
-            v-if="quickNotifications.length != 0">
-            Tümünü Oku
-          </a>
+          ({$notificationsCount})
+            {#if $quickNotifications.length !== 0}
+              <a
+                class="float-right"
+                href="javascript:void(0);"
+                title="Tümünü Oku">
+                Tümünü Oku
+              </a>
+            {/if}
         </h6>
 
         <router-link
@@ -86,12 +89,12 @@
           <small class="text-muted text-right font-weight-lighter">15 dk</small>
         </router-link>
 
-        <div
-          class="d-flex flex-column align-items-center justify-content-center"
-          v-if="quickNotifications.length === 0">
-          <Icon data={faBell} scale="3" class="text-glass m-3"/>
-          <p class="text-gray">Yeni bildirim yok.</p>
-        </div>
+          {#if $quickNotifications.length === 0}
+            <div class="d-flex flex-column align-items-center justify-content-center">
+              <Icon data={faBell} scale="3" class="text-glass m-3"/>
+              <p class="text-gray">Yeni bildirim yok.</p>
+            </div>
+          {/if}
 
         <router-link
           class="dropdown-item text-primary text-center small pt-2"
@@ -111,7 +114,7 @@
         title="Oturum">
         <Icon data={faUser}/>
         <span class="d-lg-inline d-none">
-          <!--            {{ username }}-->
+          {$user.username}
         </span>
       </a>
       <div class="dropdown-menu dropdown-menu-right animated fadeIn faster">
