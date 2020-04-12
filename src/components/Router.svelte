@@ -2,6 +2,7 @@
   import router from "page";
   import page from "page";
   import ChunkComponent from "../Chunk.svelte";
+  import {path} from "../RouterStore"
 
   import {ChunkGenerator} from "svelte-spa-chunk";
 
@@ -11,9 +12,47 @@
 
   page.base("/panel");
 
+  function parse(ctx, next) {
+    path.set(ctx.pathname);
+
+    next();
+  }
+
+  router("*", parse);
+
   router("/", () => {
     props = {
       component: Chunk(() => import("../pages/Dashboard.svelte"))
+    };
+  });
+
+  router("/players", () => {
+    props = {
+      component: Chunk(() => import("../pages/Players.svelte"))
+    };
+  });
+
+  router("/addons", () => {
+    props = {
+      component: Chunk(() => import("../pages/Addons.svelte"))
+    };
+  });
+
+  router("/view", () => {
+    props = {
+      component: Chunk(() => import("../pages/View.svelte"))
+    };
+  });
+
+  router("/admins", () => {
+    props = {
+      component: Chunk(() => import("../pages/Admins.svelte"))
+    };
+  });
+
+  router("/tools", () => {
+    props = {
+      component: Chunk(() => import("../pages/Tools.svelte"))
     };
   });
 

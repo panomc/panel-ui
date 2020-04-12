@@ -4,7 +4,7 @@
   import Router from "./Router.svelte";
   import PageLoading from "./PageLoading.svelte";
 
-  import {isPageLoading} from "../ChunkStore";
+  import {isPageLoading} from "../RouterStore";
 
   export let hidden;
 </script>

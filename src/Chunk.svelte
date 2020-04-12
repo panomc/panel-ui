@@ -2,7 +2,7 @@
 <script>
   import Loadable from 'svelte-loadable'
   import {get} from 'svelte/store'
-  import {isPageChanged, isPageLoading} from './ChunkStore'
+  import {isPageChanged, isPageLoading} from './RouterStore'
   import {isPageGonnaInitialize, isPageInitialized} from './Store'
 
   export let component;

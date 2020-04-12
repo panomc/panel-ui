@@ -1,4 +1,6 @@
 <script>
+  import {path} from "../../RouterStore";
+
   import Icon from "svelte-awesome";
   import {
     faChartLine,
@@ -8,51 +10,54 @@
     faUserCircle,
     faTools
   } from "@fortawesome/free-solid-svg-icons";
+
+  function matching(path, pathName, startsWith = false) {
+    return path.toUpperCase() === pathName.toUpperCase() || path.toUpperCase() === (pathName + '/').toUpperCase() || (startsWith && path.startsWith(pathName));
+  }
 </script>
 
 <nav class="sidebar-nav navbar-dark" v-if="sidebarTabsState === 'website'">
   <ul class="menu navbar-nav font-weight-normal">
-    <!--        :class="{ 'active': path === '/panel' || path === '/panel/' }"-->
-    <li class="nav-item">
-      <router-link class="nav-link" to="/panel">
+    <li class="nav-item" class:active={matching($path, "/panel")}>
+      <a class="nav-link" href="/panel">
         <Icon data={faChartLine} class="mr-1"/>
         İstatistikler
-      </router-link>
+      </a>
     </li>
-    <!--        :class="{ 'active': path.startsWith('/panel/players') }"-->
-    <li class="nav-item">
-      <router-link class="nav-link" to="/panel/players">
+
+    <li class="nav-item" class:active={matching($path, "/panel/players", true)}>
+      <a class="nav-link" href="/panel/players">
         <Icon data={faUsers} class="mr-1"/>
         Oyuncular
-      </router-link>
+      </a>
     </li>
-    <!--        :class="{ 'active': path.startsWith('/panel/addons') }"-->
-    <li class="nav-item">
-      <router-link class="nav-link" to="/panel/addons">
+
+    <li class="nav-item" class:active={matching($path, "/panel/addons", true)}>
+      <a class="nav-link" href="/panel/addons">
         <Icon data={faPuzzlePiece} class="mr-1"/>
         Eklentiler
-      </router-link>
+      </a>
     </li>
-    <!--        :class="{ 'active': path.startsWith('/panel/view') }"-->
-    <li class="nav-item">
-      <router-link class="nav-link" to="/panel/view">
+
+    <li class="nav-item" class:active={matching($path, "/panel/view", true)}>
+      <a class="nav-link" href="/panel/view">
         <Icon data={faPalette} class="mr-1"/>
         Görünüm
-      </router-link>
+      </a>
     </li>
-    <!--        :class="{ 'active': path.startsWith('/panel/admins') }"-->
-    <li class="nav-item">
-      <router-link class="nav-link" to="/panel/admins">
+
+    <li class="nav-item" class:active={matching($path, "/panel/admins", true)}>
+      <a class="nav-link" href="/panel/admins">
         <Icon data={faUserCircle} class="mr-1"/>
         Yöneticiler
-      </router-link>
+      </a>
     </li>
-    <!--        :class="{ 'active': path.startsWith('/panel/tools') }"-->
-    <li class="nav-item">
-      <router-link class="nav-link" to="/panel/tools">
+
+    <li class="nav-item" class:active={matching($path, "/panel/tools", true)}>
+      <a class="nav-link" href="/panel/tools">
         <Icon data={faTools} class="mr-1"/>
         Araçlar
-      </router-link>
+      </a>
     </li>
   </ul>
 </nav>
