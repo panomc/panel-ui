@@ -9,7 +9,7 @@
   export let hidden;
 </script>
 
-<div class="d-flex" hidden={hidden}>
+<div class:d-flex={!hidden} hidden={hidden}>
   <Sidebar/>
   <!--  Main  -->
   <main class="panel-content">
