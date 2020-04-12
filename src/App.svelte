@@ -99,7 +99,3 @@
 {#await import('./components/Main.svelte') then MainComponent}
   <svelte:component this={MainComponent.default} hidden={showSplash} />
 {/await}
-
-<!--{#if $isPageLoading}-->
-<!--  <PageLoading/>-->
-<!--{/if}-->
