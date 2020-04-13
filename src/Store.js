@@ -22,6 +22,8 @@ export const servers = writable([]);
 export const quickNotifications = writable([]);
 export const notificationsCount = writable(0);
 
+export const logoutLoading = writable(false);
+
 
 export function toggleSidebar() {
   isSidebarOpen.update(value => {

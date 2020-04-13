@@ -1,11 +1,12 @@
 <script>
-  import { onMount, onDestroy } from "svelte";
-  import { get } from "svelte/store";
+  import {onMount, onDestroy} from "svelte";
+  import {get} from "svelte/store";
   import {
     isPageInitialized,
     getBasicData,
     networkErrorCallbacks,
-    showNetworkErrorOnCatch
+    showNetworkErrorOnCatch,
+    logoutLoading
   } from "./Store";
 
   import Splash from "./components/Splash.svelte";
@@ -14,12 +15,19 @@
   let waitAnimation = true;
   let basicDataInitialized = false;
 
+  const logoutLoadingUnsubscribe = logoutLoading.subscribe(value => {
+    if (value) {
+      showSplash = true;
+    }
+  });
+
   const isPageInitializedUnsubscribe = isPageInitialized.subscribe(value => {
     if (
       value &&
       !waitAnimation &&
       basicDataInitialized &&
-      get(networkErrorCallbacks).length === 0
+      get(networkErrorCallbacks).length === 0 &&
+      !get(logoutLoading)
     ) {
       showSplash = false;
     }
@@ -34,7 +42,8 @@
         value.length === 0 &&
         !waitAnimation &&
         basicDataInitialized &&
-        get(isPageInitialized)
+        get(isPageInitialized) &&
+        !get(logoutLoading)
       ) {
         showSplash = false;
       }
@@ -43,16 +52,18 @@
 
   onDestroy(isPageInitializedUnsubscribe);
   onDestroy(networkErrorCallbacksUnsubscribe);
+  onDestroy(logoutLoadingUnsubscribe);
 
   onMount(async () => {
-    setTimeout(function() {
+    setTimeout(function () {
       waitAnimation = false;
 
       if (
         showSplash &&
         get(isPageInitialized) &&
         basicDataInitialized &&
-        get(networkErrorCallbacks).length === 0
+        get(networkErrorCallbacks).length === 0 &&
+        !get(logoutLoading)
       ) {
         showSplash = false;
       }
@@ -72,7 +83,8 @@
               showSplash &&
               get(isPageInitialized) &&
               !waitAnimation &&
-              get(networkErrorCallbacks).length === 0
+              get(networkErrorCallbacks).length === 0 &&
+              !get(logoutLoading)
             ) {
               showSplash = false;
             }
@@ -92,10 +104,10 @@
 
 <!-- Splash Animation -->
 {#if showSplash}
-  <Splash />
+  <Splash/>
 {/if}
 
-<!-- Main Contents Hidden -->
+  <!-- Main Contents Hidden -->
 {#await import('./components/Main.svelte') then MainComponent}
-  <svelte:component this={MainComponent.default} hidden={showSplash} />
+  <svelte:component this={MainComponent.default} hidden={showSplash}/>
 {/await}
