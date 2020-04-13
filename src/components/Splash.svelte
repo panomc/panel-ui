@@ -1,6 +1,5 @@
 <script>
   import {onDestroy} from "svelte";
-  import jQuery from "jquery";
 
   import {basePath} from "../util/path.util";
   import {
@@ -10,19 +9,9 @@
   } from "../Store";
 
   let networkErrors = false;
-  let styleAdded = false;
 
   const networkErrorCallbacksUnsubscribe = networkErrorCallbacks.subscribe(
     value => {
-      if (value.length === 0) {
-        jQuery('#disableShow').remove();
-
-        styleAdded = false;
-      } else if (!styleAdded) {
-        jQuery('<style id="disableShow" type="text/css">.show {display: none !important;}<\/style>').appendTo("head");
-
-        styleAdded = true;
-      }
       networkErrors = value.length !== 0;
     }
   );
@@ -33,6 +22,17 @@
     resumeAfterNetworkError();
   }
 </script>
+
+<svelte:head>
+    {#if networkErrors}
+      <style>
+        .show {
+          display: none !important;
+        }
+      </style>
+    {/if}
+</svelte:head>
+
 
 <div class="splash" role="status">
   <img
