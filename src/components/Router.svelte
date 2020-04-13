@@ -9,6 +9,8 @@
 
   import {ChunkGenerator} from "svelte-spa-chunk";
 
+  import Router from "../router";
+
   const Chunk = ChunkGenerator(ChunkComponent);
 
   let props = {};
@@ -25,7 +27,18 @@
 
   page("*", parse);
 
-  page("/", () => {
+  (function SetupRouter(routerValue, parent = "") {
+    routerValue.forEach(value => {
+      age(parent+value.path, () => {
+        props = {
+          component: Chunk(() => import(`../${value.component}`))
+        };
+      });
+      if (Array.isArray(value.children)) SetupRouter(value.children, parent+value.path);
+    });
+  })(Router);
+
+  /*page("/", () => {
     props = {
       component: Chunk(() => import("../pages/Dashboard.svelte"))
     };
@@ -71,7 +84,7 @@
     props = {
       component: Chunk(() => import("../pages/Error404.svelte"))
     };
-  });
+  });*/
 
   page.start();
 
