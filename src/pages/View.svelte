@@ -1,7 +1,7 @@
-<script context="module">
-  import {isPageGonnaInitialize} from "../Store"
+<script>
+  import {isPageInitialized} from "../Store"
 
-  isPageGonnaInitialize.set(false);
+  isPageInitialized.set(true);
 </script>
 
 <div class="content">View page!</div>

@@ -2,7 +2,11 @@
   import router from "page";
   import page from "page";
   import ChunkComponent from "../Chunk.svelte";
-  import {path} from "../RouterStore"
+  import {path} from "../RouterStore";
+  import {get} from "svelte/store";
+
+  import {isPageChanged, isPageLoading} from '../RouterStore';
+  import {isPageInitialized} from '../Store';
 
   import {ChunkGenerator} from "svelte-spa-chunk";
 
@@ -14,6 +18,10 @@
 
   function parse(ctx, next) {
     path.set(ctx.pathname);
+
+    console.log("geldi amk ---> " + ctx.pathname)
+
+    isPageInitialized.set(false);
 
     next();
   }

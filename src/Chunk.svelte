@@ -1,9 +1,9 @@
 <!--suppress JSUnusedAssignment, BadExpressionStatementJS, ES6UnusedImports -->
 <script>
-  import Loadable from 'svelte-loadable'
-  import {get} from 'svelte/store'
-  import {isPageChanged, isPageLoading} from './RouterStore'
-  import {isPageGonnaInitialize, isPageInitialized} from './Store'
+  import Loadable from 'svelte-loadable';
+  import {get} from 'svelte/store';
+  import {onDestroy} from "svelte";
+  import {isPageChanged, isPageLoading} from './RouterStore';
 
   export let component;
   export let dynamicImport;
@@ -14,9 +14,9 @@
       duration: 4000,
       tick: t => {
         if (get(isPageChanged)) {
-          node.style.display = 'none'
+          node.style.display = 'none';
         } else {
-          node.style.display = 'block'
+          node.style.display = 'block';
         }
       }
     }
@@ -28,7 +28,6 @@
 
 <Loadable loader={dynamicImport} {delay}>
   <div slot="loading">
-    isInitialPageInitialized
       {(isPageLoading.set(true)) ? '' : ''}
 
       {(isPageChanged.set(false)) ? '' : ''}
@@ -37,11 +36,8 @@
   <div
     out:flashPrevent
     slot="success"
-    let:component
-  >
-    <svelte:component this={component}/>
-      {$isPageGonnaInitialize ? '' : isPageInitialized.set(true) ? '' : ''}
-
+    let:component>
+    <svelte:component this={component} />
       {(isPageLoading.set(false)) ? '' : ''}
 
       {(isPageChanged.set(true)) ? '' : ''}

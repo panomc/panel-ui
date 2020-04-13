@@ -1,7 +1,10 @@
-<script context="module">
-  import {isPageGonnaInitialize} from "../Store"
+<script>
+  import {isPageInitialized} from "../Store"
+  import {onMount} from "svelte"
 
-  isPageGonnaInitialize.set(false);
+  onMount(() => {
+    isPageInitialized.set(false);
+  })
 </script>
 
 <div class="content">Players page!</div>

@@ -11,7 +11,6 @@ export const isSidebarOpen = writable(PanelSidebarStorageUtil.isThereSideBarOpen
 export const sidebarTabsState = writable(PanelSidebarStorageUtil.isThereSideBarTabsState() ? PanelSidebarStorageUtil.getSidebarTabsState() : "website");
 
 export const isPageInitialized = writable(false);
-export const isPageGonnaInitialize = writable(false);
 
 export const user = writable({});
 export const website = writable({});

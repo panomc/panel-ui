@@ -33,8 +33,8 @@
         showSplash &&
         value.length === 0 &&
         !waitAnimation &&
-        get(isPageInitialized) &&
-        basicDataInitialized
+        basicDataInitialized &&
+        get(isPageInitialized)
       ) {
         showSplash = false;
       }
