@@ -19,8 +19,6 @@
   function parse(ctx, next) {
     path.set(ctx.pathname);
 
-    console.log("geldi amk ---> " + ctx.pathname)
-
     isPageInitialized.set(false);
 
     next();

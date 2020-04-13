@@ -3,7 +3,7 @@
   import {onMount} from "svelte"
 
   onMount(() => {
-    isPageInitialized.set(false);
+    isPageInitialized.set(true);
   })
 </script>
 
