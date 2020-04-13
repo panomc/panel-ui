@@ -1,5 +1,4 @@
 <script>
-  import router from "page";
   import page from "page";
   import ChunkComponent from "../Chunk.svelte";
   import {path} from "../RouterStore";
@@ -24,51 +23,57 @@
     next();
   }
 
-  router("*", parse);
+  page("*", parse);
 
-  router("/", () => {
+  page("/", () => {
     props = {
       component: Chunk(() => import("../pages/Dashboard.svelte"))
     };
   });
 
-  router("/players", () => {
+  page("/players", () => {
     props = {
       component: Chunk(() => import("../pages/Players.svelte"))
     };
   });
 
-  router("/addons", () => {
+  page("/addons", () => {
     props = {
       component: Chunk(() => import("../pages/Addons.svelte"))
     };
   });
 
-  router("/view", () => {
+  page("/view", () => {
     props = {
       component: Chunk(() => import("../pages/View.svelte"))
     };
   });
 
-  router("/admins", () => {
+  page("/admins", () => {
     props = {
       component: Chunk(() => import("../pages/Admins.svelte"))
     };
   });
 
-  router("/tools", () => {
+  page("/tools", () => {
     props = {
       component: Chunk(() => import("../pages/Tools.svelte"))
     };
   });
 
-  router("*", () => {
+  page("/settings*", () => {
+    props = {
+      component: Chunk(() => import("../pages/Settings.svelte"))
+    };
+  });
+
+  page("*", () => {
     props = {
       component: Chunk(() => import("../pages/Error404.svelte"))
     };
   });
 
-  router.start();
+  page.start();
 
   export let hidden;
 </script>

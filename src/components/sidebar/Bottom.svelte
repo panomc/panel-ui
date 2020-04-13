@@ -6,18 +6,18 @@
 </script>
 
 <div class="sidebar-bottom p-2 border-top border-glass">
-  <router-link
+  <a
     class="btn btn-link text-light"
-    to="/panel/settings"
+    href="/panel/settings"
     use:tooltip={['top', 'Ayarlar']}>
     <Icon data={faCog} />
-  </router-link>
-  <router-link
+  </a>
+  <a
     class="btn btn-link text-light"
-    to="/panel/settings/updates"
+    href="/panel/settings/updates"
     use:tooltip={['top', 'Güncellemeler']}>
     <Icon data={faSync} />
-  </router-link>
+  </a>
   <a
     class="btn btn-link text-light"
     href="https://panomc.com/discord"
