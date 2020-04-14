@@ -29,7 +29,7 @@
 
   (function SetupRouter(routerValue, parent = "") {
     routerValue.forEach(value => {
-      age(parent+value.path, () => {
+      page(parent+value.path, () => {
         props = {
           component: Chunk(() => import(`../${value.component}`))
         };
