@@ -1,5 +1,5 @@
 <script>
-  import {ApiUtil} from "../util/api.util";
+  import { ApiUtil } from "../util/api.util";
   import {
     toggleSidebar,
     notificationsCount,
@@ -31,17 +31,18 @@
     logoutLoading.set(true);
 
     showNetworkErrorOnCatch(
-      () => new Promise((resolve, reject) => {
-        ApiUtil.post("auth/logout", {})
-          .then(() => {
-            window.location.href = '/';
+      () =>
+        new Promise((resolve, reject) => {
+          ApiUtil.post("auth/logout", {})
+            .then(() => {
+              window.location.href = "/";
 
-            resolve();
-          })
-          .catch(() => {
-            reject();
-          });
-      })
+              resolve();
+            })
+            .catch(() => {
+              reject();
+            });
+        })
     );
   }
 </script>
@@ -56,7 +57,7 @@
         href="javascript:void(0);"
         title="Menüyü Aç/Kapa"
         on:click={onSideBarCollapseClick}>
-        <Icon data={faBars}/>
+        <Icon data={faBars} />
       </a>
     </li>
     <li class="nav-item">
@@ -64,7 +65,7 @@
         href="javascript:void(0);"
         target="_blank"
         class="btn btn-link border-lightprimary text-secondary">
-        <Icon data={faStore} class="d-lg-none d-inline"/>
+        <Icon data={faStore} class="d-lg-none d-inline" />
         <span class="d-lg-inline d-none">Web Market</span>
       </a>
     </li>
@@ -80,24 +81,24 @@
         href="javascript:void(0);"
         role="button"
         title="Bildirimler">
-          {#if $notificationsCount !== 0}
-            <div class="notification"/>
-          {/if}
-        <Icon data={faBell}/>
+        {#if $notificationsCount !== 0}
+          <div class="notification" />
+        {/if}
+        <Icon data={faBell} />
       </a>
       <div
         class="dropdown-menu animated fadeIn faster dropdown-menu-right
         notifications">
         <h6 class="dropdown-header">
           Bildirimler ({$notificationsCount})
-            {#if $quickNotifications.length !== 0}
-              <a
-                class="float-right"
-                href="javascript:void(0);"
-                title="Tümünü Oku">
-                Tümünü Oku
-              </a>
-            {/if}
+          {#if $quickNotifications.length !== 0}
+            <a
+              class="float-right"
+              href="javascript:void(0);"
+              title="Tümünü Oku">
+              Tümünü Oku
+            </a>
+          {/if}
         </h6>
 
         <router-link
@@ -107,19 +108,19 @@
           :key="index"
           v-for="(notification, index) in quickNotifications">
           <h6 class="text-muted m-0 text-wrap d-inline">
-            <Icon data={faDotCircle} class="text-primary"/>
-            <span v-text="notification.type_ID"/>
+            <Icon data={faDotCircle} class="text-primary" />
+            <span v-text="notification.type_ID" />
           </h6>
           <small class="text-muted text-right font-weight-lighter">15 dk</small>
         </router-link>
 
-          {#if $quickNotifications.length === 0}
-            <div
-              class="d-flex flex-column align-items-center justify-content-center">
-              <Icon data={faBell} scale="3" class="text-glass m-3"/>
-              <p class="text-gray">Yeni bildirim yok.</p>
-            </div>
-          {/if}
+        {#if $quickNotifications.length === 0}
+          <div
+            class="d-flex flex-column align-items-center justify-content-center">
+            <Icon data={faBell} scale="3" class="text-glass m-3" />
+            <p class="text-gray">Yeni bildirim yok.</p>
+          </div>
+        {/if}
 
         <router-link
           class="dropdown-item text-primary text-center small pt-2"
@@ -137,25 +138,28 @@
         data-toggle="dropdown"
         href="javascript:void(0);"
         title="Oturum">
-        <Icon data={faUser}/>
+        <Icon data={faUser} />
       </a>
       <div class="dropdown-menu dropdown-menu-right animated fadeIn faster">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link text-primary" href="javascript:void(0);">
-              <Icon data={faUser} class="mr-1"/>
-                {$user.username}
+              <Icon data={faUser} class="mr-1" />
+              {$user.username}
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="javascript:void(0);">
-              <Icon data={faUserPlus} class="mr-1"/>
+              <Icon data={faUserPlus} class="mr-1" />
               Yönetici Ekle
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-danger" href="javascript:void(0);" on:click={onLogout}>
-              <Icon data={faSignOutAlt} class="mr-1"/>
+            <a
+              class="nav-link text-danger"
+              href="javascript:void(0);"
+              on:click={onLogout}>
+              <Icon data={faSignOutAlt} class="mr-1" />
               Çıkış Yap
             </a>
           </li>
