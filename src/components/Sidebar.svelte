@@ -60,7 +60,11 @@
       on:click={onMobileSideBarCollapseClick}>
       <Icon data={faBars} />
     </a>
-    <img alt="Pano" src={basePath() + 'assets/img/logo.svg'} width="20" />
+    <img
+      alt="Pano"
+      title="Pano"
+      src={basePath() + 'assets/img/logo.svg'}
+      width="20" />
   </div>
 
   <div class="sidebar-inner">
@@ -69,6 +73,7 @@
     <div class="sidebar-info">
       <img
         alt="Server İkon"
+        title={$website.name}
         class="sidebar-server-icon"
         width="80"
         height="80"
