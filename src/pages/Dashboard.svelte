@@ -50,7 +50,7 @@
           </p>
           <button
             class="btn btn-sm btn-outline-primary"
-            data-target="javascript:void(0);connectServer"
+            data-target="#connectServer"
             data-toggle="modal">
             <Icon data={faPlus} class="mr-2" />
             Sunucu Bağla
