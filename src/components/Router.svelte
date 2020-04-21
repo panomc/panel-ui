@@ -1,94 +1,95 @@
 <script>
   import page from "page";
-  import ChunkComponent from "../Chunk.svelte";
-  import {path} from "../RouterStore";
+  import {onDestroy} from "svelte";
   import {get} from "svelte/store";
 
-  import {isPageChanged, isPageLoading} from '../RouterStore';
+  import {path, subRouterRoutesByBasePath} from '../RouterStore';
   import {isPageInitialized} from '../Store';
 
-  import {ChunkGenerator} from "svelte-spa-chunk";
+  import RoutesConfig from "../router.config";
 
-  import Router from "../router";
-
-  const Chunk = ChunkGenerator(ChunkComponent);
+  const pageInstance = page.create();
 
   let props = {};
 
-  page.base("/panel");
+  export const mainBasePath = "/panel";
+  export let basePath = mainBasePath;
 
-  function parse(ctx, next) {
-    path.set(ctx.pathname);
+  const nestedRoute = basePath !== mainBasePath;
 
-    isPageInitialized.set(false);
+  export let routes = nestedRoute ? $subRouterRoutesByBasePath[basePath] : RoutesConfig;
+  export let hidden = false;
+
+  pageInstance.base(basePath);
+
+  function parseRoute(ctx, next) {
+    if (get(path) !== ctx.pathname) {
+      path.set(ctx.pathname);
+
+      isPageInitialized.set(false);
+    }
 
     next();
   }
 
-  page("*", parse);
+  if (!nestedRoute) {
+    pageInstance("*", parseRoute);
+  }
 
-  (function SetupRouter(routerValue, parent = "") {
-    routerValue.forEach(value => {
-      page(parent+value.path, () => {
+  (function setupRouter(paths, parent = "", parentHandler = null) {
+    Object.keys(paths).forEach(path => {
+      const route = paths[path];
+
+      const handler = () => {
+        if (route.children !== null && typeof route.children === 'object') {
+          subRouterRoutesByBasePath.update(value => {
+            value[basePath + path] = route.children;
+
+            return value;
+          })
+        }
+
         props = {
-          component: Chunk(() => import(`../${value.component}`))
+          component: route.component
         };
-      });
-      if (Array.isArray(value.children)) SetupRouter(value.children, parent+value.path);
+      }
+
+      pageInstance(parent + path, parentHandler === null ? handler : parentHandler);
+
+      if (route.children !== null && typeof route.children === 'object') {
+        setupRouter(route.children, parent + path, parentHandler === null ? handler : parentHandler);
+      }
     });
-  })(Router);
+  })(routes);
 
-  /*page("/", () => {
-    props = {
-      component: Chunk(() => import("../pages/Dashboard.svelte"))
-    };
-  });
+  pageInstance.start();
 
-  page("/players", () => {
-    props = {
-      component: Chunk(() => import("../pages/Players.svelte"))
-    };
-  });
+  if (nestedRoute) {
+    const pathUnsubscribe = path.subscribe((value) => {
+      if (value.startsWith(pageInstance.base())) {
+        pageInstance(value);
+      }
+    })
 
-  page("/addons", () => {
-    props = {
-      component: Chunk(() => import("../pages/Addons.svelte"))
-    };
-  });
+    onDestroy(pathUnsubscribe);
+    onDestroy(() => {
+      subRouterRoutesByBasePath.update(list => {
+        const newList = [];
 
-  page("/view", () => {
-    props = {
-      component: Chunk(() => import("../pages/View.svelte"))
-    };
-  });
+        Object.keys(list)
+                .filter(key => key !== pageInstance.base())
+                .forEach(key => {
+                  newList[key] = list[key]
+                });
 
-  page("/admins", () => {
-    props = {
-      component: Chunk(() => import("../pages/Admins.svelte"))
-    };
-  });
+        return newList;
+      })
+    })
+  }
 
-  page("/tools", () => {
-    props = {
-      component: Chunk(() => import("../pages/Tools.svelte"))
-    };
-  });
-
-  page("/settings*", () => {
-    props = {
-      component: Chunk(() => import("../pages/Settings.svelte"))
-    };
-  });
-
-  page("*", () => {
-    props = {
-      component: Chunk(() => import("../pages/Error404.svelte"))
-    };
-  });*/
-
-  page.start();
-
-  export let hidden;
+  onDestroy(() => {
+    pageInstance.stop()
+  })
 </script>
 
 <div hidden={hidden}>

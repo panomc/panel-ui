@@ -1,26 +1,12 @@
 <!--suppress JSUnusedAssignment, BadExpressionStatementJS, ES6UnusedImports -->
 <script>
   import Loadable from 'svelte-loadable';
-  import {get} from 'svelte/store';
-  import {onDestroy} from "svelte";
-  import {isPageChanged, isPageLoading} from './RouterStore';
+  import {isPageLoading} from './RouterStore';
 
   export let component;
   export let dynamicImport;
   export let delay = 0;
-
-  function flashPrevent(node) {
-    return {
-      duration: 4000,
-      tick: t => {
-        if (get(isPageChanged)) {
-          node.style.display = 'none';
-        } else {
-          node.style.display = 'block';
-        }
-      }
-    }
-  }
+  export let params = {}
 
   // use component variable for nothing (fix useless svelte warning)
   component;
@@ -29,18 +15,11 @@
 <Loadable loader={dynamicImport} {delay}>
   <div slot="loading">
       {(isPageLoading.set(true)) ? '' : ''}
-
-      {(isPageChanged.set(false)) ? '' : ''}
   </div>
 
-  <div
-    out:flashPrevent
-    slot="success"
-    let:component>
-    <svelte:component this={component} />
+  <div slot="success" let:component>
+    <svelte:component this={component} {...params}/>
+
       {(isPageLoading.set(false)) ? '' : ''}
-
-      {(isPageChanged.set(true)) ? '' : ''}
   </div>
-
 </Loadable>

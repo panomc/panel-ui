@@ -2455,10 +2455,10 @@ svelte-preprocess@^3.7.1:
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
 
-svelte-spa-chunk@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/svelte-spa-chunk/-/svelte-spa-chunk-1.0.3.tgz#bd37691722b98ec27a799db0b8e9ac3844969e30"
-  integrity sha512-e85CuQAxFp42wYPmhOtNTVQPTL5cI/MJJUexNXmxnpgjQ9pNeSXDHiQXdFdGtarn4otmGt7ap6GisaHBOLScWQ==
+svelte-spa-chunk@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/svelte-spa-chunk/-/svelte-spa-chunk-2.0.0.tgz#0b4040f106e315c993fda9befa25444b2e81fccd"
+  integrity sha512-pU11oy14PbF8sjoNgTswNiNyE7+EKxHmxy0v70tXfKxEM4LeJw8AC3g6JkYKUWCHrUWVAwnmU6l+8CIR75MQuQ==
   dependencies:
     svelte-loadable "^1.4.0"
 
