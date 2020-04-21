@@ -81,9 +81,7 @@
         href="javascript:void(0);"
         role="button"
         title="Bildirimler">
-        {#if $notificationsCount !== 0}
-          <div class="notification" />
-        {/if}
+        <div class="unread-badge" />
         <Icon data={faBell} />
       </a>
       <div
