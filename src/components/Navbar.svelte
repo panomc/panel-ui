@@ -89,17 +89,7 @@
       <div
         class="dropdown-menu animated fadeIn faster dropdown-menu-right
         notifications">
-        <h6 class="dropdown-header">
-          Bildirimler ({$notificationsCount})
-          {#if $quickNotifications.length !== 0}
-            <a
-              class="float-right"
-              href="javascript:void(0);"
-              title="Tümünü Oku">
-              Tümünü Oku
-            </a>
-          {/if}
-        </h6>
+        <h6 class="dropdown-header">Bildirimler</h6>
 
         <router-link
           class="dropdown-item d-flex w-100 justify-content-between
@@ -118,14 +108,22 @@
           <div
             class="d-flex flex-column align-items-center justify-content-center">
             <Icon data={faBell} scale="3" class="text-glass m-3" />
-            <p class="text-gray">Yeni bildirim yok.</p>
+            <p class="text-gray">Bildirim yok.</p>
           </div>
         {/if}
 
+        <!-- Loading Spinner -->
+        <div class="d-flex justify-content-center m-3">
+          <div
+            class="spinner-border spinner-border-sm text-primary"
+            role="status" />
+        </div>
+
         <router-link
-          class="dropdown-item text-primary text-center small pt-2"
+          class="dropdown-item text-primary text-center small pt-2
+          font-weight-bolder"
           to="/panel/notifications">
-          Bildirim Geçmişini Görüntüle
+          Tümünü Görüntüle — 5
         </router-link>
       </div>
     </li>
