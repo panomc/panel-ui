@@ -293,3 +293,16 @@ body {
   position: absolute;
   z-index: 1050;
 }
+
+.notification-unread {
+  animation: readNotification 3s ease-in-out;
+}
+
+@keyframes readNotification {
+  0% {
+    background-color: $lightprimary;
+  }
+  100% {
+    background-color: transparent;
+  }
+}

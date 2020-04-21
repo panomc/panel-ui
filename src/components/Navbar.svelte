@@ -91,7 +91,7 @@
 
         <router-link
           class="dropdown-item d-flex w-100 justify-content-between
-          border-bottom py-3 bg-lightprimary"
+          border-bottom py-3 notification-unread"
           to="javascript:void(0);"
           :key="index"
           v-for="(notification, index) in quickNotifications">
