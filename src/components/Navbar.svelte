@@ -250,12 +250,11 @@
             </div>
           {/if}
 
-        <router-link
-          class="dropdown-item text-primary text-center small pt-2
-          font-weight-bolder"
-          to="/panel/notifications">
+        <a
+          class="dropdown-item text-primary font-weight-bolder text-center small pt-2"
+          href="/panel/notifications">
           Tümünü Görüntüle {$notificationsCount === 0 ? "" : "— "+ $notificationsCount}
-        </router-link>
+        </a>
       </div>
     </li>
 
