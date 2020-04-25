@@ -16,8 +16,9 @@ body {
   background: $bittersweet;
   border-radius: 50%;
 }
-z .notifications {
-  width: 300px;
+
+.notifications {
+  min-width: 300px;
 }
 
 .content {
