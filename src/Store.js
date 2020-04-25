@@ -19,7 +19,6 @@ export const currentServerPlatformMatchKey = writable("");
 export const platformAddress = writable("");
 
 export const servers = writable([]);
-export const quickNotifications = writable([]);
 export const notificationsCount = writable(0);
 
 export const logoutLoading = writable(false);
@@ -107,6 +106,5 @@ function initializeBasicData(data) {
   currentServerPlatformMatchKey.set(data.platform_server_match_key);
   platformAddress.set(data.platform_host_address);
   servers.set(data.servers);
-  quickNotifications.set(data.quick_notifications);
   notificationsCount.set(data.notifications_count);
 }

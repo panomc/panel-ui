@@ -1,9 +1,11 @@
 <script>
-  import { ApiUtil } from "../util/api.util";
+  import jQuery from "jquery";
+  import {onMount} from "svelte";
+
+  import {ApiUtil} from "../util/api.util";
   import {
     toggleSidebar,
     notificationsCount,
-    quickNotifications,
     user,
     logoutLoading,
     showNetworkErrorOnCatch
@@ -22,6 +24,10 @@
     faUserPlus,
     faSignOutAlt
   } from "@fortawesome/free-solid-svg-icons";
+
+  let notificationsLoading = true;
+  let quickNotifications = [];
+  let quickNotificationProcessID = 0;
 
   function onSideBarCollapseClick() {
     toggleSidebar();
@@ -45,6 +51,131 @@
         })
     );
   }
+
+  function array_move(arr, old_index, new_index) {
+    if (new_index >= arr.length) {
+      let k = new_index - arr.length + 1;
+      while (k--) {
+        arr.push(undefined);
+      }
+    }
+    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+    return arr; // for testing
+  }
+
+  function setNotifications(newNotifications) {
+    if (quickNotifications.length === 0 || newNotifications.length === 0) {
+      quickNotifications = newNotifications;
+    } else {
+      quickNotifications.forEach((item, index) => {
+        const newArrayOfFilter = newNotifications.filter(filterItem => filterItem.id === item.id)
+
+        if (newArrayOfFilter.length === 0) {
+          quickNotifications = quickNotifications.splice(index - 1, 1);
+        }
+      })
+
+      newNotifications.forEach((item, index) => {
+        const newArrayOfFilter = quickNotifications.filter(filterItem => filterItem.id === item.id)
+
+        if (newArrayOfFilter.length === 0) {
+          quickNotifications[index] = item;
+        }
+      })
+
+      newNotifications.forEach((item, index) => {
+        const newArrayOfFilter = quickNotifications.filter(filterItem => filterItem.id === item.id)
+
+        if (newArrayOfFilter.length !== 0) {
+          quickNotifications = array_move(quickNotifications, index, quickNotifications.indexOf(newArrayOfFilter[0]))
+        }
+      })
+    }
+  }
+
+  function getQuickNotificationsAndRead(id) {
+    showNetworkErrorOnCatch(() =>
+      new Promise((resolve, reject) => {
+        ApiUtil.get("panel/quickNotificationsAndRead")
+          .then(response => {
+            if (quickNotificationProcessID === id) {
+              if (response.data.result === "ok") {
+                setNotifications(response.data.notifications)
+                notificationsCount.set(response.data.notifications_count);
+
+                notificationsLoading = false;
+              }
+
+              setTimeout(() => {
+                if (quickNotificationProcessID === id) {
+                  startQuickNotificationsAndReadCountDown();
+                }
+              }, 1000);
+            }
+
+            resolve();
+          })
+          .catch(() => {
+            reject();
+          });
+      }));
+  }
+
+  function getQuickNotifications(id) {
+    showNetworkErrorOnCatch(() =>
+      new Promise((resolve, reject) => {
+        ApiUtil.get("panel/quickNotifications")
+          .then(response => {
+            if (quickNotificationProcessID === id) {
+              if (response.data.result === "ok") {
+                notificationsCount.set(response.data.notifications_count);
+              }
+
+              setTimeout(() => {
+                if (quickNotificationProcessID === id) {
+                  startQuickNotificationsCountDown();
+                }
+              }, 1000);
+            }
+
+            resolve();
+          })
+          .catch(() => {
+            reject();
+          });
+      }));
+  }
+
+  function startQuickNotificationsAndReadCountDown() {
+    quickNotificationProcessID++;
+
+    const id = quickNotificationProcessID;
+
+    getQuickNotificationsAndRead(id);
+  }
+
+  function startQuickNotificationsCountDown() {
+    quickNotificationProcessID++;
+
+    const id = quickNotificationProcessID;
+
+    getQuickNotifications(id);
+  }
+
+  startQuickNotificationsCountDown();
+
+  onMount(() => {
+    jQuery('#quickNotificationsDropdown')
+      .on('show.bs.dropdown', function () {
+        notificationsLoading = true;
+        quickNotifications = [];
+
+        startQuickNotificationsAndReadCountDown();
+      })
+      .on('hide.bs.dropdown', function () {
+        startQuickNotificationsCountDown();
+      })
+  })
 </script>
 
 <!-- Top Navbar -->
@@ -57,7 +188,7 @@
         href="javascript:void(0);"
         title="Menüyü Aç/Kapa"
         on:click={onSideBarCollapseClick}>
-        <Icon data={faBars} />
+        <Icon data={faBars}/>
       </a>
     </li>
     <li class="nav-item">
@@ -65,7 +196,7 @@
         href="javascript:void(0);"
         target="_blank"
         class="btn btn-link border-lightprimary text-secondary">
-        <Icon data={faStore} class="d-lg-none d-inline" />
+        <Icon data={faStore} class="d-lg-none d-inline"/>
         <span class="d-lg-inline d-none">Web Market</span>
       </a>
     </li>
@@ -74,48 +205,50 @@
   <div class="navbar-brand">Panel</div>
 
   <ul class="nav navbar-nav ml-auto">
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown" id="quickNotificationsDropdown">
       <a
         class="icon-link nav-link position-relative"
         data-toggle="dropdown"
         href="javascript:void(0);"
         role="button"
         title="Bildirimler">
-        <div class="unread-badge" />
-        <Icon data={faBell} />
+          {#if $notificationsCount !== 0}
+            <div class="unread-badge"></div>
+          {/if}
+        <Icon data={faBell}/>
       </a>
-      <div
-        class="dropdown-menu animated fadeIn faster dropdown-menu-right
-        notifications">
+      <div class="dropdown-menu animated fadeIn faster dropdown-menu-right notifications">
         <h6 class="dropdown-header">Bildirimler</h6>
+          {#if !notificationsLoading}
+              {#each quickNotifications as notification}
+                <a href="javascript:void(0);"
+                   class="dropdown-item d-flex w-100 justify-content-between border-bottom py-3"
+                   class:notification-unread={notification.status === "NOT_READ"}>
+                  <h6 class="text-muted m-0 text-wrap d-inline">
+                    <Icon data={faDotCircle} class="text-primary"/>
+                    <span>{notification.type_ID}</span>
+                  </h6>
+                  <small class="text-muted text-right font-weight-lighter">15 dk</small>
+                </a>
+              {/each}
+          {/if}
 
-        <router-link
-          class="dropdown-item d-flex w-100 justify-content-between
-          border-bottom py-3 notification-unread"
-          to="javascript:void(0);"
-          :key="index"
-          v-for="(notification, index) in quickNotifications">
-          <h6 class="text-muted m-0 text-wrap d-inline">
-            <Icon data={faDotCircle} class="text-primary" />
-            <span v-text="notification.type_ID" />
-          </h6>
-          <small class="text-muted text-right font-weight-lighter">15 dk</small>
-        </router-link>
-
-        {#if $quickNotifications.length === 0}
-          <div
-            class="d-flex flex-column align-items-center justify-content-center">
-            <Icon data={faBell} scale="3" class="text-glass m-3" />
-            <p class="text-gray">Bildirim yok.</p>
-          </div>
-        {/if}
+          {#if quickNotifications.length === 0 && !notificationsLoading}
+            <div
+              class="d-flex flex-column align-items-center justify-content-center">
+              <Icon data={faBell} scale="3" class="text-glass m-3"/>
+              <p class="text-gray">Bildirim yok.</p>
+            </div>
+          {/if}
 
         <!-- Loading Spinner -->
-        <div class="d-flex justify-content-center m-3">
-          <div
-            class="spinner-border spinner-border-sm text-primary"
-            role="status" />
-        </div>
+          {#if notificationsLoading}
+            <div class="d-flex justify-content-center m-3">
+              <div
+                class="spinner-border spinner-border-sm text-primary"
+                role="status"></div>
+            </div>
+          {/if}
 
         <router-link
           class="dropdown-item text-primary text-center small pt-2
@@ -134,19 +267,19 @@
         data-toggle="dropdown"
         href="javascript:void(0);"
         title="Oturum">
-        <Icon data={faUser} />
+        <Icon data={faUser}/>
       </a>
       <div class="dropdown-menu dropdown-menu-right animated fadeIn faster">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link text-primary" href="javascript:void(0);">
-              <Icon data={faUser} class="mr-1" />
-              {$user.username}
+              <Icon data={faUser} class="mr-1"/>
+                {$user.username}
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="javascript:void(0);">
-              <Icon data={faUserPlus} class="mr-1" />
+              <Icon data={faUserPlus} class="mr-1"/>
               Yönetici Ekle
             </a>
           </li>
@@ -155,7 +288,7 @@
               class="nav-link text-danger"
               href="javascript:void(0);"
               on:click={onLogout}>
-              <Icon data={faSignOutAlt} class="mr-1" />
+              <Icon data={faSignOutAlt} class="mr-1"/>
               Çıkış Yap
             </a>
           </li>
