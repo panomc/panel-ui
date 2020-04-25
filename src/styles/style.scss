@@ -16,8 +16,7 @@ body {
   background: $bittersweet;
   border-radius: 50%;
 }
-
-.notifications {
+z .notifications {
   width: 300px;
 }
 
@@ -296,13 +295,14 @@ body {
 
 .notification-unread {
   animation: readNotification 3s ease-in-out;
+  background-color: $lightprimary;
 }
 
 @keyframes readNotification {
   0% {
-    background-color: $lightprimary;
+    background-color: rgba($primary, 0.2);
   }
   100% {
-    background-color: transparent;
+    background-color: $lightprimary;
   }
 }
