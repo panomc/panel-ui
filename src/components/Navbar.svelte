@@ -1,6 +1,7 @@
 <script>
   import jQuery from "jquery";
   import {onMount} from "svelte";
+  import moment from "moment";
 
   import {ApiUtil} from "../util/api.util";
   import {
@@ -228,7 +229,7 @@
                     <Icon data={faDotCircle} class="text-primary"/>
                     <span>{notification.type_ID}</span>
                   </h6>
-                  <small class="text-muted text-right font-weight-lighter">15 dk</small>
+                  <small class="text-muted text-right font-weight-lighter">{moment(notification.date).fromNow()}</small>
                 </a>
               {/each}
           {/if}
