@@ -254,7 +254,7 @@
           class="dropdown-item text-primary text-center small pt-2
           font-weight-bolder"
           to="/panel/notifications">
-          Tümünü Görüntüle — 5
+          Tümünü Görüntüle {$notificationsCount === 0 ? "" : "— "+ $notificationsCount}
         </router-link>
       </div>
     </li>
