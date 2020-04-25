@@ -296,7 +296,6 @@ body {
 
 .notification-unread {
   animation: readNotification 3s ease-in-out;
-  background-color: $lightprimary;
 }
 
 @keyframes readNotification {
@@ -304,6 +303,6 @@ body {
     background-color: rgba($primary, 0.2);
   }
   100% {
-    background-color: $lightprimary;
+    background-color: transparent;
   }
 }
