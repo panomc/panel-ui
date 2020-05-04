@@ -284,12 +284,6 @@
       <h5 class="card-title">Tüm İstatistikler</h5>
       <div class="table-responsive">
         <table class="table table-sm m-0">
-          <thead>
-            <tr class="text-primary">
-              <th scope="col">İstatistik</th>
-              <th scope="col">Veri</th>
-            </tr>
-          </thead>
           <tbody class="text-muted">
             <tr>
               <th scope="row">Yazılar:</th>
@@ -301,7 +295,8 @@
             </tr>
             <tr>
               <th scope="row">Kayıtlı Oyuncular:</th>
-              <td v-text="registered_player_count" />
+              <!-- <td v-text="registered_player_count" /> -->
+              <td>0</td>
             </tr>
             <tr>
               <th scope="row">Açık Talepler:</th>
