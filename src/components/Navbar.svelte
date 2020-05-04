@@ -251,7 +251,7 @@
               </div>
               <div class="col">
                 <span class="text-wrap text-dark">{notification.type_ID}</span>
-                <small class="text-gray">
+                <small class="text-gray d-block">
                   {moment(notification.date).fromNow()}
                 </small>
               </div>
