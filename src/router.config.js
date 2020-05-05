@@ -1,4 +1,4 @@
-import { ChunkGenerator } from "svelte-spa-chunk";
+import {ChunkGenerator} from "svelte-spa-chunk";
 
 import ChunkComponent from "./Chunk.svelte";
 
@@ -25,6 +25,11 @@ export default {
   },
   "/settings": {
     component: Chunk(() => import("./pages/Settings.svelte")),
+    children: {
+      "": {
+        component: Chunk(()=> import("./pages/Settings/General.svelte"))
+      },
+    }
   },
   "/notifications": {
     component: Chunk(() => import("./pages/Notifications.svelte")),
