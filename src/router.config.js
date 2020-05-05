@@ -35,6 +35,9 @@ export default {
       "/updates": {
         component: Chunk(()=> import("./pages/Settings/Updates.svelte"))
       },
+      "/about": {
+        component: Chunk(()=> import("./pages/Settings/About.svelte"))
+      }
     }
   },
   "/notifications": {
