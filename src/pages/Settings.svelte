@@ -1,7 +1,5 @@
 <script>
-  import { isPageInitialized } from "../Store";
-
-  isPageInitialized.set(true);
+  import Router from "../components/Router.svelte";
 </script>
 
 <!-- Settings Categories Nav -->
@@ -19,7 +17,7 @@
       class="nav-item nav-link ml-sm-auto position-relative"
       href="/panel/settings/updates">
       Güncellemeler
-      <span class="notification" />
+      <span class="notification"/>
       <!-- :class="{ 'active': currentActiveNavLink === 3 }" -->
     </a>
     <a class="nav-item nav-link" href="/panel/settings/about">
@@ -31,5 +29,5 @@
 
 <!-- Settings Contents -->
 <article class="content">
-  <!-- <router-view></router-view> -->
+  <Router basePath="/panel/settings"/>
 </article>
