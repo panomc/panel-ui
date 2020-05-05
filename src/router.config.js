@@ -14,6 +14,9 @@ export default {
       "": {
         component: Chunk(()=> import("./pages/Players/AllPlayers.svelte"))
       },
+      "/player": {
+        component: Chunk(()=> import("./pages/Players/Player.svelte"))
+      }
     }
   },
   "/addons": {
