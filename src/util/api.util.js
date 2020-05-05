@@ -63,3 +63,4 @@ export const ApiUtil = {
   }
 };
 
+export default ApiUtil;
