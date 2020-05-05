@@ -1,27 +1,32 @@
 <script>
   import Router from "../components/Router.svelte";
+  import {path} from "../RouterStore";
+
+  function matching(path, pathName, startsWith = false) {
+    return (
+            path.toUpperCase() === pathName.toUpperCase() ||
+            path.toUpperCase() === (pathName + "/").toUpperCase() ||
+            (startsWith && path.startsWith(pathName))
+    );
+  }
 </script>
 
 <!-- Settings Categories Nav -->
 <nav class="border-bottom border-glass page-category">
   <div class="nav nav-pills d-flex justify-content-center flex-row w-100">
-    <a class="nav-item nav-link" href="/panel/settings">
+    <a class="nav-item nav-link" href="/panel/settings" class:active={matching($path, '/panel/settings')}>
       Genel
-      <!-- :class="{ 'active': currentActiveNavLink === 1 }"  -->
     </a>
-    <a class="nav-item nav-link" href="/panel/settings/site-settings">
-      <!-- :class="{ 'active': currentActiveNavLink === 2 }"  -->
+    <a class="nav-item nav-link" href="/panel/settings/site-settings" class:active={matching($path, '/panel/settings/site-settings', true)}>
       Website
     </a>
     <a
       class="nav-item nav-link ml-sm-auto position-relative"
-      href="/panel/settings/updates">
+      href="/panel/settings/updates" class:active={matching($path, '/panel/settings/updates', true)}>
       Güncellemeler
       <span class="notification"/>
-      <!-- :class="{ 'active': currentActiveNavLink === 3 }" -->
     </a>
-    <a class="nav-item nav-link" href="/panel/settings/about">
-      <!-- :class="{ 'active': currentActiveNavLink === 4 }"  -->
+    <a class="nav-item nav-link" href="/panel/settings/about" class:active={matching($path, '/panel/settings/about', true)}>
       Hakkında
     </a>
   </div>
