@@ -10,6 +10,11 @@ export default {
   },
   "/players": {
     component: Chunk(() => import("./pages/Players.svelte")),
+    children: {
+      "": {
+        component: Chunk(()=> import("./pages/Players/AllPlayers.svelte"))
+      },
+    }
   },
   "/addons": {
     component: Chunk(() => import("./pages/Addons.svelte")),
