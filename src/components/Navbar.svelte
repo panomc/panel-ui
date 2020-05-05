@@ -29,6 +29,17 @@
   let notificationsLoading = true;
   let quickNotifications = [];
   let quickNotificationProcessID = 0;
+  const notificationIntervals = [];
+  let notificationDates = [];
+
+  function clearIntervalsAndDates() {
+    notificationDates = [];
+
+    notificationIntervals.forEach((item, index) => {
+      clearInterval(item);
+      notificationIntervals.remove(index);
+    })
+  }
 
   function onSideBarCollapseClick() {
     toggleSidebar();
@@ -65,9 +76,37 @@
     return this;
   };
 
+  function setDate(index) {
+    notificationDates[index] = moment(quickNotifications[index].date).fromNow()
+  }
+
+  function setIntervalDate(index) {
+    setDate(index);
+
+    const interval = setInterval(() => {
+      setDate(index);
+    }, 1000);
+
+    notificationIntervals.insert(index, interval);
+  }
+
+  function removeIntervalDate(index) {
+    clearInterval(notificationIntervals[index]);
+    notificationIntervals.remove(index);
+    notificationDates.remove(index);
+  }
+
   function setNotifications(newNotifications) {
     if (quickNotifications.length === 0 || newNotifications.length === 0) {
       quickNotifications = newNotifications;
+
+      if (newNotifications.length === 0) {
+        clearIntervalsAndDates();
+      } else {
+        quickNotifications.forEach((item, index) => {
+          setIntervalDate(index);
+        });
+      }
     } else {
       const listOfFilterIsNotificationExists = [];
 
@@ -80,6 +119,8 @@
       newNotifications.forEach((item, index) => {
         if (listOfFilterIsNotificationExists[index].length === 0) {
           quickNotifications = quickNotifications.insert(index, item);
+
+          setIntervalDate(index);
         }
       });
 
@@ -90,6 +131,7 @@
 
         if (newArrayOfFilter.length === 0) {
           quickNotifications = quickNotifications.remove(index);
+          removeIntervalDate(index);
         }
       });
     }
@@ -175,11 +217,11 @@
       .on("show.bs.dropdown", function () {
         notificationsLoading = true;
         quickNotifications = [];
-
         startQuickNotificationsAndReadCountDown();
       })
       .on("hide.bs.dropdown", function () {
         startQuickNotificationsCountDown();
+        clearIntervalsAndDates();
       });
   });
 </script>
@@ -235,14 +277,15 @@
               {#each quickNotifications as notification, index (notification)}
                 <a
                   href="javascript:void(0);"
-                  class="dropdown-item d-flex flex-row border-bottom py-2" class:notification-unread={notification.status === 'NOT_READ'}>
+                  class="dropdown-item d-flex flex-row border-bottom py-2"
+                  class:notification-unread={notification.status === 'NOT_READ'}>
                   <div class="col-auto pl-0">
                     <Icon data={faDotCircle} class="text-primary"/>
                   </div>
                   <div class="col">
                     <span class="text-wrap text-dark">{notification.type_ID}</span>
                     <small class="text-gray d-block">
-                        {moment(notification.date).fromNow()}
+                        {notificationDates[index]}
                     </small>
                   </div>
                 </a>

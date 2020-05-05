@@ -1,6 +1,7 @@
 <script>
   import Icon from "svelte-awesome";
   import moment from "moment";
+  import {onDestroy} from "svelte";
 
   import {showNetworkErrorOnCatch, isPageInitialized} from "../Store";
   import ApiUtil from "../util/api.util";
@@ -12,6 +13,8 @@
 
   let notificationProcessID = 0;
   let notifications = [];
+  const notificationIntervals = [];
+  let notificationDates = [];
 
   Array.prototype.insert = function (index, item) {
     this.splice(index, 0, item);
@@ -25,9 +28,46 @@
     return this;
   };
 
+  function clearIntervalsAndDates() {
+    notificationDates = [];
+
+    notificationIntervals.forEach((item, index) => {
+      clearInterval(item);
+      notificationIntervals.remove(index);
+    })
+  }
+
+  function setDate(index) {
+    notificationDates[index] = moment(notifications[index].date).fromNow()
+  }
+
+  function setIntervalDate(index) {
+    setDate(index);
+
+    const interval = setInterval(() => {
+      setDate(index);
+    }, 1000);
+
+    notificationIntervals.insert(index, interval);
+  }
+
+  function removeIntervalDate(index) {
+    clearInterval(notificationIntervals[index]);
+    notificationIntervals.remove(index);
+    notificationDates.remove(index);
+  }
+
   function setNotifications(newNotifications) {
     if (notifications.length === 0 || newNotifications.length === 0) {
       notifications = newNotifications;
+
+      if (newNotifications.length === 0) {
+        clearIntervalsAndDates();
+      } else {
+        notifications.forEach((item, index) => {
+          setIntervalDate(index);
+        });
+      }
     } else {
       const listOfFilterIsNotificationExists = [];
 
@@ -40,6 +80,7 @@
       newNotifications.forEach((item, index) => {
         if (listOfFilterIsNotificationExists[index].length === 0) {
           notifications = notifications.insert(index, item);
+          setIntervalDate(index);
         }
       });
 
@@ -50,6 +91,7 @@
 
         if (newArrayOfFilter.length === 0) {
           notifications = notifications.remove(index);
+          removeIntervalDate(index);
         }
       });
     }
@@ -93,6 +135,11 @@
   }
 
   startNotificationsDown();
+
+  onDestroy(() => {
+    clearIntervalsAndDates();
+    notificationProcessID++;
+  })
 </script>
 
 <div class="content">
@@ -115,31 +162,31 @@
   <div class="card">
     <div class="card-body">
       <div class="border rounded">
-        {#each notifications as notification, index (notification)}
-          <a
-            href="javascript:void(0);"
-            class="dropdown-item d-flex flex-row border-bottom py-2"
-            class:notification-unread={notification.status === 'NOT_READ'}>
+          {#each notifications as notification, index (notification)}
+            <a
+              href="javascript:void(0);"
+              class="dropdown-item d-flex flex-row border-bottom py-2"
+              class:notification-unread={notification.status === 'NOT_READ'}>
 
-            <div class="col-auto pl-0">
-              <Icon data={faDotCircle} class="text-primary"/>
-            </div>
-            <div class="col">
-              <span class="text-wrap text-dark">{notification.type_ID}</span>
-              <small class="text-gray d-block">
-                 {moment(notification.date).fromNow()}
-              </small>
-            </div>
-          </a>
-        {/each}
+              <div class="col-auto pl-0">
+                <Icon data={faDotCircle} class="text-primary"/>
+              </div>
+              <div class="col">
+                <span class="text-wrap text-dark">{notification.type_ID}</span>
+                <small class="text-gray d-block">
+                    {notificationDates[index]}
+                </small>
+              </div>
+            </a>
+          {/each}
 
-        {#if notifications.length === 0}
-          <div
-                  class="d-flex flex-column align-items-center justify-content-center">
-            <Icon data={faBell} scale="3" class="text-glass m-3"/>
-            <p class="text-gray">Bildirim yok.</p>
-          </div>
-        {/if}
+          {#if notifications.length === 0}
+            <div
+              class="d-flex flex-column align-items-center justify-content-center">
+              <Icon data={faBell} scale="3" class="text-glass m-3"/>
+              <p class="text-gray">Bildirim yok.</p>
+            </div>
+          {/if}
       </div>
     </div>
   </div>
