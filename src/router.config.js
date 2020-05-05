@@ -16,6 +16,11 @@ export default {
   },
   "/view": {
     component: Chunk(() => import("./pages/View.svelte")),
+    children: {
+      "": {
+        component: Chunk(()=> import("./pages/View/Themes.svelte"))
+      }
+    }
   },
   "/admins": {
     component: Chunk(() => import("./pages/Admins.svelte")),
