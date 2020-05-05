@@ -1,10 +1,5 @@
 <script>
-  import {isPageInitialized} from "../Store"
-  import {onMount} from "svelte"
-
-  onMount(() => {
-    isPageInitialized.set(true);
-  })
+  import Router from "../components/Router.svelte";
 </script>
 
-<div class="content">Players page!</div>
+<Router basePath="/panel/players"/>
