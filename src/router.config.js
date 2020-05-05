@@ -19,6 +19,9 @@ export default {
     children: {
       "": {
         component: Chunk(()=> import("./pages/View/Themes.svelte"))
+      },
+      "/theme-options": {
+        component: Chunk(()=> import("./pages/View/ThemeOptions.svelte"))
       }
     }
   },
