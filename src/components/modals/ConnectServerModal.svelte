@@ -19,17 +19,27 @@
   } from "@fortawesome/free-solid-svg-icons";
   import {faBell} from "@fortawesome/free-regular-svg-icons";
 
-  import {onMount, onDestroy} from "svelte";
+  import {onDestroy} from "svelte";
   import {get} from "svelte/store";
   import copy from "copy-to-clipboard";
+  import moment from "moment";
 
   let timeToRefreshKey = "...";
   let commandText;
   let isCommandTextCopied = false;
   let copyClickIDForCommandText = 0;
+  let firstStartCountDown = false;
+
+  function getTimeLeftInSeconds() {
+    const now = moment(new Date()); //todays date
+    const end = moment(get(platformKeyRefreshedTime)); // another date
+    const duration = moment.duration(now.diff(end));
+
+    return 30 - Math.round(duration.asSeconds());
+  }
 
   function startCountDown() {
-    timeToRefreshKey = 30;
+    timeToRefreshKey = getTimeLeftInSeconds();
 
     const timer = setInterval(() => {
       if (timeToRefreshKey > 0) {
@@ -52,12 +62,16 @@
             .then(response => {
               if (response.data.result === "ok") {
                 currentServerPlatformMatchKey.set(response.data.key);
-                platformKeyRefreshedTime.set(response.data.timeStarted)
+                platformKeyRefreshedTime.set(response.data.timeStarted);
+
+                console.log(get(platformKeyRefreshedTime))
               } else {
                 currentServerPlatformMatchKey.set("");
               }
 
-              startCountDown();
+              if (firstStartCountDown)
+                startCountDown();
+
               resolve();
             })
             .catch(() => {
@@ -69,10 +83,6 @@
     );
   }
 
-  onMount(async () => {
-    startCountDown();
-  });
-
   function updateCommandText() {
     commandText =
       "/pano connect " +
@@ -81,18 +91,26 @@
       get(currentServerPlatformMatchKey);
   }
 
+  const platformKeyRefreshedTimeUnsubscribe = platformKeyRefreshedTime.subscribe(value => {
+    if (value !== 0 && !firstStartCountDown) {
+      firstStartCountDown = true;
+
+      startCountDown();
+    }
+  });
+
   const platformAddressUnsubscribe = platformAddress.subscribe(() => {
     updateCommandText();
   });
 
-  const currentServerPlatformMatchKeyUnsubscribe = currentServerPlatformMatchKey.subscribe(
-    () => {
+  const currentServerPlatformMatchKeyUnsubscribe = currentServerPlatformMatchKey.subscribe(() => {
       updateCommandText();
     }
   );
 
   onDestroy(platformAddressUnsubscribe);
   onDestroy(currentServerPlatformMatchKeyUnsubscribe);
+  onDestroy(platformKeyRefreshedTimeUnsubscribe);
 
   function onCopyCommandTextClick() {
     copyClickIDForCommandText++;
