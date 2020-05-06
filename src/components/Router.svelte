@@ -51,7 +51,7 @@
 
         let params = {};
 
-        if (route.params !== null && typeof route.params === 'object' && route.params) {
+        if (route.params !== null && typeof route.params === 'object') {
           params = route.params;
         }
 
