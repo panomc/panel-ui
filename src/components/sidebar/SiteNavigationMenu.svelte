@@ -8,7 +8,9 @@
     faPuzzlePiece,
     faPalette,
     faUserCircle,
-    faTools
+    faTools,
+    faStickyNote,
+    faTicketAlt
   } from "@fortawesome/free-solid-svg-icons";
 
   function matching(path, pathName, startsWith = false) {
@@ -31,13 +33,15 @@
 
     <li class="nav-item" class:active={matching($path, '/panel/posts', true)}>
       <a class="nav-link" href="/panel/posts">
-        <i class="fas fa-sticky-note fa-fw"></i> Yazılar
+        <Icon data={faStickyNote} class="mr-1" />
+        Yazılar
       </a>
     </li>
 
     <li class="nav-item" class:active={matching($path, '/panel/tickets', true)}>
       <a class="nav-link" href="/panel/tickets">
-        <i class="fas fa-ticket-alt fa-fw"></i> Talepler
+        <Icon data={faTicketAlt} class="mr-1" />
+        Talepler
       </a>
     </li>
 
