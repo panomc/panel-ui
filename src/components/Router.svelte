@@ -1,14 +1,12 @@
 <script>
-  import page from "page";
   import {onDestroy} from "svelte";
   import {get} from "svelte/store";
+  import page from "page";
 
-  import {path, subRouterRoutesByBasePath} from '../RouterStore';
+  import {path, subRouterRoutesByBasePath, basePageInstance} from '../RouterStore';
   import {isPageInitialized} from '../Store';
 
   import RoutesConfig from "../router.config";
-
-  const pageInstance = page.create();
 
   let props = {};
 
@@ -19,6 +17,8 @@
 
   export let routes = nestedRoute ? $subRouterRoutesByBasePath[basePath] : RoutesConfig;
   export let hidden = false;
+
+  const pageInstance = nestedRoute ? page.create() : basePageInstance;
 
   pageInstance.base(basePath);
 
