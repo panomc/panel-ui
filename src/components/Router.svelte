@@ -40,7 +40,7 @@
     Object.keys(paths).forEach(path => {
       const route = paths[path];
 
-      const handler = () => {
+      const handler = (context) => {
         if (route.children !== null && typeof route.children === 'object') {
           subRouterRoutesByBasePath.update(value => {
             value[basePath + path] = route.children;
@@ -49,8 +49,17 @@
           })
         }
 
+        let params = {};
+
+        if (route.context !== null && typeof route.context === 'boolean' && route.context) {
+          params = {
+            context: context
+          }
+        }
+
         props = {
-          component: route.component
+          component: route.component,
+          params: params
         };
       }
 
@@ -77,10 +86,10 @@
         const newList = [];
 
         Object.keys(list)
-                .filter(key => key !== pageInstance.base())
-                .forEach(key => {
-                  newList[key] = list[key]
-                });
+          .filter(key => key !== pageInstance.base())
+          .forEach(key => {
+            newList[key] = list[key]
+          });
 
         return newList;
       })
