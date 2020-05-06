@@ -1,10 +1,10 @@
 <script>
-  import {isPageInitialized} from "../../Store"
-  import {onMount} from "svelte"
+  import { isPageInitialized } from "../../Store";
+  import { onMount } from "svelte";
 
   onMount(() => {
     isPageInitialized.set(true);
-  })
+  });
 </script>
 
 <!-- About Sup Page -->
@@ -19,10 +19,9 @@
           </label>
           <div class="col">
             <h5
-                    aria-describedby="panoVersion"
-                    class="m-0 text-muted"
-                    id="panoVersion"
-            >
+              aria-describedby="panoVersion"
+              class="m-0 text-muted"
+              id="panoVersion">
               1.0
             </h5>
           </div>
@@ -33,10 +32,9 @@
           </label>
           <div class="col">
             <h5
-                    aria-describedby="panoRelease"
-                    class="m-0 text-muted"
-                    id="panoRelease"
-            >
+              aria-describedby="panoRelease"
+              class="m-0 text-muted"
+              id="panoRelease">
               Beta
             </h5>
             <small>Beta sürüm bilinmeyen hatalar içerebilir.</small>
@@ -48,11 +46,10 @@
           </label>
           <div class="col">
             <a
-                    aria-describedby="panoWebsite"
-                    href="https://panomc.com"
-                    id="panoWebsite"
-                    target="_blank"
-            >
+              aria-describedby="panoWebsite"
+              href="https://panomc.com"
+              id="panoWebsite"
+              target="_blank">
               www.panomc.com
             </a>
           </div>

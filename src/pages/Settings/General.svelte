@@ -1,11 +1,12 @@
 <script>
-  import {isPageInitialized} from "../../Store"
-  import {onMount} from "svelte"
+  import { isPageInitialized } from "../../Store";
+  import { onMount } from "svelte";
 
   onMount(() => {
     isPageInitialized.set(true);
-  })
+  });
 </script>
+
 <!-- General Settings Sub Page -->
 <div class="tab-pane">
   <div class="card">

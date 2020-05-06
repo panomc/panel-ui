@@ -1,10 +1,13 @@
 <script>
-  import {isPageInitialized} from "../../Store"
-  import {onMount} from "svelte"
+  import { isPageInitialized } from "../../Store";
+  import { onMount } from "svelte";
+
+  import Icon from "svelte-awesome";
+  import { faSync, faDownload } from "@fortawesome/free-solid-svg-icons";
 
   onMount(() => {
     isPageInitialized.set(true);
-  })
+  });
 </script>
 
 <!-- Updates Sub Page -->
@@ -12,24 +15,21 @@
   <div>
     <!-- Action Menu -->
     <section class="row justify-content-between align-items-center mb-3">
-      <div class="col-md-4">
-        <a class="btn btn-link" role="button">
-          <strong class="text-muted">
-            5 Güncelleme Mevcut
-          </strong>
-        </a>
+      <div class="col-md-4 d-flex align-items-center">
+        <button
+          class="btn btn-outline-primary mr-3"
+          type="button"
+          href="#availableUpdates"
+          data-toggle="collapse"
+          aria-controls="availableUpdates">
+          <Icon data={faSync} />
+        </button>
+        <strong class="text-primary ">5 Güncelleme Mevcut</strong>
       </div>
       <div class="col text-right">
         <button class="btn btn-secondary" type="button">
-          <i aria-hidden="true" class="fa fa-download fa-fw"></i>
+          <Icon data={faDownload} class="mr-1" />
           <span class="d-md-inline d-none">Tümünü Kur</span>
-        </button>
-        <button class="btn btn-primary" type="button"
-                href="#availableUpdates"
-                data-toggle="collapse"
-                aria-controls="availableUpdates">
-          <i aria-hidden="true" class="fa fa-sync"></i>
-          <br>
         </button>
       </div>
     </section>
@@ -37,13 +37,12 @@
     <!-- Available Updates -->
     <div class="card">
       <div class="card-body position-relative">
-        <span class="notification"></span>
+        <span class="notification" />
         <h5 class="card-title">
-          Platform Güncellemesi Mevcut:
           <a href="#">Pano 1.2</a>
         </h5>
         <h6 class="text-muted font-weight-normal">
-          Yayınlanma Tarihi:
+          Yayınlanma:
           <b>01.01.2019</b>
         </h6>
         <h6 class="text-muted font-weight-normal">
@@ -55,12 +54,12 @@
           ve mevcut özelliklerinin iyileştirmesini sağlayan önemli
           güncellemelerdir.
         </p>
+        <hr />
         <button class="btn btn-secondary" type="button">
-          <i aria-hidden="true" class="fa fa-download fa-fw"></i>
+          <Icon data={faDownload} class="mr-1" />
           Kur
         </button>
         <button class="btn btn-outline-primary" type="button">
-          <i class="fas fa-external-link-alt fa-fw"></i>
           Değişiklikler
         </button>
       </div>
@@ -68,25 +67,24 @@
 
     <div class="card">
       <div class="card-body position-relative">
-        <span class="notification"></span>
+        <span class="notification" />
         <h5 class="card-title">
-          Eklenti Güncellemesi Mevcut:
           <a href="#">Sayfalar 1.1</a>
         </h5>
         <h6 class="text-muted font-weight-normal">
-          Yayınlanma Tarihi:
+          Yayınlanma:
           <b>01.01.2019</b>
         </h6>
         <h6 class="text-muted font-weight-normal">
           Dosya Boyutu:
           <b>5 MB.</b>
         </h6>
+        <hr />
         <button class="btn btn-secondary" type="button">
-          <i aria-hidden="true" class="fa fa-download fa-fw"></i>
+          <Icon data={faDownload} class="mr-1" />
           Kur
         </button>
         <button class="btn btn-outline-primary" type="button">
-          <i class="fas fa-external-link-alt fa-fw"></i>
           Değişiklikler
         </button>
       </div>
