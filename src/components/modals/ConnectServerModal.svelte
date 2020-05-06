@@ -63,8 +63,6 @@
               if (response.data.result === "ok") {
                 currentServerPlatformMatchKey.set(response.data.key);
                 platformKeyRefreshedTime.set(response.data.timeStarted);
-
-                console.log(get(platformKeyRefreshedTime))
               } else {
                 currentServerPlatformMatchKey.set("");
               }
