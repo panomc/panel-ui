@@ -59,6 +59,10 @@
           params.context = context;
         }
 
+        Object.keys(context.params).forEach(key => {
+          params[key] = context.params[key];
+        })
+
         props = {
           component: route.component,
           params: params
