@@ -59,6 +59,10 @@
           params.context = context;
         }
 
+        if (route.pageJsInstance !== null && typeof route.pageJsInstance === 'boolean' && route.pageJsInstance) {
+          params.pageJsInstance = pageInstance;
+        }
+
         Object.keys(context.params).forEach(key => {
           params[key] = context.params[key];
         })
