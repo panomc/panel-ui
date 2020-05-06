@@ -16,6 +16,7 @@ export const user = writable({});
 export const website = writable({});
 
 export const currentServerPlatformMatchKey = writable("");
+export const platformKeyRefreshedTime = writable(0);
 export const platformAddress = writable("");
 
 export const servers = writable([]);
@@ -104,6 +105,7 @@ function initializeBasicData(data) {
   user.set(data.user);
   website.set(data.website);
   currentServerPlatformMatchKey.set(data.platform_server_match_key);
+  platformKeyRefreshedTime.set(data.platform_server_match_key_time_started)
   platformAddress.set(data.platform_host_address);
   servers.set(data.servers);
   notificationsCount.set(data.notifications_count);

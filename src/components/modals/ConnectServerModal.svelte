@@ -1,11 +1,13 @@
 <script>
   import {
     currentServerPlatformMatchKey,
+    platformKeyRefreshedTime,
     platformAddress,
     showNetworkErrorOnCatch
   } from "../../Store";
-  import { ApiUtil } from "../../util/api.util";
+  import {ApiUtil} from "../../util/api.util";
   import tooltip from "../../util/tooltip.util";
+
   import Icon from "svelte-awesome";
   import {
     faDownload,
@@ -15,10 +17,10 @@
     faClipboard,
     faCheckCircle
   } from "@fortawesome/free-solid-svg-icons";
-  import { faBell } from "@fortawesome/free-regular-svg-icons";
+  import {faBell} from "@fortawesome/free-regular-svg-icons";
 
-  import { onMount, onDestroy } from "svelte";
-  import { get } from "svelte/store";
+  import {onMount, onDestroy} from "svelte";
+  import {get} from "svelte/store";
   import copy from "copy-to-clipboard";
 
   let timeToRefreshKey = "...";
@@ -50,6 +52,7 @@
             .then(response => {
               if (response.data.result === "ok") {
                 currentServerPlatformMatchKey.set(response.data.key);
+                platformKeyRefreshedTime.set(response.data.timeStarted)
               } else {
                 currentServerPlatformMatchKey.set("");
               }
@@ -100,7 +103,7 @@
 
     isCommandTextCopied = true;
 
-    setTimeout(function() {
+    setTimeout(function () {
       if (copyClickIDForCommandText === id) {
         isCommandTextCopied = false;
       }
@@ -131,21 +134,21 @@
         <div class="card-body text-center">
 
           <div class="mb-3">
-            <Icon data={faDownload} scale="3" class="text-primary" />
+            <Icon data={faDownload} scale="3" class="text-primary"/>
           </div>
 
           <h5 class="text-primary" for="downloadPlugin">
             1. Oyun Eklentisini Sunucunuza İndirin:
           </h5>
           <button class="btn btn-link bg-light">
-            <Icon data={faFileDownload} class="mr-1" />
+            <Icon data={faFileDownload} class="mr-1"/>
             Pano Minecraft Eklentisini İndir
-            <br />
+            <br/>
             <small>BungeeCord, Bukkit, Spigot, PaperSpigot</small>
           </button>
 
           <div class="my-4">
-            <Icon data={faTerminal} scale="3" class="text-primary" />
+            <Icon data={faTerminal} scale="3" class="text-primary"/>
           </div>
 
           <h5 class="text-primary" for="platformToken">
@@ -156,7 +159,7 @@
               bind:value={commandText}
               class="form-control shadow-sm"
               id="platformToken"
-              type="text" />
+              type="text"/>
             <div class="input-group-append">
               <button
                 on:click={onCopyCommandTextClick}
@@ -164,7 +167,7 @@
                 id="copyPlatformToken"
                 type="button"
                 use:tooltip={['top', isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala']}>
-                <Icon data={faClipboard} />
+                <Icon data={faClipboard}/>
               </button>
             </div>
           </div>
@@ -174,13 +177,13 @@
           </small>
 
           <div class="my-4">
-            <Icon data={faCheckCircle} scale="3" class="text-primary" />
+            <Icon data={faCheckCircle} scale="3" class="text-primary"/>
           </div>
 
           <h5 class="text-primary">3. Bağlantı İsteğine Onay Verin:</h5>
           <p class="mb-0">
             Bildirim panelinden (
-            <Icon data={faBell} />
+            <Icon data={faBell}/>
             ) "Sunucu Bağlantısı İsteği" bildirimini açarak, onay verin.
           </p>
 
