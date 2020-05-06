@@ -29,6 +29,18 @@
       </a>
     </li>
 
+    <li class="nav-item" class:active={matching($path, '/panel/posts', true)}>
+      <a class="nav-link" href="/panel/posts">
+        <i class="fas fa-sticky-note fa-fw"></i> Yazılar
+      </a>
+    </li>
+
+    <li class="nav-item" class:active={matching($path, '/panel/tickets', true)}>
+      <a class="nav-link" href="/panel/tickets">
+        <i class="fas fa-ticket-alt fa-fw"></i> Talepler
+      </a>
+    </li>
+
     <li class="nav-item" class:active={matching($path, '/panel/players', true)}>
       <a class="nav-link" href="/panel/players">
         <Icon data={faUsers} class="mr-1" />
