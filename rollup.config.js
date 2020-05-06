@@ -58,7 +58,15 @@ const plugins = [
     css: css => {
       css.write("public/assets/css/bundle.css");
     },
-    preprocess
+    preprocess,
+
+    onwarn: (warning, handler) => {
+      // e.g. don't warn on <marquee> elements, cos they're cool
+      if (warning.code === 'a11y-invalid-attribute') return;
+
+      // let Rollup handle all other warnings normally
+      handler(warning);
+    }
   }),
 
   // If you have external dependencies installed from
