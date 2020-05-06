@@ -56,6 +56,14 @@ export default {
       }
     }
   },
+  "/tickets": {
+    component: Chunk(() => import("./pages/Tickets.svelte")),
+    children: {
+      "": {
+        component: Chunk(()=> import("./pages/Tickets/AllTickets.svelte"))
+      },
+    }
+  },
   "/notifications": {
     component: Chunk(() => import("./pages/Notifications.svelte")),
   },
