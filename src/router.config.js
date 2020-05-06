@@ -62,6 +62,9 @@ export default {
       "": {
         component: Chunk(()=> import("./pages/Tickets/AllTickets.svelte"))
       },
+      "/categories": {
+        component: Chunk(()=> import("./pages/Tickets/Categories.svelte"))
+      }
     }
   },
   "/notifications": {
