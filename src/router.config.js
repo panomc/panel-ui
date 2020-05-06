@@ -62,7 +62,40 @@ export default {
       "": {
         component: Chunk(()=> import("./pages/Tickets/AllTickets.svelte"))
       },
+      "all": {
+        component: Chunk(()=> import("./pages/Tickets/AllTickets.svelte"))
+      },
+      "all/:page": {
+        component: Chunk(()=> import("./pages/Tickets/AllTickets.svelte"))
+      },
+      "waitingReply": {
+        component: Chunk(()=> import("./pages/Tickets/AllTickets.svelte")),
+        params: {
+          pageType: "waitingReply"
+        }
+      },
+      "waitingReply/:page": {
+        component: Chunk(()=> import("./pages/Tickets/AllTickets.svelte")),
+        params: {
+          pageType: "waitingReply"
+        }
+      },
+      "closed": {
+        component: Chunk(()=> import("./pages/Tickets/AllTickets.svelte")),
+        params: {
+          pageType: "closed"
+        }
+      },
+      "closed/:page": {
+        component: Chunk(()=> import("./pages/Tickets/AllTickets.svelte")),
+        params: {
+          pageType: "closed"
+        }
+      },
       "/categories": {
+        component: Chunk(()=> import("./pages/Tickets/Categories.svelte"))
+      },
+      "/categories/:page": {
         component: Chunk(()=> import("./pages/Tickets/Categories.svelte"))
       }
     }
