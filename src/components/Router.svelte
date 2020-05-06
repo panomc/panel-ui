@@ -51,10 +51,12 @@
 
         let params = {};
 
+        if (route.params !== null && typeof route.params === 'object' && route.params) {
+          params = route.params;
+        }
+
         if (route.context !== null && typeof route.context === 'boolean' && route.context) {
-          params = {
-            context: context
-          }
+          params.context = context;
         }
 
         props = {
