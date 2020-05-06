@@ -201,47 +201,49 @@
         {/if}
       </div>
 
-      <nav class="pt-3">
-        <ul class="pagination pagination-sm mb-0 justify-content-start">
-          <!--          :class="{ 'disabled': page === 1 }"-->
-          <!--          @click="routePage(1)"-->
-          <li class="page-item">
-            <a
-              class="page-link"
-              href="javascript:void(0);"
-              title="Önceki Sayfa">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
+      {#if notifications.length !== 0}
+        <nav class="pt-3">
+          <ul class="pagination pagination-sm mb-0 justify-content-start">
+            <!--          :class="{ 'disabled': page === 1 }"-->
+            <!--          @click="routePage(1)"-->
+            <li class="page-item">
+              <a
+                class="page-link"
+                href="javascript:void(0);"
+                title="Önceki Sayfa">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
 
-          <!--          :class="{ 'active': index === page }"-->
-          <!--          :key="index"-->
-          <!--          @click="routePage(index)"-->
-          <!--          v-for="index in total_page"-->
-          <li class="page-item">
-            <a
-              class="page-link"
-              href="javascript:void(0);"
-              v-if="page !== index">
-              <!--                {{index}}-->
-            </a>
-            <!--            {{index}}-->
-            <a class="page-link" href="javascript:void(0);" />
-            <!-- v-if="page === index" -->
-          </li>
+            <!--          :class="{ 'active': index === page }"-->
+            <!--          :key="index"-->
+            <!--          @click="routePage(index)"-->
+            <!--          v-for="index in total_page"-->
+            <li class="page-item">
+              <a
+                class="page-link"
+                href="javascript:void(0);"
+                v-if="page !== index">
+                <!--                {{index}}-->
+              </a>
+              <!--            {{index}}-->
+              <a class="page-link" href="javascript:void(0);" />
+              <!-- v-if="page === index" -->
+            </li>
 
-          <!--          :class="{ 'disabled': page === total_page }"-->
-          <!--          @click="routePage(total_page)"-->
-          <li class="page-item">
-            <a
-              class="page-link"
-              href="javascript:void(0);"
-              title="Sonraki Sayfa">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+            <!--          :class="{ 'disabled': page === total_page }"-->
+            <!--          @click="routePage(total_page)"-->
+            <li class="page-item">
+              <a
+                class="page-link"
+                href="javascript:void(0);"
+                title="Sonraki Sayfa">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      {/if}
     </div>
   </div>
 
