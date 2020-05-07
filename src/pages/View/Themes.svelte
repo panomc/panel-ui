@@ -1,8 +1,10 @@
 <script>
-  import {isPageInitialized} from "../../Store"
+  import { isPageInitialized } from "../../Store";
+  import ConfirmDeleteThemeModal from "../../components/modals/ConfirmDeleteThemeModal.svelte";
 
   isPageInitialized.set(true);
 </script>
+
 <!-- Themes Sub Page -->
 <div class="tab-pane">
 
@@ -17,43 +19,34 @@
 
   <section class="row">
     <div class="col-lg-4 col-md-6">
-      <a href="javascript:void(0);">
-        <div class="card shadow selected">
-          <img alt="Vanilla" class="rounded p-2" height="auto" src="/panel/assets/img/vanilla.png" width="100%">
-          <div class="card-body">
-            <div class="row justify-content-between align-items-center">
-              <div class="col-6 text-left">
-                <h5 class="card-title mb-0">Vanilla</h5>
-              </div>
-              <div class="col-6 text-right">
-                <button class="btn btn-sm btn-link text-danger" data-target="#confirmDeleteTheme" data-toggle="modal">
-                  <i aria-hidden="true" class="fa fa-trash"></i>
-                </button>
-              </div>
+      <div class="card shadow selected">
+        <img
+          alt="Vanilla"
+          class="rounded p-2"
+          height="auto"
+          src="../../assets/img/vanilla.png"
+          width="100%" />
+        <div class="card-body">
+          <div class="row justify-content-between align-items-center">
+            <div class="col-6 text-left">
+              <h5 class="card-title mb-0">Vanilla</h5>
+              Yapımcı: Butlu
+            </div>
+            <div class="col-6 text-right">
+              <button
+                class="btn btn-outline-danger btn-sm disabled"
+                data-target="#confirmDeleteTheme"
+                data-toggle="modal"
+                disabled>
+                Kaldır
+              </button>
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   </section>
 
-  <!-- Confirm Delete Theme Modal -->
-  <div aria-hidden="true" class="modal fade" id="confirmDeleteTheme" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered" role="dialog">
-      <div class="modal-content">
-        <div class="modal-body text-center">
-          <div class="pb-3">
-            <i aria-hidden="true" class="fa fa-question-circle fa-4x d-block m-auto text-gray"></i>
-          </div>
-          Bu temayı kalıcı olarak silmek istediğinizden emin misiniz?
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-outline-primary w-100" data-dismiss="modal" type="button">Hayır</button>
-          <button class="btn btn-danger w-100" type="button">Evet
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <ConfirmDeleteThemeModal />
 
 </div>
