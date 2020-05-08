@@ -5,7 +5,7 @@ import autoPreprocess from "svelte-preprocess";
 import copyTo from "rollup-plugin-copy-assets-to";
 import replace from "@rollup/plugin-replace";
 import livereload from "rollup-plugin-livereload";
-import {terser} from "rollup-plugin-terser";
+import { terser } from "rollup-plugin-terser";
 import babel from "rollup-plugin-babel";
 import rmdir from "rimraf";
 
@@ -30,9 +30,9 @@ const watch = {
 const plugins = [
   copyTo({
     assets: [
-      "./src/commons/favicon",
-      "./src/commons/fonts",
-      "./src/commons/img",
+      "./src/pano/favicon",
+      "./src/pano/fonts",
+      "./src/pano/img",
     ],
     outputDir: "public/commons",
   }),
