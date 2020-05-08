@@ -157,6 +157,7 @@
             <div class="row">
               <div class="col-8">
                 <img
+                  alt="Username"
                   class="img-fluid mr-3 rounded border float-left"
                   src="https://www.gravatar.com/avatar/"
                   width="48"
@@ -196,6 +197,7 @@
             <div class="row">
               <div class="col-8">
                 <img
+                  alt="Username"
                   class="img-fluid mr-3 rounded border float-left"
                   src="https://www.gravatar.com/avatar/"
                   width="48"

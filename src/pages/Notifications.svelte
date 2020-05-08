@@ -15,13 +15,13 @@
   const notificationIntervals = [];
   let notificationDates = [];
 
-  Array.prototype.insert = function (index, item) {
+  Array.prototype.insert = function(index, item) {
     this.splice(index, 0, item);
 
     return this;
   };
 
-  Array.prototype.remove = function (index) {
+  Array.prototype.remove = function(index) {
     this.splice(index, 1);
 
     return this;
@@ -72,7 +72,7 @@
 
       newNotifications.forEach((item, index) => {
         listOfFilterIsNotificationExists[index] = notifications.filter(
-          (filterItem) => filterItem.id === item.id
+          filterItem => filterItem.id === item.id
         );
       });
 
@@ -85,7 +85,7 @@
 
       notifications.forEach((item, index) => {
         const newArrayOfFilter = newNotifications.filter(
-          (filterItem) => filterItem.id === item.id
+          filterItem => filterItem.id === item.id
         );
 
         if (newArrayOfFilter.length === 0) {
@@ -101,7 +101,7 @@
       () =>
         new Promise((resolve, reject) => {
           ApiUtil.get("panel/notifications")
-            .then((response) => {
+            .then(response => {
               if (notificationProcessID === id) {
                 if (response.data.result === "ok") {
                   setNotifications(response.data.notifications);
@@ -234,7 +234,7 @@
                 <!--                {{index}}-->
               </a>
               <!--            {{index}}-->
-              <a class="page-link" href="javascript:void(0);"></a>
+              <a class="page-link" href="javascript:void(0);">?</a>
               <!-- v-if="page === index" -->
             </li>
 
