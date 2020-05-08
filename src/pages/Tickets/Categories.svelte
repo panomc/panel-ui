@@ -1,5 +1,5 @@
 <script>
-  import {isPageInitialized} from "../../Store"
+  import { isPageInitialized } from "../../Store";
 
   isPageInitialized.set(true);
 </script>
@@ -21,7 +21,7 @@
     </div>
     <div class="col-6 text-right">
 
-<!--      @click="onShowCreateCategoryButtonClick"-->
+      <!--      @click="onShowCreateCategoryButtonClick"-->
       <button
         class="btn btn-primary"
         data-target="#addEditCategory"
@@ -39,10 +39,10 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title text-sm-left text-center">
-<!--          {{ category_count }} -->
+        <!--          {{ category_count }} -->
         Kategori -
-<!--        {{ page }}-->
-<!--        {{ total_page }}-->
+        <!--        {{ page }}-->
+        <!--        {{ total_page }}-->
         <span class="text-primary">/</span>
       </h5>
 
@@ -56,63 +56,63 @@
       <div class="table-responsive" v-if="category_count > 0">
         <table class="table mb-0">
           <thead>
-          <tr>
-            <th scope="col"></th>
-            <th class="min-w-200px" scope="col">Kategori</th>
-            <th scope="col">Açıklama</th>
-          </tr>
+            <tr>
+              <th scope="col"></th>
+              <th class="min-w-200px" scope="col">Kategori</th>
+              <th scope="col">Açıklama</th>
+            </tr>
           </thead>
           <tbody>
-<!--          :key="index" v-for="(category, index) in categories"-->
-          <tr >
-            <th class="min-w-50px" scope="row">
-              <div class="dropdown">
-                <a
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  class="icon-link d-blcok m-auto"
-                  data-toggle="dropdown"
-                  href="javascript:void(0);"
-                  id="postAction"
-                >
-                  <i aria-hidden="true" class="fa fa-ellipsis-v px-3"></i>
-                </a>
-                <div
-                  aria-labelledby="postAction"
-                  class="dropdown-menu dropdown-menu-right"
-                >
-
-<!--                  @click="onDeleteClick(category.id)"-->
+            <!--          :key="index" v-for="(category, index) in categories"-->
+            <tr>
+              <th class="min-w-50px" scope="row">
+                <div class="dropdown">
                   <a
-                    class="dropdown-item"
-                    data-target="#confirmDeleteCategory"
-                    data-toggle="modal"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    class="icon-link d-blcok m-auto"
+                    data-toggle="dropdown"
                     href="javascript:void(0);"
+                    id="postAction"
                   >
-                    <i
-                      aria-hidden="true"
-                      class="fa fa-trash fa-fw text-danger"
-                    ></i>
-                    Sil
+                    <i aria-hidden="true" class="fa fa-ellipsis-v px-3"></i>
                   </a>
+                  <div
+                    aria-labelledby="postAction"
+                    class="dropdown-menu dropdown-menu-right"
+                  >
+
+                    <!--                  @click="onDeleteClick(category.id)"-->
+                    <a
+                      class="dropdown-item"
+                      data-target="#confirmDeleteCategory"
+                      data-toggle="modal"
+                      href="javascript:void(0);"
+                    >
+                      <i
+                        aria-hidden="true"
+                        class="fa fa-trash fa-fw text-danger"
+                      ></i>
+                      Sil
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </th>
-            <td>
-<!--              @click="onShowEditCategoryButtonClick(index)"-->
-              <a
-                data-target="#addEditCategory"
-                data-toggle="modal"
-                href="javascript:void(0);"
-                title="Kategoriyi Düzenle"
-              >
-<!--                  {{ category.title }}-->
-              </a>
-            </td>
-            <td>
-<!--                {{ category.description }}-->
-            </td>
-          </tr>
+              </th>
+              <td>
+                <!--              @click="onShowEditCategoryButtonClick(index)"-->
+                <a
+                  data-target="#addEditCategory"
+                  data-toggle="modal"
+                  href="javascript:void(0);"
+                  title="Kategoriyi Düzenle"
+                >
+                  <!--                  {{ category.title }}-->
+                </a>
+              </td>
+              <td>
+                <!--                {{ category.description }}-->
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -121,11 +121,9 @@
       <nav class="pt-3">
         <ul class="pagination pagination-sm mb-0 justify-content-start">
 
-<!--          :class="{ 'disabled': page === 1 }"-->
-<!--          @click="routePage(1)"-->
-          <li
-            class="page-item"
-          >
+          <!--          :class="{ 'disabled': page === 1 }"-->
+          <!--          @click="routePage(1)"-->
+          <li class="page-item">
             <a
               class="page-link"
               href="javascript:void(0);"
@@ -135,28 +133,24 @@
             </a>
           </li>
 
-<!--          :class="{ 'active': index === page }"-->
-<!--          :key="index"-->
-<!--          @click="routePage(index)"-->
-<!--          v-for="index in total_page"-->
-          <li
-            class="page-item"
-          >
+          <!--          :class="{ 'active': index === page }"-->
+          <!--          :key="index"-->
+          <!--          @click="routePage(index)"-->
+          <!--          v-for="index in total_page"-->
+          <li class="page-item">
             <a
               class="page-link"
               href="javascript:void(0);"
               v-if="page !== index"
             >
-<!--                {{index}}-->
+              <!--                {{index}}-->
             </a>
-<!--            {{index}}-->
+            <!--            {{index}}-->
             <a class="page-link" v-if="page === index"></a>
           </li>
-<!--          :class="{ 'disabled': page === total_page }"-->
-<!--          @click="routePage(total_page)"-->
-          <li
-            class="page-item"
-          >
+          <!--          :class="{ 'disabled': page === total_page }"-->
+          <!--          @click="routePage(total_page)"-->
+          <li class="page-item">
             <a
               class="page-link"
               href="javascript:void(0);"
@@ -193,23 +187,19 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-<!--        @submit.prevent="submitSaveOrAdd"-->
-        <form >
+        <!--        @submit.prevent="submitSaveOrAdd"-->
+        <form>
           <div class="modal-body">
             <div class="form-group">
               <label for="category">Kategori:</label>
-<!--              :class="{ 'border-danger': categoryForm.error.name }"-->
-<!--              v-model="categoryForm.name"-->
-              <input
-                class="form-control"
-                id="category"
-                type="text"
-              />
+              <!--              :class="{ 'border-danger': categoryForm.error.name }"-->
+              <!--              v-model="categoryForm.name"-->
+              <input class="form-control" id="category" type="text" />
             </div>
             <div class="form-group">
               <label for="categoryDescription">Açıklama:</label>
-<!--              :class="{ 'border-danger': categoryForm.error.description }"-->
-<!--              v-model="categoryForm.description"-->
+              <!--              :class="{ 'border-danger': categoryForm.error.description }"-->
+              <!--              v-model="categoryForm.description"-->
               <input
                 class="form-control"
                 id="categoryDescription"
@@ -248,13 +238,13 @@
             ></i>
           </div>
           Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?
-          <br/>
-          <br/>
+          <br />
+          <br />
           <span class="text-danger">
             <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i>
             İçerisindeki 12 yazı kategorisiz kalacak:
           </span>
-          <br/>
+          <br />
           <ul class="list-unstyled">
             <li>Yazı 1</li>
             <li>Yazı 2</li>
@@ -272,21 +262,16 @@
             Hayır
           </button>
 
-<!--          :disabled="deleting"-->
-<!--          @click="deleteCategory"-->
-          <button
-            class="btn btn-danger w-100"
-            type="button"
-          >
+          <!--          :disabled="deleting"-->
+          <!--          @click="deleteCategory"-->
+          <button class="btn btn-danger w-100" type="button">
             <div
               class="spinner-border spinner-border-sm text-white"
               role="status"
               v-if="deleting"
             ></div>
 
-            <span v-if="!deleting">
-              Evet
-            </span>
+            <span v-if="!deleting">Evet</span>
           </button>
         </div>
       </div>

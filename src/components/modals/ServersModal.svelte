@@ -1,51 +1,51 @@
 <script>
-  import { servers } from '../../Store'
-  import { NETWORK_ERROR } from '../../util/api.util'
+  import { servers } from "../../Store";
+  import { NETWORK_ERROR } from "../../util/api.util";
 
-  import Icon from 'svelte-awesome'
+  import Icon from "svelte-awesome";
   import {
     faPlus,
     faCog,
     faTimes,
     faHome,
     faCube,
-  } from '@fortawesome/free-solid-svg-icons'
-  import { faBell } from '@fortawesome/free-regular-svg-icons'
+  } from "@fortawesome/free-solid-svg-icons";
+  import { faBell } from "@fortawesome/free-regular-svg-icons";
 
-  let serverListLoading = false
+  let serverListLoading = false;
 
   function getServerList() {
     return new Promise((resolve, reject) => {
-      ApiUtil.get('/api/panel/server/list')
-        .then(response => {
-          if (response.data.result === 'ok') {
-            resolve(response)
-          } else if (response.data.result === 'error') {
-            const error = response.data.error
+      ApiUtil.get("/api/panel/server/list")
+        .then((response) => {
+          if (response.data.result === "ok") {
+            resolve(response);
+          } else if (response.data.result === "error") {
+            const error = response.data.error;
 
-            reject(error)
+            reject(error);
           } else {
-            reject(NETWORK_ERROR)
+            reject(NETWORK_ERROR);
           }
         })
         .catch(() => {
-          reject(NETWORK_ERROR)
-        })
-    })
+          reject(NETWORK_ERROR);
+        });
+    });
   }
 
   function reloadServerList() {
-    serverListLoading = true
+    serverListLoading = true;
 
     getServerList()
-      .then(response => {
-        serverListLoading = false
+      .then((response) => {
+        serverListLoading = false;
 
-        servers.set(response.data.servers)
+        servers.set(response.data.servers);
       })
       .catch(() => {
-        serverListLoading = false
-      })
+        serverListLoading = false;
+      });
   }
 </script>
 
@@ -55,7 +55,8 @@
   class="modal fade"
   id="showServers"
   role="dialog"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -65,8 +66,9 @@
           data-dismiss="modal"
           data-target="#connectServer"
           data-toggle="modal"
-          type="button">
-          <Icon data={faPlus} class="mr-2" />
+          type="button"
+        >
+          <Icon data="{faPlus}" class="mr-2" />
           Sunucu Bağla
         </button>
         <button
@@ -74,14 +76,15 @@
           class="close"
           data-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button">
+          type="button"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="row">
           {#if serverListLoading}
-            <div class="spinner-border text-primary mr-2" role="status" />
+            <div class="spinner-border text-primary mr-2" role="status"></div>
           {/if}
 
           <!-- Server Card -->
@@ -95,7 +98,7 @@
                     <div class="card-img-top bg-primary border-0">
                       <div class="card-body">
                         <h4 class="card-title text-white lead">
-                          <Icon data={faHome} class="mr-1 text-light" />
+                          <Icon data="{faHome}" class="mr-1 text-light" />
                           {server.name} Panocraft
                         </h4>
                         <h5 class="badge badge-sunflower">Spigot</h5>
@@ -109,11 +112,13 @@
                           height="72"
                           alt=" Sever İkon"
                           class="d-block m-auto border rounded-circle shadow-sm
-                          bg-white p-1 text-center" />
+                          bg-white p-1 text-center"
+                        />
                       </div>
                       <div
                         class="mt-4 card-body text-center text-dark d-flex
-                        flex-row justify-content-between">
+                        flex-row justify-content-between"
+                      >
                         <div>
                           <span class="lead">
                             {server.status === 'online' ? server.player_count : 0}
@@ -146,27 +151,31 @@
                         data-toggle="dropdown"
                         id="serverOptions"
                         title="Seçenekler"
-                        type="button">
-                        <Icon data={faCog} class="mr-1" />
+                        type="button"
+                      >
+                        <Icon data="{faCog}" class="mr-1" />
 
                       </button>
                       <div
                         aria-labelledby="serverOptions"
-                        class="dropdown-menu">
+                        class="dropdown-menu"
+                      >
 
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          v-if="main_server.id !== server.id">
-                          <Icon data={faHome} class="mr-1 text-primary" />
+                          v-if="main_server.id !== server.id"
+                        >
+                          <Icon data="{faHome}" class="mr-1 text-primary" />
                           Ana Sunucu Olarak Belirle
                         </a>
 
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          v-if="main_server.id === server.id">
-                          <Icon data={faTimes} class="mr-1 text-primary" />
+                          v-if="main_server.id === server.id"
+                        >
+                          <Icon data="{faTimes}" class="mr-1 text-primary" />
                           Ana Sunuculuğunu Kaldır
                         </a>
                         <!--                    @click="onRemoveClick(server)"-->
@@ -175,9 +184,10 @@
                           data-dismiss="modal"
                           data-target="#confirmRemoveServer"
                           data-toggle="modal"
-                          href="javascript:void(0);">
+                          href="javascript:void(0);"
+                        >
 
-                          <Icon data={faTimes} class="mr-1 text-danger" />
+                          <Icon data="{faTimes}" class="mr-1 text-danger" />
                           Sunucuyu Kaldır
                         </a>
                       </div>
@@ -191,7 +201,7 @@
           <!-- No Server -->
           {#if $servers.length === 0}
             <div class="container text-center">
-              <Icon data={faCube} scale="4" class="m-3 text-glass" />
+              <Icon data="{faCube}" scale="4" class="m-3 text-glass" />
               <p class="text-gray">Bağlı sunucu yok.</p>
             </div>
           {/if}

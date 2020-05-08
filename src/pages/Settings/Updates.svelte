@@ -21,14 +21,15 @@
           type="button"
           href="#availableUpdates"
           data-toggle="collapse"
-          aria-controls="availableUpdates">
-          <Icon data={faSync} />
+          aria-controls="availableUpdates"
+        >
+          <Icon data="{faSync}" />
         </button>
         <strong class="text-primary ">5 Güncelleme Mevcut</strong>
       </div>
       <div class="col text-right">
         <button class="btn btn-secondary" type="button">
-          <Icon data={faDownload} class="mr-1" />
+          <Icon data="{faDownload}" class="mr-1" />
           <span class="d-md-inline d-none">Tümünü Kur</span>
         </button>
       </div>
@@ -37,7 +38,7 @@
     <!-- Available Updates -->
     <div class="card">
       <div class="card-body position-relative">
-        <span class="notification" />
+        <span class="notification"></span>
         <h5 class="card-title">
           <a href="#">Pano 1.2</a>
         </h5>
@@ -56,7 +57,7 @@
         </p>
         <hr />
         <button class="btn btn-secondary" type="button">
-          <Icon data={faDownload} class="mr-1" />
+          <Icon data="{faDownload}" class="mr-1" />
           Kur
         </button>
         <button class="btn btn-outline-primary" type="button">
@@ -67,7 +68,7 @@
 
     <div class="card">
       <div class="card-body position-relative">
-        <span class="notification" />
+        <span class="notification"></span>
         <h5 class="card-title">
           <a href="#">Sayfalar 1.1</a>
         </h5>
@@ -81,7 +82,7 @@
         </h6>
         <hr />
         <button class="btn btn-secondary" type="button">
-          <Icon data={faDownload} class="mr-1" />
+          <Icon data="{faDownload}" class="mr-1" />
           Kur
         </button>
         <button class="btn btn-outline-primary" type="button">

@@ -21,7 +21,8 @@
             <h5
               aria-describedby="panoVersion"
               class="m-0 text-muted"
-              id="panoVersion">
+              id="panoVersion"
+            >
               1.0
             </h5>
           </div>
@@ -34,7 +35,8 @@
             <h5
               aria-describedby="panoRelease"
               class="m-0 text-muted"
-              id="panoRelease">
+              id="panoRelease"
+            >
               Beta
             </h5>
             <small>Beta sürüm bilinmeyen hatalar içerebilir.</small>
@@ -49,7 +51,8 @@
               aria-describedby="panoWebsite"
               href="https://panomc.com"
               id="panoWebsite"
-              target="_blank">
+              target="_blank"
+            >
               www.panomc.com
             </a>
           </div>

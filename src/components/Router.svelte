@@ -1,10 +1,14 @@
 <script>
-  import {onDestroy} from "svelte";
-  import {get} from "svelte/store";
+  import { onDestroy } from "svelte";
+  import { get } from "svelte/store";
   import page from "page";
 
-  import {path, subRouterRoutesByBasePath, basePageInstance} from '../RouterStore';
-  import {isPageInitialized} from '../Store';
+  import {
+    path,
+    subRouterRoutesByBasePath,
+    basePageInstance,
+  } from "../RouterStore";
+  import { isPageInitialized } from "../Store";
 
   import RoutesConfig from "../router.config";
 
@@ -15,7 +19,9 @@
 
   const nestedRoute = basePath !== mainBasePath;
 
-  export let routes = nestedRoute ? $subRouterRoutesByBasePath[basePath] : RoutesConfig;
+  export let routes = nestedRoute
+    ? $subRouterRoutesByBasePath[basePath]
+    : RoutesConfig;
   export let hidden = false;
 
   const pageInstance = nestedRoute ? page.create() : basePageInstance;
@@ -37,46 +43,61 @@
   }
 
   (function setupRouter(paths, parent = "", parentHandler = null) {
-    Object.keys(paths).forEach(path => {
+    Object.keys(paths).forEach((path) => {
       const route = paths[path];
 
       const handler = (context) => {
-        if (route.children !== null && typeof route.children === 'object') {
-          subRouterRoutesByBasePath.update(value => {
+        if (route.children !== null && typeof route.children === "object") {
+          subRouterRoutesByBasePath.update((value) => {
             value[basePath + path] = route.children;
 
             return value;
-          })
+          });
         }
 
         let params = {};
 
-        if (route.params !== null && typeof route.params === 'object') {
+        if (route.params !== null && typeof route.params === "object") {
           params = route.params;
         }
 
-        if (route.context !== null && typeof route.context === 'boolean' && route.context) {
+        if (
+          route.context !== null &&
+          typeof route.context === "boolean" &&
+          route.context
+        ) {
           params.context = context;
         }
 
-        if (route.pageJsInstance !== null && typeof route.pageJsInstance === 'boolean' && route.pageJsInstance) {
+        if (
+          route.pageJsInstance !== null &&
+          typeof route.pageJsInstance === "boolean" &&
+          route.pageJsInstance
+        ) {
           params.pageJsInstance = pageInstance;
         }
 
-        Object.keys(context.params).forEach(key => {
+        Object.keys(context.params).forEach((key) => {
           params[key] = context.params[key];
-        })
+        });
 
         props = {
           component: route.component,
-          params: params
+          params: params,
         };
-      }
+      };
 
-      pageInstance(parent + path, parentHandler === null ? handler : parentHandler);
+      pageInstance(
+        parent + path,
+        parentHandler === null ? handler : parentHandler
+      );
 
-      if (route.children !== null && typeof route.children === 'object') {
-        setupRouter(route.children, parent + path, parentHandler === null ? handler : parentHandler);
+      if (route.children !== null && typeof route.children === "object") {
+        setupRouter(
+          route.children,
+          parent + path,
+          parentHandler === null ? handler : parentHandler
+        );
       }
     });
   })(routes);
@@ -88,29 +109,29 @@
       if (value.startsWith(pageInstance.base())) {
         pageInstance(value);
       }
-    })
+    });
 
     onDestroy(pathUnsubscribe);
     onDestroy(() => {
-      subRouterRoutesByBasePath.update(list => {
+      subRouterRoutesByBasePath.update((list) => {
         const newList = [];
 
         Object.keys(list)
-          .filter(key => key !== pageInstance.base())
-          .forEach(key => {
-            newList[key] = list[key]
+          .filter((key) => key !== pageInstance.base())
+          .forEach((key) => {
+            newList[key] = list[key];
           });
 
         return newList;
-      })
-    })
+      });
+    });
   }
 
   onDestroy(() => {
-    pageInstance.stop()
-  })
+    pageInstance.stop();
+  });
 </script>
 
-<div hidden={hidden}>
-  <svelte:component this={props.component} {...props}/>
+<div hidden="{hidden}">
+  <svelte:component this="{props.component}" {...props} />
 </div>

@@ -3,9 +3,9 @@
     currentServerPlatformMatchKey,
     platformKeyRefreshedTime,
     platformAddress,
-    showNetworkErrorOnCatch
+    showNetworkErrorOnCatch,
   } from "../../Store";
-  import {ApiUtil} from "../../util/api.util";
+  import { ApiUtil } from "../../util/api.util";
   import tooltip from "../../util/tooltip.util";
 
   import Icon from "svelte-awesome";
@@ -15,12 +15,12 @@
     faFileDownload,
     faHourglassHalf,
     faClipboard,
-    faCheckCircle
+    faCheckCircle,
   } from "@fortawesome/free-solid-svg-icons";
-  import {faBell} from "@fortawesome/free-regular-svg-icons";
+  import { faBell } from "@fortawesome/free-regular-svg-icons";
 
-  import {onDestroy} from "svelte";
-  import {get} from "svelte/store";
+  import { onDestroy } from "svelte";
+  import { get } from "svelte/store";
   import copy from "copy-to-clipboard";
   import moment from "moment";
 
@@ -59,7 +59,7 @@
       () =>
         new Promise((resolve, reject) => {
           ApiUtil.get("panel/platformAuth/refreshKey")
-            .then(response => {
+            .then((response) => {
               if (response.data.result === "ok") {
                 currentServerPlatformMatchKey.set(response.data.key);
                 platformKeyRefreshedTime.set(response.data.timeStarted);
@@ -67,8 +67,7 @@
                 currentServerPlatformMatchKey.set("");
               }
 
-              if (firstStartCountDown)
-                startCountDown();
+              if (firstStartCountDown) startCountDown();
 
               resolve();
             })
@@ -89,19 +88,22 @@
       get(currentServerPlatformMatchKey);
   }
 
-  const platformKeyRefreshedTimeUnsubscribe = platformKeyRefreshedTime.subscribe(value => {
-    if (value !== 0 && !firstStartCountDown) {
-      firstStartCountDown = true;
+  const platformKeyRefreshedTimeUnsubscribe = platformKeyRefreshedTime.subscribe(
+    (value) => {
+      if (value !== 0 && !firstStartCountDown) {
+        firstStartCountDown = true;
 
-      startCountDown();
+        startCountDown();
+      }
     }
-  });
+  );
 
   const platformAddressUnsubscribe = platformAddress.subscribe(() => {
     updateCommandText();
   });
 
-  const currentServerPlatformMatchKeyUnsubscribe = currentServerPlatformMatchKey.subscribe(() => {
+  const currentServerPlatformMatchKeyUnsubscribe = currentServerPlatformMatchKey.subscribe(
+    () => {
       updateCommandText();
     }
   );
@@ -133,7 +135,8 @@
   class="modal fade"
   id="connectServer"
   role="document"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -142,7 +145,8 @@
           class="close"
           data-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button">
+          type="button"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -150,21 +154,21 @@
         <div class="card-body text-center">
 
           <div class="mb-3">
-            <Icon data={faDownload} scale="3" class="text-primary"/>
+            <Icon data="{faDownload}" scale="3" class="text-primary" />
           </div>
 
           <h5 class="text-primary" for="downloadPlugin">
             1. Oyun Eklentisini Sunucunuza İndirin:
           </h5>
           <button class="btn btn-link bg-light">
-            <Icon data={faFileDownload} class="mr-1"/>
+            <Icon data="{faFileDownload}" class="mr-1" />
             Pano Minecraft Eklentisini İndir
-            <br/>
+            <br />
             <small>BungeeCord, Bukkit, Spigot, PaperSpigot</small>
           </button>
 
           <div class="my-4">
-            <Icon data={faTerminal} scale="3" class="text-primary"/>
+            <Icon data="{faTerminal}" scale="3" class="text-primary" />
           </div>
 
           <h5 class="text-primary" for="platformToken">
@@ -172,18 +176,20 @@
           </h5>
           <div class="input-group mb-2">
             <input
-              bind:value={commandText}
+              bind:value="{commandText}"
               class="form-control shadow-sm"
               id="platformToken"
-              type="text"/>
+              type="text"
+            />
             <div class="input-group-append">
               <button
-                on:click={onCopyCommandTextClick}
+                on:click="{onCopyCommandTextClick}"
                 class="btn btn-link bg-light border shadow-sm"
                 id="copyPlatformToken"
                 type="button"
-                use:tooltip={['top', isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala']}>
-                <Icon data={faClipboard}/>
+                use:tooltip="{['top', isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala']}"
+              >
+                <Icon data="{faClipboard}" />
               </button>
             </div>
           </div>
@@ -193,13 +199,13 @@
           </small>
 
           <div class="my-4">
-            <Icon data={faCheckCircle} scale="3" class="text-primary"/>
+            <Icon data="{faCheckCircle}" scale="3" class="text-primary" />
           </div>
 
           <h5 class="text-primary">3. Bağlantı İsteğine Onay Verin:</h5>
           <p class="mb-0">
             Bildirim panelinden (
-            <Icon data={faBell}/>
+            <Icon data="{faBell}" />
             ) "Sunucu Bağlantısı İsteği" bildirimini açarak, onay verin.
           </p>
 

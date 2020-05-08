@@ -5,10 +5,10 @@ module.exports = {
     [
       "@babel/plugin-transform-runtime",
       {
-        useESModules: true
-      }
-    ]
+        useESModules: true,
+      },
+    ],
   ],
   presets: ["@babel/preset-env"],
-  ignore: ["node_modules/**"]
+  ignore: ["node_modules/**"],
 };

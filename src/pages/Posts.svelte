@@ -4,5 +4,5 @@
 
 <!-- Posts Page -->
 <article class="content">
-  <Router basePath="/panel/posts"/>
+  <Router basePath="/panel/posts" />
 </article>

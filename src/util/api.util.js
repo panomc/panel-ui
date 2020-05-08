@@ -4,15 +4,15 @@ export const NETWORK_ERROR = "NETWORK_ERROR";
 
 export const DEFAULT_CONFIG = {
   headers: {
-    "Content-Type": "application/json"
-  }
+    "Content-Type": "application/json",
+  },
 };
 
 axios.interceptors.response.use(
-  function(response) {
+  function (response) {
     return response;
   },
-  error => {
+  (error) => {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
@@ -39,7 +39,8 @@ export const ApiUtil = {
 
     axios.defaults.withCredentials = true;
 
-    axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
+    axios.defaults.headers.post["Content-Type"] =
+      "application/json;charset=utf-8";
   },
 
   get(resource, config = DEFAULT_CONFIG) {
@@ -60,7 +61,7 @@ export const ApiUtil = {
 
   customRequest(data) {
     return axios(data);
-  }
+  },
 };
 
 export default ApiUtil;

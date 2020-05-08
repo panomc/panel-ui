@@ -5,7 +5,7 @@
     isSidebarOpen,
     setSidebarTabsState,
     sidebarTabsState,
-    website
+    website,
   } from "../Store";
   import { onDestroy } from "svelte";
 
@@ -26,7 +26,7 @@
     toggleSidebar();
   }
 
-  const unsubscribeSidebarTabsState = sidebarTabsState.subscribe(value => {
+  const unsubscribeSidebarTabsState = sidebarTabsState.subscribe((value) => {
     if (value === "website") {
       menuComponent = SiteNavigationMenu;
     } else {
@@ -50,21 +50,23 @@
 <RemoveServerModal />
 
 <!-- Sidebar -->
-<div class="sidebar" class:active={$isSidebarOpen}>
+<div class="sidebar" class:active="{$isSidebarOpen}">
 
   <!-- Sidebar Logo -->
   <div class="sidebar-logo border-bottom border-glass">
     <a
       href="javascript:void(0);"
       class="sidebar-toggler btn btn-link text-light"
-      on:click={onMobileSideBarCollapseClick}>
-      <Icon data={faBars} />
+      on:click="{onMobileSideBarCollapseClick}"
+    >
+      <Icon data="{faBars}" />
     </a>
     <img
       alt="Pano"
       title="Pano"
-      src={basePath() + 'assets/img/logo.svg'}
-      width="20" />
+      src="{basePath() + 'assets/img/logo.svg'}"
+      width="20"
+    />
   </div>
 
   <div class="sidebar-inner">
@@ -73,11 +75,12 @@
     <div class="sidebar-info">
       <img
         alt="Server İkon"
-        title={$website.name}
+        title="{$website.name}"
         class="sidebar-server-icon"
         width="80"
         height="80"
-        src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" />
+        src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
+      />
       <h5 class="text-white">{$website.name}</h5>
 
       {#if $sidebarTabsState === 'website'}
@@ -94,7 +97,8 @@
             class="btn btn-aqua btn-sm text-white"
             data-target="#showServers"
             data-toggle="modal"
-            type="button">
+            type="button"
+          >
             Sunucuları Görüntüle
           </button>
         </a>
@@ -107,26 +111,28 @@
         <a
           href="javascript:void(0)"
           class="nav-link"
-          on:click={onWebsiteMenuClick}
-          class:active={$sidebarTabsState === 'website'}
-          class:text-light={$sidebarTabsState !== 'website'}>
-          <Icon data={faGlobe} scale="1.3" />
+          on:click="{onWebsiteMenuClick}"
+          class:active="{$sidebarTabsState === 'website'}"
+          class:text-light="{$sidebarTabsState !== 'website'}"
+        >
+          <Icon data="{faGlobe}" scale="1.3" />
         </a>
       </li>
       <li class="nav-item">
         <a
           href="javascript:void(0)"
           class="nav-link"
-          on:click={onGameMenuClick}
-          class:active={$sidebarTabsState === 'game'}
-          class:text-light={$sidebarTabsState !== 'game'}>
-          <Icon data={faCube} scale="1.3" />
+          on:click="{onGameMenuClick}"
+          class:active="{$sidebarTabsState === 'game'}"
+          class:text-light="{$sidebarTabsState !== 'game'}"
+        >
+          <Icon data="{faCube}" scale="1.3" />
         </a>
       </li>
     </ul>
 
     <!-- Sidebar Site Navigation Menu || Sidebar Server Navigation Menu -->
-    <svelte:component this={menuComponent} />
+    <svelte:component this="{menuComponent}" />
   </div>
 
   <!-- Sidebar Bottom -->

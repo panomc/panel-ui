@@ -12,8 +12,9 @@
     <router-link
       class="btn btn-link"
       role="button"
-      to="/panel/tickets/categories">
-      <i aria-hidden="true" class="far fa-list-alt fa-fw" />
+      to="/panel/tickets/categories"
+    >
+      <i aria-hidden="true" class="far fa-list-alt fa-fw"></i>
       <span class="d-md-inline d-none">Kategoriler</span>
     </router-link>
   </div>
@@ -38,21 +39,24 @@
           <router-link
             class="btn btn-sm btn-outline-light btn-link"
             role="button"
-            to="/panel/tickets/all">
+            to="/panel/tickets/all"
+          >
             Tümü
           </router-link>
           <!--            :class="{ 'active': page_type === 'waitingReply' }"-->
           <router-link
             class="btn btn-sm btn-outline-light btn-link"
             role="button"
-            to="/panel/tickets/waitingReply">
+            to="/panel/tickets/waitingReply"
+          >
             Yanıtlanmadı
           </router-link>
           <!--            :class="{ 'active': page_type === 'closed' }"-->
           <router-link
             class="btn btn-sm btn-outline-light btn-link text-danger"
             role="button"
-            to="/panel/tickets/closed">
+            to="/panel/tickets/closed"
+          >
             Kapalı
           </router-link>
         </div>
@@ -61,7 +65,7 @@
 
     <!-- No Tickets -->
     <div class="container text-center" v-if="tickets_count === 0">
-      <i aria-hidden="true" class="fa fa-ticket-alt fa-4x text-glass m-3" />
+      <i aria-hidden="true" class="fa fa-ticket-alt fa-4x text-glass m-3"></i>
       <p class="text-gray">Burada içerik yok.</p>
     </div>
 
@@ -89,8 +93,9 @@
                   <input
                     class="custom-control-input"
                     id="postCheck"
-                    type="checkbox" />
-                  <label class="custom-control-label" for="postCheck" />
+                    type="checkbox"
+                  />
+                  <label class="custom-control-label" for="postCheck"></label>
                 </div>
               </div>
             </th>
@@ -101,31 +106,35 @@
             <td>
               <router-link
                 :to="'/panel/tickets/' + ticket.id"
-                title="Talebi Görüntüle">
+                title="Talebi Görüntüle"
+              >
                 <!--                  {{ ticket.title }}-->
               </router-link>
             </td>
             <td>
               <span
                 class="text-center rounded border"
-                v-if="ticket.status === 1">
+                v-if="ticket.status === 1"
+              >
                 Yanıtlandı
               </span>
               <span
                 class="text-center rounded bg-success text-white"
-                v-if="ticket.status === 2">
+                v-if="ticket.status === 2"
+              >
                 Yeni
               </span>
               <span
                 class="text-center rounded bg-danger text-white"
-                v-if="ticket.status === 0">
+                v-if="ticket.status === 0"
+              >
                 Kapalı
               </span>
             </td>
             <!--            {{ ticket.category.title }}-->
-            <td />
+            <td></td>
             <!--            {{ ticket.writer.username }}-->
-            <td />
+            <td></td>
             <td>1 saat önce</td>
           </tr>
         </tbody>
@@ -152,7 +161,7 @@
             <!--                {{index}}-->
           </a>
           <!--            {{index}}-->
-          <a class="page-link" v-if="page === index" />
+          <a class="page-link" v-if="page === index"></a>
         </li>
 
         <!--          :class="{ 'disabled': page === total_page }"-->

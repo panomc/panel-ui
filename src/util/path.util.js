@@ -1,4 +1,3 @@
-
 export function basePath() {
-  return "/"
+  return "/";
 }

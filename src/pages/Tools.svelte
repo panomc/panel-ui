@@ -1,5 +1,5 @@
 <script>
-  import {isPageInitialized} from "../Store"
+  import { isPageInitialized } from "../Store";
 
   isPageInitialized.set(true);
 </script>
@@ -11,35 +11,47 @@
     <div class="col-3 p-0">
       <nav class="page-category-v border-right border-glass">
         <div class="nav nav-pills d-flex flex-column py-2">
-          <h6 class="text-muted text-muted text-uppercase font-weight-normal px-3">Genel</h6>
-          <router-link class="nav-item nav-link text-md-left text-center active" to="#">
+          <h6
+            class="text-muted text-muted text-uppercase font-weight-normal px-3"
+          >
+            Genel
+          </h6>
+          <router-link
+            class="nav-item nav-link text-md-left text-center active"
+            to="#"
+          >
             <i class="fa fa-bullhorn fa-fw" aria-hidden="true"></i>
             <span class="d-md-inline d-none">Duyurular</span>
           </router-link>
-          <router-link class="nav-item nav-link text-md-left text-center" to="#">
+          <router-link
+            class="nav-item nav-link text-md-left text-center"
+            to="#"
+          >
             <i class="fa fa-gamepad fa-fw" aria-hidden="true"></i>
             <span class="d-md-inline d-none">Oyna Butonu</span>
           </router-link>
-          <router-link class="nav-item nav-link text-md-left text-center" to="#">
+          <router-link
+            class="nav-item nav-link text-md-left text-center"
+            to="#"
+          >
             <i class="fa fa-smile fa-fw" aria-hidden="true"></i>
-            <span class="d-md-inline d-none">Çevrimiçi
-              Kafalar</span>
+            <span class="d-md-inline d-none">Çevrimiçi Kafalar</span>
           </router-link>
-          <router-link class="nav-item nav-link text-md-left text-center" to="#">
+          <router-link
+            class="nav-item nav-link text-md-left text-center"
+            to="#"
+          >
             <i class="fa fa-pencil-alt fa-fw" aria-hidden="true"></i>
-            <span class="d-md-inline d-none">Son Kayıt
-              Olanlar</span>
+            <span class="d-md-inline d-none">Son Kayıt Olanlar</span>
           </router-link>
-          <hr>
+          <hr />
         </div>
       </nav>
     </div>
 
     <!-- Tool Page Content -->
     <div class="col-9">
-      <div class="content">
-        ...
-      </div>
+      <div class="content">...</div>
     </div>
   </div>
 </div>

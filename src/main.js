@@ -12,7 +12,7 @@ window.jQuery = window.jquery = window.$ = jquery;
 window.Popper = Popper;
 
 const app = new App({
-  target: document.body
+  target: document.body,
 });
 
 export default app;

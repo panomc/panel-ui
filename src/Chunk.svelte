@@ -1,25 +1,22 @@
-<!--suppress JSUnusedAssignment, BadExpressionStatementJS, ES6UnusedImports -->
 <script>
-  import Loadable from 'svelte-loadable';
-  import {isPageLoading} from './RouterStore';
+  import Loadable from "svelte-loadable";
+  import { isPageLoading } from "./RouterStore";
 
   export let component;
   export let dynamicImport;
   export let delay = 0;
-  export let params = {}
+  export let params = {};
 
   // use component variable for nothing (fix useless svelte warning)
   component;
 </script>
 
-<Loadable loader={dynamicImport} {delay}>
-  <div slot="loading">
-      {(isPageLoading.set(true)) ? '' : ''}
-  </div>
+<!--suppress JSUnusedAssignment, BadExpressionStatementJS, ES6UnusedImports -->
+<Loadable loader="{dynamicImport}" delay="delay">
+  <div slot="loading">{isPageLoading.set(true) ? '' : ''}</div>
 
   <div slot="success" let:component>
-    <svelte:component this={component} {...params}/>
-
-      {(isPageLoading.set(false)) ? '' : ''}
+    <svelte:component this="{component}" {...params} />
+    {isPageLoading.set(false) ? '' : ''}
   </div>
 </Loadable>

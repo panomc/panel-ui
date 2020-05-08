@@ -9,45 +9,41 @@ import {terser} from "rollup-plugin-terser";
 import babel from "rollup-plugin-babel";
 import rmdir from "rimraf";
 
-rmdir("public/assets", function(error) {
-});
-rmdir("public/commons", function(error) {
-});
+rmdir("public/assets", function (error) {});
+rmdir("public/commons", function (error) {});
 
 const production = !process.env.ROLLUP_WATCH;
 
 const preprocess = autoPreprocess({
   scss: {},
   postcss: {
-    plugins: [require("autoprefixer")]
-  }
+    plugins: [require("autoprefixer")],
+  },
 });
 
 const input = ["src/main.js"];
 
 const watch = {
-  clearScreen: false
+  clearScreen: false,
 };
 
 const plugins = [
   copyTo({
     assets: [
-      './src/commons/favicon',
-      './src/commons/fonts',
-      './src/commons/img',
+      "./src/commons/favicon",
+      "./src/commons/fonts",
+      "./src/commons/img",
     ],
-    outputDir: "public/commons"
+    outputDir: "public/commons",
   }),
 
   copyTo({
-    assets: [
-      "./src/assets"
-    ],
-    outputDir: "public"
+    assets: ["./src/assets"],
+    outputDir: "public",
   }),
 
   babel({
-    runtimeHelpers: true
+    runtimeHelpers: true,
   }),
 
   svelte({
@@ -55,18 +51,18 @@ const plugins = [
     dev: !production,
     // we'll extract any component CSS out into
     // a separate file - better for performance
-    css: css => {
+    css: (css) => {
       css.write("public/assets/css/bundle.css");
     },
     preprocess,
 
     onwarn: (warning, handler) => {
       // e.g. don't warn on <marquee> elements, cos they're cool
-      if (warning.code === 'a11y-invalid-attribute') return;
+      if (warning.code === "a11y-invalid-attribute") return;
 
       // let Rollup handle all other warnings normally
       handler(warning);
-    }
+    },
   }),
 
   // If you have external dependencies installed from
@@ -76,18 +72,20 @@ const plugins = [
   // https://github.com/rollup/plugins/tree/master/packages/commonjs
   resolve({
     browser: true,
-    dedupe: ["svelte"]
+    dedupe: ["svelte"],
   }),
 
   commonjs({
     namedExports: {
-      'node_modules/jquery/dist/jquery.min.js': ['jquery'],
-      'node_modules/bootstrap/dist/js/bootstrap.min.js': ['bootstrap']
-    }
+      "node_modules/jquery/dist/jquery.min.js": ["jquery"],
+      "node_modules/bootstrap/dist/js/bootstrap.min.js": ["bootstrap"],
+    },
   }),
 
   replace({
-    'process.env.NODE_ENV': JSON.stringify(production ? 'production' : 'development')
+    "process.env.NODE_ENV": JSON.stringify(
+      production ? "production" : "development"
+    ),
   }),
 
   // In dev mode, call `npm run start` once
@@ -100,7 +98,7 @@ const plugins = [
 
   // If we're building for production (npm run build
   // instead of npm run dev), minify
-  production && terser()
+  production && terser(),
 ];
 
 const esExport = {
@@ -110,11 +108,11 @@ const esExport = {
       sourcemap: true,
       format: "es",
       name: "app",
-      dir: "public/assets/js/es/"
-    }
+      dir: "public/assets/js/es/",
+    },
   ],
   plugins: plugins,
-  watch: watch
+  watch: watch,
 };
 
 const systemExport = {
@@ -124,19 +122,16 @@ const systemExport = {
       sourcemap: true,
       format: "system",
       name: "app",
-      dir: "public/assets/js/system/"
-    }
+      dir: "public/assets/js/system/",
+    },
   ],
   plugins: plugins,
-  watch: watch
+  watch: watch,
 };
 
-const listExports = [
-  esExport
-];
+const listExports = [esExport];
 
-if (production)
-  listExports.push(systemExport);
+if (production) listExports.push(systemExport);
 
 export default listExports;
 
@@ -150,9 +145,9 @@ function serve() {
 
         require("child_process").spawn("npm", ["run", "start", "--", "--dev"], {
           stdio: ["ignore", "inherit", "inherit"],
-          shell: true
+          shell: true,
         });
       }
-    }
+    },
   };
 }

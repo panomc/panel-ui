@@ -1,5 +1,5 @@
 <script>
-  import {isPageInitialized} from "../../Store"
+  import { isPageInitialized } from "../../Store";
 
   isPageInitialized.set(true);
 </script>
@@ -59,7 +59,8 @@
     <div class="col-lg-3">
       <div class="card">
         <div
-          class="card-body d-flex flex-column justify-content-center align-items-center"
+          class="card-body d-flex flex-column justify-content-center
+          align-items-center"
         >
           <img
             alt="Username"
@@ -74,8 +75,8 @@
               <i aria-hidden="true" class="fa fa-times fa-fw text-danger"></i>
               Talepleri Yasaklı
             </span>
-            <br/>
-            <hr/>
+            <br />
+            <hr />
             <span class="text-muted" title="Kayıt Tarihi">
               <i
                 aria-hidden="true"
@@ -175,11 +176,12 @@
 
               <div class="col-4 text-right">
                 <p
-                  class="text-dark text-center rounded bg-warning border mb-1 d-inline-block px-3"
+                  class="text-dark text-center rounded bg-warning border mb-1
+                  d-inline-block px-3"
                 >
                   Yanıtlanmadı
                 </p>
-                <br/>
+                <br />
                 <span class="text-muted d-inline-block">
                   <i aria-hidden="true" class="far fa-clock fa-fw"></i>
                   <span class="d-md-inline d-none">Son cevap:</span>
@@ -213,11 +215,12 @@
 
               <div class="col-4 text-right">
                 <p
-                  class="text-dark text-center rounded bg-warning border mb-1 d-inline-block px-3"
+                  class="text-dark text-center rounded bg-warning border mb-1
+                  d-inline-block px-3"
                 >
                   Yanıtlanmadı
                 </p>
-                <br/>
+                <br />
                 <span class="text-muted d-inline-block">
                   <i aria-hidden="true" class="far fa-clock fa-fw"></i>
                   <span class="d-md-inline d-none">Son cevap:</span>
@@ -289,9 +292,7 @@
           >
             Hayır
           </button>
-          <button class="btn btn-danger w-100" type="button">
-            Evet
-          </button>
+          <button class="btn btn-danger w-100" type="button">Evet</button>
         </div>
       </div>
     </div>
