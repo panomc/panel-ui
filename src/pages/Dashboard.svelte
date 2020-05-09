@@ -21,6 +21,10 @@
 
   import ApiUtil from "../util/api.util";
   import { showNetworkErrorOnCatch } from "../Store";
+  import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
+  import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";
+  import TicketsChart from "../components/charts/Dashboard/TicketsChart.svelte";
+  import PostsChart from "../components/charts/Dashboard/PostsChart.svelte";
 
   let getting_started_blocks = {
     welcome_board: false,
@@ -198,7 +202,7 @@
             </div>
           </div>
           <div class="d-flex align-items-center h-100">
-            <canvas height="120" id="myChart"></canvas>
+            <VisitorsChart />
           </div>
         </div>
       </div>
@@ -216,7 +220,7 @@
             </h2>
             <strong class="pl-4">Oyuncu</strong>
           </div>
-          <canvas height="90" id="playersChart"></canvas>
+          <PlayersChart />
         </div>
         <div class="card d-flex flex-fill">
           <div class="card-body pt-3 pb-0 d-flex flex-row align-items-center">
@@ -225,7 +229,7 @@
             </h2>
             <strong class="pl-4">Talepler</strong>
           </div>
-          <canvas height="90" id="ticketsChart"></canvas>
+          <TicketsChart />
         </div>
         <div class="card d-flex flex-fill">
           <div class="card-body pt-3 pb-0 d-flex flex-row align-items-center">
@@ -234,7 +238,7 @@
             </h2>
             <strong class="pl-4">Yazılar</strong>
           </div>
-          <canvas height="90" id="postsChart"></canvas>
+          <PostsChart />
         </div>
       </div>
     </div>
