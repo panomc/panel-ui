@@ -87,7 +87,7 @@
         };
       }
 
-      const handlerWithoutParams = (context) => {
+      const handlerWithoutPageJsParams = (context) => {
         if (route.children !== null && typeof route.children === "object") {
           subRouterRoutesByBasePath.update((value) => {
             value[basePath + path] = route.children;
@@ -97,6 +97,26 @@
         }
 
         let params = {};
+
+        if (route.params !== null && typeof route.params === "object") {
+          params = route.params;
+        }
+
+        if (
+                route.context !== null &&
+                typeof route.context === "boolean" &&
+                route.context
+        ) {
+          params.context = context;
+        }
+
+        if (
+                route.pageJsInstance !== null &&
+                typeof route.pageJsInstance === "boolean" &&
+                route.pageJsInstance
+        ) {
+          params.pageJsInstance = pageInstance;
+        }
 
         props = {
           component: route.component,
@@ -113,7 +133,7 @@
         setupRouter(
           route.children,
           parent + path,
-          parentHandler === null ? handlerWithoutParams : parentHandler
+          parentHandler === null ? handlerWithoutPageJsParams : parentHandler
         );
       }
     });
