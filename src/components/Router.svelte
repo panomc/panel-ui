@@ -85,6 +85,23 @@
           component: route.component,
           params: params,
         };
+      }
+
+      const handlerWithoutParams = (context) => {
+        if (route.children !== null && typeof route.children === "object") {
+          subRouterRoutesByBasePath.update((value) => {
+            value[basePath + path] = route.children;
+
+            return value;
+          });
+        }
+
+        let params = {};
+
+        props = {
+          component: route.component,
+          params: params,
+        };
       };
 
       pageInstance(
@@ -96,7 +113,7 @@
         setupRouter(
           route.children,
           parent + path,
-          parentHandler === null ? handler : parentHandler
+          parentHandler === null ? handlerWithoutParams : parentHandler
         );
       }
     });
