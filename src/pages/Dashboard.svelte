@@ -32,6 +32,7 @@
 
   let registered_player_count = 0;
   let post_count = 0;
+  let tickets_count = 0;
 
   function getInitialData() {
     showNetworkErrorOnCatch(
@@ -216,7 +217,7 @@
         <div class="card d-flex flex-fill">
           <div class="card-body pt-3 pb-0 d-flex flex-row align-items-center">
             <h2 class="text-secondary font-weight-bolder m-0">
-              <!-- {{ registered_player_count }} -->
+              {registered_player_count}
             </h2>
             <strong class="pl-4">Oyuncu</strong>
           </div>
@@ -225,7 +226,7 @@
         <div class="card d-flex flex-fill">
           <div class="card-body pt-3 pb-0 d-flex flex-row align-items-center">
             <h2 class="text-bittersweet font-weight-bolder m-0">
-              <!-- {{ registered_player_count }} -->
+              {tickets_count}
             </h2>
             <strong class="pl-4">Talepler</strong>
           </div>
@@ -234,7 +235,7 @@
         <div class="card d-flex flex-fill">
           <div class="card-body pt-3 pb-0 d-flex flex-row align-items-center">
             <h2 class="text-sunflower font-weight-bolder m-0">
-              <!-- {{ post_count }} -->
+              {post_count}
             </h2>
             <strong class="pl-4">Yazılar</strong>
           </div>
