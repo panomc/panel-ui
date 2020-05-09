@@ -21,6 +21,7 @@
 
   import ApiUtil from "../util/api.util";
   import { showNetworkErrorOnCatch } from "../Store";
+
   import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
   import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";
   import TicketsChart from "../components/charts/Dashboard/TicketsChart.svelte";
@@ -43,6 +44,7 @@
               if (response.data.result === "ok") {
                 registered_player_count = response.data.registered_player_count;
                 post_count = response.data.post_count;
+                tickets_count = response.data.tickets_count;
 
                 getting_started_blocks = response.data.getting_started_blocks;
 
