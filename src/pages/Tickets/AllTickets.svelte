@@ -92,7 +92,7 @@
     routePage(index);
   }
 
-  function checkPageLinkCurrentPage(index) {
+  function checkPageLinkCurrentPage(page, index) {
     return page !== index;
   }
 
@@ -227,19 +227,24 @@
     <!-- Pagination -->
     <nav class="pt-3">
       <ul class="pagination pagination-sm mb-0 justify-content-start">
-        <li
-          class="page-item"
-          class:disabled="{page === 1}"
-          disabled="{page === 1}"
-          on:click="{onFirstPageClick}"
-        >
+        {#if checkPageLinkCurrentPage(page, totalPage)}
           <a class="page-link" href="javascript:void(0);" title="Önceki Sayfa">
-            <span aria-hidden="true">&laquo;</span>
+            <li class="page-item" on:click="{onFirstPageClick}">
+              <span aria-hidden="true">&laquo;</span>
+            </li>
           </a>
-        </li>
+        {:else}
+          <li
+            class="page-item page-link disabled"
+            disabled="true"
+            on:click="{onFirstPageClick}"
+          >
+            <span aria-hidden="true">&laquo;</span>
+          </li>
+        {/if}
 
         {#each pages as index}
-          {#if checkPageLinkCurrentPage(index)}
+          {#if checkPageLinkCurrentPage(page, index)}
             <a href="javascript:void(0);" on:click="{onPageLinkClick(index)}">
               <li class="page-item page-link">{index}</li>
             </a>
@@ -248,36 +253,16 @@
           {/if}
         {/each}
 
-        {#if checkPageLinkCurrentPage(index)}
-          <a
-                  href="javascript:void(0);"
-                  title="Sonraki Sayfa"
-          >
-            <li
-                    class="page-item page-link"
-                    class:disabled="{page === totalPage}"
-                    disabled="{page === totalPage}"
-                    on:click="{onLastPageClick}"
-            >
-
+        {#if checkPageLinkCurrentPage(page, totalPage)}
+          <a href="javascript:void(0);" title="Sonraki Sayfa">
+            <li class="page-item page-link" on:click="{onLastPageClick}">
               <span aria-hidden="true">&raquo;</span>
             </li>
           </a>
         {:else}
-          <a
-                  href="javascript:void(0);"
-                  title="Sonraki Sayfa"
-          >
-            <li
-                    class="page-item page-link"
-                    class:disabled="{page === totalPage}"
-                    disabled="{page === totalPage}"
-                    on:click="{onLastPageClick}"
-            >
-
-              <span aria-hidden="true">&raquo;</span>
-            </li>
-          </a>
+          <li class="page-item page-link disabled" disabled="true">
+            <span aria-hidden="true">&raquo;</span>
+          </li>
         {/if}
       </ul>
     </nav>
