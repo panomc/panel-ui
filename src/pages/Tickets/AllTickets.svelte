@@ -24,7 +24,6 @@
   }
 
   function routePage(pageNumber, forceReload = false) {
-    console.log("RoutePage called" + pageNumber);
     if (pageNumber !== page || forceReload) {
       showNetworkErrorOnCatch(
         () =>
