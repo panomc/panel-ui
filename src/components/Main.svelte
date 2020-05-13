@@ -1,13 +1,13 @@
 <script>
   import Navbar from "./Navbar.svelte";
   import Sidebar from "./Sidebar.svelte";
-  import Router from "./Router.svelte";
+  import Router, {isPageLoading, beforeRouteEnter} from "routve";
+  import RouterConfig from "../router.config";
   import PageLoading from "./PageLoading.svelte";
 
   import { onDestroy } from "svelte";
   import { get } from "svelte/store";
 
-  import { isPageLoading } from "../RouterStore";
   import { isPageInitialized } from "../Store";
 
   let showLoading = true;
@@ -20,8 +20,15 @@
     showLoading = !(!value && get(isPageInitialized));
   });
 
+  const beforeRouteEnterHandler = beforeRouteEnter((_, next)=> {
+    isPageInitialized.set(false);
+
+    next();
+  })
+
   onDestroy(isPageInitializedUnsubscribe);
   onDestroy(isPageLoadingUnsubscribe);
+  onDestroy(beforeRouteEnterHandler);
 
   export let hidden;
 </script>
@@ -32,7 +39,7 @@
   <main class="panel-content">
     <Navbar />
 
-    <Router hidden="{showLoading}" />
+    <Router hidden="{showLoading}" routerConfig="{RouterConfig}" />
 
     <PageLoading show="{showLoading}" />
   </main>

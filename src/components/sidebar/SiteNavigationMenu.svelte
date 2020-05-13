@@ -1,5 +1,5 @@
 <script>
-  import { path } from "../../RouterStore";
+  import { path } from "routve";
 
   import Icon from "svelte-awesome";
   import {

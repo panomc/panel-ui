@@ -7,7 +7,7 @@
     "start": "sirv public -s"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
+    "@babel/core": "^7.9.6",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
@@ -25,7 +25,6 @@
     "copy-to-clipboard": "^3.3.1",
     "jquery": "^3.5.0",
     "moment": "^2.24.0",
-    "page": "^1.11.5",
     "popper.js": "^1.16.1",
     "prettier": "^2.0.5",
     "prettier-plugin-svelte": "^1.1.0",
@@ -40,8 +39,7 @@
     "sirv-cli": "^0.4.5",
     "svelte": "^3.22.2",
     "svelte-awesome": "^2.2.1",
-    "svelte-loadable": "^1.4.0",
     "svelte-preprocess": "^3.7.1",
-    "svelte-spa-chunk": "^2.0.0"
+    "routve": "1.1.1"
   }
 }

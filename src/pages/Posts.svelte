@@ -1,5 +1,5 @@
 <script>
-  import Router from "../components/Router.svelte";
+  import Router from "routve";
 </script>
 
 <!-- Posts Page -->

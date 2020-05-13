@@ -3,13 +3,13 @@
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../util/api.util";
-  import { basePageInstance, path } from "../../RouterStore";
 
   import Icon from "svelte-awesome";
   import { faListAlt } from "@fortawesome/free-regular-svg-icons";
   import { faTicketAlt } from "@fortawesome/free-solid-svg-icons";
 
   import { get } from "svelte/store";
+  import { getPath, route } from "routve";
 
   export let page = undefined;
   export let pageType = "all";
@@ -48,14 +48,18 @@
 
                   if (
                     page === 1 &&
-                    get(path) !== "/panel/tickets" &&
-                    get(path) !== "/panel/tickets/" &&
-                    get(path) !== "/panel/tickets/" + pageType &&
-                    get(path) !== "/panel/tickets/" + pageType + "/"
+                    getPath() !== "/panel/tickets" &&
+                    getPath() !== "/panel/tickets/" &&
+                    getPath() !== "/panel/tickets/" + pageType &&
+                    getPath() !== "/panel/tickets/" + pageType + "/"
                   )
-                    basePageInstance("/panel/tickets/" + pageType + "/" + page);
+                    route(
+                      "/panel/tickets/" + pageType + "/" + page
+                    );
                   else if (page !== 1)
-                    basePageInstance("/panel/tickets/" + pageType + "/" + page);
+                    route(
+                      "/panel/tickets/" + pageType + "/" + page
+                    );
 
                   isPageInitialized.set(true);
 
@@ -66,7 +70,7 @@
                   isPageInitialized.set(true);
 
                   if (errorCode === "PAGE_NOT_FOUND") {
-                    basePageInstance("/panel/error-404");
+                    route("/panel/error-404");
                   }
 
                   resolve();

@@ -1,6 +1,5 @@
 <script>
-  import Router from "../components/Router.svelte";
-  import { path } from "../RouterStore";
+  import Router, {path} from "routve";
 
   function matching(path, pathName, startsWith = false) {
     return (
