@@ -1,7 +1,7 @@
 <script>
   import Navbar from "./Navbar.svelte";
   import Sidebar from "./Sidebar.svelte";
-  import Router, {isPageLoading, beforeRouteEnter} from "routve";
+  import Router, { isPageLoading, beforeRouteEnter } from "routve";
   import RouterConfig from "../router.config";
   import PageLoading from "./PageLoading.svelte";
 
@@ -20,11 +20,15 @@
     showLoading = !(!value && get(isPageInitialized));
   });
 
-  const beforeRouteEnterHandler = beforeRouteEnter((_, next)=> {
-    isPageInitialized.set(false);
+  let beforeRoutePath = null;
+
+  const beforeRouteEnterHandler = beforeRouteEnter((context, next) => {
+    if (beforeRoutePath !== context.pathname) isPageInitialized.set(false);
+
+    beforeRoutePath = context.pathname;
 
     next();
-  })
+  });
 
   onDestroy(isPageInitializedUnsubscribe);
   onDestroy(isPageLoadingUnsubscribe);
