@@ -27,9 +27,9 @@
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/ticketPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType(),
+          page_type: getStatusFromPageType()
         })
-          .then((response) => {
+          .then(response => {
             if (response.data.result === "ok") {
               ticketsCount = response.data.tickets_count;
               tickets = response.data.tickets;
@@ -192,11 +192,11 @@
     {/if}
     <!-- Pagination -->
     <Pagination
-      page="{page}"
-      totalPage="{totalPage}"
+      {page}
+      {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:onPageLinkClick="{(event) => routePage(event.detail.page)}"
+      on:onPageLinkClick="{event => routePage(event.detail.page)}"
     />
   </div>
 </div>

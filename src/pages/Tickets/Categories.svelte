@@ -75,9 +75,9 @@
 <!-- Action Menu -->
 <div class="row justify-content-between align-items-center mb-3">
   <div class="col-6">
-    <a class="btn btn-outline-primary" role="button" href="/panel/tickets">
+    <a class="btn btn-link" role="button" href="/panel/tickets">
       <Icon data="{faArrowLeft}" class="mr-1" />
-      Tüm Talepler
+      Talepler
     </a>
   </div>
   <div class="col-6 text-right">
@@ -89,8 +89,8 @@
       data-toggle="modal"
       type="button"
     >
-      <i aria-hidden="true" class="fa fa-plus fa-fw"></i>
-      <span class="d-md-inline d-none">Kategori Oluştur</span>
+      <Icon data="{faPlus}" />
+      <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
     </button>
   </div>
 </div>
@@ -100,8 +100,7 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title text-sm-left text-center">
-      {categoriesCount} Kategori -
-      <span class="text-primary">{page} / {totalPage}</span>
+      {categoriesCount} Talep Kategorisi
     </h5>
 
     <!-- No Category -->
