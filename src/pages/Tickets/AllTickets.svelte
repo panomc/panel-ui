@@ -30,9 +30,9 @@
           new Promise((resolve, reject) => {
             ApiUtil.post("panel/initPage/ticketPage", {
               page: pageNumber,
-              page_type: getStatusFromPageType(),
+              page_type: getStatusFromPageType()
             })
-              .then((response) => {
+              .then(response => {
                 if (response.data.result === "ok") {
                   ticketsCount = response.data.tickets_count;
                   tickets = response.data.tickets;
@@ -53,13 +53,9 @@
                     getPath() !== "/panel/tickets/" + pageType &&
                     getPath() !== "/panel/tickets/" + pageType + "/"
                   )
-                    route(
-                      "/panel/tickets/" + pageType + "/" + page
-                    );
+                    route("/panel/tickets/" + pageType + "/" + page);
                   else if (page !== 1)
-                    route(
-                      "/panel/tickets/" + pageType + "/" + page
-                    );
+                    route("/panel/tickets/" + pageType + "/" + page);
 
                   isPageInitialized.set(true);
 
@@ -119,13 +115,9 @@
 <!-- All Tickets -->
 <div class="card">
   <div class="card-body">
-    <div class="row justify-content-between">
+    <div class="row justify-content-between pb-3 align-items-center">
       <div class="col-md-6 col-12 text-md-left text-center">
-        <h5 class="card-title">
-          {ticketsCount} Talep - {page}
-          <span class="text-primary">/</span>
-          {totalPage}
-        </h5>
+        <h5 class="card-title mb-md-0">{ticketsCount} Talep</h5>
       </div>
       <div class="col-md-6 col-12 text-md-right text-center">
         <div class="btn-group">
@@ -184,23 +176,19 @@
             {#each tickets as ticket, index (ticket)}
               <tr>
                 <th scope="row">
-                  <div class="d-flex flex-row align-items-center">
-                    <div class="custom-control custom-checkbox">
-                      <input
-                        class="custom-control-input"
-                        id="postCheck{ticket.id}"
-                        type="checkbox"
-                      />
-                      <label
-                        class="custom-control-label"
-                        for="postCheck{ticket.id}"
-                      ></label>
-                    </div>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      class="custom-control-input"
+                      id="postCheck{ticket.id}"
+                      type="checkbox"
+                    />
+                    <label
+                      class="custom-control-label"
+                      for="postCheck{ticket.id}"
+                    ></label>
                   </div>
                 </th>
-                <td>
-                  <b class="text-muted" title="Talep NO">#{ticket.id}</b>
-                </td>
+                <td>#{ticket.id}</td>
                 <td>
                   <a href="/panel/tickets/{ticket.id}" title="Talebi Görüntüle">
                     {ticket.title}
@@ -208,19 +196,21 @@
                 </td>
                 <td>
                   {#if ticket.status === 1}
-                    <span class="text-center rounded border">Yanıtlandı</span>
-                  {:else if ticket.status === 2}
-                    <span class="text-center rounded bg-success text-white">
-                      Yeni
+                    <span class="badge badge-sunflower badge-pill">
+                      Yanıtlandı
                     </span>
+                  {:else if ticket.status === 2}
+                    <span class="badge badge-secondary badge-pill">Yeni</span>
                   {:else if ticket.status === 0}
-                    <span class="text-center rounded bg-danger text-white">
+                    <span class="badge badge-bittersweet badge-pill">
                       Kapalı
                     </span>
                   {/if}
                 </td>
                 <td>{ticket.category.title}</td>
-                <td>{ticket.writer.username}</td>
+                <td>
+                  <a href="#">{ticket.writer.username}</a>
+                </td>
                 <td>1 saat önce</td>
               </tr>
             {/each}
