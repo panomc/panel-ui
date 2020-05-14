@@ -197,8 +197,8 @@
     <Pagination
       page="{page}"
       totalPage="{totalPage}"
-      on:firstPageClick="{() => route(1)}"
-      on:lastPageClick="{() => route(totalPage)}"
+      on:firstPageClick="{() => routePage(1)}"
+      on:lastPageClick="{() => routePage(totalPage)}"
       on:onPageLinkClick="{(event) => routePage(event.detail.page)}"
     />
   </div>
