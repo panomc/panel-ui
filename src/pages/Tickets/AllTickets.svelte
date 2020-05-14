@@ -9,6 +9,7 @@
   import { faTicketAlt } from "@fortawesome/free-solid-svg-icons";
 
   import { getPath, route } from "routve";
+  import Pagination from "../../components/Pagination.svelte";
 
   export let page = undefined;
   export let pageType = "all";
@@ -16,7 +17,6 @@
   let ticketsCount = 0;
   let tickets = [];
   let totalPage = 1;
-  let pages = [];
 
   function getStatusFromPageType() {
     return pageType === "all" ? 1 : pageType === "waitingReply" ? 2 : 0;
@@ -29,19 +29,13 @@
           new Promise((resolve, reject) => {
             ApiUtil.post("panel/initPage/ticketPage", {
               page: pageNumber,
-              page_type: getStatusFromPageType()
+              page_type: getStatusFromPageType(),
             })
-              .then(response => {
+              .then((response) => {
                 if (response.data.result === "ok") {
                   ticketsCount = response.data.tickets_count;
                   tickets = response.data.tickets;
                   totalPage = response.data.total_page;
-
-                  pages = [];
-
-                  for (let i = 1; i <= totalPage; i++) {
-                    pages.push(i);
-                  }
 
                   page = pageNumber;
 
@@ -79,25 +73,7 @@
     }
   }
 
-  function onLastPageClick() {
-    routePage(totalPage);
-  }
-
-  function onFirstPageClick() {
-    routePage(1);
-  }
-
-  function onPageLinkClick(index) {
-    routePage(index);
-  }
-
-  function checkPageLinkCurrentPage(page, index) {
-    return page !== index;
-  }
-
-  routePage(
-    typeof page === "undefined" ? 1 : parseInt(page) === 0 ? 1 : parseInt(page)
-  );
+  routePage(typeof page === "undefined" ? 1 : parseInt(page));
 </script>
 
 <!-- Tickets Page -->
@@ -218,47 +194,13 @@
       </div>
     {/if}
     <!-- Pagination -->
-    <nav class="pt-3">
-      <ul class="pagination pagination-sm mb-0 justify-content-start">
-        {#if checkPageLinkCurrentPage(page, totalPage)}
-          <a class="page-link" href="javascript:void(0);" title="Önceki Sayfa">
-            <li class="page-item" on:click="{onFirstPageClick}">
-              <span aria-hidden="true">&laquo;</span>
-            </li>
-          </a>
-        {:else}
-          <li
-            class="page-item page-link disabled"
-            disabled="true"
-            on:click="{onFirstPageClick}"
-          >
-            <span aria-hidden="true">&laquo;</span>
-          </li>
-        {/if}
-
-        {#each pages as index}
-          {#if checkPageLinkCurrentPage(page, index)}
-            <a href="javascript:void(0);" on:click="{onPageLinkClick(index)}">
-              <li class="page-item page-link">{index}</li>
-            </a>
-          {:else}
-            <li class="page-item page-link">{index}</li>
-          {/if}
-        {/each}
-
-        {#if checkPageLinkCurrentPage(page, totalPage)}
-          <a href="javascript:void(0);" title="Sonraki Sayfa">
-            <li class="page-item page-link" on:click="{onLastPageClick}">
-              <span aria-hidden="true">&raquo;</span>
-            </li>
-          </a>
-        {:else}
-          <li class="page-item page-link disabled" disabled="true">
-            <span aria-hidden="true">&raquo;</span>
-          </li>
-        {/if}
-      </ul>
-    </nav>
+    <Pagination
+      page="{page}"
+      totalPage="{totalPage}"
+      on:firstPageClick="{() => route(1)}"
+      on:lastPageClick="{() => route(totalPage)}"
+      on:onPageLinkClick="{(event) => routePage(event.detail.page)}"
+    />
   </div>
 </div>
 
