@@ -146,16 +146,18 @@
         Bildirimler
       </h3>
     </div>
-    <div class="col text-right">
-      <button
-        type="button"
-        class="btn btn-link text-danger"
-        data-target="#ConfirmRemoveAllNotificationsModal"
-        data-toggle="modal"
-      >
-        <span class="d-md-inline d-none">Tümünü Sil</span>
-      </button>
-    </div>
+    {#if notifications.length !== 0}
+      <div class="col text-right">
+        <button
+          type="button"
+          class="btn btn-link text-danger"
+          data-target="#ConfirmRemoveAllNotificationsModal"
+          data-toggle="modal"
+        >
+          <span class="d-md-inline d-none">Tümünü Sil</span>
+        </button>
+      </div>
+    {/if}
   </div>
 
   <!-- All Notifications -->
