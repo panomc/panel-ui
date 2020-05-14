@@ -8,7 +8,6 @@
   import { faListAlt } from "@fortawesome/free-regular-svg-icons";
   import { faTicketAlt } from "@fortawesome/free-solid-svg-icons";
 
-  import { get } from "svelte/store";
   import { getPath, route } from "routve";
 
   export let page = undefined;
