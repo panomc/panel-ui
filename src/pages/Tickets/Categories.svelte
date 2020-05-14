@@ -179,7 +179,7 @@
       {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:onPageLinkClick="{event => routePage(event.detail.page)}"
+      on:pageLinkClick="{event => routePage(event.detail.page)}"
     />
   </div>
 </div>
