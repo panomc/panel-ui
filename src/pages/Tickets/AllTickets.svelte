@@ -24,52 +24,49 @@
 
   function routePage(pageNumber, forceReload = false) {
     if (pageNumber !== page || forceReload) {
-      showNetworkErrorOnCatch(
-        () =>
-          new Promise((resolve, reject) => {
-            ApiUtil.post("panel/initPage/ticketPage", {
-              page: pageNumber,
-              page_type: getStatusFromPageType(),
-            })
-              .then((response) => {
-                if (response.data.result === "ok") {
-                  ticketsCount = response.data.tickets_count;
-                  tickets = response.data.tickets;
-                  totalPage = response.data.total_page;
+      showNetworkErrorOnCatch((resolve, reject) => {
+        ApiUtil.post("panel/initPage/ticketPage", {
+          page: pageNumber,
+          page_type: getStatusFromPageType(),
+        })
+          .then((response) => {
+            if (response.data.result === "ok") {
+              ticketsCount = response.data.tickets_count;
+              tickets = response.data.tickets;
+              totalPage = response.data.total_page;
 
-                  page = pageNumber;
+              page = pageNumber;
 
-                  if (
-                    page === 1 &&
-                    getPath() !== "/panel/tickets" &&
-                    getPath() !== "/panel/tickets/" &&
-                    getPath() !== "/panel/tickets/" + pageType &&
-                    getPath() !== "/panel/tickets/" + pageType + "/"
-                  )
-                    route("/panel/tickets/" + pageType + "/" + page);
-                  else if (page !== 1)
-                    route("/panel/tickets/" + pageType + "/" + page);
+              if (
+                page === 1 &&
+                getPath() !== "/panel/tickets" &&
+                getPath() !== "/panel/tickets/" &&
+                getPath() !== "/panel/tickets/" + pageType &&
+                getPath() !== "/panel/tickets/" + pageType + "/"
+              )
+                route("/panel/tickets/" + pageType + "/" + page);
+              else if (page !== 1)
+                route("/panel/tickets/" + pageType + "/" + page);
 
-                  isPageInitialized.set(true);
+              isPageInitialized.set(true);
 
-                  resolve();
-                } else if (response.data.result === "error") {
-                  const errorCode = response.data.error;
+              resolve();
+            } else if (response.data.result === "error") {
+              const errorCode = response.data.error;
 
-                  isPageInitialized.set(true);
+              isPageInitialized.set(true);
 
-                  if (errorCode === "PAGE_NOT_FOUND") {
-                    route("/panel/error-404");
-                  }
+              if (errorCode === "PAGE_NOT_FOUND") {
+                route("/panel/error-404");
+              }
 
-                  resolve();
-                } else reject();
-              })
-              .catch(() => {
-                reject();
-              });
+              resolve();
+            } else reject();
           })
-      );
+          .catch(() => {
+            reject();
+          });
+      });
     }
   }
 

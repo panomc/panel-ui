@@ -1,7 +1,7 @@
-import {get, writable} from "svelte/store";
+import { get, writable } from "svelte/store";
 
-import {PanelSidebarStorageUtil} from "./util/storage.util";
-import {ApiUtil, NETWORK_ERROR} from "./util/api.util";
+import { PanelSidebarStorageUtil } from "./util/storage.util";
+import { ApiUtil, NETWORK_ERROR } from "./util/api.util";
 
 export const networkErrorCallbacks = writable([]);
 export const retryingNetworkErrors = writable(false);
@@ -68,7 +68,9 @@ export function getBasicData() {
 }
 
 export function showNetworkErrorOnCatch(callback) {
-  callback().catch(() => {
+  new Promise((resolve, reject) => {
+    callback(resolve, reject);
+  }).catch(() => {
     networkErrorCallbacks.update((value) => value.concat(callback));
   });
 }
@@ -96,7 +98,9 @@ export function resumeAfterNetworkError() {
   currentList.forEach((callback) => {
     doneList.push(callback);
 
-    callback()
+    new Promise((resolve, reject) => {
+      callback(resolve, reject);
+    })
       .then(() => {
         networkErrorCallbacks.update((list) =>
           list.filter((item) => item !== callback)

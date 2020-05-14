@@ -36,43 +36,37 @@
   let tickets_count = 0;
 
   function getInitialData() {
-    showNetworkErrorOnCatch(
-      () =>
-        new Promise((resolve, reject) => {
-          ApiUtil.get("panel/initPage/dashboard")
-            .then((response) => {
-              if (response.data.result === "ok") {
-                registered_player_count = response.data.registered_player_count;
-                post_count = response.data.post_count;
-                tickets_count = response.data.tickets_count;
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.get("panel/initPage/dashboard")
+        .then((response) => {
+          if (response.data.result === "ok") {
+            registered_player_count = response.data.registered_player_count;
+            post_count = response.data.post_count;
+            tickets_count = response.data.tickets_count;
 
-                getting_started_blocks = response.data.getting_started_blocks;
+            getting_started_blocks = response.data.getting_started_blocks;
 
-                isPageInitialized.set(true);
+            isPageInitialized.set(true);
 
-                resolve(response);
-              } else reject();
-            })
-            .catch(() => {
-              reject();
-            });
+            resolve(response);
+          } else reject();
         })
-    );
+        .catch(() => {
+          reject();
+        });
+    });
   }
 
   function onCloseGettingStartedCard() {
-    showNetworkErrorOnCatch(
-      () =>
-        new Promise((resolve, reject) => {
-          ApiUtil.post("panel/dashboard/closeGettingStartedCard", {})
-            .then((response) => {
-              resolve();
-            })
-            .catch(() => {
-              reject();
-            });
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/dashboard/closeGettingStartedCard", {})
+        .then((response) => {
+          resolve();
         })
-    );
+        .catch(() => {
+          reject();
+        });
+    });
   }
 
   getInitialData();
@@ -236,9 +230,7 @@
         </div>
         <div class="card d-flex flex-fill">
           <div class="card-body pt-3 pb-0 d-flex flex-row align-items-center">
-            <h2 class="text-sunflower font-weight-bolder m-0">
-              {post_count}
-            </h2>
+            <h2 class="text-sunflower font-weight-bolder m-0">{post_count}</h2>
             <strong class="pl-4">Yazılar</strong>
           </div>
           <PostsChart />

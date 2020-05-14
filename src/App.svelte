@@ -76,30 +76,27 @@
 
   let first = true;
 
-  showNetworkErrorOnCatch(
-    () =>
-      new Promise((resolve, reject) => {
-        getBasicData()
-          .then(() => {
-            basicDataInitialized = true;
+  showNetworkErrorOnCatch((resolve, reject) => {
+    getBasicData()
+      .then(() => {
+        basicDataInitialized = true;
 
-            if (
-              showSplash &&
-              get(isPageInitialized) &&
-              !waitAnimation &&
-              get(networkErrorCallbacks).length === 0 &&
-              !get(logoutLoading)
-            ) {
-              showSplash = false;
-            }
+        if (
+          showSplash &&
+          get(isPageInitialized) &&
+          !waitAnimation &&
+          get(networkErrorCallbacks).length === 0 &&
+          !get(logoutLoading)
+        ) {
+          showSplash = false;
+        }
 
-            resolve();
-          })
-          .catch(() => {
-            reject();
-          });
+        resolve();
       })
-  );
+      .catch(() => {
+        reject();
+      });
+  });
 </script>
 
 <!-- Splash Animation -->

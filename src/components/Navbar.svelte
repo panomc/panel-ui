@@ -48,20 +48,17 @@
   function onLogout() {
     logoutLoading.set(true);
 
-    showNetworkErrorOnCatch(
-      () =>
-        new Promise((resolve, reject) => {
-          ApiUtil.post("auth/logout", {})
-            .then(() => {
-              window.location.href = "/";
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("auth/logout", {})
+        .then(() => {
+          window.location.href = "/";
 
-              resolve();
-            })
-            .catch(() => {
-              reject();
-            });
+          resolve();
         })
-    );
+        .catch(() => {
+          reject();
+        });
+    });
   }
 
   Array.prototype.insert = function (index, item) {
@@ -138,60 +135,54 @@
   }
 
   function getQuickNotificationsAndRead(id) {
-    showNetworkErrorOnCatch(
-      () =>
-        new Promise((resolve, reject) => {
-          ApiUtil.get("panel/quickNotificationsAndRead")
-            .then((response) => {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.get("panel/quickNotificationsAndRead")
+        .then((response) => {
+          if (quickNotificationProcessID === id) {
+            if (response.data.result === "ok") {
+              setNotifications(response.data.notifications);
+              notificationsCount.set(response.data.notifications_count);
+
+              notificationsLoading = false;
+            }
+
+            setTimeout(() => {
               if (quickNotificationProcessID === id) {
-                if (response.data.result === "ok") {
-                  setNotifications(response.data.notifications);
-                  notificationsCount.set(response.data.notifications_count);
-
-                  notificationsLoading = false;
-                }
-
-                setTimeout(() => {
-                  if (quickNotificationProcessID === id) {
-                    startQuickNotificationsAndReadCountDown();
-                  }
-                }, 1000);
+                startQuickNotificationsAndReadCountDown();
               }
+            }, 1000);
+          }
 
-              resolve();
-            })
-            .catch(() => {
-              reject();
-            });
+          resolve();
         })
-    );
+        .catch(() => {
+          reject();
+        });
+    });
   }
 
   function getQuickNotifications(id) {
-    showNetworkErrorOnCatch(
-      () =>
-        new Promise((resolve, reject) => {
-          ApiUtil.get("panel/quickNotifications")
-            .then((response) => {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.get("panel/quickNotifications")
+        .then((response) => {
+          if (quickNotificationProcessID === id) {
+            if (response.data.result === "ok") {
+              notificationsCount.set(response.data.notifications_count);
+            }
+
+            setTimeout(() => {
               if (quickNotificationProcessID === id) {
-                if (response.data.result === "ok") {
-                  notificationsCount.set(response.data.notifications_count);
-                }
-
-                setTimeout(() => {
-                  if (quickNotificationProcessID === id) {
-                    startQuickNotificationsCountDown();
-                  }
-                }, 1000);
+                startQuickNotificationsCountDown();
               }
+            }, 1000);
+          }
 
-              resolve();
-            })
-            .catch(() => {
-              reject();
-            });
+          resolve();
         })
-    );
+        .catch(() => {
+          reject();
+        });
+    });
   }
 
   function startQuickNotificationsAndReadCountDown() {

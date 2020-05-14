@@ -55,29 +55,26 @@
   }
 
   function refreshKey() {
-    showNetworkErrorOnCatch(
-      () =>
-        new Promise((resolve, reject) => {
-          ApiUtil.get("panel/platformAuth/refreshKey")
-            .then((response) => {
-              if (response.data.result === "ok") {
-                currentServerPlatformMatchKey.set(response.data.key);
-                platformKeyRefreshedTime.set(response.data.timeStarted);
-              } else {
-                currentServerPlatformMatchKey.set("");
-              }
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.get("panel/platformAuth/refreshKey")
+        .then((response) => {
+          if (response.data.result === "ok") {
+            currentServerPlatformMatchKey.set(response.data.key);
+            platformKeyRefreshedTime.set(response.data.timeStarted);
+          } else {
+            currentServerPlatformMatchKey.set("");
+          }
 
-              if (firstStartCountDown) startCountDown();
+          if (firstStartCountDown) startCountDown();
 
-              resolve();
-            })
-            .catch(() => {
-              currentServerPlatformMatchKey.set("");
-
-              reject();
-            });
+          resolve();
         })
-    );
+        .catch(() => {
+          currentServerPlatformMatchKey.set("");
+
+          reject();
+        });
+    });
   }
 
   function updateCommandText() {
