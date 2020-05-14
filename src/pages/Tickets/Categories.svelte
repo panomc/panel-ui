@@ -1,7 +1,62 @@
 <script>
-  import { isPageInitialized } from "../../Store";
+  import { route, getPath } from "routve";
 
-  isPageInitialized.set(true);
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+  import ApiUtil from "../../util/api.util";
+  import Pagination from "../../components/Pagination.svelte";
+
+  export let page = undefined;
+
+  let categoriesCount = 0;
+  let categories = [];
+  let totalPage = 1;
+  let pages = [];
+
+  function routePage(pageNumber, forceReload = false) {
+    if (pageNumber !== page || forceReload) {
+      showNetworkErrorOnCatch((resolve, reject) => {
+        ApiUtil.post("panel/initPage/tickets/categoryPage", {
+          page: pageNumber,
+        })
+          .then((response) => {
+            if (response.data.result === "ok") {
+              categoriesCount = response.data.category_count;
+              categories = response.data.categories;
+              totalPage = response.data.total_page;
+
+              page = pageNumber;
+
+              isPageInitialized.set(true);
+
+              if (
+                page === 1 &&
+                getPath() !== "/panel/tickets/categories" &&
+                getPath() !== "/panel/tickets/categories/"
+              )
+                route("/panel/tickets/categories/" + page);
+              else if (page !== 1) route("/panel/tickets/categories/" + page);
+
+              resolve();
+            } else if (response.data.result === "error") {
+              const errorCode = response.data.error;
+
+              isPageInitialized.set(true);
+
+              if (errorCode === "PAGE_NOT_FOUND") {
+                route("/panel/error-404");
+              }
+
+              resolve();
+            } else reject();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    }
+  }
+
+  routePage(typeof page === "undefined" ? 1 : parseInt(page));
 </script>
 
 <!-- Ticket Categories Page -->
@@ -10,14 +65,10 @@
   <!-- Action Menu -->
   <div class="row justify-content-between align-items-center mb-3">
     <div class="col-6">
-      <router-link
-        class="btn btn-outline-primary"
-        role="button"
-        to="/panel/tickets/"
-      >
+      <a class="btn btn-outline-primary" role="button" href="/panel/tickets">
         <i aria-hidden="true" class="fa fa-arrow-left fa-fw"></i>
         Tüm Talepler
-      </router-link>
+      </a>
     </div>
     <div class="col-6 text-right">
 
@@ -39,128 +90,97 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title text-sm-left text-center">
-        <!--          {{ category_count }} -->
-        Kategori -
-        <!--        {{ page }}-->
-        <!--        {{ total_page }}-->
-        <span class="text-primary">/</span>
+        {categoriesCount} Kategori -
+        <span class="text-primary">{page} / {totalPage}</span>
       </h5>
 
       <!-- No Category -->
-      <div class="container text-center" v-if="category_count === 0">
-        <i aria-hidden="true" class="far fa-list-alt fa-4x text-glass m-3"></i>
-        <p class="text-gray">Burada gösterilecek içerik yok.</p>
-      </div>
+      {#if categoriesCount === 0}
+        <div class="container text-center">
+          <!--          TODO: icon to component-->
+          <i
+            aria-hidden="true"
+            class="far fa-list-alt fa-4x text-glass m-3"
+          ></i>
+          <p class="text-gray">Burada gösterilecek içerik yok.</p>
+        </div>
+      {/if}
 
       <!-- Tickets Table -->
-      <div class="table-responsive" v-if="category_count > 0">
-        <table class="table mb-0">
-          <thead>
-            <tr>
-              <th scope="col"></th>
-              <th class="min-w-200px" scope="col">Kategori</th>
-              <th scope="col">Açıklama</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!--          :key="index" v-for="(category, index) in categories"-->
-            <tr>
-              <th class="min-w-50px" scope="row">
-                <div class="dropdown">
-                  <a
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                    class="icon-link d-blcok m-auto"
-                    data-toggle="dropdown"
-                    href="javascript:void(0);"
-                    id="postAction"
-                  >
-                    <i aria-hidden="true" class="fa fa-ellipsis-v px-3"></i>
-                  </a>
-                  <div
-                    aria-labelledby="postAction"
-                    class="dropdown-menu dropdown-menu-right"
-                  >
+      {#if categoriesCount > 0}
+        <div class="table-responsive">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th class="min-w-200px" scope="col">Kategori</th>
+                <th scope="col">Açıklama</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#each categories as category, index (category)}
+                <tr>
+                  <th class="min-w-50px" scope="row">
+                    <div class="dropdown">
+                      <a
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        class="icon-link d-blcok m-auto"
+                        data-toggle="dropdown"
+                        href="javascript:void(0);"
+                        id="postAction"
+                      >
+                        <!--          TODO: icon to component-->
+                        <i aria-hidden="true" class="fa fa-ellipsis-v px-3"></i>
+                      </a>
+                      <div
+                        aria-labelledby="postAction"
+                        class="dropdown-menu dropdown-menu-right"
+                      >
 
-                    <!--                  @click="onDeleteClick(category.id)"-->
+                        <!--                  @click="onDeleteClick(category.id)"-->
+                        <a
+                          class="dropdown-item"
+                          data-target="#confirmDeleteCategory"
+                          data-toggle="modal"
+                          href="javascript:void(0);"
+                        >
+                          <!--          TODO: icon to component-->
+                          <i
+                            aria-hidden="true"
+                            class="fa fa-trash fa-fw text-danger"
+                          ></i>
+                          Sil
+                        </a>
+                      </div>
+                    </div>
+                  </th>
+                  <td>
+                    <!--              @click="onShowEditCategoryButtonClick(index)"-->
                     <a
-                      class="dropdown-item"
-                      data-target="#confirmDeleteCategory"
+                      data-target="#addEditCategory"
                       data-toggle="modal"
                       href="javascript:void(0);"
+                      title="Kategoriyi Düzenle"
                     >
-                      <i
-                        aria-hidden="true"
-                        class="fa fa-trash fa-fw text-danger"
-                      ></i>
-                      Sil
+                      {category.title}
                     </a>
-                  </div>
-                </div>
-              </th>
-              <td>
-                <!--              @click="onShowEditCategoryButtonClick(index)"-->
-                <a
-                  data-target="#addEditCategory"
-                  data-toggle="modal"
-                  href="javascript:void(0);"
-                  title="Kategoriyi Düzenle"
-                >
-                  <!--                  {{ category.title }}-->
-                </a>
-              </td>
-              <td>
-                <!--                {{ category.description }}-->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
+                  </td>
+                  <td>{category.description}</td>
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+        </div>
+      {/if}
       <!-- Pagination -->
-      <nav class="pt-3">
-        <ul class="pagination pagination-sm mb-0 justify-content-start">
-
-          <!--          :class="{ 'disabled': page === 1 }"-->
-          <!--          @click="routePage(1)"-->
-          <li class="page-item">
-            <a
-              class="page-link"
-              href="javascript:void(0);"
-              title="Önceki Sayfa"
-            >
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-
-          <!--          :class="{ 'active': index === page }"-->
-          <!--          :key="index"-->
-          <!--          @click="routePage(index)"-->
-          <!--          v-for="index in total_page"-->
-          <li class="page-item">
-            <a
-              class="page-link"
-              href="javascript:void(0);"
-              v-if="page !== index"
-            >
-              <!--                {{index}}-->
-            </a>
-            <!--            {{index}}-->
-            <a class="page-link" v-if="page === index"></a>
-          </li>
-          <!--          :class="{ 'disabled': page === total_page }"-->
-          <!--          @click="routePage(total_page)"-->
-          <li class="page-item">
-            <a
-              class="page-link"
-              href="javascript:void(0);"
-              title="Sonraki Sayfa"
-            >
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <Pagination
+        page="{page}"
+        totalPage="{totalPage}"
+        on:firstPageClick="{() => routePage(1)}"
+        on:lastPageClick="{() => routePage(totalPage)}"
+        on:onPageLinkClick="{(event) => routePage(event.detail.page)}"
+      />
     </div>
   </div>
 
