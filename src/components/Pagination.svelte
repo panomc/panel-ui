@@ -33,17 +33,13 @@
 <nav class="pt-3">
   <ul class="pagination pagination-sm mb-0 justify-content-start">
     {#if page !== 1}
-      <a class="page-link" href="javascript:void(0);" title="Önceki Sayfa">
-        <li class="page-item" on:click="{onFirstPageClick}">
+      <a class="page-link" href="javascript:void(0);" title="Önceki Sayfa" on:click="{onFirstPageClick}">
+        <li class="page-item">
           <span aria-hidden="true">&laquo;</span>
         </li>
       </a>
     {:else}
-      <li
-        class="page-item page-link disabled"
-        disabled="true"
-        on:click="{onFirstPageClick}"
-      >
+      <li class="page-item page-link disabled" disabled="true">
         <span aria-hidden="true">&laquo;</span>
       </li>
     {/if}
@@ -59,8 +55,8 @@
     {/each}
 
     {#if page !== totalPage}
-      <a href="javascript:void(0);" title="Sonraki Sayfa">
-        <li class="page-item page-link" on:click="{onLastPageClick}">
+      <a href="javascript:void(0);" title="Sonraki Sayfa" on:click="{onLastPageClick}">
+        <li class="page-item page-link">
           <span aria-hidden="true">&raquo;</span>
         </li>
       </a>
