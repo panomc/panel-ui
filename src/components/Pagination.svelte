@@ -32,38 +32,46 @@
 
 <nav class="pt-3">
   <ul class="pagination pagination-sm mb-0 justify-content-start">
-    {#if parseInt(page) !== 1}
-      <a class="page-link" href="javascript:void(0);" title="Önceki Sayfa" on:click="{onFirstPageClick}">
-        <li class="page-item">
-          <span aria-hidden="true">&laquo;</span>
-        </li>
+    <li class="page-item" class:disabled="{parseInt(page) === 1}">
+      <a
+        class="page-link"
+        href="javascript:void(0);"
+        title="Önceki Sayfa"
+        on:click="{onFirstPageClick}"
+        aria-hidden="{parseInt(page) === 1}"
+      >
+        &laquo;
       </a>
-    {:else}
-      <li class="page-item page-link disabled" disabled="true">
-        <span aria-hidden="true">&laquo;</span>
-      </li>
-    {/if}
+    </li>
 
     {#each pages as index}
-      {#if parseInt(page) !== index}
-        <a href="javascript:void(0);" on:click="{onPageLinkClick(index)}">
-          <li class="page-item page-link">{index}</li>
+      <li
+        class="page-item"
+        class:disabled="{parseInt(page) === index}"
+        class:active="{parseInt(page) === index}"
+        aria-current="{parseInt(page) === index ? 'page' : ''}"
+      >
+        <a
+          class="page-link"
+          href="javascript:void(0);"
+          on:click="{onPageLinkClick(index)}"
+          aria-hidden="{parseInt(page) === index}"
+        >
+          {index}
         </a>
-      {:else}
-        <li class="page-item page-link">{index}</li>
-      {/if}
+      </li>
     {/each}
 
-    {#if parseInt(page) !== totalPage}
-      <a href="javascript:void(0);" title="Sonraki Sayfa" on:click="{onLastPageClick}">
-        <li class="page-item page-link">
-          <span aria-hidden="true">&raquo;</span>
-        </li>
+    <li class="page-item" class:disabled="{parseInt(page) === totalPage}">
+      <a
+        class="page-link"
+        href="javascript:void(0);"
+        title="Sonraki Sayfa"
+        on:click="{onLastPageClick}"
+        aria-hidden="{parseInt(page) === totalPage}"
+      >
+        &raquo;
       </a>
-    {:else}
-      <li class="page-item page-link disabled" disabled="true">
-        <span aria-hidden="true">&raquo;</span>
-      </li>
-    {/if}
+    </li>
   </ul>
 </nav>
