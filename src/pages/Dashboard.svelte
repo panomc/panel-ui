@@ -5,7 +5,7 @@
   import {
     faBell,
     faDotCircle,
-    faUser,
+    faUser
   } from "@fortawesome/free-regular-svg-icons";
   import {
     faPlus,
@@ -15,7 +15,7 @@
     faUserCog,
     faPuzzlePiece,
     faPalette,
-    faBookOpen,
+    faBookOpen
   } from "@fortawesome/free-solid-svg-icons";
   import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 
@@ -28,7 +28,7 @@
   import PostsChart from "../components/charts/Dashboard/PostsChart.svelte";
 
   let getting_started_blocks = {
-    welcome_board: false,
+    welcome_board: false
   };
 
   let registered_player_count = 0;
@@ -38,7 +38,7 @@
   function getInitialData() {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get("panel/initPage/dashboard")
-        .then((response) => {
+        .then(response => {
           if (response.data.result === "ok") {
             registered_player_count = response.data.registered_player_count;
             post_count = response.data.post_count;
@@ -60,7 +60,7 @@
   function onCloseGettingStartedCard() {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post("panel/dashboard/closeGettingStartedCard", {})
-        .then((response) => {
+        .then(response => {
           resolve();
         })
         .catch(() => {
@@ -224,14 +224,14 @@
             <h2 class="text-bittersweet font-weight-bolder m-0">
               {tickets_count}
             </h2>
-            <strong class="pl-4">Talepler</strong>
+            <strong class="pl-4">Talep</strong>
           </div>
           <TicketsChart />
         </div>
         <div class="card d-flex flex-fill">
           <div class="card-body pt-3 pb-0 d-flex flex-row align-items-center">
             <h2 class="text-sunflower font-weight-bolder m-0">{post_count}</h2>
-            <strong class="pl-4">Yazılar</strong>
+            <strong class="pl-4">Yazı</strong>
           </div>
           <PostsChart />
         </div>

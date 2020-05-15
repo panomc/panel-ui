@@ -149,7 +149,7 @@
                         data-toggle="modal"
                         href="javascript:void(0);"
                       >
-                        <Icon data="{faTrash}" class="text-danger" />
+                        <Icon data="{faTrash}" class="text-danger mr-1" />
                         Sil
                       </a>
                     </div>
