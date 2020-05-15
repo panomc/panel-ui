@@ -47,7 +47,6 @@
     {#each pages as index}
       <li
         class="page-item"
-        class:disabled="{parseInt(page) === index}"
         class:active="{parseInt(page) === index}"
         aria-current="{parseInt(page) === index ? 'page' : ''}"
       >
