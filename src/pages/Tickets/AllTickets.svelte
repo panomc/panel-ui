@@ -1,3 +1,7 @@
+<script context="module">
+  let checkedList = [];
+</script>
+
 <script>
   import ConfirmCloseTicketModal from "../../components/modals/ConfirmCloseTicketModal.svelte";
 
@@ -27,9 +31,9 @@
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/ticketPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType()
+          page_type: getStatusFromPageType(),
         })
-          .then(response => {
+          .then((response) => {
             if (response.data.result === "ok") {
               ticketsCount = response.data.tickets_count;
               tickets = response.data.tickets;
@@ -153,6 +157,7 @@
                       class="custom-control-input"
                       id="postCheck{ticket.id}"
                       type="checkbox"
+                      bind:checked="{checkedList[ticket.id]}"
                     />
                     <label
                       class="custom-control-label"
@@ -196,7 +201,7 @@
       {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{event => routePage(event.detail.page)}"
+      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
     />
   </div>
 </div>
