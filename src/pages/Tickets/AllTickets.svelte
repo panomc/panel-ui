@@ -1,5 +1,7 @@
 <script context="module">
-  let checkedList = [];
+  import { writable } from "svelte/store";
+
+  let checkedList = writable([]);
 </script>
 
 <script>
@@ -157,7 +159,7 @@
                       class="custom-control-input"
                       id="postCheck{ticket.id}"
                       type="checkbox"
-                      bind:checked="{checkedList[ticket.id]}"
+                      bind:checked="{$checkedList[ticket.id]}"
                     />
                     <label
                       class="custom-control-label"
