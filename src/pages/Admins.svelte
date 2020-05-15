@@ -14,14 +14,10 @@
   <div class="row mb-3">
     <div class="col-md-4 col-6"></div>
     <div class="col text-right">
-      <router-link
-        class="btn btn-primary"
-        role="button"
-        to="/panel/posts/create-post"
-      >
-        <Icon data="{faPlus}" class="mr-2" />
-        <span class="d-md-inline d-none">Yönetici Ekle</span>
-      </router-link>
+      <a class="btn btn-primary" role="button" href="/panel/posts/create-post">
+        <Icon data="{faPlus}" />
+        <span class="d-md-inline d-none ml-1">Yönetici Ekle</span>
+      </a>
     </div>
   </div>
 
