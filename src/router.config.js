@@ -138,7 +138,10 @@ export default {
         "/categories/:page": {
           component: () => import("./pages/Tickets/Categories.svelte"),
         },
-      },
+        "/ticket/:id": {
+          component: () => import("./pages/Tickets/TicketDetail.svelte")
+        }
+      }
     },
     "/notifications": {
       component: () => import("./pages/Notifications.svelte"),
