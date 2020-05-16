@@ -7,7 +7,7 @@
 <div
   aria-hidden="true"
   class="modal fade"
-  id="confirmCloseTicket"
+  id="confirmDeleteTicket"
   role="dialog"
   tabindex="-1"
 >
@@ -21,7 +21,7 @@
             class="d-block m-auto text-gray"
           />
         </div>
-        Bu talebi/talepleri kapatmak istediğinizden emin misiniz?
+        Bu talebi/talepleri kalıcı olarak silmek istediğinizden emin misiniz?
       </div>
       <div class="modal-footer">
         <button

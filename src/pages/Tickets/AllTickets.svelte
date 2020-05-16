@@ -6,13 +6,14 @@
 
 <script>
   import ConfirmCloseTicketModal from "../../components/modals/ConfirmCloseTicketModal.svelte";
+  import ConfirmDeleteTicketModal from "../../components/modals/ConfirmDeleteTicketModal.svelte";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../util/api.util";
 
   import Icon from "svelte-awesome";
   import { faListAlt } from "@fortawesome/free-regular-svg-icons";
-  import { faTicketAlt } from "@fortawesome/free-solid-svg-icons";
+  import { faTicketAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 
   import { getPath, route } from "routve";
   import Pagination from "../../components/Pagination.svelte";
@@ -33,9 +34,9 @@
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/ticketPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType(),
+          page_type: getStatusFromPageType()
         })
-          .then((response) => {
+          .then(response => {
             if (response.data.result === "ok") {
               ticketsCount = response.data.tickets_count;
               tickets = response.data.tickets;
@@ -87,6 +88,29 @@
       <Icon data="{faListAlt}" class="mr-1" />
       Kategoriler
     </a>
+  </div>
+  <div class="col d-flex">
+    <div class=" ml-auto animated fadeIn faster">
+      <a
+        class="btn btn-outline-primary"
+        role="button"
+        data-target="#confirmCloseTicket"
+        data-toggle="modal"
+        href="javascript:void(0);"
+      >
+        Kapat
+      </a>
+      <a
+        class="btn btn-outline-danger"
+        role="button"
+        data-target="#confirmDeleteTicket"
+        data-toggle="modal"
+        href="javascript:void(0);"
+      >
+        <Icon data="{faTrash}" class="mr-1" />
+        Sil
+      </a>
+    </div>
   </div>
 </div>
 
@@ -203,9 +227,10 @@
       {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
+      on:pageLinkClick="{event => routePage(event.detail.page)}"
     />
   </div>
 </div>
 
 <ConfirmCloseTicketModal />
+<ConfirmDeleteTicketModal />
