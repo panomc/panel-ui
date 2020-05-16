@@ -34,9 +34,9 @@
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/ticketPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType()
+          page_type: getStatusFromPageType(),
         })
-          .then(response => {
+          .then((response) => {
             if (response.data.result === "ok") {
               ticketsCount = response.data.tickets_count;
               tickets = response.data.tickets;
@@ -77,6 +77,16 @@
     }
   }
 
+  let firstLoad = true;
+
+  function getListOfChecked(list) {
+    const result = list.filter((item) => item);
+
+    if (result.length > 0) firstLoad = false;
+
+    return result;
+  }
+
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
 </script>
 
@@ -90,7 +100,11 @@
     </a>
   </div>
   <div class="col d-flex">
-    <div class=" ml-auto animated fadeIn faster">
+    <div
+      class:d-none="{firstLoad}"
+      class="ml-auto animated {getListOfChecked($checkedList).length > 0 ? 'fadeIn' : 'fadeOut'}
+      faster"
+    >
       <a
         class="btn btn-outline-primary"
         role="button"
@@ -227,7 +241,7 @@
       {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{event => routePage(event.detail.page)}"
+      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
     />
   </div>
 </div>
