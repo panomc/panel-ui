@@ -1,30 +1,106 @@
 <script>
-  import { isPageInitialized } from "../../Store";
+  import Pagination from "../../components/Pagination.svelte";
 
-  isPageInitialized.set(true);
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+  import ApiUtil from "../../util/api.util";
+  import tooltip from "../../util/tooltip.util";
+
+  import { getPath, route } from "routve";
+
+  export let page = undefined;
+  export let pageType = "published";
+
+  let postsCount = 0;
+  let posts = [];
+  let totalPage = 1;
+  let host = "";
+
+  function getStatusFromPageType() {
+    return pageType === "published" ? 1 : pageType === "draft" ? 2 : 0;
+  }
+
+  function routePage(pageNumber, forceReload = false) {
+    if (pageNumber !== page || forceReload) {
+      showNetworkErrorOnCatch((resolve, reject) => {
+        ApiUtil.post("panel/initPage/postPage", {
+          page: pageNumber,
+          page_type: getStatusFromPageType(),
+        })
+          .then((response) => {
+            if (response.data.result === "ok") {
+              postsCount = response.data.posts_count;
+              posts = response.data.posts;
+              totalPage = response.data.total_page;
+
+              page = pageNumber;
+
+              host = response.data.host;
+
+              isPageInitialized.set(true);
+
+              if (
+                page === 1 &&
+                getPath() !== "/panel/posts" &&
+                getPath() !== "/panel/posts/" &&
+                getPath() !== "/panel/posts/" + pageType &&
+                getPath() !== "/panel/posts/" + pageType + "/"
+              )
+                route("/panel/posts/" + pageType + "/" + page);
+              else if (page !== 1)
+                route("/panel/posts/" + pageType + "/" + page);
+            } else if (response.data.result === "error") {
+              const errorCode = response.data.error;
+
+              isPageInitialized.set(true);
+
+              if (errorCode === "PAGE_NOT_FOUND") {
+                route("/panel/error-404");
+              }
+
+              reject(errorCode);
+            } else reject();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    }
+  }
+
+  function getFormattedDate(date) {
+    const dateFromNumberDate = new Date(date * 1000);
+
+    return (
+      dateFromNumberDate.getDate() +
+      "." +
+      (dateFromNumberDate.getMonth() + 1) +
+      "." +
+      dateFromNumberDate.getFullYear() +
+      " - " +
+      dateFromNumberDate.getHours() +
+      ":" +
+      dateFromNumberDate.getMinutes() +
+      ":" +
+      dateFromNumberDate.getSeconds()
+    );
+  }
+
+  routePage(typeof page === "undefined" ? 1 : parseInt(page));
 </script>
 
 <!-- Action Menu -->
 <div class="row mb-3">
   <div class="col-md-4 col-6">
-    <router-link
-      class="btn btn-link"
-      role="button"
-      to="/panel/posts/categories"
-    >
+    <a class="btn btn-link" role="button" href="/panel/posts/categories">
       <i aria-hidden="true" class="far fa-list-alt fa-fw"></i>
       <span class="d-md-inline d-none">Kategoriler</span>
-    </router-link>
+    </a>
   </div>
   <div class="col text-right">
-    <router-link
-      class="btn btn-primary"
-      role="button"
-      to="/panel/posts/create-post"
-    >
+    <a class="btn btn-primary" role="button" href="/panel/posts/create-post">
       <i aria-hidden="true" class="fa fa-plus fa-fw"></i>
       <span class="d-md-inline d-none">Yazı Oluştur</span>
-    </router-link>
+    </a>
   </div>
 </div>
 
@@ -35,225 +111,192 @@
     <div class="row justify-content-between">
       <div class="col-md-6 col-12 text-md-left text-center">
         <h5 class="card-title">
-          <!--            {{ posts_count }} -->
-          Yazı -
-          <!--          {{ page }}/{{ total_page }}-->
-          <span class="text-primary"></span>
+          {postsCount} Yazı -
+          <span class="text-primary">{page}/{totalPage}</span>
         </h5>
       </div>
       <div class="col-md-6 col-12 text-md-right text-center">
         <div class="btn-group">
 
-          <!--          :class="{ 'active': page_type === 'published' }"-->
-          <router-link
+          <a
+            class:active="{pageType === 'published'}"
             class="btn btn-sm btn-outline-light btn-link"
             role="button"
-            to="/panel/posts/published"
+            href="/panel/posts/published"
           >
             Yayınlanmış
-          </router-link>
-          <!--          :class="{ 'active': page_type === 'draft' }"-->
-          <router-link
+          </a>
+          <a
+            class:active="{pageType === 'draft'}"
             class="btn btn-sm btn-outline-light btn-link"
             role="button"
-            to="/panel/posts/draft"
+            href="/panel/posts/draft"
           >
             Taslak
-          </router-link>
+          </a>
 
-          <!--          :class="{ 'active': page_type === 'trash' }"-->
-          <router-link
+          <a
+            class:active="{pageType === 'trash'}"
             class="btn btn-sm btn-outline-light btn-link text-danger"
             role="button"
-            to="/panel/posts/trash"
+            href="/panel/posts/trash"
           >
             Çöp
-          </router-link>
+          </a>
         </div>
       </div>
     </div>
 
     <!-- No Posts -->
-    <!--    v-if="posts_count === 0"-->
-    <div class="container text-center">
-      <i aria-hidden="true" class="far fa-sticky-note fa-4x text-glass m-3"></i>
-      <p class="text-gray">Burada içerik yok.</p>
-    </div>
-
-    <!-- Posts Table -->
-    <!--    v-if="posts_count !== 0"-->
-    <div class="table-responsive">
-      <table class="table mb-0">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th class="min-w-200px" scope="col">Başlık</th>
-            <th scope="col">Kategori</th>
-            <th scope="col">Yazar</th>
-            <th scope="col">Görüntülenme</th>
-            <th scope="col">Tarih</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!--        :key="index" v-for="(post, index) in posts"-->
-          <tr>
-            <th class="min-w-50px" scope="row">
-              <div class="dropdown position-absolute">
-                <a
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  class="icon-link d-block m-auto"
-                  data-toggle="dropdown"
-                  href="javascript:void(0);"
-                  id="postAction"
-                  title="Eylemler"
-                >
-                  <i aria-hidden="true" class="fa fa-ellipsis-v px-3"></i>
-                </a>
-                <div
-                  aria-labelledby="postAction"
-                  class="dropdown-menu dropdown-menu-right"
-                >
-                  <router-link class="dropdown-item" target="_blank" to="/">
-                    <i
-                      aria-hidden="true"
-                      class="fa fa-eye fa-fw text-primary"
-                    ></i>
-                    Görüntüle
-                  </router-link>
-                  <!--                v-if="page_type !== 'draft'"-->
-                  <!--                :disabled="drafting"-->
-                  <!--                @click="moveToDraft(index)"-->
-                  <a class="dropdown-item" href="javascript:void(0);">
-<!--                    v-if="!drafting"-->
-                    <span>
-                      <i
-                        aria-hidden="true"
-                        class="fa fa-bookmark fa-fw text-primary"
-                      ></i>
-                      Taslaklara Taşı
-                    </span>
-
-<!--                    v-if="drafting"-->
+    {#if postsCount === 0}
+      <div class="container text-center">
+        <i
+          aria-hidden="true"
+          class="far fa-sticky-note fa-4x text-glass m-3"
+        ></i>
+        <p class="text-gray">Burada içerik yok.</p>
+      </div>
+    {:else}
+      <!-- Posts Table -->
+      <div class="table-responsive">
+        <table class="table mb-0">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th class="min-w-200px" scope="col">Başlık</th>
+              <th scope="col">Kategori</th>
+              <th scope="col">Yazar</th>
+              <th scope="col">Görüntülenme</th>
+              <th scope="col">Tarih</th>
+            </tr>
+          </thead>
+          <tbody>
+            {#each posts as post, index (post)}
+              <tr>
+                <th class="min-w-50px" scope="row">
+                  <div class="dropdown position-absolute">
+                    <a
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      class="icon-link d-block m-auto"
+                      data-toggle="dropdown"
+                      href="javascript:void(0);"
+                      id="postAction"
+                      title="Eylemler"
+                    >
+                      <i aria-hidden="true" class="fa fa-ellipsis-v px-3"></i>
+                    </a>
                     <div
-                      class="spinner-border spinner-border-sm text-primary"
-                      role="status"
-                    ></div>
-                  </a>
+                      aria-labelledby="postAction"
+                      class="dropdown-menu dropdown-menu-right"
+                    >
+                      <a class="dropdown-item" target="_blank" href="/">
+                        <i
+                          aria-hidden="true"
+                          class="fa fa-eye fa-fw text-primary"
+                        ></i>
+                        Görüntüle
+                      </a>
+                      <!--                v-if="page_type !== 'draft'"-->
+                      <!--                :disabled="drafting"-->
+                      <!--                @click="moveToDraft(index)"-->
+                      <a class="dropdown-item" href="javascript:void(0);">
+                        <!--                    v-if="!drafting"-->
+                        <span>
+                          <i
+                            aria-hidden="true"
+                            class="fa fa-bookmark fa-fw text-primary"
+                          ></i>
+                          Taslaklara Taşı
+                        </span>
 
-                  <!--                :disabled="publishing"-->
-                  <!--                @click="publish(post.id)"-->
-<!--                  v-if="page_type !== 'published'"-->
+                        <!--                    v-if="drafting"-->
+                        <div
+                          class="spinner-border spinner-border-sm text-primary"
+                          role="status"
+                        ></div>
+                      </a>
+
+                      <!--                :disabled="publishing"-->
+                      <!--                @click="publish(post.id)"-->
+                      <!--                  v-if="page_type !== 'published'"-->
+                      <a class="dropdown-item" href="javascript:void(0);">
+                        <!--                    v-if="!publishing"-->
+                        <span>
+                          <i
+                            aria-hidden="true"
+                            class="fa fa-globe-americas fa-fw text-primary"
+                          ></i>
+                          Yayınla
+                        </span>
+
+                        <!--                  v-if="publishing"-->
+                        <div
+                          class="spinner-border spinner-border-sm text-primary"
+                          role="status"
+                        ></div>
+                      </a>
+
+                      <!--                @click="deletingPostID = post.id"-->
+                      <a
+                        class="dropdown-item"
+                        data-target="#confirmDeletePost"
+                        data-toggle="modal"
+                        href="javascript:void(0);"
+                      >
+                        <i
+                          aria-hidden="true"
+                          class="fa fa-trash fa-fw text-danger"
+                        ></i>
+                        Sil
+                      </a>
+                    </div>
+                  </div>
+                </th>
+                <td>
                   <a
-                    class="dropdown-item"
-                    href="javascript:void(0);"
+                    href="{'/panel/posts/post/' + post.id}"
+                    title="Yazıyı Düzenle"
                   >
-<!--                    v-if="!publishing"-->
-                    <span>
-                      <i
-                        aria-hidden="true"
-                        class="fa fa-globe-americas fa-fw text-primary"
-                      ></i>
-                      Yayınla
-                    </span>
-
-                    <!--                  v-if="publishing"-->
-                    <div
-                      class="spinner-border spinner-border-sm text-primary"
-                      role="status"
-                    ></div>
+                    {post.title}
                   </a>
-
-                  <!--                @click="deletingPostID = post.id"-->
-                  <a
-                    class="dropdown-item"
-                    data-target="#confirmDeletePost"
-                    data-toggle="modal"
-                    href="javascript:void(0);"
+                </td>
+                <td>
+                  <span
+                    style="background: #{post.category.color}"
+                    class="border px-3 rounded"
                   >
-                    <i
-                      aria-hidden="true"
-                      class="fa fa-trash fa-fw text-danger"
-                    ></i>
-                    Sil
+                    {post.category.title}
+                  </span>
+                </td>
+                <td>
+
+                  <a title="Oyuncu Profiline Git" href="#" use:tooltip={['top', post.writer.username]}>
+                    <img
+                      alt="Oyuncu Adı"
+                      class="rounded-circle border"
+                      height="32"
+                      src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/32"
+                      width="32"
+                    />
                   </a>
-                </div>
-              </div>
-            </th>
-            <td>
-              <router-link
-                :to="'/panel/posts/post/' + post.id"
-                title="Yazıyı Düzenle"
-              >
-                <!--                {{ post.title }}-->
-              </router-link>
-            </td>
-            <td>
-
-              <!--            :style="{ background: '#' + post.category.color }"-->
-              <span class="border px-3 rounded">
-                <!--                  {{ post.category.title }}-->
-              </span>
-            </td>
-            <td>
-
-<!--              v-tooltip:top="'Username'"-->
-              <router-link
-                title="Oyuncu Profiline Git"
-                to="#"
-              >
-                <img
-                  alt="Oyuncu Adı"
-                  class="rounded-circle border"
-                  height="32"
-                  src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/32"
-                  width="32"
-                />
-              </router-link>
-            </td>
-            <td>0</td>
-            <!--          {{ getFormattedDate(post.date) }}-->
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
+                </td>
+                <td>0</td>
+                <td>{getFormattedDate(post.date)}</td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
+    {/if}
     <!-- Pagination -->
-    <nav class="pt-3">
-      <ul class="pagination pagination-sm mb-0 justify-content-start">
-
-        <!--        :class="{ 'disabled': page === 1 }"-->
-        <!--        @click="routePage(1)"-->
-        <li class="page-item">
-          <a class="page-link" href="javascript:void(0);" title="Önceki Sayfa">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-
-        <!--        :class="{ 'active': index === page }"-->
-        <!--        :key="index"-->
-        <!--        @click="routePage(index)"-->
-        <!--        v-for="index in total_page"-->
-        <li class="page-item">
-          <!--          v-if="page !== index"-->
-          <a class="page-link" href="javascript:void(0);">
-            <!--              {{index}}-->
-          </a>
-          <!--          v-if="page === index"-->
-          <!--          {{index}}-->
-          <a class="page-link"></a>
-        </li>
-
-        <!--        :class="{ 'disabled': page === total_page }"-->
-        <!--        @click="routePage(total_page)"-->
-        <li class="page-item">
-          <a class="page-link" href="javascript:void(0);" title="Sonraki Sayfa">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <Pagination
+      {page}
+      {totalPage}
+      on:firstPageClick="{() => routePage(1)}"
+      on:lastPageClick="{() => routePage(totalPage)}"
+      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
+    />
   </div>
 </div>
 
