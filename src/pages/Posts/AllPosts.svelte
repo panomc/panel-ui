@@ -1,5 +1,6 @@
 <script>
   import Pagination from "../../components/Pagination.svelte";
+  import ConfirmDeletePostModal from "../../components/modals/ConfirmDeletePostModal.svelte";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../util/api.util";
@@ -302,47 +303,4 @@
   </div>
 </div>
 
-<!-- Confirm Delete Post Modal -->
-<div
-  aria-hidden="true"
-  class="modal fade"
-  id="confirmDeletePost"
-  role="dialog"
-  tabindex="-1"
->
-  <div class="modal-dialog modal-dialog-centered" role="dialog">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-        <div class="pb-3">
-          <i
-            aria-hidden="true"
-            class="fa fa-question-circle fa-4x d-block m-auto text-gray"
-          ></i>
-        </div>
-        <!--        v-text="page_type === 'trash' ? 'Bu yazıyı kalıcı olarak silmek istediğinizden emin misiniz?' : 'Bu yazıyı çöp kutusuna taşımak istediğinizden emin misiniz?'"-->
-        <span></span>
-      </div>
-      <div class="modal-footer">
-        <button
-          class="btn btn-outline-primary w-100"
-          data-dismiss="modal"
-          type="button"
-        >
-          Hayır
-        </button>
-
-        <!--        :disabled="deleting"-->
-        <!--        @click="page_type === 'trash' ? deletePost() : moveToTrash()"-->
-        <button class="btn btn-danger w-100" type="button">
-          <!--          v-if="deleting"-->
-          <div
-            class="spinner-border spinner-border-sm text-white"
-            role="status"
-          ></div>
-          <!--          v-if="!deleting"-->
-          <span>Evet</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+<ConfirmDeletePostModal />
