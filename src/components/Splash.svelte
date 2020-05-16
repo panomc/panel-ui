@@ -1,5 +1,6 @@
 <script>
   import { onDestroy } from "svelte";
+  import { fade } from "svelte/transition";
 
   import { basePath } from "../util/path.util";
   import {
@@ -33,7 +34,7 @@
   {/if}
 </svelte:head>
 
-<div class="splash" role="status">
+<div class="splash" role="status" in:fade out:fade>
   <img
     class="animated fadeIn infinite slow"
     alt="Pano"

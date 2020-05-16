@@ -37,7 +37,11 @@
   export let hidden;
 </script>
 
-<div class:d-flex="{!hidden}" hidden="{hidden}">
+<div
+  class:d-flex="{!hidden}"
+  {hidden}
+  class="animated {hidden ? 'fadeOut' : 'fadeIn'} faster"
+>
   <Sidebar />
   <!--  Main  -->
   <main class="panel-content">
