@@ -5,6 +5,18 @@
   import ApiUtil from "../../util/api.util";
   import tooltip from "../../util/tooltip.util";
 
+  import Icon from "svelte-awesome";
+  import { faListAlt } from "@fortawesome/free-regular-svg-icons";
+  import {
+    faStickyNote,
+    faTrash,
+    faPlus,
+    faEllipsisV,
+    faEye,
+    faBookmark,
+    faGlobeAmericas
+  } from "@fortawesome/free-solid-svg-icons";
+
   import { getPath, route } from "routve";
 
   export let page = undefined;
@@ -24,9 +36,9 @@
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/postPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType(),
+          page_type: getStatusFromPageType()
         })
-          .then((response) => {
+          .then(response => {
             if (response.data.result === "ok") {
               postsCount = response.data.posts_count;
               posts = response.data.posts;
@@ -92,14 +104,14 @@
 <div class="row mb-3">
   <div class="col-md-4 col-6">
     <a class="btn btn-link" role="button" href="/panel/posts/categories">
-      <i aria-hidden="true" class="far fa-list-alt fa-fw"></i>
-      <span class="d-md-inline d-none">Kategoriler</span>
+      <Icon data="{faListAlt}" class="mr-1" />
+      Kategoriler
     </a>
   </div>
   <div class="col text-right">
     <a class="btn btn-primary" role="button" href="/panel/posts/create-post">
-      <i aria-hidden="true" class="fa fa-plus fa-fw"></i>
-      <span class="d-md-inline d-none">Yazı Oluştur</span>
+      <Icon data="{faPlus}" />
+      <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
     </a>
   </div>
 </div>
@@ -110,10 +122,7 @@
   <div class="card-body">
     <div class="row justify-content-between">
       <div class="col-md-6 col-12 text-md-left text-center">
-        <h5 class="card-title">
-          {postsCount} Yazı -
-          <span class="text-primary">{page}/{totalPage}</span>
-        </h5>
+        <h5 class="card-title mb-md-0">{postsCount} Yazı</h5>
       </div>
       <div class="col-md-6 col-12 text-md-right text-center">
         <div class="btn-group">
@@ -150,10 +159,7 @@
     <!-- No Posts -->
     {#if postsCount === 0}
       <div class="container text-center">
-        <i
-          aria-hidden="true"
-          class="far fa-sticky-note fa-4x text-glass m-3"
-        ></i>
+        <Icon data="{faStickyNote}" scale="3" class="text-glass m-3" />
         <p class="text-gray">Burada içerik yok.</p>
       </div>
     {:else}
@@ -184,17 +190,14 @@
                       id="postAction"
                       title="Eylemler"
                     >
-                      <i aria-hidden="true" class="fa fa-ellipsis-v px-3"></i>
+                      <Icon data="{faEllipsisV}" class="px-3" />
                     </a>
                     <div
                       aria-labelledby="postAction"
                       class="dropdown-menu dropdown-menu-right"
                     >
                       <a class="dropdown-item" target="_blank" href="/">
-                        <i
-                          aria-hidden="true"
-                          class="fa fa-eye fa-fw text-primary"
-                        ></i>
+                        <Icon data="{faEye}" class="text-primary mr-1" />
                         Görüntüle
                       </a>
                       <!--                v-if="page_type !== 'draft'"-->
@@ -203,10 +206,7 @@
                       <a class="dropdown-item" href="javascript:void(0);">
                         <!--                    v-if="!drafting"-->
                         <span>
-                          <i
-                            aria-hidden="true"
-                            class="fa fa-bookmark fa-fw text-primary"
-                          ></i>
+                          <Icon data="{faBookmark}" class="text-primary mr-1" />
                           Taslaklara Taşı
                         </span>
 
@@ -223,10 +223,10 @@
                       <a class="dropdown-item" href="javascript:void(0);">
                         <!--                    v-if="!publishing"-->
                         <span>
-                          <i
-                            aria-hidden="true"
-                            class="fa fa-globe-americas fa-fw text-primary"
-                          ></i>
+                          <Icon
+                            data="{faGlobeAmericas}"
+                            class="text-primary mr-1"
+                          />
                           Yayınla
                         </span>
 
@@ -244,10 +244,8 @@
                         data-toggle="modal"
                         href="javascript:void(0);"
                       >
-                        <i
-                          aria-hidden="true"
-                          class="fa fa-trash fa-fw text-danger"
-                        ></i>
+
+                        <Icon data="{faTrash}" class="text-danger mr-1" />
                         Sil
                       </a>
                     </div>
@@ -271,7 +269,11 @@
                 </td>
                 <td>
 
-                  <a title="Oyuncu Profiline Git" href="#" use:tooltip={['top', post.writer.username]}>
+                  <a
+                    title="Oyuncu Profiline Git"
+                    href="#"
+                    use:tooltip="{['top', post.writer.username]}"
+                  >
                     <img
                       alt="Oyuncu Adı"
                       class="rounded-circle border"
@@ -295,7 +297,7 @@
       {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
+      on:pageLinkClick="{event => routePage(event.detail.page)}"
     />
   </div>
 </div>
