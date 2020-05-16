@@ -47,7 +47,12 @@
   <main class="panel-content">
     <Navbar />
 
-    <Router hidden="{showLoading}" routerConfig="{RouterConfig}" />
+    <div
+      hidden="{showLoading}"
+      class="animated {showLoading ? 'fadeOut' : 'fadeIn'} faster"
+    >
+      <Router routerConfig="{RouterConfig}" />
+    </div>
 
     <PageLoading show="{showLoading}" />
   </main>
