@@ -40,7 +40,6 @@
 <div
   class:d-flex="{!hidden}"
   {hidden}
-  class="animated {hidden ? 'fadeOut' : 'fadeIn'} faster"
 >
   <Sidebar />
   <!--  Main  -->
