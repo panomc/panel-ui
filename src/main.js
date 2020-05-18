@@ -2,7 +2,7 @@ import jquery from "jquery";
 import Popper from "popper.js";
 import "bootstrap";
 
-import {ApiUtil} from "./util/api.util";
+import {ApiUtil} from "./pano/js/api.util";
 
 import App from "./App.svelte";
 

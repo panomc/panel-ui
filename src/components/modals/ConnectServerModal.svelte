@@ -5,7 +5,7 @@
     platformAddress,
     showNetworkErrorOnCatch,
   } from "../../Store";
-  import { ApiUtil } from "../../util/api.util";
+  import { ApiUtil } from "../../pano/js/api.util";
   import tooltip from "../../util/tooltip.util";
 
   import Icon from "svelte-awesome";

@@ -9,7 +9,7 @@
   import ConfirmDeleteTicketModal from "../../components/modals/ConfirmDeleteTicketModal.svelte";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../util/api.util";
+  import ApiUtil from "../../pano/js/api.util";
 
   import Icon from "svelte-awesome";
   import { faListAlt } from "@fortawesome/free-regular-svg-icons";

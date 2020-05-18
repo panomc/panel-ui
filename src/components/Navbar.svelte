@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
   import moment from "moment";
 
-  import { ApiUtil } from "../util/api.util";
+  import { ApiUtil } from "../pano/js/api.util";
   import {
     toggleSidebar,
     notificationsCount,

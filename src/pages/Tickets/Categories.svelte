@@ -2,7 +2,7 @@
   import { route, getPath } from "routve";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../util/api.util";
+  import ApiUtil from "../../pano/js/api.util";
   import Pagination from "../../components/Pagination.svelte";
   import ConfirmDeleteTicketCategoryModal from "../../components/modals/ConfirmDeleteTicketCategoryModal.svelte";
   import AddEditTicketCategoryModal from "../../components/modals/AddEditTicketCategoryModal.svelte";

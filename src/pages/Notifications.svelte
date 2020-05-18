@@ -4,7 +4,7 @@
   import { onDestroy } from "svelte";
 
   import { showNetworkErrorOnCatch, isPageInitialized } from "../Store";
-  import ApiUtil from "../util/api.util";
+  import ApiUtil from "../pano/js/api.util";
   import tooltip from "../util/tooltip.util";
 
   import { faBell, faDotCircle } from "@fortawesome/free-regular-svg-icons";

@@ -19,7 +19,7 @@
   } from "@fortawesome/free-solid-svg-icons";
   import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 
-  import ApiUtil from "../util/api.util";
+  import ApiUtil from "../pano/js/api.util";
   import { showNetworkErrorOnCatch } from "../Store";
 
   import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
