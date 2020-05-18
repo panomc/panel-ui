@@ -5,7 +5,7 @@
 
   import { showNetworkErrorOnCatch, isPageInitialized } from "../Store";
   import ApiUtil from "../pano/js/api.util";
-  import tooltip from "../util/tooltip.util";
+  import tooltip from "../pano/js/tooltip.util";
 
   import { faBell, faDotCircle } from "@fortawesome/free-regular-svg-icons";
   import ConfirmRemoveAllNotificationsModal from "../components/modals/ConfirmRemoveAllNotificationsModal.svelte";
