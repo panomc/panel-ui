@@ -107,6 +107,7 @@
     >
       <a
         class="btn btn-outline-primary"
+        class:disabled="{getListOfChecked($checkedList).length === 0}"
         role="button"
         data-target="#confirmCloseTicket"
         data-toggle="modal"
@@ -116,6 +117,7 @@
       </a>
       <a
         class="btn btn-outline-danger"
+        class:disabled="{getListOfChecked($checkedList).length === 0}"
         role="button"
         data-target="#confirmDeleteTicket"
         data-toggle="modal"
