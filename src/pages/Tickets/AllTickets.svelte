@@ -111,6 +111,8 @@
         role="button"
         data-target="#confirmCloseTicket"
         data-toggle="modal"
+        data-backdrop="static"
+        data-keyboard="false"
         href="javascript:void(0);"
       >
         Kapat
@@ -121,6 +123,8 @@
         role="button"
         data-target="#confirmDeleteTicket"
         data-toggle="modal"
+        data-backdrop="static"
+        data-keyboard="false"
         href="javascript:void(0);"
       >
         <Icon data="{faTrash}" class="mr-1" />
