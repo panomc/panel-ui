@@ -3,8 +3,7 @@
 </script>
 
 <div
-  class="align-items-center justify-content-center w-100 h-75 animated {show ? 'fadeIn' : 'fadeOut'}
-  faster"
+  class="align-items-center justify-content-center w-100 h-75"
   hidden="{!show}"
   class:d-flex="{show}"
 >
