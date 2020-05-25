@@ -247,4 +247,4 @@
 </div>
 
 <ConfirmCloseTicketModal />
-<ConfirmDeleteTicketModal />
+<ConfirmDeleteTicketModal selectedTickets="{getListOfChecked($checkedList)}" />
