@@ -37,21 +37,13 @@
   export let hidden;
 </script>
 
-<div
-  class:d-flex="{!hidden}"
-  {hidden}
->
+<div class:d-flex="{!hidden}" {hidden}>
   <Sidebar />
   <!--  Main  -->
   <main class="panel-content">
     <Navbar />
 
-    <div
-      hidden="{showLoading}"
-      class="animated {showLoading ? 'fadeOut' : 'fadeIn'} faster"
-    >
-      <Router routerConfig="{RouterConfig}" />
-    </div>
+    <Router hidden="{showLoading}" routerConfig="{RouterConfig}" />
 
     <PageLoading show="{showLoading}" />
   </main>
