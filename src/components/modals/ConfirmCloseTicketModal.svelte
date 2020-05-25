@@ -1,6 +1,8 @@
 <script>
   import Icon from "svelte-awesome";
   import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+
+  export let selectedTickets;
 </script>
 
 <!-- Confirm Close Ticket Modal -->
@@ -21,7 +23,7 @@
             class="d-block m-auto text-gray"
           />
         </div>
-        Bu talebi/talepleri kapatmak istediğinizden emin misiniz?
+        Bu {selectedTickets.length === 1 ? "talebi": "talepleri"} kapatmak istediğinizden emin misiniz?
       </div>
       <div class="modal-footer">
         <button
