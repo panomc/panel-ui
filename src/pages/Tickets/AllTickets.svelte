@@ -87,6 +87,24 @@
     return result;
   }
 
+  function onSelectAllClick() {
+    const isAllSelected = isAllTicketsSelected($checkedList);
+
+    tickets.forEach((ticket) => {
+      $checkedList[ticket.id] = !isAllSelected;
+    });
+  }
+
+  function isAllTicketsSelected(list) {
+    let isAllSelected = true;
+
+    tickets.forEach((ticket) => {
+      if (!list[ticket.id]) isAllSelected = false;
+    });
+
+    return isAllSelected;
+  }
+
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
 </script>
 
@@ -139,7 +157,9 @@
   <div class="card-body">
     <div class="row justify-content-between pb-3 align-items-center">
       <div class="col-md-6 col-12 text-md-left text-center">
-        <h5 class="card-title mb-md-0">{ticketsCount} Talep{getListOfChecked($checkedList).length > 0 ? ", " + getListOfChecked($checkedList).length + " adet seçildi" : ""}</h5>
+        <h5 class="card-title mb-md-0">
+          {ticketsCount} Talep{getListOfChecked($checkedList).length > 0 ? ', ' + getListOfChecked($checkedList).length + ' adet seçildi' : ''}
+        </h5>
       </div>
       <div class="col-md-6 col-12 text-md-right text-center">
         <div class="btn-group">
@@ -184,7 +204,9 @@
           <thead>
             <tr>
               <th scope="col">
-                <a href="#">Seç</a>
+                <a href="javascript:void(0);" on:click="{onSelectAllClick}">
+                  {isAllTicketsSelected($checkedList) ? 'Tümünü Kaldır' : 'Tümünü Seç'}
+                </a>
               </th>
               <th scope="col">Talep</th>
               <th class="min-w-200px" scope="col">Konu</th>
