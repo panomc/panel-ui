@@ -88,18 +88,18 @@
   }
 
   function onSelectAllClick() {
-    const isAllSelected = isAllTicketsSelected($checkedList);
+    const isAllSelected = isAllTicketsSelected(tickets, $checkedList);
 
     tickets.forEach((ticket) => {
       $checkedList[ticket.id] = !isAllSelected;
     });
   }
 
-  function isAllTicketsSelected(list) {
+  function isAllTicketsSelected(ticketsList, selectedList) {
     let isAllSelected = true;
 
-    tickets.forEach((ticket) => {
-      if (!list[ticket.id]) isAllSelected = false;
+    ticketsList.forEach((ticket) => {
+      if (!selectedList[ticket.id]) isAllSelected = false;
     });
 
     return isAllSelected;
@@ -205,7 +205,7 @@
             <tr>
               <th scope="col">
                 <a href="javascript:void(0);" on:click="{onSelectAllClick}">
-                  {isAllTicketsSelected($checkedList) ? 'Tümünü Kaldır' : 'Tümünü Seç'}
+                  {isAllTicketsSelected(tickets, $checkedList) ? 'Tümünü Kaldır' : 'Tümünü Seç'}
                 </a>
               </th>
               <th scope="col">Talep</th>
