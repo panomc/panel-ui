@@ -223,45 +223,48 @@
           <tbody>
             {#each tickets as ticket, index (ticket)}
               <tr>
-                <th scope="row" class="row flex-nowrap align-items-center">
-                  <div class="custom-control custom-checkbox mx-2">
-                    <input
-                      class="custom-control-input"
-                      id="postCheck{ticket.id}"
-                      type="checkbox"
-                      bind:checked="{$checkedList[ticket.id]}"
-                    />
-                    <label
-                      class="custom-control-label"
-                      for="postCheck{ticket.id}"
-                    ></label>
-                  </div>
-                  <div class="dropdown">
-                    <a
-                      class="btn btn-sm py-0"
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      data-toggle="dropdown"
-                      href="javascript:void(0);"
-                      id="postAction"
-                    >
-                      <Icon data="{faEllipsisV}" />
-                    </a>
-                    <div
-                      aria-labelledby="postAction"
-                      class="dropdown-menu dropdown-menu-right"
-                    >
+                <th scope="row">
+                  <div class="row flex-nowrap">
 
-                      <!--                  @click="onDeleteClick(category.id)"-->
+                    <div class="custom-control custom-checkbox mx-2">
+                      <input
+                        class="custom-control-input"
+                        id="postCheck{ticket.id}"
+                        type="checkbox"
+                        bind:checked="{$checkedList[ticket.id]}"
+                      />
+                      <label
+                        class="custom-control-label"
+                        for="postCheck{ticket.id}"
+                      ></label>
+                    </div>
+                    <div class="dropdown">
                       <a
-                        class="dropdown-item"
-                        data-target="#confirmDeleteTicketCategory"
-                        data-toggle="modal"
+                        class="btn btn-sm py-0"
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        data-toggle="dropdown"
                         href="javascript:void(0);"
+                        id="postAction"
                       >
-                        <Icon data="{faTrash}" class="text-danger mr-1" />
-                        Sil
+                        <Icon data="{faEllipsisV}" />
                       </a>
+                      <div
+                        aria-labelledby="postAction"
+                        class="dropdown-menu dropdown-menu-right"
+                      >
+
+                        <!--                  @click="onDeleteClick(category.id)"-->
+                        <a
+                          class="dropdown-item"
+                          data-target="#confirmDeleteTicketCategory"
+                          data-toggle="modal"
+                          href="javascript:void(0);"
+                        >
+                          <Icon data="{faTrash}" class="text-danger mr-1" />
+                          Sil
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </th>
