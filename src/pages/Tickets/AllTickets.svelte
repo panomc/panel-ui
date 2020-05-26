@@ -139,7 +139,7 @@
   <div class="card-body">
     <div class="row justify-content-between pb-3 align-items-center">
       <div class="col-md-6 col-12 text-md-left text-center">
-        <h5 class="card-title mb-md-0">{ticketsCount} Talep</h5>
+        <h5 class="card-title mb-md-0">{ticketsCount} Talep{getListOfChecked($checkedList).length > 0 ? ", " + getListOfChecked($checkedList).length + " adet seçildi" : ""}</h5>
       </div>
       <div class="col-md-6 col-12 text-md-right text-center">
         <div class="btn-group">
