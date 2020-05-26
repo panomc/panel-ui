@@ -155,7 +155,7 @@
                     </div>
                   </div>
                 </th>
-                <td>
+                <td class="text-nowrap">
                   <!--              @click="onShowEditCategoryButtonClick(index)"-->
                   <a
                     data-target="#addEditTicketCategory"
@@ -166,7 +166,7 @@
                     {category.title}
                   </a>
                 </td>
-                <td>{category.description}</td>
+                <td class="text-nowrap">{category.description}</td>
               </tr>
             {/each}
           </tbody>
