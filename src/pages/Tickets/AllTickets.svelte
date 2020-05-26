@@ -13,7 +13,11 @@
 
   import Icon from "svelte-awesome";
   import { faListAlt } from "@fortawesome/free-regular-svg-icons";
-  import { faTicketAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+  import {
+    faTicketAlt,
+    faEllipsisV,
+    faTrash
+  } from "@fortawesome/free-solid-svg-icons";
 
   import { getPath, route } from "routve";
   import Pagination from "../../components/Pagination.svelte";
@@ -34,9 +38,9 @@
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/ticketPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType(),
+          page_type: getStatusFromPageType()
         })
-          .then((response) => {
+          .then(response => {
             if (response.data.result === "ok") {
               ticketsCount = response.data.tickets_count;
               tickets = response.data.tickets;
@@ -80,7 +84,7 @@
   let firstLoad = true;
 
   function getListOfChecked(list) {
-    const result = list.filter((item) => item);
+    const result = list.filter(item => item);
 
     if (result.length > 0) firstLoad = false;
 
@@ -90,7 +94,7 @@
   function onSelectAllClick() {
     const isAllSelected = isAllTicketsSelected(tickets, $checkedList);
 
-    tickets.forEach((ticket) => {
+    tickets.forEach(ticket => {
       $checkedList[ticket.id] = !isAllSelected;
     });
   }
@@ -98,7 +102,7 @@
   function isAllTicketsSelected(ticketsList, selectedList) {
     let isAllSelected = true;
 
-    ticketsList.forEach((ticket) => {
+    ticketsList.forEach(ticket => {
       if (!selectedList[ticket.id]) isAllSelected = false;
     });
 
@@ -203,7 +207,7 @@
         <table class="table mb-0">
           <thead>
             <tr>
-              <th scope="col">
+              <th class="text-nowrap" scope="col">
                 <a href="javascript:void(0);" on:click="{onSelectAllClick}">
                   {isAllTicketsSelected(tickets, $checkedList) ? 'Tümünü Kaldır' : 'Tümünü Seç'}
                 </a>
@@ -219,8 +223,8 @@
           <tbody>
             {#each tickets as ticket, index (ticket)}
               <tr>
-                <th scope="row">
-                  <div class="custom-control custom-checkbox">
+                <th scope="row" class="row flex-nowrap align-items-center">
+                  <div class="custom-control custom-checkbox mx-2">
                     <input
                       class="custom-control-input"
                       id="postCheck{ticket.id}"
@@ -232,9 +236,37 @@
                       for="postCheck{ticket.id}"
                     ></label>
                   </div>
+                  <div class="dropdown">
+                    <a
+                      class="btn btn-sm py-0"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      data-toggle="dropdown"
+                      href="javascript:void(0);"
+                      id="postAction"
+                    >
+                      <Icon data="{faEllipsisV}" />
+                    </a>
+                    <div
+                      aria-labelledby="postAction"
+                      class="dropdown-menu dropdown-menu-right"
+                    >
+
+                      <!--                  @click="onDeleteClick(category.id)"-->
+                      <a
+                        class="dropdown-item"
+                        data-target="#confirmDeleteTicketCategory"
+                        data-toggle="modal"
+                        href="javascript:void(0);"
+                      >
+                        <Icon data="{faTrash}" class="text-danger mr-1" />
+                        Sil
+                      </a>
+                    </div>
+                  </div>
                 </th>
                 <td>#{ticket.id}</td>
-                <td>
+                <td class="text-nowrap">
                   <a href="/panel/tickets/{ticket.id}" title="Talebi Görüntüle">
                     {ticket.title}
                   </a>
@@ -256,7 +288,7 @@
                 <td>
                   <a href="#">{ticket.writer.username}</a>
                 </td>
-                <td>1 saat önce</td>
+                <td class="text-nowrap">1 saat önce</td>
               </tr>
             {/each}
           </tbody>
@@ -269,7 +301,7 @@
       {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
+      on:pageLinkClick="{event => routePage(event.detail.page)}"
     />
   </div>
 </div>

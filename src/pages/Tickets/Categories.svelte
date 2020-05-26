@@ -125,12 +125,12 @@
           <tbody>
             {#each categories as category, index (category)}
               <tr>
-                <th class="min-w-50px" scope="row">
+                <th scope="row">
                   <div class="dropdown">
                     <a
+                      class="btn btn-sm py-0"
                       aria-expanded="false"
                       aria-haspopup="true"
-                      class="icon-link d-blcok m-auto"
                       data-toggle="dropdown"
                       href="javascript:void(0);"
                       id="postAction"
