@@ -181,7 +181,7 @@
             role="button"
             href="/panel/tickets/waitingReply"
           >
-            Yanıtlanmadı
+            Yeni
           </a>
           <a
             class="btn btn-sm btn-outline-light btn-link text-danger"
