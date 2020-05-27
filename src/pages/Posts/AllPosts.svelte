@@ -265,7 +265,6 @@
                   </span>
                 </td>
                 <td>
-
                   <a href="#" use:tooltip="{['top', post.writer.username]}">
                     <img
                       alt="Oyuncu Adı"

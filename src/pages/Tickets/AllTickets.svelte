@@ -10,13 +10,14 @@
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../pano/js/api.util";
+  import tooltip from "../../pano/js/tooltip.util";
 
   import Icon from "svelte-awesome";
   import { faListAlt } from "@fortawesome/free-regular-svg-icons";
   import {
     faTicketAlt,
     faEllipsisV,
-    faTrash,
+    faTrash
   } from "@fortawesome/free-solid-svg-icons";
 
   import { getPath, route } from "routve";
@@ -38,9 +39,9 @@
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/ticketPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType(),
+          page_type: getStatusFromPageType()
         })
-          .then((response) => {
+          .then(response => {
             if (response.data.result === "ok") {
               ticketsCount = response.data.tickets_count;
               tickets = response.data.tickets;
@@ -84,7 +85,7 @@
   let firstLoad = true;
 
   function getListOfChecked(list) {
-    const result = list.filter((item) => item);
+    const result = list.filter(item => item);
 
     if (result.length > 0) firstLoad = false;
 
@@ -94,7 +95,7 @@
   function onSelectAllClick() {
     const isAllSelected = isAllTicketsSelected(tickets, $checkedList);
 
-    tickets.forEach((ticket) => {
+    tickets.forEach(ticket => {
       $checkedList[ticket.id] = !isAllSelected;
     });
   }
@@ -102,7 +103,7 @@
   function isAllTicketsSelected(ticketsList, selectedList) {
     let isAllSelected = true;
 
-    ticketsList.forEach((ticket) => {
+    ticketsList.forEach(ticket => {
       if (!selectedList[ticket.id]) isAllSelected = false;
     });
 
@@ -216,7 +217,7 @@
               <th class="min-w-200px" scope="col">Konu</th>
               <th scope="col">Durum</th>
               <th scope="col">Kategori</th>
-              <th scope="col">Yazan</th>
+              <th scope="col">Yazar</th>
               <th scope="col">Son Yanıt</th>
             </tr>
           </thead>
@@ -289,7 +290,15 @@
                 </td>
                 <td>{ticket.category.title}</td>
                 <td>
-                  <a href="#">{ticket.writer.username}</a>
+                  <a href="#" use:tooltip="{['top', ticket.writer.username]}">
+                    <img
+                      alt="Oyuncu Adı"
+                      class="rounded-circle border"
+                      height="32"
+                      src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/32"
+                      width="32"
+                    />
+                  </a>
                 </td>
                 <td class="text-nowrap">1 saat önce</td>
               </tr>
@@ -304,7 +313,7 @@
       {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
+      on:pageLinkClick="{event => routePage(event.detail.page)}"
     />
   </div>
 </div>
