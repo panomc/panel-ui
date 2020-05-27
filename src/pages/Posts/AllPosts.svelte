@@ -109,8 +109,12 @@
       Kategoriler
     </a>
   </div>
-  <div class="col text-right">
-    <a class="btn btn-primary" role="button" href="/panel/posts/create-post">
+  <div class="col d-flex">
+    <a
+      class="btn btn-primary ml-auto"
+      role="button"
+      href="/panel/posts/create-post"
+    >
       <Icon data="{faPlus}" />
       <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
     </a>
@@ -121,7 +125,7 @@
 
 <div class="card">
   <div class="card-body">
-    <div class="row justify-content-between">
+    <div class="row justify-content-between pb-3 align-items-center">
       <div class="col-md-6 col-12 text-md-left text-center">
         <h5 class="card-title mb-md-0">{postsCount} Yazı</h5>
       </div>
@@ -183,15 +187,15 @@
                 <th class="min-w-50px" scope="row">
                   <div class="dropdown position-absolute">
                     <a
+                      class="btn btn-sm py-0"
                       aria-expanded="false"
                       aria-haspopup="true"
-                      class="icon-link d-block m-auto"
                       data-toggle="dropdown"
                       href="javascript:void(0);"
                       id="postAction"
                       title="Eylemler"
                     >
-                      <Icon data="{faEllipsisV}" class="px-3" />
+                      <Icon data="{faEllipsisV}" />
                     </a>
                     <div
                       aria-labelledby="postAction"
@@ -212,10 +216,6 @@
                         </span>
 
                         <!--                    v-if="drafting"-->
-                        <div
-                          class="spinner-border spinner-border-sm text-primary"
-                          role="status"
-                        ></div>
                       </a>
 
                       <!--                :disabled="publishing"-->
@@ -232,10 +232,6 @@
                         </span>
 
                         <!--                  v-if="publishing"-->
-                        <div
-                          class="spinner-border spinner-border-sm text-primary"
-                          role="status"
-                        ></div>
                       </a>
 
                       <!--                @click="deletingPostID = post.id"-->
@@ -262,19 +258,15 @@
                 </td>
                 <td>
                   <span
+                    class="badge badge-sunflower badge-pill"
                     style="background: #{post.category.color}"
-                    class="border px-3 rounded"
                   >
                     {post.category.title}
                   </span>
                 </td>
                 <td>
 
-                  <a
-                    title="Oyuncu Profiline Git"
-                    href="#"
-                    use:tooltip="{['top', post.writer.username]}"
-                  >
+                  <a href="#" use:tooltip="{['top', post.writer.username]}">
                     <img
                       alt="Oyuncu Adı"
                       class="rounded-circle border"
