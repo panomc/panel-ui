@@ -270,7 +270,7 @@
                 </th>
                 <td>#{ticket.id}</td>
                 <td class="text-nowrap">
-                  <a href="/panel/tickets/{ticket.id}" title="Talebi Görüntüle">
+                  <a href="/panel/tickets/ticket/{ticket.id}" title="Talebi Görüntüle">
                     {ticket.title}
                   </a>
                 </td>
