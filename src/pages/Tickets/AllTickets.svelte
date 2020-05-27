@@ -16,7 +16,7 @@
   import {
     faTicketAlt,
     faEllipsisV,
-    faTrash
+    faTrash,
   } from "@fortawesome/free-solid-svg-icons";
 
   import { getPath, route } from "routve";
@@ -30,7 +30,7 @@
   let totalPage = 1;
 
   function getStatusFromPageType() {
-    return pageType === "all" ? 1 : pageType === "waitingReply" ? 2 : 0;
+    return pageType === "all" ? 2 : pageType === "waitingReply" ? 1 : 3;
   }
 
   function routePage(pageNumber, forceReload = false) {
@@ -38,9 +38,9 @@
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/ticketPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType()
+          page_type: getStatusFromPageType(),
         })
-          .then(response => {
+          .then((response) => {
             if (response.data.result === "ok") {
               ticketsCount = response.data.tickets_count;
               tickets = response.data.tickets;
@@ -84,7 +84,7 @@
   let firstLoad = true;
 
   function getListOfChecked(list) {
-    const result = list.filter(item => item);
+    const result = list.filter((item) => item);
 
     if (result.length > 0) firstLoad = false;
 
@@ -94,7 +94,7 @@
   function onSelectAllClick() {
     const isAllSelected = isAllTicketsSelected(tickets, $checkedList);
 
-    tickets.forEach(ticket => {
+    tickets.forEach((ticket) => {
       $checkedList[ticket.id] = !isAllSelected;
     });
   }
@@ -102,7 +102,7 @@
   function isAllTicketsSelected(ticketsList, selectedList) {
     let isAllSelected = true;
 
-    ticketsList.forEach(ticket => {
+    ticketsList.forEach((ticket) => {
       if (!selectedList[ticket.id]) isAllSelected = false;
     });
 
@@ -276,12 +276,12 @@
                 </td>
                 <td>
                   {#if ticket.status === 1}
+                    <span class="badge badge-secondary badge-pill">Yeni</span>
+                  {:else if ticket.status === 2}
                     <span class="badge badge-sunflower badge-pill">
                       Yanıtlandı
                     </span>
-                  {:else if ticket.status === 2}
-                    <span class="badge badge-secondary badge-pill">Yeni</span>
-                  {:else if ticket.status === 0}
+                  {:else if ticket.status === 3}
                     <span class="badge badge-bittersweet badge-pill">
                       Kapalı
                     </span>
@@ -304,7 +304,7 @@
       {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{event => routePage(event.detail.page)}"
+      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
     />
   </div>
 </div>
