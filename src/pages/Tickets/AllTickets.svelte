@@ -295,7 +295,7 @@
                       alt="Oyuncu Adı"
                       class="rounded-circle border"
                       height="32"
-                      src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/32"
+                      src="https://minotar.net/avatar/{ticket.writer.username}/32"
                       width="32"
                     />
                   </a>
