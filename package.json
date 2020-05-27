@@ -40,6 +40,6 @@
     "svelte": "^3.22.2",
     "svelte-awesome": "^2.3.0",
     "svelte-preprocess": "^3.7.4",
-    "routve": "1.1.6"
+    "routve": "1.1.7"
   }
 }
