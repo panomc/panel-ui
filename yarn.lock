@@ -1759,10 +1759,10 @@ rollup@^2.10.2:
   optionalDependencies:
     fsevents "~2.1.2"
 
-routve@1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/routve/-/routve-1.1.4.tgz#70e6c3d8f7df4a29f4d0ac674607bf53a307a781"
-  integrity sha512-nw3C6FqHRwogsbBoX4e1Xn3ZjN4zNcGXZaNaO0b+SvdmBe55b93n2gBweLuWakB3d01TKQoEuaDHYbJ+DBq6IA==
+routve@1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/routve/-/routve-1.1.6.tgz#eadf3b9260887575f2e58a13d6732cd935734782"
+  integrity sha512-4B9ySvGtCAgQNx9wUiUob+blpoiN3ZnlE7+0IoxaV/+fpqOVnZxv6BszDBlQbTAFdGUjTCKBsHL8JdNEeyDgJA==
   dependencies:
     page "^1.11.6"
     svelte-loadable "^1.5.0"
