@@ -54,6 +54,7 @@
         <button
           class="btn btn-danger"
           type="button"
+          on:click="{onConfirmButtonClick}"
           class:disabled="{loading}"
           aria-disabled="{loading}"
           disabled="{loading}"
