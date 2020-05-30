@@ -35,6 +35,9 @@
   let confirmCloseTicketModal;
   let closingTicketsLoading = false;
 
+  let confirmDeleteTicketModal;
+  let deletingTicketsLoading = false;
+
   function getStatusFromPageType() {
     return pageType === "all" ? 2 : pageType === "waitingReply" ? 1 : 3;
   }
@@ -366,4 +369,8 @@
   bind:this="{confirmCloseTicketModal}"
   loading="{closingTicketsLoading}"
 />
-<ConfirmDeleteTicketModal selectedTickets="{getListOfChecked($checkedList)}" />
+<ConfirmDeleteTicketModal
+  selectedTickets="{getListOfChecked($checkedList)}"
+  bind:this="{confirmCloseTicketModal}"
+  loading="{closingTicketsLoading}"
+/>
