@@ -17,7 +17,7 @@
   import {
     faTicketAlt,
     faEllipsisV,
-    faTrash
+    faTrash,
   } from "@fortawesome/free-solid-svg-icons";
 
   import { getPath, route } from "routve";
@@ -30,18 +30,20 @@
   let tickets = [];
   let totalPage = 1;
 
+  let confirmCloseTicketModal;
+
   function getStatusFromPageType() {
     return pageType === "all" ? 2 : pageType === "waitingReply" ? 1 : 3;
   }
 
-  function routePage(pageNumber, forceReload = false) {
+  function routePage(pageNumber, forceReload = false, handler = null) {
     if (pageNumber !== page || forceReload) {
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/ticketPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType()
+          page_type: getStatusFromPageType(),
         })
-          .then(response => {
+          .then((response) => {
             if (response.data.result === "ok") {
               ticketsCount = response.data.tickets_count;
               tickets = response.data.tickets;
@@ -61,6 +63,8 @@
                 route("/panel/tickets/" + pageType + "/" + page);
 
               isPageInitialized.set(true);
+
+              if (handler) handler();
 
               resolve();
             } else if (response.data.result === "error") {
@@ -85,7 +89,7 @@
   let firstLoad = true;
 
   function getListOfChecked(list) {
-    const result = list.filter(item => item);
+    const result = Object.keys(list).filter((key) => list[key]);
 
     if (result.length > 0) firstLoad = false;
 
@@ -95,7 +99,7 @@
   function onSelectAllClick() {
     const isAllSelected = isAllTicketsSelected(tickets, $checkedList);
 
-    tickets.forEach(ticket => {
+    tickets.forEach((ticket) => {
       $checkedList[ticket.id] = !isAllSelected;
     });
   }
@@ -103,11 +107,41 @@
   function isAllTicketsSelected(ticketsList, selectedList) {
     let isAllSelected = true;
 
-    ticketsList.forEach(ticket => {
+    ticketsList.forEach((ticket) => {
       if (!selectedList[ticket.id]) isAllSelected = false;
     });
 
     return isAllSelected;
+  }
+
+  function clearSelections() {
+    Object.keys($checkedList)
+      .filter((key) => $checkedList[key])
+      .forEach((key) => {
+        $checkedList[key] = false;
+      });
+  }
+
+  function onConfirmCloseTicketsButtonClick() {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/ticket/close/selectedList", {
+        tickets: Object.values(getListOfChecked($checkedList)),
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            clearSelections();
+
+            routePage(page, true, () => {
+              confirmCloseTicketModal.close();
+            });
+
+            resolve();
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
   }
 
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
@@ -271,7 +305,10 @@
                 </th>
                 <td>#{ticket.id}</td>
                 <td class="text-nowrap">
-                  <a href="/panel/tickets/ticket/{ticket.id}" title="Talebi Görüntüle">
+                  <a
+                    href="/panel/tickets/ticket/{ticket.id}"
+                    title="Talebi Görüntüle"
+                  >
                     {ticket.title}
                   </a>
                 </td>
@@ -313,10 +350,14 @@
       {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{event => routePage(event.detail.page)}"
+      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
     />
   </div>
 </div>
 
-<ConfirmCloseTicketModal selectedTickets="{getListOfChecked($checkedList)}" />
+<ConfirmCloseTicketModal
+  on:confirmButtonClick="{onConfirmCloseTicketsButtonClick}"
+  selectedTickets="{getListOfChecked($checkedList)}"
+  bind:this="{confirmCloseTicketModal}"
+/>
 <ConfirmDeleteTicketModal selectedTickets="{getListOfChecked($checkedList)}" />
