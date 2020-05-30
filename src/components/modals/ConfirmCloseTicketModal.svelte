@@ -1,6 +1,19 @@
 <script>
   import Icon from "svelte-awesome";
   import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+  import { createEventDispatcher } from "svelte";
+  import jQuery from "jquery";
+
+  const dispatch = createEventDispatcher();
+  const modalID = "confirmCloseTicket";
+
+  function onConfirmButtonClick() {
+    dispatch("confirmButtonClick");
+  }
+
+  export const close = () => {
+    jQuery("#" + modalID).modal("hide");
+  };
 
   export let selectedTickets;
 </script>
@@ -9,7 +22,7 @@
 <div
   aria-hidden="true"
   class="modal fade"
-  id="confirmCloseTicket"
+  id="{modalID}"
   role="dialog"
   tabindex="-1"
 >
@@ -23,7 +36,8 @@
             class="d-block m-auto text-gray"
           />
         </div>
-        Bu {selectedTickets.length === 1 ? "talebi": "talepleri"} kapatmak istediğinizden emin misiniz?
+        Bu {selectedTickets.length === 1 ? 'talebi' : 'talepleri'} kapatmak
+        istediğinizden emin misiniz?
       </div>
       <div class="modal-footer">
         <button
@@ -33,7 +47,13 @@
         >
           İptal
         </button>
-        <button class="btn btn-danger" type="button">Evet</button>
+        <button
+          class="btn btn-danger"
+          type="button"
+          on:click="{onConfirmButtonClick}"
+        >
+          Evet
+        </button>
       </div>
     </div>
   </div>
