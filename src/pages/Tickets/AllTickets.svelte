@@ -152,6 +152,32 @@
     });
   }
 
+  function onConfirmDeleteTicketsButtonClick() {
+    deletingTicketsLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/ticket/delete/selectedTickets", {
+        tickets: Object.values(getListOfChecked($checkedList)),
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            clearSelections();
+
+            routePage(page, true, () => {
+              deletingTicketsLoading = false;
+
+              confirmDeleteTicketModal.close();
+            });
+
+            resolve();
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
 </script>
 
@@ -371,6 +397,7 @@
 />
 <ConfirmDeleteTicketModal
   selectedTickets="{getListOfChecked($checkedList)}"
-  bind:this="{confirmCloseTicketModal}"
-  loading="{closingTicketsLoading}"
+  bind:this="{confirmDeleteTicketModal}"
+  loading="{deletingTicketsLoading}"
+  on:confirmButtonClick="{onConfirmDeleteTicketsButtonClick}"
 />
