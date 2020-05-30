@@ -30,7 +30,10 @@
   let tickets = [];
   let totalPage = 1;
 
+  let firstLoad = true;
+
   let confirmCloseTicketModal;
+  let closingTicketsLoading = false;
 
   function getStatusFromPageType() {
     return pageType === "all" ? 2 : pageType === "waitingReply" ? 1 : 3;
@@ -86,8 +89,6 @@
     }
   }
 
-  let firstLoad = true;
-
   function getListOfChecked(list) {
     const result = Object.keys(list).filter((key) => list[key]);
 
@@ -123,6 +124,8 @@
   }
 
   function onConfirmCloseTicketsButtonClick() {
+    closingTicketsLoading = true;
+
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post("panel/ticket/close/selectedList", {
         tickets: Object.values(getListOfChecked($checkedList)),
@@ -132,6 +135,8 @@
             clearSelections();
 
             routePage(page, true, () => {
+              closingTicketsLoading = false;
+
               confirmCloseTicketModal.close();
             });
 
@@ -359,5 +364,6 @@
   on:confirmButtonClick="{onConfirmCloseTicketsButtonClick}"
   selectedTickets="{getListOfChecked($checkedList)}"
   bind:this="{confirmCloseTicketModal}"
+  loading="{closingTicketsLoading}"
 />
 <ConfirmDeleteTicketModal selectedTickets="{getListOfChecked($checkedList)}" />

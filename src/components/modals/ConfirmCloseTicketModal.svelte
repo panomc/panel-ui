@@ -5,7 +5,10 @@
   import jQuery from "jquery";
 
   const dispatch = createEventDispatcher();
-  const modalID = "confirmCloseTicket";
+  export const modalID = "confirmCloseTicket";
+
+  export let loading;
+  export let selectedTickets;
 
   function onConfirmButtonClick() {
     dispatch("confirmButtonClick");
@@ -14,8 +17,6 @@
   export const close = () => {
     jQuery("#" + modalID).modal("hide");
   };
-
-  export let selectedTickets;
 </script>
 
 <!-- Confirm Close Ticket Modal -->
@@ -44,6 +45,9 @@
           class="btn btn-link text-muted"
           data-dismiss="modal"
           type="button"
+          class:disabled="{loading}"
+          aria-disabled="{loading}"
+          disabled="{loading}"
         >
           İptal
         </button>
@@ -51,6 +55,9 @@
           class="btn btn-danger"
           type="button"
           on:click="{onConfirmButtonClick}"
+          class:disabled="{loading}"
+          aria-disabled="{loading}"
+          disabled="{loading}"
         >
           Evet
         </button>
