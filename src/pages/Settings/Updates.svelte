@@ -16,21 +16,14 @@
     <!-- Action Menu -->
     <section class="row justify-content-between align-items-center mb-3">
       <div class="col-md-4 d-flex align-items-center">
-        <button
-          class="btn btn-outline-primary mr-3"
-          type="button"
-          href="#availableUpdates"
-          data-toggle="collapse"
-          aria-controls="availableUpdates"
-        >
-          <Icon data="{faSync}" />
-        </button>
-        <strong class="text-primary ">5 Güncelleme Mevcut</strong>
+        <strong class="text-primary mx-2">2 Güncelleme Mevcut</strong>
       </div>
       <div class="col text-right">
-        <button class="btn btn-secondary" type="button">
-          <Icon data="{faDownload}" class="mr-1" />
-          <span class="d-md-inline d-none">Tümünü Kur</span>
+        <button
+          class="btn btn-outline-primary"
+          type="button"
+        >
+          <Icon data="{faSync}" />
         </button>
       </div>
     </section>
