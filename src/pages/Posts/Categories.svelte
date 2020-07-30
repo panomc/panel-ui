@@ -1,5 +1,15 @@
 <script>
   import { isPageInitialized } from "../../Store";
+  
+  import Icon from "svelte-awesome";
+  import {
+    faPlus,
+    faArrowLeft,
+    faStickyNote,
+    faTrash,
+    faEllipsisV,
+
+  } from "@fortawesome/free-solid-svg-icons";
 
   isPageInitialized.set(true);
 </script>
@@ -9,26 +19,22 @@
 <div>
   <!-- Action Menu -->
   <div class="row justify-content-between align-items-center mb-3">
-    <div class="col-6">
-      <a
-              class="btn btn-outline-primary"
-              role="button"
-              href="/panel/posts/"
-      >
-        <i aria-hidden="true" class="fa fa-arrow-left fa-fw"></i>
-        Tüm Yazılar
-      </a>
-    </div>
+  <div class="col-6">
+    <a class="btn btn-link" role="button" href="/panel/posts">
+      <Icon data="{faArrowLeft}" class="mr-1" />
+      Yazılar
+    </a>
+  </div>
     <div class="col-6 text-right">
       <!--              @click="onShowCreateCategoryButtonClick"-->
       <button
-              class="btn btn-primary"
-              data-target="#addEditCategory"
-              data-toggle="modal"
-              type="button"
+        class="btn btn-primary"
+        data-target="#addEditCategory"
+        data-toggle="modal"
+        type="button"
       >
-        <i aria-hidden="true" class="fa fa-plus fa-fw"></i>
-        <span class="d-md-inline d-none">Kategori Oluştur</span>
+        <Icon data="{faPlus}" />
+        <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
       </button>
     </div>
   </div>
@@ -37,20 +43,14 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title text-sm-left text-center">
-<!--        {{ category_count }} -->
-        Kategori -
-        <span class="text-primary">
-<!--          {{ page }}-->
-          /
-<!--          {{ total_page }}-->
-        </span>
+<!--     {{ category_count }} --> Yazı Kategorisi
       </h5>
 
       <!-- No Category -->
 <!--      v-if="category_count === 0"-->
       <div class="container text-center">
-        <i aria-hidden="true" class="far fa-list-alt fa-4x text-glass m-3"></i>
-        <p class="text-gray">Burada gösterilecek içerik yok.</p>
+        <Icon data="{faStickyNote}" scale="3" class="text-glass m-3" />
+        <p class="text-gray">Burada içerik yok.</p>
       </div>
 
       <!-- Tickets Table -->
@@ -72,15 +72,14 @@
             <th class="min-w-50px" scope="row">
               <div class="dropdown position-absolute">
                 <a
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        class="icon-link d-block m-auto"
-                        data-toggle="dropdown"
-                        href="javascript:void(0);"
-                        id="postAction"
-                        title="Eylemler"
+                  class="btn btn-sm py-0"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  data-toggle="dropdown"
+                  href="javascript:void(0);"
+                  id="postAction"
                 >
-                  <i aria-hidden="true" class="fa fa-ellipsis-v px-3"></i>
+                      <Icon data="{faEllipsisV}" />
                 </a>
                 <div
                         aria-labelledby="postAction"
@@ -93,10 +92,7 @@
                           data-toggle="modal"
                           href="javascript:void(0);"
                   >
-                    <i
-                            aria-hidden="true"
-                            class="fa fa-trash fa-fw text-danger"
-                    ></i>
+                    <Icon data="{faTrash}" class="text-danger mr-1" />
                     Sil
                   </a>
                 </div>
@@ -301,7 +297,6 @@
               </span>
 <!--              v-if="!showEditCategory && !addingOrSaving"-->
               <span>
-                <i aria-hidden="true" class="fa fa-plus fa-fw"></i>
                 Oluştur
               </span>
             </button>
