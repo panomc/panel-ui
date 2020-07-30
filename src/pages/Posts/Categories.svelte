@@ -1,6 +1,10 @@
 <script>
-  import { isPageInitialized } from "../../Store";
-  
+  import { route, getPath } from "routve";
+
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+  import ApiUtil from "../../pano/js/api.util";
+  import Pagination from "../../components/Pagination.svelte";
+
   import Icon from "svelte-awesome";
   import {
     faPlus,
@@ -8,23 +12,72 @@
     faStickyNote,
     faTrash,
     faEllipsisV,
-
   } from "@fortawesome/free-solid-svg-icons";
 
-  isPageInitialized.set(true);
-</script>
+  export let page = undefined;
 
+  let categoriesCount = 0;
+  let categories = [];
+  let totalPage = 1;
+  let pages = [];
+
+  function routePage(pageNumber, forceReload = false) {
+    if (pageNumber !== page || forceReload) {
+      showNetworkErrorOnCatch((resolve, reject) => {
+        ApiUtil.post("panel/initPage/posts/categoryPage", {
+          page: pageNumber,
+        })
+          .then((response) => {
+            if (response.data.result === "ok") {
+              categoriesCount = response.data.category_count;
+              categories = response.data.categories;
+              totalPage = response.data.total_page;
+
+              page = pageNumber;
+
+              isPageInitialized.set(true);
+
+              if (
+                page === 1 &&
+                getPath() !== "/panel/posts/categories" &&
+                getPath() !== "/panel/posts/categories/"
+              )
+                route("/panel/posts/categories/" + page);
+              else if (page !== 1) route("/panel/posts/categories/" + page);
+
+              resolve();
+            } else if (response.data.result === "error") {
+              const errorCode = response.data.error;
+
+              isPageInitialized.set(true);
+
+              if (errorCode === "PAGE_NOT_FOUND") {
+                route("/panel/error-404");
+              }
+
+              resolve();
+            } else reject();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    }
+  }
+
+  routePage(typeof page === "undefined" ? 1 : parseInt(page));
+</script>
 
 <!-- Categories Page -->
 <div>
   <!-- Action Menu -->
   <div class="row justify-content-between align-items-center mb-3">
-  <div class="col-6">
-    <a class="btn btn-link" role="button" href="/panel/posts">
-      <Icon data="{faArrowLeft}" class="mr-1" />
-      Yazılar
-    </a>
-  </div>
+    <div class="col-6">
+      <a class="btn btn-link" role="button" href="/panel/posts">
+        <Icon data="{faArrowLeft}" class="mr-1" />
+        Yazılar
+      </a>
+    </div>
     <div class="col-6 text-right">
       <!--              @click="onShowCreateCategoryButtonClick"-->
       <button
@@ -43,201 +96,151 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title text-sm-left text-center">
-<!--     {{ category_count }} --> Yazı Kategorisi
+        {categoriesCount} Yazı Kategorisi
       </h5>
 
       <!-- No Category -->
-<!--      v-if="category_count === 0"-->
-      <div class="container text-center">
-        <Icon data="{faStickyNote}" scale="3" class="text-glass m-3" />
-        <p class="text-gray">Burada içerik yok.</p>
-      </div>
+      {#if categoriesCount === 0}
+        <div class="container text-center">
+          <Icon data="{faStickyNote}" scale="3" class="text-glass m-3" />
+          <p class="text-gray">Burada içerik yok.</p>
+        </div>
+      {/if}
 
       <!-- Tickets Table -->
-<!--      v-if="category_count > 0"-->
-      <div class="table-responsive">
-        <table class="table mb-0">
-          <thead>
-          <tr>
-            <th scope="col"></th>
-            <th class="min-w-200px" scope="col">Kategori</th>
-            <th scope="col">Açıklama</th>
-            <th scope="col">URL</th>
-            <th scope="col">Renk</th>
-          </tr>
-          </thead>
-          <tbody>
-<!--          :key="index" v-for="(category, index) in categories"-->
-          <tr>
-            <th class="min-w-50px" scope="row">
-              <div class="dropdown position-absolute">
-                <a
-                  class="btn btn-sm py-0"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  data-toggle="dropdown"
-                  href="javascript:void(0);"
-                  id="postAction"
-                >
-                      <Icon data="{faEllipsisV}" />
-                </a>
-                <div
+      {#if categoriesCount > 0}
+        <div class="table-responsive">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th class="min-w-200px" scope="col">Kategori</th>
+                <th scope="col">Açıklama</th>
+                <th scope="col">URL</th>
+                <th scope="col">Renk</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#each categories as category, index (category)}
+                <tr>
+                  <th class="min-w-50px" scope="row">
+                    <div class="dropdown position-absolute">
+                      <a
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        class="btn btn-sm py-0"
+                        data-toggle="dropdown"
+                        href="javascript:void(0);"
+                        id="postAction"
+                        title="Eylemler"
+                      >
+                        <Icon data="{faEllipsisV}" />
+                      </a>
+                      <div
                         aria-labelledby="postAction"
                         class="dropdown-menu dropdown-menu-right"
-                >
-                  <!--                          @click="onDeleteClick(category.id)"-->
-                  <a
+                      >
+                        <!--                          @click="onDeleteClick(category.id)"-->
+                        <a
                           class="dropdown-item"
                           data-target="#confirmDeleteCategory"
                           data-toggle="modal"
                           href="javascript:void(0);"
-                  >
-                    <Icon data="{faTrash}" class="text-danger mr-1" />
-                    Sil
-                  </a>
-                </div>
-              </div>
-            </th>
-            <td>
-<!--              @click="onShowEditCategoryButtonClick(index)"-->
-              <a
+                        >
+                          <Icon data="{faTrash}" class="text-danger mr-1" />
+                          Sil
+                        </a>
+                      </div>
+                    </div>
+                  </th>
+                  <td>
+                    <!--              @click="onShowEditCategoryButtonClick(index)"-->
+                    <a
                       data-target="#addEditCategory"
                       data-toggle="modal"
                       href="javascript:void(0);"
                       title="Kategoriyi Düzenle"
-              >
-<!--                {{ category.title }}-->
-              </a>
-            </td>
-            <td>
-<!--              {{ category.description }}-->
-            </td>
-            <td>
-
-<!--              :href="'/category/' + category.url"-->
-              <a
+                    >
+                      {category.title}
+                    </a>
+                  </td>
+                  <td>{category.description}</td>
+                  <td>
+                    <a
+                      href="/category/{category.url}"
                       target="_blank"
                       title="Kategoriyi Görüntüle"
-              >
-<!--                {{ host }}-->
-                /category/
-                <b class="text-muted">
-<!--                  {{ category.url }}-->
-                </b>
-              </a>
-            </td>
-            <td>
-              <!--                      :value="'#' + category.color"-->
-              <input
+                    >
+                      /category/
+                      <b class="text-muted">{category.url}</b>
+                    </a>
+                  </td>
+                  <td>
+                    <input
+                      value="#{category.color}"
                       class="form-control form-control-sm"
                       disabled
                       type="color"
-              />
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-
+                    />
+                  </td>
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+        </div>
+      {/if}
       <!-- Pagination -->
-      <nav class="pt-3">
-        <ul class="pagination pagination-sm mb-0 justify-content-start">
-          <!--                  :class="{ 'disabled': page === 1 }"-->
-          <!--                  @click="routePage(1)"-->
-          <li
-                  class="page-item"
-          >
-            <a
-                    class="page-link"
-                    href="javascript:void(0);"
-                    title="Önceki Sayfa"
-            >
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <!--                  :class="{ 'active': index === page }"-->
-          <!--                  :key="index"-->
-          <!--                  @click="routePage(index)"-->
-          <!--                  v-for="index in total_page"-->
-          <li
-                  class="page-item"
-          >
-            <!--                    v-if="page !== index"-->
-            <a
-                    class="page-link"
-                    href="javascript:void(0);"
-            >
-<!--              {{index}}-->
-            </a>
-            <a class="page-link" v-if="page === index">
-<!--              {{index}}-->
-            </a>
-          </li>
-          <!--                  :class="{ 'disabled': page === total_page }"-->
-          <!--                  @click="routePage(total_page)"-->
-          <li
-                  class="page-item"
-          >
-            <a
-                    class="page-link"
-                    href="javascript:void(0);"
-                    title="Sonraki Sayfa"
-            >
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <Pagination
+        {page}
+        {totalPage}
+        on:firstPageClick="{() => routePage(1)}"
+        on:lastPageClick="{() => routePage(totalPage)}"
+        on:pageLinkClick="{(event) => routePage(event.detail.page)}"
+      />
     </div>
   </div>
 
   <!-- Add / Edit Category Modal -->
   <div
-          aria-hidden="true"
-          class="modal fade"
-          id="addEditCategory"
-          role="dialog"
-          tabindex="-1"
+    aria-hidden="true"
+    class="modal fade"
+    id="addEditCategory"
+    role="dialog"
+    tabindex="-1"
   >
     <div class="modal-dialog modal-dialog-centered" role="dialog">
       <div class="modal-content">
         <div class="modal-header">
           <!--                  v-text="showEditCategory ? 'Kategori Düzenle' : 'Kategori Oluştur'"-->
-          <h5
-                  class="modal-title"
-          ></h5>
+          <h5 class="modal-title"></h5>
 
           <button
-                  aria-label="Kapat"
-                  class="close"
-                  data-dismiss="modal"
-                  title="Pencereyi Kapat"
-                  type="button"
+            aria-label="Kapat"
+            class="close"
+            data-dismiss="modal"
+            title="Pencereyi Kapat"
+            type="button"
           >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-<!--        @submit.prevent="submitSaveOrAdd"-->
+        <!--        @submit.prevent="submitSaveOrAdd"-->
         <form>
           <div class="modal-body">
             <div class="form-group">
               <label for="category">Kategori:</label>
               <!--                      :class="{ 'border-danger': categoryForm.error.name }"-->
               <!--                      v-model="categoryForm.name"-->
-              <input
-                      class="form-control"
-                      id="category"
-                      type="text"
-              />
+              <input class="form-control" id="category" type="text" />
             </div>
             <div class="form-group">
               <label for="categoryDescription">Açıklama:</label>
               <!--                      :class="{ 'border-danger': categoryForm.error.description }"-->
-<!--              v-model="categoryForm.description"-->
+              <!--              v-model="categoryForm.description"-->
               <input
-                      class="form-control"
-                      id="categoryDescription"
-                      type="text"
+                class="form-control"
+                id="categoryDescription"
+                type="text"
               />
             </div>
             <div class="form-group">
@@ -245,22 +248,19 @@
               <div class="input-group ">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
-<!--                    {{ host }}-->
-                    /category/</span>
+                    <!--                    {{ host }}-->
+                    /category/
+                  </span>
                 </div>
                 <!--                        :class="{ 'border-danger': categoryForm.error.url }"-->
                 <!--                        v-model="categoryForm.url"-->
-                <input
-                        class="form-control"
-                        id="categoryURL"
-                        type="text"
-                />
+                <input class="form-control" id="categoryURL" type="text" />
               </div>
-<!--              :class="{ 'text-danger': categoryForm.error.url }"-->
+              <!--              :class="{ 'text-danger': categoryForm.error.url }"-->
               <small>
                 <i
-                        aria-hidden="true"
-                        class="fa fa-exclamation-circle fa-fw"
+                  aria-hidden="true"
+                  class="fa fa-exclamation-circle fa-fw"
                 ></i>
                 Yanlızca [A-Z/a-z/0-9/_] içerebilir ve minimum 3, maksimum 32
                 karkater olabilir.
@@ -270,35 +270,26 @@
               <label for="categoryColor">Renk:</label>
               <div class="input-group">
                 <!--                        v-model="categoryForm.colorCode"-->
-                <input
-                        class="form-control"
-                        id="categoryColor"
-                        type="color"
-                />
+                <input class="form-control" id="categoryColor" type="color" />
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <!--                    :class="{ 'btn-secondary': !showEditCategory, 'btn-primary': showEditCategory }"-->
             <!--                    :disabled="isSaveAddButtonDisabled || addingOrSaving"-->
-            <button
-                    class="btn btn-block"
-                    type="submit"
-            >
+            <button class="btn btn-block" type="submit">
               <!--                      v-if="addingOrSaving"-->
               <div
-                      class="spinner-border spinner-border-sm text-white"
-                      role="status"
+                class="spinner-border spinner-border-sm text-white"
+                role="status"
               ></div>
-<!--              v-if="showEditCategory && !addingOrSaving"-->
+              <!--              v-if="showEditCategory && !addingOrSaving"-->
               <span>
                 <i aria-hidden="true" class="fa fa-save fa-fw"></i>
                 Kaydet
               </span>
-<!--              v-if="!showEditCategory && !addingOrSaving"-->
-              <span>
-                Oluştur
-              </span>
+              <!--              v-if="!showEditCategory && !addingOrSaving"-->
+              <span>Oluştur</span>
             </button>
           </div>
         </form>
@@ -308,19 +299,19 @@
 
   <!-- Confirm Delete Category Modal -->
   <div
-          aria-hidden="true"
-          class="modal fade"
-          id="confirmDeleteCategory"
-          role="dialog"
-          tabindex="-1"
+    aria-hidden="true"
+    class="modal fade"
+    id="confirmDeleteCategory"
+    role="dialog"
+    tabindex="-1"
   >
     <div class="modal-dialog modal-dialog-centered" role="dialog">
       <div class="modal-content">
         <div class="modal-body text-center">
           <div class="pb-3">
             <i
-                    aria-hidden="true"
-                    class="fa fa-question-circle fa-4x d-block m-auto text-gray"
+              aria-hidden="true"
+              class="fa fa-question-circle fa-4x d-block m-auto text-gray"
             ></i>
           </div>
           Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?
@@ -341,27 +332,22 @@
         </div>
         <div class="modal-footer">
           <button
-                  class="btn btn-outline-primary w-100"
-                  data-dismiss="modal"
-                  type="button"
+            class="btn btn-outline-primary w-100"
+            data-dismiss="modal"
+            type="button"
           >
             Hayır
           </button>
           <!--                  :disabled="deleting"-->
           <!--                  @click="deleteCategory"-->
-          <button
-                  class="btn btn-danger w-100"
-                  type="button"
-          >
+          <button class="btn btn-danger w-100" type="button">
             <!--                    v-if="deleting"-->
             <div
-                    class="spinner-border spinner-border-sm text-white"
-                    role="status"
+              class="spinner-border spinner-border-sm text-white"
+              role="status"
             ></div>
-<!--            v-if="!deleting"-->
-            <span>
-              Evet
-            </span>
+            <!--            v-if="!deleting"-->
+            <span>Evet</span>
           </button>
         </div>
       </div>
