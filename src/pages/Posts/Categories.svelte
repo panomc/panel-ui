@@ -4,6 +4,10 @@
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../pano/js/api.util";
   import Pagination from "../../components/Pagination.svelte";
+  import PostCategoriesAddEditModal, {
+    show as showPostCategoriesAddEditModal,
+    setCallback as setCallbackForPostCategoriesAddEditModal,
+  } from "../../components/modals/PostCategoriesAddEditModal.svelte";
 
   import Icon from "svelte-awesome";
   import {
@@ -65,8 +69,26 @@
     }
   }
 
+  function onCreateCategoryClick() {
+    showPostCategoriesAddEditModal("create");
+  }
+
+  function onShowEditCategoryButtonClick(index) {
+    showPostCategoriesAddEditModal("edit", categories[index]);
+  }
+
+  setCallbackForPostCategoriesAddEditModal((routeFirstPage) => {
+    routePage(
+      routeFirstPage ? 1 : typeof page === "undefined" ? 1 : parseInt(page),
+      true
+    );
+  });
+
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
 </script>
+
+<!-- Add / Edit Category Modal -->
+<PostCategoriesAddEditModal />
 
 <!-- Categories Page -->
 <div>
@@ -82,9 +104,8 @@
       <!--              @click="onShowCreateCategoryButtonClick"-->
       <button
         class="btn btn-primary"
-        data-target="#addEditCategory"
-        data-toggle="modal"
         type="button"
+        on:click="{onCreateCategoryClick}"
       >
         <Icon data="{faPlus}" />
         <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
@@ -160,6 +181,7 @@
                       data-toggle="modal"
                       href="javascript:void(0);"
                       title="Kategoriyi Düzenle"
+                      on:click="{onShowEditCategoryButtonClick(index)}"
                     >
                       {category.title}
                     </a>
@@ -197,103 +219,6 @@
         on:lastPageClick="{() => routePage(totalPage)}"
         on:pageLinkClick="{(event) => routePage(event.detail.page)}"
       />
-    </div>
-  </div>
-
-  <!-- Add / Edit Category Modal -->
-  <div
-    aria-hidden="true"
-    class="modal fade"
-    id="addEditCategory"
-    role="dialog"
-    tabindex="-1"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <!--                  v-text="showEditCategory ? 'Kategori Düzenle' : 'Kategori Oluştur'"-->
-          <h5 class="modal-title"></h5>
-
-          <button
-            aria-label="Kapat"
-            class="close"
-            data-dismiss="modal"
-            title="Pencereyi Kapat"
-            type="button"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <!--        @submit.prevent="submitSaveOrAdd"-->
-        <form>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="category">Kategori:</label>
-              <!--                      :class="{ 'border-danger': categoryForm.error.name }"-->
-              <!--                      v-model="categoryForm.name"-->
-              <input class="form-control" id="category" type="text" />
-            </div>
-            <div class="form-group">
-              <label for="categoryDescription">Açıklama:</label>
-              <!--                      :class="{ 'border-danger': categoryForm.error.description }"-->
-              <!--              v-model="categoryForm.description"-->
-              <input
-                class="form-control"
-                id="categoryDescription"
-                type="text"
-              />
-            </div>
-            <div class="form-group">
-              <label for="categoryURL">URL:</label>
-              <div class="input-group ">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <!--                    {{ host }}-->
-                    /category/
-                  </span>
-                </div>
-                <!--                        :class="{ 'border-danger': categoryForm.error.url }"-->
-                <!--                        v-model="categoryForm.url"-->
-                <input class="form-control" id="categoryURL" type="text" />
-              </div>
-              <!--              :class="{ 'text-danger': categoryForm.error.url }"-->
-              <small>
-                <i
-                  aria-hidden="true"
-                  class="fa fa-exclamation-circle fa-fw"
-                ></i>
-                Yanlızca [A-Z/a-z/0-9/_] içerebilir ve minimum 3, maksimum 32
-                karkater olabilir.
-              </small>
-            </div>
-            <div class="form-group">
-              <label for="categoryColor">Renk:</label>
-              <div class="input-group">
-                <!--                        v-model="categoryForm.colorCode"-->
-                <input class="form-control" id="categoryColor" type="color" />
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <!--                    :class="{ 'btn-secondary': !showEditCategory, 'btn-primary': showEditCategory }"-->
-            <!--                    :disabled="isSaveAddButtonDisabled || addingOrSaving"-->
-            <button class="btn btn-block" type="submit">
-              <!--                      v-if="addingOrSaving"-->
-              <div
-                class="spinner-border spinner-border-sm text-white"
-                role="status"
-              ></div>
-              <!--              v-if="showEditCategory && !addingOrSaving"-->
-              <span>
-                <i aria-hidden="true" class="fa fa-save fa-fw"></i>
-                Kaydet
-              </span>
-              <!--              v-if="!showEditCategory && !addingOrSaving"-->
-              <span>Oluştur</span>
-            </button>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
 
