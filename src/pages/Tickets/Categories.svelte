@@ -5,7 +5,10 @@
   import ApiUtil from "../../pano/js/api.util";
   import Pagination from "../../components/Pagination.svelte";
   import ConfirmDeleteTicketCategoryModal from "../../components/modals/ConfirmDeleteTicketCategoryModal.svelte";
-  import AddEditTicketCategoryModal from "../../components/modals/AddEditTicketCategoryModal.svelte";
+  import AddEditTicketCategoryModal, {
+    show as showTicketCategoriesAddEditModal,
+    setCallback as setCallbackForTicketCategoriesAddEditModal,
+  } from "../../components/modals/AddEditTicketCategoryModal.svelte";
 
   import Icon from "svelte-awesome";
   import {
@@ -13,7 +16,7 @@
     faArrowLeft,
     faTicketAlt,
     faEllipsisV,
-    faTrash
+    faTrash,
   } from "@fortawesome/free-solid-svg-icons";
 
   export let page = undefined;
@@ -27,9 +30,9 @@
     if (pageNumber !== page || forceReload) {
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/tickets/categoryPage", {
-          page: pageNumber
+          page: pageNumber,
         })
-          .then(response => {
+          .then((response) => {
             if (response.data.result === "ok") {
               categoriesCount = response.data.category_count;
               categories = response.data.categories;
@@ -67,10 +70,31 @@
     }
   }
 
+  function onCreateCategoryClick() {
+    showTicketCategoriesAddEditModal("create");
+  }
+
+  function onShowEditCategoryButtonClick(index) {
+    showTicketCategoriesAddEditModal("edit", categories[index]);
+  }
+
+  setCallbackForTicketCategoriesAddEditModal((routeFirstPage) => {
+    routePage(
+      routeFirstPage ? 1 : typeof page === "undefined" ? 1 : parseInt(page),
+      true
+    );
+  });
+
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
 </script>
 
 <!-- Ticket Categories Page -->
+
+<!-- Add / Edit Ticket Category Modal -->
+<AddEditTicketCategoryModal />
+
+<!-- Confirm Delete Ticket Category Modal -->
+<ConfirmDeleteTicketCategoryModal />
 
 <!-- Action Menu -->
 <div class="row justify-content-between align-items-center mb-3">
@@ -82,12 +106,10 @@
   </div>
   <div class="col-6 text-right">
 
-    <!--      @click="onShowCreateCategoryButtonClick"-->
     <button
       class="btn btn-primary"
-      data-target="#addEditTicketCategory"
-      data-toggle="modal"
       type="button"
+      on:click="{onCreateCategoryClick}"
     >
       <Icon data="{faPlus}" />
       <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
@@ -156,12 +178,10 @@
                   </div>
                 </th>
                 <td class="text-nowrap">
-                  <!--              @click="onShowEditCategoryButtonClick(index)"-->
                   <a
-                    data-target="#addEditTicketCategory"
-                    data-toggle="modal"
                     href="javascript:void(0);"
                     title="Kategoriyi Düzenle"
+                    on:click="{onShowEditCategoryButtonClick(index)}"
                   >
                     {category.title}
                   </a>
@@ -179,10 +199,7 @@
       {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{event => routePage(event.detail.page)}"
+      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
     />
   </div>
 </div>
-
-<AddEditTicketCategoryModal />
-<ConfirmDeleteTicketCategoryModal />
