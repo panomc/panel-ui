@@ -1,52 +1,60 @@
 <script>
   import { isPageInitialized } from "../../Store";
+  import Icon from "svelte-awesome";
+  import { faListAlt } from "@fortawesome/free-regular-svg-icons";
+  import {
+    faUsers,
+    faEllipsisV,
+    faTimes,
+    faUserCircle,
+    faGlobe
+  } from "@fortawesome/free-solid-svg-icons";
 
   isPageInitialized.set(true);
 </script>
 
 <!-- All Players Page -->
 <div class="content">
-  <!-- All Players -->
 
+  <!-- All Players -->
   <div class="card">
     <div class="card-body">
       <div class="row justify-content-between">
         <div class="col-md-6 col-12 text-md-left text-center">
           <h5 class="card-title">
-            50 Oyuncu -
-            <span class="text-primary">1/5</span>
+            50 Oyuncu
           </h5>
         </div>
         <div class="col-md-6 col-12 text-md-right text-center">
           <div class="btn-group">
-            <router-link
+            <a
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              to="/panel/players/all"
+              href="/panel/players/all"
             >
               Tümü
-            </router-link>
-            <router-link
+            </a>
+            <a
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              to="/panel/players/special"
+              href="/panel/players/special"
             >
-              Özel
-            </router-link>
-            <router-link
+              Yetkili
+            </a>
+            <a
               class="btn btn-sm btn-outline-light btn-link text-danger"
               role="button"
-              to="/panel/players/banned"
+              href="/panel/players/banned"
             >
-              Cezalı
-            </router-link>
+              Yasaklı
+            </a>
           </div>
         </div>
       </div>
 
       <!-- No Players -->
-      <div class="container text-center d-block">
-        <i aria-hidden="true" class="fas fa-users fa-4x text-glass m-3"></i>
+      <div class="container text-center">
+        <Icon data="{faUsers}" scale="3" class="text-glass m-3" />
         <p class="text-gray">Burada içerik yok.</p>
       </div>
 
@@ -68,44 +76,38 @@
               <th class="min-w-50px" scope="row">
                 <div class="dropdown position-absolute">
                   <a
+                    class="btn btn-sm py-0"
                     aria-expanded="false"
                     aria-haspopup="true"
-                    class="icon-link d-block m-auto"
                     data-toggle="dropdown"
                     href="javascript:void(0);"
                     id="postAction"
                     title="Eylemler"
                   >
-                    <i aria-hidden="true" class="fa fa-ellipsis-v px-3"></i>
+                    <Icon data="{faEllipsisV}" />
                   </a>
                   <div
                     aria-labelledby="postAction"
                     class="dropdown-menu dropdown-menu-right"
                   >
-                    <a class="dropdown-item" href="javascript:void(0);">
-                      <i
-                        aria-hidden="true"
-                        class="fa fa-user-tag fa-fw text-primary"
-                      ></i>
+                    <a class="dropdown-item text-primary" href="javascript:void(0);">
+                    <Icon data="{faUserCircle}" class="mr-1" />
                       Yetkilendir
                     </a>
                     <a
-                      class="dropdown-item"
+                      class="dropdown-item text-danger"
                       data-target="#conformBanTickets"
                       data-toggle="modal"
                       href="javascript:void(0);"
                     >
-                      <i
-                        aria-hidden="true"
-                        class="fa fa-times fa-fw text-danger"
-                      ></i>
-                      Taleplerini Yasakla
+                    <Icon data="{faTimes}" class="mr-1" />
+                      Yasakla
                     </a>
                   </div>
                 </div>
               </th>
               <td class="min-w-200px">
-                <router-link title="Oyuncu Profiline Git" to="#">
+                <a title="Oyuncu Profiline Git" href="#">
                   <img
                     alt="Oyuncu Adı"
                     class="rounded-circle border mr-3"
@@ -114,7 +116,7 @@
                     width="32"
                   />
                   Kahverengi
-                </router-link>
+                </a>
               </td>
               <td>
                 0
@@ -130,7 +132,8 @@
                   v-tooltip:top="'Sitede'"
                 >
                   <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
-                  <span class="d-md-inline d-none">Çevrimiçi</span>
+                    <Icon data="{faGlobe}"/>
+                  <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
                 </span>
               </td>
               <td>10 dakika önce</td>
@@ -171,38 +174,4 @@
     </div>
   </div>
 
-  <!-- Confirm Ban User Tickets Modal -->
-  <div
-    aria-hidden="true"
-    class="modal fade"
-    id="conformBanTickets"
-    role="dialog"
-    tabindex="-1"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="dialog">
-      <div class="modal-content">
-        <div class="modal-body text-center">
-          <div class="pb-3">
-            <i
-              aria-hidden="true"
-              class="fa fa-question-circle fa-4x d-block m-auto text-gray"
-            ></i>
-          </div>
-          <span>
-            Bu kullanıcının taleplerini gerçekten yasaklamak istiyor musunuz?
-          </span>
-        </div>
-        <div class="modal-footer">
-          <button
-            class="btn btn-outline-primary w-100"
-            data-dismiss="modal"
-            type="button"
-          >
-            Hayır
-          </button>
-          <button class="btn btn-danger w-100" type="button">Evet</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
