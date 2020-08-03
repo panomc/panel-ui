@@ -1,3 +1,58 @@
+<script context="module">
+  import { writable, get } from "svelte/store";
+
+  const post = writable({
+    id: -1,
+    title: "Yazı başlığı 🖊",
+    text: "",
+    category: -1,
+    status: -1,
+    date: 0,
+    imageCode: "",
+  });
+  const editorMode = writable("create");
+
+  export function setPost(newPost) {
+    post.set(newPost);
+    editorMode.set("edit");
+  }
+</script>
+
+<script>
+  import tooltip from "../pano/js/tooltip.util";
+
+  let loading = false;
+  let lengthEditorText = 0;
+
+  function getStatusByPostStatus(status) {
+    return status === 0
+      ? "Çöp"
+      : status === 1
+      ? "Yayında"
+      : status === 2
+      ? "Taslak"
+      : "-";
+  }
+
+  function getFormattedDate(date) {
+    const dateFromNumberDate = new Date(date * 1000);
+
+    return (
+      dateFromNumberDate.getDate() +
+      "." +
+      (dateFromNumberDate.getMonth() + 1) +
+      "." +
+      dateFromNumberDate.getFullYear() +
+      " - " +
+      dateFromNumberDate.getHours() +
+      ":" +
+      dateFromNumberDate.getMinutes() +
+      ":" +
+      dateFromNumberDate.getSeconds()
+    );
+  }
+</script>
+
 <!-- Create Post Subpage -->
 
 <div>
@@ -5,8 +60,11 @@
   <!-- Action Menu -->
   <section class="row justify-content-between align-items-center mb-3">
     <div class="col-auto text-left">
-      <!--      href="'/panel/posts' + (post.status === 0 ? '/trash' : post.status === 2 ? '/draft' : '')"-->
-      <a class="btn btn-outline-primary" role="button">
+      <a
+        href="/panel/posts{$post.status === 0 ? '/trash' : $post.status === 2 ? '/draft' : ''}"
+        class="btn btn-outline-primary"
+        role="button"
+      >
         <i aria-hidden="true" class="fa fa-arrow-left fa-fw"></i>
         Tüm Yazılar
       </a>
@@ -16,40 +74,35 @@
       </a>
     </div>
     <div class="col text-right">
-      <!--      v-show="editorMode === 'edit'"-->
+      {#if $editorMode === 'edit'}
+        <button
+          class="btn btn-link text-danger"
+          data-target="#confirmDeletePost"
+          data-toggle="modal"
+          type="button"
+        >
+          <i aria-hidden="true" class="fa fa-trash"></i>
+        </button>
+      {/if}
+      {#if $post.status !== 2 && $post.id !== -1}
+        <button
+          class="btn btn-link"
+          type="button"
+          class:disabled="{loading}"
+          disabled="{loading}"
+        >
+          <i aria-hidden="true" class="fa fa-bookmark fa-fw"></i>
+          <span class="d-md-inline d-none">Taslaklara Taşı</span>
+        </button>
+      {/if}
+      <!--      @click="onSubmit"-->
       <button
-        class="btn btn-link text-danger"
-        data-target="#confirmDeletePost"
-        data-toggle="modal"
+        class="btn btn-secondary"
         type="button"
+        class:disabled="{loading || lengthEditorText === 0 || $post.title.length === 0}"
+        disabled="{loading || lengthEditorText === 0 || $post.title.length === 0}"
       >
-        <i aria-hidden="true" class="fa fa-trash"></i>
-      </button>
-      <!--      :disabled="drafting" @click="onDraftClick"-->
-      <!--      v-show="post.status !== 2 && post.id !== -1"-->
-      <button class="btn btn-link" type="button">
-        <!--        v-if="!drafting"-->
-        <i aria-hidden="true" class="fa fa-bookmark fa-fw"></i>
-        <!--        v-if="!drafting"-->
-        <span class="d-md-inline d-none">Taslaklara Taşı</span>
-
-        <!--        v-if="drafting"-->
-        <div
-          class="spinner-border spinner-border-sm text-primary"
-          role="status"
-        ></div>
-      </button>
-      <!--      :disabled="lengthEditorText === 0 || post.title.length === 0  || publishing" @click="onSubmit"-->
-      <button class="btn btn-secondary" type="button">
-
-        <!--        v-if="publishing"-->
-        <div
-          class="spinner-border spinner-border-sm text-white"
-          role="status"
-        ></div>
-
-        <!--        v-if="!publishing" v-text="post.status === 1 ? 'Güncelle' : 'Yayınla'"-->
-        <span>Güncelle/Yayınla</span>
+        <span>{$post.status === 1 ? 'Güncelle' : 'Yayınla'}</span>
       </button>
     </div>
   </section>
@@ -61,10 +114,10 @@
     <div class="col-lg-9 d-flex flex-fill">
       <div class="card w-100">
         <div class="card-body d-flex flex-column">
-          <!--          v-model="post.title"-->
           <input
             class="form-control font-weight-bolder text-muted mb-2"
             type="text"
+            bind:value="{$post.title}"
           />
 
           <div class="align-selft-center w-100 h-75">
@@ -121,26 +174,34 @@
         <div class="card-body">
           <form>
             <ul class="list-group">
-              <!--              v-tooltip:left="'Durum'"-->
-              <li class="list-group-item px-0 pt-0">
+              <li
+                class="list-group-item px-0 pt-0"
+                use:tooltip="{['left', 'Durum']}"
+              >
                 <i
                   aria-hidden="true"
                   class="far fa-sticky-note text-primary fa-fw"
                 ></i>
-                <!--                  {{ status }}-->
-                <span class="font-weight-normal"></span>
+                <span class="font-weight-normal">
+                  {getStatusByPostStatus($post.status)}
+                </span>
               </li>
-              <!--              v-tooltip:left="'Son Düzenleme'"-->
-              <li class="list-group-item px-0">
+              <li
+                class="list-group-item px-0"
+                use:tooltip="{['left', 'Son Düzenleme']}"
+              >
                 <i
                   aria-hidden="true"
                   class="fa fa-pencil-alt text-primary fa-fw"
                 ></i>
-                <!--                  {{ post.date === 0 ? '-' : getFormattedDate(post.date) }}-->
-                <span class="font-weight-normal"></span>
+                <span class="font-weight-normal">
+                  {$post.date === 0 ? '-' : getFormattedDate($post.date)}
+                </span>
               </li>
-              <!--              v-tooltip:left="'Görüntülenme'"-->
-              <li class="list-group-item px-0 pb-0">
+              <li
+                class="list-group-item px-0 pb-0"
+                use:tooltip="{['left', 'Görüntülenme']}"
+              >
                 <i aria-hidden="true" class="far fa-eye text-primary fa-fw"></i>
                 <span class="font-weight-normal">0</span>
               </li>
@@ -247,7 +308,7 @@
           <span></span>
         </div>
         <div class="modal-footer">
-<!--          :disabled="deleting"-->
+          <!--          :disabled="deleting"-->
           <button
             class="btn btn-outline-primary w-100"
             data-dismiss="modal"
@@ -255,18 +316,15 @@
           >
             Hayır
           </button>
-<!--          :disabled="deleting"-->
-<!--          @click="post.status === 0 ? deletePost() : moveToTrash()"-->
-          <button
-            class="btn btn-danger w-100"
-            type="button"
-          >
+          <!--          :disabled="deleting"-->
+          <!--          @click="post.status === 0 ? deletePost() : moveToTrash()"-->
+          <button class="btn btn-danger w-100" type="button">
             <div
               class="spinner-border spinner-border-sm text-white"
               role="status"
               v-if="deleting"
             ></div>
-<!--            v-if="!deleting"-->
+            <!--            v-if="!deleting"-->
             <span>Evet</span>
           </button>
         </div>
