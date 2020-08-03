@@ -25,20 +25,6 @@
           />
         </div>
         Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?
-        <br />
-        <br />
-        <span class="text-danger">
-          <Icon data="{faExclamationCircle}" class="mr-1" />
-          İçerisindeki 12 yazı kategorisiz kalacak:
-        </span>
-        <br />
-        <ul class="list-unstyled">
-          <li>Yazı 1</li>
-          <li>Yazı 2</li>
-          <li>Yazı 3</li>
-          <li>Yazı 4</li>
-        </ul>
-        <a href="#">Daha Fazlasını Göster</a>
       </div>
       <div class="modal-footer">
         <button
