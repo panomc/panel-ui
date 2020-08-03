@@ -1,5 +1,18 @@
 <script context="module">
   import { writable, get } from "svelte/store";
+  import Icon from "svelte-awesome";
+  import {
+    faEye,
+    faArrowLeft,
+    faBookmark,
+    faTrash
+  } from "@fortawesome/free-solid-svg-icons";
+  import {
+    faStickyNote,
+    faFolderOpen,
+    faEdit,
+    faImage
+  } from "@fortawesome/free-regular-svg-icons";
 
   const post = writable({
     id: -1,
@@ -55,25 +68,24 @@
 
 <!-- Create Post Subpage -->
 
-<div>
 
   <!-- Action Menu -->
   <section class="row justify-content-between align-items-center mb-3">
     <div class="col-auto text-left">
       <a
         href="/panel/posts{$post.status === 0 ? '/trash' : $post.status === 2 ? '/draft' : ''}"
-        class="btn btn-outline-primary"
+        class="btn btn-link"
         role="button"
       >
-        <i aria-hidden="true" class="fa fa-arrow-left fa-fw"></i>
-        Tüm Yazılar
-      </a>
-      <a class="btn btn-link" role="button" target="_blank" href="/">
-        <i aria-hidden="true" class="fa fa-eye fa-fw"></i>
-        <span class="d-md-inline d-none">Yazıyı Görüntüle</span>
+      <Icon data="{faArrowLeft}" class="mr-1" />
+        Yazılar
       </a>
     </div>
     <div class="col text-right">
+      <a class="btn btn-outline-primary" role="button" target="_blank" href="/">
+      <Icon data="{faEye}" />
+        <span class="d-md-inline d-none ml-1">Görüntüle</span>
+      </a>
       {#if $editorMode === 'edit'}
         <button
           class="btn btn-link text-danger"
@@ -81,7 +93,7 @@
           data-toggle="modal"
           type="button"
         >
-          <i aria-hidden="true" class="fa fa-trash"></i>
+        <Icon data="{faTrash}" />
         </button>
       {/if}
       {#if $post.status !== 2 && $post.id !== -1}
@@ -91,8 +103,8 @@
           class:disabled="{loading}"
           disabled="{loading}"
         >
-          <i aria-hidden="true" class="fa fa-bookmark fa-fw"></i>
-          <span class="d-md-inline d-none">Taslaklara Taşı</span>
+          <Icon data="{faBookmark}" />
+          <span class="d-md-inline d-none ml-1">Taslaklara Taşı</span>
         </button>
       {/if}
       <!--      @click="onSubmit"-->
@@ -182,6 +194,8 @@
                   aria-hidden="true"
                   class="far fa-sticky-note text-primary fa-fw"
                 ></i>
+                
+                <Icon data="{faStickyNote}" class="text-primary mr-1" />
                 <span class="font-weight-normal">
                   {getStatusByPostStatus($post.status)}
                 </span>
@@ -190,10 +204,8 @@
                 class="list-group-item px-0"
                 use:tooltip="{['left', 'Son Düzenleme']}"
               >
-                <i
-                  aria-hidden="true"
-                  class="fa fa-pencil-alt text-primary fa-fw"
-                ></i>
+              
+                <Icon data="{faEdit}" class="text-primary mr-1" />
                 <span class="font-weight-normal">
                   {$post.date === 0 ? '-' : getFormattedDate($post.date)}
                 </span>
@@ -202,7 +214,7 @@
                 class="list-group-item px-0 pb-0"
                 use:tooltip="{['left', 'Görüntülenme']}"
               >
-                <i aria-hidden="true" class="far fa-eye text-primary fa-fw"></i>
+                <Icon data="{faEye}" class="text-primary mr-1" />
                 <span class="font-weight-normal">0</span>
               </li>
             </ul>
@@ -212,19 +224,12 @@
       <div class="card">
         <div class="card-body">
           <h6>
-            <i
-              aria-hidden="true"
-              class="far fa-folder-open text-primary fa-fw"
-            ></i>
+            <Icon data="{faFolderOpen}" class="text-primary mr-1" />
             Kategori:
           </h6>
           <form>
             <!--            v-if="category_count === 0"-->
             <div class="container text-center">
-              <i
-                aria-hidden="true"
-                class="far fa-list-alt fa-3x text-glass m-3"
-              ></i>
               <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
             </div>
 
@@ -237,32 +242,23 @@
               <!--              :key="index" :value="category.id" v-for="(category, index) in categories" v-text="category.title"-->
               <option></option>
             </select>
-
-            <a
-              class="btn btn-link btn-sm btn-block"
-              role="button"
-              href="/panel/posts/categories"
-            >
-              Kategorileri Düzenle
-            </a>
           </form>
         </div>
       </div>
       <div class="card">
         <div class="card-body">
           <h6>
-            <i aria-hidden="true" class="far fa-image text-primary fa-fw"></i>
-            Yazı Kapak Resmi:
+            <Icon data="{faImage}" class="text-primary mr-1" />
+            Küçük Resim:
           </h6>
           <div class="container text-center d-none">
-            <i aria-hidden="true" class="far fa-image fa-3x text-glass m-3"></i>
             <p class="text-muted small">Küçük resim belirlenmedi.</p>
           </div>
 
           <!--          :src="post.imageCode"-->
           <!--          v-if="post.imageCode !== ''"-->
           <img
-            alt="Önizleme Resmi"
+            alt="Küçük Resim"
             class="img-fluid rounded mb-3"
             height="auto"
             width="100%"
@@ -278,8 +274,7 @@
 
           <!--          :class="{ 'text-danger': error.image, 'text-muted': !error.image }"-->
           <small>
-            Küçük resim görseliniz minimum 600x300 boyutlarında ve maksimum 1 MB
-            olmalı.
+            Küçük resim minimum 600x300 boyutlarında ve maksimum 1 MB olmalı.
           </small>
         </div>
       </div>
@@ -295,39 +290,38 @@
     role="dialog"
     tabindex="-1"
   >
-    <div class="modal-dialog modal-dialog-centered" role="dialog">
-      <div class="modal-content">
-        <div class="modal-body text-center">
-          <div class="pb-3">
-            <i
-              aria-hidden="true"
-              class="fa fa-question-circle fa-4x d-block m-auto text-gray"
-            ></i>
-          </div>
-          <!--          v-text="post.status === 0 ? 'Bu yazıyı kalıcı olarak silmek istediğinizden emin misiniz?' : 'Bu yazıyı çöp kutusuna taşımak istediğinizden emin misiniz?'"-->
-          <span></span>
+  <div class="modal-dialog modal-dialog-centered" role="dialog">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <div class="pb-3">
+          <i
+            aria-hidden="true"
+            class="fa fa-question-circle fa-4x d-block m-auto text-gray"
+          ></i>
         </div>
-        <div class="modal-footer">
-          <!--          :disabled="deleting"-->
-          <button
-            class="btn btn-outline-primary w-100"
-            data-dismiss="modal"
-            type="button"
-          >
-            Hayır
-          </button>
-          <!--          :disabled="deleting"-->
-          <!--          @click="post.status === 0 ? deletePost() : moveToTrash()"-->
-          <button class="btn btn-danger w-100" type="button">
-            <div
-              class="spinner-border spinner-border-sm text-white"
-              role="status"
-              v-if="deleting"
-            ></div>
-            <!--            v-if="!deleting"-->
-            <span>Evet</span>
-          </button>
-        </div>
+        <!--          v-text="post.status === 0 ? 'Bu yazıyı kalıcı olarak silmek istediğinizden emin misiniz?' : 'Bu yazıyı çöp kutusuna taşımak istediğinizden emin misiniz?'"-->
+        <span></span>
+      </div>
+      <div class="modal-footer">
+        <!--          :disabled="deleting"-->
+        <button
+          class="btn btn-outline-primary w-100"
+          data-dismiss="modal"
+          type="button"
+        >
+          Hayır
+        </button>
+        <!--          :disabled="deleting"-->
+        <!--          @click="post.status === 0 ? deletePost() : moveToTrash()"-->
+        <button class="btn btn-danger w-100" type="button">
+          <div
+            class="spinner-border spinner-border-sm text-white"
+            role="status"
+            v-if="deleting"
+          ></div>
+          <!--            v-if="!deleting"-->
+          <span>Evet</span>
+        </button>
       </div>
     </div>
   </div>
