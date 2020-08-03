@@ -58,6 +58,9 @@ export default {
         "": {
           component: () => import("./pages/Posts/AllPosts.svelte"),
         },
+        "/create-post": {
+          component: () => import("./pages/Posts/CreatePost.svelte")
+        },
         "/published": {
           component: () => import("./pages/Posts/AllPosts.svelte"),
         },
