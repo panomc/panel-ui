@@ -29,11 +29,7 @@ const watch = {
 
 const plugins = [
   copyTo({
-    assets: [
-      "./src/pano/favicon",
-      "./src/pano/fonts",
-      "./src/pano/img",
-    ],
+    assets: ["./src/pano/favicon", "./src/pano/fonts", "./src/pano/img"],
     outputDir: "public/commons",
   }),
 
@@ -143,10 +139,29 @@ function serve() {
       if (!started) {
         started = true;
 
-        require("child_process").spawn("npm", ["run", "start", "--", "--dev"], {
-          stdio: ["ignore", "inherit", "inherit"],
-          shell: true,
-        });
+        const fs = require("fs");
+        const configPath = "./config.js";
+
+        let config = {
+          port: 5000,
+        };
+
+        try {
+          if (fs.existsSync(configPath)) {
+            config = require(configPath);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+
+        require("child_process").spawn(
+          "npm",
+          ["run", "start", "--", "--dev", "-p", config.port],
+          {
+            stdio: ["ignore", "inherit", "inherit"],
+            shell: true,
+          }
+        );
       }
     },
   };
