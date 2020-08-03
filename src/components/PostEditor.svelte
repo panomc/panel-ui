@@ -1,18 +1,5 @@
 <script context="module">
   import { writable, get } from "svelte/store";
-  import Icon from "svelte-awesome";
-  import {
-    faEye,
-    faArrowLeft,
-    faBookmark,
-    faTrash
-  } from "@fortawesome/free-solid-svg-icons";
-  import {
-    faStickyNote,
-    faFolderOpen,
-    faEdit,
-    faImage
-  } from "@fortawesome/free-regular-svg-icons";
 
   const post = writable({
     id: -1,
@@ -33,6 +20,20 @@
 
 <script>
   import tooltip from "../pano/js/tooltip.util";
+
+  import Icon from "svelte-awesome";
+  import {
+    faEye,
+    faArrowLeft,
+    faBookmark,
+    faTrash
+  } from "@fortawesome/free-solid-svg-icons";
+  import {
+    faStickyNote,
+    faFolderOpen,
+    faEdit,
+    faImage
+  } from "@fortawesome/free-regular-svg-icons";
 
   let loading = false;
   let lengthEditorText = 0;
