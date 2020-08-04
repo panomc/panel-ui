@@ -27,7 +27,7 @@
   import { onMount } from "svelte";
 
   import tooltip from "../pano/js/tooltip.util";
-  import MoveToTrashPostConfirmationModal from "../components/modals/MoveToTrashPostConfirmationModal.svelte"
+  import MoveToTrashPostConfirmationModal from "../components/modals/MoveToTrashPostConfirmationModal.svelte";
 
   import Icon from "svelte-awesome";
   import {
@@ -35,7 +35,7 @@
     faArrowLeft,
     faBookmark,
     faTrash,
-    faQuestionCircle
+    faQuestionCircle,
   } from "@fortawesome/free-solid-svg-icons";
   import {
     faStickyNote,
@@ -117,13 +117,13 @@
       class="btn btn-link"
       role="button"
     >
-    <Icon data="{faArrowLeft}" class="mr-1" />
+      <Icon data="{faArrowLeft}" class="mr-1" />
       Yazılar
     </a>
   </div>
   <div class="col text-right">
     <a class="btn btn-outline-primary" role="button" target="_blank" href="/">
-    <Icon data="{faEye}" />
+      <Icon data="{faEye}" />
       <span class="d-md-inline d-none ml-1">Görüntüle</span>
     </a>
     {#if $editorMode === 'edit'}
@@ -133,7 +133,7 @@
         data-toggle="modal"
         type="button"
       >
-      <Icon data="{faTrash}" />
+        <Icon data="{faTrash}" />
       </button>
     {/if}
     {#if $post.status !== 2 && $post.id !== -1}
@@ -322,4 +322,4 @@
 
 </section>
 
-<MoveToTrashPostConfirmationModal></MoveToTrashPostConfirmationModal>
+<MoveToTrashPostConfirmationModal />
