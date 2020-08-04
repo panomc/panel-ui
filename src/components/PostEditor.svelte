@@ -1,3 +1,7 @@
+<style lang="scss" global>
+  @import "node_modules/quill/dist/quill.snow";
+</style>
+
 <script context="module">
   import { writable, get } from "svelte/store";
 
@@ -19,6 +23,9 @@
 </script>
 
 <script>
+  import Quill from "quill";
+  import { onMount } from "svelte";
+
   import tooltip from "../pano/js/tooltip.util";
   import MoveToTrashPostConfirmationModal from "../components/modals/MoveToTrashPostConfirmationModal.svelte"
 
@@ -34,11 +41,12 @@
     faStickyNote,
     faFolderOpen,
     faEdit,
-    faImage
+    faImage,
   } from "@fortawesome/free-regular-svg-icons";
 
   let loading = false;
   let lengthEditorText = 0;
+  let quill;
 
   function getStatusByPostStatus(status) {
     return status === 0
@@ -67,10 +75,39 @@
       dateFromNumberDate.getSeconds()
     );
   }
+
+  function imageHandler() {
+    const range = quill.getSelection();
+    const value = prompt("What is the image URL");
+    if (value) {
+      quill.insertEmbed(range.index, "image", value, Quill.sources.USER);
+    }
+  }
+
+  onMount(() => {
+    quill = new Quill("#editor", {
+      modules: {
+        toolbar: {
+          container: "#editorToolbar",
+          handlers: {
+            image: imageHandler,
+          },
+        },
+      },
+      theme: "snow",
+    });
+
+    quill.setHTML = (html) => {
+      quill.container.firstChild.innerHTML = html;
+    };
+
+    quill.getHTML = () => {
+      return quill.container.firstChild.innerHTML;
+    };
+  });
 </script>
 
 <!-- Create Post Subpage -->
-
 
 <!-- Action Menu -->
 <section class="row justify-content-between align-items-center mb-3">
@@ -197,7 +234,7 @@
                 aria-hidden="true"
                 class="far fa-sticky-note text-primary fa-fw"
               ></i>
-              
+
               <Icon data="{faStickyNote}" class="text-primary mr-1" />
               <span class="font-weight-normal">
                 {getStatusByPostStatus($post.status)}
@@ -207,7 +244,7 @@
               class="list-group-item px-0"
               use:tooltip="{['left', 'Son Düzenleme']}"
             >
-            
+
               <Icon data="{faEdit}" class="text-primary mr-1" />
               <span class="font-weight-normal">
                 {$post.date === 0 ? '-' : getFormattedDate($post.date)}
