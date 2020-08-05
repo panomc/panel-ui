@@ -57,7 +57,7 @@
       ? "Yayında"
       : status === 2
       ? "Taslak"
-      : "-";
+      : "Yeni";
   }
 
   function getFormattedDate(date) {
