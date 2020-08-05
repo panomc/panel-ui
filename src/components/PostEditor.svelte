@@ -159,9 +159,6 @@
     }
   }
 
-  function onEditorInput(event) {
-  }
-
   $: setPost(parseInt(postID));
 
   onMount(() => {
@@ -299,7 +296,7 @@
             </span>
           </div>
 
-          <div id="editor" on:input="{(event) => onEditorInput(event)}"></div>
+          <div id="editor"></div>
           <!-- Editor End -->
         </div>
 
