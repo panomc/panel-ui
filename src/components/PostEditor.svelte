@@ -2,32 +2,15 @@
   @import "node_modules/quill/dist/quill.snow";
 </style>
 
-<script context="module">
-  import { writable, get } from "svelte/store";
-
-  const post = writable({
-    id: -1,
-    title: "Yazı başlığı 🖊",
-    text: "",
-    category: -1,
-    status: -1,
-    date: 0,
-    imageCode: "",
-  });
-  const editorMode = writable("create");
-
-  export function setPost(newPost) {
-    post.set(newPost);
-    editorMode.set("edit");
-  }
-</script>
-
 <script>
   import Quill from "quill";
   import { onMount } from "svelte";
+  import { route } from "routve";
 
   import tooltip from "../pano/js/tooltip.util";
   import MoveToTrashPostConfirmationModal from "../components/modals/MoveToTrashPostConfirmationModal.svelte";
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
+  import ApiUtil from "../pano/js/api.util";
 
   import Icon from "svelte-awesome";
   import {
@@ -44,9 +27,28 @@
     faImage,
   } from "@fortawesome/free-regular-svg-icons";
 
+  const defaultPost = {
+    id: -1,
+    title: "Yazı başlığı 🖊",
+    text: "",
+    category: 0,
+    status: -1,
+    date: 0,
+    imageCode: "",
+  };
+
   let loading = false;
   let lengthEditorText = 0;
   let quill;
+  let categoryCount = 0;
+  let categories = [];
+  let quillInitialized = false;
+  let editorMode = "create";
+  let postInitialized = false;
+
+  let post = defaultPost;
+
+  export let postID = -1;
 
   function getStatusByPostStatus(status) {
     return status === 0
@@ -79,10 +81,85 @@
   function imageHandler() {
     const range = quill.getSelection();
     const value = prompt("What is the image URL");
+
     if (value) {
       quill.insertEmbed(range.index, "image", value, Quill.sources.USER);
     }
   }
+
+  function setCategories() {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.get("panel/post/category/categories")
+        .then((response) => {
+          if (response.data.result === "ok") {
+            categoryCount = response.data.category_count;
+            categories = response.data.categories;
+
+            isPageInitialized.set(true);
+            resolve();
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  function initPost() {
+    quill.setHTML(post.text);
+  }
+
+  function initPage() {
+    setCategories();
+    initPost();
+  }
+
+  function setPostInitialized() {
+    if (quillInitialized) {
+      initPage();
+    }
+
+    postInitialized = true;
+  }
+
+  function setPost(postID) {
+    if (postID === -1) {
+      post = defaultPost;
+      editorMode = "create";
+
+      setPostInitialized();
+    } else {
+      editorMode = "edit";
+
+      showNetworkErrorOnCatch((resolve, reject) => {
+        ApiUtil.post("panel/initPage/editPost", { id: postID })
+          .then((response) => {
+            if (response.data.result === "ok") {
+              post = response.data.post;
+
+              setPostInitialized();
+
+              resolve();
+            } else if (response.data.result === "error") {
+              const error = response.data.error;
+
+              if (error === "POST_NOT_FOUND") {
+                setPostInitialized();
+
+                route("/panel/error-404");
+
+                resolve();
+              } else reject();
+            } else reject();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    }
+  }
+
+  $: setPost(parseInt(postID));
 
   onMount(() => {
     quill = new Quill("#editor", {
@@ -104,16 +181,22 @@
     quill.getHTML = () => {
       return quill.container.firstChild.innerHTML;
     };
+
+    quillInitialized = true;
+
+    if (postInitialized) initPage();
   });
 </script>
 
 <!-- Create Post Subpage -->
 
+<a href="/panel/posts/post/15">15'e git</a>
+
 <!-- Action Menu -->
 <section class="row justify-content-between align-items-center mb-3">
   <div class="col-auto text-left">
     <a
-      href="/panel/posts{$post.status === 0 ? '/trash' : $post.status === 2 ? '/draft' : ''}"
+      href="/panel/posts{post.status === 0 ? '/trash' : post.status === 2 ? '/draft' : ''}"
       class="btn btn-link"
       role="button"
     >
@@ -126,7 +209,7 @@
       <Icon data="{faEye}" />
       <span class="d-md-inline d-none ml-1">Görüntüle</span>
     </a>
-    {#if $editorMode === 'edit'}
+    {#if editorMode === 'edit'}
       <button
         class="btn btn-link text-danger"
         data-target="#moveToTrashPostConfirmationModal"
@@ -136,7 +219,7 @@
         <Icon data="{faTrash}" />
       </button>
     {/if}
-    {#if $post.status !== 2 && $post.id !== -1}
+    {#if post.status !== 2 && post.id !== -1}
       <button
         class="btn btn-link"
         type="button"
@@ -151,10 +234,10 @@
     <button
       class="btn btn-secondary"
       type="button"
-      class:disabled="{loading || lengthEditorText === 0 || $post.title.length === 0}"
-      disabled="{loading || lengthEditorText === 0 || $post.title.length === 0}"
+      class:disabled="{loading || lengthEditorText === 0 || post.title.length === 0}"
+      disabled="{loading || lengthEditorText === 0 || post.title.length === 0}"
     >
-      <span>{$post.status === 1 ? 'Güncelle' : 'Yayınla'}</span>
+      <span>{post.status === 1 ? 'Güncelle' : 'Yayınla'}</span>
     </button>
   </div>
 </section>
@@ -169,7 +252,7 @@
         <input
           class="form-control font-weight-bolder text-muted mb-2"
           type="text"
-          bind:value="{$post.title}"
+          bind:value="{post.title}"
         />
 
         <div class="align-selft-center w-100 h-75">
@@ -237,7 +320,7 @@
 
               <Icon data="{faStickyNote}" class="text-primary mr-1" />
               <span class="font-weight-normal">
-                {getStatusByPostStatus($post.status)}
+                {getStatusByPostStatus(post.status)}
               </span>
             </li>
             <li
@@ -247,7 +330,7 @@
 
               <Icon data="{faEdit}" class="text-primary mr-1" />
               <span class="font-weight-normal">
-                {$post.date === 0 ? '-' : getFormattedDate($post.date)}
+                {post.date === 0 ? '-' : getFormattedDate(post.date)}
               </span>
             </li>
             <li
@@ -268,20 +351,23 @@
           Kategori:
         </h6>
         <form>
-          <!--            v-if="category_count === 0"-->
-          <div class="container text-center">
-            <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
-          </div>
-
-          <!--            v-if="category_count > 0"-->
-          <!--            v-model="post.category"-->
-          <select class="form-control form-control-sm mb-3">
-            <option class="text-primary" disabled value="-1">
-              Kategori Seç:
-            </option>
-            <!--              :key="index" :value="category.id" v-for="(category, index) in categories" v-text="category.title"-->
-            <option></option>
-          </select>
+          {#if categoryCount === 0}
+            <div class="container text-center">
+              <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
+            </div>
+          {:else}
+            <select
+              class="form-control form-control-sm mb-3"
+              value="{post.category}"
+            >
+              <option class="text-primary" disabled value="-1">
+                Kategori Seç:
+              </option>
+              {#each categories as category, index (category)}
+                <option value="{category.id}">{category.title}</option>
+              {/each}
+            </select>
+          {/if}
         </form>
       </div>
     </div>

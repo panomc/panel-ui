@@ -61,6 +61,9 @@ export default {
         "/create-post": {
           component: () => import("./pages/Posts/CreatePost.svelte")
         },
+        "/post/:postID": {
+          component: () => import("./pages/Posts/EditPost.svelte")
+        },
         "/published": {
           component: () => import("./pages/Posts/AllPosts.svelte"),
         },
