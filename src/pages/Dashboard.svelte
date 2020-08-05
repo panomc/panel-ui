@@ -34,6 +34,7 @@
   let registered_player_count = 0;
   let post_count = 0;
   let tickets_count = 0;
+  let open_tickets_count = 0;
 
   function getInitialData() {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -43,12 +44,13 @@
             registered_player_count = response.data.registered_player_count;
             post_count = response.data.post_count;
             tickets_count = response.data.tickets_count;
+            open_tickets_count = response.data.open_tickets_count;
 
             getting_started_blocks = response.data.getting_started_blocks;
 
             isPageInitialized.set(true);
 
-            resolve(response);
+            resolve();
           } else reject();
         })
         .catch(() => {
@@ -60,7 +62,7 @@
   function onCloseGettingStartedCard() {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post("panel/dashboard/closeGettingStartedCard", {})
-        .then(response => {
+        .then(() => {
           resolve();
         })
         .catch(() => {
@@ -361,11 +363,11 @@
             </tr>
             <tr>
               <th scope="row">Açık Talepler:</th>
-              <td>0</td>
+              <td>{open_tickets_count}</td>
             </tr>
             <tr>
               <th scope="row">Kayıtlı Talepler:</th>
-              <td>0</td>
+              <td>{tickets_count}</td>
             </tr>
           </tbody>
         </table>
