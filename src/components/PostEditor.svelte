@@ -190,8 +190,6 @@
 
 <!-- Create Post Subpage -->
 
-<a href="/panel/posts/post/15">15'e git</a>
-
 <!-- Action Menu -->
 <section class="row justify-content-between align-items-center mb-3">
   <div class="col-auto text-left">
