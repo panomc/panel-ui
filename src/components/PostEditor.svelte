@@ -31,7 +31,7 @@
     id: -1,
     title: "Yazı başlığı 🖊",
     text: "",
-    category: 0,
+    category: -1,
     status: -1,
     date: 0,
     imageCode: "",
