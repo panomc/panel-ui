@@ -11,6 +11,7 @@
   import MoveToTrashPostConfirmationModal from "../components/modals/MoveToTrashPostConfirmationModal.svelte";
   import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
   import ApiUtil from "../pano/js/api.util";
+  import { extractContent } from "../util/text.util";
 
   import Icon from "svelte-awesome";
   import {
@@ -38,7 +39,6 @@
   };
 
   let loading = false;
-  let lengthEditorText = 0;
   let quill;
   let categoryCount = 0;
   let categories = [];
@@ -159,6 +159,9 @@
     }
   }
 
+  function onEditorInput(event) {
+  }
+
   $: setPost(parseInt(postID));
 
   onMount(() => {
@@ -181,6 +184,10 @@
     quill.getHTML = () => {
       return quill.container.firstChild.innerHTML;
     };
+
+    quill.on("text-change", () => {
+      post.text = quill.getHTML();
+    });
 
     quillInitialized = true;
 
@@ -232,8 +239,8 @@
     <button
       class="btn btn-secondary"
       type="button"
-      class:disabled="{loading || lengthEditorText === 0 || post.title.length === 0}"
-      disabled="{loading || lengthEditorText === 0 || post.title.length === 0}"
+      class:disabled="{loading || extractContent(post.text).length === 0 || post.title.length === 0}"
+      disabled="{loading || extractContent(post.text).length === 0 || post.title.length === 0}"
     >
       <span>{post.status === 1 ? 'Güncelle' : 'Yayınla'}</span>
     </button>
@@ -292,8 +299,7 @@
             </span>
           </div>
 
-          <!--            @input="onEditorInput($event)"-->
-          <div id="editor"></div>
+          <div id="editor" on:input="{(event) => onEditorInput(event)}"></div>
           <!-- Editor End -->
         </div>
 
