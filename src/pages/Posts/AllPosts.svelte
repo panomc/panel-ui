@@ -28,6 +28,7 @@
   let posts = [];
   let totalPage = 1;
   let host = "";
+  let buttonsLoading = false;
 
   function getStatusFromPageType() {
     return pageType === "published" ? 1 : pageType === "draft" ? 2 : 0;
@@ -79,6 +80,30 @@
           });
       });
     }
+  }
+
+  function refreshBrowserPage() {
+    location.reload();
+  }
+
+  function onMoveToDraft(id) {
+    buttonsLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/post/moveDraft", { id })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            buttonsLoading = false;
+
+            routePage(page, true);
+
+            resolve();
+          } else refreshBrowserPage();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
   }
 
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
@@ -184,15 +209,22 @@
                       aria-labelledby="postAction"
                       class="dropdown-menu dropdown-menu-right"
                     >
-                      <a class="dropdown-item" target="_blank" href="/preview/post/{post.id}">
+                      <a
+                        class="dropdown-item"
+                        target="_blank"
+                        href="/preview/post/{post.id}"
+                      >
                         <Icon data="{faEye}" class="text-primary mr-1" />
                         Görüntüle
                       </a>
-                      <!--                :disabled="drafting"-->
-                      <!--                @click="moveToDraft(index)"-->
                       {#if pageType !== 'draft'}
-                        <a class="dropdown-item" href="javascript:void(0);">
-                          <!--                    v-if="!drafting"-->
+                        <a
+                          class="dropdown-item"
+                          href="javascript:void(0);"
+                          on:click="{onMoveToDraft(post.id)}"
+                          class:disabled="{buttonsLoading}"
+                          disabled="{buttonsLoading}"
+                        >
                           <span>
                             <Icon
                               data="{faBookmark}"
@@ -200,16 +232,17 @@
                             />
                             Taslaklara Taşı
                           </span>
-
-                          <!--                    v-if="drafting"-->
                         </a>
                       {/if}
 
-                      <!--                :disabled="publishing"-->
                       <!--                @click="publish(post.id)"-->
                       {#if pageType !== 'published'}
-                        <a class="dropdown-item" href="javascript:void(0);">
-                          <!--                    v-if="!publishing"-->
+                        <a
+                          class="dropdown-item"
+                          href="javascript:void(0);"
+                          class:disabled="{buttonsLoading}"
+                          disabled="{buttonsLoading}"
+                        >
                           <span>
                             <Icon
                               data="{faGlobeAmericas}"
@@ -217,8 +250,6 @@
                             />
                             Yayınla
                           </span>
-
-                          <!--                  v-if="publishing"-->
                         </a>
                       {/if}
 
