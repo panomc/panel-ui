@@ -222,7 +222,7 @@
     </a>
   </div>
   <div class="col text-right">
-    <a class="btn btn-outline-primary" role="button" target="_blank" href="/">
+    <a class="btn btn-outline-primary" role="button" target="_blank" href="/preview/post/{post.id}">
       <Icon data="{faEye}" />
       <span class="d-md-inline d-none ml-1">Görüntüle</span>
     </a>
