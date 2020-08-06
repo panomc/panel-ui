@@ -132,8 +132,6 @@
   setDeletePostModalCallback((post) => {
     if (post.status === 0) {
       routePage(page, true);
-
-      //TODO TOAST
     } else {
       route("/panel/posts/trash");
     }

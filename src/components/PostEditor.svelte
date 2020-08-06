@@ -9,7 +9,10 @@
   import moment from "moment";
 
   import tooltip from "../pano/js/tooltip.util";
-  import MoveToTrashPostConfirmationModal from "../components/modals/MoveToTrashPostConfirmationModal.svelte";
+  import ConfirmDeletePostModal, {
+    setCallback as setDeletePostModalCallback,
+    show as showDeletePostModal,
+  } from "../components/modals/ConfirmDeletePostModal.svelte";
   import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
   import ApiUtil from "../pano/js/api.util";
   import { extractContent } from "../util/text.util";
@@ -226,6 +229,14 @@
 
     if (postInitialized) initPage();
   });
+
+  setDeletePostModalCallback((post) => {
+    if (post.status === 0) {
+      route("/panel/posts");
+    } else {
+      route("/panel/posts/trash");
+    }
+  });
 </script>
 
 <!-- Create Post Subpage -->
@@ -255,9 +266,8 @@
     {#if editorMode === 'edit'}
       <button
         class="btn btn-link text-danger"
-        data-target="#moveToTrashPostConfirmationModal"
-        data-toggle="modal"
         type="button"
+        on:click="{showDeletePostModal(post)}"
       >
         <Icon data="{faTrash}" />
       </button>
@@ -451,5 +461,3 @@
   </div>
 
 </section>
-
-<MoveToTrashPostConfirmationModal />

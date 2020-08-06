@@ -49,6 +49,10 @@
 
             hide();
 
+            // if (get(post).status === 0)
+
+                    //TODO TOAST
+
             callback(get(post));
 
             resolve();
