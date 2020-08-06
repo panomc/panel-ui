@@ -106,6 +106,26 @@
     });
   }
 
+  function onPublishClick(id) {
+    buttonsLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/post/onlyPublish", { id })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            buttonsLoading = false;
+
+            route("/panel/posts");
+
+            resolve();
+          } else refreshBrowserPage();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
 </script>
 
@@ -235,13 +255,13 @@
                         </a>
                       {/if}
 
-                      <!--                @click="publish(post.id)"-->
                       {#if pageType !== 'published'}
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
                           class:disabled="{buttonsLoading}"
                           disabled="{buttonsLoading}"
+                          on:click="{onPublishClick(post.id)}"
                         >
                           <span>
                             <Icon
