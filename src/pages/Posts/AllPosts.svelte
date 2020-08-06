@@ -3,7 +3,10 @@
   import { getPath, route } from "routve";
 
   import Pagination from "../../components/Pagination.svelte";
-  import ConfirmDeletePostModal from "../../components/modals/ConfirmDeletePostModal.svelte";
+  import ConfirmDeletePostModal, {
+    setCallback as setDeletePostModalCallback,
+    show as showDeletePostModal,
+  } from "../../components/modals/ConfirmDeletePostModal.svelte";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../pano/js/api.util";
@@ -125,6 +128,16 @@
         });
     });
   }
+
+  setDeletePostModalCallback((post) => {
+    if (post.status === 0) {
+      routePage(page, true);
+
+      //TODO TOAST
+    } else {
+      route("/panel/posts/trash");
+    }
+  });
 
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
 </script>
@@ -273,12 +286,12 @@
                         </a>
                       {/if}
 
-                      <!--                @click="deletingPostID = post.id"-->
                       <a
                         class="dropdown-item"
                         data-target="#confirmDeletePost"
                         data-toggle="modal"
                         href="javascript:void(0);"
+                        on:click="{showDeletePostModal(post)}"
                       >
 
                         <Icon data="{faTrash}" class="text-danger mr-1" />
