@@ -258,7 +258,7 @@
                     />
                   </a>
                 </td>
-                <td>0</td>
+                <td>{post.views}</td>
                 <td>{moment(parseInt(post.date)).format('DD/MM/YYYY, HH:mm')}</td>
               </tr>
             {/each}
