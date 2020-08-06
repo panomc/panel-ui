@@ -1,4 +1,7 @@
 <script>
+  import moment from "moment";
+  import { getPath, route } from "routve";
+
   import Pagination from "../../components/Pagination.svelte";
   import ConfirmDeletePostModal from "../../components/modals/ConfirmDeletePostModal.svelte";
 
@@ -17,8 +20,6 @@
     faBookmark,
     faGlobeAmericas
   } from "@fortawesome/free-solid-svg-icons";
-
-  import { getPath, route } from "routve";
 
   export let page = undefined;
   export let pageType = "published";
@@ -78,24 +79,6 @@
           });
       });
     }
-  }
-
-  function getFormattedDate(date) {
-    const dateFromNumberDate = new Date(date * 1000);
-
-    return (
-      dateFromNumberDate.getDate() +
-      "." +
-      (dateFromNumberDate.getMonth() + 1) +
-      "." +
-      dateFromNumberDate.getFullYear() +
-      " - " +
-      dateFromNumberDate.getHours() +
-      ":" +
-      dateFromNumberDate.getMinutes() +
-      ":" +
-      dateFromNumberDate.getSeconds()
-    );
   }
 
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
@@ -276,7 +259,7 @@
                   </a>
                 </td>
                 <td>0</td>
-                <td>{getFormattedDate(post.date)}</td>
+                <td>{moment(parseInt(post.date)).format('DD/MM/YYYY, HH:mm')}</td>
               </tr>
             {/each}
           </tbody>
