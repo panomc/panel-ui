@@ -461,3 +461,5 @@
   </div>
 
 </section>
+
+<ConfirmDeletePostModal />
