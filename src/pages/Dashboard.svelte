@@ -246,7 +246,14 @@
     <div class="col-lg-6">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Son Talepler</h5>
+          <div class="row justify-content-between">
+            <div class="col-6">
+              <h5 class="card-title">Son Talepler</h5>
+            </div>
+            <div class="col-6 text-right">
+              <a href="/tickets" class="btn btn-link bg-light btn-sm">Tüm Talepler</a>
+            </div>
+          </div>
 
           <ul class="list-group borders">
             <a
