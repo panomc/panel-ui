@@ -174,6 +174,26 @@
     });
   }
 
+  function onDraftClick() {
+    loading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/post/moveDraft", post)
+        .then((response) => {
+          if (response.data.result === "ok") {
+            loading = false;
+
+            route("/panel/posts/draft");
+
+            resolve();
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
   $: setPost(parseInt(postID));
 
   onMount(() => {
@@ -222,7 +242,12 @@
     </a>
   </div>
   <div class="col text-right">
-    <a class="btn btn-outline-primary" role="button" target="_blank" href="/preview/post/{post.id}">
+    <a
+      class="btn btn-outline-primary"
+      role="button"
+      target="_blank"
+      href="/preview/post/{post.id}"
+    >
       <Icon data="{faEye}" />
       <span class="d-md-inline d-none ml-1">Görüntüle</span>
     </a>
@@ -242,6 +267,7 @@
         type="button"
         class:disabled="{loading}"
         disabled="{loading}"
+        on:click="{onDraftClick}"
       >
         <Icon data="{faBookmark}" />
         <span class="d-md-inline d-none ml-1">Taslaklara Taşı</span>
@@ -378,9 +404,7 @@
               class="form-control form-control-sm mb-3"
               bind:value="{post.category}"
             >
-              <option class="text-primary" value="-1">
-                Kategorisiz
-              </option>
+              <option class="text-primary" value="-1">Kategorisiz</option>
 
               {#each categories as category, index (category)}
                 <option value="{category.id}">{category.title}</option>
