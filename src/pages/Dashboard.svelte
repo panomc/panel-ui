@@ -255,84 +255,34 @@
             </div>
           </div>
 
-          <ul class="list-group borders">
+          <ul class="list-group">
+
             <a
               href="javascript:void(0);"
-              class="list-group-item list-group-item-action d-flex
-              justify-content-between align-items-center rounded"
+              class="list-group-item list-group-item-action rounded d-flex flex-row"
             >
-              <div>
+              <div class="col-auto">
                 <img
                   src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
                   width="48"
                   height="48"
-                  class="border rounded float-left mr-3"
+                  class="border rounded-circle"
                   alt="Butlu"
                 />
+              </div>
+              <div class="col">
                 <span class="text-primary">
-                  #14 Lagdan öldüm itemlerim gitti xd
+                  Lagdan öldüm itemlerim gitti, lütfen ilgilenebilir misiniz?
                 </span>
                 <br />
                 <small class="text-muted">
-                  <b>Butlu</b>
-                  tarafından
-                  <b>Genel</b>
-                  kategorisine açıldı.
+                  <b>2 gün önce</b>,
+                  <b>Genel</b> kategorisine açıldı.
                 </small>
               </div>
-              <span class="badge badge-secondary badge-pill">Yeni</span>
-            </a>
-            <a
-              href="javascript:void(0);"
-              class="list-group-item list-group-item-action d-flex
-              justify-content-between align-items-center rounded"
-            >
-              <div>
-                <img
-                  src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
-                  width="48"
-                  height="48"
-                  class="border rounded float-left mr-3"
-                  alt="Butlu"
-                />
-                <span class="text-primary">
-                  #14 Lagdan öldüm itemlerim gitti xd
-                </span>
-                <br />
-                <small class="text-muted">
-                  <b>Butlu</b>
-                  tarafından
-                  <b>Genel</b>
-                  kategorisine açıldı.
-                </small>
+              <div class="col-auto d-flex align-items-center">
+                <span class="badge badge-secondary badge-pill">Yeni</span>
               </div>
-              <span class="badge badge-sunflower badge-pill">Yanıtlandı</span>
-            </a>
-            <a
-              href="javascript:void(0);"
-              class="list-group-item list-group-item-action d-flex
-              justify-content-between align-items-center rounded"
-            >
-              <div>
-                <img
-                  src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
-                  width="48"
-                  height="48"
-                  class="border rounded float-left mr-3"
-                  alt="Butlu"
-                />
-                <span class="text-primary">
-                  #14 Lagdan öldüm itemlerim gitti xd
-                </span>
-                <br />
-                <small class="text-muted">
-                  <b>Butlu</b>
-                  tarafından
-                  <b>Genel</b>
-                  kategorisine açıldı.
-                </small>
-              </div>
-              <span class="badge badge-bittersweet badge-pill">Kapalı</span>
             </a>
           </ul>
 
