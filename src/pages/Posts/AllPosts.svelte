@@ -250,10 +250,10 @@
                 <td>
                   <a href="#" use:tooltip="{['top', post.writer.username]}">
                     <img
-                      alt="Oyuncu Adı"
+                      alt="{post.writer.username}"
                       class="rounded-circle border"
                       height="32"
-                      src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/32"
+                      src="https://minotar.net/avatar/{post.writer.username}"
                       width="32"
                     />
                   </a>
