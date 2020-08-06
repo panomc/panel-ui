@@ -371,7 +371,7 @@
                     />
                   </a>
                 </td>
-                <td class="text-nowrap">1 saat önce</td>
+                <td class="text-nowrap">{moment(parseInt(ticket.date)).fromNow()}</td>
               </tr>
             {/each}
           </tbody>
