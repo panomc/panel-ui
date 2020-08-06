@@ -353,7 +353,7 @@
               use:tooltip="{['left', 'Görüntülenme']}"
             >
               <Icon data="{faEye}" class="text-primary mr-1" />
-              <span class="font-weight-normal">0</span>
+              <span class="font-weight-normal">{post.id === -1 ? "0" : post.views}</span>
             </li>
           </ul>
         </form>
