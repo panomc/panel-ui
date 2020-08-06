@@ -10,7 +10,7 @@
 
   export function show(
     newMode,
-    newCategory = { id: -1, title: "", description: "", url: "", color: "#000000" }
+    newCategory = { id: -1, title: "", description: "", url: "", color: "#1976d2" }
   ) {
     mode.set(newMode);
 
