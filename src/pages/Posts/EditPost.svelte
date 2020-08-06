@@ -9,5 +9,4 @@
   }
 </script>
 
-Edit post
 <PostEditor {postID} />

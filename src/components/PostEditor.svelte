@@ -45,6 +45,7 @@
   let quillInitialized = false;
   let editorMode = "create";
   let postInitialized = false;
+  let error = {};
 
   let post = defaultPost;
 
@@ -159,6 +160,36 @@
     }
   }
 
+  function onSubmit() {
+    loading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/post/publish", post)
+        .then((response) => {
+          if (response.data.result === "ok") {
+            loading = false;
+
+            if (post.id === -1) {
+              route("/panel/posts/post/" + response.data.id);
+            }
+
+            //TODO: TOAST
+
+            resolve();
+          } else if (response.data.result === "error") {
+            loading = false;
+
+            error = response.data.error;
+
+            resolve();
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
   $: setPost(parseInt(postID));
 
   onMount(() => {
@@ -232,12 +263,12 @@
         <span class="d-md-inline d-none ml-1">Taslaklara Taşı</span>
       </button>
     {/if}
-    <!--      @click="onSubmit"-->
     <button
       class="btn btn-secondary"
       type="button"
       class:disabled="{loading || extractContent(post.text).length === 0 || post.title.length === 0}"
       disabled="{loading || extractContent(post.text).length === 0 || post.title.length === 0}"
+      on:click="{onSubmit}"
     >
       <span>{post.status === 1 ? 'Güncelle' : 'Yayınla'}</span>
     </button>
