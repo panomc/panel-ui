@@ -80,6 +80,7 @@
             categories = response.data.categories;
 
             isPageInitialized.set(true);
+
             resolve();
           } else reject();
         })
@@ -353,7 +354,9 @@
               use:tooltip="{['left', 'Görüntülenme']}"
             >
               <Icon data="{faEye}" class="text-primary mr-1" />
-              <span class="font-weight-normal">{post.id === -1 ? "0" : post.views}</span>
+              <span class="font-weight-normal">
+                {post.id === -1 ? '0' : post.views}
+              </span>
             </li>
           </ul>
         </form>
@@ -373,11 +376,12 @@
           {:else}
             <select
               class="form-control form-control-sm mb-3"
-              value="{post.category}"
+              bind:value="{post.category}"
             >
-              <option class="text-primary" disabled value="-1">
-                Kategori Seç:
+              <option class="text-primary" value="-1">
+                Kategorisiz
               </option>
+
               {#each categories as category, index (category)}
                 <option value="{category.id}">{category.title}</option>
               {/each}
