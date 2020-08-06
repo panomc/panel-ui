@@ -421,7 +421,7 @@
             </select>
           {/if}
         </form>
-        <a href="./categories" class="btn btn-link btn-sm pl-0">
+        <a href="/panel/posts/categories" target="_blank" class="btn btn-link btn-sm pl-0">
           <Icon data="{faListAlt}" class="mr-1" />
           Yazı Kategorileri
         </a>
