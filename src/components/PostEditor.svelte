@@ -23,6 +23,7 @@
     faQuestionCircle,
   } from "@fortawesome/free-solid-svg-icons";
   import {
+    faListAlt,
     faStickyNote,
     faFolderOpen,
     faEdit,
@@ -396,9 +397,7 @@
         </h6>
         <form>
           {#if categoryCount === 0}
-            <div class="container text-center">
-              <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
-            </div>
+            <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
           {:else}
             <select
               class="form-control form-control-sm mb-3"
@@ -412,6 +411,10 @@
             </select>
           {/if}
         </form>
+        <a href="./categories" class="btn btn-link btn-sm pl-0">
+          <Icon data="{faListAlt}" class="mr-1" />
+          Yazı Kategorileri
+        </a>
       </div>
     </div>
     <div class="card">
@@ -420,9 +423,7 @@
           <Icon data="{faImage}" class="text-primary mr-1" />
           Küçük Resim:
         </h6>
-        <div class="container text-center d-none">
-          <p class="text-muted small">Küçük resim belirlenmedi.</p>
-        </div>
+        <p class="text-muted small">Küçük resim belirlenmedi.</p>
 
         <!--          :src="post.imageCode"-->
         <!--          v-if="post.imageCode !== ''"-->
