@@ -18,7 +18,7 @@
     faEllipsisV,
     faEye,
     faBookmark,
-    faGlobeAmericas
+    faGlobeAmericas,
   } from "@fortawesome/free-solid-svg-icons";
 
   export let page = undefined;
@@ -38,9 +38,9 @@
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/postPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType()
+          page_type: getStatusFromPageType(),
         })
-          .then(response => {
+          .then((response) => {
             if (response.data.result === "ok") {
               postsCount = response.data.posts_count;
               posts = response.data.posts;
@@ -184,38 +184,43 @@
                       aria-labelledby="postAction"
                       class="dropdown-menu dropdown-menu-right"
                     >
-                      <a class="dropdown-item" target="_blank" href="/">
+                      <a class="dropdown-item" target="_blank" href="/preview/post/{post.id}">
                         <Icon data="{faEye}" class="text-primary mr-1" />
                         Görüntüle
                       </a>
-                      <!--                v-if="page_type !== 'draft'"-->
                       <!--                :disabled="drafting"-->
                       <!--                @click="moveToDraft(index)"-->
-                      <a class="dropdown-item" href="javascript:void(0);">
-                        <!--                    v-if="!drafting"-->
-                        <span>
-                          <Icon data="{faBookmark}" class="text-primary mr-1" />
-                          Taslaklara Taşı
-                        </span>
+                      {#if pageType !== 'draft'}
+                        <a class="dropdown-item" href="javascript:void(0);">
+                          <!--                    v-if="!drafting"-->
+                          <span>
+                            <Icon
+                              data="{faBookmark}"
+                              class="text-primary mr-1"
+                            />
+                            Taslaklara Taşı
+                          </span>
 
-                        <!--                    v-if="drafting"-->
-                      </a>
+                          <!--                    v-if="drafting"-->
+                        </a>
+                      {/if}
 
                       <!--                :disabled="publishing"-->
                       <!--                @click="publish(post.id)"-->
-                      <!--                  v-if="page_type !== 'published'"-->
-                      <a class="dropdown-item" href="javascript:void(0);">
-                        <!--                    v-if="!publishing"-->
-                        <span>
-                          <Icon
-                            data="{faGlobeAmericas}"
-                            class="text-primary mr-1"
-                          />
-                          Yayınla
-                        </span>
+                      {#if pageType !== 'published'}
+                        <a class="dropdown-item" href="javascript:void(0);">
+                          <!--                    v-if="!publishing"-->
+                          <span>
+                            <Icon
+                              data="{faGlobeAmericas}"
+                              class="text-primary mr-1"
+                            />
+                            Yayınla
+                          </span>
 
-                        <!--                  v-if="publishing"-->
-                      </a>
+                          <!--                  v-if="publishing"-->
+                        </a>
+                      {/if}
 
                       <!--                @click="deletingPostID = post.id"-->
                       <a
@@ -259,7 +264,9 @@
                   </a>
                 </td>
                 <td>{post.views}</td>
-                <td>{moment(parseInt(post.date)).format('DD/MM/YYYY, HH:mm')}</td>
+                <td>
+                  {moment(parseInt(post.date)).format('DD/MM/YYYY, HH:mm')}
+                </td>
               </tr>
             {/each}
           </tbody>
@@ -272,7 +279,7 @@
       {totalPage}
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{event => routePage(event.detail.page)}"
+      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
     />
   </div>
 </div>
