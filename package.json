@@ -7,7 +7,7 @@
     "start": "sirv public -s --host 0.0.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.0",
+    "@babel/core": "^7.11.1",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
@@ -20,7 +20,7 @@
     "animate.css": "^3.7.2",
     "autoprefixer": "^9.8.6",
     "axios": "^0.19.2",
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^4.5.1",
     "chart.js": "^2.9.3",
     "copy-to-clipboard": "^3.3.1",
     "jquery": "^3.5.1",
@@ -39,8 +39,8 @@
     "routve": "1.1.10",
     "sass": "^1.26.10",
     "sirv-cli": "^1.0.5",
-    "svelte": "^3.24.0",
+    "svelte": "^3.24.1",
     "svelte-awesome": "^2.3.0",
-    "svelte-preprocess": "^4.0.9"
+    "svelte-preprocess": "^4.0.10"
   }
 }
