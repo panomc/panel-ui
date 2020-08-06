@@ -6,6 +6,7 @@
   import Quill from "quill";
   import { onMount } from "svelte";
   import { route } from "routve";
+  import moment from "moment";
 
   import tooltip from "../pano/js/tooltip.util";
   import MoveToTrashPostConfirmationModal from "../components/modals/MoveToTrashPostConfirmationModal.svelte";
@@ -59,24 +60,6 @@
       : status === 2
       ? "Taslak"
       : "Yeni";
-  }
-
-  function getFormattedDate(date) {
-    const dateFromNumberDate = new Date(date * 1000);
-
-    return (
-      dateFromNumberDate.getDate() +
-      "." +
-      (dateFromNumberDate.getMonth() + 1) +
-      "." +
-      dateFromNumberDate.getFullYear() +
-      " - " +
-      dateFromNumberDate.getHours() +
-      ":" +
-      dateFromNumberDate.getMinutes() +
-      ":" +
-      dateFromNumberDate.getSeconds()
-    );
   }
 
   function imageHandler() {
@@ -362,7 +345,7 @@
 
               <Icon data="{faEdit}" class="text-primary mr-1" />
               <span class="font-weight-normal">
-                {post.date === 0 ? '-' : getFormattedDate(post.date)}
+                {post.date === 0 ? '-' : moment(parseInt(post.date)).format('DD/MM/YYYY, HH:mm')}
               </span>
             </li>
             <li
