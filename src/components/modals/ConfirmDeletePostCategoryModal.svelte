@@ -39,12 +39,9 @@
 
   function onYesClick() {
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post(
-        "panel/post/category/delete",
-        {
-          id: get(category).id,
-        }
-      )
+      ApiUtil.post("panel/post/category/delete", {
+        id: get(category).id,
+      })
         .then((response) => {
           if (response.data.result === "ok") {
             loading = false;
