@@ -5,6 +5,9 @@
 </script>
 
 <script>
+  import moment from "moment";
+  import { getPath, route } from "routve";
+
   import ConfirmCloseTicketModal from "../../components/modals/ConfirmCloseTicketModal.svelte";
   import ConfirmDeleteTicketModal from "../../components/modals/ConfirmDeleteTicketModal.svelte";
 
@@ -20,7 +23,6 @@
     faTrash,
   } from "@fortawesome/free-solid-svg-icons";
 
-  import { getPath, route } from "routve";
   import Pagination from "../../components/Pagination.svelte";
 
   export let page = undefined;
@@ -371,7 +373,9 @@
                     />
                   </a>
                 </td>
-                <td class="text-nowrap">{moment(parseInt(ticket.date)).fromNow()}</td>
+                <td class="text-nowrap">
+                  {moment(parseInt(ticket.date)).fromNow()}
+                </td>
               </tr>
             {/each}
           </tbody>
