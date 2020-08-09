@@ -36,6 +36,8 @@
   }
 
   function onYesClick() {
+    loading = true;
+
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post(
         "panel/post/" + (get(post).status === 0 ? "delete" : "moveTrash"),

@@ -41,6 +41,8 @@
   }
 
   function onYesClick() {
+    loading = true;
+
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post("panel/ticket/category/delete", {
         id: get(category).id,
