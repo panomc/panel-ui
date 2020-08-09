@@ -8,7 +8,10 @@
   import moment from "moment";
   import { getPath, route } from "routve";
 
-  import ConfirmCloseTicketModal from "../../components/modals/ConfirmCloseTicketModal.svelte";
+  import ConfirmCloseTicketModal, {
+    setCallback as setCloseTicketModalCallback,
+    show as showCloseTicketModal,
+  } from "../../components/modals/ConfirmCloseTicketModal.svelte";
   import ConfirmDeleteTicketModal, {
     setCallback as setDeleteTicketModalCallback,
     show as showDeleteTicketModal,
@@ -36,12 +39,6 @@
   let totalPage = 1;
 
   let firstLoad = true;
-
-  let confirmCloseTicketModal;
-  let closingTicketsLoading = false;
-
-  let confirmDeleteTicketModal;
-  let deletingTicketsLoading = false;
 
   function getStatusFromPageType() {
     return pageType === "all" ? 2 : pageType === "waitingReply" ? 1 : 3;
@@ -131,32 +128,6 @@
       });
   }
 
-  function onConfirmCloseTicketsButtonClick() {
-    closingTicketsLoading = true;
-
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/ticket/close/selectedList", {
-        tickets: Object.values(getListOfChecked($checkedList)),
-      })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            clearSelections();
-
-            routePage(page, true, () => {
-              closingTicketsLoading = false;
-
-              confirmCloseTicketModal.close();
-            });
-
-            resolve();
-          } else reject();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-
   function onShowDeleteTicketsModalClick() {
     showDeleteTicketModal(getListOfChecked(get(checkedList)));
   }
@@ -165,7 +136,19 @@
     showDeleteTicketModal([id]);
   }
 
+  function onShowCloseTicketsModalClick() {
+    showCloseTicketModal(getListOfChecked(get(checkedList)));
+  }
+
   setDeleteTicketModalCallback((selectedTickets) => {
+    Object.values(selectedTickets).forEach((id) => {
+      $checkedList[id] = false;
+    });
+
+    routePage(page, true);
+  });
+
+  setCloseTicketModalCallback((selectedTickets) => {
     Object.values(selectedTickets).forEach((id) => {
       $checkedList[id] = false;
     });
@@ -195,11 +178,8 @@
         class="btn btn-outline-primary"
         class:disabled="{getListOfChecked($checkedList).length === 0}"
         role="button"
-        data-target="#confirmCloseTicket"
-        data-toggle="modal"
-        data-backdrop="static"
-        data-keyboard="false"
         href="javascript:void(0);"
+        on:click="{onShowCloseTicketsModalClick}"
       >
         Kapat
       </a>
@@ -382,10 +362,5 @@
   </div>
 </div>
 
-<ConfirmCloseTicketModal
-  on:confirmButtonClick="{onConfirmCloseTicketsButtonClick}"
-  selectedTickets="{getListOfChecked($checkedList)}"
-  bind:this="{confirmCloseTicketModal}"
-  loading="{closingTicketsLoading}"
-/>
+<ConfirmCloseTicketModal />
 <ConfirmDeleteTicketModal />
