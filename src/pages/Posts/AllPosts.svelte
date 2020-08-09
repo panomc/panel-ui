@@ -37,7 +37,7 @@
     return pageType === "published" ? 1 : pageType === "draft" ? 2 : 0;
   }
 
-  function routePage(pageNumber, forceReload = false) {
+  function routePage(pageNumber, forceReload = false, findLastPage = false) {
     if (pageNumber !== page || forceReload) {
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/postPage", {
@@ -69,10 +69,14 @@
             } else if (response.data.result === "error") {
               const errorCode = response.data.error;
 
-              isPageInitialized.set(true);
+              if (!findLastPage) {
+                isPageInitialized.set(true);
+              }
 
               if (errorCode === "PAGE_NOT_FOUND") {
-                route("/panel/error-404");
+                if (findLastPage) {
+                  routePage(page - 1, true, true);
+                } else route("/panel/error-404");
               }
 
               reject(errorCode);
@@ -131,7 +135,7 @@
 
   setDeletePostModalCallback((post) => {
     if (post.status === 0) {
-      routePage(page, true);
+      routePage(page, true, page !== 1);
     } else {
       route("/panel/posts/trash");
     }
