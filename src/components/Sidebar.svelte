@@ -53,7 +53,7 @@
 <div class="sidebar" class:active="{$isSidebarOpen}">
 
   <!-- Sidebar Logo -->
-  <div class="sidebar-logo border-bottom border-glass">
+  <div class="sidebar-logo border-bottom border-glass border-right">
     <a
       href="javascript:void(0);"
       class="sidebar-toggler btn btn-link text-muted"
@@ -69,7 +69,7 @@
     />
   </div>
 
-  <div class="sidebar-inner">
+  <div class="sidebar-inner border-glass border-right">
 
     <!-- Sidebar Info Section -->
     <div class="sidebar-info">
