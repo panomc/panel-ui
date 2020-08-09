@@ -44,7 +44,7 @@
     return pageType === "all" ? 2 : pageType === "waitingReply" ? 1 : 3;
   }
 
-  function routePage(pageNumber, forceReload = false, handler = null) {
+  function routePage(pageNumber, forceReload = false, findLastPage = false) {
     if (pageNumber !== page || forceReload) {
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/ticketPage", {
@@ -72,16 +72,18 @@
 
               isPageInitialized.set(true);
 
-              if (handler) handler();
-
               resolve();
             } else if (response.data.result === "error") {
               const errorCode = response.data.error;
 
-              isPageInitialized.set(true);
+              if (!findLastPage) {
+                isPageInitialized.set(true);
+              }
 
               if (errorCode === "PAGE_NOT_FOUND") {
-                route("/panel/error-404");
+                if (findLastPage) {
+                  routePage(page - 1, true, true);
+                } else route("/panel/error-404");
               }
 
               resolve();
@@ -145,7 +147,7 @@
       $checkedList[id] = false;
     });
 
-    routePage(page, true);
+    routePage(page, true, page !== 1);
   });
 
   setCloseTicketModalCallback((selectedTickets) => {
@@ -153,10 +155,12 @@
       $checkedList[id] = false;
     });
 
-    routePage(page, true);
+    routePage(page, true, page !== 1);
   });
 
-  routePage(typeof page === "undefined" ? 1 : parseInt(page));
+  $: {
+    routePage(typeof page === "undefined" ? 1 : parseInt(page));
+  }
 </script>
 
 <!-- Tickets Page -->
