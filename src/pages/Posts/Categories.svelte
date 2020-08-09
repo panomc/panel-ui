@@ -4,11 +4,15 @@
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../pano/js/api.util";
   import Pagination from "../../components/Pagination.svelte";
+
   import PostCategoriesAddEditModal, {
     show as showPostCategoriesAddEditModal,
     setCallback as setCallbackForPostCategoriesAddEditModal,
   } from "../../components/modals/PostCategoriesAddEditModal.svelte";
-  import PostCategoryDeleteConfirmationModal from "../../components/modals/PostCategoryDeleteConfirmationModal.svelte";
+  import ConfirmDeletePostCategoryModal, {
+    setCallback as setDeletePostCategoryModalCallback,
+    show as showDeletePostCategoryModal,
+  } from "../../components/modals/ConfirmDeletePostCategoryModal.svelte";
 
   import Icon from "svelte-awesome";
   import {
@@ -78,7 +82,18 @@
     showPostCategoriesAddEditModal("edit", categories[index]);
   }
 
+  function onShowDeletePostCategoryModalClick(index) {
+    showDeletePostCategoryModal(categories[index]);
+  }
+
   setCallbackForPostCategoriesAddEditModal((routeFirstPage) => {
+    routePage(
+      routeFirstPage ? 1 : typeof page === "undefined" ? 1 : parseInt(page),
+      true
+    );
+  });
+
+  setDeletePostCategoryModalCallback((routeFirstPage) => {
     routePage(
       routeFirstPage ? 1 : typeof page === "undefined" ? 1 : parseInt(page),
       true
@@ -159,12 +174,10 @@
                       aria-labelledby="postAction"
                       class="dropdown-menu dropdown-menu-right"
                     >
-                      <!--                          @click="onDeleteClick(category.id)"-->
                       <a
                         class="dropdown-item"
-                        data-target="#postCategoryDeleteConfirmationModal"
-                        data-toggle="modal"
                         href="javascript:void(0);"
+                        on:click="{onShowDeletePostCategoryModalClick(index)}"
                       >
                         <Icon data="{faTrash}" class="text-danger mr-1" />
                         Sil
@@ -173,7 +186,6 @@
                   </div>
                 </th>
                 <td>
-                  <!--              @click="onShowEditCategoryButtonClick(index)"-->
                   <a
                     data-target="#addEditCategory"
                     data-toggle="modal"
@@ -190,7 +202,9 @@
                     href="/category/{category.url}"
                     target="_blank"
                     title="Kategoriyi Görüntüle"
-                  >/category/<b class="text-muted">{category.url}</b>
+                  >
+                    /category/
+                    <b class="text-muted">{category.url}</b>
                   </a>
                 </td>
                 <td>
@@ -219,8 +233,7 @@
 </div>
 
 <!-- Post Category Delete Confirmation Modal -->
-<PostCategoryDeleteConfirmationModal></PostCategoryDeleteConfirmationModal>
-
+<ConfirmDeletePostCategoryModal />
 
 <!-- Add / Edit Post Category Modal -->
 <PostCategoriesAddEditModal />
