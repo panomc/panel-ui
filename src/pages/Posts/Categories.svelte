@@ -30,7 +30,7 @@
   let totalPage = 1;
   let pages = [];
 
-  function routePage(pageNumber, forceReload = false) {
+  function routePage(pageNumber, forceReload = false, findLastPage = false) {
     if (pageNumber !== page || forceReload) {
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/posts/categoryPage", {
@@ -58,10 +58,14 @@
             } else if (response.data.result === "error") {
               const errorCode = response.data.error;
 
-              isPageInitialized.set(true);
+              if (!findLastPage) {
+                isPageInitialized.set(true);
+              }
 
               if (errorCode === "PAGE_NOT_FOUND") {
-                route("/panel/error-404");
+                if (findLastPage) {
+                  routePage(page - 1, true, true);
+                } else route("/panel/error-404");
               }
 
               resolve();
@@ -89,14 +93,16 @@
   setCallbackForPostCategoriesAddEditModal((routeFirstPage) => {
     routePage(
       routeFirstPage ? 1 : typeof page === "undefined" ? 1 : parseInt(page),
-      true
+      true,
+      page !== 1
     );
   });
 
   setDeletePostCategoryModalCallback((routeFirstPage) => {
     routePage(
       routeFirstPage ? 1 : typeof page === "undefined" ? 1 : parseInt(page),
-      true
+      true,
+      page !== 1
     );
   });
 
