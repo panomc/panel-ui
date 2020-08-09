@@ -22,6 +22,7 @@ body {
 }
 
 .content {
+  background-color: #f5f7fa;
   padding: 1.5rem 1.5rem;
   @include media-breakpoint-down(xs) {
     padding: 1rem 1rem;
@@ -29,7 +30,6 @@ body {
 }
 
 .card {
-  box-shadow: $box-shadow-sm;
   margin-bottom: 1rem;
 }
 
@@ -65,7 +65,7 @@ body {
   left: 0;
   z-index: 1;
   transition: 0.5s all;
-  background: $primary;
+  background: $white;
   z-index: 1021;
   @include media-breakpoint-down(md) {
     position: fixed;
@@ -123,7 +123,7 @@ body {
 .sidebar-server-icon {
   display: block;
   margin: 1rem auto;
-  border: 10px solid $lightglass;
+  border: 10px solid $lightprimary;
   border-radius: 100%;
 }
 
@@ -197,7 +197,7 @@ body {
 
 .sidebar-tab > li.nav-item {
   a.nav-link.active {
-    background: $glass;
+    background: $lightprimary;
     color: $sunflower;
     font-weight: bolder;
   }

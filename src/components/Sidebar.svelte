@@ -56,7 +56,7 @@
   <div class="sidebar-logo border-bottom border-glass">
     <a
       href="javascript:void(0);"
-      class="sidebar-toggler btn btn-link text-light"
+      class="sidebar-toggler btn btn-link text-muted"
       on:click="{onMobileSideBarCollapseClick}"
     >
       <Icon data="{faBars}" />
@@ -64,7 +64,7 @@
     <img
       alt="Pano"
       title="Pano"
-      src="{basePath() + 'assets/img/logo.svg'}"
+      src="{basePath() + 'assets/img/logo-blue.svg'}"
       width="20"
     />
   </div>
@@ -81,7 +81,7 @@
         height="80"
         src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
       />
-      <h5 class="text-white">{$website.name}</h5>
+      <h5 class="text-dark">{$website.name}</h5>
 
       {#if $sidebarTabsState === 'website'}
         <a href="/" class="z-1" target="_blank">
@@ -113,7 +113,7 @@
           class="nav-link"
           on:click="{onWebsiteMenuClick}"
           class:active="{$sidebarTabsState === 'website'}"
-          class:text-light="{$sidebarTabsState !== 'website'}"
+          class:text-muted="{$sidebarTabsState !== 'website'}"
         >
           <Icon data="{faGlobe}" scale="1.3" />
         </a>
@@ -124,7 +124,7 @@
           class="nav-link"
           on:click="{onGameMenuClick}"
           class:active="{$sidebarTabsState === 'game'}"
-          class:text-light="{$sidebarTabsState !== 'game'}"
+          class:text-muted="{$sidebarTabsState !== 'game'}"
         >
           <Icon data="{faCube}" scale="1.3" />
         </a>

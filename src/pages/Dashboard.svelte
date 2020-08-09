@@ -193,10 +193,10 @@
             </div>
             <div class="col-8 text-right">
               <div class="btn-group">
-                <button class="btn btn-sm btn-outline-primary active">
+                <button class="btn btn-sm btn-outline-light btn-link active">
                   Haftalık
                 </button>
-                <button class="btn btn-sm btn-outline-primary">Aylık</button>
+                <button class="btn btn-sm btn-outline-light btn-link">Aylık</button>
               </div>
             </div>
           </div>
