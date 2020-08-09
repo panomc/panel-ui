@@ -4,11 +4,15 @@
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../pano/js/api.util";
   import Pagination from "../../components/Pagination.svelte";
-  import ConfirmDeleteTicketCategoryModal from "../../components/modals/ConfirmDeleteTicketCategoryModal.svelte";
+
   import AddEditTicketCategoryModal, {
     show as showTicketCategoriesAddEditModal,
     setCallback as setCallbackForTicketCategoriesAddEditModal,
   } from "../../components/modals/AddEditTicketCategoryModal.svelte";
+  import ConfirmDeleteTicketCategoryModal, {
+    setCallback as setDeleteTicketCategoryModalCallback,
+    show as showDeleteTicketCategoryModal,
+  } from "../../components/modals/ConfirmDeleteTicketCategoryModal.svelte";
 
   import Icon from "svelte-awesome";
   import {
@@ -78,7 +82,18 @@
     showTicketCategoriesAddEditModal("edit", categories[index]);
   }
 
+  function onShowDeleteTicketCategoryModalClick(index) {
+    showDeleteTicketCategoryModal(categories[index]);
+  }
+
   setCallbackForTicketCategoriesAddEditModal((routeFirstPage) => {
+    routePage(
+      routeFirstPage ? 1 : typeof page === "undefined" ? 1 : parseInt(page),
+      true
+    );
+  });
+
+  setDeleteTicketCategoryModalCallback((routeFirstPage) => {
     routePage(
       routeFirstPage ? 1 : typeof page === "undefined" ? 1 : parseInt(page),
       true
@@ -163,13 +178,10 @@
                       aria-labelledby="postAction"
                       class="dropdown-menu dropdown-menu-right"
                     >
-
-                      <!--                  @click="onDeleteClick(category.id)"-->
                       <a
                         class="dropdown-item"
-                        data-target="#confirmDeleteTicketCategory"
-                        data-toggle="modal"
                         href="javascript:void(0);"
+                        on:click="{onShowDeleteTicketCategoryModalClick(index)}"
                       >
                         <Icon data="{faTrash}" class="text-danger mr-1" />
                         Sil
