@@ -123,9 +123,9 @@
     return isAllSelected;
   }
 
-  function clearSelections(list = $checkedList) {
+  function clearSelections() {
     Object.keys($checkedList)
-      .filter((key) => list[key])
+      .filter((key) => $checkedList[key])
       .forEach((key) => {
         $checkedList[key] = false;
       });
@@ -157,12 +157,18 @@
     });
   }
 
-  function onShowDeleteTicketModalClick() {
+  function onShowDeleteTicketsModalClick() {
     showDeleteTicketModal(getListOfChecked(get(checkedList)));
   }
 
+  function onShowDeleteTicketModalClick(id) {
+    showDeleteTicketModal([id]);
+  }
+
   setDeleteTicketModalCallback((selectedTickets) => {
-    clearSelections(selectedTickets);
+    Object.values(selectedTickets).forEach((id) => {
+      $checkedList[id] = false;
+    });
 
     routePage(page, true);
   });
@@ -202,7 +208,7 @@
         class:disabled="{getListOfChecked($checkedList).length === 0}"
         role="button"
         href="javascript:void(0);"
-        on:click="{onShowDeleteTicketModalClick}"
+        on:click="{onShowDeleteTicketsModalClick}"
       >
         <Icon data="{faTrash}" class="mr-1" />
         Sil
@@ -312,9 +318,8 @@
                         <!--                  @click="onDeleteClick(category.id)"-->
                         <a
                           class="dropdown-item"
-                          data-target="#confirmDeleteTicketCategory"
-                          data-toggle="modal"
                           href="javascript:void(0);"
+                          on:click="{onShowDeleteTicketModalClick(ticket.id)}"
                         >
                           <Icon data="{faTrash}" class="text-danger mr-1" />
                           Sil
