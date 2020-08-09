@@ -1,29 +1,72 @@
+<script context="module">
+  import jquery from "jquery";
+  import { writable, get } from "svelte/store";
+
+  const dialogID = "confirmDeleteTicket";
+  const selectedTickets = writable([]);
+
+  let callback = (selectedTickets) => {};
+
+  export function show(newSelectedTickets) {
+    selectedTickets.set(newSelectedTickets);
+
+    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
+  }
+
+  export function setCallback(newCallback) {
+    callback = newCallback;
+  }
+
+  export function hide() {
+    jquery("#" + dialogID).modal("hide");
+  }
+</script>
+
 <script>
   import Icon from "svelte-awesome";
   import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
-  import { createEventDispatcher } from "svelte";
-  import jQuery from "jquery";
 
-  const dispatch = createEventDispatcher();
-  export const modalID = "confirmDeleteTicket";
+  import { showNetworkErrorOnCatch } from "../../Store";
+  import ApiUtil from "../../pano/js/api.util";
 
-  export let loading;
-  export let selectedTickets;
+  let loading;
 
-  function onConfirmButtonClick() {
-    dispatch("confirmButtonClick");
+  function refreshBrowserPage() {
+    location.reload();
   }
 
-  export const close = () => {
-    jQuery("#" + modalID).modal("hide");
-  };
+  function onYesClick() {
+    loading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/ticket/delete/selectedTickets", {
+        tickets: Object.values(get(selectedTickets)),
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            loading = false;
+
+            hide();
+
+            //TODO TOAST
+
+            callback(get(selectedTickets));
+
+            resolve();
+          } else refreshBrowserPage();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
 </script>
 
 <!-- Confirm Close Ticket Modal -->
 <div
   aria-hidden="true"
   class="modal fade"
-  id="{modalID}"
+  id="{dialogID}"
   role="dialog"
   tabindex="-1"
 >
@@ -37,8 +80,8 @@
             class="d-block m-auto text-gray"
           />
         </div>
-        Bu {selectedTickets.length === 1 ? 'talebi' : 'talepleri'} kalıcı olarak
-        silmek istediğinizden emin misiniz?
+        Bu {$selectedTickets.length === 1 ? 'talebi' : 'talepleri'} kalıcı
+        olarak silmek istediğinizden emin misiniz?
       </div>
       <div class="modal-footer">
         <button
@@ -54,10 +97,10 @@
         <button
           class="btn btn-danger"
           type="button"
-          on:click="{onConfirmButtonClick}"
           class:disabled="{loading}"
           aria-disabled="{loading}"
           disabled="{loading}"
+          on:click="{onYesClick}"
         >
           Evet
         </button>

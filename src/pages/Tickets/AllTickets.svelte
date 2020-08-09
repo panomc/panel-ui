@@ -1,5 +1,5 @@
 <script context="module">
-  import { writable } from "svelte/store";
+  import { writable, get } from "svelte/store";
 
   let checkedList = writable([]);
 </script>
@@ -9,7 +9,10 @@
   import { getPath, route } from "routve";
 
   import ConfirmCloseTicketModal from "../../components/modals/ConfirmCloseTicketModal.svelte";
-  import ConfirmDeleteTicketModal from "../../components/modals/ConfirmDeleteTicketModal.svelte";
+  import ConfirmDeleteTicketModal, {
+    setCallback as setDeleteTicketModalCallback,
+    show as showDeleteTicketModal,
+  } from "../../components/modals/ConfirmDeleteTicketModal.svelte";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../pano/js/api.util";
@@ -120,9 +123,9 @@
     return isAllSelected;
   }
 
-  function clearSelections() {
+  function clearSelections(list = $checkedList) {
     Object.keys($checkedList)
-      .filter((key) => $checkedList[key])
+      .filter((key) => list[key])
       .forEach((key) => {
         $checkedList[key] = false;
       });
@@ -154,31 +157,15 @@
     });
   }
 
-  function onConfirmDeleteTicketsButtonClick() {
-    deletingTicketsLoading = true;
-
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/ticket/delete/selectedTickets", {
-        tickets: Object.values(getListOfChecked($checkedList)),
-      })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            clearSelections();
-
-            routePage(page, true, () => {
-              deletingTicketsLoading = false;
-
-              confirmDeleteTicketModal.close();
-            });
-
-            resolve();
-          } else reject();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
+  function onShowDeleteTicketModalClick() {
+    showDeleteTicketModal(getListOfChecked(get(checkedList)));
   }
+
+  setDeleteTicketModalCallback((selectedTickets) => {
+    clearSelections(selectedTickets);
+
+    routePage(page, true);
+  });
 
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
 </script>
@@ -214,11 +201,8 @@
         class="btn btn-outline-danger"
         class:disabled="{getListOfChecked($checkedList).length === 0}"
         role="button"
-        data-target="#confirmDeleteTicket"
-        data-toggle="modal"
-        data-backdrop="static"
-        data-keyboard="false"
         href="javascript:void(0);"
+        on:click="{onShowDeleteTicketModalClick}"
       >
         <Icon data="{faTrash}" class="mr-1" />
         Sil
@@ -399,9 +383,4 @@
   bind:this="{confirmCloseTicketModal}"
   loading="{closingTicketsLoading}"
 />
-<ConfirmDeleteTicketModal
-  selectedTickets="{getListOfChecked($checkedList)}"
-  bind:this="{confirmDeleteTicketModal}"
-  loading="{deletingTicketsLoading}"
-  on:confirmButtonClick="{onConfirmDeleteTicketsButtonClick}"
-/>
+<ConfirmDeleteTicketModal />
