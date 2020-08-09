@@ -137,7 +137,9 @@
     }
   });
 
-  routePage(typeof page === "undefined" ? 1 : parseInt(page));
+  $: {
+    routePage(typeof page === "undefined" ? 1 : parseInt(page));
+  }
 </script>
 
 <!-- Action Menu -->
