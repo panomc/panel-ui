@@ -51,7 +51,7 @@
 
             // if (get(post).status === 0)
 
-                    //TODO TOAST
+            //TODO TOAST
 
             callback(get(post));
 
