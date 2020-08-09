@@ -254,6 +254,11 @@
             <tr>
               <th class="text-nowrap" scope="col">
                 <a href="javascript:void(0);" on:click="{onSelectAllClick}">
+                  <input
+                          type="checkbox"
+                          checked="{isAllTicketsSelected(tickets, $checkedList)}"
+                  />
+
                   {isAllTicketsSelected(tickets, $checkedList) ? 'Tümünü Kaldır' : 'Tümünü Seç'}
                 </a>
               </th>
