@@ -12,7 +12,7 @@
   export function show(newCategory) {
     category.set(newCategory);
 
-    jquery("#" + dialogID).modal("show");
+    jquery("#" + dialogID).modal({backdrop: 'static', keyboard: false});
   }
 
   export function setCallback(newCallback) {

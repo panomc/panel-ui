@@ -10,7 +10,7 @@
   export function show(newPost) {
     post.set(newPost);
 
-    jquery("#" + dialogID).modal("show");
+    jquery("#" + dialogID).modal({backdrop: 'static', keyboard: false});
   }
 
   export function setCallback(newCallback) {
