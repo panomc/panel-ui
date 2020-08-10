@@ -22,7 +22,7 @@ body {
 }
 
 .content {
-  background-color: #f5f7fa;
+  background-color: #f0f6ff;
   padding: 1.5rem 1.5rem;
   @include media-breakpoint-down(xs) {
     padding: 1rem 1rem;
@@ -30,6 +30,7 @@ body {
 }
 
 .card {
+  box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.03);
   margin-bottom: 1rem;
 }
 

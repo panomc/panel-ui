@@ -5,7 +5,8 @@
   import {
     faBell,
     faDotCircle,
-    faUser
+    faUser,
+    faStickyNote,
   } from "@fortawesome/free-regular-svg-icons";
   import {
     faPlus,
@@ -15,7 +16,12 @@
     faUserCog,
     faPuzzlePiece,
     faPalette,
-    faBookOpen
+    faBookOpen,
+    faCaretUp,
+    faCaretDown,
+    faLiraSign,
+    faTicketAlt,
+    faGlobe,
   } from "@fortawesome/free-solid-svg-icons";
   import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 
@@ -28,7 +34,7 @@
   import PostsChart from "../components/charts/Dashboard/PostsChart.svelte";
 
   let getting_started_blocks = {
-    welcome_board: false
+    welcome_board: false,
   };
 
   let registered_player_count = 0;
@@ -39,7 +45,7 @@
   function getInitialData() {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get("panel/initPage/dashboard")
-        .then(response => {
+        .then((response) => {
           if (response.data.result === "ok") {
             registered_player_count = response.data.registered_player_count;
             post_count = response.data.post_count;
@@ -160,7 +166,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0);">
+                <a href="javascript:void(0);" target="_blank">
                   <Icon data="{faBookOpen}" class="mr-1" />
                   Dökümantasyonları İnceleyin
                 </a>
@@ -180,129 +186,169 @@
   <!-- Dashboard Title  -->
   <h3 class="text-muted badge badge-lightprimary panel-subtitle">Website</h3>
 
-  <!-- Website Activity -->
-  <div class="row justify-content-around align-items-stretch">
+  <div class="row">
 
-    <!-- Statics Blocks -->
-    <div class="d-flex col-lg-9">
-      <div class="d-flex flex-fill card">
-        <div class="card-body h-100">
-          <div class="row justify-content-between">
-            <div class="col-4">
-              <h5 class="card-title b-0">Ziyaretler</h5>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card">
+        <div class="p-3">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <h3 class="font-weight-bolder text-primary">
+                {registered_player_count}
+                <Icon data="{faCaretUp}" class="ml-2" />
+              </h3>
+              <span class="text-primary">Yeni Kayıt</span>
             </div>
-            <div class="col-8 text-right">
-              <div class="btn-group">
-                <button class="btn btn-sm btn-outline-light btn-link active">
-                  Haftalık
-                </button>
-                <button class="btn btn-sm btn-outline-light btn-link">Aylık</button>
-              </div>
+            <div class="col-6">
+              <PlayersChart />
             </div>
-          </div>
-          <div class="d-flex align-items-center h-100">
-            <VisitorsChart />
           </div>
         </div>
       </div>
     </div>
-
-    <div class="d-flex flex-fill col-lg-3">
-      <div
-        class="d-flex flex-column justify-content-between justify-items-stretch
-        w-100 h-100"
-      >
-        <div class="card d-flex flex-fill">
-          <div class="card-body pt-3 pb-0 d-flex flex-row align-items-center">
-            <h2 class="text-secondary font-weight-bolder m-0">
-              {registered_player_count}
-            </h2>
-            <strong class="pl-4">Oyuncu</strong>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card">
+        <div class="p-3">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="font-weight-bolder text-secondary">1</h3>
+              <span class="text-secondary">Oturumu Açık</span>
+            </div>
+            <div class="col-auto">
+              <Icon data="{faGlobe}" class="text-gray d-block mx-2" />
+            </div>
           </div>
-          <PlayersChart />
         </div>
-        <div class="card d-flex flex-fill">
-          <div class="card-body pt-3 pb-0 d-flex flex-row align-items-center">
-            <h2 class="text-bittersweet font-weight-bolder m-0">
-              {tickets_count}
-            </h2>
-            <strong class="pl-4">Talep</strong>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card">
+        <div class="p-3">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="font-weight-bolder text-bittersweet">1</h3>
+              <span class="text-bittersweet">Yazı Görüntülemesi</span>
+            </div>
+            <div class="col-auto">
+              <Icon data="{faStickyNote}" class="text-gray d-block mx-2" />
+            </div>
           </div>
-          <TicketsChart />
         </div>
-        <div class="card d-flex flex-fill">
-          <div class="card-body pt-3 pb-0 d-flex flex-row align-items-center">
-            <h2 class="text-sunflower font-weight-bolder m-0">{post_count}</h2>
-            <strong class="pl-4">Yazı</strong>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="d-flex flex-fill card">
+          <div class="card-body h-100">
+            <div class="row justify-content-between">
+              <div class="col-4">
+                <h5 class="card-title">Ziyaretler</h5>
+              </div>
+              <div class="col-8 text-right">
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-outline-light btn-link active">
+                    Haftalık
+                  </button>
+                  <button class="btn btn-sm btn-outline-light btn-link">
+                    Aylık
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center h-100">
+              <VisitorsChart />
+            </div>
           </div>
-          <PostsChart />
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="row justify-content-between">
+              <div class="col-4">
+                <h5 class="card-title">Trafik</h5>
+              </div>
+              <div class="col-8 text-right">
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-outline-light btn-link active">
+                    Haftalık
+                  </button>
+                  <button class="btn btn-sm btn-outline-light btn-link">
+                    Aylık
+                  </button>
+                </div>
+              </div>
+            </div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi,
+            quam cum qui recusandae sed officiis sit cumque illo accusantium
+            tempora ex repellat laborum similique, quas, officia doloribus quod
+            non distinctio. Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Incidunt accusantium eveniet necessitatibus. Repudiandae
+            voluptatem soluta saepe architecto, earum nostrum in mollitia quam
+            possimus facere molestias nobis, recusandae beatae quod alias.
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Latest Tickets & Event Calender -->
-  <div class="row justify-content-around">
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <div class="row justify-content-between">
-            <div class="col-6">
-              <h5 class="card-title">Son Talepler</h5>
-            </div>
-            <div class="col-6 text-right">
-              <a href="/tickets" class="btn btn-link bg-light btn-sm">Tüm Talepler</a>
-            </div>
+  <!-- Latest Tickets -->
+  <div class="card">
+    <div class="card-body">
+      <div class="row justify-content-between">
+        <div class="col-6">
+          <h5 class="card-title">Son Talepler</h5>
+        </div>
+        <div class="col-6 text-right">
+          <a href="/tickets" class="btn btn-link bg-light btn-sm">
+            Tüm Talepler
+          </a>
+        </div>
+      </div>
+
+      <ul class="list-group">
+
+        <a
+          href="javascript:void(0);"
+          class="list-group-item list-group-item-action rounded d-flex flex-row"
+        >
+          <div class="col-auto">
+            <img
+              src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
+              width="48"
+              height="48"
+              class="border rounded-circle"
+              alt="Butlu"
+            />
           </div>
+          <div class="col">
+            <span class="text-primary">
+              Lagdan öldüm itemlerim gitti, lütfen ilgilenebilir misiniz?
+            </span>
+            <br />
+            <small class="text-muted">
+              <b>2 gün önce</b>
+              ,
+              <b>Genel</b>
+              kategorisine açıldı.
+            </small>
+          </div>
+          <div class="col-auto d-flex align-items-center">
+            <span class="badge badge-secondary badge-pill">Yeni</span>
+          </div>
+        </a>
+      </ul>
 
-          <ul class="list-group">
-
-            <a
-              href="javascript:void(0);"
-              class="list-group-item list-group-item-action rounded d-flex flex-row"
-            >
-              <div class="col-auto">
-                <img
-                  src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
-                  width="48"
-                  height="48"
-                  class="border rounded-circle"
-                  alt="Butlu"
-                />
-              </div>
-              <div class="col">
-                <span class="text-primary">
-                  Lagdan öldüm itemlerim gitti, lütfen ilgilenebilir misiniz?
-                </span>
-                <br />
-                <small class="text-muted">
-                  <b>2 gün önce</b>,
-                  <b>Genel</b> kategorisine açıldı.
-                </small>
-              </div>
-              <div class="col-auto d-flex align-items-center">
-                <span class="badge badge-secondary badge-pill">Yeni</span>
-              </div>
-            </a>
-          </ul>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-6 d-flex">
-      <div class="card d-flex flex-fill">
-        <div class="card-body">
-          <h5 class="card-title">Etkinlik Takvimi</h5>
-        </div>
-      </div>
     </div>
   </div>
 
   <!-- Statistic Table -->
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Tüm İstatistikler</h5>
+      <h5 class="card-title">İstatistik</h5>
       <div class="table-responsive">
         <table class="table table-sm m-0">
           <tbody class="text-muted">
@@ -315,16 +361,28 @@
               <td>0</td>
             </tr>
             <tr>
-              <th scope="row">Kayıtlı Oyuncular:</th>
+              <th scope="row">Oyuncular:</th>
               <td>{registered_player_count}</td>
             </tr>
             <tr>
-              <th scope="row">Açık Talepler:</th>
-              <td>{open_tickets_count}</td>
+              <th scope="row">Yöneticiler:</th>
+              <td>?</td>
             </tr>
             <tr>
-              <th scope="row">Kayıtlı Talepler:</th>
+              <th scope="row">Talepler:</th>
               <td>{tickets_count}</td>
+            </tr>
+            <tr>
+              <th scope="row">Bağlı Sunucular:</th>
+              <td>?</td>
+            </tr>
+            <tr>
+              <th scope="row">Eklentiler:</th>
+              <td>?</td>
+            </tr>
+            <tr>
+              <th scope="row">Temalar:</th>
+              <td>?</td>
             </tr>
           </tbody>
         </table>

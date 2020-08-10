@@ -12,7 +12,7 @@
           {
             data: [8, 5, 9, 7, 12, 8, 9],
             backgroundColor: "rgba(114, 192, 118, .08)",
-            borderColor: "#72c076",
+            borderColor: "#1976d2",
             borderWidth: 2.5,
             pointRadius: 0,
           },
