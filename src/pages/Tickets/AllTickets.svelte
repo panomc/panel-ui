@@ -253,17 +253,18 @@
           <thead>
             <tr>
               <th class="text-nowrap" scope="col">
-                <a href="javascript:void(0);" on:click="{onSelectAllClick}">
+                <div class="custom-control custom-checkbox">
                   <input
-                          type="checkbox"
-                          checked="{isAllTicketsSelected(tickets, $checkedList)}"
+                    type="checkbox"
+                    class="custom-control-input"
+                    on:click="{onSelectAllClick}"
+                    checked="{isAllTicketsSelected(tickets, $checkedList)}"
+                    id="selectAll"
                   />
-
-                  {isAllTicketsSelected(tickets, $checkedList) ? 'Tümünü Kaldır' : 'Tümünü Seç'}
-                </a>
+                  <label class="custom-control-label" for="selectAll"></label>
+                </div>
               </th>
-              <th scope="col">Talep</th>
-              <th class="min-w-200px" scope="col">Konu</th>
+              <th class="min-w-200px" scope="col">Başlık</th>
               <th scope="col">Durum</th>
               <th scope="col">Kategori</th>
               <th scope="col">Yazar</th>
@@ -317,13 +318,12 @@
                     </div>
                   </div>
                 </th>
-                <td>#{ticket.id}</td>
                 <td class="text-nowrap">
                   <a
                     href="/panel/tickets/ticket/{ticket.id}"
                     title="Talebi Görüntüle"
                   >
-                    {ticket.title}
+                    #{ticket.id} {ticket.title}
                   </a>
                 </td>
                 <td>
@@ -343,10 +343,10 @@
                 <td>
                   <a href="#" use:tooltip="{['top', ticket.writer.username]}">
                     <img
+                      src="https://minotar.net/avatar/{ticket.writer.username}/32"
                       alt="Oyuncu Adı"
                       class="rounded-circle border"
                       height="32"
-                      src="https://minotar.net/avatar/{ticket.writer.username}/32"
                       width="32"
                     />
                   </a>
