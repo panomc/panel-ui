@@ -88,20 +88,17 @@
                     aria-labelledby="postAction"
                     class="dropdown-menu dropdown-menu-right"
                   >
-                    <a
-                      class="dropdown-item text-primary"
-                      href="javascript:void(0);"
-                    >
-                      <Icon data="{faUserCircle}" class="mr-1" />
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      <Icon data="{faUserCircle}" class="mr-1 text-primary" />
                       Yetkilendir
                     </a>
                     <a
-                      class="dropdown-item text-danger"
+                      class="dropdown-item"
                       data-target="#conformBanTickets"
                       data-toggle="modal"
                       href="javascript:void(0);"
                     >
-                      <Icon data="{faTimes}" class="mr-1" />
+                      <Icon data="{faTimes}" class="mr-1 text-danger" />
                       Yasakla
                     </a>
                   </div>
