@@ -7,7 +7,6 @@
   import Icon from "svelte-awesome";
   import {
     faTicketAlt,
-    faCheck,
     faTrash,
     faTimes,
   } from "@fortawesome/free-solid-svg-icons";
@@ -22,8 +21,12 @@
     </h3>
   </div>
   <div class="col-auto ml-auto">
-    <a class="btn btn-outline-primary" role="button" href="javascript:void(0);">
-      <Icon data="{faCheck}" class="mr-1" />
+    <a
+      class="btn btn-outline-bittersweet"
+      role="button"
+      href="javascript:void(0);"
+    >
+      <Icon data="{faTimes}" class="mr-1" />
       Kapat
     </a>
     <a class="btn btn-outline-danger" role="button" href="javascript:void(0);">
@@ -33,14 +36,9 @@
   </div>
 </div>
 
-<div class="card mb-3">
+<div class="card border border-success mb-3">
   <div class="card-body">
     <div class="row">
-      <div class="d-lg-flex align-items-center d-none">
-        <div class="text-center">
-          <Icon data="{faTicketAlt}" scale="2.5" class="text-glass m-3" />
-        </div>
-      </div>
       <div class="col">
         <h5 class="card-title">
           Lagdan öldüm itemlerim gitti, lütfen ilgilenebilir misiniz?
@@ -56,8 +54,6 @@
         <span class="badge badge-secondary badge-pill">Yeni</span>
       </div>
     </div>
-
-    <hr />
 
     <div class="card-body rounded border">
 

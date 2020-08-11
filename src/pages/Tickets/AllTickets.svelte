@@ -27,7 +27,7 @@
     faTicketAlt,
     faEllipsisV,
     faTrash,
-    faCheck,
+    faTimes,
   } from "@fortawesome/free-solid-svg-icons";
 
   import Pagination from "../../components/Pagination.svelte";
@@ -180,13 +180,13 @@
       faster"
     >
       <a
-        class="btn btn-outline-primary"
+        class="btn btn-outline-bittersweet"
         class:disabled="{getListOfChecked($checkedList).length === 0}"
         role="button"
         href="javascript:void(0);"
         on:click="{onShowCloseTicketsModalClick}"
       >
-        <Icon data="{faCheck}" class="mr-1" />
+        <Icon data="{faTimes}" class="mr-1" />
         Kapat
       </a>
       <a
@@ -322,7 +322,10 @@
                           href="javascript:void(0);"
                           on:click="{onShowCloseTicketsModalClick}"
                         >
-                          <Icon data="{faCheck}" class="mr-1 text-primary" />
+                          <Icon
+                            data="{faTimes}"
+                            class="mr-1 text-bittersweet"
+                          />
                           Kapat
                         </a>
                       </div>
