@@ -7,7 +7,7 @@
     faEllipsisV,
     faTimes,
     faUserCircle,
-    faGlobe
+    faGlobe,
   } from "@fortawesome/free-solid-svg-icons";
 
   isPageInitialized.set(true);
@@ -21,9 +21,7 @@
     <div class="card-body">
       <div class="row justify-content-between">
         <div class="col-md-6 col-12 text-md-left text-center">
-          <h5 class="card-title">
-            50 Oyuncu
-          </h5>
+          <h5 class="card-title">50 Oyuncu</h5>
         </div>
         <div class="col-md-6 col-12 text-md-right text-center">
           <div class="btn-group">
@@ -90,8 +88,11 @@
                     aria-labelledby="postAction"
                     class="dropdown-menu dropdown-menu-right"
                   >
-                    <a class="dropdown-item text-primary" href="javascript:void(0);">
-                    <Icon data="{faUserCircle}" class="mr-1" />
+                    <a
+                      class="dropdown-item text-primary"
+                      href="javascript:void(0);"
+                    >
+                      <Icon data="{faUserCircle}" class="mr-1" />
                       Yetkilendir
                     </a>
                     <a
@@ -100,7 +101,7 @@
                       data-toggle="modal"
                       href="javascript:void(0);"
                     >
-                    <Icon data="{faTimes}" class="mr-1" />
+                      <Icon data="{faTimes}" class="mr-1" />
                       Yasakla
                     </a>
                   </div>
@@ -128,11 +129,11 @@
               </td>
               <td>
                 <span
-                  class="badge badge-pill badge-success text-white"
+                  class="badge badge-pill badge-lightsecondary text-success"
                   v-tooltip:top="'Sitede'"
                 >
                   <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
-                    <Icon data="{faGlobe}"/>
+                  <Icon data="{faGlobe}" />
                   <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
                 </span>
               </td>
