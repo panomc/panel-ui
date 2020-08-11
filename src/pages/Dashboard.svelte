@@ -188,7 +188,7 @@
 
   <div class="row justify-content-between">
 
-    <div class="col-lg-3 col-sm-6">
+    <div class="col-lg-3 col-6">
       <div class="card bg-transparent border-0 shadow-none">
         <div class="p-3">
           <div class="row align-items-center">
@@ -206,7 +206,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-sm-6">
+    <div class="col-lg-3 col-6">
       <div class="card bg-transparent border-0 shadow-none">
         <div class="p-3">
           <div class="row align-items-center">
@@ -225,7 +225,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-auto">
+    <div class="col-lg-3">
       <div class="card bg-transparent border-0 shadow-none">
         <div class="p-3">
           <div class="row align-items-center">
