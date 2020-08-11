@@ -27,6 +27,7 @@
     faTicketAlt,
     faEllipsisV,
     faTrash,
+    faCheck,
   } from "@fortawesome/free-solid-svg-icons";
 
   import Pagination from "../../components/Pagination.svelte";
@@ -185,6 +186,7 @@
         href="javascript:void(0);"
         on:click="{onShowCloseTicketsModalClick}"
       >
+        <Icon data="{faCheck}" class="mr-1" />
         Kapat
       </a>
       <a
@@ -313,6 +315,15 @@
                         >
                           <Icon data="{faTrash}" class="text-danger mr-1" />
                           Sil
+                        </a>
+
+                        <a
+                          class="dropdown-item"
+                          href="javascript:void(0);"
+                          on:click="{onShowCloseTicketsModalClick}"
+                        >
+                          <Icon data="{faCheck}" class="mr-1 text-primary" />
+                          Kapat
                         </a>
                       </div>
                     </div>

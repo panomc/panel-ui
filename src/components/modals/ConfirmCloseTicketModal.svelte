@@ -95,7 +95,7 @@
           İptal
         </button>
         <button
-          class="btn btn-danger"
+          class="btn btn-primary"
           type="button"
           class:disabled="{loading}"
           aria-disabled="{loading}"
