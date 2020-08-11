@@ -306,17 +306,6 @@
                         aria-labelledby="postAction"
                         class="dropdown-menu dropdown-menu-right"
                       >
-
-                        <!--                  @click="onDeleteClick(category.id)"-->
-                        <a
-                          class="dropdown-item"
-                          href="javascript:void(0);"
-                          on:click="{onShowDeleteTicketModalClick(ticket.id)}"
-                        >
-                          <Icon data="{faTrash}" class="text-danger mr-1" />
-                          Sil
-                        </a>
-
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
@@ -327,6 +316,15 @@
                             class="mr-1 text-bittersweet"
                           />
                           Kapat
+                        </a>
+
+                        <a
+                          class="dropdown-item"
+                          href="javascript:void(0);"
+                          on:click="{onShowDeleteTicketModalClick(ticket.id)}"
+                        >
+                          <Icon data="{faTrash}" class="text-danger mr-1" />
+                          Sil
                         </a>
                       </div>
                     </div>
