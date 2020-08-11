@@ -12,6 +12,26 @@ import rmdir from "rimraf";
 rmdir("public/assets", function (error) {});
 rmdir("public/commons", function (error) {});
 
+const fs = require("fs");
+const configPath = "./config.js";
+
+const config = {
+  port: 5000,
+  "api-url": "http://localhost:8088/api/",
+};
+
+try {
+  if (fs.existsSync(configPath)) {
+    const fileConfig = require(configPath);
+
+    Object.keys(config).forEach((key, index) => {
+      if (fileConfig.hasOwnProperty(key)) config[key] = fileConfig[key];
+    });
+  }
+} catch (error) {
+  console.error(error);
+}
+
 const production = !process.env.ROLLUP_WATCH;
 
 const preprocess = autoPreprocess({
@@ -84,6 +104,10 @@ const plugins = [
     ),
   }),
 
+  replace({
+    "process.env.API_URL": JSON.stringify(production ? "" : config["api-url"]),
+  }),
+
   // In dev mode, call `npm run start` once
   // the bundle has been generated
   !production && serve(),
@@ -138,21 +162,6 @@ function serve() {
     writeBundle() {
       if (!started) {
         started = true;
-
-        const fs = require("fs");
-        const configPath = "./config.js";
-
-        let config = {
-          port: 5000,
-        };
-
-        try {
-          if (fs.existsSync(configPath)) {
-            config = require(configPath);
-          }
-        } catch (error) {
-          console.error(error);
-        }
 
         require("child_process").spawn(
           "npm",
