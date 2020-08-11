@@ -9,6 +9,7 @@
     faTicketAlt,
     faTrash,
     faTimes,
+    faArrowLeft,
   } from "@fortawesome/free-solid-svg-icons";
 
   isPageInitialized.set(true);
@@ -16,9 +17,10 @@
 
 <div class="row mb-3">
   <div class="col-auto">
-    <h3 class="text-muted badge badge-lightprimary panel-subtitle">
-      Talep: #1
-    </h3>
+    <a class="btn btn-link" role="button" href="/panel/tickets">
+      <Icon data="{faArrowLeft}" class="mr-1" />
+      Talepler
+    </a>
   </div>
   <div class="col-auto ml-auto">
     <a
@@ -35,6 +37,8 @@
     </a>
   </div>
 </div>
+
+<h3 class="text-muted badge badge-lightprimary panel-subtitle">Talep: #1</h3>
 
 <div class="card border border-success mb-3">
   <div class="card-body">
