@@ -310,17 +310,19 @@
                         aria-labelledby="postAction"
                         class="dropdown-menu dropdown-menu-right"
                       >
-                        <a
-                          class="dropdown-item"
-                          href="javascript:void(0);"
-                          on:click="{onShowCloseTicketModalClick(ticket.id)}"
-                        >
-                          <Icon
-                            data="{faTimes}"
-                            class="mr-1 text-bittersweet"
-                          />
-                          Kapat
-                        </a>
+                        {#if ticket.status !== 3}
+                          <a
+                            class="dropdown-item"
+                            href="javascript:void(0);"
+                            on:click="{onShowCloseTicketModalClick(ticket.id)}"
+                          >
+                            <Icon
+                              data="{faTimes}"
+                              class="mr-1 text-bittersweet"
+                            />
+                            Kapat
+                          </a>
+                        {/if}
 
                         <a
                           class="dropdown-item"
