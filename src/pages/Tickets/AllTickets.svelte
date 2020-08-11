@@ -143,6 +143,10 @@
     showCloseTicketModal(getListOfChecked(get(checkedList)));
   }
 
+  function onShowCloseTicketModalClick(id) {
+    showCloseTicketModal([id]);
+  }
+
   setDeleteTicketModalCallback((selectedTickets) => {
     Object.values(selectedTickets).forEach((id) => {
       $checkedList[id] = false;
@@ -309,7 +313,7 @@
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          on:click="{onShowCloseTicketsModalClick}"
+                          on:click="{onShowCloseTicketModalClick(ticket.id)}"
                         >
                           <Icon
                             data="{faTimes}"
