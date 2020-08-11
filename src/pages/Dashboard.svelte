@@ -186,7 +186,7 @@
   <!-- Dashboard Title  -->
   <h3 class="text-muted badge badge-lightprimary panel-subtitle">Website</h3>
 
-  <div class="row">
+  <div class="row justify-content-between">
 
     <div class="col-lg-3 col-sm-6">
       <div class="card bg-transparent border-0 shadow-none">
