@@ -189,7 +189,7 @@
   <div class="row">
 
     <div class="col-lg-3 col-sm-6">
-      <div class="card">
+      <div class="card bg-transparent border-0 shadow-none">
         <div class="p-3">
           <div class="row align-items-center">
             <div class="col-6">
@@ -207,12 +207,12 @@
       </div>
     </div>
     <div class="col-lg-3 col-sm-6">
-      <div class="card">
+      <div class="card bg-transparent border-0 shadow-none">
         <div class="p-3">
           <div class="row align-items-center">
             <div class="col">
               <h3 class="font-weight-bolder text-secondary">1</h3>
-              <span class="text-secondary">Oturumu Açık</span>
+              <span class="text-secondary">Çevrimiçi</span>
             </div>
             <div class="col-auto">
               <Icon
@@ -225,8 +225,8 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-sm-6">
-      <div class="card">
+    <div class="col-lg-auto">
+      <div class="card bg-transparent border-0 shadow-none">
         <div class="p-3">
           <div class="row align-items-center">
             <div class="col">
@@ -243,9 +243,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-3 col-sm-6">
-      <div class="card"></div>
     </div>
     <div class="row">
       <div class="col-lg-8 col">
