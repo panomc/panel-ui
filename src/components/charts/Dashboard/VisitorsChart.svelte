@@ -1,6 +1,6 @@
 <script>
   import Chart from "chart.js";
-  import {onMount} from "svelte";
+  import { onMount } from "svelte";
 
   onMount(() => {
     const ctx = document.getElementById("visitorsChart");
@@ -12,7 +12,7 @@
           {
             data: [39, 45, 83, 53, 89, 72, 99],
             borderColor: "#1976d2",
-            backgroundColor: "transparent",
+            backgroundColor: "rgba(25, 118, 210, .1)",
             borderWidth: 2.5,
           },
         ],
@@ -22,7 +22,7 @@
           yAxes: [
             {
               ticks: {
-                fontColor: "#1976d2",
+                fontColor: "#aab2bd",
                 beginAtZero: true,
                 maxTicksLimit: 10,
                 padding: 20,
@@ -37,7 +37,7 @@
           xAxes: [
             {
               ticks: {
-                fontColor: "#1976d2",
+                fontColor: "#aab2bd",
                 beginAtZero: true,
                 maxTicksLimit: 10,
                 padding: 20,
