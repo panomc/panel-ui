@@ -30,7 +30,6 @@
 
   import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
   import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";
-  import TicketsChart from "../components/charts/Dashboard/TicketsChart.svelte";
   import PostsChart from "../components/charts/Dashboard/PostsChart.svelte";
 
   let getting_started_blocks = {
