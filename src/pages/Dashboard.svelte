@@ -215,7 +215,11 @@
               <span class="text-secondary">Oturumu Açık</span>
             </div>
             <div class="col-auto">
-              <Icon data="{faGlobe}" class="text-gray d-block mx-2" />
+              <Icon
+                data="{faGlobe}"
+                scale="1.5"
+                class="text-gray d-block mx-2"
+              />
             </div>
           </div>
         </div>
@@ -230,7 +234,11 @@
               <span class="text-bittersweet">Yazı Görüntülemesi</span>
             </div>
             <div class="col-auto">
-              <Icon data="{faStickyNote}" class="text-gray d-block mx-2" />
+              <Icon
+                data="{faStickyNote}"
+                scale="1.5"
+                class="text-gray d-block mx-2"
+              />
             </div>
           </div>
         </div>
@@ -240,7 +248,7 @@
       <div class="card"></div>
     </div>
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-8 col">
         <div class="d-flex flex-fill card">
           <div class="card-body h-100">
             <div class="row justify-content-between">
@@ -264,7 +272,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 d-flex flex-fill">
+      <div class="col-lg-4 col d-flex flex-fill">
         <div class="card d-flex flex-fill">
           <div class="card-body">
             <div class="row justify-content-between">
@@ -302,8 +310,12 @@
         </div>
       </div>
 
-      <ul class="list-group">
+      <div class="container text-center">
+        <Icon data="{faTicketAlt}" scale="3" class="text-glass m-3" />
+        <p class="text-gray">Burada içerik yok.</p>
+      </div>
 
+      <ul class="list-group">
         <a
           href="javascript:void(0);"
           class="list-group-item list-group-item-action rounded d-flex flex-row"
