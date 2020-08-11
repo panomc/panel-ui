@@ -31,6 +31,7 @@
   import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
   import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";
   import PostsChart from "../components/charts/Dashboard/PostsChart.svelte";
+  import TrafficChart from "../components/charts/Dashboard/TrafficChart.svelte";
 
   let getting_started_blocks = {
     welcome_board: false,
@@ -263,8 +264,8 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <div class="card">
+      <div class="col-lg-4 d-flex flex-fill">
+        <div class="card d-flex flex-fill">
           <div class="card-body">
             <div class="row justify-content-between">
               <div class="col-4">
@@ -273,21 +274,14 @@
               <div class="col-8 text-right">
                 <div class="btn-group">
                   <button class="btn btn-sm btn-outline-light btn-link active">
-                    Haftalık
-                  </button>
-                  <button class="btn btn-sm btn-outline-light btn-link">
-                    Aylık
+                    Tüm Zamanlar
                   </button>
                 </div>
               </div>
             </div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi,
-            quam cum qui recusandae sed officiis sit cumque illo accusantium
-            tempora ex repellat laborum similique, quas, officia doloribus quod
-            non distinctio. Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Incidunt accusantium eveniet necessitatibus. Repudiandae
-            voluptatem soluta saepe architecto, earum nostrum in mollitia quam
-            possimus facere molestias nobis, recusandae beatae quod alias.
+            <div class="d-flex align-items-center h-100">
+              <TrafficChart />
+            </div>
           </div>
         </div>
       </div>
