@@ -52,7 +52,7 @@
             data-dismiss="modal"
             type="button"
           >
-            Hayır
+            İptal
           </button>
 
           <button

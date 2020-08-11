@@ -12,7 +12,7 @@
   export function show(newCategory) {
     category.set(newCategory);
 
-    jquery("#" + dialogID).modal({backdrop: 'static', keyboard: false});
+    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
   }
 
   export function setCallback(newCallback) {
@@ -111,7 +111,7 @@
           class:disabled="{loading}"
           disabled="{loading}"
         >
-          Hayır
+          İptal
         </button>
         <button
           class="btn btn-danger"
