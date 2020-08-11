@@ -1,13 +1,39 @@
 <script>
   import { isPageInitialized } from "../../Store";
 
+  import ConfirmCloseTicketModal from "../../components/modals/ConfirmCloseTicketModal.svelte";
+  import ConfirmDeleteTicketModal from "../../components/modals/ConfirmDeleteTicketModal.svelte";
+
   import Icon from "svelte-awesome";
-  import { faTicketAlt } from "@fortawesome/free-solid-svg-icons";
+  import {
+    faTicketAlt,
+    faCheck,
+    faTrash,
+    faTimes,
+  } from "@fortawesome/free-solid-svg-icons";
 
   isPageInitialized.set(true);
 </script>
 
-<div class="card">
+<div class="row mb-3">
+  <div class="col-auto">
+    <h3 class="text-muted badge badge-lightprimary panel-subtitle">
+      Talep: #1
+    </h3>
+  </div>
+  <div class="col-auto ml-auto">
+    <a class="btn btn-outline-primary" role="button" href="javascript:void(0);">
+      <Icon data="{faCheck}" class="mr-1" />
+      Kapat
+    </a>
+    <a class="btn btn-outline-danger" role="button" href="javascript:void(0);">
+      <Icon data="{faTrash}" class="mr-1" />
+      Sil
+    </a>
+  </div>
+</div>
+
+<div class="card mb-3">
   <div class="card-body">
     <div class="row">
       <div class="d-lg-flex align-items-center d-none">
@@ -17,7 +43,6 @@
       </div>
       <div class="col">
         <h5 class="card-title">
-          <a href="#" class="mr-2">#1</a>
           Lagdan öldüm itemlerim gitti, lütfen ilgilenebilir misiniz?
         </h5>
         <p class="text-muted">
@@ -77,3 +102,11 @@
     </div>
   </div>
 </div>
+
+<div class="container text-center">
+  <Icon data="{faTimes}" scale="3" class="text-glass m-3" />
+  <p class="text-gray">Bu talep yanıtlara kapalı.</p>
+</div>
+
+<ConfirmCloseTicketModal />
+<ConfirmDeleteTicketModal />
