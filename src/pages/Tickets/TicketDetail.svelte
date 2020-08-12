@@ -47,12 +47,9 @@
         <h5 class="card-title">
           Lagdan öldüm itemlerim gitti, lütfen ilgilenebilir misiniz?
         </h5>
-        <p class="text-muted">
-          <b>2 gün önce</b>
-          ,
-          <b>Genel</b>
-          kategorisine açıldı.
-        </p>
+        <div class="text-gray mb-3">
+          <a href="#">Butlu</a> tarafından <a href="#">Genel</a> kategorisine açıldı.
+        </div>
       </div>
       <div class="col-auto ml-auto">
         <span class="badge badge-secondary badge-pill">Yeni</span>
@@ -62,13 +59,15 @@
     <div class="card-body rounded border">
 
       <div class="media mb-3">
-        <img
-          src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
-          class="mr-3 border rounded-circle"
-          alt="Butlu"
-          width="48"
-          height="48"
-        />
+        <a href="#">
+          <img
+            src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
+            class="mr-3 border rounded-circle"
+            alt="Butlu"
+            width="48"
+            height="48"
+          />
+        </a>
         <div class="media-body p-2 rounded bg-lightprimary shadow-sm">
           <div>
             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
@@ -90,13 +89,15 @@
           </div>
           <small class="text-muted pt-2">16 saat önce</small>
         </div>
-        <img
-          src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
-          class="ml-3 border rounded-circle"
-          alt="Admin"
-          width="48"
-          height="48"
-        />
+        <a href="#">
+          <img
+            src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
+            class="ml-3 border rounded-circle"
+            alt="Admin"
+            width="48"
+            height="48"
+          />
+        </a>
       </div>
 
     </div>
