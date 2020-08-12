@@ -20,7 +20,7 @@
     "animate.css": "^3.7.2",
     "autoprefixer": "^9.8.6",
     "axios": "^0.19.2",
-    "bootstrap": "^4.5.1",
+    "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
     "copy-to-clipboard": "^3.3.1",
     "jquery": "^3.5.1",
@@ -30,17 +30,17 @@
     "prettier-plugin-svelte": "^1.1.0",
     "quill": "^1.3.7",
     "rimraf": "^3.0.2",
-    "rollup": "^2.23.0",
+    "rollup": "^2.23.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-copy-assets-to": "^1.0.0",
     "rollup-plugin-livereload": "^1.3.0",
     "rollup-plugin-svelte": "^5.2.3",
-    "rollup-plugin-terser": "^6.1.0",
+    "rollup-plugin-terser": "^7.0.0",
     "routve": "1.1.10",
     "sass": "^1.26.10",
     "sirv-cli": "^1.0.5",
     "svelte": "^3.24.1",
     "svelte-awesome": "^2.3.0",
-    "svelte-preprocess": "^4.0.10"
+    "svelte-preprocess": "^4.0.11"
   }
 }
