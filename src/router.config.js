@@ -29,9 +29,6 @@ export default {
         },
       },
     },
-    "/admins": {
-      component: () => import("./pages/Admins.svelte"),
-    },
     "/tools": {
       component: () => import("./pages/Tools.svelte"),
     },

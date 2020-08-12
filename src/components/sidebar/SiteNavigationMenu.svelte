@@ -7,7 +7,6 @@
     faUsers,
     faPuzzlePiece,
     faPalette,
-    faUserCircle,
     faTools,
     faStickyNote,
     faTicketAlt,
@@ -72,16 +71,6 @@
       <a class="nav-link" href="/panel/view">
         <Icon data="{faPalette}" class="mx-2" />
         Görünüm
-      </a>
-    </li>
-
-    <li
-      class="nav-item"
-      class:active="{matching($path, '/panel/admins', true)}"
-    >
-      <a class="nav-link" href="/panel/admins">
-        <Icon data="{faUserCircle}" class="mx-2" />
-        Yöneticiler
       </a>
     </li>
 
