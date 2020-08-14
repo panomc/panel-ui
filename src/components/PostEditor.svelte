@@ -24,9 +24,9 @@
     faBookmark,
     faTrash,
     faQuestionCircle,
+    faPlus,
   } from "@fortawesome/free-solid-svg-icons";
   import {
-    faListAlt,
     faStickyNote,
     faFolderOpen,
     faEdit,
@@ -35,7 +35,7 @@
 
   const defaultPost = {
     id: -1,
-    title: "Yazı başlığı 🖊",
+    title: "",
     text: "",
     category: -1,
     status: -1,
@@ -304,9 +304,9 @@
     <div class="card w-100">
       <div class="card-body d-flex flex-column">
         <input
-          class="form-control font-weight-bolder text-muted mb-2"
+          class="form-control form-control-lg shadow-none display-3 mb-2"
           type="text"
-          bind:value="{post.title}"
+          placeholder="Yazı Başlığı"
         />
 
         <div class="align-selft-center w-100 h-75">
@@ -364,7 +364,6 @@
           <ul class="list-group">
             <li
               class="list-group-item px-0 pt-0"
-              use:tooltip="{['left', 'Durum']}"
             >
               <i
                 aria-hidden="true"
@@ -372,28 +371,13 @@
               ></i>
 
               <Icon data="{faStickyNote}" class="text-primary mr-1" />
-              <span class="font-weight-normal">
-                {getStatusByPostStatus(post.status)}
-              </span>
-            </li>
-            <li
-              class="list-group-item px-0"
-              use:tooltip="{['left', 'Son Düzenleme']}"
-            >
-
-              <Icon data="{faEdit}" class="text-primary mr-1" />
-              <span class="font-weight-normal">
-                {post.date === 0 ? '-' : moment(parseInt(post.date)).format('DD/MM/YYYY, HH:mm')}
-              </span>
+              <b>Durum:</b> {getStatusByPostStatus(post.status)}
             </li>
             <li
               class="list-group-item px-0 pb-0"
-              use:tooltip="{['left', 'Görüntülenme']}"
             >
               <Icon data="{faEye}" class="text-primary mr-1" />
-              <span class="font-weight-normal">
-                {post.id === -1 ? '0' : post.views}
-              </span>
+              <b>Görüntülenme:</b> {post.id === -1 ? '0' : post.views}
             </li>
           </ul>
         </form>
@@ -421,9 +405,9 @@
             </select>
           {/if}
         </form>
-        <a href="/panel/posts/categories" target="_blank" class="btn btn-link btn-sm pl-0">
-          <Icon data="{faListAlt}" class="mr-1" />
-          Yazı Kategorileri
+        <a href="/panel/posts/categories" target="_blank" class="btn btn-link bg-lightprimary">
+          <Icon data="{faPlus}" class="mr-1" />
+          Kategori Oluştur
         </a>
       </div>
     </div>
@@ -435,27 +419,10 @@
         </h6>
         <p class="text-muted small">Küçük resim belirlenmedi.</p>
 
-        <!--          :src="post.imageCode"-->
-        <!--          v-if="post.imageCode !== ''"-->
-        <img
-          alt="Küçük Resim"
-          class="img-fluid rounded mb-3"
-          height="auto"
-          width="100%"
-        />
-
-        <!--          @change="readFile"-->
-        <input
-          accept="image/*"
-          class="form-control-file"
-          id="selectThumbnaiImage"
-          type="file"
-        />
-
-        <!--          :class="{ 'text-danger': error.image, 'text-muted': !error.image }"-->
-        <small>
-          Küçük resim minimum 600x300 boyutlarında ve maksimum 1 MB olmalı.
-        </small>
+        <button class="btn btn-link bg-lightprimary">
+          <Icon data="{faImage}" class="mr-1" />
+          Küçük Resim Belirle
+        </button>
       </div>
     </div>
   </div>
