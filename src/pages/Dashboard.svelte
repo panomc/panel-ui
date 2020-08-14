@@ -187,9 +187,8 @@
   <h3 class="text-muted badge badge-lightprimary panel-subtitle">Website</h3>
 
   <div class="row justify-content-between">
-
-    <div class="col-lg-3 col-6">
-      <div class="card bg-transparent border-0 shadow-none">
+    <div class="col-lg-4">
+      <div class="card">
         <div class="p-3">
           <div class="row align-items-center">
             <div class="col-6">
@@ -206,8 +205,8 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-6">
-      <div class="card bg-transparent border-0 shadow-none">
+    <div class="col-lg-4">
+      <div class="card">
         <div class="p-3">
           <div class="row align-items-center">
             <div class="col">
@@ -225,8 +224,8 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3">
-      <div class="card bg-transparent border-0 shadow-none">
+    <div class="col-lg-4">
+      <div class="card">
         <div class="p-3">
           <div class="row align-items-center">
             <div class="col">
@@ -244,49 +243,50 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-8 col">
-        <div class="d-flex flex-fill card">
-          <div class="card-body h-100">
-            <div class="row justify-content-between">
-              <div class="col-4">
-                <h5 class="card-title">Ziyaretler</h5>
-              </div>
-              <div class="col-8 text-right">
-                <div class="btn-group">
-                  <button class="btn btn-sm btn-outline-light btn-link active">
-                    Haftalık
-                  </button>
-                  <button class="btn btn-sm btn-outline-light btn-link">
-                    Aylık
-                  </button>
-                </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8 col">
+      <div class="d-flex flex-fill card">
+        <div class="card-body h-100">
+          <div class="row justify-content-between">
+            <div class="col-4">
+              <h5 class="card-title">Ziyaretler</h5>
+            </div>
+            <div class="col-8 text-right">
+              <div class="btn-group">
+                <button class="btn btn-sm btn-outline-light btn-link active">
+                  Haftalık
+                </button>
+                <button class="btn btn-sm btn-outline-light btn-link">
+                  Aylık
+                </button>
               </div>
             </div>
-            <div class="d-flex align-items-center h-100">
-              <VisitorsChart />
-            </div>
+          </div>
+          <div class="d-flex align-items-center h-100">
+            <VisitorsChart />
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col d-flex flex-fill">
-        <div class="card d-flex flex-fill">
-          <div class="card-body">
-            <div class="row justify-content-between">
-              <div class="col-4">
-                <h5 class="card-title">Trafik</h5>
-              </div>
-              <div class="col-8 text-right">
-                <div class="btn-group">
-                  <button class="btn btn-sm btn-outline-light btn-link active">
-                    Tüm Zamanlar
-                  </button>
-                </div>
+    </div>
+    <div class="col-lg-4 col d-flex flex-fill">
+      <div class="card d-flex flex-fill">
+        <div class="card-body">
+          <div class="row justify-content-between">
+            <div class="col-4">
+              <h5 class="card-title">Trafik</h5>
+            </div>
+            <div class="col-8 text-right">
+              <div class="btn-group">
+                <button class="btn btn-sm btn-outline-light btn-link active">
+                  Tüm Zamanlar
+                </button>
               </div>
             </div>
-            <div class="d-flex align-items-center h-100">
-              <TrafficChart />
-            </div>
+          </div>
+          <div class="d-flex align-items-center h-100">
+            <TrafficChart />
           </div>
         </div>
       </div>
