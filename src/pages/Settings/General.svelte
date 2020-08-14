@@ -24,10 +24,8 @@
             </select>
           </div>
         </div>
-      </form>
 
-      <h5 class="card-title">Güncelleme Tercihleri</h5>
-      <form>
+        <h5 class="card-title">Güncelleme Tercihleri</h5>
         <div class="form-group row mb-0 justify-content-between">
           <label class="col-md-4 col-form-labeel" for="platformLangueage">
             Otomatik güncellemeleri denetle:
@@ -40,6 +38,10 @@
               <option id="autoUpdatesOption3">Ayda bir kez</option>
             </select>
           </div>
+        </div>
+
+        <div style="form-group">
+          <button class="btn btn-secondary mt-3" style="submit">Kaydet</button>
         </div>
       </form>
     </div>

@@ -83,6 +83,10 @@
             </div>
           </div>
         </div>
+        
+        <div style="form-group">
+          <button class="btn btn-secondary mt-3" style="submit">Kaydet</button>
+        </div>
       </form>
     </div>
   </div>
