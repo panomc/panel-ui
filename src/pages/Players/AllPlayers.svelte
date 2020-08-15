@@ -1,5 +1,11 @@
 <script>
-  import { isPageInitialized } from "../../Store";
+  import { getPath, route } from "routve";
+  import moment from "moment";
+
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+  import ApiUtil from "../../pano/js/api.util";
+  import Pagination from "../../components/Pagination.svelte";
+
   import Icon from "svelte-awesome";
   import { faListAlt } from "@fortawesome/free-regular-svg-icons";
   import {
@@ -10,7 +16,70 @@
     faGlobe,
   } from "@fortawesome/free-solid-svg-icons";
 
-  isPageInitialized.set(true);
+  export let page = undefined;
+  export let pageType = "all";
+
+  let playersCount = 0;
+  let players = [];
+  let totalPage = 1;
+
+  function getStatusFromPageType() {
+    return pageType === "all" ? 1 : pageType === "hasPerm" ? 2 : 0;
+  }
+
+  function routePage(pageNumber, forceReload = false, findLastPage = false) {
+    if (pageNumber !== page || forceReload) {
+      showNetworkErrorOnCatch((resolve, reject) => {
+        ApiUtil.post("panel/initPage/playersPage", {
+          page: pageNumber,
+          page_type: getStatusFromPageType(),
+        })
+          .then((response) => {
+            if (response.data.result === "ok") {
+              playersCount = response.data.players_count;
+              players = response.data.players;
+              totalPage = response.data.total_page;
+
+              page = pageNumber;
+
+              isPageInitialized.set(true);
+
+              if (
+                page === 1 &&
+                getPath() !== "/panel/players" &&
+                getPath() !== "/panel/players/" &&
+                getPath() !== "/panel/players/" + pageType &&
+                getPath() !== "/panel/players/" + pageType + "/"
+              )
+                route("/panel/players/" + pageType + "/" + page);
+              else if (page !== 1)
+                route("/panel/players/" + pageType + "/" + page);
+            } else if (response.data.result === "error") {
+              const errorCode = response.data.error;
+
+              if (!findLastPage) {
+                isPageInitialized.set(true);
+              }
+
+              if (errorCode === "PAGE_NOT_FOUND") {
+                if (findLastPage) {
+                  routePage(page - 1, true, true);
+                } else route("/panel/error-404");
+              }
+
+              reject(errorCode);
+            } else reject();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    }
+  }
+
+  $: {
+    routePage(typeof page === "undefined" ? 1 : parseInt(page));
+  }
 </script>
 
 <!-- All Players Page -->
@@ -21,11 +90,12 @@
     <div class="card-body">
       <div class="row justify-content-between">
         <div class="col-md-6 col-12 text-md-left text-center">
-          <h5 class="card-title">50 Oyuncu</h5>
+          <h5 class="card-title">{playersCount} Oyuncu</h5>
         </div>
         <div class="col-md-6 col-12 text-md-right text-center">
           <div class="btn-group">
             <a
+              class:active="{pageType === 'all'}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
               href="/panel/players/all"
@@ -33,13 +103,15 @@
               Tümü
             </a>
             <a
+              class:active="{pageType === 'hasPerm'}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="/panel/players/special"
+              href="/panel/players/hasPerm"
             >
-              Yetkili
+              Yetkililer
             </a>
             <a
+              class:active="{pageType === 'banned'}"
               class="btn btn-sm btn-outline-light btn-link text-danger"
               role="button"
               href="/panel/players/banned"
@@ -51,124 +123,113 @@
       </div>
 
       <!-- No Players -->
-      <div class="container text-center">
-        <Icon data="{faUsers}" scale="3" class="text-glass m-3" />
-        <p class="text-gray">Burada içerik yok.</p>
-      </div>
-
-      <!-- Posts Table -->
-      <div class="table-responsive">
-        <table class="table mb-0">
-          <thead>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">İsim</th>
-              <th scope="col">Talepler</th>
-              <th scope="col">Durum</th>
-              <th scope="col">Son Oturum</th>
-              <th scope="col">Kayıt</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th class="min-w-50px" scope="row">
-                <div class="dropdown position-absolute">
-                  <a
-                    class="btn btn-sm py-0"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                    data-toggle="dropdown"
-                    href="javascript:void(0);"
-                    id="postAction"
-                    title="Eylemler"
-                  >
-                    <Icon data="{faEllipsisV}" />
-                  </a>
-                  <div
-                    aria-labelledby="postAction"
-                    class="dropdown-menu dropdown-menu-right"
-                  >
-                    <a class="dropdown-item" href="javascript:void(0);">
-                      <Icon data="{faUserCircle}" class="mr-1 text-primary" />
-                      Yetkilendir
+      {#if playersCount === 0}
+        <div class="container text-center">
+          <Icon data="{faUsers}" scale="3" class="text-glass m-3" />
+          <p class="text-gray">Burada içerik yok.</p>
+        </div>
+      {:else}
+        <!-- Players Table -->
+        <div class="table-responsive">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">İsim</th>
+                <th scope="col">Talepler</th>
+                <th scope="col">Durum</th>
+                <th scope="col">Son Oturum</th>
+                <th scope="col">Kayıt</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#each players as player, index (player)}
+                <tr>
+                  <th class="min-w-50px" scope="row">
+                    <div class="dropdown position-absolute">
+                      <a
+                        class="btn btn-sm py-0"
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        data-toggle="dropdown"
+                        href="javascript:void(0);"
+                        id="playerAction"
+                        title="Eylemler"
+                      >
+                        <Icon data="{faEllipsisV}" />
+                      </a>
+                      <div
+                        aria-labelledby="playerAction"
+                        class="dropdown-menu dropdown-menu-right"
+                      >
+                        <a class="dropdown-item" href="javascript:void(0);">
+                          <Icon
+                            data="{faUserCircle}"
+                            class="mr-1 text-primary"
+                          />
+                          Yetkilendir
+                        </a>
+                        <a
+                          class="dropdown-item"
+                          data-target="#conformBanTickets"
+                          data-toggle="modal"
+                          href="javascript:void(0);"
+                        >
+                          <Icon data="{faTimes}" class="mr-1 text-danger" />
+                          Yasakla
+                        </a>
+                      </div>
+                    </div>
+                  </th>
+                  <td class="min-w-200px">
+                    <a title="Oyuncu Profiline Git" href="#">
+                      <img
+                        alt="Oyuncu Adı"
+                        class="rounded-circle border mr-3"
+                        height="32"
+                        src="https://minotar.net/avatar/{player.username}"
+                        width="32"
+                      />
+                      {player.username}
                     </a>
-                    <a
-                      class="dropdown-item"
-                      data-target="#conformBanTickets"
-                      data-toggle="modal"
-                      href="javascript:void(0);"
+                  </td>
+                  <td>
+                    0
+                    <i
+                      aria-hidden="true"
+                      class="fa fa-times text-danger fa-fw"
+                      v-tooltip:top="'Talepleri Yasaklı'"
+                    ></i>
+                  </td>
+                  <td>
+                    <span
+                      class="badge badge-pill badge-lightsecondary text-success"
+                      v-tooltip:top="'Sitede'"
                     >
-                      <Icon data="{faTimes}" class="mr-1 text-danger" />
-                      Yasakla
-                    </a>
-                  </div>
-                </div>
-              </th>
-              <td class="min-w-200px">
-                <a title="Oyuncu Profiline Git" href="#">
-                  <img
-                    alt="Oyuncu Adı"
-                    class="rounded-circle border mr-3"
-                    height="32"
-                    src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/32"
-                    width="32"
-                  />
-                  Kahverengi
-                </a>
-              </td>
-              <td>
-                0
-                <i
-                  aria-hidden="true"
-                  class="fa fa-times text-danger fa-fw"
-                  v-tooltip:top="'Talepleri Yasaklı'"
-                ></i>
-              </td>
-              <td>
-                <span
-                  class="badge badge-pill badge-lightsecondary text-success"
-                  v-tooltip:top="'Sitede'"
-                >
-                  <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
-                  <Icon data="{faGlobe}" />
-                  <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
-                </span>
-              </td>
-              <td>10 dakika önce</td>
-              <td>01.01.2019</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                      <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
+                      <Icon data="{faGlobe}" />
+                      <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
+                    </span>
+                  </td>
+                  <td>10 dakika önce</td>
+                  <td>
+                    {moment(parseInt(player.register_date)).format('DD/MM/YYYY, HH:mm')}
+                  </td>
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+        </div>
+      {/if}
 
       <!-- Pagination -->
-      <nav class="pt-3">
-        <ul class="pagination pagination-sm mb-0 justify-content-start">
-          <li class="page-item">
-            <a
-              class="page-link"
-              href="javascript:void(0);"
-              title="Önceki Sayfa"
-            >
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-
-          <li class="page-item">
-            <a class="page-link" href="javascript:void(0);">1</a>
-          </li>
-
-          <li class="page-item">
-            <a
-              class="page-link"
-              href="javascript:void(0);"
-              title="Sonraki Sayfa"
-            >
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <Pagination
+        {page}
+        {totalPage}
+        on:firstPageClick="{() => routePage(1)}"
+        on:lastPageClick="{() => routePage(totalPage)}"
+        on:pageLinkClick="{(event) => routePage(event.detail.page)}"
+      />
     </div>
   </div>
 

@@ -13,6 +13,36 @@ export default {
         "/player": {
           component: () => import("./pages/Players/Player.svelte"),
         },
+        "/all": {
+          component: () => import("./pages/Players/AllPlayers.svelte"),
+        },
+        "/hasPerm": {
+          component: () => import("./pages/Players/AllPlayers.svelte"),
+          params: {
+            pageType: "hasPerm",
+          },
+        },
+        "/banned": {
+          component: () => import("./pages/Players/AllPlayers.svelte"),
+          params: {
+            pageType: "banned",
+          },
+        },
+        "/all/:page": {
+          component: () => import("./pages/Players/AllPlayers.svelte"),
+        },
+        "/hasPerm/:page": {
+          component: () => import("./pages/Players/AllPlayers.svelte"),
+          params: {
+            pageType: "hasPerm",
+          },
+        },
+        "/banned/:page": {
+          component: () => import("./pages/Players/AllPlayers.svelte"),
+          params: {
+            pageType: "banned",
+          },
+        },
       },
     },
     "/addons": {
@@ -56,10 +86,10 @@ export default {
           component: () => import("./pages/Posts/AllPosts.svelte"),
         },
         "/create-post": {
-          component: () => import("./pages/Posts/CreatePost.svelte")
+          component: () => import("./pages/Posts/CreatePost.svelte"),
         },
         "/post/:postID": {
-          component: () => import("./pages/Posts/EditPost.svelte")
+          component: () => import("./pages/Posts/EditPost.svelte"),
         },
         "/published": {
           component: () => import("./pages/Posts/AllPosts.svelte"),
@@ -142,9 +172,9 @@ export default {
           component: () => import("./pages/Tickets/Categories.svelte"),
         },
         "/ticket/:id": {
-          component: () => import("./pages/Tickets/TicketDetail.svelte")
-        }
-      }
+          component: () => import("./pages/Tickets/TicketDetail.svelte"),
+        },
+      },
     },
     "/notifications": {
       component: () => import("./pages/Notifications.svelte"),
