@@ -13,6 +13,9 @@ export default {
         "/player": {
           component: () => import("./pages/Players/Player.svelte"),
         },
+        "/permissions": {
+          component: () => import("./pages/Players/Permissions.svelte"),
+        },
         "/all": {
           component: () => import("./pages/Players/AllPlayers.svelte"),
         },
