@@ -359,10 +359,6 @@
               <td>{post_count}</td>
             </tr>
             <tr>
-              <th scope="row">Sayfalar:</th>
-              <td>0</td>
-            </tr>
-            <tr>
               <th scope="row">Oyuncular:</th>
               <td>{registered_player_count}</td>
             </tr>
