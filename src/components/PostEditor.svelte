@@ -307,6 +307,7 @@
           class="form-control form-control-lg shadow-none display-3 mb-2"
           type="text"
           placeholder="Yazı Başlığı"
+          bind:value="{post.title}"
         />
 
         <div class="align-selft-center w-100 h-75">
