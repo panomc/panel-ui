@@ -420,6 +420,10 @@
         </h6>
         <p class="text-muted small">Küçük resim belirlenmedi.</p>
 
+        <div class="form-group">
+          <img src="" class="border rounded img-fluid" title="Küçük Resim" alt="Küçük Resim">
+        </div>
+
         <button class="btn btn-link bg-lightprimary">
           <Icon data="{faImage}" class="mr-1" />
           Küçük Resim Belirle
