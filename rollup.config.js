@@ -1,14 +1,12 @@
 import svelte from "rollup-plugin-svelte";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-// import autoPreprocess from "svelte-preprocess";
 import copyTo from "rollup-plugin-copy-assets-to";
 import replace from "@rollup/plugin-replace";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import babel from "rollup-plugin-babel";
 import rmdir from "rimraf";
-
 import sveltePreprocess from "svelte-preprocess";
 
 rmdir("public/assets", function (error) {});
@@ -35,13 +33,6 @@ try {
 }
 
 const production = !process.env.ROLLUP_WATCH;
-
-// const preprocess = autoPreprocess({
-//   // postcss: {
-//   //   plugins: [require("autoprefixer")],
-//   // },
-//   scss: {},
-// });
 
 const input = ["src/main.js"];
 
