@@ -3,10 +3,6 @@
 
 // Control Panel Styles
 
-body {
-  overflow: hidden;
-}
-
 .unread-badge {
   position: absolute;
   right: 8px;
@@ -30,7 +26,6 @@ body {
 }
 
 .card {
-  box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.03);
   margin-bottom: 1rem;
 }
 

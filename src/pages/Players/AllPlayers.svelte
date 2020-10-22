@@ -85,6 +85,17 @@
 <!-- All Players Page -->
 <div class="content">
 
+
+<!-- Action Menu -->
+<div class="row mb-3">
+  <div class="col-auto">
+    <a class="btn btn-link" role="button" href="/panel/players/permissions">
+      <Icon data="{faUserCircle}" class="mr-1" />
+      Yetkiler
+    </a>
+  </div>
+</div>
+
   <!-- All Players -->
   <div class="card">
     <div class="card-body">
