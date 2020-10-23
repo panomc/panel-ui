@@ -313,7 +313,8 @@
           pt-2"
           href="/panel/notifications"
         >
-          Tümünü Görüntüle {$notificationsCount === 0 ? '' : '— ' + $notificationsCount}
+          Tümünü Görüntüle
+          {$notificationsCount === 0 ? '' : '— ' + $notificationsCount}
         </a>
       </div>
     </li>
@@ -322,7 +323,7 @@
       <a
         aria-expanded="false"
         aria-haspopup="true"
-        class="icon-link nav-link"
+        class="icon-link nav-link p-1"
         data-toggle="dropdown"
         href="javascript:void(0);"
         title="Oturum"
