@@ -8,10 +8,12 @@
   import PostCategoriesAddEditModal, {
     show as showPostCategoriesAddEditModal,
     setCallback as setCallbackForPostCategoriesAddEditModal,
+    onHide as onAddEditPostCategoryModalHide,
   } from "../../components/modals/PostCategoriesAddEditModal.svelte";
   import ConfirmDeletePostCategoryModal, {
     setCallback as setDeletePostCategoryModalCallback,
     show as showDeletePostCategoryModal,
+    onHide as onConfirmDeletePostCategoryModalHide,
   } from "../../components/modals/ConfirmDeletePostCategoryModal.svelte";
 
   import Icon from "svelte-awesome";
@@ -83,10 +85,14 @@
   }
 
   function onShowEditCategoryButtonClick(index) {
+    categories[index].selected = true;
+
     showPostCategoriesAddEditModal("edit", categories[index]);
   }
 
   function onShowDeletePostCategoryModalClick(index) {
+    categories[index].selected = true;
+
     showDeletePostCategoryModal(categories[index]);
   }
 
@@ -98,12 +104,22 @@
     );
   });
 
+  onAddEditPostCategoryModalHide((category) => {
+    if (categories.indexOf(category) !== -1)
+      categories[categories.indexOf(category)].selected = false;
+  });
+
   setDeletePostCategoryModalCallback((routeFirstPage) => {
     routePage(
       routeFirstPage ? 1 : typeof page === "undefined" ? 1 : parseInt(page),
       true,
       page !== 1
     );
+  });
+
+  onConfirmDeletePostCategoryModalHide((category) => {
+    if (categories.indexOf(category) !== -1)
+      categories[categories.indexOf(category)].selected = false;
   });
 
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
@@ -136,7 +152,8 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title text-sm-left text-center">
-      {categoriesCount} Yazı Kategorisi
+      {categoriesCount}
+      Yazı Kategorisi
     </h5>
 
     <!-- No Category -->
@@ -162,7 +179,7 @@
           </thead>
           <tbody>
             {#each categories as category, index (category)}
-              <tr>
+              <tr class:bg-lightprimary="{category.selected}">
                 <th class="min-w-50px" scope="row">
                   <div class="dropdown position-absolute">
                     <a
@@ -229,8 +246,8 @@
     {/if}
     <!-- Pagination -->
     <Pagination
-      {page}
-      {totalPage}
+      page="{page}"
+      totalPage="{totalPage}"
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
       on:pageLinkClick="{(event) => routePage(event.detail.page)}"
