@@ -8,10 +8,12 @@
   import AddEditTicketCategoryModal, {
     show as showTicketCategoriesAddEditModal,
     setCallback as setCallbackForTicketCategoriesAddEditModal,
+    onHide as onAddEditTicketCategoryModalHide,
   } from "../../components/modals/AddEditTicketCategoryModal.svelte";
   import ConfirmDeleteTicketCategoryModal, {
     setCallback as setDeleteTicketCategoryModalCallback,
     show as showDeleteTicketCategoryModal,
+    onHide as onConfirmDeleteTicketCategoryModalHide,
   } from "../../components/modals/ConfirmDeleteTicketCategoryModal.svelte";
 
   import Icon from "svelte-awesome";
@@ -83,10 +85,14 @@
   }
 
   function onShowEditCategoryButtonClick(index) {
+    categories[index].selected = true;
+
     showTicketCategoriesAddEditModal("edit", categories[index]);
   }
 
   function onShowDeleteTicketCategoryModalClick(index) {
+    categories[index].selected = true;
+
     showDeleteTicketCategoryModal(categories[index]);
   }
 
@@ -94,16 +100,26 @@
     routePage(
       routeFirstPage ? 1 : typeof page === "undefined" ? 1 : parseInt(page),
       true,
-            page !== 1
+      page !== 1
     );
+  });
+
+  onAddEditTicketCategoryModalHide((category) => {
+    if (categories.indexOf(category) !== -1)
+      categories[categories.indexOf(category)].selected = false;
   });
 
   setDeleteTicketCategoryModalCallback((routeFirstPage) => {
     routePage(
       routeFirstPage ? 1 : typeof page === "undefined" ? 1 : parseInt(page),
       true,
-            page !== 1
+      page !== 1
     );
+  });
+
+  onConfirmDeleteTicketCategoryModalHide((category) => {
+    if (categories.indexOf(category) !== -1)
+      categories[categories.indexOf(category)].selected = false;
   });
 
   routePage(typeof page === "undefined" ? 1 : parseInt(page));
@@ -126,7 +142,6 @@
     </a>
   </div>
   <div class="col-6 text-right">
-
     <button
       class="btn btn-primary"
       type="button"
@@ -143,7 +158,8 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title text-sm-left text-center">
-      {categoriesCount} Talep Kategorisi
+      {categoriesCount}
+      Talep Kategorisi
     </h5>
 
     <!-- No Category -->
@@ -167,7 +183,7 @@
           </thead>
           <tbody>
             {#each categories as category, index (category)}
-              <tr>
+              <tr class:bg-lightprimary="{category.selected}">
                 <th scope="row">
                   <div class="dropdown">
                     <a
@@ -213,8 +229,8 @@
     {/if}
     <!-- Pagination -->
     <Pagination
-      {page}
-      {totalPage}
+      page="{page}"
+      totalPage="{totalPage}"
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
       on:pageLinkClick="{(event) => routePage(event.detail.page)}"
