@@ -322,12 +322,18 @@
       <a
         aria-expanded="false"
         aria-haspopup="true"
-        class="icon-link nav-link text-capitalize"
+        class="icon-link nav-link"
         data-toggle="dropdown"
         href="javascript:void(0);"
         title="Oturum"
       >
-        <Icon data="{faUser}" />
+        <img
+          src="https://minotar.net/avatar/Butlu"
+          width="32"
+          height="32"
+          class="border rounded-circle"
+          alt="Butlu"
+        />
       </a>
       <div class="dropdown-menu dropdown-menu-right animated fadeIn faster">
         <ul class="nav flex-column">
