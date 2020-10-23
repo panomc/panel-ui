@@ -1,6 +1,8 @@
 <script>
   import { isPageInitialized } from "../Store";
 
+  import moment from "moment";
+
   import Icon from "svelte-awesome";
   import {
     faBell,
@@ -32,6 +34,7 @@
   import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";
   import PostsChart from "../components/charts/Dashboard/PostsChart.svelte";
   import TrafficChart from "../components/charts/Dashboard/TrafficChart.svelte";
+  import TicketStatus from "../components/TicketStatus.svelte";
 
   let getting_started_blocks = {
     welcome_board: false,
@@ -41,6 +44,7 @@
   let post_count = 0;
   let tickets_count = 0;
   let open_tickets_count = 0;
+  let tickets = [];
 
   function getInitialData() {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -51,6 +55,7 @@
             post_count = response.data.post_count;
             tickets_count = response.data.tickets_count;
             open_tickets_count = response.data.open_tickets_count;
+            tickets = response.data.tickets;
 
             getting_started_blocks = response.data.getting_started_blocks;
 
@@ -301,49 +306,49 @@
           <h5 class="card-title">Son Talepler</h5>
         </div>
         <div class="col-6 text-right">
-          <a href="/tickets" class="btn btn-link bg-light btn-sm">
+          <a href="/panel/tickets" class="btn btn-link bg-light btn-sm">
             Tüm Talepler
           </a>
         </div>
       </div>
 
-      <div class="container text-center">
-        <Icon data="{faTicketAlt}" scale="3" class="text-glass m-3" />
-        <p class="text-gray">Burada içerik yok.</p>
-      </div>
-
-      <ul class="list-group">
-        <a
-          href="javascript:void(0);"
-          class="list-group-item list-group-item-action rounded d-flex flex-row"
-        >
-          <div class="col-auto">
-            <img
-              src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
-              width="48"
-              height="48"
-              class="border rounded-circle"
-              alt="Butlu"
-            />
-          </div>
-          <div class="col">
-            <span class="text-primary">
-              Lagdan öldüm itemlerim gitti, lütfen ilgilenebilir misiniz?
-            </span>
-            <br />
-            <small class="text-muted">
-              <b>2 gün önce</b>
-              ,
-              <b>Genel</b>
-              kategorisine açıldı.
-            </small>
-          </div>
-          <div class="col-auto d-flex align-items-center">
-            <span class="badge badge-secondary badge-pill">Yeni</span>
-          </div>
-        </a>
-      </ul>
-
+      {#if tickets.length === 0}
+        <div class="container text-center">
+          <Icon data="{faTicketAlt}" scale="3" class="text-glass m-3" />
+          <p class="text-gray">Burada içerik yok.</p>
+        </div>
+      {:else}
+        <ul class="list-group">
+          {#each tickets as ticket, index (ticket)}
+            <a
+              href="/panel/tickets/ticket/{ticket.id}"
+              class="list-group-item list-group-item-action rounded d-flex flex-row"
+            >
+              <div class="col-auto">
+                <img
+                  src="https://minotar.net/avatar/{ticket.writer.username}"
+                  width="48"
+                  height="48"
+                  class="border rounded-circle"
+                  alt="{ticket.writer.username}"
+                />
+              </div>
+              <div class="col">
+                <span class="text-primary"> #{ticket.id} {ticket.title} </span>
+                <br />
+                <small class="text-muted">
+                  <b>{moment(parseInt(ticket.date)).fromNow()}</b>,
+                  <b>{ticket.category.title}</b>
+                  kategorisine açıldı.
+                </small>
+              </div>
+              <div class="col-auto d-flex align-items-center">
+                <TicketStatus status="{ticket.status}" />
+              </div>
+            </a>
+          {/each}
+        </ul>
+      {/if}
     </div>
   </div>
 
