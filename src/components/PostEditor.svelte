@@ -13,6 +13,7 @@
     setCallback as setDeletePostModalCallback,
     show as showDeletePostModal,
   } from "../components/modals/ConfirmDeletePostModal.svelte";
+  import SetPostThumbnailModal from "../components/modals/SetPostThumbnailModal.svelte";
   import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
   import ApiUtil from "../pano/js/api.util";
   import { extractContent } from "../util/text.util";
@@ -298,7 +299,6 @@
 
 <!-- Post & Post Options -->
 <section class="row">
-
   <!-- Post -->
   <div class="col-lg-9 d-flex flex-fill">
     <div class="card w-100">
@@ -313,9 +313,7 @@
         <div class="align-selft-center w-100 h-75">
           <!-- Editor -->
           <div id="editorToolbar">
-            <span class="ql-formats">
-              <select class="ql-size"></select>
-            </span>
+            <span class="ql-formats"> <select class="ql-size"></select> </span>
             <span class="ql-formats">
               <button class="ql-bold"></button>
               <button class="ql-italic"></button>
@@ -352,7 +350,6 @@
           <div id="editor"></div>
           <!-- Editor End -->
         </div>
-
       </div>
     </div>
   </div>
@@ -363,22 +360,20 @@
       <div class="card-body">
         <form>
           <ul class="list-group">
-            <li
-              class="list-group-item px-0 pt-0"
-            >
+            <li class="list-group-item px-0 pt-0">
               <i
                 aria-hidden="true"
                 class="far fa-sticky-note text-primary fa-fw"
               ></i>
 
               <Icon data="{faStickyNote}" class="text-primary mr-1" />
-              <b>Durum:</b> {getStatusByPostStatus(post.status)}
+              <b>Durum:</b>
+              {getStatusByPostStatus(post.status)}
             </li>
-            <li
-              class="list-group-item px-0 pb-0"
-            >
+            <li class="list-group-item px-0 pb-0">
               <Icon data="{faEye}" class="text-primary mr-1" />
-              <b>Görüntülenme:</b> {post.id === -1 ? '0' : post.views}
+              <b>Görüntülenme:</b>
+              {post.id === -1 ? '0' : post.views}
             </li>
           </ul>
         </form>
@@ -406,7 +401,11 @@
             </select>
           {/if}
         </form>
-        <a href="/panel/posts/categories" target="_blank" class="btn btn-link bg-lightprimary">
+        <a
+          href="/panel/posts/categories"
+          target="_blank"
+          class="btn btn-link bg-lightprimary"
+        >
           <Icon data="{faPlus}" class="mr-1" />
           Kategori Oluştur
         </a>
@@ -418,20 +417,23 @@
           <Icon data="{faImage}" class="text-primary mr-1" />
           Küçük Resim:
         </h6>
-        <p class="text-muted small">Küçük resim belirlenmedi.</p>
-
-        <div class="form-group">
-          <img src="" class="border rounded img-fluid" title="Küçük Resim" alt="Küçük Resim">
-        </div>
-
-        <button class="btn btn-link bg-lightprimary">
-          <Icon data="{faImage}" class="mr-1" />
-          Küçük Resim Belirle
-        </button>
+        <a
+          href="javascript:void(0);"
+          data-target="#setPostThumbnailModal"
+          data-toggle="modal"
+          class="form-group"
+        >
+          <img
+            src="/assets/img/vanilla.png"
+            class="border rounded img-fluid"
+            title="Küçük Resim"
+            alt="Küçük Resim"
+          />
+        </a>
       </div>
     </div>
   </div>
-
 </section>
 
 <ConfirmDeletePostModal />
+<SetPostThumbnailModal />
