@@ -7,6 +7,7 @@
   import { onMount } from "svelte";
   import { route } from "routve";
   import moment from "moment";
+  import { basePath } from "../util/path.util";
 
   import tooltip from "../pano/js/tooltip.util";
   import ConfirmDeletePostModal, {
@@ -424,7 +425,7 @@
           class="form-group"
         >
           <img
-            src="/assets/img/vanilla.png"
+            src="{basePath() + '/assets/img/vanilla.png' }"
             class="border rounded img-fluid"
             title="Küçük Resim"
             alt="Küçük Resim"
