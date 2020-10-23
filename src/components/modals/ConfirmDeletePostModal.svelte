@@ -6,6 +6,7 @@
   const post = writable({});
 
   let callback = (post) => {};
+  let hideCallback = (post) => {};
 
   export function show(newPost) {
     post.set(newPost);
@@ -18,7 +19,13 @@
   }
 
   export function hide() {
+    hideCallback(get(post));
+
     jquery("#" + dialogID).modal("hide");
+  }
+
+  export function onHide(newCallback) {
+    hideCallback = newCallback;
   }
 </script>
 
@@ -90,10 +97,10 @@
       <div class="modal-footer">
         <button
           class="btn btn-link text-muted"
-          data-dismiss="modal"
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
+          on:click={hide}
         >
           İptal
         </button>
