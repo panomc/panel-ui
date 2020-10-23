@@ -10,11 +10,11 @@
 
   import ConfirmCloseTicketModal, {
     setCallback as setCloseTicketModalCallback,
-    show as showCloseTicketModal,
+    show as showCloseTicketModal
   } from "../../components/modals/ConfirmCloseTicketModal.svelte";
   import ConfirmDeleteTicketModal, {
     setCallback as setDeleteTicketModalCallback,
-    show as showDeleteTicketModal,
+    show as showDeleteTicketModal
   } from "../../components/modals/ConfirmDeleteTicketModal.svelte";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
@@ -27,10 +27,11 @@
     faTicketAlt,
     faEllipsisV,
     faTrash,
-    faTimes,
+    faTimes
   } from "@fortawesome/free-solid-svg-icons";
 
   import Pagination from "../../components/Pagination.svelte";
+  import TicketStatus from "../../components/TicketStatus.svelte";
 
   export let page = undefined;
   export let pageType = "all";
@@ -50,7 +51,7 @@
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/ticketPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType(),
+          page_type: getStatusFromPageType()
         })
           .then((response) => {
             if (response.data.result === "ok") {
@@ -345,17 +346,7 @@
                   </a>
                 </td>
                 <td>
-                  {#if ticket.status === 1}
-                    <span class="badge badge-secondary badge-pill">Yeni</span>
-                  {:else if ticket.status === 2}
-                    <span class="badge badge-sunflower badge-pill">
-                      Yanıtlandı
-                    </span>
-                  {:else if ticket.status === 3}
-                    <span class="badge badge-bittersweet badge-pill">
-                      Kapalı
-                    </span>
-                  {/if}
+                  <TicketStatus status={ticket.status}/>
                 </td>
                 <td>{ticket.category.title}</td>
                 <td>
