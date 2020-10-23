@@ -6,6 +6,7 @@
   import ConfirmDeletePostModal, {
     setCallback as setDeletePostModalCallback,
     show as showDeletePostModal,
+    onHide as onDeletePostModalHide,
   } from "../../components/modals/ConfirmDeletePostModal.svelte";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
@@ -134,12 +135,24 @@
   }
 
   setDeletePostModalCallback((post) => {
+    if (posts.indexOf(post) !== -1) posts[posts.indexOf(post)].selected = false;
+
     if (post.status === 0) {
       routePage(page, true, page !== 1);
     } else {
       route("/panel/posts/trash");
     }
   });
+
+  onDeletePostModalHide((post) => {
+    if (posts.indexOf(post) !== -1) posts[posts.indexOf(post)].selected = false;
+  });
+
+  function onDeletePostClick(post) {
+    posts[posts.indexOf(post)].selected = true;
+
+    showDeletePostModal(post);
+  }
 
   $: {
     routePage(typeof page === "undefined" ? 1 : parseInt(page));
@@ -176,7 +189,6 @@
       </div>
       <div class="col-md-6 col-12 text-md-right text-center">
         <div class="btn-group">
-
           <a
             class:active="{pageType === 'published'}"
             class="btn btn-sm btn-outline-light btn-link"
@@ -228,7 +240,7 @@
           </thead>
           <tbody>
             {#each posts as post, index (post)}
-              <tr>
+              <tr class:bg-lightprimary="{post.selected}">
                 <th class="min-w-50px" scope="row">
                   <div class="dropdown position-absolute">
                     <a
@@ -295,9 +307,8 @@
                         data-target="#confirmDeletePost"
                         data-toggle="modal"
                         href="javascript:void(0);"
-                        on:click="{showDeletePostModal(post)}"
+                        on:click="{onDeletePostClick(post)}"
                       >
-
                         <Icon data="{faTrash}" class="text-danger mr-1" />
                         Sil
                       </a>
@@ -343,8 +354,8 @@
     {/if}
     <!-- Pagination -->
     <Pagination
-      {page}
-      {totalPage}
+      page="{page}"
+      totalPage="{totalPage}"
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
       on:pageLinkClick="{(event) => routePage(event.detail.page)}"
