@@ -328,11 +328,11 @@
         title="Oturum"
       >
         <img
-          src="https://minotar.net/avatar/Butlu"
+          src="https://minotar.net/avatar/{$user.username}"
           width="32"
           height="32"
           class="border rounded-circle"
-          alt="Butlu"
+          alt="{$user.username}"
         />
       </a>
       <div class="dropdown-menu dropdown-menu-right animated fadeIn faster">
