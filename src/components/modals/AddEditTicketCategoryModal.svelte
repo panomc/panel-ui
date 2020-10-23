@@ -6,7 +6,9 @@
   const mode = writable("create");
   const category = writable({});
   const errors = writable([]);
+
   let callback = (routeFirstPage) => {};
+  let hideCallback = (category) => {};
 
   export function show(
     newMode,
@@ -14,21 +16,26 @@
   ) {
     mode.set(newMode);
 
-    if (newCategory.description === null)
-      newCategory.description = ""
+    if (newCategory.description === null) newCategory.description = "";
 
     category.set(newCategory);
     errors.set([]);
 
-    jquery("#" + dialogID).modal("show");
+    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
   }
 
   export function hide() {
+    if (get(mode) === "edit") hideCallback(get(category));
+
     jquery("#" + dialogID).modal("hide");
   }
 
   export function setCallback(newCallback) {
     callback = newCallback;
+  }
+
+  export function onHide(newCallback) {
+    hideCallback = newCallback;
   }
 </script>
 
@@ -88,9 +95,9 @@
         <button
           aria-label="Kapat"
           class="close"
-          data-dismiss="modal"
           title="Pencereyi Kapat"
           type="button"
+          on:click="{hide}"
         >
           <span aria-hidden="true">&times;</span>
         </button>
