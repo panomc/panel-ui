@@ -8,6 +8,7 @@
   });
 
   let callback = (category) => {};
+  let hideCallback = (category) => {};
 
   export function show(newCategory) {
     category.set(newCategory);
@@ -20,7 +21,13 @@
   }
 
   export function hide() {
+    hideCallback(get(category));
+
     jquery("#" + dialogID).modal("hide");
+  }
+
+  export function onHide(newCallback) {
+    hideCallback = newCallback;
   }
 </script>
 
@@ -96,7 +103,8 @@
           {/each}
 
           {#if $category.post_count > 5}
-            +{$category.post_count - 5} yazı daha
+            +{$category.post_count - 5}
+            yazı daha
           {/if}
 
           <br />
@@ -106,10 +114,10 @@
       <div class="modal-footer">
         <button
           class="btn btn-link text-muted"
-          data-dismiss="modal"
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
+          on:click="{hide}"
         >
           İptal
         </button>
