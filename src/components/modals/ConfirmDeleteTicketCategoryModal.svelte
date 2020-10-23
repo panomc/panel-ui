@@ -8,11 +8,12 @@
   });
 
   let callback = (category) => {};
+  let hideCallback = (category) => {};
 
   export function show(newCategory) {
     category.set(newCategory);
 
-    jquery("#" + dialogID).modal({backdrop: 'static', keyboard: false});
+    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
   }
 
   export function setCallback(newCallback) {
@@ -20,7 +21,13 @@
   }
 
   export function hide() {
+    hideCallback(get(category));
+
     jquery("#" + dialogID).modal("hide");
+  }
+
+  export function onHide(newCallback) {
+    hideCallback = newCallback;
   }
 </script>
 
@@ -99,7 +106,8 @@
           {/each}
 
           {#if $category.ticket_count > 5}
-            +{$category.ticket_count - 5} talep daha
+            +{$category.ticket_count - 5}
+            talep daha
           {/if}
 
           <br />
@@ -109,10 +117,10 @@
       <div class="modal-footer">
         <button
           class="btn btn-link text-muted"
-          data-dismiss="modal"
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
+          on:click="{hide}"
         >
           İptal
         </button>
