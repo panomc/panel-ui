@@ -62,7 +62,7 @@ const plugins = [
     // a separate file - better for performance
 
     preprocess: sveltePreprocess({
-      postcss: true
+      postcss: true,
     }),
 
     css: function (css) {
@@ -74,7 +74,6 @@ const plugins = [
       // — pass `false` as the second argument if you don't want the sourcemap
       css.write(`public/assets/css/bundle.css`, true);
     },
-
 
     onwarn: (warning, handler) => {
       // e.g. don't warn on <marquee> elements, cos they're cool
