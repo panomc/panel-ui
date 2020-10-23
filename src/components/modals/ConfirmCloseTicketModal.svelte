@@ -6,6 +6,7 @@
   const selectedTickets = writable([]);
 
   let callback = (selectedTickets) => {};
+  let hideCallback = (selectedTickets) => {};
 
   export function show(newSelectedTickets) {
     selectedTickets.set(newSelectedTickets);
@@ -18,7 +19,13 @@
   }
 
   export function hide() {
+    hideCallback(get(selectedTickets));
+
     jquery("#" + dialogID).modal("hide");
+  }
+
+  export function onHide(newCallback) {
+    hideCallback = newCallback;
   }
 </script>
 
@@ -80,17 +87,18 @@
             class="d-block m-auto text-gray"
           />
         </div>
-        Bu {$selectedTickets.length === 1 ? 'talebi' : 'talepleri'} kapatmak
-        istediğinizden emin misiniz?
+        Bu
+        {$selectedTickets.length === 1 ? 'talebi' : 'talepleri'}
+        kapatmak istediğinizden emin misiniz?
       </div>
       <div class="modal-footer">
         <button
           class="btn btn-link text-muted"
-          data-dismiss="modal"
           type="button"
           class:disabled="{loading}"
           aria-disabled="{loading}"
           disabled="{loading}"
+          on:click="{hide}"
         >
           İptal
         </button>
