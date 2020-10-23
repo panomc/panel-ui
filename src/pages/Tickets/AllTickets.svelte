@@ -10,11 +10,13 @@
 
   import ConfirmCloseTicketModal, {
     setCallback as setCloseTicketModalCallback,
-    show as showCloseTicketModal
+    show as showCloseTicketModal,
+    onHide as onConfirmCloseTicketModalHide,
   } from "../../components/modals/ConfirmCloseTicketModal.svelte";
   import ConfirmDeleteTicketModal, {
     setCallback as setDeleteTicketModalCallback,
-    show as showDeleteTicketModal
+    show as showDeleteTicketModal,
+    onHide as onConfirmDeleteTicketModalHide,
   } from "../../components/modals/ConfirmDeleteTicketModal.svelte";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
@@ -27,11 +29,12 @@
     faTicketAlt,
     faEllipsisV,
     faTrash,
-    faTimes
+    faTimes,
   } from "@fortawesome/free-solid-svg-icons";
 
   import Pagination from "../../components/Pagination.svelte";
   import TicketStatus from "../../components/TicketStatus.svelte";
+  import { onHide as onAddEditPostCategoryModalHide } from "../../components/modals/PostCategoriesAddEditModal.svelte";
 
   export let page = undefined;
   export let pageType = "all";
@@ -51,7 +54,7 @@
       showNetworkErrorOnCatch((resolve, reject) => {
         ApiUtil.post("panel/initPage/ticketPage", {
           page: pageNumber,
-          page_type: getStatusFromPageType()
+          page_type: getStatusFromPageType(),
         })
           .then((response) => {
             if (response.data.result === "ok") {
@@ -133,18 +136,52 @@
   }
 
   function onShowDeleteTicketsModalClick() {
+    getListOfChecked(get(checkedList)).forEach(
+      (id) =>
+        (tickets[
+          tickets.indexOf(
+            tickets.find(
+              (ticketInTickets) => ticketInTickets.id === parseInt(id)
+            )
+          )
+        ].selected = true)
+    );
+
     showDeleteTicketModal(getListOfChecked(get(checkedList)));
   }
 
   function onShowDeleteTicketModalClick(id) {
+    tickets[
+      tickets.indexOf(
+        tickets.find((ticketInTickets) => ticketInTickets.id === id)
+      )
+    ].selected = true;
+
     showDeleteTicketModal([id]);
   }
 
   function onShowCloseTicketsModalClick() {
+    getListOfChecked(get(checkedList)).forEach(
+      (id) =>
+        (tickets[
+          tickets.indexOf(
+            tickets.find(
+              (ticketInTickets) => ticketInTickets.id === parseInt(id)
+            )
+          )
+        ].selected = true)
+    );
+
     showCloseTicketModal(getListOfChecked(get(checkedList)));
   }
 
   function onShowCloseTicketModalClick(id) {
+    tickets[
+      tickets.indexOf(
+        tickets.find((ticketInTickets) => ticketInTickets.id === id)
+      )
+    ].selected = true;
+
     showCloseTicketModal([id]);
   }
 
@@ -156,12 +193,32 @@
     routePage(page, true, page !== 1);
   });
 
+  onConfirmDeleteTicketModalHide((selectedTickets) => {
+    Object.values(selectedTickets).forEach((id) => {
+      tickets[
+        tickets.indexOf(
+          tickets.find((ticketInTickets) => ticketInTickets.id === parseInt(id))
+        )
+      ].selected = false;
+    });
+  });
+
   setCloseTicketModalCallback((selectedTickets) => {
     Object.values(selectedTickets).forEach((id) => {
       $checkedList[id] = false;
     });
 
     routePage(page, true, page !== 1);
+  });
+
+  onConfirmCloseTicketModalHide((selectedTickets) => {
+    Object.values(selectedTickets).forEach((id) => {
+      tickets[
+        tickets.indexOf(
+          tickets.find((ticketInTickets) => ticketInTickets.id === parseInt(id))
+        )
+      ].selected = false;
+    });
   });
 
   $: {
@@ -214,7 +271,8 @@
     <div class="row justify-content-between pb-3 align-items-center">
       <div class="col-md-6 col-12 text-md-left text-center">
         <h5 class="card-title mb-md-0">
-          {ticketsCount} Talep{getListOfChecked($checkedList).length > 0 ? ', ' + getListOfChecked($checkedList).length + ' adet seçildi' : ''}
+          {ticketsCount}
+          Talep{getListOfChecked($checkedList).length > 0 ? ', ' + getListOfChecked($checkedList).length + ' adet seçildi' : ''}
         </h5>
       </div>
       <div class="col-md-6 col-12 text-md-right text-center">
@@ -280,10 +338,9 @@
           </thead>
           <tbody>
             {#each tickets as ticket, index (ticket)}
-              <tr>
+              <tr class:bg-lightprimary="{ticket.selected}">
                 <th scope="row">
                   <div class="row flex-nowrap">
-
                     <div class="custom-control custom-checkbox mx-2">
                       <input
                         class="custom-control-input"
@@ -342,11 +399,12 @@
                     href="/panel/tickets/ticket/{ticket.id}"
                     title="Talebi Görüntüle"
                   >
-                    #{ticket.id} {ticket.title}
+                    #{ticket.id}
+                    {ticket.title}
                   </a>
                 </td>
                 <td>
-                  <TicketStatus status={ticket.status}/>
+                  <TicketStatus status="{ticket.status}" />
                 </td>
                 <td>{ticket.category.title}</td>
                 <td>
@@ -371,8 +429,8 @@
     {/if}
     <!-- Pagination -->
     <Pagination
-      {page}
-      {totalPage}
+      page="{page}"
+      totalPage="{totalPage}"
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
       on:pageLinkClick="{(event) => routePage(event.detail.page)}"
