@@ -6,18 +6,22 @@
   import Quill from "quill";
   import { onMount } from "svelte";
   import { route } from "routve";
-  import moment from "moment";
-  import { basePath } from "../util/path.util";
 
-  import tooltip from "../pano/js/tooltip.util";
-  import ConfirmDeletePostModal, {
-    setCallback as setDeletePostModalCallback,
-    show as showDeletePostModal,
-  } from "../components/modals/ConfirmDeletePostModal.svelte";
   import SetPostThumbnailModal from "../components/modals/SetPostThumbnailModal.svelte";
   import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
   import ApiUtil from "../pano/js/api.util";
   import { extractContent } from "../util/text.util";
+  import { basePath } from "../util/path.util";
+
+  import ConfirmDeletePostModal, {
+    setCallback as setDeletePostModalCallback,
+    show as showDeletePostModal,
+  } from "../components/modals/ConfirmDeletePostModal.svelte";
+
+  import PostCategoriesAddEditModal, {
+    show as showPostCategoriesAddEditModal,
+    setCallback as setCallbackForPostCategoriesAddEditModal,
+  } from "../components/modals/PostCategoriesAddEditModal.svelte";
 
   import Icon from "svelte-awesome";
   import {
@@ -77,7 +81,7 @@
     }
   }
 
-  function setCategories() {
+  function setCategories(callback = () => {}) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get("panel/post/category/categories")
         .then((response) => {
@@ -87,6 +91,7 @@
 
             isPageInitialized.set(true);
 
+            callback();
             resolve();
           } else reject();
         })
@@ -199,6 +204,16 @@
         });
     });
   }
+
+  function onCreateCategoryClick() {
+    showPostCategoriesAddEditModal("create");
+  }
+
+  setCallbackForPostCategoriesAddEditModal((routeFirstPage, category) => {
+    setCategories(() => {
+      post.category = category.id;
+    });
+  });
 
   $: setPost(parseInt(postID));
 
@@ -390,6 +405,7 @@
           {#if categoryCount === 0}
             <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
           {:else}
+            {post.category}
             <select
               class="form-control form-control-sm mb-3"
               bind:value="{post.category}"
@@ -402,14 +418,14 @@
             </select>
           {/if}
         </form>
-        <a
-          href="/panel/posts/categories"
-          target="_blank"
+        <button
           class="btn btn-link bg-lightprimary"
+          type="button"
+          on:click="{onCreateCategoryClick}"
         >
           <Icon data="{faPlus}" class="mr-1" />
           Kategori Oluştur
-        </a>
+        </button>
       </div>
     </div>
     <div class="card">
@@ -425,7 +441,7 @@
           class="form-group"
         >
           <img
-            src="{basePath() + '/assets/img/vanilla.png' }"
+            src="{basePath() + '/assets/img/vanilla.png'}"
             class="border rounded img-fluid"
             title="Küçük Resim"
             alt="Küçük Resim"
@@ -438,3 +454,4 @@
 
 <ConfirmDeletePostModal />
 <SetPostThumbnailModal />
+<PostCategoriesAddEditModal />
