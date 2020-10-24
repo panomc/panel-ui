@@ -7,7 +7,7 @@
   const category = writable({});
   const errors = writable([]);
 
-  let callback = (routeFirstPage) => {};
+  let callback = (routeFirstPage, category) => {};
   let hideCallback = (category) => {};
 
   export function show(
@@ -28,7 +28,7 @@
     category.set(newCategory);
     errors.set([]);
 
-    jquery("#" + dialogID).modal({backdrop: 'static', keyboard: false});
+    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
   }
 
   export function hide() {
@@ -66,7 +66,11 @@
 
             hide();
 
-            callback(true);
+            const newCategory = get(category);
+
+            newCategory.id = response.data.id;
+
+            callback(true, newCategory);
 
             resolve();
           } else if (response.data.result === "error") {
