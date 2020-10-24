@@ -405,7 +405,6 @@
           {#if categoryCount === 0}
             <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
           {:else}
-            {post.category}
             <select
               class="form-control form-control-sm mb-3"
               bind:value="{post.category}"
