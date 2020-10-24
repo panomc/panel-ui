@@ -1,57 +1,64 @@
 <script>
   import { isPageInitialized } from "../../Store";
+  import { getPath, route } from "routve";
+
+  import Icon from "svelte-awesome";
+  import ApiUtil from "../../pano/js/api.util";
+  import {
+    faArrowLeft,
+    faTimes,
+    faCheck,
+    faGlobe,
+    faUserCircle,
+    faEllipsisV,
+  } from "@fortawesome/free-solid-svg-icons";
 
   isPageInitialized.set(true);
 </script>
 
-<!-- Player Page -->
+<!-- Player Detail Page -->
 
 <div class="content">
   <!-- Action Menu -->
   <div class="row mb-3">
     <div class="col-md-4 col-6">
-      <router-link
-        class="btn btn-outline-primary"
-        role="button"
-        to="/panel/players"
-      >
-        <i aria-hidden="true" class="fa fa-arrow-left fa-fw"></i>
-        <span class="d-md-inline d-none">Tüm Oyuncular</span>
+      <router-link class="btn btn-link" role="button" to="/panel/players">
+        <Icon data="{faArrowLeft}" class="mr-1" />
+        Oyuncular
       </router-link>
     </div>
     <div class="col text-right">
-      <div class="dropdown d-inline-block">
-        <button
+      <div class="dropdown">
+        <a
+          class="btn btn-link"
           aria-expanded="false"
           aria-haspopup="true"
-          class="btn btn-danger dropdown-toggle"
           data-toggle="dropdown"
-          id="banActions"
-          type="button"
+          href="javascript:void(0);"
+          id="playerAction"
+          title="Eylemler"
         >
-          <i aria-hidden="true" class="fa fa-times fa-fw"></i>
-          Yasakla
-        </button>
-        <div aria-labelledby="banActions" class="dropdown-menu">
+          <Icon data="{faEllipsisV}" />
+        </a>
+        <div
+          aria-labelledby="playerAction"
+          class="dropdown-menu dropdown-menu-right"
+        >
+          <a class="dropdown-item" href="javascript:void(0);">
+            <Icon data="{faUserCircle}" class="mr-1 text-primary" />
+            Yetkilendir
+          </a>
           <a
             class="dropdown-item"
             data-target="#conformBanTickets"
             data-toggle="modal"
             href="javascript:void(0);"
           >
-            <i aria-hidden="true" class="fa fa-times fa-fw text-danger"></i>
-            Taleplerini Yasakla
-          </a>
-          <a class="dropdown-item" href="#">
-            <i aria-hidden="true" class="fa fa-check fa-fw text-success"></i>
-            Taleplerine İzin Ver
+            <Icon data="{faTimes}" class="mr-1 text-danger" />
+            Yasakla
           </a>
         </div>
       </div>
-      <button class="btn btn-primary" type="button">
-        <i aria-hidden="true" class="fa fa-user-tag fa-fw"></i>
-        <span class="d-md-inline d-none">Yetkilendir</span>
-      </button>
     </div>
   </div>
 
@@ -64,39 +71,28 @@
         >
           <img
             alt="Username"
-            class="mb-3 rounded-circle border border-lg p-1"
-            height="100"
-            src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
-            width="100"
+            class="mb-3 rounded-circle"
+            width="64"
+            height="64"
+            src="https://minotar.net/avatar/butlu"
           />
-          <h4 class="card-title">Butlu</h4>
-          <div class="form-group pt-2">
-            <span class="text-muted">
-              <i aria-hidden="true" class="fa fa-times fa-fw text-danger"></i>
-              Talepleri Yasaklı
-            </span>
-            <br />
-            <hr />
-            <span class="text-muted" title="Kayıt Tarihi">
-              <i
-                aria-hidden="true"
-                class="far fa-address-book fa-fw text-primary"
-              ></i>
-              1 Ocak 2018 01.01
-            </span>
-          </div>
+          <h4 class="card-title">
+            <span class="badge badge-danger badge-pill mr-2">Yasaklı</span>
+            Butlu
+          </h4>
 
-          <p
-            class="text-center rounded bg-success text-white mb-0 w-100"
+          Kayıt: 01.01.2019
+
+          <hr />
+
+          <span
+            class="badge badge-pill badge-lightsecondary text-success"
             v-tooltip:top="'Sitede'"
           >
-            <i aria-hidden="true" class="fa fa-globe"></i>
-            Çevrimiçi
-          </p>
-          <p class="text-center rounded border mb-0 w-100">
-            <i aria-hidden="true" class="fa fa-globe"></i>
-            Çevrimdışı
-          </p>
+            <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
+            <Icon data="{faGlobe}" />
+            <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
+          </span>
         </div>
       </div>
     </div>
@@ -104,164 +100,22 @@
       <!-- User's Tickets -->
       <div class="card">
         <div class="card-body">
-          <div class="row justify-content-between pb-2">
-            <div class="col-md-6 col-12 text-md-left text-center">
-              <h5 class="card-title">
-                <i
-                  aria-hidden="true"
-                  class="fa fa-ticket-alt fa-fw text-primary"
-                ></i>
-                Butlu kullanıcısından 0 Talep -
-                <span class="text-primary">1/1</span>
-                :
-              </h5>
+          <div class="row justify-content-between">
+            <div class="col-6">
+              <h5 class="card-title">Butlu tarafından Son Talepler</h5>
             </div>
-            <div class="col-md-6 col-12 text-md-right text-center">
-              <div class="btn-group">
-                <router-link
-                  class="btn btn-sm btn-outline-light btn-link active"
-                  role="button"
-                  to="/panel/tickets/all"
-                >
-                  Tümü
-                </router-link>
-                <router-link
-                  class="btn btn-sm btn-outline-light btn-link"
-                  role="button"
-                  to="/panel/tickets/waitingReply"
-                >
-                  Yanıtlanmadı
-                </router-link>
-                <router-link
-                  class="btn btn-sm btn-outline-light btn-link text-danger"
-                  role="button"
-                  to="/panel/tickets/closed"
-                >
-                  Kapalı
-                </router-link>
-              </div>
+            <div class="col-6 text-right">
+              <a href="/panel/tickets" class="btn btn-link bg-light btn-sm">
+                Tüm Talepler
+              </a>
             </div>
           </div>
 
-          <!-- No Players -->
-          <div class="container text-center d-block">
-            <i
-              aria-hidden="true"
-              class="fa fa-ticket-alt fa-4x text-glass m-3"
-            ></i>
-            <p class="text-gray">Burada gösterilecek içerik yok.</p>
-          </div>
-
-          <!-- Ticket Info -->
-          <div class="alert alert-warning shadow-sm">
-            <div class="row">
-              <div class="col-8">
-                <img
-                  alt="Username"
-                  class="img-fluid mr-3 rounded border float-left"
-                  src="https://www.gravatar.com/avatar/"
-                  width="48"
-                />
-                <h5 class="text-dark mb-0 pb-1">
-                  <router-link class="text-primary" to="/">#4513</router-link>
-                  Bu bir talep konusu
-                </h5>
-                <span class="text-muted">
-                  17 saat önce
-                  <a href="#">Butlu</a>
-                  tarafından
-                  <a href="#">Genel</a>
-                  kategorisine açıldı.
-                </span>
-              </div>
-
-              <div class="col-4 text-right">
-                <p
-                  class="text-dark text-center rounded bg-warning border mb-1
-                  d-inline-block px-3"
-                >
-                  Yanıtlanmadı
-                </p>
-                <br />
-                <span class="text-muted d-inline-block">
-                  <i aria-hidden="true" class="far fa-clock fa-fw"></i>
-                  <span class="d-md-inline d-none">Son cevap:</span>
-                  1 dakika önce.
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Ticket Info -->
-          <div class="alert alert-warning shadow-sm">
-            <div class="row">
-              <div class="col-8">
-                <img
-                  alt="Username"
-                  class="img-fluid mr-3 rounded border float-left"
-                  src="https://www.gravatar.com/avatar/"
-                  width="48"
-                />
-                <h5 class="text-dark mb-0 pb-1">
-                  <router-link class="text-primary" to="/">#4513</router-link>
-                  Bu bir talep konusu
-                </h5>
-                <span class="text-muted">
-                  17 saat önce
-                  <a href="#">Butlu</a>
-                  tarafından
-                  <a href="#">Genel</a>
-                  kategorisine açıldı.
-                </span>
-              </div>
-
-              <div class="col-4 text-right">
-                <p
-                  class="text-dark text-center rounded bg-warning border mb-1
-                  d-inline-block px-3"
-                >
-                  Yanıtlanmadı
-                </p>
-                <br />
-                <span class="text-muted d-inline-block">
-                  <i aria-hidden="true" class="far fa-clock fa-fw"></i>
-                  <span class="d-md-inline d-none">Son cevap:</span>
-                  1 dakika önce.
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pagination -->
-          <nav class="pt-3">
-            <ul class="pagination pagination-sm mb-0 justify-content-start">
-              <li class="page-item">
-                <a
-                  class="page-link"
-                  href="javascript:void(0);"
-                  title="Önceki Sayfa"
-                >
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-
-              <li class="page-item">
-                <a class="page-link">1</a>
-              </li>
-
-              <li class="page-item">
-                <a
-                  class="page-link"
-                  href="javascript:void(0);"
-                  title="Sonraki Sayfa"
-                >
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          Buraya kullaınıcının son talepleri (istatistiklerdeki gibi)
         </div>
       </div>
+
+      <!-- User's Tickets -->
     </div>
   </div>
 
