@@ -440,7 +440,7 @@
           class="form-group"
         >
           <img
-            src="{basePath() + '/assets/img/vanilla.png'}"
+            src="{basePath()}assets/img/vanilla.png"
             class="border rounded img-fluid"
             title="Küçük Resim"
             alt="Küçük Resim"
