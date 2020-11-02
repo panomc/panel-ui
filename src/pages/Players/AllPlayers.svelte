@@ -84,17 +84,15 @@
 
 <!-- All Players Page -->
 <div class="content">
-
-
-<!-- Action Menu -->
-<div class="row mb-3">
-  <div class="col-auto">
-    <a class="btn btn-link" role="button" href="/panel/players/permissions">
-      <Icon data="{faUserCircle}" class="mr-1" />
-      Yetkiler
-    </a>
+  <!-- Action Menu -->
+  <div class="row mb-3">
+    <div class="col-auto">
+      <a class="btn btn-link" role="button" href="/panel/players/permissions">
+        <Icon data="{faUserCircle}" class="mr-1" />
+        Yetkiler
+      </a>
+    </div>
   </div>
-</div>
 
   <!-- All Players -->
   <div class="card">
@@ -145,12 +143,12 @@
           <table class="table mb-0">
             <thead>
               <tr>
-                <th scope="col"></th>
-                <th scope="col">İsim</th>
-                <th scope="col">Talepler</th>
-                <th scope="col">Durum</th>
-                <th scope="col">Son Oturum</th>
-                <th scope="col">Kayıt</th>
+                <th class="align-middle text-nowrap" scope="col"></th>
+                <th class="align-middle text-nowrap" scope="col">İsim</th>
+                <th class="align-middle text-nowrap" scope="col">Talepler</th>
+                <th class="align-middle text-nowrap" scope="col">Durum</th>
+                <th class="align-middle text-nowrap" scope="col">Son Oturum</th>
+                <th class="align-middle text-nowrap" scope="col">Kayıt</th>
               </tr>
             </thead>
             <tbody>
@@ -192,7 +190,7 @@
                       </div>
                     </div>
                   </th>
-                  <td class="min-w-200px">
+                  <td class="min-w-200px align-middle text-nowrap">
                     <a title="Oyuncu Profiline Git" href="#">
                       <img
                         alt="Oyuncu Adı"
@@ -204,7 +202,7 @@
                       {player.username}
                     </a>
                   </td>
-                  <td>
+                  <td class="align-middle text-nowrap">
                     0
                     <i
                       aria-hidden="true"
@@ -212,7 +210,7 @@
                       v-tooltip:top="'Talepleri Yasaklı'"
                     ></i>
                   </td>
-                  <td>
+                  <td class="align-middle text-nowrap">
                     <span
                       class="badge badge-pill badge-lightsecondary text-success"
                       v-tooltip:top="'Sitede'"
@@ -222,8 +220,8 @@
                       <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
                     </span>
                   </td>
-                  <td>10 dakika önce</td>
-                  <td>
+                  <td class="align-middle text-nowrap">10 dakika önce</td>
+                  <td class="align-middle text-nowrap">
                     {moment(parseInt(player.register_date)).format('DD/MM/YYYY, HH:mm')}
                   </td>
                 </tr>
@@ -235,13 +233,12 @@
 
       <!-- Pagination -->
       <Pagination
-        {page}
-        {totalPage}
+        page="{page}"
+        totalPage="{totalPage}"
         on:firstPageClick="{() => routePage(1)}"
         on:lastPageClick="{() => routePage(totalPage)}"
         on:pageLinkClick="{(event) => routePage(event.detail.page)}"
       />
     </div>
   </div>
-
 </div>

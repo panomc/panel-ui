@@ -231,11 +231,11 @@
           <thead>
             <tr>
               <th scope="col"></th>
-              <th class="min-w-200px" scope="col">Başlık</th>
-              <th scope="col">Kategori</th>
-              <th scope="col">Yazar</th>
-              <th scope="col">Görüntülenme</th>
-              <th scope="col">Tarih</th>
+              <th class="min-w-200px align-middle" scope="col">Başlık</th>
+              <th scope="col align-middle">Kategori</th>
+              <th scope="col align-middle">Yazar</th>
+              <th scope="col align-middle">Görüntülenme</th>
+              <th scope="col align-middle">Tarih</th>
             </tr>
           </thead>
           <tbody>
@@ -315,7 +315,7 @@
                     </div>
                   </div>
                 </th>
-                <td>
+                <td class="align-middle text-nowrap">
                   <a
                     href="{'/panel/posts/post/' + post.id}"
                     title="Yazıyı Düzenle"
@@ -323,7 +323,7 @@
                     {post.title}
                   </a>
                 </td>
-                <td>
+                <td class="align-middle text-nowrap">
                   <span
                     class="badge badge-sunflower badge-pill"
                     style="background: #{post.category.color}"
@@ -331,7 +331,7 @@
                     {post.category.title}
                   </span>
                 </td>
-                <td>
+                <td class="align-middle text-nowrap">
                   <a href="#" use:tooltip="{['top', post.writer.username]}">
                     <img
                       alt="{post.writer.username}"
@@ -342,8 +342,8 @@
                     />
                   </a>
                 </td>
-                <td>{post.views}</td>
-                <td>
+                <td class="align-middle text-nowrap">{post.views}</td>
+                <td class="align-middle text-nowrap">
                   {moment(parseInt(post.date)).format('DD/MM/YYYY, HH:mm')}
                 </td>
               </tr>

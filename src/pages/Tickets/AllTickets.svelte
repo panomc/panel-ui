@@ -317,7 +317,7 @@
         <table class="table mb-0">
           <thead>
             <tr>
-              <th class="text-nowrap" scope="col">
+              <th class="text-nowrap align-middle" scope="col">
                 <div class="custom-control custom-checkbox">
                   <input
                     type="checkbox"
@@ -329,11 +329,11 @@
                   <label class="custom-control-label" for="selectAll"></label>
                 </div>
               </th>
-              <th class="min-w-200px" scope="col">Başlık</th>
-              <th scope="col">Durum</th>
-              <th scope="col">Kategori</th>
-              <th scope="col">Yazar</th>
-              <th scope="col">Son Yanıt</th>
+              <th class="min-w-200px align-middle" scope="col">Başlık</th>
+              <th class="align-middle" scope="col">Durum</th>
+              <th class="align-middle" scope="col">Kategori</th>
+              <th class="align-middle" scope="col">Yazar</th>
+              <th class="align-middle" scope="col">Son Yanıt</th>
             </tr>
           </thead>
           <tbody>
@@ -394,7 +394,7 @@
                     </div>
                   </div>
                 </th>
-                <td class="text-nowrap">
+                <td class="align-middle text-nowrap">
                   <a
                     href="/panel/tickets/ticket/{ticket.id}"
                     title="Talebi Görüntüle"
@@ -403,11 +403,13 @@
                     {ticket.title}
                   </a>
                 </td>
-                <td>
+                <td class="align-middle text-nowrap">
                   <TicketStatus status="{ticket.status}" />
                 </td>
-                <td>{ticket.category.title}</td>
-                <td>
+                <td class="align-middle text-nowrap">
+                  {ticket.category.title}
+                </td>
+                <td class="align-middle">
                   <a href="#" use:tooltip="{['top', ticket.writer.username]}">
                     <img
                       src="https://minotar.net/avatar/{ticket.writer.username}/32"
@@ -418,7 +420,7 @@
                     />
                   </a>
                 </td>
-                <td class="text-nowrap">
+                <td class="align-middle text-nowrap">
                   {moment(parseInt(ticket.date)).fromNow()}
                 </td>
               </tr>
