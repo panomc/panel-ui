@@ -373,20 +373,15 @@
   <!-- Post Option Cards -->
   <div class="col-lg-3">
     <div class="card">
-      <div class="card-body">
+      <div class="p-2">
         <form>
           <ul class="list-group">
-            <li class="list-group-item px-0 pt-0">
-              <i
-                aria-hidden="true"
-                class="far fa-sticky-note text-primary fa-fw"
-              ></i>
-
+            <li class="list-group-item">
               <Icon data="{faStickyNote}" class="text-primary mr-1" />
               <b>Durum:</b>
               {getStatusByPostStatus(post.status)}
             </li>
-            <li class="list-group-item px-0 pb-0">
+            <li class="list-group-item">
               <Icon data="{faEye}" class="text-primary mr-1" />
               <b>Görüntülenme:</b>
               {post.id === -1 ? '0' : post.views}
