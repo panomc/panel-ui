@@ -1,6 +1,7 @@
 <script>
   import { isPageInitialized } from "../../Store";
   import { getPath, route } from "routve";
+  import ConfirmBanPlayerModal from "../../components/modals/ConfirmBanPlayerModal.svelte";
 
   import Icon from "svelte-awesome";
   import ApiUtil from "../../pano/js/api.util";
@@ -22,10 +23,10 @@
   <!-- Action Menu -->
   <div class="row mb-3">
     <div class="col-md-4 col-6">
-      <router-link class="btn btn-link" role="button" to="/panel/players">
+      <a class="btn btn-link" role="button" href="/panel/players">
         <Icon data="{faArrowLeft}" class="mr-1" />
         Oyuncular
-      </router-link>
+      </a>
     </div>
     <div class="col text-right">
       <div class="dropdown">
@@ -50,7 +51,7 @@
           </a>
           <a
             class="dropdown-item"
-            data-target="#conformBanTickets"
+            data-target="#conformBanPlayer"
             data-toggle="modal"
             href="javascript:void(0);"
           >
@@ -114,43 +115,9 @@
           Buraya kullaınıcının son talepleri (istatistiklerdeki gibi)
         </div>
       </div>
-
-      <!-- User's Tickets -->
-    </div>
-  </div>
-
-  <!-- Confirm Ban User Tickets Modal -->
-  <div
-    aria-hidden="true"
-    class="modal fade"
-    id="conformBanTickets"
-    role="dialog"
-    tabindex="-1"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="dialog">
-      <div class="modal-content">
-        <div class="modal-body text-center">
-          <div class="pb-3">
-            <i
-              aria-hidden="true"
-              class="fa fa-question-circle fa-4x d-block m-auto text-gray"
-            ></i>
-          </div>
-          <span>
-            Bu kullanıcının taleplerini gerçekten yasaklamak istiyor musunuz?
-          </span>
-        </div>
-        <div class="modal-footer">
-          <button
-            class="btn btn-outline-primary w-100"
-            data-dismiss="modal"
-            type="button"
-          >
-            Hayır
-          </button>
-          <button class="btn btn-danger w-100" type="button">Evet</button>
-        </div>
-      </div>
     </div>
   </div>
 </div>
+<!-- Ban Player Confirmation Modal -->
+
+<ConfirmBanPlayerModal />
