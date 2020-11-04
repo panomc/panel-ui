@@ -262,6 +262,13 @@
   height: 100px;
 }
 
+.player-profile-icon {
+  display: block;
+  margin: 0 1rem;
+  border: 10px solid;
+  border-radius: 100%;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

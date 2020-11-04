@@ -72,28 +72,25 @@
         >
           <img
             alt="Username"
-            class="mb-3 rounded-circle"
-            width="64"
-            height="64"
+            class="mb-3 rounded-circle player-profile-icon border-lightsecondary"
+            width="80"
+            height="80"
             src="https://minotar.net/avatar/butlu"
           />
-          <h4 class="card-title">
-            <span class="badge badge-danger badge-pill mr-2">Yasaklı</span>
-            Butlu
-          </h4>
 
-          Kayıt: 01.01.2019
+          <h4 class="card-title"><span><del>Butlu</del></span></h4>
+          <div class="badge badge-pill badge-danger d-block">Yasaklı</div>
 
           <hr />
 
-          <span
-            class="badge badge-pill badge-lightsecondary text-success"
-            v-tooltip:top="'Sitede'"
-          >
-            <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
-            <Icon data="{faGlobe}" />
-            <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
-          </span>
+          <ul class="list-inline my-0">
+            <li class="list-inline-item">
+              <div class="badge text-dark border">Yönetici</div>
+            </li>
+            <li class="list-inline-item">
+              <div class="badge text-dark border">Kayıt: 01.01.2019</div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -111,8 +108,7 @@
               </a>
             </div>
           </div>
-
-          Buraya kullaınıcının son talepleri (istatistiklerdeki gibi)
+          -
         </div>
       </div>
     </div>

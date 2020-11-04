@@ -9,7 +9,7 @@
 </script>
 
 <nav class="sidebar-nav navbar-light" v-if="sidebarTabsState === 'game'">
-  <ul class="menu navbar-nav font-weight-normal">
+  <ul class="menu navbar-nav font-weight-normal d-none">
     <!--        :class="{ 'active': path.startsWith('/panel/server-panel') }"-->
     <li class="nav-item">
       <router-link class="nav-link" to="/panel/tools">
@@ -32,12 +32,12 @@
       bağlayın.
     </p>
     <button
-      class="btn btn-secondary btn-sm"
+      class="btn bg-lightprimary text-primary btn-sm"
       data-target="#connectServer"
       data-toggle="modal"
       type="button"
     >
-      <Icon data="{faPlus}" class="mx-2" />
+      <Icon data="{faPlus}" class="mr-2" />
       Suncuu Bağla
     </button>
   </div>

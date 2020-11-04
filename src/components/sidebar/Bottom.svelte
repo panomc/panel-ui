@@ -2,10 +2,11 @@
   import tooltip from "../../pano/js/tooltip.util";
 
   import Icon from "svelte-awesome";
-  import { faCog, faSync, faQuestion } from "@fortawesome/free-solid-svg-icons";
+  import { faCog, faSync } from "@fortawesome/free-solid-svg-icons";
+  import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 </script>
 
-<div class="sidebar-bottom p-2 border-top border-glass">
+<div class="sidebar-bottom p-2 border-top border-right border-glass">
   <a
     class="btn btn-link text-muted"
     href="/panel/settings"
@@ -26,6 +27,6 @@
     target="_blank"
     use:tooltip="{['top', 'Yardım']}"
   >
-    <Icon data="{faQuestion}" />
+    <Icon data="{faDiscord}" />
   </a>
 </div>
