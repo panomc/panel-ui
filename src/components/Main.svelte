@@ -43,7 +43,7 @@
   <main class="panel-content">
     <Navbar />
 
-    <Router hidden="{showLoading}" routerConfig="{RouterConfig}" />
+    <Router hidden="{showLoading}" config="{RouterConfig}" />
 
     <PageLoading show="{showLoading}" />
   </main>

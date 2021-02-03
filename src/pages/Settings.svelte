@@ -47,5 +47,5 @@
 
 <!-- Settings Contents -->
 <article class="content">
-  <Router basePath="/panel/settings" />
+  <Router />
 </article>

@@ -35,5 +35,5 @@
 
 <!-- Settings Contents -->
 <article class="content">
-  <Router basePath="/panel/view" />
+  <Router />
 </article>

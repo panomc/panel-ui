@@ -8,6 +8,7 @@ import { terser } from "rollup-plugin-terser";
 import babel from "rollup-plugin-babel";
 import rmdir from "rimraf";
 import sveltePreprocess from "svelte-preprocess";
+import postcss from "rollup-plugin-postcss";
 
 rmdir("public/assets", function (error) {});
 rmdir("public/commons", function (error) {});
@@ -56,50 +57,21 @@ const plugins = [
     runtimeHelpers: true,
   }),
 
+  postcss({
+    extract: "assets/css/bundle.css",
+    sourceMap: production,
+    plugins: [],
+  }),
+
   svelte({
-    // enable run-time checks when not in production
-    dev: !production,
+    compilerOptions: {
+      // enable run-time checks when not in production
+      dev: !production,
+    },
 
     preprocess: sveltePreprocess({
       postcss: true,
     }),
-
-    css: function (css) {
-      if (!systemBuildStarted) {
-        const cssFileName = "bundle.css",
-          stupidOutputDir = "public/assets/js/es",
-          sensibleOutputDir = "public/assets/css",
-          maxAttempts = 4;
-
-        // console.log(css.code); // the concatenated CSS
-        // console.log(css.map); // a sourcemap
-
-        // creates `bundle.css` and `bundle.css.map`
-        // using a falsy name will default to the bundle name
-        // — pass `false` as the second argument if you don't want the sourcemap
-        css.write(cssFileName, true);
-
-        setTimeout(function check_for_css(attempts = 0) {
-          const outputCSS = stupidOutputDir + "/" + cssFileName;
-          const outputMap = outputCSS + ".map";
-
-          const newOutputCSS = sensibleOutputDir + "/" + cssFileName;
-          const newOutputMap = sensibleOutputDir + "/" + cssFileName + ".map";
-
-          if (fs.existsSync(outputCSS) && fs.existsSync(outputMap)) {
-            if (!fs.existsSync(sensibleOutputDir))
-              fs.mkdirSync(sensibleOutputDir);
-
-            fs.renameSync(outputCSS, newOutputCSS);
-            fs.renameSync(outputMap, newOutputMap);
-          } else {
-            if (attempts < maxAttempts) {
-              setTimeout(() => check_for_css(attempts + 1), 250);
-            }
-          }
-        }, 250);
-      }
-    },
 
     onwarn: (warning, handler) => {
       // e.g. don't warn on <marquee> elements, cos they're cool
@@ -152,7 +124,10 @@ const esExport = {
       sourcemap: true,
       format: "es",
       name: "app",
-      dir: "public/assets/js/es/",
+      dir: "public/",
+      entryFileNames: "assets/js/es/[name].js",
+      chunkFileNames: "assets/js/es/[name].[hash].js",
+      assetFileNames: "assets/[name].[hash].[ext]",
     },
   ],
   plugins: plugins,
@@ -168,7 +143,10 @@ const systemExport = {
       sourcemap: true,
       format: "system",
       name: "app",
-      dir: "public/assets/js/system/",
+      dir: "public/",
+      entryFileNames: "assets/js/system/[name].js",
+      chunkFileNames: "assets/js/system/[name].[hash].js",
+      assetFileNames: "assets/[name].[hash].[ext]",
     },
   ],
   plugins: systemBundlePlugins,
