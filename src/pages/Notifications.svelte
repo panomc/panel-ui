@@ -1,7 +1,7 @@
 <script>
   import Icon from "svelte-awesome";
   import moment from "moment";
-  import { onDestroy } from "svelte";
+  import { onMount, onDestroy } from "svelte";
 
   import { showNetworkErrorOnCatch, isPageInitialized } from "../Store";
   import ApiUtil from "../pano/js/api.util";
@@ -12,8 +12,9 @@
 
   let notificationProcessID = 0;
   let notifications = [];
-  const notificationIntervals = [];
-  let notificationDates = [];
+
+  let checkTime = 0;
+  let interval;
 
   Array.prototype.insert = function (index, item) {
     this.splice(index, 0, item);
@@ -27,47 +28,10 @@
     return this;
   };
 
-  function clearIntervalsAndDates() {
-    notificationDates = [];
-
-    notificationIntervals.forEach((item, index) => {
-      clearInterval(item);
-      notificationIntervals.remove(index);
-    });
-  }
-
-  function setDate(index) {
-    notificationDates[index] = moment(notifications[index].date).fromNow();
-  }
-
-  function setIntervalDate(index) {
-    setDate(index);
-
-    const interval = setInterval(() => {
-      setDate(index);
-    }, 1000);
-
-    notificationIntervals.insert(index, interval);
-  }
-
-  function removeIntervalDate(index) {
-    clearInterval(notificationIntervals[index]);
-    notificationIntervals.remove(index);
-    notificationDates.remove(index);
-  }
-
   function setNotifications(newNotifications) {
-    if (notifications.length === 0 || newNotifications.length === 0) {
+    if (notifications.length === 0 || newNotifications.length === 0)
       notifications = newNotifications;
-
-      if (newNotifications.length === 0) {
-        clearIntervalsAndDates();
-      } else {
-        notifications.forEach((item, index) => {
-          setIntervalDate(index);
-        });
-      }
-    } else {
+    else {
       const listOfFilterIsNotificationExists = [];
 
       newNotifications.forEach((item, index) => {
@@ -79,7 +43,6 @@
       newNotifications.forEach((item, index) => {
         if (listOfFilterIsNotificationExists[index].length === 0) {
           notifications = notifications.insert(index, item);
-          setIntervalDate(index);
         }
       });
 
@@ -90,7 +53,6 @@
 
         if (newArrayOfFilter.length === 0) {
           notifications = notifications.remove(index);
-          removeIntervalDate(index);
         }
       });
     }
@@ -132,10 +94,21 @@
 
   startNotificationsDown();
 
-  onDestroy(() => {
-    clearIntervalsAndDates();
-    notificationProcessID++;
+  onMount(() => {
+    interval = setInterval(() => {
+      checkTime += 1;
+    }, 1000);
   });
+
+  onDestroy(() => {
+    notificationProcessID++;
+
+    clearInterval(interval);
+  });
+
+  function getTime(check, time, locale) {
+    return moment(time).fromNow();
+  }
 </script>
 
 <div class="content">
@@ -178,7 +151,7 @@
               <div class="col">
                 <span class="text-wrap text-dark">{notification.type_ID}</span>
                 <small class="text-gray d-block">
-                  {notificationDates[index]}
+                  {getTime(checkTime, parseInt(notification.date), "")}
                 </small>
               </div>
             </a>
