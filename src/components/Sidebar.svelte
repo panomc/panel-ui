@@ -51,26 +51,22 @@
 
 <!-- Sidebar -->
 <div class="sidebar" class:active="{$isSidebarOpen}">
-
   <!-- Sidebar Logo -->
   <div class="sidebar-logo border-bottom border-glass border-right">
     <a
       href="javascript:void(0);"
       class="sidebar-toggler btn btn-link text-muted"
-      on:click="{onMobileSideBarCollapseClick}"
-    >
+      on:click="{onMobileSideBarCollapseClick}">
       <Icon data="{faBars}" />
     </a>
     <img
       alt="Pano"
       title="Pano"
       src="{basePath() + 'assets/img/logo-blue.svg'}"
-      width="20"
-    />
+      width="20" />
   </div>
 
   <div class="sidebar-inner border-glass border-right">
-
     <!-- Sidebar Info Section -->
     <div class="sidebar-info">
       <img
@@ -79,11 +75,10 @@
         class="sidebar-server-icon"
         width="80"
         height="80"
-        src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
-      />
+        src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" />
       <h5 class="text-dark">{$website.name}</h5>
 
-      {#if $sidebarTabsState === 'website'}
+      {#if $sidebarTabsState === "website"}
         <a href="/" class="z-1" target="_blank">
           <button class="btn btn-secondary btn-sm" type="button">
             Websiteyi Görüntüle
@@ -91,14 +86,13 @@
         </a>
       {/if}
 
-      {#if $sidebarTabsState === 'game'}
+      {#if $sidebarTabsState === "game"}
         <a href="javascript:void(0);" class="z-1">
           <button
             class="btn btn-aqua btn-sm text-white"
             data-target="#showServers"
             data-toggle="modal"
-            type="button"
-          >
+            type="button">
             Sunucuları Görüntüle
           </button>
         </a>
@@ -113,8 +107,7 @@
           class="nav-link"
           on:click="{onWebsiteMenuClick}"
           class:active="{$sidebarTabsState === 'website'}"
-          class:text-muted="{$sidebarTabsState !== 'website'}"
-        >
+          class:text-muted="{$sidebarTabsState !== 'website'}">
           <Icon data="{faGlobe}" scale="1.3" />
         </a>
       </li>
@@ -124,8 +117,7 @@
           class="nav-link"
           on:click="{onGameMenuClick}"
           class:active="{$sidebarTabsState === 'game'}"
-          class:text-muted="{$sidebarTabsState !== 'game'}"
-        >
+          class:text-muted="{$sidebarTabsState !== 'game'}">
           <Icon data="{faCube}" scale="1.3" />
         </a>
       </li>

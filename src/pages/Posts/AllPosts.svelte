@@ -171,8 +171,7 @@
     <a
       class="btn btn-primary ml-auto"
       role="button"
-      href="/panel/posts/create-post"
-    >
+      href="/panel/posts/create-post">
       <Icon data="{faPlus}" />
       <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
     </a>
@@ -193,16 +192,14 @@
             class:active="{pageType === 'published'}"
             class="btn btn-sm btn-outline-light btn-link"
             role="button"
-            href="/panel/posts/published"
-          >
+            href="/panel/posts/published">
             Yayınlanmış
           </a>
           <a
             class:active="{pageType === 'draft'}"
             class="btn btn-sm btn-outline-light btn-link"
             role="button"
-            href="/panel/posts/draft"
-          >
+            href="/panel/posts/draft">
             Taslak
           </a>
 
@@ -210,8 +207,7 @@
             class:active="{pageType === 'trash'}"
             class="btn btn-sm btn-outline-light btn-link text-danger"
             role="button"
-            href="/panel/posts/trash"
-          >
+            href="/panel/posts/trash">
             Çöp
           </a>
         </div>
@@ -250,53 +246,46 @@
                       data-toggle="dropdown"
                       href="javascript:void(0);"
                       id="postAction"
-                      title="Eylemler"
-                    >
+                      title="Eylemler">
                       <Icon data="{faEllipsisV}" />
                     </a>
                     <div
                       aria-labelledby="postAction"
-                      class="dropdown-menu dropdown-menu-right"
-                    >
+                      class="dropdown-menu dropdown-menu-right">
                       <a
                         class="dropdown-item"
                         target="_blank"
-                        href="/preview/post/{post.id}"
-                      >
+                        href="/preview/post/{post.id}">
                         <Icon data="{faEye}" class="text-primary mr-1" />
                         Görüntüle
                       </a>
-                      {#if pageType !== 'draft'}
+                      {#if pageType !== "draft"}
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
                           on:click="{onMoveToDraft(post.id)}"
                           class:disabled="{buttonsLoading}"
-                          disabled="{buttonsLoading}"
-                        >
+                          disabled="{buttonsLoading}">
                           <span>
                             <Icon
                               data="{faBookmark}"
-                              class="text-primary mr-1"
-                            />
+                              class="text-primary mr-1" />
                             Taslaklara Taşı
                           </span>
                         </a>
                       {/if}
 
-                      {#if pageType !== 'published'}
+                      {#if pageType !== "published"}
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
                           class:disabled="{buttonsLoading}"
                           disabled="{buttonsLoading}"
-                          on:click="{onPublishClick(post.id)}"
-                        >
+                          on:click="{onPublishClick(post.id)}">
                           <span>
                             <Icon
                               data="{faGlobeAmericas}"
-                              class="text-primary mr-1"
-                            />
+                              class="text-primary mr-1" />
                             Yayınla
                           </span>
                         </a>
@@ -307,8 +296,7 @@
                         data-target="#confirmDeletePost"
                         data-toggle="modal"
                         href="javascript:void(0);"
-                        on:click="{onDeletePostClick(post)}"
-                      >
+                        on:click="{onDeletePostClick(post)}">
                         <Icon data="{faTrash}" class="text-danger mr-1" />
                         Sil
                       </a>
@@ -318,16 +306,14 @@
                 <td class="align-middle text-nowrap">
                   <a
                     href="{'/panel/posts/post/' + post.id}"
-                    title="Yazıyı Düzenle"
-                  >
+                    title="Yazıyı Düzenle">
                     {post.title}
                   </a>
                 </td>
                 <td class="align-middle text-nowrap">
                   <span
                     class="badge badge-sunflower badge-pill"
-                    style="background: #{post.category.color}"
-                  >
+                    style="background: #{post.category.color}">
                     {post.category.title}
                   </span>
                 </td>
@@ -338,13 +324,12 @@
                       class="rounded-circle border"
                       height="32"
                       src="https://minotar.net/avatar/{post.writer.username}"
-                      width="32"
-                    />
+                      width="32" />
                   </a>
                 </td>
                 <td class="align-middle text-nowrap">{post.views}</td>
                 <td class="align-middle text-nowrap">
-                  {moment(parseInt(post.date)).format('DD/MM/YYYY, HH:mm')}
+                  {moment(parseInt(post.date)).format("DD/MM/YYYY, HH:mm")}
                 </td>
               </tr>
             {/each}
@@ -358,8 +343,7 @@
       totalPage="{totalPage}"
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
-    />
+      on:pageLinkClick="{(event) => routePage(event.detail.page)}" />
   </div>
 </div>
 

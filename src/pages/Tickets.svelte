@@ -4,5 +4,5 @@
 
 <!-- Tickets Contents -->
 <article class="content">
-  <Router/>
+  <Router />
 </article>

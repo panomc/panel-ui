@@ -16,30 +16,26 @@
     <a
       class="nav-item nav-link"
       href="/panel/settings"
-      class:active="{matching($path, '/panel/settings')}"
-    >
+      class:active="{matching($path, '/panel/settings')}">
       Genel
     </a>
     <a
       class="nav-item nav-link"
       href="/panel/settings/site-settings"
-      class:active="{matching($path, '/panel/settings/site-settings', true)}"
-    >
+      class:active="{matching($path, '/panel/settings/site-settings', true)}">
       Website
     </a>
     <a
       class="nav-item nav-link ml-sm-auto position-relative"
       href="/panel/settings/updates"
-      class:active="{matching($path, '/panel/settings/updates', true)}"
-    >
+      class:active="{matching($path, '/panel/settings/updates', true)}">
       Güncellemeler
       <span class="notification"></span>
     </a>
     <a
       class="nav-item nav-link"
       href="/panel/settings/about"
-      class:active="{matching($path, '/panel/settings/about', true)}"
-    >
+      class:active="{matching($path, '/panel/settings/about', true)}">
       Hakkında
     </a>
   </div>

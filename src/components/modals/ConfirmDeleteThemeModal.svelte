@@ -9,8 +9,7 @@
   class="modal fade"
   id="confirmDeleteTheme"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
@@ -18,8 +17,7 @@
           <Icon
             data="{faQuestionCircle}"
             scale="3"
-            class="d-block m-auto text-gray"
-          />
+            class="d-block m-auto text-gray" />
         </div>
         Bu temayı kalıcı olarak silmek istediğinizden emin misiniz?
       </div>
@@ -27,8 +25,7 @@
         <button
           class="btn btn-link text-muted"
           data-dismiss="modal"
-          type="button"
-        >
+          type="button">
           İptal
         </button>
         <button class="btn btn-danger" type="button">Evet</button>

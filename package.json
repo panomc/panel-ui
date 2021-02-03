@@ -4,7 +4,11 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public -s --host 0.0.0.0"
+    "start": "sirv public -s --host 0.0.0.0",
+    "lint": "npx npm-run-all -c lint:*",
+    "lint:prettier": "prettier -c . --config .prettierrc",
+    "format": "npx npm-run-all -c format:*",
+    "format:prettier": "prettier --write . --config .prettierrc"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

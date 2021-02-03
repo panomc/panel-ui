@@ -83,13 +83,12 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-          {$mode === 'edit' ? 'Kategoriyi Düzenle' : 'Kategori Ekle'}
+          {$mode === "edit" ? "Kategoriyi Düzenle" : "Kategori Ekle"}
         </h5>
 
         <button
@@ -97,8 +96,7 @@
           class="close"
           title="Pencereyi Kapat"
           type="button"
-          on:click="{hide}"
-        >
+          on:click="{hide}">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -111,8 +109,7 @@
               id="category"
               type="text"
               bind:value="{$category.title}"
-              class:border-danger="{$errors.title}"
-            />
+              class:border-danger="{$errors.title}" />
           </div>
           <div class="form-group">
             <label for="categoryDescription">Açıklama:</label>
@@ -121,8 +118,7 @@
               id="categoryDescription"
               type="text"
               bind:value="{$category.description}"
-              class:border-danger="{$errors.description}"
-            />
+              class:border-danger="{$errors.description}" />
           </div>
         </div>
         <div class="modal-footer">
@@ -130,9 +126,8 @@
             class="btn btn-block btn-secondary"
             type="submit"
             class:disabled="{loading}"
-            disabled="{loading}"
-          >
-            {$mode === 'edit' ? 'Kaydet' : 'Oluştur'}
+            disabled="{loading}">
+            {$mode === "edit" ? "Kaydet" : "Oluştur"}
           </button>
         </div>
       </form>

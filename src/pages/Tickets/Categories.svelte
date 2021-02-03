@@ -145,8 +145,7 @@
     <button
       class="btn btn-primary"
       type="button"
-      on:click="{onCreateCategoryClick}"
-    >
+      on:click="{onCreateCategoryClick}">
       <Icon data="{faPlus}" />
       <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
     </button>
@@ -192,19 +191,18 @@
                       aria-haspopup="true"
                       data-toggle="dropdown"
                       href="javascript:void(0);"
-                      id="postAction"
-                    >
+                      id="postAction">
                       <Icon data="{faEllipsisV}" />
                     </a>
                     <div
                       aria-labelledby="postAction"
-                      class="dropdown-menu dropdown-menu-right"
-                    >
+                      class="dropdown-menu dropdown-menu-right">
                       <a
                         class="dropdown-item"
                         href="javascript:void(0);"
-                        on:click="{onShowDeleteTicketCategoryModalClick(index)}"
-                      >
+                        on:click="{onShowDeleteTicketCategoryModalClick(
+                          index
+                        )}">
                         <Icon data="{faTrash}" class="text-danger mr-1" />
                         Sil
                       </a>
@@ -215,8 +213,7 @@
                   <a
                     href="javascript:void(0);"
                     title="Kategoriyi Düzenle"
-                    on:click="{onShowEditCategoryButtonClick(index)}"
-                  >
+                    on:click="{onShowEditCategoryButtonClick(index)}">
                     {category.title}
                   </a>
                 </td>
@@ -233,7 +230,6 @@
       totalPage="{totalPage}"
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
-    />
+      on:pageLinkClick="{(event) => routePage(event.detail.page)}" />
   </div>
 </div>

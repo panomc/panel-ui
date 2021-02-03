@@ -92,14 +92,12 @@
     <div
       class="alert card rounded alert-welcome alert-dismissible flex-fill w-100
       show border mb-4"
-      role="alert"
-    >
+      role="alert">
       <button
         class="close"
         data-dismiss="alert"
         type="button"
-        on:click="{onCloseGettingStartedCard}"
-      >
+        on:click="{onCloseGettingStartedCard}">
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="card-body">
@@ -120,8 +118,7 @@
             <button
               class="btn btn-sm btn-outline-primary"
               data-target="#connectServer"
-              data-toggle="modal"
-            >
+              data-toggle="modal">
               <Icon data="{faPlus}" class="mr-2" />
               Sunucu Bağla
             </button>
@@ -222,8 +219,7 @@
               <Icon
                 data="{faGlobe}"
                 scale="1.5"
-                class="text-gray d-block mx-2"
-              />
+                class="text-gray d-block mx-2" />
             </div>
           </div>
         </div>
@@ -241,8 +237,7 @@
               <Icon
                 data="{faStickyNote}"
                 scale="1.5"
-                class="text-gray d-block mx-2"
-              />
+                class="text-gray d-block mx-2" />
             </div>
           </div>
         </div>
@@ -322,16 +317,14 @@
           {#each tickets as ticket, index (ticket)}
             <a
               href="/panel/tickets/ticket/{ticket.id}"
-              class="list-group-item list-group-item-action rounded d-flex flex-row"
-            >
+              class="list-group-item list-group-item-action rounded d-flex flex-row">
               <div class="col-auto">
                 <img
                   src="https://minotar.net/avatar/{ticket.writer.username}"
                   width="48"
                   height="48"
                   class="border rounded-circle"
-                  alt="{ticket.writer.username}"
-                />
+                  alt="{ticket.writer.username}" />
               </div>
               <div class="col">
                 <span class="text-primary"> #{ticket.id} {ticket.title} </span>

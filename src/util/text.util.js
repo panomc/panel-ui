@@ -1,5 +1,4 @@
-
-const span = document.createElement('span');
+const span = document.createElement("span");
 
 export function extractContent(s) {
   span.innerHTML = s;

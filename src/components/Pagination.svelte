@@ -38,8 +38,7 @@
         href="javascript:void(0);"
         title="Önceki Sayfa"
         on:click="{onFirstPageClick}"
-        aria-hidden="{parseInt(page) === 1}"
-      >
+        aria-hidden="{parseInt(page) === 1}">
         &laquo;
       </a>
     </li>
@@ -48,14 +47,12 @@
       <li
         class="page-item"
         class:active="{parseInt(page) === index}"
-        aria-current="{parseInt(page) === index ? 'page' : ''}"
-      >
+        aria-current="{parseInt(page) === index ? 'page' : ''}">
         <a
           class="page-link"
           href="javascript:void(0);"
           on:click="{onPageLinkClick(index)}"
-          aria-hidden="{parseInt(page) === index}"
-        >
+          aria-hidden="{parseInt(page) === index}">
           {index}
         </a>
       </li>
@@ -67,8 +64,7 @@
         href="javascript:void(0);"
         title="Sonraki Sayfa"
         on:click="{onLastPageClick}"
-        aria-hidden="{parseInt(page) === totalPage}"
-      >
+        aria-hidden="{parseInt(page) === totalPage}">
         &raquo;
       </a>
     </li>

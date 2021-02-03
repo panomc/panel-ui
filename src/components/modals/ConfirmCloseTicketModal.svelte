@@ -75,8 +75,7 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
@@ -84,11 +83,10 @@
           <Icon
             data="{faQuestionCircle}"
             scale="3"
-            class="d-block m-auto text-gray"
-          />
+            class="d-block m-auto text-gray" />
         </div>
         Bu
-        {$selectedTickets.length === 1 ? 'talebi' : 'talepleri'}
+        {$selectedTickets.length === 1 ? "talebi" : "talepleri"}
         kapatmak istediğinizden emin misiniz?
       </div>
       <div class="modal-footer">
@@ -98,8 +96,7 @@
           class:disabled="{loading}"
           aria-disabled="{loading}"
           disabled="{loading}"
-          on:click="{hide}"
-        >
+          on:click="{hide}">
           İptal
         </button>
         <button
@@ -108,8 +105,7 @@
           class:disabled="{loading}"
           aria-disabled="{loading}"
           disabled="{loading}"
-          on:click="{onYesClick}"
-        >
+          on:click="{onYesClick}">
           Evet
         </button>
       </div>

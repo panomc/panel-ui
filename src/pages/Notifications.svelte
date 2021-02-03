@@ -15,13 +15,13 @@
   const notificationIntervals = [];
   let notificationDates = [];
 
-  Array.prototype.insert = function(index, item) {
+  Array.prototype.insert = function (index, item) {
     this.splice(index, 0, item);
 
     return this;
   };
 
-  Array.prototype.remove = function(index) {
+  Array.prototype.remove = function (index) {
     this.splice(index, 1);
 
     return this;
@@ -72,7 +72,7 @@
 
       newNotifications.forEach((item, index) => {
         listOfFilterIsNotificationExists[index] = notifications.filter(
-          filterItem => filterItem.id === item.id
+          (filterItem) => filterItem.id === item.id
         );
       });
 
@@ -85,7 +85,7 @@
 
       notifications.forEach((item, index) => {
         const newArrayOfFilter = newNotifications.filter(
-          filterItem => filterItem.id === item.id
+          (filterItem) => filterItem.id === item.id
         );
 
         if (newArrayOfFilter.length === 0) {
@@ -99,7 +99,7 @@
   function getNotifications(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get("panel/notifications")
-        .then(response => {
+        .then((response) => {
           if (notificationProcessID === id) {
             if (response.data.result === "ok") {
               setNotifications(response.data.notifications);
@@ -152,8 +152,7 @@
           type="button"
           class="btn btn-link text-danger"
           data-target="#ConfirmRemoveAllNotificationsModal"
-          data-toggle="modal"
-        >
+          data-toggle="modal">
           <span class="d-md-inline d-none">Tümünü Sil</span>
         </button>
       </div>
@@ -166,16 +165,13 @@
     <div class="card-body">
       <div
         class="d-flex flex-column justify-content-center align-items-center
-        border rounded"
-      >
+        border rounded">
         {#each notifications as notification, index (notification)}
           <div class="d-flex flex-row align-items-center w-100 border-bottom">
             <a
               href="javascript:void(0);"
               class="dropdown-item d-flex flex-row py-2"
-              class:notification-unread="{notification.status === 'NOT_READ'}"
-            >
-
+              class:notification-unread="{notification.status === 'NOT_READ'}">
               <div class="col-auto pl-0">
                 <Icon data="{faDotCircle}" class="text-primary" />
               </div>
@@ -188,8 +184,7 @@
             </a>
             <button
               class="btn btn-link text-danger mx-2"
-              use:tooltip="{['right', 'Bildirimi Sil']}"
-            >
+              use:tooltip="{['right', 'Bildirimi Sil']}">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -197,8 +192,7 @@
 
         {#if notifications.length === 0}
           <div
-            class="d-flex flex-column align-items-center justify-content-center"
-          >
+            class="d-flex flex-column align-items-center justify-content-center">
             <Icon data="{faBell}" scale="3" class="text-glass m-3" />
             <p class="text-gray">Bildirim yok.</p>
           </div>
@@ -214,8 +208,7 @@
               <a
                 class="page-link"
                 href="javascript:void(0);"
-                title="Önceki Sayfa"
-              >
+                title="Önceki Sayfa">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
@@ -228,8 +221,7 @@
               <a
                 class="page-link"
                 href="javascript:void(0);"
-                v-if="page !== index"
-              >
+                v-if="page !== index">
                 <!--                {{index}}-->
               </a>
               <!--            {{index}}-->
@@ -243,8 +235,7 @@
               <a
                 class="page-link"
                 href="javascript:void(0);"
-                title="Sonraki Sayfa"
-              >
+                title="Sonraki Sayfa">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
@@ -253,7 +244,6 @@
       {/if}
     </div>
   </div>
-
 </div>
 
 <ConfirmRemoveAllNotificationsModal />

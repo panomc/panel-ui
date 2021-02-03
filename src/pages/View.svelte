@@ -1,5 +1,5 @@
 <script>
-  import Router, {path} from "routve";
+  import Router, { path } from "routve";
 
   function matching(path, pathName, startsWith = false) {
     return (
@@ -18,16 +18,14 @@
     <a
       class="nav-item nav-link"
       href="/panel/view"
-      class:active="{matching($path, '/panel/view')}"
-    >
+      class:active="{matching($path, '/panel/view')}">
       Temalar
     </a>
 
     <a
       class="nav-item nav-link"
       href="/panel/view/theme-options"
-      class:active="{matching($path, '/panel/view/theme-options')}"
-    >
+      class:active="{matching($path, '/panel/view/theme-options')}">
       Tema Seçenekleri
     </a>
   </div>

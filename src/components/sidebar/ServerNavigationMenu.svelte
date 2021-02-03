@@ -35,8 +35,7 @@
       class="btn bg-lightprimary text-primary btn-sm"
       data-target="#connectServer"
       data-toggle="modal"
-      type="button"
-    >
+      type="button">
       <Icon data="{faPlus}" class="mr-2" />
       Suncuu Bağla
     </button>

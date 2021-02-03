@@ -9,4 +9,4 @@
   }
 </script>
 
-<PostEditor {postID} />
+<PostEditor postID="{postID}" />

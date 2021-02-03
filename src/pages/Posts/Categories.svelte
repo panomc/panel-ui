@@ -140,8 +140,7 @@
     <button
       class="btn btn-primary"
       type="button"
-      on:click="{onCreateCategoryClick}"
-    >
+      on:click="{onCreateCategoryClick}">
       <Icon data="{faPlus}" />
       <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
     </button>
@@ -189,19 +188,16 @@
                       data-toggle="dropdown"
                       href="javascript:void(0);"
                       id="postAction"
-                      title="Eylemler"
-                    >
+                      title="Eylemler">
                       <Icon data="{faEllipsisV}" />
                     </a>
                     <div
                       aria-labelledby="postAction"
-                      class="dropdown-menu dropdown-menu-right"
-                    >
+                      class="dropdown-menu dropdown-menu-right">
                       <a
                         class="dropdown-item"
                         href="javascript:void(0);"
-                        on:click="{onShowDeletePostCategoryModalClick(index)}"
-                      >
+                        on:click="{onShowDeletePostCategoryModalClick(index)}">
                         <Icon data="{faTrash}" class="text-danger mr-1" />
                         Sil
                       </a>
@@ -214,8 +210,7 @@
                     data-toggle="modal"
                     href="javascript:void(0);"
                     title="Kategoriyi Düzenle"
-                    on:click="{onShowEditCategoryButtonClick(index)}"
-                  >
+                    on:click="{onShowEditCategoryButtonClick(index)}">
                     {category.title}
                   </a>
                 </td>
@@ -224,8 +219,7 @@
                   <a
                     href="/category/{category.url}"
                     target="_blank"
-                    title="Kategoriyi Görüntüle"
-                  >
+                    title="Kategoriyi Görüntüle">
                     /category/
                     <b class="text-muted">{category.url}</b>
                   </a>
@@ -235,8 +229,7 @@
                     value="#{category.color}"
                     class="form-control form-control-sm bg-transparent"
                     disabled
-                    type="color"
-                  />
+                    type="color" />
                 </td>
               </tr>
             {/each}
@@ -250,8 +243,7 @@
       totalPage="{totalPage}"
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
-    />
+      on:pageLinkClick="{(event) => routePage(event.detail.page)}" />
   </div>
 </div>
 

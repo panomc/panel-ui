@@ -219,16 +219,14 @@
 
 <!-- Top Navbar -->
 <nav
-  class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom"
->
+  class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom">
   <ul class="nav navbar-nav mr-auto">
     <li class="nav-item mr-2">
       <a
         class="icon-link nav-link"
         href="javascript:void(0);"
         title="Menüyü Aç/Kapa"
-        on:click="{onSideBarCollapseClick}"
-      >
+        on:click="{onSideBarCollapseClick}">
         <Icon data="{faBars}" />
       </a>
     </li>
@@ -236,8 +234,7 @@
       <a
         href="javascript:void(0);"
         target="_blank"
-        class="btn btn-link border-lightprimary text-secondary"
-      >
+        class="btn btn-link border-lightprimary text-secondary">
         <Icon data="{faStore}" class="d-lg-none d-inline" />
         <span class="d-lg-inline d-none">Web Market</span>
       </a>
@@ -255,8 +252,7 @@
         data-toggle="dropdown"
         href="javascript:void(0);"
         role="button"
-        title="Bildirimler"
-      >
+        title="Bildirimler">
         {#if $notificationsCount !== 0}
           <div class="unread-badge"></div>
         {/if}
@@ -265,8 +261,7 @@
 
       <div
         class="dropdown-menu animated fadeIn faster dropdown-menu-right
-        notifications"
-      >
+        notifications">
         <h6 class="dropdown-header">Bildirimler</h6>
 
         {#if !notificationsLoading}
@@ -274,8 +269,7 @@
             <a
               href="javascript:void(0);"
               class="dropdown-item d-flex flex-row border-bottom py-2"
-              class:notification-unread="{notification.status === 'NOT_READ'}"
-            >
+              class:notification-unread="{notification.status === 'NOT_READ'}">
               <div class="col-auto pl-0">
                 <Icon data="{faDotCircle}" class="text-primary" />
               </div>
@@ -291,8 +285,7 @@
 
         {#if quickNotifications.length === 0 && !notificationsLoading}
           <div
-            class="d-flex flex-column align-items-center justify-content-center"
-          >
+            class="d-flex flex-column align-items-center justify-content-center">
             <Icon data="{faBell}" scale="3" class="text-glass m-3" />
             <p class="text-gray">Bildirim yok.</p>
           </div>
@@ -303,18 +296,17 @@
           <div class="d-flex justify-content-center m-3">
             <div
               class="spinner-border spinner-border-sm text-primary"
-              role="status"
-            ></div>
+              role="status">
+            </div>
           </div>
         {/if}
 
         <a
           class="dropdown-item text-primary font-weight-bolder text-center small
           pt-2"
-          href="/panel/notifications"
-        >
+          href="/panel/notifications">
           Tümünü Görüntüle
-          {$notificationsCount === 0 ? '' : '— ' + $notificationsCount}
+          {$notificationsCount === 0 ? "" : "— " + $notificationsCount}
         </a>
       </div>
     </li>
@@ -326,15 +318,13 @@
         class="icon-link nav-link p-1"
         data-toggle="dropdown"
         href="javascript:void(0);"
-        title="Oturum"
-      >
+        title="Oturum">
         <img
           src="https://minotar.net/avatar/{$user.username}"
           width="32"
           height="32"
           class="border rounded-circle"
-          alt="{$user.username}"
-        />
+          alt="{$user.username}" />
       </a>
       <div class="dropdown-menu dropdown-menu-right animated fadeIn faster">
         <ul class="nav flex-column">
@@ -354,8 +344,7 @@
             <a
               class="nav-link text-danger"
               href="javascript:void(0);"
-              on:click="{onLogout}"
-            >
+              on:click="{onLogout}">
               <Icon data="{faSignOutAlt}" class="mr-1" />
               Çıkış Yap
             </a>

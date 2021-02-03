@@ -37,14 +37,12 @@
           data-toggle="dropdown"
           href="javascript:void(0);"
           id="playerAction"
-          title="Eylemler"
-        >
+          title="Eylemler">
           <Icon data="{faEllipsisV}" />
         </a>
         <div
           aria-labelledby="playerAction"
-          class="dropdown-menu dropdown-menu-right"
-        >
+          class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="javascript:void(0);">
             <Icon data="{faUserCircle}" class="mr-1 text-primary" />
             Yetkilendir
@@ -53,8 +51,7 @@
             class="dropdown-item"
             data-target="#conformBanPlayer"
             data-toggle="modal"
-            href="javascript:void(0);"
-          >
+            href="javascript:void(0);">
             <Icon data="{faTimes}" class="mr-1 text-danger" />
             Yasakla
           </a>
@@ -68,15 +65,13 @@
       <div class="card">
         <div
           class="card-body d-flex flex-column justify-content-center
-          align-items-center"
-        >
+          align-items-center">
           <img
             alt="Username"
             class="mb-3 rounded-circle player-profile-icon border-lightsecondary"
             width="80"
             height="80"
-            src="https://minotar.net/avatar/butlu"
-          />
+            src="https://minotar.net/avatar/butlu" />
 
           <h4 class="card-title"><span><del>Butlu</del></span></h4>
           <div class="badge badge-pill badge-danger d-block">Yasaklı</div>

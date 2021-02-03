@@ -7,7 +7,6 @@
 
 <!-- Themes Sub Page -->
 <div class="tab-pane">
-
   <!-- Themes: Current Themes Sub Title -->
   <section class="row justify-content-between align-items-center">
     <div class="col-6">
@@ -25,8 +24,7 @@
           class="rounded p-2"
           height="auto"
           src="../../assets/img/vanilla.png"
-          width="100%"
-        />
+          width="100%" />
         <div class="card-body">
           <div class="row justify-content-between align-items-center">
             <div class="col-6 text-left">
@@ -38,8 +36,7 @@
                 class="btn btn-outline-danger btn-sm disabled"
                 data-target="#confirmDeleteTheme"
                 data-toggle="modal"
-                disabled
-              >
+                disabled>
                 Kaldır
               </button>
             </div>
@@ -50,5 +47,4 @@
   </section>
 
   <ConfirmDeleteThemeModal />
-
 </div>

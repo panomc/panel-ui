@@ -262,10 +262,13 @@
 <section class="row justify-content-between align-items-center mb-3">
   <div class="col-auto text-left">
     <a
-      href="/panel/posts{post.status === 0 ? '/trash' : post.status === 2 ? '/draft' : ''}"
+      href="/panel/posts{post.status === 0
+        ? '/trash'
+        : post.status === 2
+        ? '/draft'
+        : ''}"
       class="btn btn-link"
-      role="button"
-    >
+      role="button">
       <Icon data="{faArrowLeft}" class="mr-1" />
       Yazılar
     </a>
@@ -275,17 +278,15 @@
       class="btn btn-outline-primary"
       role="button"
       target="_blank"
-      href="/preview/post/{post.id}"
-    >
+      href="/preview/post/{post.id}">
       <Icon data="{faEye}" />
       <span class="d-md-inline d-none ml-1">Görüntüle</span>
     </a>
-    {#if editorMode === 'edit'}
+    {#if editorMode === "edit"}
       <button
         class="btn btn-link text-danger"
         type="button"
-        on:click="{showDeletePostModal(post)}"
-      >
+        on:click="{showDeletePostModal(post)}">
         <Icon data="{faTrash}" />
       </button>
     {/if}
@@ -295,8 +296,7 @@
         type="button"
         class:disabled="{loading}"
         disabled="{loading}"
-        on:click="{onDraftClick}"
-      >
+        on:click="{onDraftClick}">
         <Icon data="{faBookmark}" />
         <span class="d-md-inline d-none ml-1">Taslaklara Taşı</span>
       </button>
@@ -304,11 +304,14 @@
     <button
       class="btn btn-secondary"
       type="button"
-      class:disabled="{loading || extractContent(post.text).length === 0 || post.title.length === 0}"
-      disabled="{loading || extractContent(post.text).length === 0 || post.title.length === 0}"
-      on:click="{onSubmit}"
-    >
-      <span>{post.status === 1 ? 'Güncelle' : 'Yayınla'}</span>
+      class:disabled="{loading ||
+        extractContent(post.text).length === 0 ||
+        post.title.length === 0}"
+      disabled="{loading ||
+        extractContent(post.text).length === 0 ||
+        post.title.length === 0}"
+      on:click="{onSubmit}">
+      <span>{post.status === 1 ? "Güncelle" : "Yayınla"}</span>
     </button>
   </div>
 </section>
@@ -323,8 +326,7 @@
           class="form-control form-control-lg shadow-none display-3 mb-2"
           type="text"
           placeholder="Yazı Başlığı"
-          bind:value="{post.title}"
-        />
+          bind:value="{post.title}" />
 
         <div class="align-selft-center w-100 h-75">
           <!-- Editor -->
@@ -384,7 +386,7 @@
             <li class="list-group-item">
               <Icon data="{faEye}" class="text-primary mr-1" />
               <b>Görüntülenme:</b>
-              {post.id === -1 ? '0' : post.views}
+              {post.id === -1 ? "0" : post.views}
             </li>
           </ul>
         </form>
@@ -402,8 +404,7 @@
           {:else}
             <select
               class="form-control form-control-sm mb-3"
-              bind:value="{post.category}"
-            >
+              bind:value="{post.category}">
               <option class="text-primary" value="-1">Kategorisiz</option>
 
               {#each categories as category, index (category)}
@@ -415,8 +416,7 @@
         <button
           class="btn btn-link bg-lightprimary"
           type="button"
-          on:click="{onCreateCategoryClick}"
-        >
+          on:click="{onCreateCategoryClick}">
           <Icon data="{faPlus}" class="mr-1" />
           Kategori Oluştur
         </button>
@@ -432,14 +432,12 @@
           href="javascript:void(0);"
           data-target="#setPostThumbnailModal"
           data-toggle="modal"
-          class="form-group"
-        >
+          class="form-group">
           <img
             src="{basePath()}assets/img/vanilla.png"
             class="border rounded img-fluid"
             title="Küçük Resim"
-            alt="Küçük Resim"
-          />
+            alt="Küçük Resim" />
         </a>
       </div>
     </div>

@@ -23,8 +23,7 @@
               aria-describedby="siteTitle"
               class="form-control"
               id="siteTitle"
-              type="text"
-            />
+              type="text" />
           </div>
         </div>
         <div class="form-group row">
@@ -37,8 +36,7 @@
               aria-describedby="siteDesc"
               class="form-control"
               id="siteDesc"
-              rows="2"
-            ></textarea>
+              rows="2"></textarea>
           </div>
         </div>
         <div class="form-group row">
@@ -50,8 +48,7 @@
               aria-describedby="siteKeywords"
               class="form-control"
               id="siteKeywords"
-              rows="2"
-            ></textarea>
+              rows="2"></textarea>
             <small>
               Anahtar kelimeleri virgül ile ayırın. Örnek: panocraft, minecraft,
               server
@@ -70,8 +67,7 @@
                   class="d-block ml-auto"
                   height="48"
                   src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
-                  width="48"
-                />
+                  width="48" />
               </div>
               <div class="col">
                 <input class="form-control-file" id="siteFavicon" type="file" />
@@ -83,7 +79,7 @@
             </div>
           </div>
         </div>
-        
+
         <div style="form-group">
           <button class="btn btn-secondary mt-3" style="submit">Kaydet</button>
         </div>

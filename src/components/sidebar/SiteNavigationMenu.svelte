@@ -39,8 +39,7 @@
 
     <li
       class="nav-item"
-      class:active="{matching($path, '/panel/tickets', true)}"
-    >
+      class:active="{matching($path, '/panel/tickets', true)}">
       <a class="nav-link" href="/panel/tickets">
         <Icon data="{faTicketAlt}" class="mx-2" />
         Talepler
@@ -49,8 +48,7 @@
 
     <li
       class="nav-item"
-      class:active="{matching($path, '/panel/players', true)}"
-    >
+      class:active="{matching($path, '/panel/players', true)}">
       <a class="nav-link" href="/panel/players">
         <Icon data="{faUsers}" class="mx-2" />
         Oyuncular
@@ -59,8 +57,7 @@
 
     <li
       class="nav-item"
-      class:active="{matching($path, '/panel/addons', true)}"
-    >
+      class:active="{matching($path, '/panel/addons', true)}">
       <a class="nav-link" href="/panel/addons">
         <Icon data="{faPuzzlePiece}" class="mx-2" />
         Eklentiler

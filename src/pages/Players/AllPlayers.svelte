@@ -107,24 +107,21 @@
               class:active="{pageType === 'all'}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="/panel/players/all"
-            >
+              href="/panel/players/all">
               Tümü
             </a>
             <a
               class:active="{pageType === 'hasPerm'}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="/panel/players/hasPerm"
-            >
+              href="/panel/players/hasPerm">
               Yetkililer
             </a>
             <a
               class:active="{pageType === 'banned'}"
               class="btn btn-sm btn-outline-light btn-link text-danger"
               role="button"
-              href="/panel/players/banned"
-            >
+              href="/panel/players/banned">
               Yasaklı
             </a>
           </div>
@@ -163,27 +160,23 @@
                         data-toggle="dropdown"
                         href="javascript:void(0);"
                         id="playerAction"
-                        title="Eylemler"
-                      >
+                        title="Eylemler">
                         <Icon data="{faEllipsisV}" />
                       </a>
                       <div
                         aria-labelledby="playerAction"
-                        class="dropdown-menu dropdown-menu-right"
-                      >
+                        class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="javascript:void(0);">
                           <Icon
                             data="{faUserCircle}"
-                            class="mr-1 text-primary"
-                          />
+                            class="mr-1 text-primary" />
                           Yetkilendir
                         </a>
                         <a
                           class="dropdown-item"
                           data-target="#conformBanTickets"
                           data-toggle="modal"
-                          href="javascript:void(0);"
-                        >
+                          href="javascript:void(0);">
                           <Icon data="{faTimes}" class="mr-1 text-danger" />
                           Yasakla
                         </a>
@@ -197,8 +190,7 @@
                         class="rounded-circle border mr-3"
                         height="32"
                         src="https://minotar.net/avatar/{player.username}"
-                        width="32"
-                      />
+                        width="32" />
                       {player.username}
                     </a>
                   </td>
@@ -207,14 +199,12 @@
                     <i
                       aria-hidden="true"
                       class="fa fa-times text-danger fa-fw"
-                      v-tooltip:top="'Talepleri Yasaklı'"
-                    ></i>
+                      v-tooltip:top="'Talepleri Yasaklı'"></i>
                   </td>
                   <td class="align-middle text-nowrap">
                     <span
                       class="badge badge-pill badge-lightsecondary text-success"
-                      v-tooltip:top="'Sitede'"
-                    >
+                      v-tooltip:top="'Sitede'">
                       <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
                       <Icon data="{faGlobe}" />
                       <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
@@ -222,7 +212,9 @@
                   </td>
                   <td class="align-middle text-nowrap">10 dakika önce</td>
                   <td class="align-middle text-nowrap">
-                    {moment(parseInt(player.register_date)).format('DD/MM/YYYY, HH:mm')}
+                    {moment(parseInt(player.register_date)).format(
+                      "DD/MM/YYYY, HH:mm"
+                    )}
                   </td>
                 </tr>
               {/each}
@@ -237,8 +229,7 @@
         totalPage="{totalPage}"
         on:firstPageClick="{() => routePage(1)}"
         on:lastPageClick="{() => routePage(totalPage)}"
-        on:pageLinkClick="{(event) => routePage(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => routePage(event.detail.page)}" />
     </div>
   </div>
 </div>

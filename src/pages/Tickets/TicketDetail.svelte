@@ -26,8 +26,7 @@
     <a
       class="btn btn-outline-bittersweet"
       role="button"
-      href="javascript:void(0);"
-    >
+      href="javascript:void(0);">
       <Icon data="{faTimes}" class="mr-1" />
       Kapat
     </a>
@@ -57,7 +56,6 @@
     </div>
 
     <div class="card-body rounded border">
-
       <div class="media mb-3">
         <a href="#">
           <img
@@ -65,8 +63,7 @@
             class="mr-3 border rounded-circle"
             alt="Butlu"
             width="48"
-            height="48"
-          />
+            height="48" />
         </a>
         <div class="media-body p-2 rounded bg-lightprimary shadow-sm">
           <div>
@@ -95,11 +92,9 @@
             class="ml-3 border rounded-circle"
             alt="Admin"
             width="48"
-            height="48"
-          />
+            height="48" />
         </a>
       </div>
-
     </div>
   </div>
 </div>

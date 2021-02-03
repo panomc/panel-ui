@@ -94,13 +94,12 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-          {$mode === 'create' ? 'Kategori Oluştur' : 'Kategori Düzenle'}
+          {$mode === "create" ? "Kategori Oluştur" : "Kategori Düzenle"}
         </h5>
 
         <button
@@ -108,8 +107,7 @@
           class="close"
           title="Pencereyi Kapat"
           type="button"
-          on:click="{hide}"
-        >
+          on:click="{hide}">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -122,8 +120,7 @@
               class="form-control"
               id="category"
               type="text"
-              bind:value="{$category.title}"
-            />
+              bind:value="{$category.title}" />
           </div>
           <div class="form-group">
             <label for="categoryDescription">Açıklama:</label>
@@ -132,8 +129,7 @@
               class="form-control"
               id="categoryDescription"
               type="text"
-              bind:value="{$category.description}"
-            />
+              bind:value="{$category.description}" />
           </div>
           <div class="form-group">
             <label for="categoryURL">URL:</label>
@@ -146,13 +142,12 @@
                 class="form-control"
                 id="categoryURL"
                 type="text"
-                bind:value="{$category.url}"
-              />
+                bind:value="{$category.url}" />
             </div>
             <small class:text-danger="{$errors.url}">
               <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i>
-              Yanlızca [A-Z/a-z/0-9/_] içerebilir ve minimum 3, maksimum 32
-              karkater olabilir.
+              Yanlızca [A-Z/a-z/0-9/_] içerebilir ve minimum 3, maksimum 32 karkater
+              olabilir.
             </small>
           </div>
           <div class="form-group">
@@ -162,8 +157,7 @@
                 class="form-control"
                 id="categoryColor"
                 type="color"
-                bind:value="{$category.color}"
-              />
+                bind:value="{$category.color}" />
             </div>
           </div>
         </div>
@@ -174,10 +168,9 @@
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
             class:disabled="{loading}"
-            disabled="{loading}"
-          >
+            disabled="{loading}">
             <span>
-              {#if $mode === 'edit'}
+              {#if $mode === "edit"}
                 <i aria-hidden="true" class="fa fa-save fa-fw"></i>
                 Kaydet
               {:else}

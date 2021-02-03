@@ -19,10 +19,7 @@
         <strong class="text-primary mx-2">2 Güncelleme Mevcut</strong>
       </div>
       <div class="col text-right">
-        <button
-          class="btn btn-outline-primary"
-          type="button"
-        >
+        <button class="btn btn-outline-primary" type="button">
           <Icon data="{faSync}" />
         </button>
       </div>

@@ -238,16 +238,16 @@
   <div class="col d-flex">
     <div
       class:d-none="{firstLoad}"
-      class="ml-auto animated {getListOfChecked($checkedList).length > 0 ? 'fadeIn' : 'fadeOut'}
-      faster"
-    >
+      class="ml-auto animated {getListOfChecked($checkedList).length > 0
+        ? 'fadeIn'
+        : 'fadeOut'}
+      faster">
       <a
         class="btn btn-outline-bittersweet"
         class:disabled="{getListOfChecked($checkedList).length === 0}"
         role="button"
         href="javascript:void(0);"
-        on:click="{onShowCloseTicketsModalClick}"
-      >
+        on:click="{onShowCloseTicketsModalClick}">
         <Icon data="{faTimes}" class="mr-1" />
         Kapat
       </a>
@@ -256,8 +256,7 @@
         class:disabled="{getListOfChecked($checkedList).length === 0}"
         role="button"
         href="javascript:void(0);"
-        on:click="{onShowDeleteTicketsModalClick}"
-      >
+        on:click="{onShowDeleteTicketsModalClick}">
         <Icon data="{faTrash}" class="mr-1" />
         Sil
       </a>
@@ -272,7 +271,9 @@
       <div class="col-md-6 col-12 text-md-left text-center">
         <h5 class="card-title mb-md-0">
           {ticketsCount}
-          Talep{getListOfChecked($checkedList).length > 0 ? ', ' + getListOfChecked($checkedList).length + ' adet seçildi' : ''}
+          Talep{getListOfChecked($checkedList).length > 0
+            ? ", " + getListOfChecked($checkedList).length + " adet seçildi"
+            : ""}
         </h5>
       </div>
       <div class="col-md-6 col-12 text-md-right text-center">
@@ -281,24 +282,21 @@
             class="btn btn-sm btn-outline-light btn-link"
             class:active="{pageType === 'all'}"
             role="button"
-            href="/panel/tickets/all"
-          >
+            href="/panel/tickets/all">
             Tümü
           </a>
           <a
             class="btn btn-sm btn-outline-light btn-link"
             class:active="{pageType === 'waitingReply'}"
             role="button"
-            href="/panel/tickets/waitingReply"
-          >
+            href="/panel/tickets/waitingReply">
             Yeni
           </a>
           <a
             class="btn btn-sm btn-outline-light btn-link text-danger"
             class:active="{pageType === 'closed'}"
             role="button"
-            href="/panel/tickets/closed"
-          >
+            href="/panel/tickets/closed">
             Kapalı
           </a>
         </div>
@@ -324,8 +322,7 @@
                     class="custom-control-input"
                     on:click="{onSelectAllClick}"
                     checked="{isAllTicketsSelected(tickets, $checkedList)}"
-                    id="selectAll"
-                  />
+                    id="selectAll" />
                   <label class="custom-control-label" for="selectAll"></label>
                 </div>
               </th>
@@ -346,12 +343,10 @@
                         class="custom-control-input"
                         id="postCheck{ticket.id}"
                         type="checkbox"
-                        bind:checked="{$checkedList[ticket.id]}"
-                      />
+                        bind:checked="{$checkedList[ticket.id]}" />
                       <label
                         class="custom-control-label"
-                        for="postCheck{ticket.id}"
-                      ></label>
+                        for="postCheck{ticket.id}"></label>
                     </div>
                     <div class="dropdown">
                       <a
@@ -360,24 +355,20 @@
                         aria-haspopup="true"
                         data-toggle="dropdown"
                         href="javascript:void(0);"
-                        id="postAction"
-                      >
+                        id="postAction">
                         <Icon data="{faEllipsisV}" />
                       </a>
                       <div
                         aria-labelledby="postAction"
-                        class="dropdown-menu dropdown-menu-right"
-                      >
+                        class="dropdown-menu dropdown-menu-right">
                         {#if ticket.status !== 3}
                           <a
                             class="dropdown-item"
                             href="javascript:void(0);"
-                            on:click="{onShowCloseTicketModalClick(ticket.id)}"
-                          >
+                            on:click="{onShowCloseTicketModalClick(ticket.id)}">
                             <Icon
                               data="{faTimes}"
-                              class="mr-1 text-bittersweet"
-                            />
+                              class="mr-1 text-bittersweet" />
                             Kapat
                           </a>
                         {/if}
@@ -385,8 +376,7 @@
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          on:click="{onShowDeleteTicketModalClick(ticket.id)}"
-                        >
+                          on:click="{onShowDeleteTicketModalClick(ticket.id)}">
                           <Icon data="{faTrash}" class="text-danger mr-1" />
                           Sil
                         </a>
@@ -397,8 +387,7 @@
                 <td class="align-middle text-nowrap">
                   <a
                     href="/panel/tickets/ticket/{ticket.id}"
-                    title="Talebi Görüntüle"
-                  >
+                    title="Talebi Görüntüle">
                     #{ticket.id}
                     {ticket.title}
                   </a>
@@ -412,12 +401,12 @@
                 <td class="align-middle">
                   <a href="#" use:tooltip="{['top', ticket.writer.username]}">
                     <img
-                      src="https://minotar.net/avatar/{ticket.writer.username}/32"
+                      src="https://minotar.net/avatar/{ticket.writer
+                        .username}/32"
                       alt="Oyuncu Adı"
                       class="rounded-circle border"
                       height="32"
-                      width="32"
-                    />
+                      width="32" />
                   </a>
                 </td>
                 <td class="align-middle text-nowrap">
@@ -435,8 +424,7 @@
       totalPage="{totalPage}"
       on:firstPageClick="{() => routePage(1)}"
       on:lastPageClick="{() => routePage(totalPage)}"
-      on:pageLinkClick="{(event) => routePage(event.detail.page)}"
-    />
+      on:pageLinkClick="{(event) => routePage(event.detail.page)}" />
   </div>
 </div>
 

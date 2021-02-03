@@ -132,8 +132,7 @@
   class="modal fade"
   id="connectServer"
   role="document"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -142,14 +141,12 @@
           class="close"
           data-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button"
-        >
+          type="button">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="card-body text-center">
-
           <div class="mb-3">
             <Icon data="{faDownload}" scale="3" class="text-primary" />
           </div>
@@ -176,22 +173,23 @@
               bind:value="{commandText}"
               class="form-control shadow-sm"
               id="platformToken"
-              type="text"
-            />
+              type="text" />
             <div class="input-group-append">
               <button
                 on:click="{onCopyCommandTextClick}"
                 class="btn btn-link bg-light border shadow-sm"
                 id="copyPlatformToken"
                 type="button"
-                use:tooltip="{['top', isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala']}"
-              >
+                use:tooltip="{[
+                  'top',
+                  isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala',
+                ]}">
                 <Icon data="{faClipboard}" />
               </button>
             </div>
           </div>
           <small class="text-muted">
-            Kod {timeToRefreshKey}{timeToRefreshKey === '...' ? '' : ' saniye'}
+            Kod {timeToRefreshKey}{timeToRefreshKey === "..." ? "" : " saniye"}
             sonra yenilenecek.
           </small>
 
@@ -205,7 +203,6 @@
             <Icon data="{faBell}" />
             ) "Sunucu Bağlantısı İsteği" bildirimini açarak, onay verin.
           </p>
-
         </div>
       </div>
     </div>

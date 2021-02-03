@@ -55,8 +55,7 @@
   class="modal fade"
   id="showServers"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -66,8 +65,7 @@
           data-dismiss="modal"
           data-target="#connectServer"
           data-toggle="modal"
-          type="button"
-        >
+          type="button">
           <Icon data="{faPlus}" class="mr-2" />
           Sunucu Bağla
         </button>
@@ -76,8 +74,7 @@
           class="close"
           data-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button"
-        >
+          type="button">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -112,16 +109,16 @@
                           height="72"
                           alt=" Sever İkon"
                           class="d-block m-auto border rounded-circle shadow-sm
-                          bg-white p-1 text-center"
-                        />
+                          bg-white p-1 text-center" />
                       </div>
                       <div
                         class="mt-4 card-body text-center text-dark d-flex
-                        flex-row justify-content-between"
-                      >
+                        flex-row justify-content-between">
                         <div>
                           <span class="lead">
-                            {server.status === 'online' ? server.player_count : 0}
+                            {server.status === "online"
+                              ? server.player_count
+                              : 0}
                             / {server.max_player_count}
                           </span>
                           <br />
@@ -151,21 +148,16 @@
                         data-toggle="dropdown"
                         id="serverOptions"
                         title="Seçenekler"
-                        type="button"
-                      >
+                        type="button">
                         <Icon data="{faCog}" class="mr-1" />
-
                       </button>
                       <div
                         aria-labelledby="serverOptions"
-                        class="dropdown-menu"
-                      >
-
+                        class="dropdown-menu">
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          v-if="main_server.id !== server.id"
-                        >
+                          v-if="main_server.id !== server.id">
                           <Icon data="{faHome}" class="mr-1 text-primary" />
                           Ana Sunucu Olarak Belirle
                         </a>
@@ -173,8 +165,7 @@
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          v-if="main_server.id === server.id"
-                        >
+                          v-if="main_server.id === server.id">
                           <Icon data="{faTimes}" class="mr-1 text-primary" />
                           Ana Sunuculuğunu Kaldır
                         </a>
@@ -184,9 +175,7 @@
                           data-dismiss="modal"
                           data-target="#confirmRemoveServer"
                           data-toggle="modal"
-                          href="javascript:void(0);"
-                        >
-
+                          href="javascript:void(0);">
                           <Icon data="{faTimes}" class="mr-1 text-danger" />
                           Sunucuyu Kaldır
                         </a>
@@ -205,7 +194,6 @@
               <p class="text-gray">Bağlı sunucu yok.</p>
             </div>
           {/if}
-
         </div>
       </div>
     </div>

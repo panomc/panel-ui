@@ -77,8 +77,7 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
@@ -86,8 +85,7 @@
           <Icon
             data="{faQuestionCircle}"
             scale="3"
-            class="d-block m-auto text-gray"
-          />
+            class="d-block m-auto text-gray" />
         </div>
         {#if $category.post_count !== 0}
           Not: Eğer bu kategoriyi silerseniz, şu yazılar kategorisiz olarak
@@ -117,8 +115,7 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{hide}"
-        >
+          on:click="{hide}">
           İptal
         </button>
         <button
@@ -126,8 +123,7 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{onYesClick}"
-        >
+          on:click="{onYesClick}">
           Evet
         </button>
       </div>
