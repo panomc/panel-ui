@@ -15,7 +15,6 @@ rmdir("public/commons", function (error) {});
 
 const fs = require("fs");
 const configPath = "./config.js";
-let systemBuildStarted = false;
 
 const config = {
   port: 5000,
@@ -134,7 +133,7 @@ const esExport = {
   watch: watch,
 };
 
-const systemBundlePlugins = [...plugins, onSystemBuildStart()];
+const systemBundlePlugins = [...plugins];
 
 const systemExport = {
   input: input,
@@ -158,14 +157,6 @@ const listExports = [esExport];
 if (production) listExports.push(systemExport);
 
 export default listExports;
-
-function onSystemBuildStart() {
-  return {
-    buildStart() {
-      systemBuildStarted = true;
-    },
-  };
-}
 
 function serve() {
   let started = false;
