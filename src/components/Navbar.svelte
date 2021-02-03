@@ -1,6 +1,6 @@
 <script>
   import jQuery from "jquery";
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import moment from "moment";
 
   import { ApiUtil } from "../pano/js/api.util";
@@ -29,17 +29,9 @@
   let notificationsLoading = true;
   let quickNotifications = [];
   let quickNotificationProcessID = 0;
-  const notificationIntervals = [];
-  let notificationDates = [];
 
-  function clearIntervalsAndDates() {
-    notificationDates = [];
-
-    notificationIntervals.forEach((item, index) => {
-      clearInterval(item);
-      notificationIntervals.remove(index);
-    });
-  }
+  let checkTime = 0;
+  let interval;
 
   function onSideBarCollapseClick() {
     toggleSidebar();
@@ -73,38 +65,10 @@
     return this;
   };
 
-  function setDate(index) {
-    notificationDates[index] = moment(quickNotifications[index].date).fromNow();
-  }
-
-  function setIntervalDate(index) {
-    setDate(index);
-
-    const interval = setInterval(() => {
-      setDate(index);
-    }, 1000);
-
-    notificationIntervals.insert(index, interval);
-  }
-
-  function removeIntervalDate(index) {
-    clearInterval(notificationIntervals[index]);
-    notificationIntervals.remove(index);
-    notificationDates.remove(index);
-  }
-
   function setNotifications(newNotifications) {
-    if (quickNotifications.length === 0 || newNotifications.length === 0) {
+    if (quickNotifications.length === 0 || newNotifications.length === 0)
       quickNotifications = newNotifications;
-
-      if (newNotifications.length === 0) {
-        clearIntervalsAndDates();
-      } else {
-        quickNotifications.forEach((item, index) => {
-          setIntervalDate(index);
-        });
-      }
-    } else {
+    else {
       const listOfFilterIsNotificationExists = [];
 
       newNotifications.forEach((item, index) => {
@@ -116,8 +80,6 @@
       newNotifications.forEach((item, index) => {
         if (listOfFilterIsNotificationExists[index].length === 0) {
           quickNotifications = quickNotifications.insert(index, item);
-
-          setIntervalDate(index);
         }
       });
 
@@ -128,7 +90,6 @@
 
         if (newArrayOfFilter.length === 0) {
           quickNotifications = quickNotifications.remove(index);
-          removeIntervalDate(index);
         }
       });
     }
@@ -212,8 +173,19 @@
       })
       .on("hide.bs.dropdown", function () {
         startQuickNotificationsCountDown();
-        clearIntervalsAndDates();
       });
+
+    interval = setInterval(() => {
+      checkTime += 1;
+    }, 1000);
+  });
+
+  function getTime(check, time, locale) {
+    return moment(time).fromNow();
+  }
+
+  onDestroy(() => {
+    clearInterval(interval);
   });
 </script>
 
@@ -276,7 +248,7 @@
               <div class="col">
                 <span class="text-wrap text-dark">{notification.type_ID}</span>
                 <small class="text-gray d-block">
-                  {notificationDates[index]}
+                  {getTime(checkTime, parseInt(notification.date), "")}
                 </small>
               </div>
             </a>
