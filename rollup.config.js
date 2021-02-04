@@ -97,9 +97,6 @@ const plugins = [
     "process.env.NODE_ENV": JSON.stringify(
       production ? "production" : "development"
     ),
-  }),
-
-  replace({
     "process.env.API_URL": JSON.stringify(production ? "" : config["api-url"]),
   }),
 
