@@ -2873,10 +2873,10 @@ postcss@^8.2.1, postcss@^8.2.4:
     nanoid "^3.1.20"
     source-map "^0.6.1"
 
-prettier-plugin-svelte@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-svelte/-/prettier-plugin-svelte-2.1.1.tgz#e6613cac4292b5bbda5250680565c131b0da5ced"
-  integrity sha512-U0gRsdJtveyusHd86OUPD+lEVd13bHPPF/CZD/csKjz0Y+Cv4WbUy9x8tA5vaHFtf0tsu8Yb1MrfuhN3GH2gig==
+prettier-plugin-svelte@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-svelte/-/prettier-plugin-svelte-2.1.2.tgz#275da4bf70e6b92091e522863b4309aa7a9ab16e"
+  integrity sha512-nxwImTPRHvUQRhop00Zxpwv5bCAqtxUcBtqGtqnQNNansL7wx1L8jzK6+Zz0elubI2wF/5XF4XitYa5XORykmg==
 
 prettier@^2.2.1:
   version "2.2.1"
@@ -3125,10 +3125,10 @@ rollup@^2.38.4:
   optionalDependencies:
     fsevents "~2.3.1"
 
-routve@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/routve/-/routve-2.2.0.tgz#5c62febac1d476e77432da4350c2a7c4606990fb"
-  integrity sha512-0lLVO/+IbKFy8ibFAefi5z7bLX6NzM2GN8pKQSkoQt0Rgu/+j4R/+vdSQs61v0oh4xMQfnLFIs2tLFBeHLHqGQ==
+routve@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/routve/-/routve-3.0.0.tgz#24963330fc2a27c5fcbeef5d5883a88f6d71f7a9"
+  integrity sha512-3pIDVUs0DsMB4BpHOyfy75wuQeoneCzsPzXv49PEHuI4GJQ3f90DeFq7r/f3DxReww9pONMZb4CFWZyNePcWuw==
   dependencies:
     page "^1.11.6"
     qs "^6.9.4"
@@ -3348,10 +3348,10 @@ svelte-loadable@^1.5.1:
   resolved "https://registry.yarnpkg.com/svelte-loadable/-/svelte-loadable-1.5.1.tgz#0048e740a386f1826e5ab88cdfde943fbd3fcb7f"
   integrity sha512-vQd9Wj4wfEuMF/LkbYkqyGbgNkeVOURIPHWhPtC4Cxds0g/2jUFPRdjbMs/gji4bj30B87GubrkQgRf8xItw5g==
 
-svelte-preprocess@^4.6.5:
-  version "4.6.5"
-  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-4.6.5.tgz#65cd8e26241ce7e53a8c306472cefcb494a550f1"
-  integrity sha512-bVNq1seKfJlLKttWjhT55HBMz5WM8Ev5iidbu8qPD0B8+pHrsyg2QS2pZLQ6epU3GIKFfZzAlBQX+978GRHgkQ==
+svelte-preprocess@^4.6.6:
+  version "4.6.6"
+  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-4.6.6.tgz#ded7661ae62dd90f9525419f7d2c50d3f79aba23"
+  integrity sha512-qVlGwpHwsAApV/RBunO6YuI1Tbho7fIamIULOmNQ6+l21ZRjcirMtqgYtYdvj1XEngDae/pjIHA8R/7f2l+vBg==
   dependencies:
     "@types/pug" "^2.0.4"
     "@types/sass" "^1.16.0"
