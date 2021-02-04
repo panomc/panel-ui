@@ -86,7 +86,7 @@
 </script>
 
 <!-- Dashboard Page -->
-<div class="content">
+<div class="container">
   <!-- Welcome Alerts -->
   {#if getting_started_blocks.welcome_board}
     <div

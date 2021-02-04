@@ -190,8 +190,7 @@
 </script>
 
 <!-- Top Navbar -->
-<nav
-  class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom">
+<nav class="navbar navbar-expand navbar-light">
   <ul class="nav navbar-nav mr-auto">
     <li class="nav-item mr-2">
       <a
@@ -202,7 +201,7 @@
         <Icon data="{faBars}" />
       </a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item d-none">
       <a
         href="javascript:void(0);"
         target="_blank"

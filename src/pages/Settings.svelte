@@ -11,7 +11,7 @@
 </script>
 
 <!-- Settings Categories Nav -->
-<nav class="border-bottom border-glass page-category">
+<nav class="page-category">
   <div class="nav nav-pills d-flex justify-content-center flex-row w-100">
     <a
       class="nav-item nav-link"
@@ -42,6 +42,6 @@
 </nav>
 
 <!-- Settings Contents -->
-<article class="content">
+<article class="container">
   <Router />
 </article>

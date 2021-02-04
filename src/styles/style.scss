@@ -55,14 +55,13 @@
   align-items: center;
   min-width: 250px;
   max-width: 250px;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   top: 0;
   left: 0;
   z-index: 1;
   transition: 0.5s all;
   background: $white;
-  z-index: 1021;
   @include media-breakpoint-down(md) {
     position: fixed;
     left: 0;
@@ -205,9 +204,9 @@
 }
 
 .page-category {
-  background: $white;
   width: 100%;
   padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .page-category-v {

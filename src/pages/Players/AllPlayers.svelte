@@ -83,7 +83,7 @@
 </script>
 
 <!-- All Players Page -->
-<div class="content">
+<div class="container">
   <!-- Action Menu -->
   <div class="row mb-3">
     <div class="col-auto">

@@ -3,6 +3,6 @@
 </script>
 
 <!-- Posts Page -->
-<article class="content">
+<article class="container">
   <Router />
 </article>

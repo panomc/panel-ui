@@ -111,7 +111,7 @@
   }
 </script>
 
-<div class="content">
+<div class="container">
   <!-- Action Menu -->
   <div class="row mb-3">
     <div class="col-md-4 col-6">

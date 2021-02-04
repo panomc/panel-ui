@@ -4,4 +4,4 @@
   isPageInitialized.set(true);
 </script>
 
-<div class="content">Addons page!</div>
+<div class="container">Addons page!</div>

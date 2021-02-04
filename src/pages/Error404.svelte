@@ -5,7 +5,7 @@
 </script>
 
 <!-- 404 Page  -->
-<div class="content">
+<div class="container">
   <div
     class="d-flex flex-column align-items-center justify-content-center mt-5
     container animated bounceInDown">

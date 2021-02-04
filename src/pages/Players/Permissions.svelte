@@ -4,4 +4,4 @@
   isPageInitialized.set(true);
 </script>
 
-Permissions page
+<div class="container">Permissions page</div>

@@ -3,6 +3,6 @@
 </script>
 
 <!-- Tickets Contents -->
-<article class="content">
+<article class="container">
   <Router />
 </article>
