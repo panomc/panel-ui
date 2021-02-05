@@ -1,7 +1,6 @@
 import svelte from "rollup-plugin-svelte";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import copyTo from "rollup-plugin-copy-assets-to";
 import replace from "@rollup/plugin-replace";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
@@ -9,6 +8,7 @@ import babel from "rollup-plugin-babel";
 import rmdir from "rimraf";
 import sveltePreprocess from "svelte-preprocess";
 import postcss from "rollup-plugin-postcss";
+import copy from "rollup-plugin-copy";
 
 rmdir("public/assets", function (error) {});
 rmdir("public/commons", function (error) {});
@@ -42,14 +42,13 @@ const watch = {
 };
 
 const plugins = [
-  copyTo({
-    assets: ["./src/pano/favicon", "./src/pano/fonts", "./src/pano/img"],
-    outputDir: "public/commons",
-  }),
-
-  copyTo({
-    assets: ["./src/assets"],
-    outputDir: "public",
+  copy({
+    targets: [
+      { src: "src/pano/favicon", dest: "public/commons" },
+      { src: "src/pano/fonts", dest: "public/commons" },
+      { src: "src/pano/img", dest: "public/commons" },
+      { src: "src/assets", dest: "public" },
+    ],
   }),
 
   babel({
