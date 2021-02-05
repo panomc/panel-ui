@@ -8,7 +8,7 @@
 <section>
   <div class="card">
     <nav class="border-bottom border-glass rounded-top page-category">
-      <div class="nav nav-pills d-flex flex-row w-100">
+      <div class="nav nav-link d-flex flex-row w-100">
         <router-link class="nav-item nav-link active" to="">
           Yazılar
         </router-link>
