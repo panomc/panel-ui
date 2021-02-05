@@ -214,7 +214,7 @@
     </li>
   </ul>
 
-  <div class="navbar-brand">Panel</div>
+  <div class="h4 m-0">Panel</div>
 
   <!-- Notifications Dropdown -->
 
