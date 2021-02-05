@@ -46,7 +46,7 @@
         <h5 class="card-title">
           Lagdan öldüm itemlerim gitti, lütfen ilgilenebilir misiniz?
         </h5>
-        <div class="text-gray mb-3">
+        <div class="mb-3">
           <a href="#">Butlu</a> tarafından <a href="#">Genel</a> kategorisine açıldı.
         </div>
       </div>
@@ -55,8 +55,8 @@
       </div>
     </div>
 
-    <div class="card-body rounded border">
-      <div class="media mb-3">
+    <div class="card-body">
+      <div class="d-flex justify-content-start mb-3">
         <a href="#">
           <img
             src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
@@ -65,24 +65,17 @@
             width="48"
             height="48" />
         </a>
-        <div class="media-body p-2 rounded bg-lightprimary shadow-sm">
-          <div>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-            scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-            vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-            vulputate fringilla. Donec lacinia congue felis in faucibus.
-          </div>
+        <div class="p-2 rounded bg-lightprimary border border-primary">
+          <div class="pb-2">Cras sit amet nibh libero.</div>
           <small class="text-muted pt-2">16 saat önce</small>
         </div>
       </div>
 
-      <div class="media mb-3">
-        <div class="media-body p-2 bg-lightsecondary rounded shadow-sm">
-          <div>
+      <div class="d-flex justify-content-end mb-3">
+        <div class="p-2 bg-lightsecondary border border-secondary rounded">
+          <div class="pb-2">
             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-            scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-            vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-            vulputate fringilla. Donec lacinia congue felis in faucibus.
+            scelerisque ante sollicitudin.
           </div>
           <small class="text-muted pt-2">16 saat önce</small>
         </div>
@@ -101,7 +94,7 @@
 
 <div class="container text-center">
   <Icon data="{faTimes}" scale="3" class="text-glass m-3" />
-  <p class="text-gray">Bu talep yanıtlara kapalı.</p>
+  <p class="text-gray">Bu talep kapalı.</p>
 </div>
 
 <ConfirmCloseTicketModal />
