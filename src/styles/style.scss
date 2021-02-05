@@ -78,9 +78,6 @@
   padding-right: 1rem;
   padding-left: 1rem;
   align-self: center;
-  @include media-breakpoint-up(lg) {
-    display: none;
-  }
 }
 
 .sidebar.active {

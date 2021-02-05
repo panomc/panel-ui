@@ -10,6 +10,7 @@
     user,
     logoutLoading,
     showNetworkErrorOnCatch,
+    isSidebarOpen,
   } from "../Store";
 
   import Icon from "svelte-awesome";
@@ -195,6 +196,7 @@
     <li class="nav-item mr-2">
       <a
         class="icon-link nav-link"
+        class:invisible="{$isSidebarOpen}"
         href="javascript:void(0);"
         title="Menüyü Aç/Kapa"
         on:click="{onSideBarCollapseClick}">
