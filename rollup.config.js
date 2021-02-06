@@ -46,9 +46,10 @@ const watch = {
 };
 
 const plugins = [
-  babel({
-    runtimeHelpers: true,
-  }),
+  production &&
+    babel({
+      runtimeHelpers: true,
+    }),
 
   postcss({
     extract: "assets/css/bundle.css",
@@ -62,9 +63,7 @@ const plugins = [
       dev: !production,
     },
 
-    preprocess: sveltePreprocess({
-      postcss: true,
-    }),
+    preprocess: sveltePreprocess(),
 
     onwarn: (warning, handler) => {
       // e.g. don't warn on <marquee> elements, cos they're cool
@@ -111,7 +110,7 @@ const esExport = {
   input: input,
   output: [
     {
-      sourcemap: true,
+      sourcemap: production,
       format: "es",
       name: "app",
       dir: "public/",
@@ -122,6 +121,7 @@ const esExport = {
   ],
   plugins: plugins,
   watch: watch,
+  treeshake: production,
 };
 
 const systemBundlePlugins = [...plugins];
@@ -130,7 +130,7 @@ const systemExport = {
   input: input,
   output: [
     {
-      sourcemap: true,
+      sourcemap: production,
       format: "system",
       name: "app",
       dir: "public/",
@@ -141,6 +141,7 @@ const systemExport = {
   ],
   plugins: systemBundlePlugins,
   watch: watch,
+  treeshake: production,
 };
 
 const listExports = [esExport];
