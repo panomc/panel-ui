@@ -5,15 +5,19 @@ import replace from "@rollup/plugin-replace";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import babel from "rollup-plugin-babel";
-import rmdir from "rimraf";
 import sveltePreprocess from "svelte-preprocess";
 import postcss from "rollup-plugin-postcss";
-import copy from "rollup-plugin-copy";
+import fsExtra from "fs-extra";
+import fs from "fs";
 
-rmdir("public/assets", function (error) {});
-rmdir("public/commons", function (error) {});
+fs.rmdirSync("public/assets", { recursive: true });
+fs.rmdirSync("public/commons", { recursive: true });
 
-const fs = require("fs");
+fsExtra.copySync("src/pano/favicon", "public/commons/favicon");
+fsExtra.copySync("src/pano/fonts", "public/commons/fonts");
+fsExtra.copySync("src/pano/img", "public/commons/img");
+fsExtra.copySync("src/assets", "public/assets");
+
 const configPath = "./config.js";
 
 const config = {
@@ -42,15 +46,6 @@ const watch = {
 };
 
 const plugins = [
-  copy({
-    targets: [
-      { src: "src/pano/favicon", dest: "public/commons" },
-      { src: "src/pano/fonts", dest: "public/commons" },
-      { src: "src/pano/img", dest: "public/commons" },
-      { src: "src/assets", dest: "public" },
-    ],
-  }),
-
   babel({
     runtimeHelpers: true,
   }),
