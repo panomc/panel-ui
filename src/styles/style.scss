@@ -59,7 +59,7 @@
   position: relative;
   top: 0;
   left: 0;
-  z-index: 999999;
+  z-index: 1040;
   transition: 0.5s all;
   background: $white;
   @include media-breakpoint-down(md) {
