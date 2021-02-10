@@ -414,7 +414,7 @@
           {/if}
         </form>
         <button
-          class="btn btn-link bg-lightprimary"
+          class="btn btn-link btn-block bg-lightprimary"
           type="button"
           on:click="{onCreateCategoryClick}">
           <Icon data="{faPlus}" class="mr-1" />
