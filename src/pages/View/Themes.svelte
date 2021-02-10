@@ -3,6 +3,9 @@
   import ConfirmDeleteThemeModal from "../../components/modals/ConfirmDeleteThemeModal.svelte";
 
   isPageInitialized.set(true);
+
+  import Icon from "svelte-awesome";
+  import { faPlus } from "@fortawesome/free-solid-svg-icons";
 </script>
 
 <!-- Themes Sub Page -->
@@ -13,6 +16,12 @@
       <h3 class="text-muted badge badge-lightprimary panel-subtitle">
         Mevcut Temalar
       </h3>
+    </div>
+    <div class="col-6 text-right">
+      <button class="btn btn-primary">
+        <Icon data="{faPlus}" class="mr-1" />
+        Tema Ekle
+      </button>
     </div>
   </section>
 
