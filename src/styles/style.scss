@@ -304,3 +304,14 @@
   overflow-y: auto;
   max-height: 500px;
 }
+
+.overlapping-avatar {
+  position: relative;
+  border: 4px solid $white;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.overlapping-avatar:not(:last-child) {
+  margin-left: -12px;
+}
