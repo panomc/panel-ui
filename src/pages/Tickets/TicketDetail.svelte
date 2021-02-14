@@ -10,6 +10,8 @@
   import { route } from "routve";
   import moment from "moment";
   import { writable, get } from "svelte/store";
+  import { onMount } from "svelte";
+  import Quill from "quill";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import { ApiUtil } from "../../pano/js/api.util";
@@ -56,6 +58,7 @@
             date = ticket.date;
 
             isPageInitialized.set(true);
+            prepareQuill();
           } else if (response.data.error === "NOT_EXISTS") {
             route("/panel/error-404");
           } else reject();
@@ -106,6 +109,45 @@
   messagesSectionClientHeight.subscribe((height) => {
     if (height !== 0 && messagesSectionDiv)
       messagesSectionDiv.scrollTo(0, height);
+  });
+
+  function imageHandler() {
+    const range = quill.getSelection();
+    const value = prompt("What is the image URL");
+
+    if (value) {
+      quill.insertEmbed(range.index, "image", value, Quill.sources.USER);
+    }
+  }
+
+  function prepareQuill() {
+    quill = new Quill("#editor", {
+      modules: {
+        toolbar: {
+          container: "#editorToolbar",
+          handlers: {
+            image: imageHandler,
+          },
+        },
+      },
+      theme: "snow",
+    });
+  }
+
+  let quill;
+
+  onMount(() => {
+    // quill.setHTML = (html) => {
+    //   quill.container.firstChild.innerHTML = html;
+    // };
+    //
+    // quill.getHTML = () => {
+    //   return quill.container.firstChild.innerHTML;
+    // };
+    //
+    // quill.on("text-change", () => {
+    //   // post.text = quill.getHTML();
+    // });
   });
 
   $: {
@@ -250,6 +292,49 @@
     <p class="text-gray">Bu talep kapalı.</p>
   </div>
 {/if}
+
+<div class="card" class:d-none="{status === 3}">
+  <div class="card-body d-flex flex-column">
+    <!-- Editor -->
+    <div id="editorToolbar">
+      <span class="ql-formats"> <select class="ql-size"></select> </span>
+      <span class="ql-formats">
+        <button class="ql-bold"></button>
+        <button class="ql-italic"></button>
+        <button class="ql-underline"></button>
+        <button class="ql-strike"></button>
+      </span>
+      <span class="ql-formats">
+        <select class="ql-color"></select>
+        <select class="ql-background"></select>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-header" value="1"></button>
+        <button class="ql-header" value="2"></button>
+        <button class="ql-blockquote"></button>
+        <button class="ql-code-block"></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-list" value="ordered"></button>
+        <button class="ql-list" value="bullet"></button>
+        <button class="ql-indent" value="-1"></button>
+        <button class="ql-indent" value="+1"></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-direction" value="rtl"></button>
+        <select class="ql-align"></select>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-link"></button>
+        <button class="ql-image"></button>
+        <button class="ql-video"></button>
+      </span>
+    </div>
+
+    <div id="editor"></div>
+    <!-- Editor End -->
+  </div>
+</div>
 
 <ConfirmCloseTicketModal />
 <ConfirmDeleteTicketModal />
