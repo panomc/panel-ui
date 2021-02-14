@@ -1,20 +1,116 @@
 <script>
-  import { isPageInitialized } from "../../Store";
-
-  import ConfirmCloseTicketModal from "../../components/modals/ConfirmCloseTicketModal.svelte";
-  import ConfirmDeleteTicketModal from "../../components/modals/ConfirmDeleteTicketModal.svelte";
-
   import Icon from "svelte-awesome";
   import {
-    faTicketAlt,
     faTrash,
     faTimes,
     faArrowLeft,
-    faRedo,
     faEllipsisV,
   } from "@fortawesome/free-solid-svg-icons";
 
-  isPageInitialized.set(true);
+  import { route } from "routve";
+  import moment from "moment";
+  import { writable, get } from "svelte/store";
+
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+  import { ApiUtil } from "../../pano/js/api.util";
+
+  import ConfirmCloseTicketModal, {
+    setCallback as setCloseTicketModalCallback,
+    show as showCloseTicketModal,
+  } from "../../components/modals/ConfirmCloseTicketModal.svelte";
+  import ConfirmDeleteTicketModal, {
+    setCallback as setDeleteTicketModalCallback,
+    show as showDeleteTicketModal,
+  } from "../../components/modals/ConfirmDeleteTicketModal.svelte";
+
+  import TicketStatus from "../../components/TicketStatus.svelte";
+
+  let title = "";
+  let category = "-";
+  let username = "";
+  let status = 3;
+  let count = 0;
+  let messages = writable([]);
+  let date = 0;
+
+  let messagesSectionDiv;
+  let page = 0;
+  let loadMoreLoading = false;
+  const messagesSectionClientHeight = writable(0);
+
+  export let id = -1;
+
+  function getTicketDetail(id) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/initPage/ticket/detail", { id: parseInt(id) })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            const ticket = response.data.ticket;
+
+            title = ticket.title;
+            category = ticket.category;
+            username = ticket.username;
+            status = ticket.status;
+            count = ticket.count;
+            messages.set(ticket.messages);
+            date = ticket.date;
+
+            isPageInitialized.set(true);
+          } else if (response.data.error === "NOT_EXISTS") {
+            route("/panel/error-404");
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  function loadMore() {
+    loadMoreLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/ticket/detail/message/page", {
+        id: parseInt(id),
+        last_message_id: get(messages)[0].id,
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            response.data.messages.reverse().forEach((message) => {
+              messages.update((list) => {
+                list.unshift(message);
+
+                return list;
+              });
+            });
+
+            loadMoreLoading = false;
+          } else if (response.data.error === "NOT_EXISTS") {
+            route("/panel/error-404");
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  setCloseTicketModalCallback(() => {
+    getTicketDetail(id);
+  });
+
+  setDeleteTicketModalCallback(() => {
+    route("/tickets");
+  });
+
+  messagesSectionClientHeight.subscribe((height) => {
+    if (height !== 0 && messagesSectionDiv)
+      messagesSectionDiv.scrollTo(0, height);
+  });
+
+  $: {
+    getTicketDetail(id);
+  }
 </script>
 
 <div class="row mb-3">
@@ -25,113 +121,135 @@
     </a>
   </div>
   <div class="col-auto ml-auto">
-    <a class="btn btn-outline-danger" role="button" href="javascript:void(0);">
+    {#if status !== 3}
+      <a
+        class="btn btn-bittersweet"
+        role="button"
+        on:click="{() => showCloseTicketModal([id])}"
+        href="javascript:void(0);">
+        Talebi Kapat
+      </a>
+    {/if}
+    <a
+      class="btn btn-outline-danger"
+      role="button"
+      href="javascript:void(0);"
+      on:click="{() => showDeleteTicketModal([id])}">
       <Icon data="{faTrash}" class="mr-1" />
       Talebi Sil
     </a>
   </div>
 </div>
 
-<h3 class="text-muted badge badge-lightprimary panel-subtitle">Talep: #1</h3>
+<h3 class="text-muted badge badge-lightprimary panel-subtitle">Talep: #{id}</h3>
 
-<div class="card border border-success mb-3">
+<div
+  class="card border mb-3"
+  class:border-secondary="{status === 1}"
+  class:border-sunflower="{status === 2}"
+  class:border-bittersweet="{status === 3}">
   <div class="card-body">
     <div class="row">
       <div class="col">
-        <h5 class="card-title">Lagdan öldüm, itemlerim gitti!1!11</h5>
-        <a href="#">noob44</a> tarafından, 31.06.2023 tarihinde,
-        <a href="#">Genel</a>
+        <h5 class="card-title">{title}</h5>
+        <a href="#">{username}</a> tarafından,
+        <span title="{moment(parseInt(date)).format('DD/MM/YYYY, HH:mm')}"
+          >{moment(parseInt(date)).fromNow()}</span
+        >,
+        <a href="#">{category === "-" ? category : category.title}</a>
         kategorisine açıldı.
         <hr />
       </div>
       <div class="col-auto ml-auto">
-        <div class="dropdown">
-          <button
-            type="button"
-            class="btn bg-secondary text-white rounded-pill dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Yeni
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Talebi Kapat</a></li>
-            <li><a class="dropdown-item" href="#">Talabi Aç</a></li>
-          </ul>
-        </div>
+        <TicketStatus status="{status}" />
       </div>
     </div>
 
-    <div class="card-body messages-section">
-      <button class="btn text-primary bg-lightprimary d-block m-auto"
-        >Eski Mesajları Göster
-      </button>
+    <div
+      class="card-body messages-section"
+      id="messageSection"
+      bind:this="{messagesSectionDiv}"
+      bind:clientHeight="{$messagesSectionClientHeight}">
+      {#if $messages.length < count && count > 5 + 5 * page}
+        <button
+          class="btn text-primary bg-lightprimary d-block m-auto"
+          class:disabled="{loadMoreLoading}"
+          on:click="{loadMore}"
+          >Eski Mesajları Göster ({count - $messages.length})
+        </button>
+      {/if}
 
-      <div class="row py-3 flex-nowrap">
-        <div class="col-2 text-right">
-          <a href="#">
-            <img
-              src="https://minotar.net/avatar/e5eea5f735c444a28af9b2c867ade454/64"
-              class="mr-3 border rounded-circle"
-              alt="Butlu"
-              width="48"
-              height="48" />
-          </a>
-        </div>
-        <div class="col d-flex flex-nowrap align-items-center">
-          <div class="p-2 rounded bg-lightprimary border d-inline-block">
-            <div class="pb-2 text-black">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem
-              magni sapiente minus repellendus repellat totam inventore
-              perferendis accusamus mollitia! Non quam animi cum atque quaerat
-              aspernatur. Asperiores iure id accusantium? 🚓
+      {#each $messages as message, index (message)}
+        {#if message.panel}
+          <div class="row py-3 flex-nowrap">
+            <div class="col-2 d-flex justify-content-end"></div>
+
+            <div
+              class="col d-flex flex-nowrap justify-content-end align-items-center">
+              <a
+                class="btn btn-link mr-3 d-none"
+                role="button"
+                href="javascript:void(0);">
+                <Icon data="{faEllipsisV}" />
+              </a>
+              <div class="d-inline-block p-2 bg-lightsecondary border rounded">
+                <div class="pb-2 text-black">{@html message.message}</div>
+                <small class="text-muted pt-2"
+                  >{moment(parseInt(message.date)).fromNow()}</small>
+              </div>
             </div>
-            <small class="text-muted pt-2">0 saat önce</small>
+            <div class="col-2">
+              <a href="#">
+                <img
+                  src="https://minotar.net/avatar/{message.username}/48"
+                  class="ml-3 border rounded-circle d-block mr-auto"
+                  alt="{message.username}"
+                  width="48"
+                  height="48" />
+              </a>
+            </div>
           </div>
-          <a
-            class="btn btn-link d-none ml-3"
-            role="button"
-            href="javascript:void(0);">
-            <Icon data="{faEllipsisV}" />
-          </a>
-        </div>
-        <div class="col-2"></div>
-      </div>
-
-      <div class="row py-3 flex-nowrap">
-        <div class="col-2 d-flex justify-content-end"></div>
-
-        <div
-          class="col d-flex flex-nowrap justify-content-end align-items-center">
-          <a
-            class="btn btn-link mr-3 d-none"
-            role="button"
-            href="javascript:void(0);">
-            <Icon data="{faEllipsisV}" />
-          </a>
-          <div class="d-inline-block p-2 bg-lightsecondary border rounded">
-            <div class="pb-2 text-black">Lorem ipsum dolor sit,</div>
-            <small class="text-muted pt-2">0 saat önce</small>
+        {:else}
+          <div class="row py-3 flex-nowrap">
+            <div class="col-2 text-right">
+              <a href="#">
+                <img
+                  src="https://minotar.net/avatar/{message.username}/48"
+                  class="mr-3 border rounded-circle"
+                  alt="{message.username}"
+                  width="48"
+                  height="48" />
+              </a>
+            </div>
+            <div class="col d-flex flex-nowrap align-items-center">
+              <div class="p-2 rounded bg-lightprimary border d-inline-block">
+                <div class="pb-2 text-black">
+                  {message.message}
+                </div>
+                <small class="text-muted pt-2"
+                  >{moment(parseInt(message.date)).fromNow()}</small>
+              </div>
+              <a
+                class="btn btn-link d-none ml-3"
+                role="button"
+                href="javascript:void(0);">
+                <Icon data="{faEllipsisV}" />
+              </a>
+            </div>
+            <div class="col-2"></div>
           </div>
-        </div>
-        <div class="col-2">
-          <a href="#">
-            <img
-              src="https://minotar.net/avatar/Butlu"
-              class="ml-3 border rounded-circle d-block mr-auto"
-              alt="Admin"
-              width="48"
-              height="48" />
-          </a>
-        </div>
-      </div>
+        {/if}
+      {/each}
     </div>
   </div>
 </div>
 
-<div class="container text-center">
-  <Icon data="{faTimes}" scale="3" class="text-glass m-3" />
-  <p class="text-gray">Bu talep kapalı.</p>
-</div>
+{#if status === 3}
+  <div class="container text-center">
+    <Icon data="{faTimes}" scale="3" class="text-glass m-3" />
+    <p class="text-gray">Bu talep kapalı.</p>
+  </div>
+{/if}
 
 <ConfirmCloseTicketModal />
 <ConfirmDeleteTicketModal />
