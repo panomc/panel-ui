@@ -24,6 +24,7 @@
     faBookmark,
     faGlobeAmericas,
   } from "@fortawesome/free-solid-svg-icons";
+  import Date from "../../components/Date.svelte";
 
   export let page = undefined;
   export let pageType = "published";
@@ -329,7 +330,7 @@
                 </td>
                 <td class="align-middle text-nowrap">{post.views}</td>
                 <td class="align-middle text-nowrap">
-                  {moment(parseInt(post.date)).format("DD/MM/YYYY, HH:mm")}
+                  <Date time="{post.date}" />
                 </td>
               </tr>
             {/each}

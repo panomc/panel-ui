@@ -35,6 +35,7 @@
   import Pagination from "../../components/Pagination.svelte";
   import TicketStatus from "../../components/TicketStatus.svelte";
   import { onHide as onAddEditPostCategoryModalHide } from "../../components/modals/PostCategoriesAddEditModal.svelte";
+  import Date from "../../components/Date.svelte";
 
   export let page = undefined;
   export let pageType = "all";
@@ -410,7 +411,7 @@
                   </a>
                 </td>
                 <td class="align-middle text-nowrap">
-                  {moment(parseInt(ticket.date)).fromNow()}
+                  <Date time="{ticket.date}" />
                 </td>
               </tr>
             {/each}

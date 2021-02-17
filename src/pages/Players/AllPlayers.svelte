@@ -15,6 +15,7 @@
     faUserCircle,
     faGlobe,
   } from "@fortawesome/free-solid-svg-icons";
+  import Date from "../../components/Date.svelte";
 
   export let page = undefined;
   export let pageType = "all";
@@ -212,9 +213,7 @@
                   </td>
                   <td class="align-middle text-nowrap">10 dakika önce</td>
                   <td class="align-middle text-nowrap">
-                    {moment(parseInt(player.register_date)).format(
-                      "DD/MM/YYYY, HH:mm"
-                    )}
+                    <Date time="{player.register_date}" />
                   </td>
                 </tr>
               {/each}

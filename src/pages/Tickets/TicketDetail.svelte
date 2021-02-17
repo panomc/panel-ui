@@ -26,6 +26,7 @@
   } from "../../components/modals/ConfirmDeleteTicketModal.svelte";
 
   import TicketStatus from "../../components/TicketStatus.svelte";
+  import Date from "../../components/Date.svelte";
 
   let title = "";
   let category = "-";
@@ -195,9 +196,7 @@
       <div class="col">
         <h5 class="card-title">{title}</h5>
         <a href="#">{username}</a> tarafından,
-        <span title="{moment(parseInt(date)).format('DD/MM/YYYY, HH:mm')}"
-          >{moment(parseInt(date)).fromNow()}</span
-        >,
+        <Date time="{date}" />,
         <a href="#">{category === "-" ? category : category.title}</a>
         kategorisine açıldı.
         <hr />
@@ -225,7 +224,6 @@
         {#if message.panel}
           <div class="row py-3 flex-nowrap">
             <div class="col-2 d-flex justify-content-end"></div>
-
             <div
               class="col d-flex flex-nowrap justify-content-end align-items-center">
               <a
@@ -237,7 +235,7 @@
               <div class="d-inline-block p-2 bg-lightsecondary border rounded">
                 <div class="pb-2 text-black">{@html message.message}</div>
                 <small class="text-muted pt-2"
-                  >{moment(parseInt(message.date)).fromNow()}</small>
+                  ><Date time="{message.date}" /></small>
               </div>
             </div>
             <div class="col-2">
@@ -269,7 +267,7 @@
                   {message.message}
                 </div>
                 <small class="text-muted pt-2"
-                  >{moment(parseInt(message.date)).fromNow()}</small>
+                  ><Date time="{message.date}" /></small>
               </div>
               <a
                 class="btn btn-link d-none ml-3"
