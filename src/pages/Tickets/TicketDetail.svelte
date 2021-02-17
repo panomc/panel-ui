@@ -8,7 +8,6 @@
   } from "@fortawesome/free-solid-svg-icons";
 
   import { route } from "routve";
-  import moment from "moment";
   import { writable, get } from "svelte/store";
   import { onMount } from "svelte";
   import Quill from "quill";
@@ -101,7 +100,7 @@
   }
 
   setCloseTicketModalCallback(() => {
-    getTicketDetail(id);
+    status = 3;
   });
 
   setDeleteTicketModalCallback(() => {
