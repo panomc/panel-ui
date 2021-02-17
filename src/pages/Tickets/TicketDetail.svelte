@@ -15,6 +15,7 @@
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../pano/js/api.util";
   import tooltip from "../../pano/js/tooltip.util";
+  import { extractContent } from "../../util/text.util";
 
   import ConfirmCloseTicketModal, {
     setCallback as setCloseTicketModalCallback,
@@ -39,6 +40,11 @@
   let messagesSectionDiv;
   let page = 0;
   let loadMoreLoading = false;
+  let messageSendLoading = false;
+
+  let messageText = "";
+  let quill;
+
   const messagesSectionClientHeight = writable(0);
 
   export let id = -1;
@@ -59,7 +65,6 @@
             date = ticket.date;
 
             isPageInitialized.set(true);
-            prepareQuill();
           } else if (response.data.error === "NOT_EXISTS") {
             route("/panel/error-404");
           } else reject();
@@ -89,6 +94,37 @@
             });
 
             loadMoreLoading = false;
+          } else if (response.data.error === "NOT_EXISTS") {
+            route("/panel/error-404");
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  function sendMessage() {
+    messageSendLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/ticket/detail/message/send", {
+        ticket_id: parseInt(id),
+        message: messageText,
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            messages.update((list) => {
+              list.push(response.data.message)
+
+              return list
+            })
+
+            status = 2;
+            messageText = "";
+            quill.setHTML("");
+
+            messageSendLoading = false;
           } else if (response.data.error === "NOT_EXISTS") {
             route("/panel/error-404");
           } else reject();
@@ -133,22 +169,22 @@
       },
       theme: "snow",
     });
+
+    quill.setHTML = (html) => {
+      quill.container.firstChild.innerHTML = html;
+    };
+
+    quill.getHTML = () => {
+      return quill.container.firstChild.innerHTML;
+    };
+
+    quill.on("text-change", () => {
+      messageText = quill.getHTML();
+    });
   }
 
-  let quill;
-
   onMount(() => {
-    // quill.setHTML = (html) => {
-    //   quill.container.firstChild.innerHTML = html;
-    // };
-    //
-    // quill.getHTML = () => {
-    //   return quill.container.firstChild.innerHTML;
-    // };
-    //
-    // quill.on("text-change", () => {
-    //   // post.text = quill.getHTML();
-    // });
+    prepareQuill();
   });
 
   $: {
@@ -335,7 +371,13 @@
         <!-- Editor End -->
       </div>
       <div class="col">
-        <button class="btn btn-block btn-primary mt-lg-0 mt-3">Gönder</button>
+        <button
+          class="btn btn-block btn-primary mt-lg-0 mt-3"
+          on:click="{sendMessage}"
+          class:disabled="{messageSendLoading ||
+            extractContent(messageText).length === 0}"
+          :disabled="{messageSendLoading ||
+            extractContent(messageText).length === 0}">Gönder</button>
       </div>
     </div>
   </div>
