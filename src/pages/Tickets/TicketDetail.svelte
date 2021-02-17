@@ -14,7 +14,8 @@
   import Quill from "quill";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
-  import { ApiUtil } from "../../pano/js/api.util";
+  import ApiUtil from "../../pano/js/api.util";
+  import tooltip from "../../pano/js/tooltip.util";
 
   import ConfirmCloseTicketModal, {
     setCallback as setCloseTicketModalCallback,
@@ -243,7 +244,7 @@
                 <img
                   src="https://minotar.net/avatar/{message.username}/48"
                   class="ml-3 border rounded-circle d-block mr-auto"
-                  alt="{message.username}"
+                  use:tooltip="{['bottom', message.username]}"
                   width="48"
                   height="48" />
               </a>
@@ -256,7 +257,7 @@
                 <img
                   src="https://minotar.net/avatar/{message.username}/48"
                   class="mr-3 border rounded-circle"
-                  alt="{message.username}"
+                  use:tooltip="{['bottom', message.username]}"
                   width="48"
                   height="48" />
               </a>
