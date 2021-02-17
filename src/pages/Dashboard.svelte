@@ -8,7 +8,7 @@
     faBell,
     faDotCircle,
     faUser,
-    faStickyNote,
+    faStickyNote
   } from "@fortawesome/free-regular-svg-icons";
   import {
     faPlus,
@@ -23,7 +23,7 @@
     faCaretDown,
     faLiraSign,
     faTicketAlt,
-    faGlobe,
+    faGlobe
   } from "@fortawesome/free-solid-svg-icons";
   import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 
@@ -35,9 +35,10 @@
   import PostsChart from "../components/charts/Dashboard/PostsChart.svelte";
   import TrafficChart from "../components/charts/Dashboard/TrafficChart.svelte";
   import TicketStatus from "../components/TicketStatus.svelte";
+  import Date from "../components/Date.svelte";
 
   let getting_started_blocks = {
-    welcome_board: false,
+    welcome_board: false
   };
 
   let registered_player_count = 0;
@@ -330,7 +331,7 @@
                 <span class="text-primary"> #{ticket.id} {ticket.title} </span>
                 <br />
                 <small class="text-muted">
-                  <b>{moment(parseInt(ticket.date)).fromNow()}</b>,
+                  <b><Date time="{ticket.date}"/></b>,
                   <b>{ticket.category.title}</b>
                   kategorisine açıldı.
                 </small>
