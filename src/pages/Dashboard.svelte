@@ -1,8 +1,6 @@
 <script>
   import { isPageInitialized } from "../Store";
 
-  import moment from "moment";
-
   import Icon from "svelte-awesome";
   import {
     faBell,

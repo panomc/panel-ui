@@ -1,6 +1,5 @@
 <script>
   import { getPath, route } from "routve";
-  import moment from "moment";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../pano/js/api.util";

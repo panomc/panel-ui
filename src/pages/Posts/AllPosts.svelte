@@ -1,5 +1,4 @@
 <script>
-  import moment from "moment";
   import { getPath, route } from "routve";
 
   import Pagination from "../../components/Pagination.svelte";

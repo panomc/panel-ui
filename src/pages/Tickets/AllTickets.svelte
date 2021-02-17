@@ -5,7 +5,6 @@
 </script>
 
 <script>
-  import moment from "moment";
   import { getPath, route } from "routve";
 
   import ConfirmCloseTicketModal, {
