@@ -22,6 +22,8 @@
   ) {
     mode.set(newMode);
 
+    newCategory = Object.assign({}, newCategory);
+
     if (newCategory.color && !newCategory.color.includes("#"))
       newCategory.color = "#" + newCategory.color;
 
