@@ -410,7 +410,7 @@
                   </a>
                 </td>
                 <td class="align-middle text-nowrap">
-                  <Date time="{ticket.date}" />
+                  <Date time="{ticket.last_update}" />
                 </td>
               </tr>
             {/each}
