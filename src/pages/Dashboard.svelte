@@ -1,42 +1,34 @@
 <script>
-  import { isPageInitialized } from "../Store";
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
 
   import Icon from "svelte-awesome";
+  import { faStickyNote } from "@fortawesome/free-regular-svg-icons";
   import {
-    faBell,
-    faDotCircle,
-    faUser,
-    faStickyNote
-  } from "@fortawesome/free-regular-svg-icons";
-  import {
-    faPlus,
-    faPen,
+    faBookOpen,
     faBrush,
+    faCaretUp,
+    faGlobe,
+    faPalette,
+    faPen,
+    faPlus,
+    faPuzzlePiece,
+    faTicketAlt,
     faTools,
     faUserCog,
-    faPuzzlePiece,
-    faPalette,
-    faBookOpen,
-    faCaretUp,
-    faCaretDown,
-    faLiraSign,
-    faTicketAlt,
-    faGlobe
   } from "@fortawesome/free-solid-svg-icons";
   import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 
   import ApiUtil from "../pano/js/api.util";
-  import { showNetworkErrorOnCatch } from "../Store";
 
   import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
   import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";
-  import PostsChart from "../components/charts/Dashboard/PostsChart.svelte";
   import TrafficChart from "../components/charts/Dashboard/TrafficChart.svelte";
   import TicketStatus from "../components/TicketStatus.svelte";
   import Date from "../components/Date.svelte";
+  import tooltip from "../pano/js/tooltip.util";
 
   let getting_started_blocks = {
-    welcome_board: false
+    welcome_board: false,
   };
 
   let registered_player_count = 0;
@@ -322,14 +314,15 @@
                   src="https://minotar.net/avatar/{ticket.writer.username}"
                   width="48"
                   height="48"
-                  class="border rounded-circle"
-                  alt="{ticket.writer.username}" />
+                  class="border rounded-circle" />
               </div>
               <div class="col">
                 <span class="text-primary"> #{ticket.id} {ticket.title} </span>
                 <br />
                 <small class="text-muted">
-                  <b><Date time="{ticket.date}"/></b>,
+                  <b>
+                    <Date time="{ticket.date}" />
+                  </b>,
                   <b>{ticket.category.title}</b>
                   kategorisine açıldı.
                 </small>

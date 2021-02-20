@@ -115,10 +115,10 @@
         .then((response) => {
           if (response.data.result === "ok") {
             messages.update((list) => {
-              list.push(response.data.message)
+              list.push(response.data.message);
 
-              return list
-            })
+              return list;
+            });
 
             status = 2;
             messageText = "";
