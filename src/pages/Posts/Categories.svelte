@@ -105,8 +105,13 @@
   });
 
   onAddEditPostCategoryModalHide((category) => {
-    if (categories.indexOf(category) !== -1)
-      categories[categories.indexOf(category)].selected = false;
+    for (let loopCategory of categories) {
+      if (parseInt(loopCategory.id) === parseInt(category.id)) {
+        categories[categories.indexOf(loopCategory)].selected = false;
+
+        break;
+      }
+    }
   });
 
   setDeletePostCategoryModalCallback((routeFirstPage) => {
@@ -136,7 +141,6 @@
     </a>
   </div>
   <div class="col-6 text-right">
-    <!--              @click="onShowCreateCategoryButtonClick"-->
     <button
       class="btn btn-primary"
       type="button"
