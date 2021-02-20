@@ -274,14 +274,6 @@
     </a>
   </div>
   <div class="col text-right">
-    <a
-      class="btn btn-outline-primary"
-      role="button"
-      target="_blank"
-      href="/preview/post/{post.id}">
-      <Icon data="{faEye}" />
-      <span class="d-md-inline d-none ml-1">Görüntüle</span>
-    </a>
     {#if editorMode === "edit"}
       <button
         class="btn btn-link text-danger"
@@ -301,6 +293,14 @@
         <span class="d-md-inline d-none ml-1">Taslaklara Taşı</span>
       </button>
     {/if}
+    <a
+      class="btn btn-link"
+      role="button"
+      target="_blank"
+      href="/preview/post/{post.id}">
+      <Icon data="{faEye}" />
+      <span class="d-md-inline d-none ml-1">Görüntüle</span>
+    </a>
     <button
       class="btn btn-secondary"
       type="button"
@@ -321,9 +321,9 @@
   <!-- Post -->
   <div class="col-lg-9 d-flex flex-fill">
     <div class="card w-100">
-      <div class="card-body d-flex flex-column">
+      <div class="card-body">
         <input
-          class="form-control form-control-lg shadow-none display-3 mb-2"
+          class="form-control form-control-lg display-3 mb-2"
           type="text"
           placeholder="Yazı Başlığı"
           bind:value="{post.title}" />
