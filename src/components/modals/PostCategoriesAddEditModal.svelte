@@ -116,32 +116,33 @@
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
           <div class="form-group">
-            <label for="category">Kategori:</label>
             <input
               class:border-danger="{$errors.title}"
               class="form-control"
+              placeholder="Kategori"
               id="category"
               type="text"
               bind:value="{$category.title}" />
           </div>
           <div class="form-group">
-            <label for="categoryDescription">Açıklama:</label>
-            <input
+            <textarea
               class:border-danger="{$errors.description}"
               class="form-control"
+              placeholder="Açıklama"
               id="categoryDescription"
               type="text"
-              bind:value="{$category.description}" />
+              rows="5"
+              bind:value="{$category.description}"></textarea>
           </div>
           <div class="form-group">
-            <label for="categoryURL">URL:</label>
-            <div class="input-group ">
-              <div class="input-group-prepend">
+            <div class="input-group input-group-sm shadow-0">
+              <div class="input-group-prepend bg-lightprimary shadow-0">
                 <span class="input-group-text">/category/</span>
               </div>
               <input
                 class:border-danger="{$errors.url}"
                 class="form-control"
+                placeholder="..."
                 id="categoryURL"
                 type="text"
                 bind:value="{$category.url}" />
@@ -152,11 +153,11 @@
               olabilir.
             </small>
           </div>
-          <div class="form-group">
+          <div class="form-group d-none">
             <label for="categoryColor">Renk:</label>
             <div class="input-group">
               <input
-                class="form-control"
+                class="form-control rounded-pill"
                 id="categoryColor"
                 type="color"
                 bind:value="{$category.color}" />
