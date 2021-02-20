@@ -309,7 +309,9 @@
             <a
               href="/panel/tickets/ticket/{ticket.id}"
               class="list-group-item list-group-item-action rounded d-flex flex-row">
-              <div class="col-auto">
+              <div
+                class="col-auto"
+                use:tooltip="{['bottom', ticket.writer.username]}">
                 <img
                   src="https://minotar.net/avatar/{ticket.writer.username}"
                   width="48"
