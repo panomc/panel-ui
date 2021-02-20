@@ -177,7 +177,7 @@
               <th class="min-w-200px" scope="col">Kategori</th>
               <th scope="col">Açıklama</th>
               <th scope="col">URL</th>
-              <th scope="col">Renk</th>
+              <th scope="col" class="d-none">Renk</th>
             </tr>
           </thead>
           <tbody>
@@ -228,7 +228,7 @@
                     <b class="text-muted">{category.url}</b>
                   </a>
                 </td>
-                <td>
+                <td class="d-none">
                   <input
                     value="#{category.color}"
                     class="form-control form-control-sm bg-transparent"
