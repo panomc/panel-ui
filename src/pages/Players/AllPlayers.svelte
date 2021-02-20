@@ -195,7 +195,7 @@
                     </a>
                   </td>
                   <td class="align-middle text-nowrap">
-                    0
+                    {player.ticket_count}
                     <i
                       aria-hidden="true"
                       class="fa fa-times text-danger fa-fw"
