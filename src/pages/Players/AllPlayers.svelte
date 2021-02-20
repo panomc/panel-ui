@@ -99,7 +99,14 @@
     <div class="card-body">
       <div class="row justify-content-between">
         <div class="col-md-6 col-12 text-md-left text-center">
-          <h5 class="card-title">{playersCount} Oyuncu</h5>
+          <h5 class="card-title">
+            {playersCount}
+            {pageType === "hasPerm"
+              ? "Yetkili"
+              : pageType === "banned"
+              ? "Yasaklı"
+              : ""} Oyuncu
+          </h5>
         </div>
         <div class="col-md-6 col-12 text-md-right text-center">
           <div class="btn-group">
