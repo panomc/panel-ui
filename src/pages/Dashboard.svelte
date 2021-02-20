@@ -323,7 +323,7 @@
                 <br />
                 <small class="text-muted">
                   <b>
-                    <Date time="{ticket.date}" />
+                    <Date time="{ticket.last_update}" />
                   </b>,
                   <b>{ticket.category.title}</b>
                   kategorisine açıldı.
