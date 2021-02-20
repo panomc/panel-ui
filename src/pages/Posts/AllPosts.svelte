@@ -184,7 +184,16 @@
   <div class="card-body">
     <div class="row justify-content-between pb-3 align-items-center">
       <div class="col-md-6 col-12 text-md-left text-center">
-        <h5 class="card-title mb-md-0">{postsCount} Yazı</h5>
+        <h5 class="card-title mb-md-0">
+          {postsCount}
+          {pageType === "published"
+            ? "Yayınlanmış"
+            : pageType === "draft"
+            ? "Taslak"
+            : pageType === "trash"
+            ? "Çöp"
+            : ""} Yazı
+        </h5>
       </div>
       <div class="col-md-6 col-12 text-md-right text-center">
         <div class="btn-group">
