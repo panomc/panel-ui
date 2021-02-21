@@ -115,7 +115,7 @@
 .sidebar-server-icon {
   display: block;
   margin: 1rem auto;
-  border: 10px solid $lightprimary;
+  border: 10px solid $lightglass;
   border-radius: 100%;
 }
 
@@ -138,6 +138,7 @@
   height: 100vh;
   min-width: 300px;
   width: 100%;
+  padding-top: 88px;
   overflow-y: auto;
   transition: 0.2s ease-in;
 }
@@ -149,6 +150,7 @@
 .menu > li.nav-item {
   position: relative;
   border-radius: 0.5rem;
+  color: $lightglass;
 
   &:hover {
     transition: 0.3s all;
@@ -169,17 +171,16 @@
 
 .menu > li.nav-item.active {
   position: relative;
-  border-radius: 0.5rem;
   transition: 0.3s all;
 
   &:before {
     display: flex;
     align-items: center;
-    background: $gray;
+    background: $sunflower;
     border-radius: 20px;
     content: " ";
-    height: 90%;
-    top: 10%;
+    height: 100%;
+    top: 0;
     left: -6px;
     position: absolute;
     width: 12px;
@@ -189,7 +190,7 @@
 
 .sidebar-tab > li.nav-item {
   a.nav-link.active {
-    background: $lightprimary;
+    background: $lightglass;
     color: $sunflower;
     font-weight: bolder;
   }

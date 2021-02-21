@@ -21,7 +21,7 @@
   }
 </script>
 
-<nav class="sidebar-nav navbar-light" v-if="sidebarTabsState === 'website'">
+<nav class="sidebar-nav navbar-dark" v-if="sidebarTabsState === 'website'">
   <ul class="menu navbar-nav font-weight-normal">
     <li class="nav-item" class:active="{matching($path, '/panel')}">
       <a class="nav-link" href="/panel">

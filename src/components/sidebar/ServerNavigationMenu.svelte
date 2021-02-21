@@ -8,7 +8,7 @@
   } from "@fortawesome/free-solid-svg-icons";
 </script>
 
-<nav class="sidebar-nav navbar-light" v-if="sidebarTabsState === 'game'">
+<nav class="sidebar-nav navbar-dark" v-if="sidebarTabsState === 'game'">
   <ul class="menu navbar-nav font-weight-normal d-none">
     <!--        :class="{ 'active': path.startsWith('/panel/server-panel') }"-->
     <li class="nav-item">

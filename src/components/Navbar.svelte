@@ -191,7 +191,8 @@
 </script>
 
 <!-- Top Navbar -->
-<nav class="navbar navbar-expand navbar-light">
+<nav
+  class="navbar navbar-expand navbar-light bg-white fixed-top border-bottom border-glass">
   <ul class="nav navbar-nav mr-auto">
     <li class="nav-item mr-2">
       <a
