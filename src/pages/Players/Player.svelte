@@ -1,20 +1,53 @@
 <script>
-  import { isPageInitialized } from "../../Store";
-  import { getPath, route } from "routve";
-  import ConfirmBanPlayerModal from "../../components/modals/ConfirmBanPlayerModal.svelte";
+  import { route } from "routve";
+  import moment from "moment";
 
   import Icon from "svelte-awesome";
-  import ApiUtil from "../../pano/js/api.util";
   import {
     faArrowLeft,
     faTimes,
-    faCheck,
-    faGlobe,
     faUserCircle,
     faEllipsisV,
   } from "@fortawesome/free-solid-svg-icons";
 
-  isPageInitialized.set(true);
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+  import ConfirmBanPlayerModal from "../../components/modals/ConfirmBanPlayerModal.svelte";
+  import TicketStatus from "../../components/TicketStatus.svelte";
+  import Date from "../../components/Date.svelte";
+
+  import ApiUtil from "../../pano/js/api.util";
+
+  export let username = "";
+  let player = {
+    username: "",
+    isBanned: false,
+    registerDate: 0,
+    permission: "",
+  };
+  let tickets = [];
+
+  function getPlayerDetail(username) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/initPage/playerDetail", { username: username })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            player = response.data.player;
+            tickets = response.data.tickets;
+
+            isPageInitialized.set(true);
+          } else if (response.data.error === "NOT_EXISTS") {
+            route("/panel/error-404");
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  $: {
+    getPlayerDetail(username);
+  }
 </script>
 
 <!-- Player Detail Page -->
@@ -67,23 +100,30 @@
           class="card-body d-flex flex-column justify-content-center
           align-items-center">
           <img
-            alt="Username"
+            alt="{player.username}"
             class="mb-3 rounded-circle player-profile-icon border-lightsecondary"
             width="80"
             height="80"
-            src="https://minotar.net/avatar/butlu" />
+            src="https://minotar.net/avatar/{player.username}" />
 
-          <h4 class="card-title"><span><del>Butlu</del></span></h4>
-          <div class="badge badge-pill badge-danger d-block">Yasaklı</div>
-
+          <h4 class="card-title"><span>{player.username}</span></h4>
+          {#if player.isBanned}
+            <div class="badge badge-pill badge-danger d-block">Yasaklı</div>
+          {/if}
           <hr />
 
           <ul class="list-inline my-0">
             <li class="list-inline-item">
-              <div class="badge text-dark border">Yönetici</div>
+              <div class="badge text-dark border text-capitalize">
+                {player.permission === "" ? "Oyuncu" : player.permission}
+              </div>
             </li>
             <li class="list-inline-item">
-              <div class="badge text-dark border">Kayıt: 01.01.2019</div>
+              <div class="badge text-dark border">
+                Kayıt: {moment(parseInt(player.registerDate)).format(
+                  "DD.MM.YYYY"
+                )}
+              </div>
             </li>
           </ul>
         </div>
@@ -95,7 +135,9 @@
         <div class="card-body">
           <div class="row justify-content-between">
             <div class="col-6">
-              <h5 class="card-title">Butlu tarafından Son Talepler</h5>
+              <h5 class="card-title">
+                {player.username} tarafından Son Talepler
+              </h5>
             </div>
             <div class="col-6 text-right">
               <a href="/panel/tickets" class="btn btn-link bg-light btn-sm">
@@ -103,12 +145,30 @@
               </a>
             </div>
           </div>
-          -
+
+          {#each tickets as ticket, index (ticket)}
+            <a
+              href="/panel/tickets/ticket/{ticket.id}"
+              class="list-group-item list-group-item-action rounded d-flex flex-row">
+              <div class="col">
+                <span class="text-primary"> #{ticket.id} {ticket.title} </span>
+                <br />
+                <small class="text-muted">
+                  <b><Date time="{ticket.last_update}" /></b>,
+                  <b>{ticket.category.title}</b>
+                  kategorisine açıldı.
+                </small>
+              </div>
+              <div class="col-auto d-flex align-items-center">
+                <TicketStatus status="{ticket.status}" />
+              </div>
+            </a>
+          {/each}
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- Ban Player Confirmation Modal -->
 
+<!-- Ban Player Confirmation Modal -->
 <ConfirmBanPlayerModal />
