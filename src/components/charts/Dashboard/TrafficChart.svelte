@@ -11,7 +11,7 @@
         datasets: [
           {
             data: [8, 19],
-            backgroundColor: ["#1976d2", "rgba(25, 118, 210, .1)"],
+            backgroundColor: ["#1976d2", "rgba(25, 118, 210, .05)"],
             pointRadius: 0,
           },
         ],

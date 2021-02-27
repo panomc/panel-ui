@@ -14,6 +14,8 @@
     faPuzzlePiece,
     faTicketAlt,
     faTools,
+    faUsers,
+    faUserPlus,
     faUserCog,
   } from "@fortawesome/free-solid-svg-icons";
   import { faDiscord } from "@fortawesome/free-brands-svg-icons";
@@ -176,35 +178,15 @@
       </div>
     </div>
   {/if}
-  <!-- Dashboard Title  -->
-  <h3 class="text-muted badge badge-lightprimary panel-subtitle">Website</h3>
 
   <div class="row justify-content-between">
     <div class="col-lg-4">
-      <div class="card">
-        <div class="p-3">
-          <div class="row align-items-center">
-            <div class="col-6">
-              <h3 class="font-weight-bolder text-primary">
-                {registered_player_count}
-                <Icon data="{faCaretUp}" class="ml-2" />
-              </h3>
-              <span class="text-primary">Yeni Kayıt</span>
-            </div>
-            <div class="col-6">
-              <PlayersChart />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="card">
+      <div class="card border-0 bg-transparent">
         <div class="p-3">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="font-weight-bolder text-secondary">1</h3>
-              <span class="text-secondary">Çevrimiçi</span>
+              <h3 class="font-weight-bolder text-primary">12</h3>
+              <span class="text-primary">Çevrimiçi</span>
             </div>
             <div class="col-auto">
               <Icon
@@ -217,16 +199,37 @@
       </div>
     </div>
     <div class="col-lg-4">
-      <div class="card">
+      <div class="card border-0 bg-transparent">
         <div class="p-3">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="font-weight-bolder text-bittersweet">1</h3>
-              <span class="text-bittersweet">Yazı Görüntülemesi</span>
+              <h3 class="font-weight-bolder text-primary">
+                {registered_player_count}
+                <Icon data="{faCaretUp}" class="ml-2" />
+              </h3>
+              <span class="text-primary">Yeni Kayıt</span>
             </div>
             <div class="col-auto">
               <Icon
-                data="{faStickyNote}"
+                data="{faUserPlus}"
+                scale="1.5"
+                class="text-gray d-block mx-2" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card border-0 bg-transparent">
+        <div class="p-3">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="font-weight-bolder text-primary">56</h3>
+              <span class="text-primary">Toplam Oyuncu</span>
+            </div>
+            <div class="col-auto">
+              <Icon
+                data="{faUsers}"
                 scale="1.5"
                 class="text-gray d-block mx-2" />
             </div>
@@ -236,51 +239,24 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-lg-8 col">
-      <div class="d-flex flex-fill card">
-        <div class="card-body h-100">
-          <div class="row justify-content-between">
-            <div class="col-4">
-              <h5 class="card-title">Ziyaretler</h5>
-            </div>
-            <div class="col-8 text-right">
-              <div class="btn-group">
-                <button class="btn btn-sm btn-outline-light btn-link active">
-                  Haftalık
-                </button>
-                <button class="btn btn-sm btn-outline-light btn-link">
-                  Aylık
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex align-items-center h-100">
-            <VisitorsChart />
+  <div class="card">
+    <div class="card-body">
+      <div class="row justify-content-between">
+        <div class="col-4">
+          <h5 class="card-title">Ziyaretler</h5>
+        </div>
+        <div class="col-8 text-right">
+          <div class="btn-group">
+            <button class="btn btn-sm btn-outline-light btn-link active">
+              Haftalık
+            </button>
+            <button class="btn btn-sm btn-outline-light btn-link">
+              Aylık
+            </button>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-4 col d-flex flex-fill">
-      <div class="card d-flex flex-fill">
-        <div class="card-body">
-          <div class="row justify-content-between">
-            <div class="col-4">
-              <h5 class="card-title">Trafik</h5>
-            </div>
-            <div class="col-8 text-right">
-              <div class="btn-group">
-                <button class="btn btn-sm btn-outline-light btn-link active">
-                  Tüm Zamanlar
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex align-items-center h-100">
-            <TrafficChart />
-          </div>
-        </div>
-      </div>
+      <VisitorsChart />
     </div>
   </div>
 

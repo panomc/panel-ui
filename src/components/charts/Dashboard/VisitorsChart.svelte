@@ -10,10 +10,12 @@
         labels: ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"],
         datasets: [
           {
-            data: [39, 45, 83, 53, 89, 72, 99],
+            data: [5, 12, 8, 15, 19, 19, 22],
             borderColor: "#1976d2",
-            backgroundColor: "rgba(25, 118, 210, .1)",
-            borderWidth: 2.5,
+            backgroundColor: "rgba(25, 118, 210, .05)",
+            borderWidth: 2,
+            pointRadius: 5,
+            pointBackgroundColor: "#fff",
           },
         ],
       },
@@ -24,8 +26,6 @@
               ticks: {
                 fontColor: "#aab2bd",
                 beginAtZero: true,
-                maxTicksLimit: 10,
-                padding: 20,
               },
               gridLines: {
                 drawTicks: false,
@@ -39,8 +39,6 @@
               ticks: {
                 fontColor: "#aab2bd",
                 beginAtZero: true,
-                maxTicksLimit: 10,
-                padding: 20,
               },
               gridLines: {
                 drawTicks: false,
