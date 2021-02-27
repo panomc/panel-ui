@@ -333,7 +333,7 @@
               <th class="min-w-200px align-middle" scope="col">Başlık</th>
               <th class="align-middle" scope="col">Durum</th>
               <th class="align-middle" scope="col">Kategori</th>
-              <th class="align-middle" scope="col">Yazar</th>
+              <th class="align-middle" scope="col">Açan</th>
               <th class="align-middle" scope="col">Son Yanıt</th>
             </tr>
           </thead>
@@ -403,7 +403,9 @@
                   {ticket.category.title}
                 </td>
                 <td class="align-middle">
-                  <a href="#" use:tooltip="{['top', ticket.writer.username]}">
+                  <a
+                    href="/panel/players/player/{ticket.writer.username}"
+                    use:tooltip="{['top', ticket.writer.username]}">
                     <img
                       src="https://minotar.net/avatar/{ticket.writer
                         .username}/32"

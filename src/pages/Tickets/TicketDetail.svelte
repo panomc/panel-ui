@@ -231,7 +231,7 @@
     <div class="row">
       <div class="col">
         <h5 class="card-title">{title}</h5>
-        <a href="#">{username}</a> tarafından,
+        <a href="/panel/players/player/{username}">{username}</a> tarafından,
         <Date time="{date}" />,
         <a href="#">{category === "-" ? category : category.title}</a>
         kategorisine açıldı.
@@ -275,7 +275,7 @@
               </div>
             </div>
             <div class="col-2">
-              <a href="#">
+              <a href="/panel/players/player/{message.username}">
                 <img
                   src="https://minotar.net/avatar/{message.username}/48"
                   class="ml-3 border rounded-circle d-block mr-auto"
@@ -288,7 +288,7 @@
         {:else}
           <div class="row py-3 flex-nowrap">
             <div class="col-2 text-right">
-              <a href="#">
+              <a href="/panel/players/player/{message.username}">
                 <img
                   src="https://minotar.net/avatar/{message.username}/48"
                   class="mr-3 border rounded-circle"

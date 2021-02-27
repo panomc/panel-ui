@@ -191,7 +191,7 @@
                     </div>
                   </th>
                   <td class="min-w-200px align-middle text-nowrap">
-                    <a title="Oyuncu Profiline Git" href="#">
+                    <a title="Oyuncu Profiline Git" href="/panel/players/player/{player.username}">
                       <img
                         alt="Oyuncu Adı"
                         class="rounded-circle border mr-3"

@@ -285,22 +285,22 @@
             <a
               href="/panel/tickets/ticket/{ticket.id}"
               class="list-group-item list-group-item-action rounded d-flex flex-row">
-              <div
-                class="col-auto"
-                use:tooltip="{['bottom', ticket.writer.username]}">
-                <img
-                  src="https://minotar.net/avatar/{ticket.writer.username}"
-                  width="48"
-                  height="48"
-                  class="border rounded-circle" />
-              </div>
+              <a href="/panel/players/player/{ticket.writer.username}">
+                <div
+                  class="col-auto"
+                  use:tooltip="{['bottom', ticket.writer.username]}">
+                  <img
+                    src="https://minotar.net/avatar/{ticket.writer.username}"
+                    width="48"
+                    height="48"
+                    class="border rounded-circle" />
+                </div>
+              </a>
               <div class="col">
                 <span class="text-primary"> #{ticket.id} {ticket.title} </span>
                 <br />
                 <small class="text-muted">
-                  <b>
-                    <Date time="{ticket.last_update}" />
-                  </b>,
+                  <b> <Date time="{ticket.last_update}" /> </b>,
                   <b>{ticket.category.title}</b>
                   kategorisine açıldı.
                 </small>

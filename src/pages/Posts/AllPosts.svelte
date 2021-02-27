@@ -327,7 +327,7 @@
                   </span>
                 </td>
                 <td class="align-middle text-nowrap">
-                  <a href="#" use:tooltip="{['top', post.writer.username]}">
+                  <a href="/panel/players/player/{post.writer.username}" use:tooltip="{['top', post.writer.username]}">
                     <img
                       alt="{post.writer.username}"
                       class="rounded-circle border"
