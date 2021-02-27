@@ -10,7 +10,7 @@ export default {
         "": {
           component: () => import("./pages/Players/AllPlayers.svelte"),
         },
-        "/player": {
+        "/player/:username": {
           component: () => import("./pages/Players/Player.svelte"),
         },
         "/permissions": {
