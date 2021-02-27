@@ -107,7 +107,7 @@
           class="nav-link"
           on:click="{onWebsiteMenuClick}"
           class:active="{$sidebarTabsState === 'website'}"
-          class:text-glass="{$sidebarTabsState !== 'website'}">
+          class:text-light="{$sidebarTabsState !== 'website'}">
           <Icon data="{faGlobe}" scale="1.3" />
         </a>
       </li>
@@ -117,7 +117,7 @@
           class="nav-link"
           on:click="{onGameMenuClick}"
           class:active="{$sidebarTabsState === 'game'}"
-          class:text-glass="{$sidebarTabsState !== 'game'}">
+          class:text-light="{$sidebarTabsState !== 'game'}">
           <Icon data="{faCube}" scale="1.3" />
         </a>
       </li>
