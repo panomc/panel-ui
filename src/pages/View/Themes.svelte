@@ -12,11 +12,7 @@
 <div class="tab-pane">
   <!-- Themes: Current Themes Sub Title -->
   <section class="row justify-content-between align-items-center">
-    <div class="col-6">
-      <h3 class="text-muted badge badge-lightprimary panel-subtitle">
-        Mevcut Temalar
-      </h3>
-    </div>
+    <div class="col-6"></div>
     <div class="col-6 text-right">
       <button class="btn btn-primary">
         <Icon data="{faPlus}" class="mr-1" />
