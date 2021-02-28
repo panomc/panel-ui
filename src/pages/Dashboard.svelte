@@ -184,15 +184,15 @@
       <div class="card border-0 bg-transparent">
         <div class="p-3">
           <div class="row align-items-center">
-            <div class="col">
-              <h3 class="font-weight-bolder text-primary">12</h3>
-              <span class="text-primary">Çevrimiçi</span>
-            </div>
             <div class="col-auto">
               <Icon
                 data="{faGlobe}"
-                scale="1.5"
-                class="text-gray d-block mx-2" />
+                scale="2.3"
+                class="text-gray d-block mr-5" />
+            </div>
+            <div class="col">
+              <h3 class="font-weight-bolder text-primary">12</h3>
+              <span class="text-primary">Çevrimiçi</span>
             </div>
           </div>
         </div>
@@ -202,6 +202,12 @@
       <div class="card border-0 bg-transparent">
         <div class="p-3">
           <div class="row align-items-center">
+            <div class="col-auto">
+              <Icon
+                data="{faUserPlus}"
+                scale="2.3"
+                class="text-gray d-block mr-5" />
+            </div>
             <div class="col">
               <h3 class="font-weight-bolder text-primary">
                 {registered_player_count}
@@ -209,12 +215,6 @@
               </h3>
               <span class="text-primary">Yeni Kayıt</span>
             </div>
-            <div class="col-auto">
-              <Icon
-                data="{faUserPlus}"
-                scale="1.5"
-                class="text-gray d-block mx-2" />
-            </div>
           </div>
         </div>
       </div>
@@ -223,15 +223,15 @@
       <div class="card border-0 bg-transparent">
         <div class="p-3">
           <div class="row align-items-center">
-            <div class="col">
-              <h3 class="font-weight-bolder text-primary">56</h3>
-              <span class="text-primary">Toplam Oyuncu</span>
-            </div>
             <div class="col-auto">
               <Icon
                 data="{faUsers}"
-                scale="1.5"
-                class="text-gray d-block mx-2" />
+                scale="2.3"
+                class="text-gray d-block mr-5" />
+            </div>
+            <div class="col">
+              <h3 class="font-weight-bolder text-primary">56</h3>
+              <span class="text-primary">Toplam Oyuncu</span>
             </div>
           </div>
         </div>
