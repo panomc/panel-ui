@@ -291,6 +291,7 @@
                   use:tooltip="{['bottom', ticket.writer.username]}">
                   <img
                     src="https://minotar.net/avatar/{ticket.writer.username}"
+                    alt="{ticket.writer.username}"
                     width="48"
                     height="48"
                     class="border rounded-circle" />

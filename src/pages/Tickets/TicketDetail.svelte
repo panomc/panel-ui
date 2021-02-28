@@ -278,6 +278,7 @@
               <a href="/panel/players/player/{message.username}">
                 <img
                   src="https://minotar.net/avatar/{message.username}/48"
+                  alt="{message.username}"
                   class="ml-3 border rounded-circle d-block mr-auto"
                   use:tooltip="{['bottom', message.username]}"
                   width="48"
@@ -291,6 +292,7 @@
               <a href="/panel/players/player/{message.username}">
                 <img
                   src="https://minotar.net/avatar/{message.username}/48"
+                  alt="{message.username}"
                   class="mr-3 border rounded-circle"
                   use:tooltip="{['bottom', message.username]}"
                   width="48"
