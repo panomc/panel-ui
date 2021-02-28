@@ -114,11 +114,7 @@
 <div class="container">
   <!-- Action Menu -->
   <div class="row mb-3">
-    <div class="col-md-4 col-6">
-      <h3 class="text-muted badge badge-lightprimary panel-subtitle mb-0">
-        Bildirimler
-      </h3>
-    </div>
+    <div class="col-6"></div>
     {#if notifications.length !== 0}
       <div class="col text-right">
         <button
@@ -170,51 +166,12 @@
             <p class="text-gray">Bildirim yok.</p>
           </div>
         {/if}
+        <div class="form-group mt-4">
+          <button class="btn text-primary bg-lightprimary d-block m-auto"
+            >Daha Fazla Göster (1)
+          </button>
+        </div>
       </div>
-
-      {#if notifications.length !== 0}
-        <nav class="pt-3">
-          <ul class="pagination pagination-sm mb-0 justify-content-start">
-            <!--          :class="{ 'disabled': page === 1 }"-->
-            <!--          @click="routePage(1)"-->
-            <li class="page-item">
-              <a
-                class="page-link"
-                href="javascript:void(0);"
-                title="Önceki Sayfa">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-
-            <!--          :class="{ 'active': index === page }"-->
-            <!--          :key="index"-->
-            <!--          @click="routePage(index)"-->
-            <!--          v-for="index in total_page"-->
-            <li class="page-item">
-              <a
-                class="page-link"
-                href="javascript:void(0);"
-                v-if="page !== index">
-                <!--                {{index}}-->
-              </a>
-              <!--            {{index}}-->
-              <a class="page-link" href="javascript:void(0);">?</a>
-              <!-- v-if="page === index" -->
-            </li>
-
-            <!--          :class="{ 'disabled': page === total_page }"-->
-            <!--          @click="routePage(total_page)"-->
-            <li class="page-item">
-              <a
-                class="page-link"
-                href="javascript:void(0);"
-                title="Sonraki Sayfa">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      {/if}
     </div>
   </div>
 </div>

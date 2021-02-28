@@ -47,10 +47,24 @@
           <div class="col">
             <a
               aria-describedby="panoWebsite"
-              href="https://panomc.com"
+              href="https://panocms.com"
               id="panoWebsite"
               target="_blank">
-              www.panomc.com
+              www.panocms.com
+            </a>
+          </div>
+        </div>
+        <div class="form-group row mb-0">
+          <label class="col-sm-2 col-form-labeel" for="siteKeywords">
+            Discord:
+          </label>
+          <div class="col">
+            <a
+              aria-describedby="panoWebsite"
+              href="https://panocms.com/discord"
+              id="panoWebsite"
+              target="_blank">
+              Pano Discord
             </a>
           </div>
         </div>
