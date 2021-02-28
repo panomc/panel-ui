@@ -19,14 +19,6 @@
   min-width: 300px;
 }
 
-.content {
-  background-color: #f0f6ff;
-  padding: 1.5rem 1.5rem;
-  @include media-breakpoint-down(xs) {
-    padding: 1rem 1rem;
-  }
-}
-
 .card {
   margin-bottom: 1rem;
 }

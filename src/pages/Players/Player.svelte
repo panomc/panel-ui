@@ -83,7 +83,7 @@
 
 <!-- Player Detail Page -->
 
-<div class="content">
+<div class="container">
   <!-- Action Menu -->
   <div class="row mb-3">
     <div class="col-md-4 col-6">
@@ -93,34 +93,18 @@
       </a>
     </div>
     <div class="col text-right">
-      <div class="dropdown">
-        <a
-          class="btn btn-link"
-          aria-expanded="false"
-          aria-haspopup="true"
-          data-toggle="dropdown"
-          href="javascript:void(0);"
-          id="playerAction"
-          title="Eylemler">
-          <Icon data="{faEllipsisV}" />
-        </a>
-        <div
-          aria-labelledby="playerAction"
-          class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="javascript:void(0);">
-            <Icon data="{faUserCircle}" class="mr-1 text-primary" />
-            Yetkilendir
-          </a>
-          <a
-            class="dropdown-item"
-            data-target="#conformBanPlayer"
-            data-toggle="modal"
-            href="javascript:void(0);">
-            <Icon data="{faTimes}" class="mr-1 text-danger" />
-            Yasakla
-          </a>
-        </div>
-      </div>
+      <a class="btn btn-link" href="javascript:void(0);">
+        <Icon data="{faUserCircle}" class="mr-1" />
+        Yetkilendir
+      </a>
+      <a
+        class="btn btn-outline-danger"
+        data-target="#conformBanPlayer"
+        data-toggle="modal"
+        href="javascript:void(0);">
+        <Icon data="{faTimes}" class="mr-1" />
+        Yasakla
+      </a>
     </div>
   </div>
 
@@ -132,9 +116,9 @@
           align-items-center">
           <img
             alt="{player.username}"
-            class="mb-3 rounded-circle player-profile-icon border-lightsecondary"
-            width="80"
-            height="80"
+            class="mb-3 rounded-circle"
+            width="64"
+            height="64"
             src="https://minotar.net/avatar/{player.username}" />
 
           <h4 class="card-title"><span>{player.username}</span></h4>
