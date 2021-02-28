@@ -214,8 +214,7 @@
                 <Icon data="{faDotCircle}" class="text-primary" />
               </div>
               <div class="col">
-                <span class="text-wrap text-dark"
-                  >{notification.id} - {notification.type_ID}</span>
+                <span class="text-wrap text-dark">{notification.type_ID}</span>
                 <small class="text-gray d-block">
                   {getTime(checkTime, parseInt(notification.date), "")}
                 </small>
