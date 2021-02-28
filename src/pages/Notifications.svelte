@@ -12,6 +12,9 @@
 
   let notificationProcessID = 0;
   let notifications = [];
+  let page = 0;
+  let count = 0;
+  let loadMoreLoading = false;
 
   let checkTime = 0;
   let interval;
@@ -45,16 +48,6 @@
           notifications = notifications.insert(index, item);
         }
       });
-
-      notifications.forEach((item, index) => {
-        const newArrayOfFilter = newNotifications.filter(
-          (filterItem) => filterItem.id === item.id
-        );
-
-        if (newArrayOfFilter.length === 0) {
-          notifications = notifications.remove(index);
-        }
-      });
     }
   }
 
@@ -65,6 +58,8 @@
           if (notificationProcessID === id) {
             if (response.data.result === "ok") {
               setNotifications(response.data.notifications);
+
+              count = response.data.notifications_count;
 
               isPageInitialized.set(true);
             }
@@ -77,6 +72,30 @@
           }
 
           resolve();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  function loadMore() {
+    loadMoreLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/notifications/loadMore", {
+        id: notifications[notifications.length - 1].id,
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            response.data.notifications.forEach((notification) => {
+              notifications.insert(notifications.length, notification);
+            });
+
+            loadMoreLoading = false;
+
+            resolve();
+          } else reject();
         })
         .catch(() => {
           reject();
@@ -166,11 +185,17 @@
             <p class="text-gray">Bildirim yok.</p>
           </div>
         {/if}
-        <div class="form-group mt-4">
-          <button class="btn text-primary bg-lightprimary d-block m-auto"
-            >Daha Fazla Göster (1)
-          </button>
-        </div>
+
+        {#if notifications.length < count && count > 10 + 10 * page}
+          <div class="form-group mt-4">
+            <button
+              class="btn text-primary bg-lightprimary d-block m-auto"
+              class:disabled="{loadMoreLoading}"
+              on:click="{loadMore}"
+              >Daha Fazla Göster ({count - notifications.length})
+            </button>
+          </div>
+        {/if}
       </div>
     </div>
   </div>
