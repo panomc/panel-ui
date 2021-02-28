@@ -1,9 +1,10 @@
 <script>
-  import { route } from "routve";
+  import { getPath, route } from "routve";
   import moment from "moment";
 
   import Icon from "svelte-awesome";
   import {
+    faTicketAlt,
     faArrowLeft,
     faTimes,
     faUserCircle,
@@ -16,8 +17,11 @@
   import Date from "../../components/Date.svelte";
 
   import ApiUtil from "../../pano/js/api.util";
+  import Pagination from "../../components/Pagination.svelte";
 
   export let username = "";
+  export let page = undefined;
+
   let player = {
     username: "",
     isBanned: false,
@@ -25,28 +29,55 @@
     permission: "",
   };
   let tickets = [];
+  let ticketCount = 0;
+  let ticketTotalPage = 1;
 
-  function getPlayerDetail(username) {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/initPage/playerDetail", { username: username })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            player = response.data.player;
-            tickets = response.data.tickets;
-
-            isPageInitialized.set(true);
-          } else if (response.data.error === "NOT_EXISTS") {
-            route("/panel/error-404");
-          } else reject();
+  function getPlayerDetail(username, pageNumber, forceReload = false) {
+    if (pageNumber !== page || forceReload) {
+      showNetworkErrorOnCatch((resolve, reject) => {
+        ApiUtil.post("panel/initPage/playerDetail", {
+          username,
+          page: pageNumber,
         })
-        .catch(() => {
-          reject();
-        });
-    });
+          .then((response) => {
+            if (response.data.result === "ok") {
+              player = response.data.player;
+              tickets = response.data.tickets;
+              ticketCount = response.data.ticketCount;
+              ticketTotalPage = response.data.ticketTotalPage;
+
+              page = pageNumber;
+
+              if (
+                page === 1 &&
+                getPath() !== "/panel/players/player/" + username &&
+                getPath() !== "/panel/players/player/" + username + "/"
+              )
+                route("/panel/players/player/" + username + "/" + page);
+              else if (page !== 1)
+                route("/panel/players/player/" + username + "/" + page);
+
+              isPageInitialized.set(true);
+
+              resolve();
+            } else if (
+              response.data.error === "NOT_EXISTS" ||
+              response.data.error === "PAGE_NOT_FOUND"
+            ) {
+              route("/panel/error-404");
+
+              resolve();
+            } else reject();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    }
   }
 
   $: {
-    getPlayerDetail(username);
+    getPlayerDetail(username, typeof page === "undefined" ? 1 : parseInt(page));
   }
 </script>
 
@@ -146,24 +177,44 @@
             </div>
           </div>
 
-          {#each tickets as ticket, index (ticket)}
-            <a
-              href="/panel/tickets/ticket/{ticket.id}"
-              class="list-group-item list-group-item-action rounded d-flex flex-row">
-              <div class="col">
-                <span class="text-primary"> #{ticket.id} {ticket.title} </span>
-                <br />
-                <small class="text-muted">
-                  <b><Date time="{ticket.last_update}" /></b>,
-                  <b>{ticket.category.title}</b>
-                  kategorisine açıldı.
-                </small>
-              </div>
-              <div class="col-auto d-flex align-items-center">
-                <TicketStatus status="{ticket.status}" />
-              </div>
-            </a>
-          {/each}
+          {#if ticketCount === 0}
+            <div class="container text-center">
+              <Icon data="{faTicketAlt}" scale="3" class="text-glass m-3" />
+              <p class="text-gray">Burada içerik yok.</p>
+            </div>
+          {:else}
+            {#each tickets as ticket, index (ticket)}
+              <a
+                href="/panel/tickets/ticket/{ticket.id}"
+                class="list-group-item list-group-item-action rounded d-flex flex-row">
+                <div class="col">
+                  <span class="text-primary">
+                    #{ticket.id}
+                    {ticket.title}
+                  </span>
+                  <br />
+                  <small class="text-muted">
+                    <b><Date time="{ticket.last_update}" /></b>,
+                    <b>{ticket.category.title}</b>
+                    kategorisine açıldı.
+                  </small>
+                </div>
+                <div class="col-auto d-flex align-items-center">
+                  <TicketStatus status="{ticket.status}" />
+                </div>
+              </a>
+            {/each}
+          {/if}
+
+          <!-- Pagination -->
+          <Pagination
+            page="{page}"
+            totalPage="{ticketTotalPage}"
+            on:firstPageClick="{() => getPlayerDetail(username, 1)}"
+            on:lastPageClick="{() =>
+              getPlayerDetail(username, ticketTotalPage)}"
+            on:pageLinkClick="{(event) =>
+              getPlayerDetail(username, event.detail.page)}" />
         </div>
       </div>
     </div>

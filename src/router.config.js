@@ -13,6 +13,9 @@ export default {
         "/player/:username": {
           component: () => import("./pages/Players/Player.svelte"),
         },
+        "/player/:username/:page": {
+          component: () => import("./pages/Players/Player.svelte"),
+        },
         "/permissions": {
           component: () => import("./pages/Players/Permissions.svelte"),
         },
