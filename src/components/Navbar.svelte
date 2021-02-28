@@ -236,7 +236,11 @@
       <div
         class="dropdown-menu animated fadeIn faster dropdown-menu-right
         notifications">
-        <h6 class="dropdown-header">Bildirimler</h6>
+        <h6 class="dropdown-header">
+          Bildirimler {$notificationsCount === 0
+            ? ""
+            : "(" + $notificationsCount + " Okunmamış)"}
+        </h6>
 
         {#if !notificationsLoading}
           {#each quickNotifications as notification, index (notification)}
@@ -280,7 +284,6 @@
           pt-2"
           href="/panel/notifications">
           Tümünü Görüntüle
-          {$notificationsCount === 0 ? "" : "— " + $notificationsCount}
         </a>
       </div>
     </li>
@@ -303,7 +306,9 @@
       <div class="dropdown-menu dropdown-menu-right animated fadeIn faster">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link text-primary" href="/panel/players/player/{$user.username}">
+            <a
+              class="nav-link text-primary"
+              href="/panel/players/player/{$user.username}">
               <Icon data="{faUser}" class="mr-1" />
               {$user.username}
             </a>
