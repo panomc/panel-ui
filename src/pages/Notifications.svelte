@@ -2,12 +2,14 @@
   import Icon from "svelte-awesome";
   import moment from "moment";
   import { onDestroy, onMount } from "svelte";
+  import jQuery from "jquery";
+
+  import { faBell, faDotCircle } from "@fortawesome/free-regular-svg-icons";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
   import ApiUtil from "../pano/js/api.util";
   import tooltip from "../pano/js/tooltip.util";
 
-  import { faBell, faDotCircle } from "@fortawesome/free-regular-svg-icons";
   import ConfirmRemoveAllNotificationsModal from "../components/modals/ConfirmRemoveAllNotificationsModal.svelte";
 
   let notificationProcessID = 0;
@@ -106,6 +108,35 @@
     });
   }
 
+  function deleteNotification(id) {
+    jQuery('[data-toggle="tooltip"], .tooltip').tooltip("hide");
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/notifications/delete", {
+        id
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            notifications.forEach((notification) => {
+              if (notification.id === id) {
+                notifications.remove(notifications.indexOf(notification));
+
+                count--;
+              }
+            });
+
+            // noinspection SillyAssignmentJS
+            notifications = notifications;
+
+            resolve();
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
   function startNotificationsDown() {
     notificationProcessID++;
 
@@ -167,7 +198,7 @@
                 <Icon data="{faDotCircle}" class="text-primary" />
               </div>
               <div class="col">
-                <span class="text-wrap text-dark">{notification.type_ID}</span>
+                <span class="text-wrap text-dark">{notification.id} - {notification.type_ID}</span>
                 <small class="text-gray d-block">
                   {getTime(checkTime, parseInt(notification.date), "")}
                 </small>
@@ -175,7 +206,8 @@
             </a>
             <button
               class="btn btn-link text-danger mx-2"
-              use:tooltip="{['right', 'Bildirimi Sil']}">
+              use:tooltip="{['right', 'Bildirimi Sil']}"
+              on:click="{deleteNotification(notification.id)}">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
