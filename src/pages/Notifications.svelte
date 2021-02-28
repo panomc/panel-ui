@@ -1,9 +1,9 @@
 <script>
   import Icon from "svelte-awesome";
   import moment from "moment";
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
 
-  import { showNetworkErrorOnCatch, isPageInitialized } from "../Store";
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
   import ApiUtil from "../pano/js/api.util";
   import tooltip from "../pano/js/tooltip.util";
 
@@ -59,7 +59,7 @@
             if (response.data.result === "ok") {
               setNotifications(response.data.notifications);
 
-              count = response.data.notifications_count;
+              count = parseInt(response.data.notifications_count);
 
               isPageInitialized.set(true);
             }
@@ -91,6 +91,9 @@
             response.data.notifications.forEach((notification) => {
               notifications.insert(notifications.length, notification);
             });
+
+            // noinspection SillyAssignmentJS
+            notifications = notifications;
 
             loadMoreLoading = false;
 
