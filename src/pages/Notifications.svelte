@@ -10,7 +10,10 @@
   import ApiUtil from "../pano/js/api.util";
   import tooltip from "../pano/js/tooltip.util";
 
-  import ConfirmRemoveAllNotificationsModal from "../components/modals/ConfirmRemoveAllNotificationsModal.svelte";
+  import ConfirmRemoveAllNotificationsModal, {
+    show as showDeleteAllNotificationsModal,
+    setCallback as setDeleteAllNotificationsModalCallback,
+  } from "../components/modals/ConfirmRemoveAllNotificationsModal.svelte";
 
   let notificationProcessID = 0;
   let notifications = [];
@@ -68,7 +71,7 @@
 
             setTimeout(() => {
               if (notificationProcessID === id) {
-                startNotificationsDown();
+                startNotificationsCountdown();
               }
             }, 1000);
           }
@@ -113,7 +116,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post("panel/notifications/delete", {
-        id
+        id,
       })
         .then((response) => {
           if (response.data.result === "ok") {
@@ -137,7 +140,7 @@
     });
   }
 
-  function startNotificationsDown() {
+  function startNotificationsCountdown() {
     notificationProcessID++;
 
     const id = notificationProcessID;
@@ -145,7 +148,13 @@
     getNotifications(id);
   }
 
-  startNotificationsDown();
+  function stopNotificationsCountdown() {
+    notificationProcessID++;
+
+    clearInterval(interval);
+  }
+
+  startNotificationsCountdown();
 
   onMount(() => {
     interval = setInterval(() => {
@@ -154,14 +163,22 @@
   });
 
   onDestroy(() => {
-    notificationProcessID++;
-
-    clearInterval(interval);
+    stopNotificationsCountdown();
   });
 
   function getTime(check, time, locale) {
     return moment(time).fromNow();
   }
+
+  function onDeleteAllClick() {
+    stopNotificationsCountdown();
+
+    showDeleteAllNotificationsModal();
+  }
+
+  setDeleteAllNotificationsModalCallback(() => {
+    startNotificationsCountdown();
+  });
 </script>
 
 <div class="container">
@@ -173,8 +190,7 @@
         <button
           type="button"
           class="btn btn-link text-danger"
-          data-target="#ConfirmRemoveAllNotificationsModal"
-          data-toggle="modal">
+          on:click="{() => onDeleteAllClick()}">
           <span class="d-md-inline d-none">Tümünü Sil</span>
         </button>
       </div>
@@ -198,7 +214,8 @@
                 <Icon data="{faDotCircle}" class="text-primary" />
               </div>
               <div class="col">
-                <span class="text-wrap text-dark">{notification.id} - {notification.type_ID}</span>
+                <span class="text-wrap text-dark"
+                  >{notification.id} - {notification.type_ID}</span>
                 <small class="text-gray d-block">
                   {getTime(checkTime, parseInt(notification.date), "")}
                 </small>
