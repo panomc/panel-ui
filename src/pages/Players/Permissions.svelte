@@ -20,6 +20,8 @@
     faTrash,
     faPencilAlt,
   } from "@fortawesome/free-solid-svg-icons";
+
+  import AddEditPermGroupModal from "../../components/modals/AddEditPermGroupModal.svelte";
 </script>
 
 <div class="container">
@@ -32,7 +34,11 @@
       </a>
     </div>
     <div class="col-6 text-right">
-      <a href="#" class="btn btn-primary">
+      <a
+        href="#"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#blabla">
         <Icon data="{faPlus}" class="mr-1" />
         Yetki Grubu Oluştur
       </a>
@@ -205,3 +211,5 @@
     </div>
   </div>
 </div>
+
+<AddEditPermGroupModal />
