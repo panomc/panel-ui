@@ -121,8 +121,10 @@
             height="64"
             src="https://minotar.net/avatar/{player.username}" />
 
-          <h4 class="card-title"><span>{player.username}</span></h4>
+          <h4 class="card-title">{player.username}</h4>
+          <small class="text-muted">selimgokcek@outlook.com</small>
           {#if player.isBanned}
+            <hr />
             <div class="badge badge-pill badge-danger d-block">Yasaklı</div>
           {/if}
           <hr />
