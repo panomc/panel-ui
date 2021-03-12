@@ -7,12 +7,14 @@
     faTicketAlt,
     faArrowLeft,
     faTimes,
+    faPencilAlt,
     faUserCircle,
     faEllipsisV,
   } from "@fortawesome/free-solid-svg-icons";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ConfirmBanPlayerModal from "../../components/modals/ConfirmBanPlayerModal.svelte";
+  import EditPlayerModal from "../../components/modals/EditPlayerModal.svelte";
   import TicketStatus from "../../components/TicketStatus.svelte";
   import Date from "../../components/Date.svelte";
 
@@ -96,6 +98,14 @@
       <a class="btn btn-link" href="javascript:void(0);">
         <Icon data="{faUserCircle}" class="mr-1" />
         Yetkilendir
+      </a>
+      <a
+        class="btn btn-link"
+        href="javascript:void(0);"
+        data-toggle="modal"
+        data-target="#blabla">
+        <Icon data="{faPencilAlt}" class="mr-1" />
+        Düzenle
       </a>
       <a
         class="btn btn-outline-danger"
@@ -209,3 +219,5 @@
 
 <!-- Ban Player Confirmation Modal -->
 <ConfirmBanPlayerModal />
+
+<EditPlayerModal />
