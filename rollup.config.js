@@ -53,7 +53,7 @@ const plugins = [
 
   postcss({
     extract: "assets/css/bundle.css",
-    sourceMap: production,
+    sourceMap: false,
     plugins: [],
   }),
 
@@ -115,7 +115,7 @@ const esExport = {
   input: input,
   output: [
     {
-      sourcemap: production,
+      sourcemap: false,
       format: "es",
       name: "app",
       dir: "public/",
@@ -135,7 +135,7 @@ const systemExport = {
   input: input,
   output: [
     {
-      sourcemap: production,
+      sourcemap: false,
       format: "system",
       name: "app",
       dir: "public/",
