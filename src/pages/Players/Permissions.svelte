@@ -1,27 +1,95 @@
 <script>
-  import { isPageInitialized } from "../../Store";
-
-  isPageInitialized.set(true);
-
-  import tooltip from "../../pano/js/tooltip.util";
   import Icon from "svelte-awesome";
-  import {
-    faArrowLeft,
-    faPlus,
-    faSignInAlt,
-    faCubes,
-    faStickyNote,
-    faTicketAlt,
-    faUsers,
-    faPuzzlePiece,
-    faPalette,
-    faCog,
-    faEllipsisV,
-    faTrash,
-    faPencilAlt,
-  } from "@fortawesome/free-solid-svg-icons";
+  import * as icon from "@fortawesome/free-solid-svg-icons";
 
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+  import tooltip from "../../pano/js/tooltip.util";
   import AddEditPermGroupModal from "../../components/modals/AddEditPermGroupModal.svelte";
+  import ApiUtil from "../../pano/js/api.util";
+
+  let permissions = [];
+  let permissionGroups = [];
+  let permissionGroupPerms = {};
+
+  function getData() {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.get("panel/initPage/permissionsPage")
+        .then((response) => {
+          if (response.data.result === "ok") {
+            permissions = response.data.permissions;
+            permissionGroups = response.data.permission_groups;
+            permissionGroupPerms = response.data.permission_group_perms;
+
+            console.log(response.data);
+
+            isPageInitialized.set(true);
+
+            resolve();
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  };
+
+  getData();
+
+  console.log(typeof icon["faPlus"]);
+
+  function convertIconName(iconName) {
+    const iconNameSplit = iconName.split("-");
+    let restOfIconName = "";
+
+    iconNameSplit
+      .filter((iconName, index) => index !== 0)
+      .forEach((iconName) => {
+        restOfIconName += iconName.capitalize();
+      });
+
+    return iconNameSplit[0] + restOfIconName;
+  }
+
+  function isPermissionChecked(permissionGroup, permission) {
+    return (
+      permissionGroup.name === "admin" ||
+      (typeof permissionGroupPerms[permissionGroup.id] === "undefined"
+        ? false
+        : !!permissionGroupPerms[permissionGroup.id].includes(permission.id))
+    );
+  }
+
+  function isPermissionDisabled(permissionGroup) {
+    return permissionGroup.name === "admin";
+  }
+
+  function onPermissionClick(permissionGroup, permission) {
+    // showNetworkErrorOnCatch((resolve, reject) => {
+    //   ApiUtil.post("panel/permission/set")
+    //     .then((response) => {
+    //       if (response.data.result === "ok") {
+    //         permissions = response.data.permissions;
+    //         permissionGroups = response.data.permission_groups;
+    //         permissionGroupPerms = response.data.permission_group_perms;
+    //
+    //         console.log(response.data);
+    //
+    //         isPageInitialized.set(true);
+    //
+    //         resolve();
+    //       } else reject();
+    //     })
+    //     .catch(() => {
+    //       reject();
+    //     });
+    // });
+
+    console.log("geldi: " + permission.name);
+  }
 </script>
 
 <div class="container">
@@ -29,7 +97,7 @@
   <div class="row justify-content-between align-items-center mb-3">
     <div class="col-6">
       <a class="btn btn-link" role="button" href="/panel/players">
-        <Icon data="{faArrowLeft}" class="mr-1" />
+        <Icon data="{icon['faArrowLeft']}" class="mr-1" />
         Oyuncular
       </a>
     </div>
@@ -39,7 +107,7 @@
         class="btn btn-primary"
         data-toggle="modal"
         data-target="#blabla">
-        <Icon data="{faPlus}" class="mr-1" />
+        <Icon data="{icon['faPlus']}" class="mr-1" />
         Yetki Grubu Oluştur
       </a>
     </div>
@@ -61,151 +129,177 @@
                 'top',
                 'Panele erişebilir, ayarları ve panel içeriklerini görüntüleyebilir',
               ]}">
-              <Icon data="{faSignInAlt}" class="text-primary d-block m-auto" />
+              <Icon
+                data="{icon.faSignInAlt}"
+                class="text-primary d-block m-auto" />
               <h6 class="mb-0 mt-2">Panel Erişimi</h6>
             </th>
-            <th
-              scope="col"
-              use:tooltip="{[
-                'top',
-                'Platforma sunucu bağlayabilir ve bağlı sunucuları yönetebilir',
-              ]}">
-              <Icon data="{faCubes}" class="text-primary d-block m-auto" />
-              <h6 class="mb-0 mt-2">Sunucuları Yönet</h6></th>
-            <th
-              scope="col"
-              use:tooltip="{[
-                'top',
-                'Websiteye yazılar ekleyebilir ve yazıları düzenleyebilir',
-              ]}">
-              <Icon data="{faStickyNote}" class="text-primary d-block m-auto" />
-              <h6 class="mb-0 mt-2">Yazıları Yönet</h6></th>
-            <th
-              scope="col"
-              use:tooltip="{['top', 'Oyuncu taleplerini yönetebilir']}">
-              <Icon data="{faTicketAlt}" class="text-primary d-block m-auto" />
-              <h6 class="mb-0 mt-2">Talepleri Yönet</h6></th>
-            <th scope="col" use:tooltip="{['top', 'Oyuncuları yönetebilir']}">
-              <Icon data="{faUsers}" class="text-primary d-block m-auto" />
-              <h6 class="mb-0 mt-2">Oyuncuları Yönet</h6></th>
-            <th
-              scope="col"
-              use:tooltip="{[
-                'top',
-                'Websiteye tema ekleyebilir, temaları ve görünümünü düzenleyebilir',
-              ]}">
-              <Icon data="{faPalette}" class="text-primary d-block m-auto" />
-              <h6 class="mb-0 mt-2">Görünümü Yönet</h6></th>
-            <th
-              scope="col"
-              use:tooltip="{[
-                'top',
-                'Eklenti ekleyebilir ve eklentileri yönetebilir',
-              ]}">
-              <Icon
-                data="{faPuzzlePiece}"
-                class="text-primary d-block m-auto" />
-              <h6 class="mb-0 mt-2">Eklentileri Yönet</h6></th>
-            <th
-              scope="col"
-              use:tooltip="{['top', 'Platform ayarlarını yönetebilir']}">
-              <Icon data="{faCog}" class="text-primary d-block m-auto" />
-              <h6 class="mb-0 mt-2">Platform Ayarlarını Yönet</h6></th>
+            {#each permissions as permission, index (permission)}
+              <th
+                scope="col"
+                use:tooltip="{[
+                  'top',
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
+                ]}">
+                <Icon
+                  data="{icon[convertIconName(permission.iconName)]}"
+                  class="text-primary d-block m-auto" />
+                <h6 class="mb-0 mt-2">
+                  {permission.name}
+                </h6>
+              </th>
+            {/each}
+            <!--            <th-->
+            <!--              scope="col"-->
+            <!--              use:tooltip="{[-->
+            <!--                'top',-->
+            <!--                'Platforma sunucu bağlayabilir ve bağlı sunucuları yönetebilir',-->
+            <!--              ]}">-->
+            <!--              <Icon data="{icon.faCubes}" class="text-primary d-block m-auto" />-->
+            <!--              <h6 class="mb-0 mt-2">Sunucuları Yönet</h6></th>-->
+            <!--            <th-->
+            <!--              scope="col"-->
+            <!--              use:tooltip="{[-->
+            <!--                'top',-->
+            <!--                'Websiteye yazılar ekleyebilir ve yazıları düzenleyebilir',-->
+            <!--              ]}">-->
+            <!--              <Icon-->
+            <!--                data="{icon.faStickyNote}"-->
+            <!--                class="text-primary d-block m-auto" />-->
+            <!--              <h6 class="mb-0 mt-2">Yazıları Yönet</h6></th>-->
+            <!--            <th-->
+            <!--              scope="col"-->
+            <!--              use:tooltip="{['top', 'Oyuncu taleplerini yönetebilir']}">-->
+            <!--              <Icon-->
+            <!--                data="{icon.faTicketAlt}"-->
+            <!--                class="text-primary d-block m-auto" />-->
+            <!--              <h6 class="mb-0 mt-2">Talepleri Yönet</h6></th>-->
+            <!--            <th scope="col" use:tooltip="{['top', 'Oyuncuları yönetebilir']}">-->
+            <!--              <Icon data="{icon.faUsers}" class="text-primary d-block m-auto" />-->
+            <!--              <h6 class="mb-0 mt-2">Oyuncuları Yönet</h6></th>-->
+            <!--            <th-->
+            <!--              scope="col"-->
+            <!--              use:tooltip="{[-->
+            <!--                'top',-->
+            <!--                'Websiteye tema ekleyebilir, temaları ve görünümünü düzenleyebilir',-->
+            <!--              ]}">-->
+            <!--              <Icon-->
+            <!--                data="{icon.faPalette}"-->
+            <!--                class="text-primary d-block m-auto" />-->
+            <!--              <h6 class="mb-0 mt-2">Görünümü Yönet</h6></th>-->
+            <!--            <th-->
+            <!--              scope="col"-->
+            <!--              use:tooltip="{[-->
+            <!--                'top',-->
+            <!--                'Eklenti ekleyebilir ve eklentileri yönetebilir',-->
+            <!--              ]}">-->
+            <!--              <Icon-->
+            <!--                data="{icon.faPuzzlePiece}"-->
+            <!--                class="text-primary d-block m-auto" />-->
+            <!--              <h6 class="mb-0 mt-2">Eklentileri Yönet</h6></th>-->
+            <!--            <th-->
+            <!--              scope="col"-->
+            <!--              use:tooltip="{['top', 'Platform ayarlarını yönetebilir']}">-->
+            <!--              <Icon data="{icon.faCog}" class="text-primary d-block m-auto" />-->
+            <!--              <h6 class="mb-0 mt-2">Platform Ayarlarını Yönet</h6></th>-->
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">
-              <div
-                class="d-flex flex-row align-items-center justify-content-center">
-                <div class="dropdown mr-3">
-                  <a
-                    class="btn btn-sm py-0"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                    data-toggle="dropdown"
-                    href="javascript:void(0);"
-                    id="permAction"
-                    title="Eylemler">
-                    <Icon data="{faEllipsisV}" />
-                  </a>
-                  <div
-                    aria-labelledby="permAction"
-                    class="dropdown-menu dropdown-menu-left">
+          {#each permissionGroups as permissionGroup, index (permissionGroup)}
+            <tr>
+              <th scope="row">
+                <div
+                  class="d-flex flex-row align-items-center justify-content-center">
+                  <div class="dropdown mr-3">
                     <a
-                      class="dropdown-item"
-                      data-target="#addEditPermGroup"
-                      data-toggle="modal"
-                      href="javascript:void(0);">
-                      <Icon data="{faPencilAlt}" class="text-primary mr-1" />
-                      Düzenle
+                      class="btn btn-sm py-0"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      data-toggle="dropdown"
+                      href="javascript:void(0);"
+                      id="permAction"
+                      title="Eylemler">
+                      <Icon data="{icon.faEllipsisV}" />
                     </a>
-                    <a
-                      class="dropdown-item"
-                      data-target="#confirmDeletePermGroup"
-                      data-toggle="modal"
-                      href="javascript:void(0);">
-                      <Icon data="{faTrash}" class="text-danger mr-1" />
-                      Sil
-                    </a>
+                    <div
+                      aria-labelledby="permAction"
+                      class="dropdown-menu dropdown-menu-left">
+                      <a
+                        class="dropdown-item"
+                        data-target="#addEditPermGroup"
+                        data-toggle="modal"
+                        href="javascript:void(0);">
+                        <Icon
+                          data="{icon.faPencilAlt}"
+                          class="text-primary mr-1" />
+                        Düzenle
+                      </a>
+                      <a
+                        class="dropdown-item"
+                        data-target="#confirmDeletePermGroup"
+                        data-toggle="modal"
+                        href="javascript:void(0);">
+                        <Icon data="{icon.faTrash}" class="text-danger mr-1" />
+                        Sil
+                      </a>
+                    </div>
+                  </div>
+                  <div>
+                    <h5 class="text-primary">{permissionGroup.name}</h5>
+                    <div
+                      class="d-flex flex-row flex-row-reverse justify-content-end align-items-center mr-3">
+                      {#if permissionGroup.user_count > 3}
+                        <small class="pl-1"
+                          >+{permissionGroup.user_count - 3}</small>
+                      {/if}
+                      {#each permissionGroup.users as user, index (user)}
+                        <span class="overlapping-avatar">
+                          <img
+                            src="https://minotar.net/avatar/{user}"
+                            width="32"
+                            height="32"
+                            alt="{user}" />
+                        </span>
+                      {/each}
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <h5 class="text-primary">Yönetici</h5>
-                  <div
-                    class="d-flex flex-row flex-row-reverse justify-content-end align-items-center mr-3">
-                    <small class="pl-1">+24</small>
-                    <span class="overlapping-avatar">
-                      <img
-                        src="https://minotar.net/avatar/selim"
-                        width="32"
-                        height="32"
-                        alt="Butlu" />
-                    </span>
-                    <span class="overlapping-avatar">
-                      <img
-                        src="https://minotar.net/avatar/kahverengi"
-                        width="32"
-                        height="32"
-                        alt="Butlu" />
-                    </span>
-                    <span class="overlapping-avatar">
-                      <img
-                        src="https://minotar.net/avatar/butlu"
-                        width="32"
-                        height="32"
-                        alt="Butlu" />
-                    </span>
-                  </div>
+              </th>
+              <td class="align-middle text-center">
+                <div class="custom-control custom-switch">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input active"
+                    id="access_panel_{permissionGroup.name}"
+                    checked="true"
+                    disabled />
+                  <label
+                    class="custom-control-label"
+                    for="access_panel_{permissionGroup.name}"></label>
                 </div>
-              </div>
-            </th>
-            <td class="align-middle text-center"
-              ><div class="custom-control custom-switch">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  id="customSwitch1" />
-                <label class="custom-control-label" for="customSwitch1"></label>
-              </div>
-            </td>
-            <td class="align-middle text-center"
-              ><div class="custom-control custom-switch">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  id="customSwitch1" />
-                <label class="custom-control-label" for="customSwitch1"></label>
-              </div></td>
-            <td class="align-middle text-center"
-              ><div class="custom-control custom-switch">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  id="customSwitch1" />
-                <label class="custom-control-label" for="customSwitch1"></label>
-              </div></td>
-          </tr>
+              </td>
+              {#each permissions as permission, index (permission)}
+                <td class="align-middle text-center">
+                  <div class="custom-control custom-switch">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="{permission.name}_{permissionGroup.name}"
+                      checked="{isPermissionChecked(
+                        permissionGroup,
+                        permission
+                      )}"
+                      on:click="{() =>
+                        onPermissionClick(permissionGroup, permission)}"
+                      disabled="{isPermissionDisabled(permissionGroup)}" />
+                    <label
+                      class="custom-control-label"
+                      for="{permission.name}_{permissionGroup.name}"></label>
+                  </div>
+                </td>
+              {/each}
+            </tr>
+          {/each}
         </tbody>
       </table>
     </div>
