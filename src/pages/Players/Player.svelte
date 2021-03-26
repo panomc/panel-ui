@@ -28,7 +28,7 @@
     username: "",
     isBanned: false,
     registerDate: 0,
-    permission: "",
+    permissionGroup: "",
   };
   let tickets = [];
   let ticketCount = 0;
@@ -142,7 +142,7 @@
           <ul class="list-inline my-0">
             <li class="list-inline-item">
               <div class="badge text-dark border text-capitalize">
-                {player.permission === "" ? "Oyuncu" : player.permission}
+                {player.permissionGroup === "" ? "Oyuncu" : player.permissionGroup}
               </div>
             </li>
             <li class="list-inline-item">
