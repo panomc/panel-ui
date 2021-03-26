@@ -118,10 +118,10 @@
   </h3>
 
   <div class="card">
-    <div class="card-body">
+    <div class="card-body table-responsive">
       <table class="table table-borderless">
         <thead>
-          <tr class="text-center text-muted">
+          <tr class="text-center text-muted align-top">
             <th scope="col"></th>
             <th
               scope="col"
@@ -132,7 +132,7 @@
               <Icon
                 data="{icon.faSignInAlt}"
                 class="text-primary d-block m-auto" />
-              <h6 class="mb-0 mt-2">Panel Erişimi</h6>
+              <small class="mb-0 font-weight-bolder">Panel Erişimi</small>
             </th>
             {#each permissions as permission, index (permission)}
               <th
@@ -144,9 +144,9 @@
                 <Icon
                   data="{icon[convertIconName(permission.iconName)]}"
                   class="text-primary d-block m-auto" />
-                <h6 class="mb-0 mt-2">
+                <small class="mb-0 font-weight-bolder">
                   {permission.name}
-                </h6>
+                </small>
               </th>
             {/each}
             <!--            <th-->
@@ -245,7 +245,7 @@
                     </div>
                   </div>
                   <div>
-                    <h5 class="text-primary">{permissionGroup.name}</h5>
+                    <h5 class="text-capitalize">{permissionGroup.name}</h5>
                     <div
                       class="d-flex flex-row flex-row-reverse justify-content-end align-items-center mr-3">
                       {#if permissionGroup.user_count > 3}
