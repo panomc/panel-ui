@@ -5,8 +5,12 @@
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import tooltip from "../../pano/js/tooltip.util";
-  import AddEditPermGroupModal from "../../components/modals/AddEditPermGroupModal.svelte";
   import ApiUtil from "../../pano/js/api.util";
+
+  import AddEditPermGroupModal, {
+    show as showPermissionGroupAddEditModal,
+    setCallback as setCallbackForPermissionGroupAddEditModal,
+  } from "../../components/modals/AddEditPermGroupModal.svelte";
 
   import ConfirmDeletePermissionGroupModal, {
     setCallback as setDeletePermissionGroupModalCallback,
@@ -122,9 +126,21 @@
     });
   }
 
+  function onCreatePermissionGroupClick() {
+    showPermissionGroupAddEditModal("create");
+  }
+
+  function onShowEditPermissionGroupButtonClick(permissionGroup) {
+    showPermissionGroupAddEditModal("edit", permissionGroup);
+  }
+
   function onShowDeletePermissionGroupModalClick(permissionGroup) {
     showDeletePermissionGroupModal(permissionGroup);
   }
+
+  setCallbackForPermissionGroupAddEditModal(() => {
+    getData();
+  });
 
   setDeletePermissionGroupModalCallback((permissionGroup) => {
     permissionGroups.splice(permissionGroups.indexOf(permissionGroup), 1);
@@ -149,10 +165,9 @@
     </div>
     <div class="col-6 text-right">
       <a
-        href="#"
+        href="javascript:void(0);"
         class="btn btn-primary"
-        data-toggle="modal"
-        data-target="#blabla">
+        on:click="{() => onCreatePermissionGroupClick()}">
         <Icon data="{icon['faPlus']}" class="mr-1" />
         Yetki Grubu Oluştur
       </a>
