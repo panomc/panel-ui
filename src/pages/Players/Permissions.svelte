@@ -289,7 +289,8 @@
                         class="dropdown-item"
                         data-target="#addEditPermGroup"
                         data-toggle="modal"
-                        href="javascript:void(0);">
+                        href="javascript:void(0);"
+                      on:click={() => onShowEditPermissionGroupButtonClick(permissionGroup)}>
                         <Icon
                           data="{icon.faPencilAlt}"
                           class="text-primary mr-1" />
