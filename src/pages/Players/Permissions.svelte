@@ -1,3 +1,4 @@
+<!--suppress SillyAssignmentJS -->
 <script>
   import Icon from "svelte-awesome";
   import * as icon from "@fortawesome/free-solid-svg-icons";
@@ -6,6 +7,11 @@
   import tooltip from "../../pano/js/tooltip.util";
   import AddEditPermGroupModal from "../../components/modals/AddEditPermGroupModal.svelte";
   import ApiUtil from "../../pano/js/api.util";
+
+  import ConfirmDeletePermissionGroupModal, {
+    setCallback as setDeletePermissionGroupModalCallback,
+    show as showDeletePermissionGroupModal,
+  } from "../../components/modals/ConfirmDeletePermissionGroupModal.svelte";
 
   let permissions = [];
   let permissionGroups = [];
@@ -115,6 +121,21 @@
         });
     });
   }
+
+  function onShowDeletePermissionGroupModalClick(permissionGroup) {
+    showDeletePermissionGroupModal(permissionGroup);
+  }
+
+  setDeletePermissionGroupModalCallback((permissionGroup) => {
+    permissionGroups.splice(permissionGroups.indexOf(permissionGroup), 1);
+    permissionGroups = permissionGroups;
+
+    if (typeof permissionGroupPerms[permissionGroup.id] !== "undefined")
+      permissionGroupPerms.splice(
+        permissionGroupPerms.indexOf(permissionGroup.id),
+        1
+      );
+  });
 </script>
 
 <div class="container">
@@ -259,14 +280,22 @@
                           class="text-primary mr-1" />
                         Düzenle
                       </a>
-                      <a
-                        class="dropdown-item"
-                        data-target="#confirmDeletePermGroup"
-                        data-toggle="modal"
-                        href="javascript:void(0);">
-                        <Icon data="{icon.faTrash}" class="text-danger mr-1" />
-                        Sil
-                      </a>
+                      {#if permissionGroup.name !== "admin"}
+                        <a
+                          class="dropdown-item"
+                          data-target="#confirmDeletePermGroup"
+                          data-toggle="modal"
+                          href="javascript:void(0);"
+                          on:click="{() =>
+                            onShowDeletePermissionGroupModalClick(
+                              permissionGroup
+                            )}">
+                          <Icon
+                            data="{icon.faTrash}"
+                            class="text-danger mr-1" />
+                          Sil
+                        </a>
+                      {/if}
                     </div>
                   </div>
                   <div>
@@ -336,3 +365,4 @@
 </div>
 
 <AddEditPermGroupModal />
+<ConfirmDeletePermissionGroupModal />
