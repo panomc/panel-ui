@@ -21,8 +21,6 @@
             permissionGroups = response.data.permission_groups;
             permissionGroupPerms = response.data.permission_group_perms;
 
-            console.log(response.data);
-
             isPageInitialized.set(true);
 
             resolve();
@@ -39,8 +37,6 @@
   };
 
   getData();
-
-  console.log(typeof icon["faPlus"]);
 
   function refreshBrowserPage() {
     location.reload();
@@ -92,7 +88,6 @@
         permission_id: permission.id,
       })
         .then((response) => {
-          console.log(response);
           if (response.data.result === "ok") {
             loadingPermissionsList[
               permission.name + "_" + permissionGroup.name
@@ -115,8 +110,6 @@
           reject();
         });
     });
-
-    console.log("geldi: " + permission.name);
   }
 </script>
 
