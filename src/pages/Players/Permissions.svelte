@@ -10,6 +10,7 @@
   let permissions = [];
   let permissionGroups = [];
   let permissionGroupPerms = {};
+  let loadingPermissionsList = [];
 
   function getData() {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -41,6 +42,10 @@
 
   console.log(typeof icon["faPlus"]);
 
+  function refreshBrowserPage() {
+    location.reload();
+  }
+
   function convertIconName(iconName) {
     const iconNameSplit = iconName.split("-");
     let restOfIconName = "";
@@ -63,30 +68,53 @@
     );
   }
 
-  function isPermissionDisabled(permissionGroup) {
-    return permissionGroup.name === "admin";
+  function isPermissionDisabled(
+    permission,
+    permissionGroup,
+    loadingPermissionsList
+  ) {
+    return (
+      permissionGroup.name === "admin" ||
+      loadingPermissionsList[permission.name + "_" + permissionGroup.name]
+    );
   }
 
   function onPermissionClick(permissionGroup, permission) {
-    // showNetworkErrorOnCatch((resolve, reject) => {
-    //   ApiUtil.post("panel/permission/set")
-    //     .then((response) => {
-    //       if (response.data.result === "ok") {
-    //         permissions = response.data.permissions;
-    //         permissionGroups = response.data.permission_groups;
-    //         permissionGroupPerms = response.data.permission_group_perms;
-    //
-    //         console.log(response.data);
-    //
-    //         isPageInitialized.set(true);
-    //
-    //         resolve();
-    //       } else reject();
-    //     })
-    //     .catch(() => {
-    //       reject();
-    //     });
-    // });
+    loadingPermissionsList[permission.name + "_" + permissionGroup.name] = true;
+    const mode = isPermissionChecked(permissionGroup, permission)
+      ? "DELETE"
+      : "ADD";
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/permission/set", {
+        mode: mode,
+        permission_group_id: permissionGroup.id,
+        permission_id: permission.id,
+      })
+        .then((response) => {
+          console.log(response);
+          if (response.data.result === "ok") {
+            loadingPermissionsList[
+              permission.name + "_" + permissionGroup.name
+            ] = false;
+
+            if (mode === "ADD") {
+              permissionGroupPerms[permissionGroup.id].push(permission.id);
+            } else {
+              permissionGroupPerms[permissionGroup.id].splice(
+                permissionGroupPerms[permissionGroup.id].indexOf(permission.id),
+                1
+              );
+            }
+
+            resolve();
+          } else if (response.data.error === "NOT_EXISTS") refreshBrowserPage();
+          else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
 
     console.log("geldi: " + permission.name);
   }
@@ -291,7 +319,11 @@
                       )}"
                       on:click="{() =>
                         onPermissionClick(permissionGroup, permission)}"
-                      disabled="{isPermissionDisabled(permissionGroup)}" />
+                      disabled="{isPermissionDisabled(
+                        permission,
+                        permissionGroup,
+                        loadingPermissionsList
+                      )}" />
                     <label
                       class="custom-control-label"
                       for="{permission.name}_{permissionGroup.name}"></label>
