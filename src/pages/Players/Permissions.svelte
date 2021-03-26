@@ -94,7 +94,11 @@
             ] = false;
 
             if (mode === "ADD") {
-              permissionGroupPerms[permissionGroup.id].push(permission.id);
+              if (
+                typeof permissionGroupPerms[permissionGroup.id] === "undefined"
+              )
+                permissionGroupPerms[permissionGroup.id] = [permission.id];
+              else permissionGroupPerms[permissionGroup.id].push(permission.id);
             } else {
               permissionGroupPerms[permissionGroup.id].splice(
                 permissionGroupPerms[permissionGroup.id].indexOf(permission.id),
