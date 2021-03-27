@@ -91,28 +91,17 @@
             class="d-block m-auto text-gray" />
         </div>
         {#if $permissionGroup.user_count !== 0}
-          Not: Eğer bu yetki grubunu silerseniz, şu kullanıcılar yetkisiz olarak
-          kalacaklardır:
+          Yetki grubu içerisindeki şu kullanıcılar <i>yetkisiz</i> olarak değişecek:
           <br />
           <br />
+        </span>
 
-          <div>
-            <h5 class="text-capitalize">{$permissionGroup.name}</h5>
-            <div
-              class="d-flex flex-row flex-row-reverse justify-content-end align-items-center mr-3">
-              {#if $permissionGroup.user_count > 3}
-                <small class="pl-1">+{$permissionGroup.user_count - 3}</small>
-              {/if}
-              {#each $permissionGroup.users as user, index (user)}
-                <span class="overlapping-avatar">
-                  <img
-                    src="https://minotar.net/avatar/{user}"
-                    width="32"
-                    height="32"
-                    alt="{user}" />
-                </span>
-              {/each}
-            </div>
+            {#each $category.posts as post, index (post)}
+                <a class="badge badge-warning badge-pill mr-1" href="/panel/posts/post/{post.id}" target="_blank">
+                  {post.title}
+                </a>
+            {/each}
+          </div>
           </div>
 
           <br />

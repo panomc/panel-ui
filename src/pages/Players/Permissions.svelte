@@ -270,7 +270,7 @@
             <tr>
               <th scope="row">
                 <div
-                  class="d-flex flex-row align-items-center justify-content-center">
+                  class="d-flex flex-row align-items-center">
                   <div class="dropdown mr-3">
                     <a
                       class="btn btn-sm py-0"
