@@ -201,7 +201,7 @@
                       {player.username}
                     </a>
                   </td>
-                  <td class="align-middle text-nowrap">
+                  <td class="align-middle text-nowrap text-capitalize">
                     {player.permission_group === "-" ? "Oyuncu" : player.permission_group}
                     <i
                       aria-hidden="true"

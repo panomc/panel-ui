@@ -118,7 +118,7 @@
             </div>
           </div>
         {/if}
-
+      </div>
         <div class="modal-footer">
           <button
             class="btn btn-link text-muted"
@@ -137,7 +137,6 @@
             Evet
           </button>
         </div>
-      </div>
     </div>
   </div>
 </div>
