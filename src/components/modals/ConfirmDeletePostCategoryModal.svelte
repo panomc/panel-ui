@@ -90,24 +90,19 @@
         Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?
         {#if $category.post_count !== 0}
           <div class="mt-3 alert alert-warning">
-        <span>
-          Kategori içerisindeki şu yazılar <i>kategorisiz</i> olarak değişecek:
-          <br />
-          <br />
-        </span>
-
+              Kategori içerisindeki şu yazılar Kategorisiz olarak değişecek:
+              <br />
+              <br />
             {#each $category.posts as post, index (post)}
-                <a class="badge badge-warning badge-pill mr-1" href="/panel/posts/post/{post.id}" target="_blank">
-                  {post.title}
-                </a>
+              <a class="badge badge-warning badge-pill mr-1" href="/panel/posts/post/{post.id}" target="_blank">
+                {post.title}
+              </a>
             {/each}
           </div>
           {#if $category.post_count > 5}
             +{$category.post_count - 5}
             yazı daha
           {/if}
-
-          <br />
         {/if}
       </div>
       <div class="modal-footer">

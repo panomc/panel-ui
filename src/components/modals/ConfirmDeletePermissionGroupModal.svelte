@@ -90,41 +90,43 @@
             scale="3"
             class="d-block m-auto text-gray" />
         </div>
-        {#if $permissionGroup.user_count !== 0}
-          Yetki grubu içerisindeki şu kullanıcılar <i>yetkisiz</i> olarak değişecek:
-          <br />
-          <br />
-        </span>
-
-            {#each $category.posts as post, index (post)}
-                <a class="badge badge-warning badge-pill mr-1" href="/panel/posts/post/{post.id}" target="_blank">
-                  {post.title}
-                </a>
-            {/each}
+          Bu yetki grubunu kalıcı olarak silmek istediğinizden emin misiniz?
+          <div class="mt-3 alert alert-warning">
+            Yetki grubu içerisindeki şu kullanıcılar Oyuncu olarak değişecek:
+            <br />
+            <br />
+            <a class="badge badge-warning badge-pill mr-1" href="#" target="_blank">
+              Yetki grubu ismi
+            </a>
+              <div class="d-flex flex-row flex-row-reverse justify-content-center align-items-center mt-3 mr-3">
+                <small class="pl-1">+3</small>
+                <span class="overlapping-avatar">
+                  <img
+                    src="https://minotar.net/avatar/Steve"
+                    width="32"
+                    height="32"
+                    alt="Steve" />
+                </span>
+            </div>
           </div>
-          </div>
-
-          <br />
-        {/if}
-        Bu yetki grubunu kalıcı olarak silmek istediğinizden emin misiniz?
-      </div>
-      <div class="modal-footer">
-        <button
-          class="btn btn-link text-muted"
-          type="button"
-          class:disabled="{loading}"
-          disabled="{loading}"
-          on:click="{hide}">
-          İptal
-        </button>
-        <button
-          class="btn btn-danger"
-          type="button"
-          class:disabled="{loading}"
-          disabled="{loading}"
-          on:click="{onYesClick}">
-          Evet
-        </button>
+        <div class="modal-footer">
+          <button
+            class="btn btn-link text-muted"
+            type="button"
+            class:disabled="{loading}"
+            disabled="{loading}"
+            on:click="{hide}">
+            İptal
+          </button>
+          <button
+            class="btn btn-danger"
+            type="button"
+            class:disabled="{loading}"
+            disabled="{loading}"
+            on:click="{onYesClick}">
+            Evet
+          </button>
+        </div>
       </div>
     </div>
   </div>
