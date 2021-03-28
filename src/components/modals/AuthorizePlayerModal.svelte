@@ -58,9 +58,6 @@
 </script>
 
 <script>
-  import Icon from "svelte-awesome";
-  import { faPlus } from "@fortawesome/free-solid-svg-icons";
-
   let submitLoading = false;
 
   function refreshBrowserPage() {
@@ -137,13 +134,6 @@
               {/each}
             </select>
           </div>
-
-          <a
-            href="/panel/players/permissions"
-            class="btn btn-block bg-lightprimary text-primary">
-            <Icon data="{faPlus}" class="mr-1" />
-            Yetki Grubu Oluştur
-          </a>
         </div>
         <div class="modal-footer">
           <button
