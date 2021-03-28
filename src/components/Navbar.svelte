@@ -314,14 +314,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0);">
-              <Icon data="{faUserPlus}" class="mr-1" />
-              Yönetici Ekle
-            </a>
-          </li>
-          <li class="nav-item">
             <a
-              class="nav-link text-danger"
+              class="nav-link"
               href="javascript:void(0);"
               on:click="{onLogout}">
               <Icon data="{faSignOutAlt}" class="mr-1" />
