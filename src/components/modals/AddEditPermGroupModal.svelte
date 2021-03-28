@@ -111,7 +111,9 @@
         </div>
         <div class="modal-footer">
           <button
-            class="btn btn-block btn-secondary"
+            class="btn btn-block"
+            class:btn-secondary="{$mode === 'create'}"
+            class:btn-primary={$mode === "edit"}
             type="submit"
             class:disabled="{loading}"
             disabled="{loading}">
