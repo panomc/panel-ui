@@ -1,9 +1,9 @@
+<!--suppress SillyAssignmentJS -->
 <script>
   import { getPath, route } from "routve";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../pano/js/api.util";
-  import Pagination from "../../components/Pagination.svelte";
 
   import Icon from "svelte-awesome";
   import { faListAlt } from "@fortawesome/free-regular-svg-icons";
@@ -14,7 +14,14 @@
     faUserCircle,
     faGlobe,
   } from "@fortawesome/free-solid-svg-icons";
+
   import Date from "../../components/Date.svelte";
+  import Pagination from "../../components/Pagination.svelte";
+
+  import AuthorizePlayerModal, {
+    show as showAuthorizePlayerModal,
+    setCallback as setAuthorizePlayerModalCallback,
+  } from "../../components/modals/AuthorizePlayerModal.svelte";
 
   export let page = undefined;
   export let pageType = "all";
@@ -76,6 +83,15 @@
       });
     }
   }
+
+  setAuthorizePlayerModalCallback((newPlayer) => {
+    players.forEach((player) => {
+      if (player.id === newPlayer.id)
+        player.permission_group = newPlayer.permission_group;
+    });
+
+    players = players;
+  });
 
   $: {
     routePage(typeof page === "undefined" ? 1 : parseInt(page));
@@ -173,7 +189,10 @@
                       <div
                         aria-labelledby="playerAction"
                         class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="javascript:void(0);">
+                        <a
+                          class="dropdown-item"
+                          href="javascript:void(0);"
+                          on:click="{() => showAuthorizePlayerModal(player)}">
                           <Icon
                             data="{faUserCircle}"
                             class="mr-1 text-primary" />
@@ -191,7 +210,9 @@
                     </div>
                   </th>
                   <td class="min-w-200px align-middle text-nowrap">
-                    <a title="Oyuncu Profiline Git" href="/panel/players/player/{player.username}">
+                    <a
+                      title="Oyuncu Profiline Git"
+                      href="/panel/players/player/{player.username}">
                       <img
                         alt="Oyuncu Adı"
                         class="rounded-circle border mr-3"
@@ -202,7 +223,9 @@
                     </a>
                   </td>
                   <td class="align-middle text-nowrap text-capitalize">
-                    {player.permission_group === "-" ? "Oyuncu" : player.permission_group}
+                    {player.permission_group === "-"
+                      ? "Oyuncu"
+                      : player.permission_group}
                     <i
                       aria-hidden="true"
                       class="fa fa-times text-danger fa-fw"
@@ -238,3 +261,5 @@
     </div>
   </div>
 </div>
+
+<AuthorizePlayerModal />
