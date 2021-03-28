@@ -149,7 +149,7 @@
               <tr>
                 <th class="align-middle text-nowrap" scope="col"></th>
                 <th class="align-middle text-nowrap" scope="col">İsim</th>
-                <th class="align-middle text-nowrap" scope="col">Talepler</th>
+                <th class="align-middle text-nowrap" scope="col">Yetki</th>
                 <th class="align-middle text-nowrap" scope="col">Durum</th>
                 <th class="align-middle text-nowrap" scope="col">Son Oturum</th>
                 <th class="align-middle text-nowrap" scope="col">Kayıt</th>
@@ -202,7 +202,7 @@
                     </a>
                   </td>
                   <td class="align-middle text-nowrap">
-                    {player.ticket_count}
+                    {player.permission_group === "-" ? "Oyuncu" : player.permission_group}
                     <i
                       aria-hidden="true"
                       class="fa fa-times text-danger fa-fw"
