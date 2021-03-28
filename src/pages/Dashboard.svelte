@@ -230,7 +230,7 @@
                 class="text-gray d-block mr-5" />
             </div>
             <div class="col">
-              <h3 class="font-weight-bolder text-primary">56</h3>
+              <h3 class="font-weight-bolder text-primary">{registered_player_count}</h3>
               <span class="text-primary">Toplam Oyuncu</span>
             </div>
           </div>
