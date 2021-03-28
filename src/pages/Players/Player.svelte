@@ -33,7 +33,7 @@
     username: "",
     isBanned: false,
     registerDate: 0,
-    permissionGroup: "",
+    permission_group: "",
   };
   let tickets = [];
   let ticketCount = 0;
@@ -84,7 +84,7 @@
   }
 
   setAuthorizePlayerModalCallback((newPlayer) => {
-    player.permissionGroup = newPlayer.permissionGroup;
+    player.permission_group = newPlayer.permission_group;
   });
 
   $: {
@@ -154,9 +154,9 @@
           <ul class="list-inline my-0">
             <li class="list-inline-item">
               <div class="badge text-dark border text-capitalize">
-                {player.permissionGroup === "-"
+                {player.permission_group === "-"
                   ? "Oyuncu"
-                  : player.permissionGroup}
+                  : player.permission_group}
               </div>
             </li>
             <li class="list-inline-item">

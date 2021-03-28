@@ -125,7 +125,7 @@
             <select
               class="form-control"
               id="exampleFormControlSelect1"
-              bind:value="{$player.permissionGroup}">
+              bind:value="{$player.permission_group}">
               <option class="text-primary" value="-">Oyuncu</option>
 
               {#each $permissionGroups as permissionGroup, index (permissionGroup)}
