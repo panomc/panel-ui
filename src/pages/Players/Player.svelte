@@ -9,6 +9,7 @@
     faTimes,
     faPencilAlt,
     faUserCircle,
+    faPlus,
     faEllipsisV,
   } from "@fortawesome/free-solid-svg-icons";
 
@@ -244,6 +245,12 @@
             <option>5</option>
           </select>
         </div>
+
+        <a href="/panel/players/permissions" class="btn btn-block bg-lightprimary text-primary">
+          
+        <Icon data="{faPlus}" class="mr-1" />
+          Yetki Grubu Oluştur
+        </a>
 
       </div>
       <div class="modal-footer">
