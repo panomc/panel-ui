@@ -90,25 +90,35 @@
             scale="3"
             class="d-block m-auto text-gray" />
         </div>
-          Bu yetki grubunu kalıcı olarak silmek istediğinizden emin misiniz?
+        Bu yetki grubunu kalıcı olarak silmek istediğinizden emin misiniz?
+
+        {#if $permissionGroup.user_count > 0}
           <div class="mt-3 alert alert-warning">
             Yetki grubu içerisindeki şu kullanıcılar Oyuncu olarak değişecek:
             <br />
             <br />
-            <a class="badge badge-warning badge-pill mr-1" href="#" target="_blank">
-              Yetki grubu ismi
-            </a>
-              <div class="d-flex flex-row flex-row-reverse justify-content-center align-items-center mt-3 mr-3">
-                <small class="pl-1">+3</small>
+            <span class="badge badge-warning badge-pill mr-1">
+              {$permissionGroup.name}
+            </span>
+            <div
+              class="d-flex flex-row flex-row-reverse justify-content-center align-items-center mt-3 mr-3">
+              {#if $permissionGroup.user_count > 3}
+                <small class="pl-1">+{$permissionGroup.user_count - 3}</small>
+              {/if}
+
+              {#each $permissionGroup.users as user, index (user)}
                 <span class="overlapping-avatar">
                   <img
-                    src="https://minotar.net/avatar/Steve"
+                    src="https://minotar.net/avatar/{user}"
                     width="32"
                     height="32"
-                    alt="Steve" />
+                    alt="{user}" />
                 </span>
+              {/each}
             </div>
           </div>
+        {/if}
+
         <div class="modal-footer">
           <button
             class="btn btn-link text-muted"
