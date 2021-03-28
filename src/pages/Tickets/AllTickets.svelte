@@ -232,7 +232,7 @@
   <div class="col-md-4 col-6">
     <a class="btn btn-link" role="button" href="/panel/tickets/categories">
       <Icon data="{faListAlt}" class="mr-1" />
-      Kategoriler
+      Talep Kategorileri
     </a>
   </div>
   <div class="col d-flex">

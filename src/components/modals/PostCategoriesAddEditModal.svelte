@@ -101,7 +101,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-          {$mode === "create" ? "Kategori Oluştur" : "Kategori Düzenle"}
+          {$mode === "create" ? "Kategori Oluştur" : "Kategoriyi Düzenle"}
         </h5>
 
         <button

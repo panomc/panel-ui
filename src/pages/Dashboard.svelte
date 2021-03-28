@@ -243,7 +243,7 @@
     <div class="card-body">
       <div class="row justify-content-between">
         <div class="col-4">
-          <h5 class="card-title">Ziyaretler</h5>
+          <h5 class="card-title">Website Aktivitesi</h5>
         </div>
         <div class="col-8 text-right">
           <div class="btn-group">

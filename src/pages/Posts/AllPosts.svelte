@@ -164,7 +164,7 @@
   <div class="col-md-4 col-6">
     <a class="btn btn-link" role="button" href="/panel/posts/categories">
       <Icon data="{faListAlt}" class="mr-1" />
-      Kategoriler
+      Yazı Kategorileri
     </a>
   </div>
   <div class="col d-flex">
