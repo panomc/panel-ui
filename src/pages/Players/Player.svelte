@@ -9,13 +9,17 @@
     faTimes,
     faPencilAlt,
     faUserCircle,
-    faPlus,
-    faEllipsisV,
   } from "@fortawesome/free-solid-svg-icons";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+
   import ConfirmBanPlayerModal from "../../components/modals/ConfirmBanPlayerModal.svelte";
   import EditPlayerModal from "../../components/modals/EditPlayerModal.svelte";
+  import AuthorizePlayerModal, {
+    show as showAuthorizePlayerModal,
+    setCallback as setAuthorizePlayerModalCallback,
+  } from "../../components/modals/AuthorizePlayerModal.svelte";
+
   import TicketStatus from "../../components/TicketStatus.svelte";
   import Date from "../../components/Date.svelte";
 
@@ -79,6 +83,10 @@
     }
   }
 
+  setAuthorizePlayerModalCallback((newPlayer) => {
+    player.permissionGroup = newPlayer.permissionGroup;
+  });
+
   $: {
     getPlayerDetail(username, typeof page === "undefined" ? 1 : parseInt(page));
   }
@@ -96,7 +104,10 @@
       </a>
     </div>
     <div class="col text-right">
-      <a class="btn btn-link" href="javascript:void(0);" data-toggle="modal" data-target="#exampleModal">
+      <a
+        class="btn btn-link"
+        href="javascript:void(0);"
+        on:click="{() => showAuthorizePlayerModal(player)}">
         <Icon data="{faUserCircle}" class="mr-1" />
         Yetkilendir
       </a>
@@ -143,7 +154,9 @@
           <ul class="list-inline my-0">
             <li class="list-inline-item">
               <div class="badge text-dark border text-capitalize">
-                {player.permissionGroup === "" ? "Oyuncu" : player.permissionGroup}
+                {player.permissionGroup === "-"
+                  ? "Oyuncu"
+                  : player.permissionGroup}
               </div>
             </li>
             <li class="list-inline-item">
@@ -218,44 +231,8 @@
   </div>
 </div>
 
-<!-- Ban Player Confirmation Modal -->
 <ConfirmBanPlayerModal />
 
 <EditPlayerModal />
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Oyuncuyu Yetkilendir</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Yetki grubu seç</label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-
-        <a href="/panel/players/permissions" class="btn btn-block bg-lightprimary text-primary">
-          
-        <Icon data="{faPlus}" class="mr-1" />
-          Yetki Grubu Oluştur
-        </a>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Kaydet</button>
-      </div>
-    </div>
-  </div>
-</div>
+<AuthorizePlayerModal />
