@@ -95,7 +95,7 @@
       </a>
     </div>
     <div class="col text-right">
-      <a class="btn btn-link" href="javascript:void(0);">
+      <a class="btn btn-link" href="javascript:void(0);" data-toggle="modal" data-target="#exampleModal">
         <Icon data="{faUserCircle}" class="mr-1" />
         Yetkilendir
       </a>
@@ -221,3 +221,34 @@
 <ConfirmBanPlayerModal />
 
 <EditPlayerModal />
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Oyuncuyu Yetkilendir</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Yetki grubu seç</label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Kaydet</button>
+      </div>
+    </div>
+  </div>
+</div>
