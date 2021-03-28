@@ -269,8 +269,7 @@
           {#each permissionGroups as permissionGroup, index (permissionGroup)}
             <tr>
               <th scope="row">
-                <div
-                  class="d-flex flex-row align-items-center">
+                <div class="d-flex flex-row align-items-center">
                   <div class="dropdown mr-3">
                     <a
                       class="btn btn-sm py-0"
@@ -290,7 +289,10 @@
                         data-target="#addEditPermGroup"
                         data-toggle="modal"
                         href="javascript:void(0);"
-                      on:click={() => onShowEditPermissionGroupButtonClick(permissionGroup)}>
+                        on:click="{() =>
+                          onShowEditPermissionGroupButtonClick(
+                            permissionGroup
+                          )}">
                         <Icon
                           data="{icon.faPencilAlt}"
                           class="text-primary mr-1" />
@@ -323,12 +325,14 @@
                           >+{permissionGroup.user_count - 3}</small>
                       {/if}
                       {#each permissionGroup.users as user, index (user)}
-                        <span class="overlapping-avatar">
-                          <img
-                            src="https://minotar.net/avatar/{user}"
-                            width="32"
-                            height="32"
-                            alt="{user}" />
+                        <span class="overlapping-avatar" use:tooltip={['bottom', user]}>
+                          <a href="/panel/players/player/{user}">
+                            <img
+                              src="https://minotar.net/avatar/{user}"
+                              width="32"
+                              height="32"
+                              alt="{user}" />
+                          </a>
                         </span>
                       {/each}
                     </div>
