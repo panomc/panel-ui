@@ -9,12 +9,19 @@
   const player = writable({});
   const loading = writable(true);
   const permissionGroups = writable([]);
+  const defaultErrors = {
+    "LAST_ADMIN": false,
+  }
+  const errors = writable(defaultErrors);
+  const submitLoading = writable(false);
 
   let callback = (player) => {};
   let hideCallback = (player) => {};
 
   export function show(newPlayer) {
-    player.set(newPlayer);
+    player.set(Object.assign({}, newPlayer));
+    errors.set(defaultErrors)
+    submitLoading.set(false)
 
     initData();
 
@@ -58,20 +65,18 @@
 </script>
 
 <script>
-  let submitLoading = false;
-
   function refreshBrowserPage() {
     location.reload();
   }
 
   function onSubmit() {
-    submitLoading = true;
+    submitLoading.set(true);
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post("panel/player/set/permissionGroup", get(player))
         .then((response) => {
           if (response.data.result === "ok") {
-            submitLoading = false;
+            submitLoading.set(false);
 
             hide();
 
@@ -80,6 +85,10 @@
             resolve();
           } else if (response.data.result === "NOT_EXISTS") {
             refreshBrowserPage();
+          } else if (!!response.data.error) {
+            errors.set(response.data.error);
+
+            resolve();
           } else reject();
         })
         .catch(() => {
@@ -124,6 +133,7 @@
             <label for="exampleFormControlSelect1">Yetki grubu seç</label>
             <select
               class="form-control"
+              class:border-danger="{$errors['LAST_ADMIN']}"
               id="exampleFormControlSelect1"
               bind:value="{$player.permission_group}">
               <option class="text-primary" value="-">Oyuncu</option>
@@ -133,14 +143,21 @@
                   >{permissionGroup.name}</option>
               {/each}
             </select>
+            {#if $errors["LAST_ADMIN"]}
+              <small class="text-danger">
+                <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"
+                ></i>
+                Bu kullanıcının yetkisi son yönetici olduğu için değiştirilemez.
+              </small>
+            {/if}
           </div>
         </div>
         <div class="modal-footer">
           <button
             type="button"
             class="btn btn-primary"
-            class:disabled="{submitLoading}"
-            disabled="{submitLoading}"
+            class:disabled="{$submitLoading}"
+            disabled="{$submitLoading}"
             on:click="{onSubmit}">Kaydet</button>
         </div>
       {/if}
