@@ -40,6 +40,7 @@
 
   import { showNetworkErrorOnCatch } from "../../Store";
   import ApiUtil from "../../pano/js/api.util";
+  import tooltip from "../../pano/js/tooltip.util";
 
   let loading = false;
 
@@ -107,12 +108,16 @@
               {/if}
 
               {#each $permissionGroup.users as user, index (user)}
-                <span class="overlapping-avatar">
-                  <img
-                    src="https://minotar.net/avatar/{user}"
-                    width="32"
-                    height="32"
-                    alt="{user}" />
+                <span
+                  class="overlapping-avatar"
+                  use:tooltip="{['bottom', user]}">
+                  <a href="/panel/players/player/{user}">
+                    <img
+                      src="https://minotar.net/avatar/{user}"
+                      width="32"
+                      height="32"
+                      alt="{user}" />
+                  </a>
                 </span>
               {/each}
             </div>
