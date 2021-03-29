@@ -30,7 +30,7 @@
   import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
   import { showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano/js/api.util";
+  import ApiUtil from "../../pano-ui/js/api.util";
 
   let loading;
 

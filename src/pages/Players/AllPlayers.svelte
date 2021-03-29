@@ -3,7 +3,7 @@
   import { getPath, route } from "routve";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano/js/api.util";
+  import ApiUtil from "../../pano-ui/js/api.util";
 
   import Icon from "svelte-awesome";
   import { faListAlt } from "@fortawesome/free-regular-svg-icons";

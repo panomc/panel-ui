@@ -1,6 +1,6 @@
 <script>
   import { servers } from "../../Store";
-  import { NETWORK_ERROR } from "../../pano/js/api.util";
+  import { NETWORK_ERROR } from "../../pano-ui/js/api.util";
 
   import Icon from "svelte-awesome";
   import {

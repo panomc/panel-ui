@@ -39,8 +39,8 @@
   import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
   import { showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano/js/api.util";
-  import tooltip from "../../pano/js/tooltip.util";
+  import ApiUtil from "../../pano-ui/js/api.util";
+  import tooltip from "../../pano-ui/js/tooltip.util";
 
   let loading = false;
 

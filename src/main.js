@@ -1,6 +1,6 @@
 import "bootstrap";
 
-import { ApiUtil } from "./pano/js/api.util";
+import { ApiUtil } from "./pano-ui/js/api.util";
 
 import App from "./App.svelte";
 

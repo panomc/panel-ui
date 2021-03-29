@@ -3,7 +3,7 @@
   import { writable, get } from "svelte/store";
 
   import { showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano/js/api.util";
+  import ApiUtil from "../../pano-ui/js/api.util";
 
   const dialogID = "authorizePlayerModal";
   const player = writable({});

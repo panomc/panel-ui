@@ -1,7 +1,7 @@
 import { get, writable } from "svelte/store";
 
 import { PanelSidebarStorageUtil } from "./util/storage.util";
-import { ApiUtil, NETWORK_ERROR } from "./pano/js/api.util";
+import { ApiUtil, NETWORK_ERROR } from "./pano-ui/js/api.util";
 
 export const networkErrorCallbacks = writable([]);
 export const retryingNetworkErrors = writable(false);

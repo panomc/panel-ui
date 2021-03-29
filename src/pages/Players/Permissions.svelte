@@ -4,8 +4,8 @@
   import * as icon from "@fortawesome/free-solid-svg-icons";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
-  import tooltip from "../../pano/js/tooltip.util";
-  import ApiUtil from "../../pano/js/api.util";
+  import tooltip from "../../pano-ui/js/tooltip.util";
+  import ApiUtil from "../../pano-ui/js/api.util";
 
   import AddEditPermGroupModal, {
     show as showPermissionGroupAddEditModal,

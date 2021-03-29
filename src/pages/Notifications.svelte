@@ -7,8 +7,8 @@
   import { faBell, faDotCircle } from "@fortawesome/free-regular-svg-icons";
 
   import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
-  import ApiUtil from "../pano/js/api.util";
-  import tooltip from "../pano/js/tooltip.util";
+  import ApiUtil from "../pano-ui/js/api.util";
+  import tooltip from "../pano-ui/js/tooltip.util";
 
   import ConfirmRemoveAllNotificationsModal, {
     show as showDeleteAllNotificationsModal,

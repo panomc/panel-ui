@@ -1,5 +1,5 @@
 <script>
-  import tooltip from "../../pano/js/tooltip.util";
+  import tooltip from "../../pano-ui/js/tooltip.util";
 
   import Icon from "svelte-awesome";
   import { faCog, faSync } from "@fortawesome/free-solid-svg-icons";

@@ -1,7 +1,7 @@
 <script>
   import moment from "moment";
 
-  import tooltip from "../pano/js/tooltip.util";
+  import tooltip from "../pano-ui/js/tooltip.util";
 
   export let time;
 

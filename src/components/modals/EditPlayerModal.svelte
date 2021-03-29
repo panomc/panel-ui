@@ -48,7 +48,7 @@
 
 <script>
   import { showNetworkErrorOnCatch, user } from "../../Store";
-  import ApiUtil from "../../pano/js/api.util";
+  import ApiUtil from "../../pano-ui/js/api.util";
 
   function refreshBrowserPage() {
     location.reload();

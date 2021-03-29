@@ -20,14 +20,14 @@
   } from "@fortawesome/free-solid-svg-icons";
   import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 
-  import ApiUtil from "../pano/js/api.util";
+  import ApiUtil from "../pano-ui/js/api.util";
 
   import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
   import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";
   import TrafficChart from "../components/charts/Dashboard/TrafficChart.svelte";
   import TicketStatus from "../components/TicketStatus.svelte";
   import Date from "../components/Date.svelte";
-  import tooltip from "../pano/js/tooltip.util";
+  import tooltip from "../pano-ui/js/tooltip.util";
 
   let getting_started_blocks = {
     welcome_board: false,

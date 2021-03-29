@@ -9,7 +9,7 @@
 
   import SetPostThumbnailModal from "../components/modals/SetPostThumbnailModal.svelte";
   import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
-  import ApiUtil from "../pano/js/api.util";
+  import ApiUtil from "../pano-ui/js/api.util";
   import { extractContent } from "../util/text.util";
   import { basePath } from "../util/path.util";
 
