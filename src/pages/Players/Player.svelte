@@ -91,6 +91,19 @@
   });
 
   setEditPlayerModalCallback((newPlayer) => {
+    if (player.username !== newPlayer.username) {
+      if (
+        page === 1 &&
+        getPath() !== "/panel/players/player/" + newPlayer.username &&
+        getPath() !== "/panel/players/player/" + newPlayer.username + "/"
+      )
+        route("/panel/players/player/" + newPlayer.username + "/" + page);
+      else if (page !== 1)
+        route("/panel/players/player/" + newPlayer.username + "/" + page);
+
+      return
+    }
+
     player = newPlayer;
   });
 
