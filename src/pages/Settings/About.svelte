@@ -1,12 +1,3 @@
-<script>
-  import { isPageInitialized } from "../../Store";
-  import { onMount } from "svelte";
-
-  onMount(() => {
-    isPageInitialized.set(true);
-  });
-</script>
-
 <!-- About Sup Page -->
 <div class="tab-pane">
   <div class="card">
@@ -100,3 +91,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  import { isPageInitialized } from "../../Store";
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    isPageInitialized.set(true);
+  });
+</script>

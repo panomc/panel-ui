@@ -1,3 +1,70 @@
+<!-- Authorize Player Modal -->
+<div
+  class="modal fade"
+  id="{dialogID}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      {#if $loading}
+        <div class="modal-body">
+          <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      {:else}
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Oyuncuyu Yetkilendir
+          </h5>
+          <button
+            type="button"
+            class="close"
+            on:click="{hide}"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Yetki grubu seç</label>
+            <select
+              class="form-control"
+              class:border-danger="{$errors['LAST_ADMIN']}"
+              id="exampleFormControlSelect1"
+              bind:value="{$player.permission_group}">
+              <option class="text-primary" value="-">Oyuncu</option>
+
+              {#each $permissionGroups as permissionGroup, index (permissionGroup)}
+                <option value="{permissionGroup.name}"
+                  >{permissionGroup.name}</option>
+              {/each}
+            </select>
+            {#if $errors["LAST_ADMIN"]}
+              <small class="text-danger">
+                <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"
+                ></i>
+                Bu kullanıcının yetkisi son yönetici olduğu için değiştirilemez.
+              </small>
+            {/if}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            class:disabled="{$submitLoading}"
+            disabled="{$submitLoading}"
+            on:click="{onSubmit}">Kaydet</button>
+        </div>
+      {/if}
+    </div>
+  </div>
+</div>
+
 <script context="module">
   import jquery from "jquery";
   import { writable, get } from "svelte/store";
@@ -97,70 +164,3 @@
     });
   }
 </script>
-
-<!-- Authorize Player Modal -->
-<div
-  class="modal fade"
-  id="{dialogID}"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      {#if $loading}
-        <div class="modal-body">
-          <div class="text-center">
-            <div class="spinner-border text-primary" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
-        </div>
-      {:else}
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Oyuncuyu Yetkilendir
-          </h5>
-          <button
-            type="button"
-            class="close"
-            on:click="{hide}"
-            aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Yetki grubu seç</label>
-            <select
-              class="form-control"
-              class:border-danger="{$errors['LAST_ADMIN']}"
-              id="exampleFormControlSelect1"
-              bind:value="{$player.permission_group}">
-              <option class="text-primary" value="-">Oyuncu</option>
-
-              {#each $permissionGroups as permissionGroup, index (permissionGroup)}
-                <option value="{permissionGroup.name}"
-                  >{permissionGroup.name}</option>
-              {/each}
-            </select>
-            {#if $errors["LAST_ADMIN"]}
-              <small class="text-danger">
-                <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"
-                ></i>
-                Bu kullanıcının yetkisi son yönetici olduğu için değiştirilemez.
-              </small>
-            {/if}
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-primary"
-            class:disabled="{$submitLoading}"
-            disabled="{$submitLoading}"
-            on:click="{onSubmit}">Kaydet</button>
-        </div>
-      {/if}
-    </div>
-  </div>
-</div>

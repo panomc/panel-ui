@@ -1,107 +1,3 @@
-<script context="module">
-  import jquery from "jquery";
-  import { writable, get } from "svelte/store";
-
-  const dialogID = "editPlayerModal";
-  const player = writable({});
-  const playerBackup = writable({});
-  const defaultErrors = {
-    "username": "",
-    "email": "",
-    "newPassword": "",
-    "newPasswordRepeat": "",
-  };
-  const errors = writable(defaultErrors);
-
-  let callback = (player) => {};
-  let hideCallback = (player) => {};
-
-  export function show(newPlayer) {
-    player.set(Object.assign({}, newPlayer));
-    player.update((player) => {
-      player.new_password = "";
-      player.new_password_repeat = "";
-
-      return player;
-    });
-    playerBackup.set(Object.assign({}, get(player)))
-
-    errors.set(defaultErrors);
-
-    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
-  }
-
-  export function hide() {
-    hideCallback(get(player));
-
-    jquery("#" + dialogID).modal("hide");
-  }
-
-  export function setCallback(newCallback) {
-    callback = newCallback;
-  }
-
-  export function onHide(newCallback) {
-    hideCallback = newCallback;
-  }
-</script>
-
-<script>
-  import { showNetworkErrorOnCatch, user } from "../../Store";
-  import ApiUtil from "../../pano-ui/js/api.util";
-
-  function refreshBrowserPage() {
-    location.reload();
-  }
-
-  let loading = false;
-
-  function onSubmit() {
-    loading = true;
-
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/player/edit/info", get(player))
-        .then((response) => {
-          if (response.data.result === "ok") {
-            if (get(playerBackup).username === get(user).username) {
-              user.update((user) => {
-                user.username = get(player).username
-                user.email = get(player).email
-
-                return user;
-              })
-            }
-
-            loading = false;
-
-            hide();
-
-            player.update((player) => {
-              player.new_password = "";
-              player.new_password_repeat = "";
-
-              return player;
-            });
-
-            callback(get(player));
-
-            resolve();
-          } else if (response.data.result === "NOT_EXISTS") {
-            refreshBrowserPage();
-          } else if (!!response.data.error) {
-            loading = false;
-            errors.set(response.data.error);
-
-            resolve();
-          } else reject();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-</script>
-
 <!-- Edit Player Modal -->
 <div
   aria-hidden="true"
@@ -209,3 +105,107 @@
     </div>
   </div>
 </div>
+
+<script context="module">
+  import jquery from "jquery";
+  import { writable, get } from "svelte/store";
+
+  const dialogID = "editPlayerModal";
+  const player = writable({});
+  const playerBackup = writable({});
+  const defaultErrors = {
+    "username": "",
+    "email": "",
+    "newPassword": "",
+    "newPasswordRepeat": "",
+  };
+  const errors = writable(defaultErrors);
+
+  let callback = (player) => {};
+  let hideCallback = (player) => {};
+
+  export function show(newPlayer) {
+    player.set(Object.assign({}, newPlayer));
+    player.update((player) => {
+      player.new_password = "";
+      player.new_password_repeat = "";
+
+      return player;
+    });
+    playerBackup.set(Object.assign({}, get(player)));
+
+    errors.set(defaultErrors);
+
+    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
+  }
+
+  export function hide() {
+    hideCallback(get(player));
+
+    jquery("#" + dialogID).modal("hide");
+  }
+
+  export function setCallback(newCallback) {
+    callback = newCallback;
+  }
+
+  export function onHide(newCallback) {
+    hideCallback = newCallback;
+  }
+</script>
+
+<script>
+  import { showNetworkErrorOnCatch, user } from "../../Store";
+  import ApiUtil from "../../pano-ui/js/api.util";
+
+  function refreshBrowserPage() {
+    location.reload();
+  }
+
+  let loading = false;
+
+  function onSubmit() {
+    loading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/player/edit/info", get(player))
+        .then((response) => {
+          if (response.data.result === "ok") {
+            if (get(playerBackup).username === get(user).username) {
+              user.update((user) => {
+                user.username = get(player).username;
+                user.email = get(player).email;
+
+                return user;
+              });
+            }
+
+            loading = false;
+
+            hide();
+
+            player.update((player) => {
+              player.new_password = "";
+              player.new_password_repeat = "";
+
+              return player;
+            });
+
+            callback(get(player));
+
+            resolve();
+          } else if (response.data.result === "NOT_EXISTS") {
+            refreshBrowserPage();
+          } else if (!!response.data.error) {
+            loading = false;
+            errors.set(response.data.error);
+
+            resolve();
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+</script>

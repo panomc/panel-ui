@@ -1,3 +1,5 @@
+<canvas height="120" id="visitorsChart"></canvas>
+
 <script>
   import Chart from "chart.js";
   import { onMount } from "svelte";
@@ -55,5 +57,3 @@
     });
   });
 </script>
-
-<canvas height="120" id="visitorsChart"></canvas>

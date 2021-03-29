@@ -1,3 +1,7 @@
+<span
+  use:tooltip="{['bottom', moment(parseInt(date)).format('DD/MM/YYYY, HH:mm')]}"
+  >{moment(parseInt(date)).calendar()}</span>
+
 <script>
   import moment from "moment";
 
@@ -7,7 +11,3 @@
 
   $: date = time;
 </script>
-
-<span
-  use:tooltip="{['bottom', moment(parseInt(date)).format('DD/MM/YYYY, HH:mm')]}"
-  >{moment(parseInt(date)).calendar()}</span>

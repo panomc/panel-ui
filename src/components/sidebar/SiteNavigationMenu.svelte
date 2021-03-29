@@ -1,26 +1,3 @@
-<script>
-  import { path } from "routve";
-
-  import Icon from "svelte-awesome";
-  import {
-    faChartLine,
-    faUsers,
-    faPuzzlePiece,
-    faPalette,
-    faTools,
-    faStickyNote,
-    faTicketAlt,
-  } from "@fortawesome/free-solid-svg-icons";
-
-  function matching(path, pathName, startsWith = false) {
-    return (
-      path.toUpperCase() === pathName.toUpperCase() ||
-      path.toUpperCase() === (pathName + "/").toUpperCase() ||
-      (startsWith && path.startsWith(pathName))
-    );
-  }
-</script>
-
 <nav class="sidebar-nav navbar-dark" v-if="sidebarTabsState === 'website'">
   <ul class="menu navbar-nav font-weight-normal">
     <li class="nav-item" class:active="{matching($path, '/panel')}">
@@ -79,3 +56,26 @@
     </li>
   </ul>
 </nav>
+
+<script>
+  import { path } from "routve";
+
+  import Icon from "svelte-awesome";
+  import {
+    faChartLine,
+    faUsers,
+    faPuzzlePiece,
+    faPalette,
+    faTools,
+    faStickyNote,
+    faTicketAlt,
+  } from "@fortawesome/free-solid-svg-icons";
+
+  function matching(path, pathName, startsWith = false) {
+    return (
+      path.toUpperCase() === pathName.toUpperCase() ||
+      path.toUpperCase() === (pathName + "/").toUpperCase() ||
+      (startsWith && path.startsWith(pathName))
+    );
+  }
+</script>

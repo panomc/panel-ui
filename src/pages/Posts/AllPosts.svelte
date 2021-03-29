@@ -1,164 +1,3 @@
-<script>
-  import { getPath, route } from "routve";
-
-  import Pagination from "../../components/Pagination.svelte";
-  import ConfirmDeletePostModal, {
-    setCallback as setDeletePostModalCallback,
-    show as showDeletePostModal,
-    onHide as onDeletePostModalHide,
-  } from "../../components/modals/ConfirmDeletePostModal.svelte";
-
-  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano-ui/js/api.util";
-  import tooltip from "../../pano-ui/js/tooltip.util";
-
-  import Icon from "svelte-awesome";
-  import { faListAlt } from "@fortawesome/free-regular-svg-icons";
-  import {
-    faStickyNote,
-    faTrash,
-    faPlus,
-    faEllipsisV,
-    faEye,
-    faBookmark,
-    faGlobeAmericas,
-  } from "@fortawesome/free-solid-svg-icons";
-  import Date from "../../components/Date.svelte";
-
-  export let page = undefined;
-  export let pageType = "published";
-
-  let postsCount = 0;
-  let posts = [];
-  let totalPage = 1;
-  let host = "";
-  let buttonsLoading = false;
-
-  function getStatusFromPageType() {
-    return pageType === "published" ? 1 : pageType === "draft" ? 2 : 0;
-  }
-
-  function routePage(pageNumber, forceReload = false, findLastPage = false) {
-    if (pageNumber !== page || forceReload) {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        ApiUtil.post("panel/initPage/postPage", {
-          page: pageNumber,
-          page_type: getStatusFromPageType(),
-        })
-          .then((response) => {
-            if (response.data.result === "ok") {
-              postsCount = response.data.posts_count;
-              posts = response.data.posts;
-              totalPage = response.data.total_page;
-
-              page = pageNumber;
-
-              host = response.data.host;
-
-              isPageInitialized.set(true);
-
-              if (
-                page === 1 &&
-                getPath() !== "/panel/posts" &&
-                getPath() !== "/panel/posts/" &&
-                getPath() !== "/panel/posts/" + pageType &&
-                getPath() !== "/panel/posts/" + pageType + "/"
-              )
-                route("/panel/posts/" + pageType + "/" + page);
-              else if (page !== 1)
-                route("/panel/posts/" + pageType + "/" + page);
-            } else if (response.data.result === "error") {
-              const errorCode = response.data.error;
-
-              if (!findLastPage) {
-                isPageInitialized.set(true);
-              }
-
-              if (errorCode === "PAGE_NOT_FOUND") {
-                if (findLastPage) {
-                  routePage(page - 1, true, true);
-                } else route("/panel/error-404");
-              }
-
-              reject(errorCode);
-            } else reject();
-          })
-          .catch(() => {
-            reject();
-          });
-      });
-    }
-  }
-
-  function refreshBrowserPage() {
-    location.reload();
-  }
-
-  function onMoveToDraft(id) {
-    buttonsLoading = true;
-
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/post/moveDraft", { id })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            buttonsLoading = false;
-
-            routePage(page, true);
-
-            resolve();
-          } else refreshBrowserPage();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-
-  function onPublishClick(id) {
-    buttonsLoading = true;
-
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/post/onlyPublish", { id })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            buttonsLoading = false;
-
-            route("/panel/posts");
-
-            resolve();
-          } else refreshBrowserPage();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-
-  setDeletePostModalCallback((post) => {
-    if (posts.indexOf(post) !== -1) posts[posts.indexOf(post)].selected = false;
-
-    if (post.status === 0) {
-      routePage(page, true, page !== 1);
-    } else {
-      route("/panel/posts/trash");
-    }
-  });
-
-  onDeletePostModalHide((post) => {
-    if (posts.indexOf(post) !== -1) posts[posts.indexOf(post)].selected = false;
-  });
-
-  function onDeletePostClick(post) {
-    posts[posts.indexOf(post)].selected = true;
-
-    showDeletePostModal(post);
-  }
-
-  $: {
-    routePage(typeof page === "undefined" ? 1 : parseInt(page));
-  }
-</script>
-
 <!-- Action Menu -->
 <div class="row mb-3">
   <div class="col-md-4 col-6">
@@ -359,3 +198,164 @@
 </div>
 
 <ConfirmDeletePostModal />
+
+<script>
+  import { getPath, route } from "routve";
+
+  import Pagination from "../../components/Pagination.svelte";
+  import ConfirmDeletePostModal, {
+    setCallback as setDeletePostModalCallback,
+    show as showDeletePostModal,
+    onHide as onDeletePostModalHide,
+  } from "../../components/modals/ConfirmDeletePostModal.svelte";
+
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+  import ApiUtil from "../../pano-ui/js/api.util";
+  import tooltip from "../../pano-ui/js/tooltip.util";
+
+  import Icon from "svelte-awesome";
+  import { faListAlt } from "@fortawesome/free-regular-svg-icons";
+  import {
+    faStickyNote,
+    faTrash,
+    faPlus,
+    faEllipsisV,
+    faEye,
+    faBookmark,
+    faGlobeAmericas,
+  } from "@fortawesome/free-solid-svg-icons";
+  import Date from "../../components/Date.svelte";
+
+  export let page = undefined;
+  export let pageType = "published";
+
+  let postsCount = 0;
+  let posts = [];
+  let totalPage = 1;
+  let host = "";
+  let buttonsLoading = false;
+
+  function getStatusFromPageType() {
+    return pageType === "published" ? 1 : pageType === "draft" ? 2 : 0;
+  }
+
+  function routePage(pageNumber, forceReload = false, findLastPage = false) {
+    if (pageNumber !== page || forceReload) {
+      showNetworkErrorOnCatch((resolve, reject) => {
+        ApiUtil.post("panel/initPage/postPage", {
+          page: pageNumber,
+          page_type: getStatusFromPageType(),
+        })
+          .then((response) => {
+            if (response.data.result === "ok") {
+              postsCount = response.data.posts_count;
+              posts = response.data.posts;
+              totalPage = response.data.total_page;
+
+              page = pageNumber;
+
+              host = response.data.host;
+
+              isPageInitialized.set(true);
+
+              if (
+                page === 1 &&
+                getPath() !== "/panel/posts" &&
+                getPath() !== "/panel/posts/" &&
+                getPath() !== "/panel/posts/" + pageType &&
+                getPath() !== "/panel/posts/" + pageType + "/"
+              )
+                route("/panel/posts/" + pageType + "/" + page);
+              else if (page !== 1)
+                route("/panel/posts/" + pageType + "/" + page);
+            } else if (response.data.result === "error") {
+              const errorCode = response.data.error;
+
+              if (!findLastPage) {
+                isPageInitialized.set(true);
+              }
+
+              if (errorCode === "PAGE_NOT_FOUND") {
+                if (findLastPage) {
+                  routePage(page - 1, true, true);
+                } else route("/panel/error-404");
+              }
+
+              reject(errorCode);
+            } else reject();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    }
+  }
+
+  function refreshBrowserPage() {
+    location.reload();
+  }
+
+  function onMoveToDraft(id) {
+    buttonsLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/post/moveDraft", { id })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            buttonsLoading = false;
+
+            routePage(page, true);
+
+            resolve();
+          } else refreshBrowserPage();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  function onPublishClick(id) {
+    buttonsLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/post/onlyPublish", { id })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            buttonsLoading = false;
+
+            route("/panel/posts");
+
+            resolve();
+          } else refreshBrowserPage();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  setDeletePostModalCallback((post) => {
+    if (posts.indexOf(post) !== -1) posts[posts.indexOf(post)].selected = false;
+
+    if (post.status === 0) {
+      routePage(page, true, page !== 1);
+    } else {
+      route("/panel/posts/trash");
+    }
+  });
+
+  onDeletePostModalHide((post) => {
+    if (posts.indexOf(post) !== -1) posts[posts.indexOf(post)].selected = false;
+  });
+
+  function onDeletePostClick(post) {
+    posts[posts.indexOf(post)].selected = true;
+
+    showDeletePostModal(post);
+  }
+
+  $: {
+    routePage(typeof page === "undefined" ? 1 : parseInt(page));
+  }
+</script>

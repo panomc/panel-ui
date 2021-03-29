@@ -1,17 +1,3 @@
-<script>
-  import Router, { path } from "routve";
-  import Icon from "svelte-awesome";
-  import { faPlus } from "@fortawesome/free-solid-svg-icons";
-
-  function matching(path, pathName, startsWith = false) {
-    return (
-      path.toUpperCase() === pathName.toUpperCase() ||
-      path.toUpperCase() === (pathName + "/").toUpperCase() ||
-      (startsWith && path.startsWith(pathName))
-    );
-  }
-</script>
-
 <!-- View Page -->
 
 <!-- Settings Contents -->
@@ -44,3 +30,17 @@
 
   <Router />
 </article>
+
+<script>
+  import Router, { path } from "routve";
+  import Icon from "svelte-awesome";
+  import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
+  function matching(path, pathName, startsWith = false) {
+    return (
+      path.toUpperCase() === pathName.toUpperCase() ||
+      path.toUpperCase() === (pathName + "/").toUpperCase() ||
+      (startsWith && path.startsWith(pathName))
+    );
+  }
+</script>

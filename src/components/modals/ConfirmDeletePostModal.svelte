@@ -1,3 +1,45 @@
+<!-- Confirm Delete Post Modal -->
+<div
+  aria-hidden="true"
+  class="modal fade"
+  id="{dialogID}"
+  role="dialog"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="dialog">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <div class="pb-3">
+          <Icon
+            data="{faQuestionCircle}"
+            scale="3"
+            class="d-block m-auto text-gray" />
+        </div>
+        {$post.status === 0
+          ? "Bu yazıyı kalıcı olarak silmek istediğinizden emin misiniz?"
+          : "Bu yazıyı çöp kutusuna taşımak istediğinizden emin misiniz?"}
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-link text-muted"
+          type="button"
+          class:disabled="{loading}"
+          disabled="{loading}"
+          on:click="{hide}">
+          İptal
+        </button>
+        <button
+          class="btn btn-danger"
+          type="button"
+          class:disabled="{loading}"
+          disabled="{loading}"
+          on:click="{onYesClick}">
+          Evet
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script context="module">
   import jquery from "jquery";
   import { writable, get } from "svelte/store";
@@ -73,45 +115,3 @@
     });
   }
 </script>
-
-<!-- Confirm Delete Post Modal -->
-<div
-  aria-hidden="true"
-  class="modal fade"
-  id="{dialogID}"
-  role="dialog"
-  tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered" role="dialog">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-        <div class="pb-3">
-          <Icon
-            data="{faQuestionCircle}"
-            scale="3"
-            class="d-block m-auto text-gray" />
-        </div>
-        {$post.status === 0
-          ? "Bu yazıyı kalıcı olarak silmek istediğinizden emin misiniz?"
-          : "Bu yazıyı çöp kutusuna taşımak istediğinizden emin misiniz?"}
-      </div>
-      <div class="modal-footer">
-        <button
-          class="btn btn-link text-muted"
-          type="button"
-          class:disabled="{loading}"
-          disabled="{loading}"
-          on:click="{hide}">
-          İptal
-        </button>
-        <button
-          class="btn btn-danger"
-          type="button"
-          class:disabled="{loading}"
-          disabled="{loading}"
-          on:click="{onYesClick}">
-          Evet
-        </button>
-      </div>
-    </div>
-  </div>
-</div>

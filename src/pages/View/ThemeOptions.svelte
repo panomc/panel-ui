@@ -1,9 +1,3 @@
-<script>
-  import { isPageInitialized } from "../../Store";
-
-  isPageInitialized.set(true);
-</script>
-
 <!-- Theme Options Categories -->
 <section>
   <div class="card">
@@ -110,3 +104,9 @@
     </div>
   </div>
 </section>
+
+<script>
+  import { isPageInitialized } from "../../Store";
+
+  isPageInitialized.set(true);
+</script>

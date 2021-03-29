@@ -1,3 +1,54 @@
+<!-- Add / Edit Permission Group Modal -->
+<div
+  aria-hidden="true"
+  class="modal fade"
+  id="{dialogID}"
+  role="dialog"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {$mode === "edit" ? "Yetki Grubu Düzenle" : "Yetki Grubu Ekle"}
+        </h5>
+
+        <button
+          aria-label="Kapat"
+          class="close"
+          title="Pencereyi Kapat"
+          type="button"
+          on:click="{hide}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form on:submit|preventDefault="{onSubmit}">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Yetki Grubu Adı:</label>
+            <input
+              class="form-control"
+              id="name"
+              type="text"
+              bind:value="{$permissionGroup.name}"
+              class:border-danger="{$errors.name}" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-block"
+            class:btn-secondary="{$mode === 'create'}"
+            class:btn-primary="{$mode === 'edit'}"
+            type="submit"
+            class:disabled="{loading}"
+            disabled="{loading}">
+            {$mode === "edit" ? "Kaydet" : "Oluştur"}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script context="module">
   import jquery from "jquery";
   import { writable, get } from "svelte/store";
@@ -73,54 +124,3 @@
     });
   }
 </script>
-
-<!-- Add / Edit Permission Group Modal -->
-<div
-  aria-hidden="true"
-  class="modal fade"
-  id="{dialogID}"
-  role="dialog"
-  tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered" role="dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">
-          {$mode === "edit" ? "Yetki Grubu Düzenle" : "Yetki Grubu Ekle"}
-        </h5>
-
-        <button
-          aria-label="Kapat"
-          class="close"
-          title="Pencereyi Kapat"
-          type="button"
-          on:click="{hide}">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form on:submit|preventDefault="{onSubmit}">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="name">Yetki Grubu Adı:</label>
-            <input
-              class="form-control"
-              id="name"
-              type="text"
-              bind:value="{$permissionGroup.name}"
-              class:border-danger="{$errors.name}" />
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            class="btn btn-block"
-            class:btn-secondary="{$mode === 'create'}"
-            class:btn-primary="{$mode === 'edit'}"
-            type="submit"
-            class:disabled="{loading}"
-            disabled="{loading}">
-            {$mode === "edit" ? "Kaydet" : "Oluştur"}
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>

@@ -1,8 +1,3 @@
-<script>
-  import Icon from "svelte-awesome";
-  import { faImage, faTrash } from "@fortawesome/free-solid-svg-icons";
-</script>
-
 <!-- SetPostThumbnailModal Modal -->
 <div
   id="setPostThumbnailModal"
@@ -56,3 +51,8 @@
     </div>
   </div>
 </div>
+
+<script>
+  import Icon from "svelte-awesome";
+  import { faImage, faTrash } from "@fortawesome/free-solid-svg-icons";
+</script>

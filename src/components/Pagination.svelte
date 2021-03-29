@@ -1,35 +1,3 @@
-<script>
-  import { createEventDispatcher } from "svelte";
-
-  const dispatch = createEventDispatcher();
-  let pages;
-
-  export let page;
-  export let totalPage = 1;
-
-  $: {
-    pages = [];
-
-    for (let i = 1; i <= totalPage; i++) {
-      pages.push(i);
-    }
-  }
-
-  function onFirstPageClick() {
-    dispatch("firstPageClick", {});
-  }
-
-  function onLastPageClick() {
-    dispatch("lastPageClick", {});
-  }
-
-  function onPageLinkClick(index) {
-    dispatch("pageLinkClick", {
-      page: index,
-    });
-  }
-</script>
-
 <nav class="pt-3">
   <ul class="pagination pagination-sm mb-0 justify-content-start">
     <li class="page-item" class:disabled="{parseInt(page) === 1}">
@@ -70,3 +38,35 @@
     </li>
   </ul>
 </nav>
+
+<script>
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
+  let pages;
+
+  export let page;
+  export let totalPage = 1;
+
+  $: {
+    pages = [];
+
+    for (let i = 1; i <= totalPage; i++) {
+      pages.push(i);
+    }
+  }
+
+  function onFirstPageClick() {
+    dispatch("firstPageClick", {});
+  }
+
+  function onLastPageClick() {
+    dispatch("lastPageClick", {});
+  }
+
+  function onPageLinkClick(index) {
+    dispatch("pageLinkClick", {
+      page: index,
+    });
+  }
+</script>

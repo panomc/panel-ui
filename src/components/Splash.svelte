@@ -1,29 +1,3 @@
-<script>
-  import { onDestroy } from "svelte";
-  import { fade } from "svelte/transition";
-
-  import { basePath } from "../util/path.util";
-  import {
-    networkErrorCallbacks,
-    resumeAfterNetworkError,
-    retryingNetworkErrors,
-  } from "../Store";
-
-  let networkErrors = false;
-
-  const networkErrorCallbacksUnsubscribe = networkErrorCallbacks.subscribe(
-    (value) => {
-      networkErrors = value.length !== 0;
-    }
-  );
-
-  onDestroy(networkErrorCallbacksUnsubscribe);
-
-  function onResumeClick() {
-    resumeAfterNetworkError();
-  }
-</script>
-
 <svelte:head>
   {#if networkErrors}<style>
       .show {
@@ -54,3 +28,29 @@
     </div>
   {/if}
 </div>
+
+<script>
+  import { onDestroy } from "svelte";
+  import { fade } from "svelte/transition";
+
+  import { basePath } from "../util/path.util";
+  import {
+    networkErrorCallbacks,
+    resumeAfterNetworkError,
+    retryingNetworkErrors,
+  } from "../Store";
+
+  let networkErrors = false;
+
+  const networkErrorCallbacksUnsubscribe = networkErrorCallbacks.subscribe(
+    (value) => {
+      networkErrors = value.length !== 0;
+    }
+  );
+
+  onDestroy(networkErrorCallbacksUnsubscribe);
+
+  function onResumeClick() {
+    resumeAfterNetworkError();
+  }
+</script>

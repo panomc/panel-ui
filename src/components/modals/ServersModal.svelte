@@ -1,54 +1,3 @@
-<script>
-  import { servers } from "../../Store";
-  import { NETWORK_ERROR } from "../../pano-ui/js/api.util";
-
-  import Icon from "svelte-awesome";
-  import {
-    faPlus,
-    faCog,
-    faTimes,
-    faHome,
-    faCube,
-  } from "@fortawesome/free-solid-svg-icons";
-  import { faBell } from "@fortawesome/free-regular-svg-icons";
-
-  let serverListLoading = false;
-
-  function getServerList() {
-    return new Promise((resolve, reject) => {
-      ApiUtil.get("/api/panel/server/list")
-        .then((response) => {
-          if (response.data.result === "ok") {
-            resolve(response);
-          } else if (response.data.result === "error") {
-            const error = response.data.error;
-
-            reject(error);
-          } else {
-            reject(NETWORK_ERROR);
-          }
-        })
-        .catch(() => {
-          reject(NETWORK_ERROR);
-        });
-    });
-  }
-
-  function reloadServerList() {
-    serverListLoading = true;
-
-    getServerList()
-      .then((response) => {
-        serverListLoading = false;
-
-        servers.set(response.data.servers);
-      })
-      .catch(() => {
-        serverListLoading = false;
-      });
-  }
-</script>
-
 <!-- Servers Modal -->
 <div
   aria-hidden="true"
@@ -199,3 +148,54 @@
     </div>
   </div>
 </div>
+
+<script>
+  import { servers } from "../../Store";
+  import { NETWORK_ERROR } from "../../pano-ui/js/api.util";
+
+  import Icon from "svelte-awesome";
+  import {
+    faPlus,
+    faCog,
+    faTimes,
+    faHome,
+    faCube,
+  } from "@fortawesome/free-solid-svg-icons";
+  import { faBell } from "@fortawesome/free-regular-svg-icons";
+
+  let serverListLoading = false;
+
+  function getServerList() {
+    return new Promise((resolve, reject) => {
+      ApiUtil.get("/api/panel/server/list")
+        .then((response) => {
+          if (response.data.result === "ok") {
+            resolve(response);
+          } else if (response.data.result === "error") {
+            const error = response.data.error;
+
+            reject(error);
+          } else {
+            reject(NETWORK_ERROR);
+          }
+        })
+        .catch(() => {
+          reject(NETWORK_ERROR);
+        });
+    });
+  }
+
+  function reloadServerList() {
+    serverListLoading = true;
+
+    getServerList()
+      .then((response) => {
+        serverListLoading = false;
+
+        servers.set(response.data.servers);
+      })
+      .catch(() => {
+        serverListLoading = false;
+      });
+  }
+</script>

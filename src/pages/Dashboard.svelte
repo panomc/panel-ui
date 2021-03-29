@@ -1,83 +1,3 @@
-<script>
-  import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
-
-  import Icon from "svelte-awesome";
-  import { faStickyNote } from "@fortawesome/free-regular-svg-icons";
-  import {
-    faBookOpen,
-    faBrush,
-    faCaretUp,
-    faGlobe,
-    faPalette,
-    faPen,
-    faPlus,
-    faPuzzlePiece,
-    faTicketAlt,
-    faTools,
-    faUsers,
-    faUserPlus,
-    faUserCog,
-  } from "@fortawesome/free-solid-svg-icons";
-  import { faDiscord } from "@fortawesome/free-brands-svg-icons";
-
-  import ApiUtil from "../pano-ui/js/api.util";
-
-  import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
-  import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";
-  import TrafficChart from "../components/charts/Dashboard/TrafficChart.svelte";
-  import TicketStatus from "../components/TicketStatus.svelte";
-  import Date from "../components/Date.svelte";
-  import tooltip from "../pano-ui/js/tooltip.util";
-
-  let getting_started_blocks = {
-    welcome_board: false,
-  };
-
-  let registered_player_count = 0;
-  let post_count = 0;
-  let tickets_count = 0;
-  let open_tickets_count = 0;
-  let tickets = [];
-
-  function getInitialData() {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.get("panel/initPage/dashboard")
-        .then((response) => {
-          if (response.data.result === "ok") {
-            registered_player_count = response.data.registered_player_count;
-            post_count = response.data.post_count;
-            tickets_count = response.data.tickets_count;
-            open_tickets_count = response.data.open_tickets_count;
-            tickets = response.data.tickets;
-
-            getting_started_blocks = response.data.getting_started_blocks;
-
-            isPageInitialized.set(true);
-
-            resolve();
-          } else reject();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-
-  function onCloseGettingStartedCard() {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/dashboard/closeGettingStartedCard", {})
-        .then(() => {
-          resolve();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-
-  getInitialData();
-</script>
-
 <!-- Dashboard Page -->
 <div class="container">
   <!-- Welcome Alerts -->
@@ -359,3 +279,83 @@
     </div>
   </div>
 </div>
+
+<script>
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../Store";
+
+  import Icon from "svelte-awesome";
+  import { faStickyNote } from "@fortawesome/free-regular-svg-icons";
+  import {
+    faBookOpen,
+    faBrush,
+    faCaretUp,
+    faGlobe,
+    faPalette,
+    faPen,
+    faPlus,
+    faPuzzlePiece,
+    faTicketAlt,
+    faTools,
+    faUsers,
+    faUserPlus,
+    faUserCog,
+  } from "@fortawesome/free-solid-svg-icons";
+  import { faDiscord } from "@fortawesome/free-brands-svg-icons";
+
+  import ApiUtil from "../pano-ui/js/api.util";
+
+  import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
+  import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";
+  import TrafficChart from "../components/charts/Dashboard/TrafficChart.svelte";
+  import TicketStatus from "../components/TicketStatus.svelte";
+  import Date from "../components/Date.svelte";
+  import tooltip from "../pano-ui/js/tooltip.util";
+
+  let getting_started_blocks = {
+    welcome_board: false,
+  };
+
+  let registered_player_count = 0;
+  let post_count = 0;
+  let tickets_count = 0;
+  let open_tickets_count = 0;
+  let tickets = [];
+
+  function getInitialData() {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.get("panel/initPage/dashboard")
+        .then((response) => {
+          if (response.data.result === "ok") {
+            registered_player_count = response.data.registered_player_count;
+            post_count = response.data.post_count;
+            tickets_count = response.data.tickets_count;
+            open_tickets_count = response.data.open_tickets_count;
+            tickets = response.data.tickets;
+
+            getting_started_blocks = response.data.getting_started_blocks;
+
+            isPageInitialized.set(true);
+
+            resolve();
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  function onCloseGettingStartedCard() {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/dashboard/closeGettingStartedCard", {})
+        .then(() => {
+          resolve();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  getInitialData();
+</script>

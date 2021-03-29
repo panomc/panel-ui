@@ -1,159 +1,3 @@
-<!--suppress SillyAssignmentJS -->
-<script>
-  import Icon from "svelte-awesome";
-  import * as icon from "@fortawesome/free-solid-svg-icons";
-
-  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
-  import tooltip from "../../pano-ui/js/tooltip.util";
-  import ApiUtil from "../../pano-ui/js/api.util";
-
-  import AddEditPermGroupModal, {
-    show as showPermissionGroupAddEditModal,
-    setCallback as setCallbackForPermissionGroupAddEditModal,
-  } from "../../components/modals/AddEditPermGroupModal.svelte";
-
-  import ConfirmDeletePermissionGroupModal, {
-    setCallback as setDeletePermissionGroupModalCallback,
-    show as showDeletePermissionGroupModal,
-  } from "../../components/modals/ConfirmDeletePermissionGroupModal.svelte";
-
-  let permissions = [];
-  let permissionGroups = [];
-  let permissionGroupPerms = {};
-  let loadingPermissionsList = [];
-
-  function getData() {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.get("panel/initPage/permissionsPage")
-        .then((response) => {
-          if (response.data.result === "ok") {
-            permissions = response.data.permissions;
-            permissionGroups = response.data.permission_groups;
-            permissionGroupPerms = response.data.permission_group_perms;
-
-            isPageInitialized.set(true);
-
-            resolve();
-          } else reject();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-
-  String.prototype.capitalize = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1);
-  };
-
-  getData();
-
-  function refreshBrowserPage() {
-    location.reload();
-  }
-
-  function convertIconName(iconName) {
-    const iconNameSplit = iconName.split("-");
-    let restOfIconName = "";
-
-    iconNameSplit
-      .filter((iconName, index) => index !== 0)
-      .forEach((iconName) => {
-        restOfIconName += iconName.capitalize();
-      });
-
-    return iconNameSplit[0] + restOfIconName;
-  }
-
-  function isPermissionChecked(permissionGroup, permission) {
-    return (
-      permissionGroup.name === "admin" ||
-      (typeof permissionGroupPerms[permissionGroup.id] === "undefined"
-        ? false
-        : !!permissionGroupPerms[permissionGroup.id].includes(permission.id))
-    );
-  }
-
-  function isPermissionDisabled(
-    permission,
-    permissionGroup,
-    loadingPermissionsList
-  ) {
-    return (
-      permissionGroup.name === "admin" ||
-      loadingPermissionsList[permission.name + "_" + permissionGroup.name]
-    );
-  }
-
-  function onPermissionClick(permissionGroup, permission) {
-    loadingPermissionsList[permission.name + "_" + permissionGroup.name] = true;
-    const mode = isPermissionChecked(permissionGroup, permission)
-      ? "DELETE"
-      : "ADD";
-
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/permission/set", {
-        mode: mode,
-        permission_group_id: permissionGroup.id,
-        permission_id: permission.id,
-      })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            loadingPermissionsList[
-              permission.name + "_" + permissionGroup.name
-            ] = false;
-
-            if (mode === "ADD") {
-              if (
-                typeof permissionGroupPerms[permissionGroup.id] === "undefined"
-              )
-                permissionGroupPerms[permissionGroup.id] = [permission.id];
-              else permissionGroupPerms[permissionGroup.id].push(permission.id);
-            } else {
-              permissionGroupPerms[permissionGroup.id].splice(
-                permissionGroupPerms[permissionGroup.id].indexOf(permission.id),
-                1
-              );
-            }
-
-            resolve();
-          } else if (response.data.error === "NOT_EXISTS") refreshBrowserPage();
-          else reject();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-
-  function onCreatePermissionGroupClick() {
-    showPermissionGroupAddEditModal("create");
-  }
-
-  function onShowEditPermissionGroupButtonClick(permissionGroup) {
-    showPermissionGroupAddEditModal("edit", permissionGroup);
-  }
-
-  function onShowDeletePermissionGroupModalClick(permissionGroup) {
-    showDeletePermissionGroupModal(permissionGroup);
-  }
-
-  setCallbackForPermissionGroupAddEditModal(() => {
-    getData();
-  });
-
-  setDeletePermissionGroupModalCallback((permissionGroup) => {
-    permissionGroups.splice(permissionGroups.indexOf(permissionGroup), 1);
-    permissionGroups = permissionGroups;
-
-    if (typeof permissionGroupPerms[permissionGroup.id] !== "undefined")
-      permissionGroupPerms.splice(
-        permissionGroupPerms.indexOf(permissionGroup.id),
-        1
-      );
-  });
-</script>
-
 <div class="container">
   <!-- Action Menu -->
   <div class="row justify-content-between align-items-center mb-3">
@@ -388,3 +232,159 @@
 
 <AddEditPermGroupModal />
 <ConfirmDeletePermissionGroupModal />
+
+<!--suppress SillyAssignmentJS -->
+<script>
+  import Icon from "svelte-awesome";
+  import * as icon from "@fortawesome/free-solid-svg-icons";
+
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+  import tooltip from "../../pano-ui/js/tooltip.util";
+  import ApiUtil from "../../pano-ui/js/api.util";
+
+  import AddEditPermGroupModal, {
+    show as showPermissionGroupAddEditModal,
+    setCallback as setCallbackForPermissionGroupAddEditModal,
+  } from "../../components/modals/AddEditPermGroupModal.svelte";
+
+  import ConfirmDeletePermissionGroupModal, {
+    setCallback as setDeletePermissionGroupModalCallback,
+    show as showDeletePermissionGroupModal,
+  } from "../../components/modals/ConfirmDeletePermissionGroupModal.svelte";
+
+  let permissions = [];
+  let permissionGroups = [];
+  let permissionGroupPerms = {};
+  let loadingPermissionsList = [];
+
+  function getData() {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.get("panel/initPage/permissionsPage")
+        .then((response) => {
+          if (response.data.result === "ok") {
+            permissions = response.data.permissions;
+            permissionGroups = response.data.permission_groups;
+            permissionGroupPerms = response.data.permission_group_perms;
+
+            isPageInitialized.set(true);
+
+            resolve();
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  };
+
+  getData();
+
+  function refreshBrowserPage() {
+    location.reload();
+  }
+
+  function convertIconName(iconName) {
+    const iconNameSplit = iconName.split("-");
+    let restOfIconName = "";
+
+    iconNameSplit
+      .filter((iconName, index) => index !== 0)
+      .forEach((iconName) => {
+        restOfIconName += iconName.capitalize();
+      });
+
+    return iconNameSplit[0] + restOfIconName;
+  }
+
+  function isPermissionChecked(permissionGroup, permission) {
+    return (
+      permissionGroup.name === "admin" ||
+      (typeof permissionGroupPerms[permissionGroup.id] === "undefined"
+        ? false
+        : !!permissionGroupPerms[permissionGroup.id].includes(permission.id))
+    );
+  }
+
+  function isPermissionDisabled(
+    permission,
+    permissionGroup,
+    loadingPermissionsList
+  ) {
+    return (
+      permissionGroup.name === "admin" ||
+      loadingPermissionsList[permission.name + "_" + permissionGroup.name]
+    );
+  }
+
+  function onPermissionClick(permissionGroup, permission) {
+    loadingPermissionsList[permission.name + "_" + permissionGroup.name] = true;
+    const mode = isPermissionChecked(permissionGroup, permission)
+      ? "DELETE"
+      : "ADD";
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/permission/set", {
+        mode: mode,
+        permission_group_id: permissionGroup.id,
+        permission_id: permission.id,
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            loadingPermissionsList[
+              permission.name + "_" + permissionGroup.name
+            ] = false;
+
+            if (mode === "ADD") {
+              if (
+                typeof permissionGroupPerms[permissionGroup.id] === "undefined"
+              )
+                permissionGroupPerms[permissionGroup.id] = [permission.id];
+              else permissionGroupPerms[permissionGroup.id].push(permission.id);
+            } else {
+              permissionGroupPerms[permissionGroup.id].splice(
+                permissionGroupPerms[permissionGroup.id].indexOf(permission.id),
+                1
+              );
+            }
+
+            resolve();
+          } else if (response.data.error === "NOT_EXISTS") refreshBrowserPage();
+          else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  function onCreatePermissionGroupClick() {
+    showPermissionGroupAddEditModal("create");
+  }
+
+  function onShowEditPermissionGroupButtonClick(permissionGroup) {
+    showPermissionGroupAddEditModal("edit", permissionGroup);
+  }
+
+  function onShowDeletePermissionGroupModalClick(permissionGroup) {
+    showDeletePermissionGroupModal(permissionGroup);
+  }
+
+  setCallbackForPermissionGroupAddEditModal(() => {
+    getData();
+  });
+
+  setDeletePermissionGroupModalCallback((permissionGroup) => {
+    permissionGroups.splice(permissionGroups.indexOf(permissionGroup), 1);
+    permissionGroups = permissionGroups;
+
+    if (typeof permissionGroupPerms[permissionGroup.id] !== "undefined")
+      permissionGroupPerms.splice(
+        permissionGroupPerms.indexOf(permissionGroup.id),
+        1
+      );
+  });
+</script>

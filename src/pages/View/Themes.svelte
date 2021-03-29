@@ -1,21 +1,9 @@
-<script>
-  import { isPageInitialized } from "../../Store";
-  import ConfirmDeleteThemeModal from "../../components/modals/ConfirmDeleteThemeModal.svelte";
-
-  isPageInitialized.set(true);
-
-  import Icon from "svelte-awesome";
-  import { faPlus } from "@fortawesome/free-solid-svg-icons";
-</script>
-
 <!-- Themes Sub Page -->
 <div class="tab-pane">
   <!-- Themes: Current Themes Sub Title -->
   <section class="row justify-content-between align-items-center">
     <div class="col-6"></div>
-    <div class="col-6 text-right">
-
-    </div>
+    <div class="col-6 text-right"></div>
   </section>
 
   <section class="row">
@@ -50,3 +38,13 @@
 
   <ConfirmDeleteThemeModal />
 </div>
+
+<script>
+  import { isPageInitialized } from "../../Store";
+  import ConfirmDeleteThemeModal from "../../components/modals/ConfirmDeleteThemeModal.svelte";
+
+  isPageInitialized.set(true);
+
+  import Icon from "svelte-awesome";
+  import { faPlus } from "@fortawesome/free-solid-svg-icons";
+</script>

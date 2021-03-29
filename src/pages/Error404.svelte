@@ -1,9 +1,3 @@
-<script>
-  import { isPageInitialized } from "../Store";
-
-  isPageInitialized.set(true);
-</script>
-
 <!-- 404 Page  -->
 <div class="container">
   <div
@@ -21,3 +15,9 @@
     <a class="btn btn-primary" role="button" href="./">Geri Git</a>
   </div>
 </div>
+
+<script>
+  import { isPageInitialized } from "../Store";
+
+  isPageInitialized.set(true);
+</script>

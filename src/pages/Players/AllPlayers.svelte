@@ -1,119 +1,3 @@
-<!--suppress SillyAssignmentJS -->
-<script>
-  import { getPath, route } from "routve";
-
-  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano-ui/js/api.util";
-
-  import Icon from "svelte-awesome";
-  import { faListAlt } from "@fortawesome/free-regular-svg-icons";
-  import {
-    faUsers,
-    faEllipsisV,
-    faGavel,
-    faUserCircle,
-    faGlobe,
-    faPencilAlt,
-  } from "@fortawesome/free-solid-svg-icons";
-
-  import Date from "../../components/Date.svelte";
-  import Pagination from "../../components/Pagination.svelte";
-
-  import AuthorizePlayerModal, {
-    show as showAuthorizePlayerModal,
-    setCallback as setAuthorizePlayerModalCallback,
-  } from "../../components/modals/AuthorizePlayerModal.svelte";
-  import EditPlayerModal, {
-    show as showEditPlayerModal,
-    setCallback as setEditPlayerModalCallback,
-  } from "../../components/modals/EditPlayerModal.svelte";
-
-  export let page = undefined;
-  export let pageType = "all";
-
-  let playersCount = 0;
-  let players = [];
-  let totalPage = 1;
-
-  function getStatusFromPageType() {
-    return pageType === "all" ? 1 : pageType === "hasPerm" ? 2 : 0;
-  }
-
-  function routePage(pageNumber, forceReload = false, findLastPage = false) {
-    if (pageNumber !== page || forceReload) {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        ApiUtil.post("panel/initPage/playersPage", {
-          page: pageNumber,
-          page_type: getStatusFromPageType(),
-        })
-          .then((response) => {
-            if (response.data.result === "ok") {
-              playersCount = response.data.players_count;
-              players = response.data.players;
-              totalPage = response.data.total_page;
-
-              page = pageNumber;
-
-              isPageInitialized.set(true);
-
-              if (
-                page === 1 &&
-                getPath() !== "/panel/players" &&
-                getPath() !== "/panel/players/" &&
-                getPath() !== "/panel/players/" + pageType &&
-                getPath() !== "/panel/players/" + pageType + "/"
-              )
-                route("/panel/players/" + pageType + "/" + page);
-              else if (page !== 1)
-                route("/panel/players/" + pageType + "/" + page);
-            } else if (response.data.result === "error") {
-              const errorCode = response.data.error;
-
-              if (!findLastPage) {
-                isPageInitialized.set(true);
-              }
-
-              if (errorCode === "PAGE_NOT_FOUND") {
-                if (findLastPage) {
-                  routePage(page - 1, true, true);
-                } else route("/panel/error-404");
-              }
-
-              reject(errorCode);
-            } else reject();
-          })
-          .catch(() => {
-            reject();
-          });
-      });
-    }
-  }
-
-  setAuthorizePlayerModalCallback((newPlayer) => {
-    players.forEach((player) => {
-      if (player.id === newPlayer.id)
-        player.permission_group = newPlayer.permission_group;
-    });
-
-    players = players;
-  });
-
-  setEditPlayerModalCallback((newPlayer) => {
-    players.forEach((player) => {
-      if (player.id === newPlayer.id) {
-        player.username = newPlayer.username;
-        player.email = newPlayer.email;
-      }
-    });
-
-    players = players;
-  });
-
-  $: {
-    routePage(typeof page === "undefined" ? 1 : parseInt(page));
-  }
-</script>
-
 <!-- All Players Page -->
 <div class="container">
   <!-- Action Menu -->
@@ -289,3 +173,119 @@
 
 <EditPlayerModal />
 <AuthorizePlayerModal />
+
+<!--suppress SillyAssignmentJS -->
+<script>
+  import { getPath, route } from "routve";
+
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+  import ApiUtil from "../../pano-ui/js/api.util";
+
+  import Icon from "svelte-awesome";
+  import { faListAlt } from "@fortawesome/free-regular-svg-icons";
+  import {
+    faUsers,
+    faEllipsisV,
+    faGavel,
+    faUserCircle,
+    faGlobe,
+    faPencilAlt,
+  } from "@fortawesome/free-solid-svg-icons";
+
+  import Date from "../../components/Date.svelte";
+  import Pagination from "../../components/Pagination.svelte";
+
+  import AuthorizePlayerModal, {
+    show as showAuthorizePlayerModal,
+    setCallback as setAuthorizePlayerModalCallback,
+  } from "../../components/modals/AuthorizePlayerModal.svelte";
+  import EditPlayerModal, {
+    show as showEditPlayerModal,
+    setCallback as setEditPlayerModalCallback,
+  } from "../../components/modals/EditPlayerModal.svelte";
+
+  export let page = undefined;
+  export let pageType = "all";
+
+  let playersCount = 0;
+  let players = [];
+  let totalPage = 1;
+
+  function getStatusFromPageType() {
+    return pageType === "all" ? 1 : pageType === "hasPerm" ? 2 : 0;
+  }
+
+  function routePage(pageNumber, forceReload = false, findLastPage = false) {
+    if (pageNumber !== page || forceReload) {
+      showNetworkErrorOnCatch((resolve, reject) => {
+        ApiUtil.post("panel/initPage/playersPage", {
+          page: pageNumber,
+          page_type: getStatusFromPageType(),
+        })
+          .then((response) => {
+            if (response.data.result === "ok") {
+              playersCount = response.data.players_count;
+              players = response.data.players;
+              totalPage = response.data.total_page;
+
+              page = pageNumber;
+
+              isPageInitialized.set(true);
+
+              if (
+                page === 1 &&
+                getPath() !== "/panel/players" &&
+                getPath() !== "/panel/players/" &&
+                getPath() !== "/panel/players/" + pageType &&
+                getPath() !== "/panel/players/" + pageType + "/"
+              )
+                route("/panel/players/" + pageType + "/" + page);
+              else if (page !== 1)
+                route("/panel/players/" + pageType + "/" + page);
+            } else if (response.data.result === "error") {
+              const errorCode = response.data.error;
+
+              if (!findLastPage) {
+                isPageInitialized.set(true);
+              }
+
+              if (errorCode === "PAGE_NOT_FOUND") {
+                if (findLastPage) {
+                  routePage(page - 1, true, true);
+                } else route("/panel/error-404");
+              }
+
+              reject(errorCode);
+            } else reject();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    }
+  }
+
+  setAuthorizePlayerModalCallback((newPlayer) => {
+    players.forEach((player) => {
+      if (player.id === newPlayer.id)
+        player.permission_group = newPlayer.permission_group;
+    });
+
+    players = players;
+  });
+
+  setEditPlayerModalCallback((newPlayer) => {
+    players.forEach((player) => {
+      if (player.id === newPlayer.id) {
+        player.username = newPlayer.username;
+        player.email = newPlayer.email;
+      }
+    });
+
+    players = players;
+  });
+
+  $: {
+    routePage(typeof page === "undefined" ? 1 : parseInt(page));
+  }
+</script>

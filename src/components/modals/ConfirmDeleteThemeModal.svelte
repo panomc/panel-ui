@@ -1,8 +1,3 @@
-<script>
-  import Icon from "svelte-awesome";
-  import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
-</script>
-
 <!-- Confirm Delete Theme Modal -->
 <div
   aria-hidden="true"
@@ -33,3 +28,8 @@
     </div>
   </div>
 </div>
+
+<script>
+  import Icon from "svelte-awesome";
+  import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+</script>

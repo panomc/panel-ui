@@ -1,3 +1,5 @@
+<PostEditor postID="{postID}" />
+
 <script>
   import PostEditor from "../../components/PostEditor.svelte";
   import { route } from "routve";
@@ -8,5 +10,3 @@
     route("/panel/error-404");
   }
 </script>
-
-<PostEditor postID="{postID}" />

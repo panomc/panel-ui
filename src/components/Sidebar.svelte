@@ -1,50 +1,3 @@
-<script>
-  import { basePath } from "../util/path.util";
-  import {
-    toggleSidebar,
-    isSidebarOpen,
-    setSidebarTabsState,
-    sidebarTabsState,
-    website,
-  } from "../Store";
-  import { onDestroy } from "svelte";
-
-  import Bottom from "./sidebar/Bottom.svelte";
-  import SiteNavigationMenu from "./sidebar/SiteNavigationMenu.svelte";
-  import ServerNavigationMenu from "./sidebar/ServerNavigationMenu.svelte";
-
-  import Icon from "svelte-awesome";
-  import { faBars, faGlobe, faCube } from "@fortawesome/free-solid-svg-icons";
-
-  import ServersModal from "./modals/ServersModal.svelte";
-  import ConnectServerModal from "./modals/ConnectServerModal.svelte";
-  import RemoveServerModal from "./modals/RemoveServerModal.svelte";
-
-  let menuComponent = SiteNavigationMenu;
-
-  function onMobileSideBarCollapseClick() {
-    toggleSidebar();
-  }
-
-  const unsubscribeSidebarTabsState = sidebarTabsState.subscribe((value) => {
-    if (value === "website") {
-      menuComponent = SiteNavigationMenu;
-    } else {
-      menuComponent = ServerNavigationMenu;
-    }
-  });
-
-  onDestroy(unsubscribeSidebarTabsState);
-
-  function onWebsiteMenuClick() {
-    setSidebarTabsState("website");
-  }
-
-  function onGameMenuClick() {
-    setSidebarTabsState("game");
-  }
-</script>
-
 <ServersModal />
 <ConnectServerModal />
 <RemoveServerModal />
@@ -130,3 +83,50 @@
   <!-- Sidebar Bottom -->
   <Bottom />
 </div>
+
+<script>
+  import { basePath } from "../util/path.util";
+  import {
+    toggleSidebar,
+    isSidebarOpen,
+    setSidebarTabsState,
+    sidebarTabsState,
+    website,
+  } from "../Store";
+  import { onDestroy } from "svelte";
+
+  import Bottom from "./sidebar/Bottom.svelte";
+  import SiteNavigationMenu from "./sidebar/SiteNavigationMenu.svelte";
+  import ServerNavigationMenu from "./sidebar/ServerNavigationMenu.svelte";
+
+  import Icon from "svelte-awesome";
+  import { faBars, faGlobe, faCube } from "@fortawesome/free-solid-svg-icons";
+
+  import ServersModal from "./modals/ServersModal.svelte";
+  import ConnectServerModal from "./modals/ConnectServerModal.svelte";
+  import RemoveServerModal from "./modals/RemoveServerModal.svelte";
+
+  let menuComponent = SiteNavigationMenu;
+
+  function onMobileSideBarCollapseClick() {
+    toggleSidebar();
+  }
+
+  const unsubscribeSidebarTabsState = sidebarTabsState.subscribe((value) => {
+    if (value === "website") {
+      menuComponent = SiteNavigationMenu;
+    } else {
+      menuComponent = ServerNavigationMenu;
+    }
+  });
+
+  onDestroy(unsubscribeSidebarTabsState);
+
+  function onWebsiteMenuClick() {
+    setSidebarTabsState("website");
+  }
+
+  function onGameMenuClick() {
+    setSidebarTabsState("game");
+  }
+</script>

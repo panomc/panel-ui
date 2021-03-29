@@ -1,3 +1,5 @@
+<canvas height="200" id="trafficChart"></canvas>
+
 <script>
   import Chart from "chart.js";
   import { onMount } from "svelte";
@@ -24,5 +26,3 @@
     });
   });
 </script>
-
-<canvas height="200" id="trafficChart"></canvas>

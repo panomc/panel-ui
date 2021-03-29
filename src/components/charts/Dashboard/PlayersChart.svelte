@@ -1,3 +1,5 @@
+<canvas height="90" id="playersChart"></canvas>
+
 <script>
   import Chart from "chart.js";
   import { onMount } from "svelte";
@@ -41,5 +43,3 @@
     });
   });
 </script>
-
-<canvas height="90" id="playersChart"></canvas>

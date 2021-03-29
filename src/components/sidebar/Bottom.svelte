@@ -1,11 +1,3 @@
-<script>
-  import tooltip from "../../pano-ui/js/tooltip.util";
-
-  import Icon from "svelte-awesome";
-  import { faCog, faSync } from "@fortawesome/free-solid-svg-icons";
-  import { faDiscord } from "@fortawesome/free-brands-svg-icons";
-</script>
-
 <div class="sidebar-bottom p-2 border-top border-right border-glass">
   <a
     class="btn btn-link text-light"
@@ -27,3 +19,11 @@
     <Icon data="{faDiscord}" />
   </a>
 </div>
+
+<script>
+  import tooltip from "../../pano-ui/js/tooltip.util";
+
+  import Icon from "svelte-awesome";
+  import { faCog, faSync } from "@fortawesome/free-solid-svg-icons";
+  import { faDiscord } from "@fortawesome/free-brands-svg-icons";
+</script>

@@ -1,3 +1,15 @@
+<div class:d-flex="{!hidden}" hidden="{hidden}">
+  <Sidebar />
+  <!--  Main  -->
+  <main class="panel-content">
+    <Navbar />
+
+    <Router hidden="{showLoading}" config="{RouterConfig}" />
+
+    <PageLoading show="{showLoading}" />
+  </main>
+</div>
+
 <script>
   import Navbar from "./Navbar.svelte";
   import Sidebar from "./Sidebar.svelte";
@@ -36,15 +48,3 @@
 
   export let hidden;
 </script>
-
-<div class:d-flex="{!hidden}" hidden="{hidden}">
-  <Sidebar />
-  <!--  Main  -->
-  <main class="panel-content">
-    <Navbar />
-
-    <Router hidden="{showLoading}" config="{RouterConfig}" />
-
-    <PageLoading show="{showLoading}" />
-  </main>
-</div>

@@ -1,13 +1,3 @@
-<script>
-  import Icon from "svelte-awesome";
-  import {
-    faTachometerAlt,
-    faCogs,
-    faCube,
-    faPlus,
-  } from "@fortawesome/free-solid-svg-icons";
-</script>
-
 <nav class="sidebar-nav navbar-dark" v-if="sidebarTabsState === 'game'">
   <ul class="menu navbar-nav font-weight-normal d-none">
     <!--        :class="{ 'active': path.startsWith('/panel/server-panel') }"-->
@@ -41,3 +31,13 @@
     </button>
   </div>
 </nav>
+
+<script>
+  import Icon from "svelte-awesome";
+  import {
+    faTachometerAlt,
+    faCogs,
+    faCube,
+    faPlus,
+  } from "@fortawesome/free-solid-svg-icons";
+</script>

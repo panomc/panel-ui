@@ -1,3 +1,86 @@
+<!-- Connect Server Modal -->
+<div
+  aria-hidden="true"
+  class="modal fade"
+  id="connectServer"
+  role="document"
+  tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sunucu Bağla</h5>
+        <button
+          class="close"
+          data-dismiss="modal"
+          title="Pencereyi Kapat"
+          type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body text-center">
+          <div class="mb-3">
+            <Icon data="{faDownload}" scale="3" class="text-primary" />
+          </div>
+
+          <h5 class="text-primary" for="downloadPlugin">
+            1. Oyun Eklentisini Sunucunuza İndirin:
+          </h5>
+          <button class="btn btn-link bg-light">
+            <Icon data="{faFileDownload}" class="mr-1" />
+            Pano Minecraft Eklentisini İndir
+            <br />
+            <small>BungeeCord, Bukkit, Spigot, PaperSpigot</small>
+          </button>
+
+          <div class="my-4">
+            <Icon data="{faTerminal}" scale="3" class="text-primary" />
+          </div>
+
+          <h5 class="text-primary" for="platformToken">
+            2. Bağlantı Komutunu Çalıştırın:
+          </h5>
+          <div class="input-group mb-2">
+            <input
+              bind:value="{commandText}"
+              class="form-control shadow-sm"
+              id="platformToken"
+              type="text" />
+            <div class="input-group-append">
+              <button
+                on:click="{onCopyCommandTextClick}"
+                class="btn btn-link bg-light border shadow-sm"
+                id="copyPlatformToken"
+                type="button"
+                use:tooltip="{[
+                  'top',
+                  isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala',
+                ]}">
+                <Icon data="{faClipboard}" />
+              </button>
+            </div>
+          </div>
+          <small class="text-muted">
+            Kod {timeToRefreshKey}{timeToRefreshKey === "..." ? "" : " saniye"}
+            sonra yenilenecek.
+          </small>
+
+          <div class="my-4">
+            <Icon data="{faCheckCircle}" scale="3" class="text-primary" />
+          </div>
+
+          <h5 class="text-primary">3. Bağlantı İsteğine Onay Verin:</h5>
+          <p class="mb-0">
+            Bildirim panelinden (
+            <Icon data="{faBell}" />
+            ) "Sunucu Bağlantısı İsteği" bildirimini açarak, onay verin.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   import {
     currentServerPlatformMatchKey,
@@ -125,86 +208,3 @@
     }, 1000);
   }
 </script>
-
-<!-- Connect Server Modal -->
-<div
-  aria-hidden="true"
-  class="modal fade"
-  id="connectServer"
-  role="document"
-  tabindex="-1">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Sunucu Bağla</h5>
-        <button
-          class="close"
-          data-dismiss="modal"
-          title="Pencereyi Kapat"
-          type="button">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body text-center">
-          <div class="mb-3">
-            <Icon data="{faDownload}" scale="3" class="text-primary" />
-          </div>
-
-          <h5 class="text-primary" for="downloadPlugin">
-            1. Oyun Eklentisini Sunucunuza İndirin:
-          </h5>
-          <button class="btn btn-link bg-light">
-            <Icon data="{faFileDownload}" class="mr-1" />
-            Pano Minecraft Eklentisini İndir
-            <br />
-            <small>BungeeCord, Bukkit, Spigot, PaperSpigot</small>
-          </button>
-
-          <div class="my-4">
-            <Icon data="{faTerminal}" scale="3" class="text-primary" />
-          </div>
-
-          <h5 class="text-primary" for="platformToken">
-            2. Bağlantı Komutunu Çalıştırın:
-          </h5>
-          <div class="input-group mb-2">
-            <input
-              bind:value="{commandText}"
-              class="form-control shadow-sm"
-              id="platformToken"
-              type="text" />
-            <div class="input-group-append">
-              <button
-                on:click="{onCopyCommandTextClick}"
-                class="btn btn-link bg-light border shadow-sm"
-                id="copyPlatformToken"
-                type="button"
-                use:tooltip="{[
-                  'top',
-                  isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala',
-                ]}">
-                <Icon data="{faClipboard}" />
-              </button>
-            </div>
-          </div>
-          <small class="text-muted">
-            Kod {timeToRefreshKey}{timeToRefreshKey === "..." ? "" : " saniye"}
-            sonra yenilenecek.
-          </small>
-
-          <div class="my-4">
-            <Icon data="{faCheckCircle}" scale="3" class="text-primary" />
-          </div>
-
-          <h5 class="text-primary">3. Bağlantı İsteğine Onay Verin:</h5>
-          <p class="mb-0">
-            Bildirim panelinden (
-            <Icon data="{faBell}" />
-            ) "Sunucu Bağlantısı İsteği" bildirimini açarak, onay verin.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

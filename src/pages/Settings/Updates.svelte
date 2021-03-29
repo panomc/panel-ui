@@ -1,15 +1,3 @@
-<script>
-  import { isPageInitialized } from "../../Store";
-  import { onMount } from "svelte";
-
-  import Icon from "svelte-awesome";
-  import { faSync, faDownload } from "@fortawesome/free-solid-svg-icons";
-
-  onMount(() => {
-    isPageInitialized.set(true);
-  });
-</script>
-
 <!-- Updates Sub Page -->
 <div class="tab-pane">
   <div>
@@ -82,3 +70,15 @@
     </div>
   </div>
 </div>
+
+<script>
+  import { isPageInitialized } from "../../Store";
+  import { onMount } from "svelte";
+
+  import Icon from "svelte-awesome";
+  import { faSync, faDownload } from "@fortawesome/free-solid-svg-icons";
+
+  onMount(() => {
+    isPageInitialized.set(true);
+  });
+</script>

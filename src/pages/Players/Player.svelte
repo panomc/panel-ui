@@ -1,117 +1,3 @@
-<script>
-  import { getPath, route } from "routve";
-  import moment from "moment";
-
-  import Icon from "svelte-awesome";
-  import {
-    faTicketAlt,
-    faArrowLeft,
-    faGavel,
-    faPencilAlt,
-    faUserCircle,
-  } from "@fortawesome/free-solid-svg-icons";
-
-  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
-
-  import ConfirmBanPlayerModal from "../../components/modals/ConfirmBanPlayerModal.svelte";
-  import EditPlayerModal, {
-    show as showEditPlayerModal,
-    setCallback as setEditPlayerModalCallback,
-  } from "../../components/modals/EditPlayerModal.svelte";
-  import AuthorizePlayerModal, {
-    show as showAuthorizePlayerModal,
-    setCallback as setAuthorizePlayerModalCallback,
-  } from "../../components/modals/AuthorizePlayerModal.svelte";
-
-  import TicketStatus from "../../components/TicketStatus.svelte";
-  import Date from "../../components/Date.svelte";
-
-  import ApiUtil from "../../pano-ui/js/api.util";
-  import Pagination from "../../components/Pagination.svelte";
-
-  export let username = "";
-  export let page = undefined;
-
-  let player = {
-    username: "",
-    isBanned: false,
-    registerDate: 0,
-    permission_group: "",
-  };
-  let tickets = [];
-  let ticketCount = 0;
-  let ticketTotalPage = 1;
-
-  function getPlayerDetail(username, pageNumber, forceReload = false) {
-    if (pageNumber !== page || forceReload) {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        ApiUtil.post("panel/initPage/playerDetail", {
-          username,
-          page: pageNumber,
-        })
-          .then((response) => {
-            if (response.data.result === "ok") {
-              player = response.data.player;
-              tickets = response.data.tickets;
-              ticketCount = response.data.ticketCount;
-              ticketTotalPage = response.data.ticketTotalPage;
-
-              page = pageNumber;
-
-              if (
-                page === 1 &&
-                getPath() !== "/panel/players/player/" + username &&
-                getPath() !== "/panel/players/player/" + username + "/"
-              )
-                route("/panel/players/player/" + username + "/" + page);
-              else if (page !== 1)
-                route("/panel/players/player/" + username + "/" + page);
-
-              isPageInitialized.set(true);
-
-              resolve();
-            } else if (
-              response.data.error === "NOT_EXISTS" ||
-              response.data.error === "PAGE_NOT_FOUND"
-            ) {
-              route("/panel/error-404");
-
-              resolve();
-            } else reject();
-          })
-          .catch(() => {
-            reject();
-          });
-      });
-    }
-  }
-
-  setAuthorizePlayerModalCallback((newPlayer) => {
-    player.permission_group = newPlayer.permission_group;
-  });
-
-  setEditPlayerModalCallback((newPlayer) => {
-    if (player.username !== newPlayer.username) {
-      if (
-        page === 1 &&
-        getPath() !== "/panel/players/player/" + newPlayer.username &&
-        getPath() !== "/panel/players/player/" + newPlayer.username + "/"
-      )
-        route("/panel/players/player/" + newPlayer.username + "/" + page);
-      else if (page !== 1)
-        route("/panel/players/player/" + newPlayer.username + "/" + page);
-
-      return
-    }
-
-    player = newPlayer;
-  });
-
-  $: {
-    getPlayerDetail(username, typeof page === "undefined" ? 1 : parseInt(page));
-  }
-</script>
-
 <!-- Player Detail Page -->
 
 <div class="container">
@@ -258,3 +144,117 @@
 <EditPlayerModal />
 
 <AuthorizePlayerModal />
+
+<script>
+  import { getPath, route } from "routve";
+  import moment from "moment";
+
+  import Icon from "svelte-awesome";
+  import {
+    faTicketAlt,
+    faArrowLeft,
+    faGavel,
+    faPencilAlt,
+    faUserCircle,
+  } from "@fortawesome/free-solid-svg-icons";
+
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+
+  import ConfirmBanPlayerModal from "../../components/modals/ConfirmBanPlayerModal.svelte";
+  import EditPlayerModal, {
+    show as showEditPlayerModal,
+    setCallback as setEditPlayerModalCallback,
+  } from "../../components/modals/EditPlayerModal.svelte";
+  import AuthorizePlayerModal, {
+    show as showAuthorizePlayerModal,
+    setCallback as setAuthorizePlayerModalCallback,
+  } from "../../components/modals/AuthorizePlayerModal.svelte";
+
+  import TicketStatus from "../../components/TicketStatus.svelte";
+  import Date from "../../components/Date.svelte";
+
+  import ApiUtil from "../../pano-ui/js/api.util";
+  import Pagination from "../../components/Pagination.svelte";
+
+  export let username = "";
+  export let page = undefined;
+
+  let player = {
+    username: "",
+    isBanned: false,
+    registerDate: 0,
+    permission_group: "",
+  };
+  let tickets = [];
+  let ticketCount = 0;
+  let ticketTotalPage = 1;
+
+  function getPlayerDetail(username, pageNumber, forceReload = false) {
+    if (pageNumber !== page || forceReload) {
+      showNetworkErrorOnCatch((resolve, reject) => {
+        ApiUtil.post("panel/initPage/playerDetail", {
+          username,
+          page: pageNumber,
+        })
+          .then((response) => {
+            if (response.data.result === "ok") {
+              player = response.data.player;
+              tickets = response.data.tickets;
+              ticketCount = response.data.ticketCount;
+              ticketTotalPage = response.data.ticketTotalPage;
+
+              page = pageNumber;
+
+              if (
+                page === 1 &&
+                getPath() !== "/panel/players/player/" + username &&
+                getPath() !== "/panel/players/player/" + username + "/"
+              )
+                route("/panel/players/player/" + username + "/" + page);
+              else if (page !== 1)
+                route("/panel/players/player/" + username + "/" + page);
+
+              isPageInitialized.set(true);
+
+              resolve();
+            } else if (
+              response.data.error === "NOT_EXISTS" ||
+              response.data.error === "PAGE_NOT_FOUND"
+            ) {
+              route("/panel/error-404");
+
+              resolve();
+            } else reject();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    }
+  }
+
+  setAuthorizePlayerModalCallback((newPlayer) => {
+    player.permission_group = newPlayer.permission_group;
+  });
+
+  setEditPlayerModalCallback((newPlayer) => {
+    if (player.username !== newPlayer.username) {
+      if (
+        page === 1 &&
+        getPath() !== "/panel/players/player/" + newPlayer.username &&
+        getPath() !== "/panel/players/player/" + newPlayer.username + "/"
+      )
+        route("/panel/players/player/" + newPlayer.username + "/" + page);
+      else if (page !== 1)
+        route("/panel/players/player/" + newPlayer.username + "/" + page);
+
+      return;
+    }
+
+    player = newPlayer;
+  });
+
+  $: {
+    getPlayerDetail(username, typeof page === "undefined" ? 1 : parseInt(page));
+  }
+</script>

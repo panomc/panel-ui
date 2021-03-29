@@ -1,15 +1,3 @@
-<script>
-  import Router, { path } from "routve";
-
-  function matching(path, pathName, startsWith = false) {
-    return (
-      path.toUpperCase() === pathName.toUpperCase() ||
-      path.toUpperCase() === (pathName + "/").toUpperCase() ||
-      (startsWith && path.startsWith(pathName))
-    );
-  }
-</script>
-
 <!-- Settings Contents -->
 <article class="container">
   <!-- Settings Categories Nav -->
@@ -45,3 +33,15 @@
   <hr />
   <Router />
 </article>
+
+<script>
+  import Router, { path } from "routve";
+
+  function matching(path, pathName, startsWith = false) {
+    return (
+      path.toUpperCase() === pathName.toUpperCase() ||
+      path.toUpperCase() === (pathName + "/").toUpperCase() ||
+      (startsWith && path.startsWith(pathName))
+    );
+  }
+</script>

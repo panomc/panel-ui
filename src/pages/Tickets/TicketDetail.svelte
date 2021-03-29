@@ -1,197 +1,3 @@
-<script>
-  import Icon from "svelte-awesome";
-  import {
-    faTrash,
-    faTimes,
-    faArrowLeft,
-    faEllipsisV,
-  } from "@fortawesome/free-solid-svg-icons";
-
-  import { route } from "routve";
-  import { writable, get } from "svelte/store";
-  import { onMount } from "svelte";
-  import Quill from "quill";
-
-  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano-ui/js/api.util";
-  import tooltip from "../../pano-ui/js/tooltip.util";
-  import { extractContent } from "../../util/text.util";
-
-  import ConfirmCloseTicketModal, {
-    setCallback as setCloseTicketModalCallback,
-    show as showCloseTicketModal,
-  } from "../../components/modals/ConfirmCloseTicketModal.svelte";
-  import ConfirmDeleteTicketModal, {
-    setCallback as setDeleteTicketModalCallback,
-    show as showDeleteTicketModal,
-  } from "../../components/modals/ConfirmDeleteTicketModal.svelte";
-
-  import TicketStatus from "../../components/TicketStatus.svelte";
-  import Date from "../../components/Date.svelte";
-
-  let title = "";
-  let category = "-";
-  let username = "";
-  let status = 3;
-  let count = 0;
-  let messages = writable([]);
-  let date = 0;
-
-  let messagesSectionDiv;
-  let page = 0;
-  let loadMoreLoading = false;
-  let messageSendLoading = false;
-
-  let messageText = "";
-  let quill;
-
-  const messagesSectionClientHeight = writable(0);
-
-  export let id = -1;
-
-  function getTicketDetail(id) {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/initPage/ticket/detail", { id: parseInt(id) })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            const ticket = response.data.ticket;
-
-            title = ticket.title;
-            category = ticket.category;
-            username = ticket.username;
-            status = ticket.status;
-            count = ticket.count;
-            messages.set(ticket.messages);
-            date = ticket.date;
-
-            isPageInitialized.set(true);
-          } else if (response.data.error === "NOT_EXISTS") {
-            route("/panel/error-404");
-          } else reject();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-
-  function loadMore() {
-    loadMoreLoading = true;
-
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/ticket/detail/message/page", {
-        id: parseInt(id),
-        last_message_id: get(messages)[0].id,
-      })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            response.data.messages.reverse().forEach((message) => {
-              messages.update((list) => {
-                list.unshift(message);
-
-                return list;
-              });
-            });
-
-            loadMoreLoading = false;
-          } else if (response.data.error === "NOT_EXISTS") {
-            route("/panel/error-404");
-          } else reject();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-
-  function sendMessage() {
-    messageSendLoading = true;
-
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/ticket/detail/message/send", {
-        ticket_id: parseInt(id),
-        message: messageText,
-      })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            messages.update((list) => {
-              list.push(response.data.message);
-
-              return list;
-            });
-
-            status = 2;
-            messageText = "";
-            quill.setHTML("");
-
-            messageSendLoading = false;
-          } else if (response.data.error === "NOT_EXISTS") {
-            route("/panel/error-404");
-          } else reject();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-
-  setCloseTicketModalCallback(() => {
-    status = 3;
-  });
-
-  setDeleteTicketModalCallback(() => {
-    route("/tickets");
-  });
-
-  messagesSectionClientHeight.subscribe((height) => {
-    if (height !== 0 && messagesSectionDiv)
-      messagesSectionDiv.scrollTo(0, height);
-  });
-
-  function imageHandler() {
-    const range = quill.getSelection();
-    const value = prompt("What is the image URL");
-
-    if (value) {
-      quill.insertEmbed(range.index, "image", value, Quill.sources.USER);
-    }
-  }
-
-  function prepareQuill() {
-    quill = new Quill("#editor", {
-      modules: {
-        toolbar: {
-          container: "#editorToolbar",
-          handlers: {
-            image: imageHandler,
-          },
-        },
-      },
-      theme: "snow",
-    });
-
-    quill.setHTML = (html) => {
-      quill.container.firstChild.innerHTML = html;
-    };
-
-    quill.getHTML = () => {
-      return quill.container.firstChild.innerHTML;
-    };
-
-    quill.on("text-change", () => {
-      messageText = quill.getHTML();
-    });
-  }
-
-  onMount(() => {
-    prepareQuill();
-  });
-
-  $: {
-    getTicketDetail(id);
-  }
-</script>
-
 <div class="row mb-3">
   <div class="col-auto">
     <a class="btn btn-link" role="button" href="/panel/tickets">
@@ -387,3 +193,197 @@
 
 <ConfirmCloseTicketModal />
 <ConfirmDeleteTicketModal />
+
+<script>
+  import Icon from "svelte-awesome";
+  import {
+    faTrash,
+    faTimes,
+    faArrowLeft,
+    faEllipsisV,
+  } from "@fortawesome/free-solid-svg-icons";
+
+  import { route } from "routve";
+  import { writable, get } from "svelte/store";
+  import { onMount } from "svelte";
+  import Quill from "quill";
+
+  import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
+  import ApiUtil from "../../pano-ui/js/api.util";
+  import tooltip from "../../pano-ui/js/tooltip.util";
+  import { extractContent } from "../../util/text.util";
+
+  import ConfirmCloseTicketModal, {
+    setCallback as setCloseTicketModalCallback,
+    show as showCloseTicketModal,
+  } from "../../components/modals/ConfirmCloseTicketModal.svelte";
+  import ConfirmDeleteTicketModal, {
+    setCallback as setDeleteTicketModalCallback,
+    show as showDeleteTicketModal,
+  } from "../../components/modals/ConfirmDeleteTicketModal.svelte";
+
+  import TicketStatus from "../../components/TicketStatus.svelte";
+  import Date from "../../components/Date.svelte";
+
+  let title = "";
+  let category = "-";
+  let username = "";
+  let status = 3;
+  let count = 0;
+  let messages = writable([]);
+  let date = 0;
+
+  let messagesSectionDiv;
+  let page = 0;
+  let loadMoreLoading = false;
+  let messageSendLoading = false;
+
+  let messageText = "";
+  let quill;
+
+  const messagesSectionClientHeight = writable(0);
+
+  export let id = -1;
+
+  function getTicketDetail(id) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/initPage/ticket/detail", { id: parseInt(id) })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            const ticket = response.data.ticket;
+
+            title = ticket.title;
+            category = ticket.category;
+            username = ticket.username;
+            status = ticket.status;
+            count = ticket.count;
+            messages.set(ticket.messages);
+            date = ticket.date;
+
+            isPageInitialized.set(true);
+          } else if (response.data.error === "NOT_EXISTS") {
+            route("/panel/error-404");
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  function loadMore() {
+    loadMoreLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/ticket/detail/message/page", {
+        id: parseInt(id),
+        last_message_id: get(messages)[0].id,
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            response.data.messages.reverse().forEach((message) => {
+              messages.update((list) => {
+                list.unshift(message);
+
+                return list;
+              });
+            });
+
+            loadMoreLoading = false;
+          } else if (response.data.error === "NOT_EXISTS") {
+            route("/panel/error-404");
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  function sendMessage() {
+    messageSendLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/ticket/detail/message/send", {
+        ticket_id: parseInt(id),
+        message: messageText,
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            messages.update((list) => {
+              list.push(response.data.message);
+
+              return list;
+            });
+
+            status = 2;
+            messageText = "";
+            quill.setHTML("");
+
+            messageSendLoading = false;
+          } else if (response.data.error === "NOT_EXISTS") {
+            route("/panel/error-404");
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  setCloseTicketModalCallback(() => {
+    status = 3;
+  });
+
+  setDeleteTicketModalCallback(() => {
+    route("/tickets");
+  });
+
+  messagesSectionClientHeight.subscribe((height) => {
+    if (height !== 0 && messagesSectionDiv)
+      messagesSectionDiv.scrollTo(0, height);
+  });
+
+  function imageHandler() {
+    const range = quill.getSelection();
+    const value = prompt("What is the image URL");
+
+    if (value) {
+      quill.insertEmbed(range.index, "image", value, Quill.sources.USER);
+    }
+  }
+
+  function prepareQuill() {
+    quill = new Quill("#editor", {
+      modules: {
+        toolbar: {
+          container: "#editorToolbar",
+          handlers: {
+            image: imageHandler,
+          },
+        },
+      },
+      theme: "snow",
+    });
+
+    quill.setHTML = (html) => {
+      quill.container.firstChild.innerHTML = html;
+    };
+
+    quill.getHTML = () => {
+      return quill.container.firstChild.innerHTML;
+    };
+
+    quill.on("text-change", () => {
+      messageText = quill.getHTML();
+    });
+  }
+
+  onMount(() => {
+    prepareQuill();
+  });
+
+  $: {
+    getTicketDetail(id);
+  }
+</script>

@@ -1,3 +1,74 @@
+<!-- Permission Group Delete Confirmation Modal -->
+<div
+  aria-hidden="true"
+  class="modal fade"
+  id="{dialogID}"
+  role="dialog"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="dialog">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <div class="pb-3">
+          <Icon
+            data="{faQuestionCircle}"
+            scale="3"
+            class="d-block m-auto text-gray" />
+        </div>
+        Bu yetki grubunu kalıcı olarak silmek istediğinizden emin misiniz?
+
+        {#if $permissionGroup.user_count > 0}
+          <div class="mt-3 alert alert-warning">
+            Yetki grubu içerisindeki şu kullanıcılar Oyuncu olarak değişecek:
+            <br />
+            <br />
+            <span class="badge badge-warning badge-pill mr-1">
+              {$permissionGroup.name}
+            </span>
+            <div
+              class="d-flex flex-row flex-row-reverse justify-content-center align-items-center mt-3 mr-3">
+              {#if $permissionGroup.user_count > 3}
+                <small class="pl-1">+{$permissionGroup.user_count - 3}</small>
+              {/if}
+
+              {#each $permissionGroup.users as user, index (user)}
+                <span
+                  class="overlapping-avatar"
+                  use:tooltip="{['bottom', user]}">
+                  <a href="/panel/players/player/{user}">
+                    <img
+                      src="https://minotar.net/avatar/{user}"
+                      width="32"
+                      height="32"
+                      alt="{user}" />
+                  </a>
+                </span>
+              {/each}
+            </div>
+          </div>
+        {/if}
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-link text-muted"
+          type="button"
+          class:disabled="{loading}"
+          disabled="{loading}"
+          on:click="{hide}">
+          İptal
+        </button>
+        <button
+          class="btn btn-danger"
+          type="button"
+          class:disabled="{loading}"
+          disabled="{loading}"
+          on:click="{onYesClick}">
+          Evet
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script context="module">
   import jquery from "jquery";
   import { writable, get } from "svelte/store";
@@ -74,74 +145,3 @@
     });
   }
 </script>
-
-<!-- Permission Group Delete Confirmation Modal -->
-<div
-  aria-hidden="true"
-  class="modal fade"
-  id="{dialogID}"
-  role="dialog"
-  tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered" role="dialog">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-        <div class="pb-3">
-          <Icon
-            data="{faQuestionCircle}"
-            scale="3"
-            class="d-block m-auto text-gray" />
-        </div>
-        Bu yetki grubunu kalıcı olarak silmek istediğinizden emin misiniz?
-
-        {#if $permissionGroup.user_count > 0}
-          <div class="mt-3 alert alert-warning">
-            Yetki grubu içerisindeki şu kullanıcılar Oyuncu olarak değişecek:
-            <br />
-            <br />
-            <span class="badge badge-warning badge-pill mr-1">
-              {$permissionGroup.name}
-            </span>
-            <div
-              class="d-flex flex-row flex-row-reverse justify-content-center align-items-center mt-3 mr-3">
-              {#if $permissionGroup.user_count > 3}
-                <small class="pl-1">+{$permissionGroup.user_count - 3}</small>
-              {/if}
-
-              {#each $permissionGroup.users as user, index (user)}
-                <span
-                  class="overlapping-avatar"
-                  use:tooltip="{['bottom', user]}">
-                  <a href="/panel/players/player/{user}">
-                    <img
-                      src="https://minotar.net/avatar/{user}"
-                      width="32"
-                      height="32"
-                      alt="{user}" />
-                  </a>
-                </span>
-              {/each}
-            </div>
-          </div>
-        {/if}
-      </div>
-      <div class="modal-footer">
-        <button
-          class="btn btn-link text-muted"
-          type="button"
-          class:disabled="{loading}"
-          disabled="{loading}"
-          on:click="{hide}">
-          İptal
-        </button>
-        <button
-          class="btn btn-danger"
-          type="button"
-          class:disabled="{loading}"
-          disabled="{loading}"
-          on:click="{onYesClick}">
-          Evet
-        </button>
-      </div>
-    </div>
-  </div>
-</div>

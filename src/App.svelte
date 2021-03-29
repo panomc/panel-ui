@@ -2,6 +2,16 @@
   @import "styles/style";
 </style>
 
+<!-- Splash Animation -->
+{#if showSplash}
+  <Splash />
+{/if}
+
+<!-- Main Contents Hidden -->
+{#await import("./components/Main.svelte") then MainComponent}
+  <svelte:component this="{MainComponent.default}" hidden="{showSplash}" />
+{/await}
+
 <script>
   import { onMount, onDestroy } from "svelte";
   import { get } from "svelte/store";
@@ -98,13 +108,3 @@
       });
   });
 </script>
-
-<!-- Splash Animation -->
-{#if showSplash}
-  <Splash />
-{/if}
-
-<!-- Main Contents Hidden -->
-{#await import("./components/Main.svelte") then MainComponent}
-  <svelte:component this="{MainComponent.default}" hidden="{showSplash}" />
-{/await}
