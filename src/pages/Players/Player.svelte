@@ -14,7 +14,10 @@
   import { isPageInitialized, showNetworkErrorOnCatch } from "../../Store";
 
   import ConfirmBanPlayerModal from "../../components/modals/ConfirmBanPlayerModal.svelte";
-  import EditPlayerModal from "../../components/modals/EditPlayerModal.svelte";
+  import EditPlayerModal, {
+    show as showEditPlayerModal,
+    setCallback as setEditPlayerModalCallback,
+  } from "../../components/modals/EditPlayerModal.svelte";
   import AuthorizePlayerModal, {
     show as showAuthorizePlayerModal,
     setCallback as setAuthorizePlayerModalCallback,
@@ -87,6 +90,10 @@
     player.permission_group = newPlayer.permission_group;
   });
 
+  setEditPlayerModalCallback((newPlayer) => {
+    player = newPlayer;
+  });
+
   $: {
     getPlayerDetail(username, typeof page === "undefined" ? 1 : parseInt(page));
   }
@@ -114,8 +121,7 @@
       <a
         class="btn btn-link"
         href="javascript:void(0);"
-        data-toggle="modal"
-        data-target="#blabla">
+        on:click="{() => showEditPlayerModal(player)}">
         <Icon data="{faPencilAlt}" class="mr-1" />
         Düzenle
       </a>
@@ -144,7 +150,7 @@
             src="https://minotar.net/avatar/{player.username}" />
 
           <h4 class="card-title">{player.username}</h4>
-          <h6 class="text-muted">selimgokcek@outlook.com</h6>
+          <h6 class="text-muted">{player.email}</h6>
           {#if player.isBanned}
             <hr />
             <div class="badge badge-pill badge-danger d-block">
