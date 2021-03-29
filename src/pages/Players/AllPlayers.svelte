@@ -13,6 +13,7 @@
     faGavel,
     faUserCircle,
     faGlobe,
+    faPencilAlt,
   } from "@fortawesome/free-solid-svg-icons";
 
   import Date from "../../components/Date.svelte";
@@ -22,6 +23,10 @@
     show as showAuthorizePlayerModal,
     setCallback as setAuthorizePlayerModalCallback,
   } from "../../components/modals/AuthorizePlayerModal.svelte";
+  import EditPlayerModal, {
+    show as showEditPlayerModal,
+    setCallback as setEditPlayerModalCallback,
+  } from "../../components/modals/EditPlayerModal.svelte";
 
   export let page = undefined;
   export let pageType = "all";
@@ -88,6 +93,17 @@
     players.forEach((player) => {
       if (player.id === newPlayer.id)
         player.permission_group = newPlayer.permission_group;
+    });
+
+    players = players;
+  });
+
+  setEditPlayerModalCallback((newPlayer) => {
+    players.forEach((player) => {
+      if (player.id === newPlayer.id) {
+        player.username = newPlayer.username;
+        player.email = newPlayer.email;
+      }
     });
 
     players = players;
@@ -200,6 +216,15 @@
                         </a>
                         <a
                           class="dropdown-item"
+                          href="javascript:void(0);"
+                          on:click="{() => showEditPlayerModal(player)}">
+                          <Icon
+                            data="{faPencilAlt}"
+                            class="mr-1 text-primary" />
+                          Düzenle
+                        </a>
+                        <a
+                          class="dropdown-item"
                           data-target="#conformBanTickets"
                           data-toggle="modal"
                           href="javascript:void(0);">
@@ -262,4 +287,5 @@
   </div>
 </div>
 
+<EditPlayerModal />
 <AuthorizePlayerModal />
