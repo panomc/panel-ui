@@ -86,7 +86,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $lightglass;
 }
 
 .sidebar-inner {
@@ -132,7 +131,6 @@
   height: 100vh;
   min-width: 300px;
   width: 100%;
-  padding-top: 88px;
   overflow-y: auto;
   transition: 0.2s ease-in;
 }

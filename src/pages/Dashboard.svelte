@@ -83,7 +83,7 @@
   <!-- Welcome Alerts -->
   {#if getting_started_blocks.welcome_board}
     <div
-      class="alert card rounded alert-welcome alert-dismissible flex-fill w-100
+      class="alert alert-welcome alert-dismissible flex-fill w-100
       show border mb-4"
       role="alert">
       <button
@@ -96,7 +96,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-12">
-            <h4 class="card-title text-primary">Hoş Geldiniz</h4>
+            <h4 class="card-title">Hoş Geldiniz</h4>
             <p>
               Pano kullanıma hazır! İşte başlarken yapabileceklerinizden
               bazıları:
