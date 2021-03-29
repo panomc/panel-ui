@@ -158,7 +158,7 @@
             </div>
             <small class:text-danger="{$errors.url}">
               <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i>
-              Yanlızca [A-Z/a-z/0-9/_] içerebilir ve minimum 3, maksimum 32 karkater
+              Yanlızca [A-Z/a-z/0-9/-] içerebilir ve minimum 3, maksimum 32 karkater
               olabilir.
             </small>
           </div>
