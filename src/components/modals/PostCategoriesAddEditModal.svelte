@@ -91,7 +91,7 @@
 
   function setURL() {
     category.update((category) => {
-      category.url = category.title.replace(/\s+/g, '-').toLowerCase()
+      category.url = category.title.replace(/\s+/g, '-').replace(/[^0-9A-Za-z-]+/g, "").toLowerCase()
 
       return category
     });
