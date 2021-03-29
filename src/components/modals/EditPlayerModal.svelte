@@ -4,6 +4,7 @@
 
   const dialogID = "editPlayerModal";
   const player = writable({});
+  const playerBackup = writable({});
   const defaultErrors = {
     "username": "",
     "email": "",
@@ -23,6 +24,8 @@
 
       return player;
     });
+    playerBackup.set(Object.assign({}, get(player)))
+
     errors.set(defaultErrors);
 
     jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
@@ -44,7 +47,7 @@
 </script>
 
 <script>
-  import { showNetworkErrorOnCatch } from "../../Store";
+  import { showNetworkErrorOnCatch, user } from "../../Store";
   import ApiUtil from "../../pano/js/api.util";
 
   function refreshBrowserPage() {
@@ -60,6 +63,15 @@
       ApiUtil.post("panel/player/edit/info", get(player))
         .then((response) => {
           if (response.data.result === "ok") {
+            if (get(playerBackup).username === get(user).username) {
+              user.update((user) => {
+                user.username = get(player).username
+                user.email = get(player).email
+
+                return user;
+              })
+            }
+
             loading = false;
 
             hide();
