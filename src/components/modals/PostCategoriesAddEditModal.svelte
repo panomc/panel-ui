@@ -91,9 +91,13 @@
 
   function setURL() {
     category.update((category) => {
-      category.url = category.title.replace(/\s+/g, '-').replace(/[^0-9A-Za-z-]+/g, "").toLowerCase()
+      category.url = category.title
+        .replace(/\s+/g, "-")
+        .replace(/[^0-9A-Za-z-]+/g, "")
+        .toLowerCase()
+        .substring(0, 32);
 
-      return category
+      return category;
     });
   }
 </script>
@@ -131,7 +135,7 @@
               id="category"
               type="text"
               bind:value="{$category.title}"
-            on:input={() => setURL()}/>
+              on:input="{() => setURL()}" />
           </div>
           <div class="form-group">
             <textarea
