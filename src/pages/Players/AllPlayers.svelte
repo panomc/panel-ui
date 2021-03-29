@@ -10,7 +10,7 @@
   import {
     faUsers,
     faEllipsisV,
-    faTimes,
+    faGavel,
     faUserCircle,
     faGlobe,
   } from "@fortawesome/free-solid-svg-icons";
@@ -203,7 +203,7 @@
                           data-target="#conformBanTickets"
                           data-toggle="modal"
                           href="javascript:void(0);">
-                          <Icon data="{faTimes}" class="mr-1 text-danger" />
+                          <Icon data="{faGavel}" class="mr-1 text-danger" />
                           Yasakla
                         </a>
                       </div>
@@ -214,7 +214,7 @@
                       title="Oyuncu Profiline Git"
                       href="/panel/players/player/{player.username}">
                       <img
-                        alt="Oyuncu Adı"
+                        alt="{player.username}"
                         class="rounded-circle border mr-3"
                         height="32"
                         src="https://minotar.net/avatar/{player.username}"

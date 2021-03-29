@@ -6,7 +6,7 @@
   import {
     faTicketAlt,
     faArrowLeft,
-    faTimes,
+    faGavel,
     faPencilAlt,
     faUserCircle,
   } from "@fortawesome/free-solid-svg-icons";
@@ -124,7 +124,7 @@
         data-target="#conformBanPlayer"
         data-toggle="modal"
         href="javascript:void(0);">
-        <Icon data="{faTimes}" class="mr-1" />
+        <Icon data="{faGavel}" class="mr-1" />
         Yasakla
       </a>
     </div>
@@ -144,10 +144,13 @@
             src="https://minotar.net/avatar/{player.username}" />
 
           <h4 class="card-title">{player.username}</h4>
-          <small class="text-muted">selimgokcek@outlook.com</small>
+          <h6 class="text-muted">selimgokcek@outlook.com</h6>
           {#if player.isBanned}
             <hr />
-            <div class="badge badge-pill badge-danger d-block">Yasaklı</div>
+            <div class="badge badge-pill badge-danger d-block">
+              <Icon data="{faGavel}" class="mr-1" />
+              Yasaklı
+            </div>
           {/if}
           <hr />
 
