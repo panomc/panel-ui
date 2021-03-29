@@ -325,7 +325,9 @@
                           >+{permissionGroup.user_count - 3}</small>
                       {/if}
                       {#each permissionGroup.users as user, index (user)}
-                        <span class="overlapping-avatar" use:tooltip={['bottom', user]}>
+                        <span
+                          class="overlapping-avatar"
+                          use:tooltip="{['bottom', user]}">
                           <a href="/panel/players/player/{user}">
                             <img
                               src="https://minotar.net/avatar/{user}"

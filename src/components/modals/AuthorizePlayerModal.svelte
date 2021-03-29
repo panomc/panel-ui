@@ -11,7 +11,7 @@
   const permissionGroups = writable([]);
   const defaultErrors = {
     "LAST_ADMIN": false,
-  }
+  };
   const errors = writable(defaultErrors);
   const submitLoading = writable(false);
 
@@ -20,8 +20,8 @@
 
   export function show(newPlayer) {
     player.set(Object.assign({}, newPlayer));
-    errors.set(defaultErrors)
-    submitLoading.set(false)
+    errors.set(defaultErrors);
+    submitLoading.set(false);
 
     initData();
 

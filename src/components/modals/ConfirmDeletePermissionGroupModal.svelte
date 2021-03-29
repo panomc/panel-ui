@@ -124,24 +124,24 @@
           </div>
         {/if}
       </div>
-        <div class="modal-footer">
-          <button
-            class="btn btn-link text-muted"
-            type="button"
-            class:disabled="{loading}"
-            disabled="{loading}"
-            on:click="{hide}">
-            İptal
-          </button>
-          <button
-            class="btn btn-danger"
-            type="button"
-            class:disabled="{loading}"
-            disabled="{loading}"
-            on:click="{onYesClick}">
-            Evet
-          </button>
-        </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-link text-muted"
+          type="button"
+          class:disabled="{loading}"
+          disabled="{loading}"
+          on:click="{hide}">
+          İptal
+        </button>
+        <button
+          class="btn btn-danger"
+          type="button"
+          class:disabled="{loading}"
+          disabled="{loading}"
+          on:click="{onYesClick}">
+          Evet
+        </button>
+      </div>
     </div>
   </div>
 </div>

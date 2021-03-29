@@ -113,7 +113,7 @@
           <button
             class="btn btn-block"
             class:btn-secondary="{$mode === 'create'}"
-            class:btn-primary={$mode === "edit"}
+            class:btn-primary="{$mode === 'edit'}"
             type="submit"
             class:disabled="{loading}"
             disabled="{loading}">

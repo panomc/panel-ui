@@ -90,11 +90,14 @@
         Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?
         {#if $category.post_count !== 0}
           <div class="mt-3 alert alert-warning">
-              Kategori içerisindeki şu yazılar Kategorisiz olarak değişecek:
-              <br />
-              <br />
+            Kategori içerisindeki şu yazılar Kategorisiz olarak değişecek:
+            <br />
+            <br />
             {#each $category.posts as post, index (post)}
-              <a class="badge badge-warning badge-pill mr-1" href="/panel/posts/post/{post.id}" target="_blank">
+              <a
+                class="badge badge-warning badge-pill mr-1"
+                href="/panel/posts/post/{post.id}"
+                target="_blank">
                 {post.title}
               </a>
             {/each}
