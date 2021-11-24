@@ -1,9 +1,9 @@
 <!--  .format('DD/MM/YYYY, HH:mm')-->
 <span
   use:tooltip="{[
-    format(new Date(parseInt(date)), 'dd/mm/yyyy, HH:mm'),
+    format(new Date(parseInt(date)), 'dd/MM/yyyy, HH:mm'),
     { placement: 'bottom' },
-  ]}">{format(new Date(parseInt(date)), "dd/mm/yyyy")}</span
+  ]}">{format(new Date(parseInt(date)), "dd/MM/yyyy")}</span
 >
 
 <script>
