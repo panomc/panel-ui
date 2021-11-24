@@ -43,25 +43,25 @@
             <ul class="list-unstyled mb-1">
               <h5>Başlarken</h5>
               <li>
-                <a href="panel/posts/create-post">
+                <a href="{base}/posts/create-post">
                   <i class="fas fa-pen mr-1"></i>
                   İlk Yazınızı Yayınlayın
                 </a>
               </li>
               <li>
-                <a href="panel/view">
+                <a href="{base}/view">
                   <i class="fas fa-brush mr-1"></i>
                   Sitenizin Görünümünü Belirleyin
                 </a>
               </li>
               <li>
-                <a href="panel/tools">
+                <a href="{base}/tools">
                   <i class="fas fa-tools mr-1"></i>
                   Araçları Yönetin
                 </a>
               </li>
               <li>
-                <a href="panel/players">
+                <a href="{base}/players">
                   <i class="fas fa-user-cog mr-1"></i>
                   Oyuncularınızı İnceleyin
                 </a>
