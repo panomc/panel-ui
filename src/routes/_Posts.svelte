@@ -159,9 +159,15 @@
                   </td>
                   <td class="align-middle text-nowrap">
                     <span
-                      class="badge badge-sunflower badge-pill"
-                      style="background: #{post.category.color}">
-                      {post.category.title}
+                      class="badge badge-pill"
+                      class:text-dark="{post.category.title === '-'}"
+                      class:px-0="{post.category.title === '-'}"
+                      style="{post.category.title === '-'
+                        ? ''
+                        : 'background: #' + post.category.color}">
+                      {post.category.title === "-"
+                        ? "Kategorisiz"
+                        : post.category.title}
                     </span>
                   </td>
                   <td class="align-middle text-nowrap">
