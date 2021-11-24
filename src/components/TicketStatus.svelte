@@ -1,9 +1,23 @@
 {#if status === TicketStatuses.NEW}
-  <span class="badge badge-secondary badge-pill">Yeni</span>
+  <a href="{base}/tickets/waitingReply"
+    ><span
+      class="badge badge-secondary badge-pill"
+      use:tooltip="{['Tüm Yeni Talepler', { placement: 'bottom' }]}">Yeni</span
+    ></a>
 {:else if status === TicketStatuses.REPLIED}
-  <span class="badge badge-sunflower badge-pill">Yanıtlandı</span>
+  <a href="{base}/tickets"
+    ><span
+      class="badge badge-sunflower badge-pill"
+      use:tooltip="{['Tüm Yanıtlanan Talepler', { placement: 'bottom' }]}"
+      >Yanıtlandı</span
+    ></a>
 {:else if status === TicketStatuses.CLOSED}
-  <span class="badge badge-bittersweet badge-pill">Kapalı</span>
+  <a href="{base}/tickets/closed"
+    ><span
+      class="badge badge-bittersweet badge-pill"
+      use:tooltip="{['Tüm Kapalı Talepler', { placement: 'bottom' }]}"
+      >Kapalı</span
+    ></a>
 {/if}
 
 <script context="module">
@@ -15,5 +29,9 @@
 </script>
 
 <script>
+  import { base } from "$app/paths";
+
+  import tooltip from "$lib/tooltip.util";
+
   export let status = TicketStatuses.NEW;
 </script>
