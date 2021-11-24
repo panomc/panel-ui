@@ -1,11 +1,15 @@
+<!--  .format('DD/MM/YYYY, HH:mm')-->
 <span
-  use:tooltip="{['bottom', moment(parseInt(date)).format('DD/MM/YYYY, HH:mm')]}"
-  >{moment(parseInt(date)).calendar()}</span>
+  use:tooltip="{[
+    format(new Date(parseInt(date)), 'dd/mm/yyyy, HH:mm'),
+    { placement: 'bottom' },
+  ]}">{format(new Date(parseInt(date)), "dd/mm/yyyy")}</span
+>
 
 <script>
-  import moment from "moment";
+  import { format } from "date-fns";
 
-  import tooltip from "../pano-ui/js/tooltip.util";
+  import tooltip from "$lib/tooltip.util";
 
   export let time;
 

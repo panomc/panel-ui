@@ -1,2 +1,6 @@
-public/assets
-public/commons
+.svelte
+static
+build
+functions
+node_modules
+.svelte-kit

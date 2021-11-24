@@ -4,15 +4,13 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
         <div class="pb-3">
-          <Icon
-            data="{faQuestionCircle}"
-            scale="3"
-            class="d-block m-auto text-gray" />
+          <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
         Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?
         {#if $category.post_count !== 0}
@@ -23,8 +21,9 @@
             {#each $category.posts as post, index (post)}
               <a
                 class="badge badge-warning badge-pill mr-1"
-                href="/panel/posts/post/{post.id}"
-                target="_blank">
+                href="{base}/posts/post/{post.id}"
+                target="_blank"
+              >
                 {post.title}
               </a>
             {/each}
@@ -41,7 +40,8 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{hide}">
+          on:click="{hide}"
+        >
           İptal
         </button>
         <button
@@ -49,7 +49,8 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{onYesClick}">
+          on:click="{onYesClick}"
+        >
           Evet
         </button>
       </div>
@@ -91,11 +92,10 @@
 </script>
 
 <script>
-  import Icon from "svelte-awesome";
-  import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+  import { base } from "$app/paths";
 
-  import { showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano-ui/js/api.util";
+  import { showNetworkErrorOnCatch } from "$lib/store";
+  import ApiUtil from "$lib/api.util";
 
   let loading = false;
 

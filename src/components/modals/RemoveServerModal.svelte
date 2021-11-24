@@ -4,7 +4,8 @@
   class="modal fade"
   id="confirmRemoveServer"
   role="dialog"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <!--      @submit.prevent="submitRemoveServer"-->
@@ -27,11 +28,13 @@
               id="confirmRemoveServerPassword"
               placeholder="Pano Hesabı Şifreniz"
               type="password"
-              v-model="removingServerForm.password" />
+              v-model="removingServerForm.password"
+            />
 
             <small
               class="form-text text-danger d-inline"
-              v-if="removingServerForm.error.code !== ''">
+              v-if="removingServerForm.error.code !== ''"
+            >
               <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i>
               <!--              {{ removingServerForm.error.code }}-->
             </small>
@@ -46,7 +49,8 @@
             :disabled="removingServerForm.removing"
             class="btn btn-outline-primary w-100"
             data-dismiss="modal"
-            type="button">
+            type="button"
+          >
             İptal
           </button>
 
@@ -54,12 +58,13 @@
             :disabled="removingServerForm.removing ||
             removingServerForm.password === ''"
             class="btn btn-danger w-100"
-            type="submit">
+            type="submit"
+          >
             <div
               class="spinner-border spinner-border-sm text-white"
               role="status"
-              v-if="removingServerForm.removing">
-            </div>
+              v-if="removingServerForm.removing"
+            ></div>
             <span v-if="!removingServerForm.removing">Evet</span>
           </button>
         </div>

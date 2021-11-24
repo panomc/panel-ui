@@ -1,43 +1,40 @@
 <nav class="sidebar-nav navbar-dark" v-if="sidebarTabsState === 'game'">
   <ul class="menu navbar-nav font-weight-normal d-none">
-    <!--        :class="{ 'active': path.startsWith('/panel/server-panel') }"-->
+    <!--        :class="{ 'active': path.startsWith('{base}/server-panel') }"-->
     <li class="nav-item">
-      <router-link class="nav-link" to="/panel/tools">
-        <Icon data="{faTachometerAlt}" class="mx-2" />
+      <a class="nav-link" href="{base}/tools">
+        <i class="fas fa-tachometer-alt mx-2"></i>
         Sunucu Durumu
-      </router-link>
+      </a>
     </li>
-    <!--        :class="{ 'active': path.startsWith('/panel/server-preferences') }"-->
+    <!--        :class="{ 'active': path.startsWith('{base}/server-preferences') }"-->
     <li class="nav-item">
-      <router-link class="nav-link" to="/panel/tools">
-        <Icon data="{faCogs}" class="mx-2" />
+      <a class="nav-link" href="{base}/tools">
+        <i class="fas fa-cogs mx-2"></i>
         Konfigürasyon
-      </router-link>
+      </a>
     </li>
   </ul>
   <div class="container text-center">
-    <Icon data="{faCube}" scale="3" class="m-3 text-glass" />
+    <i class="fas fa-cube mx-2 fa-3x m-3 text-glass"></i>
+
     <p class="text-gray">
       Bağlı sunucu yok. Sunucu yönetimi menüsünü getirmek için bir sunucu
       bağlayın.
     </p>
+
     <button
       class="btn bg-lightprimary text-primary btn-sm"
       data-target="#connectServer"
       data-toggle="modal"
-      type="button">
-      <Icon data="{faPlus}" class="mr-2" />
-      Suncuu Bağla
+      type="button"
+    >
+      <i class="fas fa-plus mr-2"></i>
+      Sunucu Bağla
     </button>
   </div>
 </nav>
 
 <script>
-  import Icon from "svelte-awesome";
-  import {
-    faTachometerAlt,
-    faCogs,
-    faCube,
-    faPlus,
-  } from "@fortawesome/free-solid-svg-icons";
+  import { base } from "$app/paths";
 </script>

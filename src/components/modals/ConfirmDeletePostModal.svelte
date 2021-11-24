@@ -4,15 +4,13 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
         <div class="pb-3">
-          <Icon
-            data="{faQuestionCircle}"
-            scale="3"
-            class="d-block m-auto text-gray" />
+          <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
         {$post.status === 0
           ? "Bu yazıyı kalıcı olarak silmek istediğinizden emin misiniz?"
@@ -24,7 +22,8 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{hide}">
+          on:click="{hide}"
+        >
           İptal
         </button>
         <button
@@ -32,7 +31,8 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{onYesClick}">
+          on:click="{onYesClick}"
+        >
           Evet
         </button>
       </div>
@@ -72,11 +72,8 @@
 </script>
 
 <script>
-  import Icon from "svelte-awesome";
-  import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
-
-  import { showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano-ui/js/api.util";
+  import { showNetworkErrorOnCatch } from "$lib/store";
+  import ApiUtil from "$lib/api.util";
 
   let loading = false;
 

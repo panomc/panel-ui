@@ -2,21 +2,23 @@
 <ConnectServerModal />
 <RemoveServerModal />
 
-<!-- Sidebar -->
 <div class="sidebar bg-primary" class:active="{$isSidebarOpen}">
   <!-- Sidebar Logo -->
   <div class="sidebar-logo border-bottom border-glass">
     <a
       href="javascript:void(0);"
       class="sidebar-toggler btn btn-link text-light"
-      on:click="{onMobileSideBarCollapseClick}">
-      <Icon data="{faBars}" />
+      on:click="{onMobileSideBarCollapseClick}"
+    >
+      <i class="fas fa-bars"></i>
     </a>
+
     <img
       alt="Pano"
       title="Pano"
-      src="{basePath() + 'assets/img/logo.svg'}"
-      width="20" />
+      src="{base + '/assets/img/logo.svg'}"
+      width="20"
+    />
   </div>
 
   <div class="sidebar-inner border-glass border-right">
@@ -28,7 +30,8 @@
         class="sidebar-server-icon"
         width="80"
         height="80"
-        src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" />
+        src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
+      />
       <h5 class="text-light">{$website.name}</h5>
 
       {#if $sidebarTabsState === "website"}
@@ -45,7 +48,8 @@
             class="btn btn-aqua btn-sm text-white"
             data-target="#showServers"
             data-toggle="modal"
-            type="button">
+            type="button"
+          >
             Sunucuları Görüntüle
           </button>
         </a>
@@ -60,8 +64,9 @@
           class="nav-link"
           on:click="{onWebsiteMenuClick}"
           class:active="{$sidebarTabsState === 'website'}"
-          class:text-light="{$sidebarTabsState !== 'website'}">
-          <Icon data="{faGlobe}" scale="1.3" />
+          class:text-light="{$sidebarTabsState !== 'website'}"
+        >
+          <i class="fas fa-globe fa-1g"></i>
         </a>
       </li>
       <li class="nav-item">
@@ -70,8 +75,9 @@
           class="nav-link"
           on:click="{onGameMenuClick}"
           class:active="{$sidebarTabsState === 'game'}"
-          class:text-light="{$sidebarTabsState !== 'game'}">
-          <Icon data="{faCube}" scale="1.3" />
+          class:text-light="{$sidebarTabsState !== 'game'}"
+        >
+          <i class="fas fa-cube fa-1g"></i>
         </a>
       </li>
     </ul>
@@ -85,32 +91,28 @@
 </div>
 
 <script>
-  import { basePath } from "../util/path.util";
+  import { onDestroy } from "svelte";
+
+  import { base } from "$app/paths";
+
   import {
     toggleSidebar,
     isSidebarOpen,
     setSidebarTabsState,
     sidebarTabsState,
     website,
-  } from "../Store";
-  import { onDestroy } from "svelte";
+  } from "$lib/store";
 
   import Bottom from "./sidebar/Bottom.svelte";
+
   import SiteNavigationMenu from "./sidebar/SiteNavigationMenu.svelte";
   import ServerNavigationMenu from "./sidebar/ServerNavigationMenu.svelte";
-
-  import Icon from "svelte-awesome";
-  import { faBars, faGlobe, faCube } from "@fortawesome/free-solid-svg-icons";
 
   import ServersModal from "./modals/ServersModal.svelte";
   import ConnectServerModal from "./modals/ConnectServerModal.svelte";
   import RemoveServerModal from "./modals/RemoveServerModal.svelte";
 
   let menuComponent = SiteNavigationMenu;
-
-  function onMobileSideBarCollapseClick() {
-    toggleSidebar();
-  }
 
   const unsubscribeSidebarTabsState = sidebarTabsState.subscribe((value) => {
     if (value === "website") {
@@ -120,7 +122,9 @@
     }
   });
 
-  onDestroy(unsubscribeSidebarTabsState);
+  function onMobileSideBarCollapseClick() {
+    toggleSidebar();
+  }
 
   function onWebsiteMenuClick() {
     setSidebarTabsState("website");
@@ -129,4 +133,6 @@
   function onGameMenuClick() {
     setSidebarTabsState("game");
   }
+
+  onDestroy(unsubscribeSidebarTabsState);
 </script>

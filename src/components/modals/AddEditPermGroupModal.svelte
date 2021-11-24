@@ -4,7 +4,8 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -17,7 +18,8 @@
           class="close"
           title="Pencereyi Kapat"
           type="button"
-          on:click="{hide}">
+          on:click="{hide}"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -30,7 +32,8 @@
               id="name"
               type="text"
               bind:value="{$permissionGroup.name}"
-              class:border-danger="{$errors.name}" />
+              class:border-danger="{$errors.name}"
+            />
           </div>
         </div>
         <div class="modal-footer">
@@ -40,7 +43,8 @@
             class:btn-primary="{$mode === 'edit'}"
             type="submit"
             class:disabled="{loading}"
-            disabled="{loading}">
+            disabled="{loading}"
+          >
             {$mode === "edit" ? "Kaydet" : "Oluştur"}
           </button>
         </div>
@@ -86,8 +90,8 @@
 </script>
 
 <script>
-  import { showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano-ui/js/api.util";
+  import { showNetworkErrorOnCatch } from "$lib/store";
+  import ApiUtil from "$lib/api.util";
 
   let loading = false;
 
