@@ -12,8 +12,7 @@
       <a
         class="btn btn-primary ml-auto"
         role="button"
-        href="{base}/posts/create-post"
-      >
+        href="{base}/posts/create-post">
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
       </a>
@@ -43,16 +42,14 @@
               class:active="{data.pageType === PageTypes.PUBLISHED}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/posts/published"
-            >
+              href="{base}/posts/published">
               Yayınlanmış
             </a>
             <a
               class:active="{data.pageType === PageTypes.DRAFT}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/posts/draft"
-            >
+              href="{base}/posts/draft">
               Taslak
             </a>
 
@@ -60,8 +57,7 @@
               class:active="{data.pageType === PageTypes.TRASH}"
               class="btn btn-sm btn-outline-light btn-link text-danger"
               role="button"
-              href="{base}/posts/trash"
-            >
+              href="{base}/posts/trash">
               Çöp
             </a>
           </div>
@@ -100,19 +96,16 @@
                         data-toggle="dropdown"
                         href="javascript:void(0);"
                         id="postAction"
-                        title="Eylemler"
-                      >
+                        title="Eylemler">
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div
                         aria-labelledby="postAction"
-                        class="dropdown-menu dropdown-menu-right"
-                      >
+                        class="dropdown-menu dropdown-menu-right">
                         <a
                           class="dropdown-item"
                           target="_blank"
-                          href="/preview/post/{post.id}"
-                        >
+                          href="/preview/post/{post.id}">
                           <i class="fas fa-eye text-primary mr-1"></i>
                           Görüntüle
                         </a>
@@ -122,8 +115,7 @@
                             href="javascript:void(0);"
                             on:click="{onMoveToDraft(post.id)}"
                             class:disabled="{buttonsLoading}"
-                            disabled="{buttonsLoading}"
-                          >
+                            disabled="{buttonsLoading}">
                             <span>
                               <i class="fas fa-bookmark text-primary mr-1"></i>
                               Taslaklara Taşı
@@ -137,8 +129,7 @@
                             href="javascript:void(0);"
                             class:disabled="{buttonsLoading}"
                             disabled="{buttonsLoading}"
-                            on:click="{onPublishClick(post.id)}"
-                          >
+                            on:click="{onPublishClick(post.id)}">
                             <span>
                               <i class="fas fa-globe-americas text-primary mr-1"
                               ></i>
@@ -152,8 +143,7 @@
                           data-target="#confirmDeletePost"
                           data-toggle="modal"
                           href="javascript:void(0);"
-                          on:click="{onDeletePostClick(post)}"
-                        >
+                          on:click="{onDeletePostClick(post)}">
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
                         </a>
@@ -163,16 +153,14 @@
                   <td class="align-middle text-nowrap">
                     <a
                       href="{base + '/posts/post/' + post.id}"
-                      title="Yazıyı Düzenle"
-                    >
+                      title="Yazıyı Düzenle">
                       {post.title}
                     </a>
                   </td>
                   <td class="align-middle text-nowrap">
                     <span
                       class="badge badge-sunflower badge-pill"
-                      style="background: #{post.category.color}"
-                    >
+                      style="background: #{post.category.color}">
                       {post.category.title}
                     </span>
                   </td>
@@ -182,15 +170,13 @@
                       use:tooltip="{[
                         post.writer.username,
                         { placement: 'top' },
-                      ]}"
-                    >
+                      ]}">
                       <img
                         alt="{post.writer.username}"
                         class="rounded-circle border"
                         height="32"
                         src="https://minotar.net/avatar/{post.writer.username}"
-                        width="32"
-                      />
+                        width="32" />
                     </a>
                   </td>
                   <td class="align-middle text-nowrap">{post.views}</td>
@@ -209,8 +195,7 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
       <!-- Pagination End -->
     </div>
   </div>
@@ -442,11 +427,7 @@
     if (data.posts.indexOf(post) !== -1)
       data.posts[data.posts.indexOf(post)].selected = false;
 
-    if (post.status === 0) {
-      reloadData();
-    } else {
-      goto(base + "/posts/trash");
-    }
+    reloadData();
   });
 
   onDeletePostModalHide((post) => {
