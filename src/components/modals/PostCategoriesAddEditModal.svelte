@@ -4,7 +4,8 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -17,7 +18,8 @@
           class="close"
           title="Pencereyi Kapat"
           type="button"
-          on:click="{hide}">
+          on:click="{hide}"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -31,7 +33,8 @@
               id="category"
               type="text"
               bind:value="{$category.title}"
-              on:input="{() => setURL()}" />
+              on:input="{() => setURL()}"
+            />
           </div>
           <div class="form-group">
             <textarea
@@ -54,7 +57,8 @@
                 placeholder="..."
                 id="categoryURL"
                 type="text"
-                bind:value="{$category.url}" />
+                bind:value="{$category.url}"
+              />
             </div>
             <small class:text-danger="{$errors.url}">
               <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i>
@@ -69,7 +73,8 @@
                 class="form-control rounded-pill"
                 id="categoryColor"
                 type="color"
-                bind:value="{$category.color}" />
+                bind:value="{$category.color}"
+              />
             </div>
           </div>
         </div>
@@ -80,7 +85,8 @@
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
             class:disabled="{loading}"
-            disabled="{loading}">
+            disabled="{loading}"
+          >
             <span>
               {#if $mode === "edit"}
                 <i aria-hidden="true" class="fa fa-save fa-fw"></i>
@@ -148,8 +154,8 @@
 </script>
 
 <script>
-  import { showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano-ui/js/api.util";
+  import { showNetworkErrorOnCatch } from "$lib/store";
+  import ApiUtil from "$lib/api.util";
 
   let loading = false;
 

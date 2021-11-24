@@ -7,16 +7,18 @@
         class:invisible="{$isSidebarOpen}"
         href="javascript:void(0);"
         title="Menüyü Aç/Kapa"
-        on:click="{onSideBarCollapseClick}">
-        <Icon data="{faBars}" />
+        on:click="{onSideBarCollapseClick}"
+      >
+        <i class="fas fa-bars"></i>
       </a>
     </li>
     <li class="nav-item d-none">
       <a
         href="javascript:void(0);"
         target="_blank"
-        class="btn btn-link border-lightprimary text-secondary">
-        <Icon data="{faStore}" class="d-lg-none d-inline" />
+        class="btn btn-link border-lightprimary text-secondary"
+      >
+        <i class="fas fa-store d-lg-none d-inline"></i>
         <span class="d-lg-inline d-none">Web Market</span>
       </a>
     </li>
@@ -33,16 +35,18 @@
         data-toggle="dropdown"
         href="javascript:void(0);"
         role="button"
-        title="Bildirimler">
+        title="Bildirimler"
+      >
         {#if $notificationsCount !== 0}
           <div class="unread-badge"></div>
         {/if}
-        <Icon data="{faBell}" />
+        <i class="fas fa-bell"></i>
       </a>
 
       <div
         class="dropdown-menu animated fadeIn faster dropdown-menu-right
-        notifications">
+        notifications"
+      >
         <h6 class="dropdown-header">
           Bildirimler {$notificationsCount === 0
             ? ""
@@ -54,9 +58,10 @@
             <a
               href="javascript:void(0);"
               class="dropdown-item d-flex flex-row border-bottom py-2"
-              class:notification-unread="{notification.status === 'NOT_READ'}">
+              class:notification-unread="{notification.status === 'NOT_READ'}"
+            >
               <div class="col-auto pl-0">
-                <Icon data="{faDotCircle}" class="text-primary" />
+                <i class="fas fa-dot-circle text-primary"></i>
               </div>
               <div class="col">
                 <span class="text-wrap text-dark">{notification.type_ID}</span>
@@ -70,8 +75,9 @@
 
         {#if quickNotifications.length === 0 && !notificationsLoading}
           <div
-            class="d-flex flex-column align-items-center justify-content-center">
-            <Icon data="{faBell}" scale="3" class="text-glass m-3" />
+            class="d-flex flex-column align-items-center justify-content-center"
+          >
+            <i class="fas fa-bell text-glass m-3"></i>
             <p class="text-gray">Bildirim yok.</p>
           </div>
         {/if}
@@ -81,15 +87,16 @@
           <div class="d-flex justify-content-center m-3">
             <div
               class="spinner-border spinner-border-sm text-primary"
-              role="status">
-            </div>
+              role="status"
+            ></div>
           </div>
         {/if}
 
         <a
           class="dropdown-item text-primary font-weight-bolder text-center small
           pt-2"
-          href="/panel/notifications">
+          href="{base}/notifications"
+        >
           Tümünü Görüntüle
         </a>
       </div>
@@ -102,21 +109,24 @@
         class="icon-link nav-link p-1"
         data-toggle="dropdown"
         href="javascript:void(0);"
-        title="Oturum">
+        title="Oturum"
+      >
         <img
           src="https://minotar.net/avatar/{$user.username}"
           width="32"
           height="32"
           class="border rounded-circle"
-          alt="{$user.username}" />
+          alt="{$user.username}"
+        />
       </a>
       <div class="dropdown-menu dropdown-menu-right animated fadeIn faster">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a
               class="nav-link text-primary"
-              href="/panel/players/player/{$user.username}">
-              <Icon data="{faUser}" class="mr-1" />
+              href="{base}/players/player/{$user.username}"
+            >
+              <i class="fas fa-user mr-1"></i>
               {$user.username}
             </a>
           </li>
@@ -124,8 +134,9 @@
             <a
               class="nav-link"
               href="javascript:void(0);"
-              on:click="{onLogout}">
-              <Icon data="{faSignOutAlt}" class="mr-1" />
+              on:click="{onLogout}"
+            >
+              <i class="fas fa-sign-out-alt mr-1"></i>
               Çıkış Yap
             </a>
           </li>
@@ -138,9 +149,12 @@
 <script>
   import jQuery from "jquery";
   import { onMount, onDestroy } from "svelte";
-  import moment from "moment";
+  import { formatDistanceToNow } from "date-fns";
 
-  import { ApiUtil } from "../pano-ui/js/api.util";
+  import { base } from "$app/paths";
+  import { browser } from "$app/env";
+
+  import { ApiUtil } from "$lib/api.util";
   import {
     toggleSidebar,
     notificationsCount,
@@ -148,21 +162,7 @@
     logoutLoading,
     showNetworkErrorOnCatch,
     isSidebarOpen,
-  } from "../Store";
-
-  import Icon from "svelte-awesome";
-  import {
-    faBell,
-    faDotCircle,
-    faUser,
-  } from "@fortawesome/free-regular-svg-icons";
-  import {
-    faBars,
-    faStore,
-    faCog,
-    faUserPlus,
-    faSignOutAlt,
-  } from "@fortawesome/free-solid-svg-icons";
+  } from "$lib/store";
 
   let notificationsLoading = true;
   let quickNotifications = [];
@@ -170,6 +170,18 @@
 
   let checkTime = 0;
   let interval;
+
+  Array.prototype.insert = function (index, item) {
+    this.splice(index, 0, item);
+
+    return this;
+  };
+
+  Array.prototype.remove = function (index) {
+    this.splice(index, 1);
+
+    return this;
+  };
 
   function onSideBarCollapseClick() {
     toggleSidebar();
@@ -190,18 +202,6 @@
         });
     });
   }
-
-  Array.prototype.insert = function (index, item) {
-    this.splice(index, 0, item);
-
-    return this;
-  };
-
-  Array.prototype.remove = function (index) {
-    this.splice(index, 1);
-
-    return this;
-  };
 
   function setNotifications(newNotifications) {
     if (quickNotifications.length === 0 || newNotifications.length === 0)
@@ -300,7 +300,9 @@
     getQuickNotifications(id);
   }
 
-  startQuickNotificationsCountDown();
+  function getTime(check, time, locale) {
+    return formatDistanceToNow(time, { addSuffix: true });
+  }
 
   onMount(() => {
     jQuery("#quickNotificationsDropdown")
@@ -318,8 +320,8 @@
     }, 1000);
   });
 
-  function getTime(check, time, locale) {
-    return moment(time).fromNow();
+  if (browser) {
+    startQuickNotificationsCountDown();
   }
 
   onDestroy(() => {

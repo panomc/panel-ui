@@ -4,7 +4,8 @@
   aria-hidden="true"
   class="modal fade"
   role="dialog"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,7 +15,8 @@
           class="close"
           data-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button">
+          type="button"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -22,7 +24,7 @@
         <div class="modal-body">
           <div class="form-group">
             <div class="container text-center">
-              <Icon data="{faImage}" scale="3" class="m-3 text-glass" />
+              <i class="fas fa-image fa-3x mr-3 text-glass"></i>
               <p class="text-gray">Küçük resim belirlenmedi.</p>
             </div>
           </div>
@@ -33,13 +35,14 @@
 
           <div class="form-group text-center">
             <button href="#" class="btn btn-link text-danger mr-2">
-              <Icon data="{faTrash}" />
+              <i class="fas fa-trash"></i>
             </button>
             <input
               type="file"
               id="postThumbnail"
               name="postThumbnail"
-              class="btn bg-lightprimary text-primary" />
+              class="btn bg-lightprimary text-primary"
+            />
           </div>
         </div>
         <div class="modal-footer">
@@ -51,8 +54,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  import Icon from "svelte-awesome";
-  import { faImage, faTrash } from "@fortawesome/free-solid-svg-icons";
-</script>

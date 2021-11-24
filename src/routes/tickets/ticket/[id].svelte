@@ -1,0 +1,512 @@
+<article class="container">
+  <div class="row mb-3">
+    <div class="col-auto">
+      <a class="btn btn-link" role="button" href="{base}/tickets">
+        <i class="fas fa-arrow-left mr-1"></i>
+        Talepler
+      </a>
+    </div>
+    <div class="col-auto ml-auto">
+      {#if data.ticket.status !== TicketStatuses.CLOSED}
+        <a
+          class="btn btn-bittersweet"
+          role="button"
+          on:click="{() => showCloseTicketModal([data.ticket.id])}"
+          href="javascript:void(0);"
+        >
+          Talebi Kapat
+        </a>
+      {/if}
+      <a
+        class="btn btn-outline-danger"
+        role="button"
+        href="javascript:void(0);"
+        on:click="{() => showDeleteTicketModal([data.ticket.id])}"
+      >
+        <i class="fas fa-trash mr-1"></i>
+        Talebi Sil
+      </a>
+    </div>
+  </div>
+
+  <h3 class="text-muted badge badge-lightprimary panel-subtitle">
+    Talep: #{data.ticket.id}
+  </h3>
+
+  <div
+    class="card border mb-3"
+    class:border-secondary="{data.ticket.status === TicketStatuses.NEW}"
+    class:border-sunflower="{data.ticket.status === TicketStatuses.REPLIED}"
+    class:border-bittersweet="{data.ticket.status === TicketStatuses.CLOSED}"
+  >
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <h5 class="card-title">{data.ticket.title}</h5>
+          <a href="{base}/players/player/{data.ticket.username}"
+            >{data.ticket.username}</a
+          >
+          tarafından,
+          <Date time="{data.ticket.date}" />,
+          <a href="#"
+            >{data.ticket.category === "-"
+              ? data.ticket.category
+              : data.ticket.category.title}</a
+          >
+          kategorisine açıldı.
+          <hr />
+        </div>
+        <div class="col-auto ml-auto">
+          <TicketStatus status="{data.ticket.status}" />
+        </div>
+      </div>
+
+      <div
+        class="card-body messages-section"
+        id="messageSection"
+        bind:this="{messagesSectionDiv}"
+        bind:clientHeight="{$messagesSectionClientHeight}"
+      >
+        {#if data.ticket.messages.length < data.ticket.count && data.ticket.count > 5 + 5 * page}
+          <button
+            class="btn text-primary bg-lightprimary d-block m-auto"
+            class:disabled="{loadMoreLoading}"
+            on:click="{loadMore}"
+            >Eski Mesajları Göster ({data.ticket.count -
+              data.ticket.messages.length})
+          </button>
+        {/if}
+
+        {#each data.ticket.messages as message, index (message)}
+          {#if message.panel}
+            <div class="row py-3 flex-nowrap">
+              <div class="col-2 d-flex justify-content-end"></div>
+              <div
+                class="col d-flex flex-nowrap justify-content-end align-items-center"
+              >
+                <a
+                  class="btn btn-link mr-3 d-none"
+                  role="button"
+                  href="javascript:void(0);"
+                >
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div
+                  class="d-inline-block p-2 bg-lightsecondary border rounded"
+                >
+                  <div class="pb-2 text-black">{@html message.message}</div>
+                  <small class="text-muted pt-2"
+                    ><Date time="{message.date}" /></small
+                  >
+                </div>
+              </div>
+              <div class="col-2">
+                <a href="{base}/players/player/{message.username}">
+                  <img
+                    src="https://minotar.net/avatar/{message.username}/48"
+                    alt="{message.username}"
+                    class="ml-3 border rounded-circle d-block mr-auto"
+                    use:tooltip="{[message.username, { placement: 'bottom' }]}"
+                    width="48"
+                    height="48"
+                  />
+                </a>
+              </div>
+            </div>
+          {:else}
+            <div class="row py-3 flex-nowrap">
+              <div class="col-2 text-right">
+                <a href="{base}/players/player/{message.username}">
+                  <img
+                    src="https://minotar.net/avatar/{message.username}/48"
+                    alt="{message.username}"
+                    class="mr-3 border rounded-circle"
+                    use:tooltip="{[message.username, { placement: 'bottom' }]}"
+                    width="48"
+                    height="48"
+                  />
+                </a>
+              </div>
+              <div class="col d-flex flex-nowrap align-items-center">
+                <div class="p-2 rounded bg-lightprimary border d-inline-block">
+                  <div class="pb-2 text-black">
+                    {message.message}
+                  </div>
+                  <small class="text-muted pt-2"
+                    ><Date time="{message.date}" /></small
+                  >
+                </div>
+                <a
+                  class="btn btn-link d-none ml-3"
+                  role="button"
+                  href="javascript:void(0);"
+                >
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+              </div>
+              <div class="col-2"></div>
+            </div>
+          {/if}
+        {/each}
+      </div>
+    </div>
+  </div>
+
+  {#if data.ticket.status === TicketStatuses.CLOSED}
+    <div class="container text-center">
+      <i class="fas fa-times fa-3x text-glass m-3"></i>
+      <p class="text-gray">Bu talep kapalı.</p>
+    </div>
+  {/if}
+
+  <div
+    class="card"
+    class:d-none="{data.ticket.status === TicketStatuses.CLOSED}"
+  >
+    <div class="card-body">
+      <div class="row">
+        <div class="col-auto d-flex flex-column">
+          <!-- Editor -->
+          <div id="editorToolbar">
+            <span class="ql-formats"> <select class="ql-size"></select> </span>
+            <span class="ql-formats">
+              <button class="ql-bold"></button>
+              <button class="ql-italic"></button>
+              <button class="ql-underline"></button>
+              <button class="ql-strike"></button>
+            </span>
+            <span class="ql-formats">
+              <select class="ql-color"></select>
+              <select class="ql-background"></select>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-header" value="1"></button>
+              <button class="ql-header" value="2"></button>
+              <button class="ql-blockquote"></button>
+              <button class="ql-code-block"></button>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-list" value="ordered"></button>
+              <button class="ql-list" value="bullet"></button>
+              <button class="ql-indent" value="-1"></button>
+              <button class="ql-indent" value="+1"></button>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-direction" value="rtl"></button>
+              <select class="ql-align"></select>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-link"></button>
+              <button class="ql-image"></button>
+              <button class="ql-video"></button>
+            </span>
+          </div>
+
+          <div id="editor"></div>
+          <!-- Editor End -->
+        </div>
+        <div class="col">
+          <button
+            class="btn btn-block btn-primary mt-lg-0 mt-3"
+            on:click="{sendMessage}"
+            class:disabled="{messageSendLoading ||
+              extractContent(messageText).length === 0}"
+            :disabled="{messageSendLoading ||
+              extractContent(messageText).length === 0}">Gönder</button
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<ConfirmCloseTicketModal />
+<ConfirmDeleteTicketModal />
+
+<script context="module">
+  import { writable } from "svelte/store";
+
+  import { browser } from "$app/env";
+
+  import ApiUtil from "$lib/api.util";
+  import { showNetworkErrorOnCatch } from "$lib/store";
+
+  import { TicketStatuses } from "../../../components/TicketStatus.svelte";
+
+  let refreshable = false;
+
+  async function loadTicket(id) {
+    return new Promise((resolve, reject) => {
+      ApiUtil.post("panel/initPage/ticket/detail", {
+        id: parseInt(id),
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            const ticket = response.data.ticket;
+
+            resolve(ticket);
+          } else if (response.data.result === "error") {
+            const errorCode = response.data.error;
+
+            reject(errorCode, response.data);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    });
+  }
+
+  // async function loadCategories() {
+  //   return new Promise((resolve, reject) => {
+  //     ApiUtil.get("panel/post/category/categories")
+  //       .then((response) => {
+  //         if (response.data.result === "ok") {
+  //           const data = response.data;
+  //
+  //           resolve(data);
+  //         } else if (response.data.result === "error") {
+  //           const errorCode = response.data.error;
+  //
+  //           reject(errorCode, response.data);
+  //         }
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   });
+  // }
+
+  async function initData(id) {
+    return new Promise((resolvePromise, rejectPromise) => {
+      showNetworkErrorOnCatch((resolve, reject) => {
+        loadTicket(id)
+          .then((data) => {
+            data.id = id;
+
+            resolvePromise(data);
+          })
+          .catch((errorCode, data) => {
+            if (errorCode === "NOT_EXISTS") {
+              resolve();
+            } else {
+              reject();
+            }
+
+            rejectPromise(errorCode, data);
+          });
+      });
+    });
+  }
+
+  // async function initCategories() {
+  //   return new Promise((resolvePromise, rejectPromise) => {
+  //     showNetworkErrorOnCatch((resolve, reject) => {
+  //       loadCategories()
+  //         .then((data) => {
+  //           resolvePromise(data);
+  //         })
+  //         .catch((errorCode, data) => {
+  //           reject();
+  //
+  //           rejectPromise(errorCode, data);
+  //         });
+  //     });
+  //   });
+  // }
+
+  /**
+   * @type {import('@sveltejs/kit').Load}
+   */
+  export async function load({ page, session }) {
+    let output = {
+      props: {
+        data: {
+          ticket: {
+            id: -1,
+            title: "",
+            category: "-",
+            username: "",
+            status: TicketStatuses.NEW,
+            count: 0,
+            messages: [],
+            date: 0,
+          },
+        },
+      },
+    };
+
+    if (
+      page.path === session.loadedPath &&
+      !refreshable &&
+      !!session.data &&
+      session.data.error === "NOT_EXISTS"
+    )
+      return null;
+
+    if (browser && (page.path !== session.loadedPath || refreshable)) {
+      // from another page
+      await initData(parseInt(page.params.id))
+        .then((ticket) => {
+          output.props.data.ticket = ticket;
+        })
+        .catch((errorCode) => {
+          if (!!errorCode && errorCode === "NOT_EXISTS") {
+            return null;
+          }
+        });
+    }
+
+    // if (browser)
+    //   await initCategories().then((data) => {
+    //     output.props.data = { ...output.props.data, ...data };
+    //   });
+
+    if (page.path === session.loadedPath && !refreshable) {
+      if (browser) refreshable = true;
+
+      output.props.data.ticket = session.data.ticket;
+      output.props.data.ticket.id = parseInt(page.params.id);
+    }
+
+    return output;
+  }
+</script>
+
+<script>
+  import { goto } from "$app/navigation";
+  import { base } from "$app/paths";
+
+  import tooltip from "$lib/tooltip.util";
+  import { extractContent } from "$lib/text.util";
+
+  import ConfirmCloseTicketModal, {
+    setCallback as setCloseTicketModalCallback,
+    show as showCloseTicketModal,
+  } from "../../../components/modals/ConfirmCloseTicketModal.svelte";
+  import ConfirmDeleteTicketModal, {
+    setCallback as setDeleteTicketModalCallback,
+    show as showDeleteTicketModal,
+  } from "../../../components/modals/ConfirmDeleteTicketModal.svelte";
+
+  import Date from "../../../components/Date.svelte";
+  import TicketStatus from "../../../components/TicketStatus.svelte";
+
+  export let data;
+
+  let messagesSectionDiv;
+  let page = 0;
+  let loadMoreLoading = false;
+  let messageSendLoading = false;
+
+  let messageText = "";
+  // let quill;
+
+  const messagesSectionClientHeight = writable(0);
+
+  function loadMore() {
+    loadMoreLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/ticket/detail/message/page", {
+        id: parseInt(data.ticket.id),
+        last_message_id: data.ticket.messages[0].id,
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            response.data.messages.reverse().forEach((message) => {
+              data.ticket.messages = data.ticket.messages.unshift(message);
+            });
+
+            loadMoreLoading = false;
+          } else if (response.data.error === "NOT_EXISTS") {
+            goto(base + "/error-404");
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  function sendMessage() {
+    messageSendLoading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post("panel/ticket/detail/message/send", {
+        ticket_id: parseInt(data.ticket.id),
+        message: messageText,
+      })
+        .then((response) => {
+          if (response.data.result === "ok") {
+            data.ticket.messages = data.ticket.messages.push(
+              response.data.message
+            );
+
+            data.ticket.status = TicketStatuses.REPLIED;
+            messageText = "";
+            // quill.setHTML("");
+
+            messageSendLoading = false;
+          } else if (response.data.error === "NOT_EXISTS") {
+            goto(base + "/error-404");
+          } else reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
+
+  setCloseTicketModalCallback(() => {
+    data.ticket.status = TicketStatuses.CLOSED;
+  });
+
+  setDeleteTicketModalCallback(() => {
+    goto("/tickets");
+  });
+
+  messagesSectionClientHeight.subscribe((height) => {
+    if (height !== 0 && messagesSectionDiv)
+      messagesSectionDiv.scrollTo(0, height);
+  });
+
+  // function imageHandler() {
+  //   const range = quill.getSelection();
+  //   const value = prompt("What is the image URL");
+  //
+  //   if (value) {
+  //     quill.insertEmbed(range.index, "image", value, Quill.sources.USER);
+  //   }
+  // }
+
+  // function prepareQuill() {
+  //   quill = new Quill("#editor", {
+  //     modules: {
+  //       toolbar: {
+  //         container: "#editorToolbar",
+  //         handlers: {
+  //           image: imageHandler,
+  //         },
+  //       },
+  //     },
+  //     theme: "snow",
+  //   });
+  //
+  //   quill.setHTML = (html) => {
+  //     quill.container.firstChild.innerHTML = html;
+  //   };
+  //
+  //   quill.getHTML = () => {
+  //     return quill.container.firstChild.innerHTML;
+  //   };
+  //
+  //   quill.on("text-change", () => {
+  //     messageText = quill.getHTML();
+  //   });
+  // }
+
+  // onMount(() => {
+  // prepareQuill();
+  // });
+</script>

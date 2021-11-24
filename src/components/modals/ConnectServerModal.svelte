@@ -4,7 +4,8 @@
   class="modal fade"
   id="connectServer"
   role="document"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -13,28 +14,29 @@
           class="close"
           data-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button">
+          type="button"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="card-body text-center">
           <div class="mb-3">
-            <Icon data="{faDownload}" scale="3" class="text-primary" />
+            <i class="fas fa-download fa-3x text-primary"></i>
           </div>
 
           <h5 class="text-primary" for="downloadPlugin">
             1. Oyun Eklentisini Sunucunuza İndirin:
           </h5>
           <button class="btn btn-link bg-light">
-            <Icon data="{faFileDownload}" class="mr-1" />
+            <i class="fas fa-file-download mr-1"></i>
             Pano Minecraft Eklentisini İndir
             <br />
             <small>BungeeCord, Bukkit, Spigot, PaperSpigot</small>
           </button>
 
           <div class="my-4">
-            <Icon data="{faTerminal}" scale="3" class="text-primary" />
+            <i class="fas fa-terminal fa-3x text-primary"></i>
           </div>
 
           <h5 class="text-primary" for="platformToken">
@@ -45,7 +47,8 @@
               bind:value="{commandText}"
               class="form-control shadow-sm"
               id="platformToken"
-              type="text" />
+              type="text"
+            />
             <div class="input-group-append">
               <button
                 on:click="{onCopyCommandTextClick}"
@@ -53,10 +56,11 @@
                 id="copyPlatformToken"
                 type="button"
                 use:tooltip="{[
-                  'top',
                   isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala',
-                ]}">
-                <Icon data="{faClipboard}" />
+                  { placement: 'top' },
+                ]}"
+              >
+                <i class="fas fa-clipboard"></i>
               </button>
             </div>
           </div>
@@ -66,13 +70,13 @@
           </small>
 
           <div class="my-4">
-            <Icon data="{faCheckCircle}" scale="3" class="text-primary" />
+            <i class="fas fa-check-circle fa-3x text-primary"></i>
           </div>
 
           <h5 class="text-primary">3. Bağlantı İsteğine Onay Verin:</h5>
           <p class="mb-0">
             Bildirim panelinden (
-            <Icon data="{faBell}" />
+            <i class="fas fa-bell"></i>
             ) "Sunucu Bağlantısı İsteği" bildirimini açarak, onay verin.
           </p>
         </div>
@@ -82,30 +86,22 @@
 </div>
 
 <script>
+  import { onDestroy } from "svelte";
+  import { get } from "svelte/store";
+  import copy from "copy-to-clipboard";
+  import { differenceInSeconds } from "date-fns";
+
+  import { browser } from "$app/env";
+
+  import { ApiUtil } from "$lib/api.util";
+  import tooltip from "$lib/tooltip.util";
+
   import {
     currentServerPlatformMatchKey,
     platformKeyRefreshedTime,
     platformAddress,
     showNetworkErrorOnCatch,
-  } from "../../Store";
-  import { ApiUtil } from "../../pano-ui/js/api.util";
-  import tooltip from "../../pano-ui/js/tooltip.util";
-
-  import Icon from "svelte-awesome";
-  import {
-    faDownload,
-    faTerminal,
-    faFileDownload,
-    faHourglassHalf,
-    faClipboard,
-    faCheckCircle,
-  } from "@fortawesome/free-solid-svg-icons";
-  import { faBell } from "@fortawesome/free-regular-svg-icons";
-
-  import { onDestroy } from "svelte";
-  import { get } from "svelte/store";
-  import copy from "copy-to-clipboard";
-  import moment from "moment";
+  } from "$lib/store";
 
   let timeToRefreshKey = "...";
   let commandText;
@@ -114,11 +110,12 @@
   let firstStartCountDown = false;
 
   function getTimeLeftInSeconds() {
-    const now = moment(new Date()); //todays date
-    const end = moment(get(platformKeyRefreshedTime)); // another date
-    const duration = moment.duration(now.diff(end));
+    const now = new Date(); // current time
+    const end = new Date(get(platformKeyRefreshedTime)); // future time
 
-    return 30 - Math.round(duration.asSeconds());
+    const difference = differenceInSeconds(now, end);
+
+    return 30 - difference;
   }
 
   function startCountDown() {
@@ -168,30 +165,6 @@
       get(currentServerPlatformMatchKey);
   }
 
-  const platformKeyRefreshedTimeUnsubscribe = platformKeyRefreshedTime.subscribe(
-    (value) => {
-      if (value !== 0 && !firstStartCountDown) {
-        firstStartCountDown = true;
-
-        startCountDown();
-      }
-    }
-  );
-
-  const platformAddressUnsubscribe = platformAddress.subscribe(() => {
-    updateCommandText();
-  });
-
-  const currentServerPlatformMatchKeyUnsubscribe = currentServerPlatformMatchKey.subscribe(
-    () => {
-      updateCommandText();
-    }
-  );
-
-  onDestroy(platformAddressUnsubscribe);
-  onDestroy(currentServerPlatformMatchKeyUnsubscribe);
-  onDestroy(platformKeyRefreshedTimeUnsubscribe);
-
   function onCopyCommandTextClick() {
     copyClickIDForCommandText++;
 
@@ -206,5 +179,29 @@
         isCommandTextCopied = false;
       }
     }, 1000);
+  }
+
+  if (browser) {
+    onDestroy(
+      platformKeyRefreshedTime.subscribe((value) => {
+        if (value !== 0 && !firstStartCountDown) {
+          firstStartCountDown = true;
+
+          startCountDown();
+        }
+      })
+    );
+
+    onDestroy(
+      platformAddress.subscribe(() => {
+        updateCommandText();
+      })
+    );
+
+    onDestroy(
+      currentServerPlatformMatchKey.subscribe(() => {
+        updateCommandText();
+      })
+    );
   }
 </script>

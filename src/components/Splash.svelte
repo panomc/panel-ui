@@ -1,28 +1,39 @@
 <svelte:head>
-  {#if networkErrors}<style>
+  {#if networkErrors}
+    <style>
       .show {
         display: none !important;
       }
-    </style>{/if}
+    </style>
+  {/if}
 </svelte:head>
 
 <div class="splash" role="status" in:fade out:fade>
   <img
     class="animated fadeIn infinite slow"
     alt="Pano"
-    src="{basePath() + 'assets/img/logo-blue.svg'}"
-    width="32" />
+    src="{base + '/assets/img/logo-blue.svg'}"
+    width="32"
+  />
 
   {#if networkErrors}
     <div
       class="pt-4 animated bounceInUp fast d-flex flex-column
-      justify-content-center align-items-center">
-      <p class="text-danger">Bağlantı hatası!</p>
+      justify-content-center align-items-center"
+    >
+      {#if $notLoggedIn}
+        <p class="text-danger">
+          Giriş yapılmamış!<br />Lütfen önce <b>tema<b>dan giriş yapın!</b></b>
+        </p>
+      {:else}
+        <p class="text-danger">Bağlantı hatası!</p>
+      {/if}
       <button
         class="btn btn-link bg-lightprimary btn-sm"
         on:click="{onResumeClick}"
         class:disabled="{$retryingNetworkErrors}"
-        disabled="{$retryingNetworkErrors}">
+        disabled="{$retryingNetworkErrors}"
+      >
         {$retryingNetworkErrors ? "Tekrar deneniyor..." : "Tekrar Dene"}
       </button>
     </div>
@@ -30,25 +41,24 @@
 </div>
 
 <script>
+  import { base } from "$app/paths";
   import { onDestroy } from "svelte";
   import { fade } from "svelte/transition";
 
-  import { basePath } from "../util/path.util";
   import {
     networkErrorCallbacks,
     resumeAfterNetworkError,
     retryingNetworkErrors,
-  } from "../Store";
+    notLoggedIn,
+  } from "$lib/store";
 
   let networkErrors = false;
 
-  const networkErrorCallbacksUnsubscribe = networkErrorCallbacks.subscribe(
-    (value) => {
+  onDestroy(
+    networkErrorCallbacks.subscribe((value) => {
       networkErrors = value.length !== 0;
-    }
+    })
   );
-
-  onDestroy(networkErrorCallbacksUnsubscribe);
 
   function onResumeClick() {
     resumeAfterNetworkError();

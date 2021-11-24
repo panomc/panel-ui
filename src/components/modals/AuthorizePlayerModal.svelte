@@ -4,7 +4,8 @@
   id="{dialogID}"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       {#if $loading}
@@ -24,7 +25,8 @@
             type="button"
             class="close"
             on:click="{hide}"
-            aria-label="Close">
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -35,12 +37,14 @@
               class="form-control"
               class:border-danger="{$errors['LAST_ADMIN']}"
               id="exampleFormControlSelect1"
-              bind:value="{$player.permission_group}">
+              bind:value="{$player.permission_group}"
+            >
               <option class="text-primary" value="-">Oyuncu</option>
 
               {#each $permissionGroups as permissionGroup, index (permissionGroup)}
                 <option value="{permissionGroup.name}"
-                  >{permissionGroup.name}</option>
+                  >{permissionGroup.name}</option
+                >
               {/each}
             </select>
             {#if $errors["LAST_ADMIN"]}
@@ -58,7 +62,8 @@
             class="btn btn-primary"
             class:disabled="{$submitLoading}"
             disabled="{$submitLoading}"
-            on:click="{onSubmit}">Kaydet</button>
+            on:click="{onSubmit}">Kaydet</button
+          >
         </div>
       {/if}
     </div>
@@ -69,8 +74,8 @@
   import jquery from "jquery";
   import { writable, get } from "svelte/store";
 
-  import { showNetworkErrorOnCatch } from "../../Store";
-  import ApiUtil from "../../pano-ui/js/api.util";
+  import { showNetworkErrorOnCatch } from "$lib/store";
+  import ApiUtil from "$lib/api.util";
 
   const dialogID = "authorizePlayerModal";
   const player = writable({});

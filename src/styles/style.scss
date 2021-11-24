@@ -1,5 +1,6 @@
 @import "../pano-ui/scss/main";
 @import "node_modules/animate.css/animate.min";
+@import "node_modules/tippy.js/dist/tippy";
 
 // Control Panel Styles
 
@@ -25,7 +26,7 @@
 
 .alert-welcome {
   position: relative;
-  background: url("../img/header-bg.jpg") no-repeat top;
+  background: url("/assets/img/header-bg.jpg") no-repeat top;
   background-size: cover;
   padding: 0;
   margin: 0;
@@ -221,7 +222,7 @@
     right: 3px;
     width: 30px;
     height: 30px;
-    background: url("../img/check-solid.svg") no-repeat top 3px right 3px;
+    background: url("/assets/img/check-solid.svg") no-repeat top 3px right 3px;
     background-size: 16px;
     background-color: $primary;
     border-bottom-left-radius: 75px;

@@ -1,29 +1,30 @@
 <div class="sidebar-bottom p-2 border-top border-right border-glass">
   <a
     class="btn btn-link text-light"
-    href="/panel/settings"
-    use:tooltip="{['top', 'Ayarlar']}">
-    <Icon data="{faCog}" />
+    href="{base}/settings"
+    use:tooltip="{['Ayarlar', { placement: 'top' }]}"
+  >
+    <i class="fas fa-cog"></i>
   </a>
   <a
     class="btn btn-link text-light"
-    href="/panel/settings/updates"
-    use:tooltip="{['top', 'Güncellemeler']}">
-    <Icon data="{faSync}" />
+    href="{base}/settings/updates"
+    use:tooltip="{['Güncellemeler', { placement: 'top' }]}"
+  >
+    <i class="fas fa-sync"></i>
   </a>
   <a
     class="btn btn-link text-light"
     href="https://panomc.com/discord"
     target="_blank"
-    use:tooltip="{['top', 'Yardım']}">
-    <Icon data="{faDiscord}" />
+    use:tooltip="{['Yardım', { placement: 'top' }]}"
+  >
+    <i class="fab fa-discord"></i>
   </a>
 </div>
 
 <script>
-  import tooltip from "../../pano-ui/js/tooltip.util";
+  import { base } from "$app/paths";
 
-  import Icon from "svelte-awesome";
-  import { faCog, faSync } from "@fortawesome/free-solid-svg-icons";
-  import { faDiscord } from "@fortawesome/free-brands-svg-icons";
+  import tooltip from "$lib/tooltip.util";
 </script>

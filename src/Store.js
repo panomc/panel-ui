@@ -1,7 +1,7 @@
 import { get, writable } from "svelte/store";
 
-import { PanelSidebarStorageUtil } from "./util/storage.util";
-import { ApiUtil, NETWORK_ERROR } from "./pano-ui/js/api.util";
+import { PanelSidebarStorageUtil } from "$lib/storage.util";
+import { ApiUtil, NETWORK_ERROR } from "$lib/api.util";
 
 export const networkErrorCallbacks = writable([]);
 export const retryingNetworkErrors = writable(false);
@@ -17,19 +17,19 @@ export const sidebarTabsState = writable(
     : "website"
 );
 
-export const isPageInitialized = writable(false);
-
 export const user = writable({});
 export const website = writable({});
 
 export const currentServerPlatformMatchKey = writable("");
-export const platformKeyRefreshedTime = writable(0);
+export const platformKeyRefreshedTime = writable(new Date().getTime());
 export const platformAddress = writable("");
 
 export const servers = writable([]);
 export const notificationsCount = writable(0);
 
 export const logoutLoading = writable(false);
+
+export const notLoggedIn = writable(false);
 
 export function toggleSidebar() {
   isSidebarOpen.update((value) => {
@@ -114,7 +114,9 @@ export function resumeAfterNetworkError() {
   });
 }
 
-function initializeBasicData(data) {
+export function initializeBasicData(data) {
+  notLoggedIn.set(false);
+
   user.set(data.user);
   website.set(data.website);
   currentServerPlatformMatchKey.set(data.platform_server_match_key);

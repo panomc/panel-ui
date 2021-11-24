@@ -4,7 +4,8 @@
   class="modal fade"
   id="showServers"
   role="dialog"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,8 +15,9 @@
           data-dismiss="modal"
           data-target="#connectServer"
           data-toggle="modal"
-          type="button">
-          <Icon data="{faPlus}" class="mr-2" />
+          type="button"
+        >
+          <i class="fas fa-plus mr-2"></i>
           Sunucu Bağla
         </button>
         <button
@@ -23,7 +25,8 @@
           class="close"
           data-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button">
+          type="button"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -44,7 +47,7 @@
                     <div class="card-img-top bg-primary border-0">
                       <div class="card-body">
                         <h4 class="card-title text-white lead">
-                          <Icon data="{faHome}" class="mr-1 text-light" />
+                          <i class="fas fa-home mr-1 text-light"></i>
                           {server.name} Panocraft
                         </h4>
                         <h5 class="badge badge-sunflower">Spigot</h5>
@@ -58,11 +61,13 @@
                           height="72"
                           alt=" Sever İkon"
                           class="d-block m-auto border rounded-circle shadow-sm
-                          bg-white p-1 text-center" />
+                          bg-white p-1 text-center"
+                        />
                       </div>
                       <div
                         class="mt-4 card-body text-center text-dark d-flex
-                        flex-row justify-content-between">
+                        flex-row justify-content-between"
+                      >
                         <div>
                           <span class="lead">
                             {server.status === "online"
@@ -97,25 +102,29 @@
                         data-toggle="dropdown"
                         id="serverOptions"
                         title="Seçenekler"
-                        type="button">
-                        <Icon data="{faCog}" class="mr-1" />
+                        type="button"
+                      >
+                        <i class="fas fa-cog mr-1"></i>
                       </button>
                       <div
                         aria-labelledby="serverOptions"
-                        class="dropdown-menu">
+                        class="dropdown-menu"
+                      >
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          v-if="main_server.id !== server.id">
-                          <Icon data="{faHome}" class="mr-1 text-primary" />
+                          v-if="main_server.id !== server.id"
+                        >
+                          <i class="fas fa-home mr-1 text-primary"></i>
                           Ana Sunucu Olarak Belirle
                         </a>
 
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          v-if="main_server.id === server.id">
-                          <Icon data="{faTimes}" class="mr-1 text-primary" />
+                          v-if="main_server.id === server.id"
+                        >
+                          <i class="fas fa-times mr-1 text-primary"></i>
                           Ana Sunuculuğunu Kaldır
                         </a>
                         <!--                    @click="onRemoveClick(server)"-->
@@ -124,8 +133,9 @@
                           data-dismiss="modal"
                           data-target="#confirmRemoveServer"
                           data-toggle="modal"
-                          href="javascript:void(0);">
-                          <Icon data="{faTimes}" class="mr-1 text-danger" />
+                          href="javascript:void(0);"
+                        >
+                          <i class="fas fa-times mr-1 text-danger"></i>
                           Sunucuyu Kaldır
                         </a>
                       </div>
@@ -139,7 +149,7 @@
           <!-- No Server -->
           {#if $servers.length === 0}
             <div class="container text-center">
-              <Icon data="{faCube}" scale="4" class="m-3 text-glass" />
+              <i class="fas fa-cube fa-3x m-3 text-glass"></i>
               <p class="text-gray">Bağlı sunucu yok.</p>
             </div>
           {/if}
@@ -150,24 +160,14 @@
 </div>
 
 <script>
-  import { servers } from "../../Store";
-  import { NETWORK_ERROR } from "../../pano-ui/js/api.util";
-
-  import Icon from "svelte-awesome";
-  import {
-    faPlus,
-    faCog,
-    faTimes,
-    faHome,
-    faCube,
-  } from "@fortawesome/free-solid-svg-icons";
-  import { faBell } from "@fortawesome/free-regular-svg-icons";
+  import { servers } from "$lib/store";
+  import { NETWORK_ERROR, ApiUtil } from "$lib/api.util";
 
   let serverListLoading = false;
 
   function getServerList() {
     return new Promise((resolve, reject) => {
-      ApiUtil.get("/api/panel/server/list")
+      ApiUtil.get("panel/server/list")
         .then((response) => {
           if (response.data.result === "ok") {
             resolve(response);
