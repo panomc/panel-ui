@@ -20,7 +20,7 @@
     "chart.js": "^3.6.0",
     "copy-to-clipboard": "^3.3.1",
     "date-fns": "^2.26.0",
-    "eslint": "^8.2.0",
+    "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.1",
     "got": "^11.8.3",
