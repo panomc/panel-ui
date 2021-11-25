@@ -216,6 +216,8 @@
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
 
+  import {StatusTypes as PostStatusTypes} from "./_PostEditor.svelte"
+
   let refreshable = false;
 
   export const PageTypes = Object.freeze({
@@ -228,10 +230,10 @@
 
   export function getStatusFromPageType(pageType) {
     return pageType === PageTypes.PUBLISHED
-      ? 1
+      ? PostStatusTypes.PUBLISHED
       : pageType === PageTypes.DRAFT
-      ? 2
-      : 0;
+      ? PostStatusTypes.DRAFT
+      : PostStatusTypes.TRASH;
   }
 
   async function loadData(page, pageType) {

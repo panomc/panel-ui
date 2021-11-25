@@ -7,36 +7,33 @@
   <section class="row justify-content-between align-items-center mb-3">
     <div class="col-auto text-left">
       <a
-        href="{base}/posts{data.post.status === 0
+        href="{base}/posts{data.post.status === StatusTypes.TRASH
           ? '/trash'
-          : data.post.status === 2
+          : data.post.status === StatusTypes.DRAFT
           ? '/draft'
           : ''}"
         class="btn btn-link"
-        role="button"
-      >
+        role="button">
         <i class="fas fa-arrow-left mr-1"></i>
         Yazılar
       </a>
     </div>
     <div class="col text-right">
-      {#if data.post.mode === Modes.EDIT}
+      {#if data.mode === Modes.EDIT}
         <button
           class="btn btn-link text-danger"
           type="button"
-          on:click="{showDeletePostModal(data.post)}"
-        >
+          on:click="{showDeletePostModal(data.post)}">
           <i class="fas fa-trash"></i>
         </button>
       {/if}
-      {#if data.post.status !== 2 && data.post.id !== -1}
+      {#if data.post.status !== StatusTypes.DRAFT && data.mode === Modes.EDIT}
         <button
           class="btn btn-link"
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{onDraftClick}"
-        >
+          on:click="{onDraftClick}">
           <i class="fas fa-bookmark"></i>
           <span class="d-md-inline d-none ml-1">Taslaklara Taşı</span>
         </button>
@@ -45,8 +42,7 @@
         class="btn btn-link"
         role="button"
         target="_blank"
-        href="/preview/post/{data.post.id}"
-      >
+        href="/preview/post/{data.post.id}">
         <i class="fas fa-eye"></i>
         <span class="d-md-inline d-none ml-1">Görüntüle</span>
       </a>
@@ -59,9 +55,11 @@
         disabled="{loading ||
           extractContent(data.post.text).length === 0 ||
           data.post.title.length === 0}"
-        on:click="{onSubmit}"
-      >
-        <span>{data.post.status === 1 ? "Güncelle" : "Yayınla"}</span>
+        on:click="{onSubmit}">
+        <span
+          >{data.post.status === StatusTypes.PUBLISHED
+            ? "Güncelle"
+            : "Yayınla"}</span>
       </button>
     </div>
   </section>
@@ -76,8 +74,7 @@
             class="form-control form-control-lg display-3 mb-2"
             type="text"
             placeholder="Yazı Başlığı"
-            bind:value="{data.post.title}"
-          />
+            bind:value="{data.post.title}" />
 
           <div class="align-selft-center w-100 h-75">
             <!-- Editor -->
@@ -139,7 +136,7 @@
               <li class="list-group-item">
                 <i class="fas fa-eye text-primary mr-1"></i>
                 <b>Görüntülenme:</b>
-                {data.post.id === -1 ? "0" : data.post.views}
+                {data.mode === Modes.CREATE ? "0" : data.post.views}
               </li>
             </ul>
           </form>
@@ -157,8 +154,7 @@
             {:else}
               <select
                 class="form-control form-control-sm mb-3"
-                bind:value="{data.post.category}"
-              >
+                bind:value="{data.post.category}">
                 <option class="text-primary" value="-1">Kategorisiz</option>
 
                 {#each data.categories as category, index (category)}
@@ -170,8 +166,7 @@
           <button
             class="btn btn-link btn-block bg-lightprimary"
             type="button"
-            on:click="{onCreateCategoryClick}"
-          >
+            on:click="{onCreateCategoryClick}">
             <i class="fas fa-plus mr-1"></i>
             Kategori Oluştur
           </button>
@@ -187,14 +182,12 @@
             href="javascript:void(0);"
             data-target="#setPostThumbnailModal"
             data-toggle="modal"
-            class="form-group"
-          >
+            class="form-group">
             <img
               src="{base}/assets/img/vanilla.png"
               class="border rounded img-fluid"
               title="Küçük Resim"
-              alt="Küçük Resim"
-            />
+              alt="Küçük Resim" />
           </a>
         </div>
       </div>
@@ -217,6 +210,12 @@
   export const Modes = Object.freeze({
     EDIT: "edit",
     CREATE: "create",
+  });
+
+  export const StatusTypes = Object.freeze({
+    PUBLISHED: 1,
+    DRAFT: 2,
+    TRASH: 0,
   });
 
   export const DefaultMode = Modes.CREATE;
@@ -387,11 +386,11 @@
   // let Quill;
 
   function getStatusByPostStatus(status) {
-    return status === 0
+    return status === StatusTypes.TRASH
       ? "Çöp"
-      : status === 1
+      : status === StatusTypes.PUBLISHED
       ? "Yayında"
-      : status === 2
+      : status === StatusTypes.DRAFT
       ? "Taslak"
       : "Yeni";
   }
@@ -418,7 +417,7 @@
           if (response.data.result === "ok") {
             loading = false;
 
-            if (data.post.id === -1) {
+            if (data.mode === Modes.CREATE) {
               goto(base + "/posts/post/" + response.data.id);
             }
 
@@ -508,7 +507,7 @@
   });
 
   setDeletePostModalCallback((post) => {
-    if (post.status === 0) {
+    if (post.status === StatusTypes.TRASH) {
       goto(base + "/posts");
     } else {
       goto(base + "/posts/trash");
