@@ -13,15 +13,13 @@
         class="ml-auto animated {getListOfChecked($checkedList).length > 0
           ? 'fadeIn'
           : 'fadeOut'}
-      faster"
-      >
+      faster">
         <a
           class="btn btn-outline-bittersweet"
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
-          on:click="{onShowCloseTicketsModalClick}"
-        >
+          on:click="{onShowCloseTicketsModalClick}">
           <i class="fas fa-times mr-1"></i>
           Kapat
         </a>
@@ -30,8 +28,7 @@
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
-          on:click="{onShowDeleteTicketsModalClick}"
-        >
+          on:click="{onShowDeleteTicketsModalClick}">
           <i class="fas fa-trash mr-1"></i>
           Sil
         </a>
@@ -61,24 +58,21 @@
               class="btn btn-sm btn-outline-light btn-link"
               class:active="{data.pageType === PageTypes.ALL}"
               role="button"
-              href="{base}/tickets/all"
-            >
+              href="{base}/tickets/all">
               Tümü
             </a>
             <a
               class="btn btn-sm btn-outline-light btn-link"
               class:active="{data.pageType === PageTypes.WAITING_REPLY}"
               role="button"
-              href="{base}/tickets/waitingReply"
-            >
+              href="{base}/tickets/waitingReply">
               Yeni
             </a>
             <a
               class="btn btn-sm btn-outline-light btn-link text-danger"
               class:active="{data.pageType === PageTypes.CLOSED}"
               role="button"
-              href="{base}/tickets/closed"
-            >
+              href="{base}/tickets/closed">
               Kapalı
             </a>
           </div>
@@ -107,8 +101,7 @@
                         data.tickets,
                         $checkedList
                       )}"
-                      id="selectAll"
-                    />
+                      id="selectAll" />
                     <label class="custom-control-label" for="selectAll"></label>
                   </div>
                 </th>
@@ -129,8 +122,7 @@
                           class="custom-control-input"
                           id="postCheck{ticket.id}"
                           type="checkbox"
-                          bind:checked="{$checkedList[ticket.id]}"
-                        />
+                          bind:checked="{$checkedList[ticket.id]}" />
                         <label
                           class="custom-control-label"
                           for="postCheck{ticket.id}"></label>
@@ -142,22 +134,19 @@
                           aria-haspopup="true"
                           data-toggle="dropdown"
                           href="javascript:void(0);"
-                          id="postAction"
-                        >
+                          id="postAction">
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div
                           aria-labelledby="postAction"
-                          class="dropdown-menu dropdown-menu-right"
-                        >
+                          class="dropdown-menu dropdown-menu-right">
                           {#if ticket.status !== 3}
                             <a
                               class="dropdown-item"
                               href="javascript:void(0);"
                               on:click="{onShowCloseTicketModalClick(
                                 ticket.id
-                              )}"
-                            >
+                              )}">
                               <i class="fas fa-times mr-1 text-bittersweet"></i>
                               Kapat
                             </a>
@@ -166,8 +155,9 @@
                           <a
                             class="dropdown-item"
                             href="javascript:void(0);"
-                            on:click="{onShowDeleteTicketModalClick(ticket.id)}"
-                          >
+                            on:click="{onShowDeleteTicketModalClick(
+                              ticket.id
+                            )}">
                             <i class="fas fa-trash text-danger mr-1"></i>
                             Sil
                           </a>
@@ -178,8 +168,7 @@
                   <td class="align-middle text-nowrap">
                     <a
                       href="{base}/tickets/ticket/{ticket.id}"
-                      title="Talebi Görüntüle"
-                    >
+                      title="Talebi Görüntüle">
                       #{ticket.id}
                       {ticket.title}
                     </a>
@@ -188,7 +177,9 @@
                     <TicketStatus status="{ticket.status}" />
                   </td>
                   <td class="align-middle text-nowrap">
-                    {ticket.category.title}
+                    <a href="{base}/tickets/category/{ticket.category.title}">
+                      {ticket.category.title}
+                    </a>
                   </td>
                   <td class="align-middle">
                     <a
@@ -196,16 +187,14 @@
                       use:tooltip="{[
                         ticket.writer.username,
                         { placement: 'top' },
-                      ]}"
-                    >
+                      ]}">
                       <img
                         src="https://minotar.net/avatar/{ticket.writer
                           .username}/32"
                         alt="Oyuncu Adı"
                         class="rounded-circle border"
                         height="32"
-                        width="32"
-                      />
+                        width="32" />
                     </a>
                   </td>
                   <td class="align-middle text-nowrap">
@@ -223,8 +212,7 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
     </div>
   </div>
 </article>

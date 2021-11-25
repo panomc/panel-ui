@@ -5,14 +5,12 @@
     <div
       class="alert alert-welcome alert-dismissible flex-fill w-100
       show border mb-4"
-      role="alert"
-    >
+      role="alert">
       <button
         class="close"
         data-dismiss="alert"
         type="button"
-        on:click="{onCloseGettingStartedCard}"
-      >
+        on:click="{onCloseGettingStartedCard}">
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="card-body">
@@ -33,8 +31,7 @@
             <button
               class="btn btn-sm btn-outline-primary"
               data-target="#connectServer"
-              data-toggle="modal"
-            >
+              data-toggle="modal">
               <i class="fas fa-plus mr-2"></i>
               Sunucu Bağla
             </button>
@@ -200,23 +197,20 @@
           {#each data.tickets as ticket, index (ticket)}
             <a
               href="{base}/tickets/ticket/{ticket.id}"
-              class="list-group-item list-group-item-action rounded d-flex flex-row"
-            >
+              class="list-group-item list-group-item-action rounded d-flex flex-row">
               <a href="{base}/players/player/{ticket.writer.username}">
                 <div
                   class="col-auto"
                   use:tooltip="{[
                     ticket.writer.username,
                     { placement: 'bottom' },
-                  ]}"
-                >
+                  ]}">
                   <img
                     src="https://minotar.net/avatar/{ticket.writer.username}"
                     alt="{ticket.writer.username}"
                     width="48"
                     height="48"
-                    class="border rounded-circle"
-                  />
+                    class="border rounded-circle" />
                 </div>
               </a>
               <div class="col">
@@ -224,7 +218,9 @@
                 <br />
                 <small class="text-muted">
                   <b> <Date time="{ticket.last_update}" /> </b>,
-                  <b>{ticket.category.title}</b>
+                  <a href="{base}/tickets/category/{ticket.category.title}">
+                    <b>{ticket.category.title}</b>
+                  </a>
                   kategorisine açıldı.
                 </small>
               </div>
