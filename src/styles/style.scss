@@ -107,10 +107,9 @@
 }
 
 .sidebar-server-icon {
-  display: block;
   margin: 1rem auto;
-  border: 10px solid $lightglass;
-  border-radius: 100%;
+  box-shadow: 0 0 0 10px $lightglass;
+  border-radius: 50%;
 }
 
 .menu.navbar-nav li.nav-item {

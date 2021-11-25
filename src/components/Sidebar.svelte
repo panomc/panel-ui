@@ -27,11 +27,11 @@
       <a href="{base}/settings/site-settings">
         <img
           alt="Server İkon"
-          class="sidebar-server-icon"
-          width="80"
-          height="80"
+          class="sidebar-server-icon d-inline-block"
+          width="64"
+          height="64"
           src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
-          use:tooltip="{['Sunucu ikonunu değiştir', { placement: 'right' }]}"
+          use:tooltip="{['Sunucu İkonunu Değiştir', { placement: 'right' }]}"
         />
       </a>
 
