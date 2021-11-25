@@ -8,17 +8,17 @@
     <a
       href="javascript:void(0);"
       class="sidebar-toggler btn btn-link text-light"
-      on:click="{onMobileSideBarCollapseClick}"
-    >
+      on:click="{onMobileSideBarCollapseClick}">
       <i class="fas fa-bars"></i>
     </a>
 
-    <img
-      alt="Pano"
-      title="Pano"
-      src="{base + '/assets/img/logo.svg'}"
-      width="20"
-    />
+    <a href="{base}/">
+      <img
+        alt="Pano"
+        title="Pano"
+        src="{base + '/assets/img/logo.svg'}"
+        width="20" />
+    </a>
   </div>
 
   <div class="sidebar-inner border-glass border-right">
@@ -30,8 +30,7 @@
         class="sidebar-server-icon"
         width="80"
         height="80"
-        src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
-      />
+        src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" />
       <h5 class="text-light">{$website.name}</h5>
 
       {#if $sidebarTabsState === "website"}
@@ -48,8 +47,7 @@
             class="btn btn-aqua btn-sm text-white"
             data-target="#showServers"
             data-toggle="modal"
-            type="button"
-          >
+            type="button">
             Sunucuları Görüntüle
           </button>
         </a>
@@ -64,8 +62,7 @@
           class="nav-link"
           on:click="{onWebsiteMenuClick}"
           class:active="{$sidebarTabsState === 'website'}"
-          class:text-light="{$sidebarTabsState !== 'website'}"
-        >
+          class:text-light="{$sidebarTabsState !== 'website'}">
           <i class="fas fa-globe fa-1g"></i>
         </a>
       </li>
@@ -75,8 +72,7 @@
           class="nav-link"
           on:click="{onGameMenuClick}"
           class:active="{$sidebarTabsState === 'game'}"
-          class:text-light="{$sidebarTabsState !== 'game'}"
-        >
+          class:text-light="{$sidebarTabsState !== 'game'}">
           <i class="fas fa-cube fa-1g"></i>
         </a>
       </li>
