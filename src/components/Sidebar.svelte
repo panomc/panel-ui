@@ -8,6 +8,7 @@
     <a
       href="javascript:void(0);"
       class="sidebar-toggler btn btn-link text-light"
+      title="Menüyü Aç/kapa"
       on:click="{onMobileSideBarCollapseClick}">
       <i class="fas fa-bars"></i>
     </a>
