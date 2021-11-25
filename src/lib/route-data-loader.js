@@ -23,7 +23,6 @@ export const patterns = {
   "posts/draft": new UrlPattern(base + "/posts/draft(/:page)"),
   "posts/trash": new UrlPattern(base + "/posts/trash(/:page)"),
   "posts/categories": new UrlPattern(base + "/posts/categories(/:page)"),
-  "posts/create-post": new UrlPattern(base + "/posts/create-post"),
   "posts/post": new UrlPattern(base + "/posts/post/:id"),
   "tickets": new UrlPattern(base + "/tickets"),
   "tickets/all": new UrlPattern(base + "/tickets/all(/:page)"),
@@ -170,14 +169,6 @@ export function getPathsAPI(headers, path, resolveData) {
           ? parseInt(postCategoriesMatch.page)
           : 1,
       },
-      headers,
-      responseType: "json",
-    });
-
-  const postsCreatePostMatch = patterns["posts/create-post"].match(path);
-
-  if (postsCreatePostMatch !== null)
-    return got.get(API_URL + "panel/post/category/categories", {
       headers,
       responseType: "json",
     });
