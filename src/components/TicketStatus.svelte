@@ -2,20 +2,23 @@
   <a href="{base}/tickets/waitingReply"
     ><span
       class="badge badge-secondary badge-pill"
-      use:tooltip="{['Tüm Yeni Talepler', { placement: 'bottom' }]}">Yeni</span
+      use:tooltip="{['Tüm Yeni Talepleri Göster', { placement: 'bottom' }]}"
+      >Yeni</span
     ></a>
 {:else if status === TicketStatuses.REPLIED}
   <a href="{base}/tickets"
     ><span
       class="badge badge-sunflower badge-pill"
-      use:tooltip="{['Tüm Yanıtlanan Talepler', { placement: 'bottom' }]}"
-      >Yanıtlandı</span
+      use:tooltip="{[
+        'Tüm Yanıtlanan Talepleri Göster',
+        { placement: 'bottom' },
+      ]}">Yanıtlandı</span
     ></a>
 {:else if status === TicketStatuses.CLOSED}
   <a href="{base}/tickets/closed"
     ><span
       class="badge badge-bittersweet badge-pill"
-      use:tooltip="{['Tüm Kapalı Talepler', { placement: 'bottom' }]}"
+      use:tooltip="{['Tüm Kapalı Talepleri göster', { placement: 'bottom' }]}"
       >Kapalı</span
     ></a>
 {/if}
