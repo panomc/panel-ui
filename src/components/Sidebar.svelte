@@ -24,13 +24,17 @@
   <div class="sidebar-inner border-glass border-right">
     <!-- Sidebar Info Section -->
     <div class="sidebar-info">
-      <img
-        alt="Server İkon"
-        title="{$website.name}"
-        class="sidebar-server-icon"
-        width="80"
-        height="80"
-        src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" />
+      <a href="{base}/settings/site-settings">
+        <img
+          alt="Server İkon"
+          class="sidebar-server-icon"
+          width="80"
+          height="80"
+          src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
+          use:tooltip="{['Sunucu ikonunu değiştir', { placement: 'right' }]}"
+        />
+      </a>
+
       <h5 class="text-light">{$website.name}</h5>
 
       {#if $sidebarTabsState === "website"}
@@ -90,6 +94,8 @@
   import { onDestroy } from "svelte";
 
   import { base } from "$app/paths";
+
+  import tooltip from "$lib/tooltip.util"
 
   import {
     toggleSidebar,
