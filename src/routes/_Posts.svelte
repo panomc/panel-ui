@@ -158,17 +158,19 @@
                     </a>
                   </td>
                   <td class="align-middle text-nowrap">
-                    <span
-                      class="badge badge-pill"
-                      class:text-dark="{post.category.title === '-'}"
-                      class:px-0="{post.category.title === '-'}"
-                      style="{post.category.title === '-'
-                        ? ''
-                        : 'background: #' + post.category.color}">
-                      {post.category.title === "-"
-                        ? "Kategorisiz"
-                        : post.category.title}
-                    </span>
+                    <a href="{base}/posts/category/{post.category.title}">
+                      <span
+                        class="badge badge-pill"
+                        class:text-dark="{post.category.title === '-'}"
+                        class:px-0="{post.category.title === '-'}"
+                        style="{post.category.title === '-'
+                          ? ''
+                          : 'background: #' + post.category.color}">
+                        {post.category.title === "-"
+                          ? "Kategorisiz"
+                          : post.category.title}
+                      </span>
+                    </a>
                   </td>
                   <td class="align-middle text-nowrap">
                     <a
@@ -216,7 +218,7 @@
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
 
-  import {StatusTypes as PostStatusTypes} from "./_PostEditor.svelte"
+  import { StatusTypes as PostStatusTypes } from "./_PostEditor.svelte";
 
   let refreshable = false;
 
