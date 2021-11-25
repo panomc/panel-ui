@@ -13,16 +13,14 @@
       <a
         class="btn btn-link"
         href="javascript:void(0);"
-        on:click="{() => showAuthorizePlayerModal(data.player)}"
-      >
+        on:click="{() => showAuthorizePlayerModal(data.player)}">
         <i class="fas fa-user-circle mr-1"></i>
         Yetkilendir
       </a>
       <a
         class="btn btn-link"
         href="javascript:void(0);"
-        on:click="{() => showEditPlayerModal(data.player)}"
-      >
+        on:click="{() => showEditPlayerModal(data.player)}">
         <i class="fas fa-pencil-alt mr-1"></i>
         Düzenle
       </a>
@@ -30,8 +28,7 @@
         class="btn btn-outline-danger"
         data-target="#conformBanPlayer"
         data-toggle="modal"
-        href="javascript:void(0);"
-      >
+        href="javascript:void(0);">
         <i class="fas fa-gavel mr-1"></i>
         Yasakla
       </a>
@@ -43,15 +40,13 @@
       <div class="card">
         <div
           class="card-body d-flex flex-column justify-content-center
-          align-items-center"
-        >
+          align-items-center">
           <img
             alt="{data.player.username}"
             class="mb-3 rounded-circle"
             width="64"
             height="64"
-            src="https://minotar.net/avatar/{data.player.username}"
-          />
+            src="https://minotar.net/avatar/{data.player.username}" />
 
           <h4 class="card-title">{data.player.username}</h4>
           <h6 class="text-muted">{data.player.email}</h6>
@@ -67,9 +62,13 @@
           <ul class="list-inline my-0">
             <li class="list-inline-item">
               <div class="badge text-dark border text-capitalize">
-                {data.player.permission_group === "-"
-                  ? "Oyuncu"
-                  : data.player.permission_group}
+                <a
+                  href="{base}/players/permission/{data.player
+                    .permission_group}">
+                  {data.player.permission_group === "-"
+                    ? "Oyuncu"
+                    : data.player.permission_group}
+                </a>
               </div>
             </li>
             <li class="list-inline-item">
@@ -107,8 +106,7 @@
             {#each data.tickets as ticket, index (ticket)}
               <a
                 href="{base}/tickets/ticket/{ticket.id}"
-                class="list-group-item list-group-item-action rounded d-flex flex-row"
-              >
+                class="list-group-item list-group-item-action rounded d-flex flex-row">
                 <div class="col">
                   <span class="text-primary">
                     #{ticket.id}
@@ -134,8 +132,7 @@
             totalPage="{data.ticketTotalPage}"
             on:firstPageClick="{() => reloadData(1)}"
             on:lastPageClick="{() => reloadData(data.ticketTotalPage)}"
-            on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-          />
+            on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
         </div>
       </div>
     </div>
