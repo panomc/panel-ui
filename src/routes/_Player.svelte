@@ -234,7 +234,7 @@
         !!page.params.page ? parseInt(page.params.page) : 1
       )
         .then((data) => {
-          output.props.data = data;
+          output.props.data = {...output.props.data, ...data};
         })
         .catch((errorCode) => {
           if (
@@ -249,7 +249,7 @@
     if (page.path === session.loadedPath && !refreshable) {
       if (browser) refreshable = true;
 
-      output.props.data = session.data;
+      output.props.data = {...output.props.data, ...session.data};
       output.props.data.page = !!page.params.page
         ? parseInt(page.params.page)
         : 1;

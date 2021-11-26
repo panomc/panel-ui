@@ -327,12 +327,12 @@
 
     if (browser && (page.path !== session.loadedPath || refreshable)) {
       // from another page
-      output.props.data = await loadData();
+      output.props.data = {...output.props.data, ...await loadData()};
     }
 
     if (page.path === session.loadedPath && !refreshable) {
       refreshable = true;
-      output.props.data = session.data;
+      output.props.data = {...output.props.data, ...session.data};
     }
 
     return output;
