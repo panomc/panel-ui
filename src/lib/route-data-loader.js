@@ -15,31 +15,6 @@ import {
   PageTypes as PlayersPageTypes,
 } from "../routes/_Players.svelte";
 
-export const patterns = {
-  "dashboard": new UrlPattern(base + "/"),
-  "notifications": new UrlPattern(base + "/notifications"),
-  "posts": new UrlPattern(base + "/posts"),
-  "posts/published": new UrlPattern(base + "/posts/published(/:page)"),
-  "posts/draft": new UrlPattern(base + "/posts/draft(/:page)"),
-  "posts/trash": new UrlPattern(base + "/posts/trash(/:page)"),
-  "posts/categories": new UrlPattern(base + "/posts/categories(/:page)"),
-  "posts/post": new UrlPattern(base + "/posts/post/:id"),
-  "tickets": new UrlPattern(base + "/tickets"),
-  "tickets/all": new UrlPattern(base + "/tickets/all(/:page)"),
-  "tickets/waitingReply": new UrlPattern(
-    base + "/tickets/waitingReply(/:page)"
-  ),
-  "tickets/closed": new UrlPattern(base + "/tickets/closed(/:page)"),
-  "tickets/categories": new UrlPattern(base + "/tickets/categories(/:page)"),
-  "tickets/ticket": new UrlPattern(base + "/tickets/ticket/:id"),
-  "players": new UrlPattern(base + "/players"),
-  "players/all": new UrlPattern(base + "/players/all(/:page)"),
-  "players/hasPerm": new UrlPattern(base + "/players/hasPerm(/:page)"),
-  "players/banned": new UrlPattern(base + "/players/banned(/:page)"),
-  "players/permissions": new UrlPattern(base + "/players/permissions"),
-  "players/player": new UrlPattern(base + "/players/player/:username(/:page)"),
-};
-
 export default async function loadRouteDataHandler(headers, path) {
   const basicData = await new Promise((resolve) => {
     got
@@ -57,19 +32,27 @@ export default async function loadRouteDataHandler(headers, path) {
 
     resolveData.basicData = basicData;
 
-    const pathsAPI = getPathsAPI(headers, path, resolveData);
+    const matchingPattern = getMatchingPattern(headers, path, resolveData);
 
-    if (typeof pathsAPI === "undefined") {
+    if (typeof matchingPattern === "undefined") {
       resolve({ ...resolveData });
 
       return;
     }
 
-    pathsAPI
+    const { pattern, match } = matchingPattern;
+
+    got({
+      method: pattern.method,
+      url: pattern.url,
+      responseType: pattern.responseType,
+      headers,
+      json: pattern.method !== "get" ? pattern.body(match) : null,
+    })
       .then((response) => {
         // Cleanup headers
         const notAllowed = ["vary", "content-type", "content-length"];
-        const headers = Object.keys(response.headers)
+        const responseHeaders = Object.keys(response.headers)
           .filter((key) => !notAllowed.includes(key))
           .reduce((object, key) => {
             object[key] = response.headers[key];
@@ -77,11 +60,14 @@ export default async function loadRouteDataHandler(headers, path) {
             return object;
           }, {});
 
+        // if (!!response.body.error)
+        //   resolveData = { ...resolveData, initialRequest: matchingPattern };
+
         resolveData = {
           loadedPath: path,
           ...resolveData,
           data: response.body,
-          headers,
+          responseHeaders,
         };
 
         // console.log(user);
@@ -98,233 +84,192 @@ export default async function loadRouteDataHandler(headers, path) {
   });
 }
 
-export function getPathsAPI(headers, path, resolveData) {
-  const dashboardMatch = patterns["dashboard"].match(path);
+const postsPageBodyHandler = (pattern, pageType) => {
+  return {
+    page: !!pattern.page ? parseInt(pattern.page) : 1,
+    page_type: getStatusFromPostsPageType(pageType),
+  };
+};
 
-  if (dashboardMatch !== null)
-    return got.get(API_URL + "panel/initPage/dashboard", {
-      headers,
-      responseType: "json",
-    });
+const onlyPageParameterBodyHandler = (pattern) => {
+  return {
+    page: !!pattern.page ? parseInt(pattern.page) : 1,
+  };
+};
 
-  const notificationsMatch = patterns["notifications"].match(path);
+const onlyIdParameterBodyHandler = (pattern) => {
+  return {
+    page: !!pattern.id ? parseInt(pattern.id) : -1,
+  };
+};
 
-  if (notificationsMatch !== null)
-    return got.get(API_URL + "panel/notifications", {
-      headers,
-      responseType: "json",
-    });
+const ticketsPageBodyHandler = (pattern, pageType) => {
+  return {
+    page: !!pattern.page ? parseInt(pattern.page) : 1,
+    page_type: getStatusFromTicketsPageType(pageType),
+  };
+};
 
-  const postsMatch = patterns["posts"].match(path);
-  const postsPublishedMatch = patterns["posts/published"].match(path);
+const playersPageBodyHandler = (pattern, pageType) => {
+  return {
+    page: !!pattern.page ? parseInt(pattern.page) : 1,
+    page_type: getStatusFromPlayersPageType(pageType),
+  };
+};
 
-  if (postsMatch !== null || postsPublishedMatch !== null) {
-    let page = 1;
+export const patterns = [
+  {
+    pattern: new UrlPattern(base + "/"),
+    method: "get",
+    url: "panel/initPage/dashboard",
+    responseType: "json",
+  },
+  {
+    pattern: new UrlPattern(base + "/notifications"),
+    method: "get",
+    url: "panel/notifications",
+    responseType: "json",
+  },
+  {
+    pattern: new UrlPattern(base + "/posts"),
+    method: "post",
+    url: "panel/initPage/postPage",
+    responseType: "json",
+    body: (pattern) => postsPageBodyHandler(pattern, PostsPageTypes.PUBLISHED),
+  },
+  {
+    pattern: new UrlPattern(base + "/posts/published(/:page)"),
+    method: "post",
+    url: "panel/initPage/postPage",
+    responseType: "json",
+    body: (pattern) => postsPageBodyHandler(pattern, PostsPageTypes.PUBLISHED),
+  },
+  {
+    pattern: new UrlPattern(base + "/posts/draft(/:page)"),
+    method: "post",
+    url: "panel/initPage/postPage",
+    responseType: "json",
+    body: (pattern) => postsPageBodyHandler(pattern, PostsPageTypes.DRAFT),
+  },
+  {
+    pattern: new UrlPattern(base + "/posts/trash(/:page)"),
+    method: "post",
+    url: "panel/initPage/postPage",
+    responseType: "json",
+    body: (pattern) => postsPageBodyHandler(pattern, PostsPageTypes.TRASH),
+  },
+  {
+    pattern: new UrlPattern(base + "/posts/categories(/:page)"),
+    method: "post",
+    url: "panel/initPage/posts/categoryPage",
+    responseType: "json",
+    body: onlyPageParameterBodyHandler,
+  },
+  {
+    pattern: new UrlPattern(base + "/posts/post/:id"),
+    method: "post",
+    url: "panel/initPage/editPost",
+    responseType: "json",
+    body: onlyIdParameterBodyHandler,
+  },
+  {
+    pattern: new UrlPattern(base + "/tickets"),
+    method: "post",
+    url: "panel/initPage/ticketPage",
+    responseType: "json",
+    body: (pattern) => ticketsPageBodyHandler(pattern, TicketsPageTypes.ALL),
+  },
+  {
+    pattern: new UrlPattern(base + "/tickets/all(/:page)"),
+    method: "post",
+    url: "panel/initPage/ticketPage",
+    responseType: "json",
+    body: (pattern) => ticketsPageBodyHandler(pattern, TicketsPageTypes.ALL),
+  },
+  {
+    pattern: new UrlPattern(base + "/tickets/waitingReply(/:page)"),
+    method: "post",
+    url: "panel/initPage/ticketPage",
+    responseType: "json",
+    body: (pattern) =>
+      ticketsPageBodyHandler(pattern, TicketsPageTypes.WAITING_REPLY),
+  },
+  {
+    pattern: new UrlPattern(base + "/tickets/closed(/:page)"),
+    method: "post",
+    url: "panel/initPage/ticketPage",
+    responseType: "json",
+    body: (pattern) => ticketsPageBodyHandler(pattern, TicketsPageTypes.CLOSED),
+  },
+  {
+    pattern: new UrlPattern(base + "/tickets/categories(/:page)"),
+    method: "post",
+    url: "panel/initPage/tickets/categoryPage",
+    responseType: "json",
+    body: onlyPageParameterBodyHandler,
+  },
+  {
+    pattern: new UrlPattern(base + "/tickets/ticket/:id"),
+    method: "post",
+    url: "panel/initPage/ticket/detail",
+    responseType: "json",
+    body: onlyIdParameterBodyHandler,
+  },
+  {
+    pattern: new UrlPattern(base + "/players"),
+    method: "post",
+    url: "panel/initPage/playersPage",
+    responseType: "json",
+    body: (pattern) => playersPageBodyHandler(pattern, PlayersPageTypes.ALL),
+  },
+  {
+    pattern: new UrlPattern(base + "/players/all(/:page)"),
+    method: "post",
+    url: "panel/initPage/playersPage",
+    responseType: "json",
+    body: (pattern) => playersPageBodyHandler(pattern, PlayersPageTypes.ALL),
+  },
+  {
+    pattern: new UrlPattern(base + "/players/hasPerm(/:page)"),
+    method: "post",
+    url: "panel/initPage/playersPage",
+    responseType: "json",
+    body: (pattern) =>
+      playersPageBodyHandler(pattern, PlayersPageTypes.HAS_PERM),
+  },
+  {
+    pattern: new UrlPattern(base + "/players/banned(/:page)"),
+    method: "post",
+    url: "panel/initPage/playersPage",
+    responseType: "json",
+    body: (pattern) => playersPageBodyHandler(pattern, PlayersPageTypes.BANNED),
+  },
+  {
+    pattern: new UrlPattern(base + "/players/permissions"),
+    method: "get",
+    url: "panel/initPage/permissionsPage",
+    responseType: "json",
+  },
+  {
+    pattern: new UrlPattern(base + "/players/player/:username(/:page)"),
+    method: "post",
+    url: "panel/initPage/playerDetail",
+    responseType: "json",
+    body: (pattern) => {
+      return {
+        username: pattern.username,
+        page: !!pattern.page ? parseInt(pattern.page) : 1,
+      };
+    },
+  },
+];
 
-    if (postsPublishedMatch !== null && !!postsPublishedMatch.page)
-      page = parseInt(postsPublishedMatch.page);
+export function getMatchingPattern(headers, path, resolveData) {
+  patterns.forEach((pattern) => {
+    const match = pattern.pattern.match(path);
 
-    return got.post(API_URL + "panel/initPage/postPage", {
-      json: {
-        page,
-        page_type: parseInt(
-          getStatusFromPostsPageType(PostsPageTypes.PUBLISHED)
-        ),
-      },
-      headers,
-      responseType: "json",
-    });
-  }
-
-  const postsDraftMatch = patterns["posts/draft"].match(path);
-
-  if (postsDraftMatch !== null)
-    return got.post(API_URL + "panel/initPage/postPage", {
-      json: {
-        page: !!postsDraftMatch.page ? parseInt(postsDraftMatch.page) : 1,
-        page_type: parseInt(getStatusFromPostsPageType(PostsPageTypes.DRAFT)),
-      },
-      headers,
-      responseType: "json",
-    });
-
-  const postsTrashMatch = patterns["posts/trash"].match(path);
-
-  if (postsTrashMatch !== null)
-    return got.post(API_URL + "panel/initPage/postPage", {
-      json: {
-        page: !!postsTrashMatch.page ? parseInt(postsTrashMatch.page) : 1,
-        page_type: parseInt(getStatusFromPostsPageType(PostsPageTypes.TRASH)),
-      },
-      headers,
-      responseType: "json",
-    });
-
-  const postCategoriesMatch = patterns["posts/categories"].match(path);
-
-  if (postCategoriesMatch !== null)
-    return got.post(API_URL + "panel/initPage/posts/categoryPage", {
-      json: {
-        page: !!postCategoriesMatch.page
-          ? parseInt(postCategoriesMatch.page)
-          : 1,
-      },
-      headers,
-      responseType: "json",
-    });
-
-  const postsPostMatch = patterns["posts/post"].match(path);
-
-  if (postsPostMatch !== null)
-    return got.post(API_URL + "panel/initPage/editPost", {
-      json: {
-        id: !!postsPostMatch.id ? parseInt(postsPostMatch.id) : -1,
-      },
-      headers,
-      responseType: "json",
-    });
-
-  const ticketsMatch = patterns["tickets"].match(path);
-  const ticketsAllMatch = patterns["tickets/all"].match(path);
-
-  if (ticketsMatch !== null || ticketsAllMatch !== null) {
-    let page = 1;
-
-    if (ticketsAllMatch !== null && !!ticketsAllMatch.page)
-      page = parseInt(ticketsAllMatch.page);
-
-    return got.post(API_URL + "panel/initPage/ticketPage", {
-      json: {
-        page,
-        page_type: parseInt(getStatusFromTicketsPageType(TicketsPageTypes.ALL)),
-      },
-      headers,
-      responseType: "json",
-    });
-  }
-
-  const ticketsWaitingReplyMatch = patterns["tickets/waitingReply"].match(path);
-
-  if (ticketsWaitingReplyMatch !== null)
-    return got.post(API_URL + "panel/initPage/ticketPage", {
-      json: {
-        page: !!ticketsWaitingReplyMatch.page
-          ? parseInt(ticketsWaitingReplyMatch.page)
-          : 1,
-        page_type: parseInt(
-          getStatusFromTicketsPageType(TicketsPageTypes.WAITING_REPLY)
-        ),
-      },
-      headers,
-      responseType: "json",
-    });
-
-  const ticketsClosedMatch = patterns["tickets/closed"].match(path);
-
-  if (ticketsClosedMatch !== null)
-    return got.post(API_URL + "panel/initPage/ticketPage", {
-      json: {
-        page: !!ticketsClosedMatch.page ? parseInt(ticketsClosedMatch.page) : 1,
-        page_type: parseInt(
-          getStatusFromTicketsPageType(TicketsPageTypes.CLOSED)
-        ),
-      },
-      headers,
-      responseType: "json",
-    });
-
-  const ticketCategoriesMatch = patterns["tickets/categories"].match(path);
-
-  if (ticketCategoriesMatch !== null)
-    return got.post(API_URL + "panel/initPage/tickets/categoryPage", {
-      json: {
-        page: !!ticketCategoriesMatch.page
-          ? parseInt(ticketCategoriesMatch.page)
-          : 1,
-      },
-      headers,
-      responseType: "json",
-    });
-
-  const ticketsTicketMatch = patterns["tickets/ticket"].match(path);
-
-  if (ticketsTicketMatch !== null)
-    return got.post(API_URL + "panel/initPage/ticket/detail", {
-      json: {
-        id: !!ticketsTicketMatch.id ? parseInt(ticketsTicketMatch.id) : -1,
-      },
-      headers,
-      responseType: "json",
-    });
-
-  const playersMatch = patterns["players"].match(path);
-  const playersAllMatch = patterns["players/all"].match(path);
-
-  if (playersMatch !== null || playersAllMatch !== null) {
-    let page = 1;
-
-    if (playersAllMatch !== null && !!playersAllMatch.page)
-      page = parseInt(playersAllMatch.page);
-
-    return got.post(API_URL + "panel/initPage/playersPage", {
-      json: {
-        page,
-        page_type: parseInt(getStatusFromPlayersPageType(PlayersPageTypes.ALL)),
-      },
-      headers,
-      responseType: "json",
-    });
-  }
-
-  const playersHasPermMatch = patterns["players/hasPerm"].match(path);
-
-  if (playersHasPermMatch !== null)
-    return got.post(API_URL + "panel/initPage/playersPage", {
-      json: {
-        page: !!playersHasPermMatch.page
-          ? parseInt(playersHasPermMatch.page)
-          : 1,
-        page_type: parseInt(
-          getStatusFromPlayersPageType(PlayersPageTypes.HAS_PERM)
-        ),
-      },
-      headers,
-      responseType: "json",
-    });
-
-  const playersBannedMatch = patterns["players/banned"].match(path);
-
-  if (playersBannedMatch !== null)
-    return got.post(API_URL + "panel/initPage/playersPage", {
-      json: {
-        page: !!playersBannedMatch.page ? parseInt(playersBannedMatch.page) : 1,
-        page_type: parseInt(
-          getStatusFromPlayersPageType(PlayersPageTypes.BANNED)
-        ),
-      },
-      headers,
-      responseType: "json",
-    });
-
-  const playersPermissionsMatch = patterns["players/permissions"].match(path);
-
-  if (playersPermissionsMatch !== null)
-    return got.get(API_URL + "panel/initPage/permissionsPage", {
-      headers,
-      responseType: "json",
-    });
-
-  const playersPlayerMatch = patterns["players/player"].match(path);
-
-  if (playersPlayerMatch !== null)
-    return got.post(API_URL + "panel/initPage/playerDetail", {
-      json: {
-        username: playersPlayerMatch.username,
-        page: !!playersPlayerMatch.page ? parseInt(playersPlayerMatch.page) : 1,
-      },
-      headers,
-      responseType: "json",
-    });
+    if (match) return { pattern, match };
+  });
 
   return undefined;
 }
