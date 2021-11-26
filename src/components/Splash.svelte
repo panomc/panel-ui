@@ -23,7 +23,7 @@
     >
       {#if $notLoggedIn}
         <p class="text-danger">
-          Giriş yapılmamış!<br />Lütfen önce <b>tema<b>dan giriş yapın!</b></b>
+          Giriş yapılmamış!<br />Lütfen önce <strong>tema</strong>'dan giriş yapın!
         </p>
       {:else}
         <p class="text-danger">Bağlantı hatası!</p>
