@@ -46,7 +46,7 @@
       }
 
       showNetworkErrorOnCatch((resolve, reject) => {
-        getBasicData(session.initialRequest)
+        getBasicData()
           .then(() => {
             resolve();
           })
