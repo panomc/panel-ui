@@ -67,7 +67,13 @@ export function getBasicData() {
   });
 }
 
-export function showNetworkErrorOnCatch(callback) {
+export function showNetworkErrorOnCatch(callback, isErrorAlready = false) {
+  if (isErrorAlready) {
+    networkErrorCallbacks.update((value) => value.concat(callback));
+
+    return;
+  }
+
   new Promise((resolve, reject) => {
     callback(resolve, reject);
   }).catch(() => {
@@ -79,13 +85,13 @@ export function resumeAfterNetworkError() {
   retryingNetworkErrors.set(true);
 
   const currentList = get(networkErrorCallbacks).concat();
-  const doneList = [];
+  const calledList = [];
 
   function check() {
     let callbacksDone = true;
 
     currentList.forEach((item) => {
-      if (doneList.indexOf(item) === -1) {
+      if (calledList.indexOf(item) === -1) {
         callbacksDone = false;
       }
     });
@@ -96,12 +102,12 @@ export function resumeAfterNetworkError() {
   }
 
   currentList.forEach((callback) => {
-    doneList.push(callback);
-
     new Promise((resolve, reject) => {
       callback(resolve, reject);
     })
       .then(() => {
+        calledList.push(callback);
+
         networkErrorCallbacks.update((list) =>
           list.filter((item) => item !== callback)
         );
@@ -109,6 +115,8 @@ export function resumeAfterNetworkError() {
         check();
       })
       .catch(() => {
+        calledList.push(callback);
+
         check();
       });
   });

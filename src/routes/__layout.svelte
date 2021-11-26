@@ -28,6 +28,7 @@
     getBasicData,
     initializeBasicData,
     networkErrorCallbacks,
+    showNetworkErrorOnCatch,
     notLoggedIn,
   } from "$lib/store";
 
@@ -44,9 +45,11 @@
         notLoggedIn.set(true);
       }
 
-      const callback = new Promise((resolve, reject) => {
-        getBasicData()
-          .then(() => {})
+      showNetworkErrorOnCatch((resolve, reject) => {
+        getBasicData(session.initialRequest)
+          .then(() => {
+            resolve();
+          })
           .catch((errorCode) => {
             if (errorCode === "NOT_LOGGED_IN") {
               notLoggedIn.set(true);
@@ -54,11 +57,7 @@
 
             reject();
           });
-      }).catch(() => {
-        networkErrorCallbacks.update((value) => value.concat(callback));
-      });
-
-      networkErrorCallbacks.update((value) => value.concat(callback));
+      }, true);
     }
 
     return {};
