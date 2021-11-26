@@ -4,7 +4,16 @@ import routeDataLoader from "$lib/route-data-loader";
 export async function handle({ request, resolve }) {
   const routeData = await routeDataLoader(request.headers, request.path);
 
-  // console.log(request)
+  const notAllowed = ["headers"];
+
+  request.locals = Object.keys(routeData)
+    .filter((key) => !notAllowed.includes(key))
+    .reduce((object, key) => {
+      object[key] = routeData[key];
+
+      return object;
+    }, {});
+
   const response = await resolve(request);
 
   return {
@@ -17,16 +26,6 @@ export async function handle({ request, resolve }) {
 }
 
 /** @type {import('@sveltejs/kit').GetSession} */
-export async function getSession({ headers, path }) {
-  const routeData = await routeDataLoader(headers, path);
-
-  const notAllowed = ["headers"];
-
-  return Object.keys(routeData)
-    .filter((key) => !notAllowed.includes(key))
-    .reduce((object, key) => {
-      object[key] = routeData[key];
-
-      return object;
-    }, {});
+export async function getSession({ locals }) {
+  return locals;
 }
