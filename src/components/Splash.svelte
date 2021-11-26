@@ -19,7 +19,7 @@
   {#if networkErrors}
     <div
       class="pt-4 animated bounceInUp fast d-flex flex-column
-      justify-content-center align-items-center"
+      justify-content-center align-items-center text-center"
     >
       {#if $notLoggedIn}
         <p class="text-danger">
