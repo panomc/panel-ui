@@ -32,7 +32,7 @@
           width="64"
           height="64"
           src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
-          use:tooltip="{['Sunucu İkonunu Değiştir', { placement: 'right' }]}"
+          use:tooltip="{['Website Ayaları', { placement: 'right' }]}"
         />
       </a>
 
@@ -65,6 +65,7 @@
         <a
           href="javascript:void(0)"
           class="nav-link"
+          use:tooltip="{['Website', { placement: 'bottom' }]}"
           on:click="{onWebsiteMenuClick}"
           class:active="{$sidebarTabsState === 'website'}"
           class:text-light="{$sidebarTabsState !== 'website'}">
@@ -75,6 +76,7 @@
         <a
           href="javascript:void(0)"
           class="nav-link"
+          use:tooltip="{['Sunucu', { placement: 'bottom' }]}"
           on:click="{onGameMenuClick}"
           class:active="{$sidebarTabsState === 'game'}"
           class:text-light="{$sidebarTabsState !== 'game'}">
