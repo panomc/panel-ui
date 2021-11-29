@@ -10,18 +10,22 @@
 
 <div class="splash" role="status" in:fade out:fade>
   <img
-    class="animate__animated animate__bounce animate__infinite"
+    class="animate__animated animate__bounce animate__infinite animate__slower"
     alt="Pano"
     src="{base + '/assets/img/Slimeball.webp'}"
     width="32" />
 
   {#if networkErrors}
     <div
-      class="pt-4 animated bounceInUp fast d-flex flex-column
+      class="pt-4 d-flex flex-column
       justify-content-center align-items-center text-center">
       {#if $notLoggedIn}
         <p class="text-danger">
-          Panele erişmek için lütfen <a href="http://localhost:3000/" class="font-weight-bolder text-danger" target="_blank">giriş yap</a>.
+          Panele erişmek için lütfen <a
+            href="http://localhost:3000/"
+            class="font-weight-bolder text-danger"
+            target="_blank">giriş yap</a
+          >.
         </p>
       {:else}
         <p class="text-danger">Bağlantı hatası!</p>
