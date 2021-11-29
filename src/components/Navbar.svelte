@@ -44,7 +44,7 @@
       </a>
 
       <div
-        class="dropdown-menu animated fadeIn faster dropdown-menu-right
+        class="dropdown-menu animate__animated animate__zoomIn animate__fast dropdown-menu-right
         notifications"
       >
         <h6 class="dropdown-header">
@@ -119,7 +119,7 @@
           alt="{$user.username}"
         />
       </a>
-      <div class="dropdown-menu dropdown-menu-right animated fadeIn faster">
+      <div class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a
