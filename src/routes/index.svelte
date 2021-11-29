@@ -99,7 +99,7 @@
     </div>
   {/if}
 
-  <div class="row justify-content-between">
+  <div class="row justify-content-between animate__animated animate__slideInUp">
     <div class="col-lg-4">
       <div class="card border-0 bg-transparent">
         <div class="p-3">
@@ -188,7 +188,8 @@
       </div>
 
       {#if data.tickets.length === 0}
-        <div class="container text-center">
+        <div
+          class="container text-center animate__animated animate__headShake animate__slower">
           <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -327,12 +328,12 @@
 
     if (browser && (page.path !== session.loadedPath || refreshable)) {
       // from another page
-      output.props.data = {...output.props.data, ...await loadData()};
+      output.props.data = { ...output.props.data, ...(await loadData()) };
     }
 
     if (page.path === session.loadedPath && !refreshable) {
       refreshable = true;
-      output.props.data = {...output.props.data, ...session.data};
+      output.props.data = { ...output.props.data, ...session.data };
     }
 
     return output;

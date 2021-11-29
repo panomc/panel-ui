@@ -8,7 +8,7 @@
 
   <section class="row">
     <div class="col-lg-4 col-md-6">
-      <div class="card shadow selected">
+      <div class="card shadow selected animate__animated animate__fadeIn">
         <img
           alt="Vanilla"
           class="rounded p-2"

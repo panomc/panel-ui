@@ -31,7 +31,7 @@
 
       <!-- No Category -->
       {#if data.category_count === 0}
-        <div class="container text-center">
+        <div class="container text-center animate__animated animate__headShake animate__slower">
           <i class="fas fa-sticky-note fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -39,7 +39,7 @@
 
       <!-- Tickets Table -->
       {#if data.category_count > 0}
-        <div class="table-responsive">
+        <div class="table-responsive animate__animated animate__fadeIn">
           <table class="table mb-0">
             <thead>
               <tr>
