@@ -10,20 +10,18 @@
 
 <div class="splash" role="status" in:fade out:fade>
   <img
-    class="animated fadeIn infinite slow"
+    class="animate__animated animate__bounce animate__infinite"
     alt="Pano"
-    src="{base + '/assets/img/logo-blue.svg'}"
-    width="32"
-  />
+    src="{base + '/assets/img/Slimeball.webp'}"
+    width="32" />
 
   {#if networkErrors}
     <div
       class="pt-4 animated bounceInUp fast d-flex flex-column
-      justify-content-center align-items-center text-center"
-    >
+      justify-content-center align-items-center text-center">
       {#if $notLoggedIn}
         <p class="text-danger">
-          Giriş yapılmamış!<br />Lütfen önce <strong>tema</strong>'dan giriş yapın!
+          Panele erişmek için lütfen <a href="http://localhost:3000/" class="font-weight-bolder text-danger" target="_blank">giriş yap</a>.
         </p>
       {:else}
         <p class="text-danger">Bağlantı hatası!</p>
@@ -32,9 +30,8 @@
         class="btn btn-link bg-lightprimary btn-sm"
         on:click="{onResumeClick}"
         class:disabled="{$retryingNetworkErrors}"
-        disabled="{$retryingNetworkErrors}"
-      >
-        {$retryingNetworkErrors ? "Tekrar deneniyor..." : "Tekrar Dene"}
+        disabled="{$retryingNetworkErrors}">
+        {$retryingNetworkErrors ? "Yenileniyor..." : "Yenile"}
       </button>
     </div>
   {/if}
