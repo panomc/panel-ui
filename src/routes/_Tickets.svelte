@@ -88,7 +88,7 @@
         </div>
       {:else}
         <!-- Tickets Table -->
-        <div class="table-responsive animate__animated animate__fadeIn">
+        <div class="table-responsive animate__animated animate__zoomIn">
           <table class="table mb-0">
             <thead>
               <tr>
@@ -140,7 +140,7 @@
                         </a>
                         <div
                           aria-labelledby="postAction"
-                          class="dropdown-menu dropdown-menu-right">
+                          class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
                           {#if ticket.status !== 3}
                             <a
                               class="dropdown-item"

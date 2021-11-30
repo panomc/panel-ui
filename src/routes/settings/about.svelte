@@ -65,7 +65,7 @@
 
   <div class="card">
     <div class="card-body animate__animated animate__fadeIn">
-      <h5 class="card-title animate__animated animate__flash animate__infinie">Açık Kaynak Lisansları ❤️</h5>
+      <h5 class="card-title animate__animated animate__heartBeat animate__slower animate__repeat-2 d-inline-block">Açık Kaynak Lisansları ❤️</h5>
 
       <!-- Bootstrap 4.3 License -->
       <details>

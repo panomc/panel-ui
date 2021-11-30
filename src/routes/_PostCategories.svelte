@@ -68,7 +68,7 @@
                       </a>
                       <div
                         aria-labelledby="postAction"
-                        class="dropdown-menu dropdown-menu-right"
+                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast"
                       >
                         <a
                           class="dropdown-item"

@@ -9,7 +9,7 @@
       </div>
       <div class="col text-right">
         <button class="btn btn-outline-primary" type="button">
-          <i class="fas fa-sync"></i>
+          <i class="fas fa-sync mr-1"></i> Güncellemeleri Denetle
         </button>
       </div>
     </section>
