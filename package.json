@@ -36,7 +36,7 @@
   },
   "type": "module",
   "dependencies": {
-    "animate.css": "^3.7.2",
+    "animate.css": "^4.1.1",
     "bootstrap": "^4.6.1",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1"

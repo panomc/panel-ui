@@ -2,6 +2,10 @@
 @import "node_modules/animate.css/animate.min";
 @import "node_modules/tippy.js/dist/tippy";
 
+:root {
+  --animate-duration: 250ms;
+}
+
 // Control Panel Styles
 
 .unread-badge {
@@ -55,7 +59,7 @@
   top: 0;
   left: 0;
   z-index: 1040;
-  transition: 0.5s all;
+  transition: 250ms all;
   background: $white;
   @include media-breakpoint-down(md) {
     position: fixed;
@@ -132,7 +136,7 @@
   min-width: 300px;
   width: 100%;
   overflow-y: auto;
-  transition: 0.2s ease-in;
+  transition: 250ms ease-in;
 }
 
 .table-responsive {
@@ -145,7 +149,7 @@
   color: $lightglass;
 
   &:hover {
-    transition: 0.3s all;
+    transition: 250ms all;
 
     &:before {
       background: $gray;
@@ -156,14 +160,14 @@
       top: 35%;
       position: absolute;
       width: 12px;
-      transition: 0.3s all;
+      transition: 250ms all;
     }
   }
 }
 
 .menu > li.nav-item.active {
   position: relative;
-  transition: 0.3s all;
+  transition: 250ms all;
 
   &:before {
     display: flex;
@@ -176,7 +180,7 @@
     left: -6px;
     position: absolute;
     width: 12px;
-    transition: 0.3s all;
+    transition: 250ms all;
   }
 }
 
@@ -212,7 +216,7 @@
 .selected {
   box-shadow: 0 0 0 4px inset $primary !important;
   position: relative;
-  transition: 0.2s;
+  transition: 250ms;
 
   &:after {
     position: absolute;

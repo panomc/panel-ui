@@ -7,8 +7,7 @@
         class:invisible="{$isSidebarOpen}"
         href="javascript:void(0);"
         title="Menüyü Aç/Kapa"
-        on:click="{onSideBarCollapseClick}"
-      >
+        on:click="{onSideBarCollapseClick}">
         <i class="fas fa-bars"></i>
       </a>
     </li>
@@ -16,15 +15,14 @@
       <a
         href="javascript:void(0);"
         target="_blank"
-        class="btn btn-link border-lightprimary text-secondary"
-      >
+        class="btn btn-link border-lightprimary text-secondary">
         <i class="fas fa-store d-lg-none d-inline"></i>
         <span class="d-lg-inline d-none">Web Market</span>
       </a>
     </li>
   </ul>
 
-  <div class="h4 m-0">Panel</div>
+  <div class="h4 m-0 animate__animated animate__slideInDown">Panel</div>
 
   <!-- Notifications Dropdown -->
 
@@ -35,8 +33,7 @@
         data-toggle="dropdown"
         href="javascript:void(0);"
         role="button"
-        title="Bildirimler"
-      >
+        title="Bildirimler">
         {#if $notificationsCount !== 0}
           <div class="unread-badge"></div>
         {/if}
@@ -44,9 +41,8 @@
       </a>
 
       <div
-        class="dropdown-menu animated fadeIn faster dropdown-menu-right
-        notifications"
-      >
+        class="dropdown-menu animate__animated animate__zoomIn animate__fast dropdown-menu-right
+        notifications">
         <h6 class="dropdown-header">
           Bildirimler {$notificationsCount === 0
             ? ""
@@ -58,8 +54,7 @@
             <a
               href="javascript:void(0);"
               class="dropdown-item d-flex flex-row border-bottom py-2"
-              class:notification-unread="{notification.status === 'NOT_READ'}"
-            >
+              class:notification-unread="{notification.status === 'NOT_READ'}">
               <div class="col-auto pl-0">
                 <i class="fas fa-dot-circle text-primary"></i>
               </div>
@@ -75,8 +70,7 @@
 
         {#if quickNotifications.length === 0 && !notificationsLoading}
           <div
-            class="d-flex flex-column align-items-center justify-content-center"
-          >
+            class="d-flex flex-column align-items-center justify-content-center">
             <i class="fas fa-bell text-glass m-3"></i>
             <p class="text-gray">Bildirim yok.</p>
           </div>
@@ -87,16 +81,15 @@
           <div class="d-flex justify-content-center m-3">
             <div
               class="spinner-border spinner-border-sm text-primary"
-              role="status"
-            ></div>
+              role="status">
+            </div>
           </div>
         {/if}
 
         <a
           class="dropdown-item text-primary font-weight-bolder text-center small
           pt-2"
-          href="{base}/notifications"
-        >
+          href="{base}/notifications">
           Tümünü Görüntüle
         </a>
       </div>
@@ -109,23 +102,21 @@
         class="icon-link nav-link p-1"
         data-toggle="dropdown"
         href="javascript:void(0);"
-        title="Oturum"
-      >
+        title="Oturum">
         <img
           src="https://minotar.net/avatar/{$user.username}"
           width="32"
           height="32"
           class="border rounded-circle"
-          alt="{$user.username}"
-        />
+          alt="{$user.username}" />
       </a>
-      <div class="dropdown-menu dropdown-menu-right animated fadeIn faster">
+      <div
+        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a
               class="nav-link text-primary"
-              href="{base}/players/player/{$user.username}"
-            >
+              href="{base}/players/player/{$user.username}">
               <i class="fas fa-user mr-1"></i>
               {$user.username}
             </a>
@@ -134,8 +125,7 @@
             <a
               class="nav-link"
               href="javascript:void(0);"
-              on:click="{onLogout}"
-            >
+              on:click="{onLogout}">
               <i class="fas fa-sign-out-alt mr-1"></i>
               Çıkış Yap
             </a>

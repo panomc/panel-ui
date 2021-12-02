@@ -1,7 +1,7 @@
 <!-- Site Settings Sub Page -->
 <div class="tab-pane">
   <div class="card">
-    <div class="card-body">
+    <div class="card-body  animate__animated animate__fadeIn">
       <h5 class="card-title">Website Ayarları</h5>
       <form>
         <div class="form-group row">

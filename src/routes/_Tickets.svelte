@@ -81,13 +81,14 @@
 
       <!-- No Tickets -->
       {#if data.tickets_count === 0}
-        <div class="container text-center">
+        <div
+          class="container text-center animate__animated animate__headShake animate__slower">
           <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}
         <!-- Tickets Table -->
-        <div class="table-responsive">
+        <div class="table-responsive animate__animated animate__zoomIn">
           <table class="table mb-0">
             <thead>
               <tr>
@@ -139,7 +140,7 @@
                         </a>
                         <div
                           aria-labelledby="postAction"
-                          class="dropdown-menu dropdown-menu-right">
+                          class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
                           {#if ticket.status !== 3}
                             <a
                               class="dropdown-item"
@@ -322,7 +323,7 @@
         pageType
       )
         .then((data) => {
-          output.props.data = {...output.props.data, ...data};
+          output.props.data = { ...output.props.data, ...data };
         })
         .catch((errorCode) => {
           if (!!errorCode && errorCode === "PAGE_NOT_FOUND") {
@@ -334,7 +335,7 @@
     if (page.path === session.loadedPath && !refreshable) {
       if (browser) refreshable = true;
 
-      output.props.data = {...output.props.data, ...session.data};
+      output.props.data = { ...output.props.data, ...session.data };
 
       output.props.data.page = !!page.params.page
         ? parseInt(page.params.page)

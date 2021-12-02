@@ -53,13 +53,13 @@
 
       <!-- No Players -->
       {#if data.players_count === 0}
-        <div class="container text-center">
+        <div class="container text-center animate__animated animate__headShake animate__slower">
           <i class="fas fa-users fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}
         <!-- Players Table -->
-        <div class="table-responsive">
+        <div class="table-responsive animate__animated animate__zoomIn animate__faster">
           <table class="table mb-0">
             <thead>
               <tr>
@@ -88,7 +88,7 @@
                       </a>
                       <div
                         aria-labelledby="playerAction"
-                        class="dropdown-menu dropdown-menu-right">
+                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"

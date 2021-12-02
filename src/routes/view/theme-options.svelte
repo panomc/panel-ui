@@ -9,7 +9,7 @@
         <a href="" class="nav-item nav-link">Diğer</a>
       </div>
     </nav>
-    <div class="card-body">
+    <div class="card-body animate__animated animate__fadeIn">
       <div class="row justify-content-between pb-2">
         <div class="col-6 text-left">
           <h5 class="card-title">Yazı Seçenekleri</h5>

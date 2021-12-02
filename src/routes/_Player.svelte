@@ -43,7 +43,7 @@
           align-items-center">
           <img
             alt="{data.player.username}"
-            class="mb-3 rounded-circle"
+            class="mb-3 rounded-circle animate__animated animate__zoomIn"
             width="64"
             height="64"
             src="https://minotar.net/avatar/{data.player.username}" />
@@ -98,7 +98,7 @@
           </div>
 
           {#if data.ticketCount === 0}
-            <div class="container text-center">
+            <div class="container text-center animate__animated animate__headShake animate__slower">
               <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
               <p class="text-gray">Burada içerik yok.</p>
             </div>

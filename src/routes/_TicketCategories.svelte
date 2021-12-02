@@ -19,8 +19,7 @@
       <button
         class="btn btn-primary"
         type="button"
-        on:click="{onCreateCategoryClick}"
-      >
+        on:click="{onCreateCategoryClick}">
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
       </button>
@@ -38,7 +37,8 @@
 
       <!-- No Category -->
       {#if data.category_count === 0}
-        <div class="container text-center">
+        <div
+          class="container text-center animate__animated animate__headShake animate__slower">
           <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -46,7 +46,7 @@
 
       <!-- Tickets Table -->
       {#if data.category_count > 0}
-        <div class="table-responsive">
+        <div class="table-responsive animate__animated animate__fadeIn">
           <table class="table mb-0">
             <thead>
               <tr>
@@ -66,21 +66,18 @@
                         aria-haspopup="true"
                         data-toggle="dropdown"
                         href="javascript:void(0);"
-                        id="postAction"
-                      >
+                        id="postAction">
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div
                         aria-labelledby="postAction"
-                        class="dropdown-menu dropdown-menu-right"
-                      >
+                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
                           on:click="{onShowDeleteTicketCategoryModalClick(
                             index
-                          )}"
-                        >
+                          )}">
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
                         </a>
@@ -91,8 +88,7 @@
                     <a
                       href="javascript:void(0);"
                       title="Kategoriyi Düzenle"
-                      on:click="{onShowEditCategoryButtonClick(index)}"
-                    >
+                      on:click="{onShowEditCategoryButtonClick(index)}">
                       {category.title}
                     </a>
                   </td>
@@ -109,8 +105,7 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
     </div>
   </div>
 </article>
@@ -194,7 +189,7 @@
       // from another page
       await initData(!!page.params.page ? parseInt(page.params.page) : 1)
         .then((data) => {
-          output.props.data = {...output.props.data, ...data};
+          output.props.data = { ...output.props.data, ...data };
         })
         .catch((errorCode) => {
           if (!!errorCode && errorCode === "PAGE_NOT_FOUND") {
@@ -206,7 +201,7 @@
     if (page.path === session.loadedPath && !refreshable) {
       if (browser) refreshable = true;
 
-      output.props.data = {...output.props.data, ...session.data};
+      output.props.data = { ...output.props.data, ...session.data };
 
       output.props.data.page = !!page.params.page
         ? parseInt(page.params.page)
