@@ -194,7 +194,7 @@
     logoutLoading.set(true);
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({ path: "auth/logout", CSRFToken: $session.CSRFToken })
+      ApiUtil.post({ path: "/auth/logout", CSRFToken: $session.CSRFToken })
         .then(() => {
           window.location.href = "/";
 
