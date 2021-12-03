@@ -93,6 +93,7 @@
 
 <script>
   import { base } from "$app/paths";
+  import { session } from "$app/stores";
 
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
@@ -107,11 +108,15 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/post/category/delete", {
-        id: get(category).id,
+      ApiUtil.post({
+        path: "/api/panel/post/category/delete",
+        body: {
+          id: get(category).id,
+        },
+        CSRFToken: $session.CSRFToken,
       })
-        .then((response) => {
-          if (response.data.result === "ok") {
+        .then((body) => {
+          if (body.result === "ok") {
             loading = false;
 
             hide();

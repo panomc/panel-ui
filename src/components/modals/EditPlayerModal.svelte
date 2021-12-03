@@ -162,6 +162,8 @@
 </script>
 
 <script>
+  import { session } from "$app/stores";
+
   import { showNetworkErrorOnCatch, user } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
@@ -175,9 +177,13 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/player/edit/info", get(player))
-        .then((response) => {
-          if (response.data.result === "ok") {
+      ApiUtil.post({
+        path: "/api/panel/player/edit/info",
+        body: get(player),
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
             if (get(playerBackup).username === get(user).username) {
               user.update((user) => {
                 user.username = get(player).username;
@@ -201,11 +207,11 @@
             callback(get(player));
 
             resolve();
-          } else if (response.data.result === "NOT_EXISTS") {
+          } else if (body.result === "NOT_EXISTS") {
             refreshBrowserPage();
-          } else if (!!response.data.error) {
+          } else if (body.error) {
             loading = false;
-            errors.set(response.data.error);
+            errors.set(body.error);
 
             resolve();
           } else reject();

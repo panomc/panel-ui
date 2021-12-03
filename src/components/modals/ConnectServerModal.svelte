@@ -92,8 +92,9 @@
   import { differenceInSeconds } from "date-fns";
 
   import { browser } from "$app/env";
+  import { session } from "$app/stores";
 
-  import { ApiUtil } from "$lib/api.util";
+  import ApiUtil from "$lib/api.util";
   import tooltip from "$lib/tooltip.util";
 
   import {
@@ -136,11 +137,14 @@
 
   function refreshKey() {
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.get("panel/platformAuth/refreshKey")
-        .then((response) => {
-          if (response.data.result === "ok") {
-            currentServerPlatformMatchKey.set(response.data.key);
-            platformKeyRefreshedTime.set(response.data.timeStarted);
+      ApiUtil.get({
+        path: "/api/panel/platformAuth/refreshKey",
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
+            currentServerPlatformMatchKey.set(body.key);
+            platformKeyRefreshedTime.set(body.timeStarted);
           } else {
             currentServerPlatformMatchKey.set("");
           }

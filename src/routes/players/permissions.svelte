@@ -11,7 +11,8 @@
       <a
         href="javascript:void(0);"
         class="btn btn-primary"
-        on:click="{() => onCreatePermissionGroupClick()}">
+        on:click="{() => onCreatePermissionGroupClick()}"
+      >
         <i class="fas fa-plus mr-1"></i>
         Yetki Grubu Oluştur
       </a>
@@ -29,7 +30,8 @@
               use:tooltip="{[
                 'Panele erişebilir, ayarları ve panel içeriklerini görüntüleyebilir',
                 { placement: 'top' },
-              ]}">
+              ]}"
+            >
               <i class="fas fa-sign-in-alt text-primary d-block m-auto"></i>
               <small class="mb-0 font-weight-bolder">Panel Erişimi</small>
             </th>
@@ -39,7 +41,8 @@
                 use:tooltip="{[
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
                   { placement: 'top' },
-                ]}">
+                ]}"
+              >
                 <!--              TODO: Icon system-->
                 <!--              <Icon-->
                 <!--                data="{icon[convertIconName(permission.iconName)]}"-->
@@ -117,12 +120,14 @@
                       data-toggle="dropdown"
                       href="javascript:void(0);"
                       id="permAction"
-                      title="Eylemler">
+                      title="Eylemler"
+                    >
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div
                       aria-labelledby="permAction"
-                      class="dropdown-menu dropdown-menu-left animate__animated animate__zoomIn animate__faster">
+                      class="dropdown-menu dropdown-menu-left animate__animated animate__zoomIn animate__faster"
+                    >
                       <a
                         class="dropdown-item"
                         data-target="#addEditPermGroup"
@@ -131,7 +136,8 @@
                         on:click="{() =>
                           onShowEditPermissionGroupButtonClick(
                             permissionGroup
-                          )}">
+                          )}"
+                      >
                         <i class="fas fa-pencil-alt text-primary mr-1"></i>
                         Düzenle
                       </a>
@@ -144,7 +150,8 @@
                           on:click="{() =>
                             onShowDeletePermissionGroupModalClick(
                               permissionGroup
-                            )}">
+                            )}"
+                        >
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
                         </a>
@@ -154,22 +161,26 @@
                   <div>
                     <h5 class="text-capitalize">{permissionGroup.name}</h5>
                     <div
-                      class="d-flex flex-row flex-row-reverse justify-content-end align-items-center mr-3">
+                      class="d-flex flex-row flex-row-reverse justify-content-end align-items-center mr-3"
+                    >
                       {#if permissionGroup.user_count > 3}
                         <small class="pl-1"
-                          >+{permissionGroup.user_count - 3}</small>
+                          >+{permissionGroup.user_count - 3}</small
+                        >
                       {/if}
                       {#each permissionGroup.users as user, index (user)}
                         <span
                           class="overlapping-avatar"
-                          use:tooltip="{[user, { placement: 'bottom' }]}">
+                          use:tooltip="{[user, { placement: 'bottom' }]}"
+                        >
                           <a href="{base}/players/player/{user}">
                             <img
                               class="animate__animated animate__zoomIn"
                               src="https://minotar.net/avatar/{user}"
                               width="32"
                               height="32"
-                              alt="{user}" />
+                              alt="{user}"
+                            />
                           </a>
                         </span>
                       {/each}
@@ -184,7 +195,8 @@
                     class="custom-control-input active"
                     id="access_panel_{permissionGroup.name}"
                     checked="true"
-                    disabled />
+                    disabled
+                  />
                   <label
                     class="custom-control-label"
                     for="access_panel_{permissionGroup.name}"></label>
@@ -207,7 +219,8 @@
                         permission,
                         permissionGroup,
                         loadingPermissionsList
-                      )}" />
+                      )}"
+                    />
                     <label
                       class="custom-control-label"
                       for="{permission.name}_{permissionGroup.name}"></label>
@@ -226,45 +239,21 @@
 <ConfirmDeletePermissionGroupModal />
 
 <script context="module">
-  import { browser } from "$app/env";
-
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
 
-  let refreshable = false;
-
-  async function loadData() {
+  async function loadData({ request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.get("panel/initPage/permissionsPage")
-        .then((response) => {
-          if (response.data.result === "ok") {
-            const data = response.data;
-
-            resolve(data);
-          } else if (response.data.result === "error") {
-            const errorCode = response.data.error;
-
-            reject(errorCode, response.data);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  }
-
-  async function initData() {
-    return new Promise((resolvePromise, rejectPromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        loadData()
-          .then((data) => {
-            resolvePromise(data);
-          })
-          .catch((errorCode, data) => {
-            reject();
-
-            rejectPromise(errorCode, data);
-          });
+      ApiUtil.get({
+        path: "/api/panel/initPage/permissionsPage",
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          resolve(body);
+        } else {
+          reject(body);
+        }
       });
     });
   }
@@ -272,7 +261,7 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, session }) {
+  export async function load(request) {
     let output = {
       props: {
         data: {
@@ -283,23 +272,15 @@
       },
     };
 
-    if (browser && (page.path !== session.loadedPath || refreshable)) {
-      // from another page
-      await initData().then((data) => {
-        output.props.data = { ...output.props.data, ...data };
-      });
-      // .catch((errorCode, data) => {
-      //   if (!!errorCode && errorCode === "PAGE_NOT_FOUND") {
-      //     return null;
-      //   }
-      // });
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
+
+      return output;
     }
 
-    if (page.path === session.loadedPath && !refreshable) {
-      if (browser) refreshable = true;
-
-      output.props.data = { ...output.props.data, ...session.data };
-    }
+    await loadData({ request }).then((data) => {
+      output.props.data = { ...output.props.data, ...data };
+    });
 
     return output;
   }
@@ -307,6 +288,7 @@
 
 <script>
   import { base } from "$app/paths";
+  import { session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -322,11 +304,25 @@
 
   export let data;
 
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadData({ CSRFToken: $session.CSRFToken })
+        .then((body) => {
+          data = { ...data, ...body };
+
+          resolve();
+        })
+        .catch(() => {
+          reject();
+        });
+    }, true);
+  }
+
   let loadingPermissionsList = [];
 
   function reloadData() {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData()
+      loadData({ CSRFToken: $session.CSRFToken })
         .then((loadedData) => {
           resolve();
 
@@ -388,13 +384,17 @@
       : "ADD";
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/permission/set", {
-        mode: mode,
-        permission_group_id: permissionGroup.id,
-        permission_id: permission.id,
+      ApiUtil.post({
+        path: "/api/panel/permission/set",
+        body: {
+          mode: mode,
+          permission_group_id: permissionGroup.id,
+          permission_id: permission.id,
+        },
+        CSRFToken: $session.CSRFToken,
       })
-        .then((response) => {
-          if (response.data.result === "ok") {
+        .then((body) => {
+          if (body.result === "ok") {
             loadingPermissionsList[
               permission.name + "_" + permissionGroup.name
             ] = false;
@@ -421,7 +421,7 @@
             }
 
             resolve();
-          } else if (response.data.error === "NOT_EXISTS") refreshBrowserPage();
+          } else if (body.error === "NOT_EXISTS") refreshBrowserPage();
           else reject();
         })
         .catch(() => {

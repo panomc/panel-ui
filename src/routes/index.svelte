@@ -5,12 +5,14 @@
     <div
       class="alert alert-welcome alert-dismissible flex-fill w-100
       show border mb-4"
-      role="alert">
+      role="alert"
+    >
       <button
         class="close"
         data-dismiss="alert"
         type="button"
-        on:click="{onCloseGettingStartedCard}">
+        on:click="{onCloseGettingStartedCard}"
+      >
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="card-body">
@@ -31,7 +33,8 @@
             <button
               class="btn btn-sm btn-outline-primary"
               data-target="#connectServer"
-              data-toggle="modal">
+              data-toggle="modal"
+            >
               <i class="fas fa-plus mr-2"></i>
               Sunucu Bağla
             </button>
@@ -189,7 +192,8 @@
 
       {#if data.tickets.length === 0}
         <div
-          class="container text-center animate__animated animate__headShake animate__slower">
+          class="container text-center animate__animated animate__headShake animate__slower"
+        >
           <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -198,20 +202,23 @@
           {#each data.tickets as ticket, index (ticket)}
             <a
               href="{base}/tickets/ticket/{ticket.id}"
-              class="list-group-item list-group-item-action rounded d-flex flex-row">
+              class="list-group-item list-group-item-action rounded d-flex flex-row"
+            >
               <a href="{base}/players/player/{ticket.writer.username}">
                 <div
                   class="col-auto"
                   use:tooltip="{[
                     ticket.writer.username,
                     { placement: 'bottom' },
-                  ]}">
+                  ]}"
+                >
                   <img
                     src="https://minotar.net/avatar/{ticket.writer.username}"
                     alt="{ticket.writer.username}"
                     width="48"
                     height="48"
-                    class="border rounded-circle" />
+                    class="border rounded-circle"
+                  />
                 </div>
               </a>
               <div class="col">
@@ -278,31 +285,21 @@
 </div>
 
 <script context="module">
-  import { browser } from "$app/env";
-
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
-  let refreshable = false;
-
-  async function loadData() {
-    return new Promise((resolvePromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        ApiUtil.get("panel/initPage/dashboard")
-          .then((response) => {
-            if (response.data.result === "ok") {
-              resolve();
-              resolvePromise(response.data);
-            } else {
-              reject();
-
-              resolvePromise(response.data);
-            }
-          })
-          .catch((e) => {
-            reject();
-            console.log(e);
-          });
+  async function loadData({ request, CSRFToken }) {
+    return new Promise((resolve, reject) => {
+      ApiUtil.get({
+        path: "/api/panel/initPage/dashboard",
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          resolve(body);
+        } else {
+          reject(body);
+        }
       });
     });
   }
@@ -310,7 +307,7 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, session }) {
+  export async function load(request) {
     let output = {
       props: {
         data: {
@@ -326,15 +323,15 @@
       },
     };
 
-    if (browser && (page.path !== session.loadedPath || refreshable)) {
-      // from another page
-      output.props.data = { ...output.props.data, ...(await loadData()) };
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
+
+      return output;
     }
 
-    if (page.path === session.loadedPath && !refreshable) {
-      refreshable = true;
-      output.props.data = { ...output.props.data, ...session.data };
-    }
+    await loadData({ request }).then((body) => {
+      output.props.data = { ...output.props.data, ...body };
+    });
 
     return output;
   }
@@ -342,6 +339,7 @@
 
 <script>
   import { base } from "$app/paths";
+  import { session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -353,9 +351,25 @@
 
   export let data;
 
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadData({ CSRFToken: $session.CSRFToken })
+        .then((body) => {
+          data = { ...data, ...body };
+          resolve();
+        })
+        .catch(() => {
+          reject();
+        });
+    }, true);
+  }
+
   function onCloseGettingStartedCard() {
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/dashboard/closeGettingStartedCard", {})
+      ApiUtil.post({
+        path: "/api/panel/dashboard/closeGettingStartedCard",
+        CSRFToken: $session.CSRFToken,
+      })
         .then(() => {
           resolve();
         })

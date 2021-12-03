@@ -67,7 +67,7 @@
         bind:this="{messagesSectionDiv}"
         bind:clientHeight="{$messagesSectionClientHeight}"
       >
-        {#if data.ticket.messages.length < data.ticket.count && data.ticket.count > 5 + 5 * page}
+        {#if data.ticket.messages.length < data.ticket.count && data.ticket.count > 5 + 5}
           <button
             class="btn text-primary bg-lightprimary d-block m-auto"
             class:disabled="{loadMoreLoading}"
@@ -226,34 +226,31 @@
 <script context="module">
   import { writable } from "svelte/store";
 
-  import { browser } from "$app/env";
-
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
 
   import { TicketStatuses } from "../../../components/TicketStatus.svelte";
 
-  let refreshable = false;
-
-  async function loadTicket(id) {
+  async function loadTicket({ id, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post("panel/initPage/ticket/detail", {
-        id: parseInt(id),
-      })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            const ticket = response.data.ticket;
+      ApiUtil.post({
+        path: "/api/panel/initPage/ticket/detail",
+        body: {
+          id: parseInt(id),
+        },
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          const ticket = body.ticket;
 
-            resolve(ticket);
-          } else if (response.data.result === "error") {
-            const errorCode = response.data.error;
+          ticket.id = parseInt(id);
 
-            reject(errorCode, response.data);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+          resolve(ticket);
+        } else {
+          reject(body);
+        }
+      });
     });
   }
 
@@ -277,48 +274,10 @@
   //   });
   // }
 
-  async function initData(id) {
-    return new Promise((resolvePromise, rejectPromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        loadTicket(id)
-          .then((data) => {
-            data.id = id;
-
-            resolvePromise(data);
-          })
-          .catch((errorCode, data) => {
-            if (errorCode === "NOT_EXISTS") {
-              resolve();
-            } else {
-              reject();
-            }
-
-            rejectPromise(errorCode, data);
-          });
-      });
-    });
-  }
-
-  // async function initCategories() {
-  //   return new Promise((resolvePromise, rejectPromise) => {
-  //     showNetworkErrorOnCatch((resolve, reject) => {
-  //       loadCategories()
-  //         .then((data) => {
-  //           resolvePromise(data);
-  //         })
-  //         .catch((errorCode, data) => {
-  //           reject();
-  //
-  //           rejectPromise(errorCode, data);
-  //         });
-  //     });
-  //   });
-  // }
-
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, session }) {
+  export async function load(request) {
     let output = {
       props: {
         data: {
@@ -336,38 +295,21 @@
       },
     };
 
-    if (
-      page.path === session.loadedPath &&
-      !refreshable &&
-      !!session.data &&
-      session.data.error === "NOT_EXISTS"
-    )
-      return null;
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
 
-    if (browser && (page.path !== session.loadedPath || refreshable)) {
-      // from another page
-      await initData(parseInt(page.params.id))
-        .then((ticket) => {
-          output.props.data.ticket = ticket;
-        })
-        .catch((errorCode) => {
-          if (!!errorCode && errorCode === "NOT_EXISTS") {
-            return null;
-          }
-        });
+      return output;
     }
 
-    // if (browser)
-    //   await initCategories().then((data) => {
-    //     output.props.data = { ...output.props.data, ...data };
-    //   });
-
-    if (page.path === session.loadedPath && !refreshable) {
-      if (browser) refreshable = true;
-
-      output.props.data.ticket = session.data.ticket;
-      output.props.data.ticket.id = parseInt(page.params.id);
-    }
+    await loadTicket({ id: request.page.params.id, request })
+      .then((body) => {
+        output.props.data.ticket = body;
+      })
+      .catch((body) => {
+        if (body.error === "NOT_EXISTS") {
+          output = null;
+        }
+      });
 
     return output;
   }
@@ -376,6 +318,7 @@
 <script>
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
+  import { session, page } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
   import { extractContent } from "$lib/text.util";
@@ -394,8 +337,27 @@
 
   export let data;
 
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadTicket({ id: $page.params.id, CSRFToken: $session.CSRFToken })
+        .then((loadedData) => {
+          data.ticket = loadedData;
+
+          resolve();
+        })
+        .catch((body) => {
+          if (body.error === "NOT_EXISTS") {
+            goto(base + "/error-404");
+
+            resolve();
+          } else {
+            reject();
+          }
+        });
+    }, true);
+  }
+
   let messagesSectionDiv;
-  let page = 0;
   let loadMoreLoading = false;
   let messageSendLoading = false;
 
@@ -408,18 +370,22 @@
     loadMoreLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/ticket/detail/message/page", {
-        id: parseInt(data.ticket.id),
-        last_message_id: data.ticket.messages[0].id,
+      ApiUtil.post({
+        path: "/api/panel/ticket/detail/message/page",
+        body: {
+          id: parseInt(data.ticket.id),
+          last_message_id: data.ticket.messages[0].id,
+        },
+        CSRFToken: $session.CSRFToken,
       })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            response.data.messages.reverse().forEach((message) => {
+        .then((body) => {
+          if (body.result === "ok") {
+            body.messages.reverse().forEach((message) => {
               data.ticket.messages = data.ticket.messages.unshift(message);
             });
 
             loadMoreLoading = false;
-          } else if (response.data.error === "NOT_EXISTS") {
+          } else if (body.error === "NOT_EXISTS") {
             goto(base + "/error-404");
           } else reject();
         })
@@ -433,22 +399,24 @@
     messageSendLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/ticket/detail/message/send", {
-        ticket_id: parseInt(data.ticket.id),
-        message: messageText,
+      ApiUtil.post({
+        path: "/api/panel/ticket/detail/message/send",
+        body: {
+          ticket_id: parseInt(data.ticket.id),
+          message: messageText,
+        },
+        CSRFToken: $session.CSRFToken,
       })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            data.ticket.messages = data.ticket.messages.push(
-              response.data.message
-            );
+        .then((body) => {
+          if (body.result === "ok") {
+            data.ticket.messages = data.ticket.messages.push(body.message);
 
             data.ticket.status = TicketStatuses.REPLIED;
             messageText = "";
             // quill.setHTML("");
 
             messageSendLoading = false;
-          } else if (response.data.error === "NOT_EXISTS") {
+          } else if (body.error === "NOT_EXISTS") {
             goto(base + "/error-404");
           } else reject();
         })
@@ -463,7 +431,7 @@
   });
 
   setDeleteTicketModalCallback(() => {
-    goto("/tickets");
+    goto(base + "/tickets");
   });
 
   messagesSectionClientHeight.subscribe((height) => {

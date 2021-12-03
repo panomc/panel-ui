@@ -21,37 +21,57 @@
 </div>
 
 <script context="module">
-  import ApiUtil from "$lib/api.util";
-  import { API_URL } from "$lib/variables";
-
   import {
-    getBasicData,
     initializeBasicData,
     networkErrorCallbacks,
     showNetworkErrorOnCatch,
     notLoggedIn,
   } from "$lib/store";
 
+  import ApiUtil, { NETWORK_ERROR } from "$lib/api.util";
+
+  function getBasicData({ request, CSRFToken }) {
+    return new Promise((resolve, reject) => {
+      ApiUtil.get({ path: "/api/panel/basicData", request, CSRFToken })
+        .then((body) => {
+          if (body.result === "ok") {
+            initializeBasicData(body);
+
+            resolve(body);
+          } else {
+            reject(body);
+          }
+        })
+        .catch(() => {
+          reject(NETWORK_ERROR);
+        });
+    });
+  }
+
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ session }) {
-    ApiUtil.init(API_URL);
+  export async function load(request) {
+    const output = {
+      stuff: {},
+    };
 
-    if (session.basicData.result === "ok") {
-      initializeBasicData(session.basicData);
+    if (request.session.basicData.result === "ok") {
+      initializeBasicData(request.session.basicData);
     } else {
-      if (session.basicData.error === "NOT_LOGGED_IN") {
+      if (request.session.basicData.error === "NOT_LOGGED_IN") {
         notLoggedIn.set(true);
       }
 
+      output.stuff.NETWORK_ERROR = true;
+
       showNetworkErrorOnCatch((resolve, reject) => {
-        getBasicData()
+        getBasicData({ request })
           .then(() => {
             resolve();
           })
-          .catch((errorCode) => {
-            if (errorCode === "NOT_LOGGED_IN") {
+          .catch((body) => {
+            if (body.error === "NOT_LOGGED_IN") {
               notLoggedIn.set(true);
             }
 
@@ -60,7 +80,7 @@
       }, true);
     }
 
-    return {};
+    return output;
   }
 </script>
 

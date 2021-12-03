@@ -1,7 +1,6 @@
 import { get, writable } from "svelte/store";
 
 import { PanelSidebarStorageUtil } from "$lib/storage.util";
-import { ApiUtil, NETWORK_ERROR } from "$lib/api.util";
 
 export const networkErrorCallbacks = writable([]);
 export const retryingNetworkErrors = writable(false);
@@ -43,28 +42,6 @@ export function setSidebarTabsState(state) {
   sidebarTabsState.set(state);
 
   PanelSidebarStorageUtil.setSidebarTabsState(state);
-}
-
-export function getBasicData() {
-  return new Promise((resolve, reject) => {
-    ApiUtil.get("panel/basicData")
-      .then((response) => {
-        if (response.data.result === "ok") {
-          initializeBasicData(response.data);
-
-          resolve(response);
-        } else if (response.data.result === "error") {
-          const errorCode = response.data.error;
-
-          reject(errorCode);
-        } else {
-          reject(NETWORK_ERROR);
-        }
-      })
-      .catch(() => {
-        reject(NETWORK_ERROR);
-      });
-  });
 }
 
 export function showNetworkErrorOnCatch(callback, isErrorAlready = false) {

@@ -13,12 +13,14 @@
     class="animate__animated animate__bounce animate__infinite animate__slower"
     alt="Pano"
     src="{base + '/assets/img/Slimeball.webp'}"
-    width="32" />
+    width="32"
+  />
 
   {#if networkErrors}
     <div
       class="pt-4 d-flex flex-column
-      justify-content-center align-items-center text-center">
+      justify-content-center align-items-center text-center"
+    >
       {#if $notLoggedIn}
         <p class="text-danger">
           Panele erişmek için lütfen <a
@@ -34,7 +36,8 @@
         class="btn btn-link bg-lightprimary btn-sm"
         on:click="{onResumeClick}"
         class:disabled="{$retryingNetworkErrors}"
-        disabled="{$retryingNetworkErrors}">
+        disabled="{$retryingNetworkErrors}"
+      >
         {$retryingNetworkErrors ? "Yenileniyor..." : "Yenile"}
       </button>
     </div>

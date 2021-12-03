@@ -12,7 +12,8 @@
       <a
         class="btn btn-primary ml-auto"
         role="button"
-        href="{base}/posts/create-post">
+        href="{base}/posts/create-post"
+      >
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
       </a>
@@ -42,14 +43,16 @@
               class:active="{data.pageType === PageTypes.PUBLISHED}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/posts/published">
+              href="{base}/posts/published"
+            >
               Yayınlanmış
             </a>
             <a
               class:active="{data.pageType === PageTypes.DRAFT}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/posts/draft">
+              href="{base}/posts/draft"
+            >
               Taslak
             </a>
 
@@ -57,7 +60,8 @@
               class:active="{data.pageType === PageTypes.TRASH}"
               class="btn btn-sm btn-outline-light btn-link text-danger"
               role="button"
-              href="{base}/posts/trash">
+              href="{base}/posts/trash"
+            >
               Çöp
             </a>
           </div>
@@ -67,7 +71,8 @@
       <!-- No Posts -->
       {#if data.posts_count === 0}
         <div
-          class="container text-center animate__animated animate__headShake animate__slower">
+          class="container text-center animate__animated animate__headShake animate__slower"
+        >
           <i class="fas fa-sticky-note fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -97,16 +102,19 @@
                         data-toggle="dropdown"
                         href="javascript:void(0);"
                         id="postAction"
-                        title="Eylemler">
+                        title="Eylemler"
+                      >
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div
                         aria-labelledby="postAction"
-                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
+                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast"
+                      >
                         <a
                           class="dropdown-item"
                           target="_blank"
-                          href="/preview/post/{post.id}">
+                          href="/preview/post/{post.id}"
+                        >
                           <i class="fas fa-eye text-primary mr-1"></i>
                           Görüntüle
                         </a>
@@ -116,7 +124,8 @@
                             href="javascript:void(0);"
                             on:click="{onMoveToDraft(post.id)}"
                             class:disabled="{buttonsLoading}"
-                            disabled="{buttonsLoading}">
+                            disabled="{buttonsLoading}"
+                          >
                             <span>
                               <i class="fas fa-bookmark text-primary mr-1"></i>
                               Taslaklara Taşı
@@ -130,7 +139,8 @@
                             href="javascript:void(0);"
                             class:disabled="{buttonsLoading}"
                             disabled="{buttonsLoading}"
-                            on:click="{onPublishClick(post.id)}">
+                            on:click="{onPublishClick(post.id)}"
+                          >
                             <span>
                               <i class="fas fa-globe-americas text-primary mr-1"
                               ></i>
@@ -144,7 +154,8 @@
                           data-target="#confirmDeletePost"
                           data-toggle="modal"
                           href="javascript:void(0);"
-                          on:click="{onDeletePostClick(post)}">
+                          on:click="{onDeletePostClick(post)}"
+                        >
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
                         </a>
@@ -154,7 +165,8 @@
                   <td class="align-middle text-nowrap">
                     <a
                       href="{base + '/posts/post/' + post.id}"
-                      title="Yazıyı Düzenle">
+                      title="Yazıyı Düzenle"
+                    >
                       {post.title}
                     </a>
                   </td>
@@ -166,7 +178,8 @@
                         class:px-0="{post.category.title === '-'}"
                         style="{post.category.title === '-'
                           ? ''
-                          : 'background: #' + post.category.color}">
+                          : 'background: #' + post.category.color}"
+                      >
                         {post.category.title === "-"
                           ? "Kategorisiz"
                           : post.category.title}
@@ -179,13 +192,15 @@
                       use:tooltip="{[
                         post.writer.username,
                         { placement: 'top' },
-                      ]}">
+                      ]}"
+                    >
                       <img
                         alt="{post.writer.username}"
                         class="rounded-circle border"
                         height="32"
                         src="https://minotar.net/avatar/{post.writer.username}"
-                        width="32" />
+                        width="32"
+                      />
                     </a>
                   </td>
                   <td class="align-middle text-nowrap">{post.views}</td>
@@ -204,7 +219,8 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
+      />
       <!-- Pagination End -->
     </div>
   </div>
@@ -213,15 +229,10 @@
 <ConfirmDeletePostModal />
 
 <script context="module">
-  import { browser } from "$app/env";
-  import { base } from "$app/paths";
-
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
 
   import { StatusTypes as PostStatusTypes } from "./_PostEditor.svelte";
-
-  let refreshable = false;
 
   export const PageTypes = Object.freeze({
     PUBLISHED: "published",
@@ -239,48 +250,27 @@
       : PostStatusTypes.TRASH;
   }
 
-  async function loadData(page, pageType) {
+  async function loadData({ page, pageType, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post("panel/initPage/postPage", {
-        page: parseInt(page),
-        page_type: getStatusFromPageType(pageType),
-      })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            const data = response.data;
+      ApiUtil.post({
+        path: "/api/panel/initPage/postPage",
+        body: {
+          page: parseInt(page),
+          page_type: getStatusFromPageType(pageType),
+        },
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          const data = body;
 
-            resolve(data);
-          } else if (response.data.result === "error") {
-            const errorCode = response.data.error;
+          data.page = parseInt(page);
+          data.pageType = pageType;
 
-            reject(errorCode, response.data);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  }
-
-  async function initData(page, pageType) {
-    return new Promise((resolvePromise, rejectPromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        loadData(page, pageType)
-          .then((data) => {
-            data.page = parseInt(page);
-            data.pageType = pageType;
-
-            resolvePromise(data);
-          })
-          .catch((errorCode, data) => {
-            if (errorCode === "PAGE_NOT_FOUND") {
-              resolve();
-            } else {
-              reject();
-            }
-
-            rejectPromise(errorCode, data);
-          });
+          resolve(data);
+        } else {
+          reject(body);
+        }
       });
     });
   }
@@ -288,7 +278,7 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, session }, pageType = DefaultPageType) {
+  export async function load(request, pageType = DefaultPageType) {
     let output = {
       props: {
         data: {
@@ -300,40 +290,19 @@
       },
     };
 
-    if (
-      page.path === session.loadedPath &&
-      !refreshable &&
-      !!session.data &&
-      session.data.error === "PAGE_NOT_FOUND"
-    )
-      return null;
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
 
-    if (browser && (page.path !== session.loadedPath || refreshable)) {
-      // from another page
-      await initData(
-        !!page.params.page ? parseInt(page.params.page) : 1,
-        pageType
-      )
-        .then((data) => {
-          output.props.data = { ...output.props.data, ...data };
-        })
-        .catch((errorCode) => {
-          if (!!errorCode && errorCode === "PAGE_NOT_FOUND") {
-            return null;
-          }
-        });
+      return output;
     }
 
-    if (page.path === session.loadedPath && !refreshable) {
-      if (browser) refreshable = true;
-
-      output.props.data = { ...output.props.data, ...session.data };
-
-      output.props.data.page = !!page.params.page
-        ? parseInt(page.params.page)
-        : 1;
-      output.props.data.pageType = pageType;
-    }
+    await loadData({ page: request.page.params.page || 1, pageType, request })
+      .then((data) => {
+        output.props.data = { ...output.props.data, ...data };
+      })
+      .catch((body) => {
+        if (body.error === "PAGE_NOT_FOUND") output = null;
+      });
 
     return output;
   }
@@ -341,6 +310,8 @@
 
 <script>
   import { goto } from "$app/navigation";
+  import { page, session } from "$app/stores";
+  import { base } from "$app/paths";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -355,6 +326,30 @@
 
   export let data;
 
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadData({
+        page: $page.params.page || 1,
+        pageType: data.pageType,
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((loadedData) => {
+          data = loadedData;
+
+          resolve();
+        })
+        .catch((body) => {
+          if (body.error === "PAGE_NOT_FOUND") {
+            goto(base + "/error-404");
+
+            resolve();
+          } else {
+            reject();
+          }
+        });
+    }, true);
+  }
+
   let buttonsLoading = false;
 
   function refreshBrowserPage() {
@@ -365,9 +360,13 @@
     buttonsLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/post/moveDraft", { id })
-        .then((response) => {
-          if (response.data.result === "ok") {
+      ApiUtil.post({
+        path: "/api/panel/post/moveDraft",
+        body: { id },
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
             buttonsLoading = false;
 
             reloadData();
@@ -385,9 +384,13 @@
     buttonsLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/post/onlyPublish", { id })
-        .then((response) => {
-          if (response.data.result === "ok") {
+      ApiUtil.post({
+        path: "/api/panel/post/onlyPublish",
+        body: { id },
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
             buttonsLoading = false;
 
             goto(base + "/posts");
@@ -403,7 +406,7 @@
 
   function reloadData(page = data.page, pageType = data.pageType) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData(page, pageType)
+      loadData({ page, pageType, CSRFToken: $session.CSRFToken })
         .then((loadedData) => {
           resolve();
 
@@ -411,13 +414,10 @@
             goto(base + "/posts/" + data.pageType + "/" + page);
           } else {
             data = loadedData;
-
-            data.page = page;
-            data.pageType = pageType;
           }
         })
-        .catch((errorCode) => {
-          if (!!errorCode && errorCode === "PAGE_NOT_FOUND") {
+        .catch((body) => {
+          if (body.error === "PAGE_NOT_FOUND") {
             resolve();
 
             reloadData(page - 1);

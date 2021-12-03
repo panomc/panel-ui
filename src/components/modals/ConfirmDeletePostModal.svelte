@@ -72,6 +72,8 @@
 </script>
 
 <script>
+  import { session } from "$app/stores";
+
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
@@ -85,14 +87,17 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post(
-        "panel/post/" + (get(post).status === 0 ? "delete" : "moveTrash"),
-        {
+      ApiUtil.post({
+        path:
+          "/api/panel/post/" +
+          (get(post).status === 0 ? "delete" : "moveTrash"),
+        body: {
           id: get(post).id,
-        }
-      )
-        .then((response) => {
-          if (response.data.result === "ok") {
+        },
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
             loading = false;
 
             hide();

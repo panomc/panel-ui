@@ -74,6 +74,8 @@
   import jquery from "jquery";
   import { writable, get } from "svelte/store";
 
+  import { session } from "$app/stores";
+
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
@@ -120,10 +122,13 @@
     loading.set(true);
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.get("panel/permission/groups")
-        .then((response) => {
-          if (response.data.result === "ok") {
-            permissionGroups.set(response.data.permissionGroups);
+      ApiUtil.get({
+        path: "/api/panel/permission/groups",
+        CSRFToken: get(session).CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
+            permissionGroups.set(body.permissionGroups);
             loading.set(false);
 
             resolve();
@@ -145,9 +150,13 @@
     submitLoading.set(true);
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/player/set/permissionGroup", get(player))
-        .then((response) => {
-          if (response.data.result === "ok") {
+      ApiUtil.post({
+        path: "/api/panel/player/set/permissionGroup",
+        body: get(player),
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
             submitLoading.set(false);
 
             hide();
@@ -155,10 +164,10 @@
             callback(get(player));
 
             resolve();
-          } else if (response.data.result === "NOT_EXISTS") {
+          } else if (body.result === "NOT_EXISTS") {
             refreshBrowserPage();
-          } else if (!!response.data.error) {
-            errors.set(response.data.error);
+          } else if (body.error) {
+            errors.set(body.error);
 
             resolve();
           } else reject();

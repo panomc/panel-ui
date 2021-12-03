@@ -7,7 +7,8 @@
         class:invisible="{$isSidebarOpen}"
         href="javascript:void(0);"
         title="Menüyü Aç/Kapa"
-        on:click="{onSideBarCollapseClick}">
+        on:click="{onSideBarCollapseClick}"
+      >
         <i class="fas fa-bars"></i>
       </a>
     </li>
@@ -15,7 +16,8 @@
       <a
         href="javascript:void(0);"
         target="_blank"
-        class="btn btn-link border-lightprimary text-secondary">
+        class="btn btn-link border-lightprimary text-secondary"
+      >
         <i class="fas fa-store d-lg-none d-inline"></i>
         <span class="d-lg-inline d-none">Web Market</span>
       </a>
@@ -33,7 +35,8 @@
         data-toggle="dropdown"
         href="javascript:void(0);"
         role="button"
-        title="Bildirimler">
+        title="Bildirimler"
+      >
         {#if $notificationsCount !== 0}
           <div class="unread-badge"></div>
         {/if}
@@ -42,7 +45,8 @@
 
       <div
         class="dropdown-menu animate__animated animate__zoomIn animate__fast dropdown-menu-right
-        notifications">
+        notifications"
+      >
         <h6 class="dropdown-header">
           Bildirimler {$notificationsCount === 0
             ? ""
@@ -54,7 +58,8 @@
             <a
               href="javascript:void(0);"
               class="dropdown-item d-flex flex-row border-bottom py-2"
-              class:notification-unread="{notification.status === 'NOT_READ'}">
+              class:notification-unread="{notification.status === 'NOT_READ'}"
+            >
               <div class="col-auto pl-0">
                 <i class="fas fa-dot-circle text-primary"></i>
               </div>
@@ -70,7 +75,8 @@
 
         {#if quickNotifications.length === 0 && !notificationsLoading}
           <div
-            class="d-flex flex-column align-items-center justify-content-center">
+            class="d-flex flex-column align-items-center justify-content-center"
+          >
             <i class="fas fa-bell text-glass m-3"></i>
             <p class="text-gray">Bildirim yok.</p>
           </div>
@@ -81,15 +87,16 @@
           <div class="d-flex justify-content-center m-3">
             <div
               class="spinner-border spinner-border-sm text-primary"
-              role="status">
-            </div>
+              role="status"
+            ></div>
           </div>
         {/if}
 
         <a
           class="dropdown-item text-primary font-weight-bolder text-center small
           pt-2"
-          href="{base}/notifications">
+          href="{base}/notifications"
+        >
           Tümünü Görüntüle
         </a>
       </div>
@@ -102,21 +109,25 @@
         class="icon-link nav-link p-1"
         data-toggle="dropdown"
         href="javascript:void(0);"
-        title="Oturum">
+        title="Oturum"
+      >
         <img
           src="https://minotar.net/avatar/{$user.username}"
           width="32"
           height="32"
           class="border rounded-circle"
-          alt="{$user.username}" />
+          alt="{$user.username}"
+        />
       </a>
       <div
-        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
+        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast"
+      >
         <ul class="nav flex-column">
           <li class="nav-item">
             <a
               class="nav-link text-primary"
-              href="{base}/players/player/{$user.username}">
+              href="{base}/players/player/{$user.username}"
+            >
               <i class="fas fa-user mr-1"></i>
               {$user.username}
             </a>
@@ -125,7 +136,8 @@
             <a
               class="nav-link"
               href="javascript:void(0);"
-              on:click="{onLogout}">
+              on:click="{onLogout}"
+            >
               <i class="fas fa-sign-out-alt mr-1"></i>
               Çıkış Yap
             </a>
@@ -143,8 +155,9 @@
 
   import { base } from "$app/paths";
   import { browser } from "$app/env";
+  import { session } from "$app/stores";
 
-  import { ApiUtil } from "$lib/api.util";
+  import ApiUtil from "$lib/api.util";
   import {
     toggleSidebar,
     notificationsCount,
@@ -181,7 +194,7 @@
     logoutLoading.set(true);
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("auth/logout", {})
+      ApiUtil.post({ path: "auth/logout", CSRFToken: $session.CSRFToken })
         .then(() => {
           window.location.href = "/";
 
@@ -225,12 +238,15 @@
 
   function getQuickNotificationsAndRead(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.get("panel/quickNotificationsAndRead")
-        .then((response) => {
+      ApiUtil.get({
+        path: "/api/panel/quickNotificationsAndRead",
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
           if (quickNotificationProcessID === id) {
-            if (response.data.result === "ok") {
-              setNotifications(response.data.notifications);
-              notificationsCount.set(response.data.notifications_count);
+            if (body.result === "ok") {
+              setNotifications(body.notifications);
+              notificationsCount.set(body.notifications_count);
 
               notificationsLoading = false;
             }
@@ -252,11 +268,14 @@
 
   function getQuickNotifications(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.get("panel/quickNotifications")
-        .then((response) => {
+      ApiUtil.get({
+        path: "/api/panel/quickNotifications",
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
           if (quickNotificationProcessID === id) {
-            if (response.data.result === "ok") {
-              notificationsCount.set(response.data.notifications_count);
+            if (body.result === "ok") {
+              notificationsCount.set(body.notifications_count);
             }
 
             setTimeout(() => {

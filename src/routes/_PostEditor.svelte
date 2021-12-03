@@ -13,7 +13,8 @@
           ? '/draft'
           : ''}"
         class="btn btn-link"
-        role="button">
+        role="button"
+      >
         <i class="fas fa-arrow-left mr-1"></i>
         Yazılar
       </a>
@@ -23,7 +24,8 @@
         <button
           class="btn btn-link text-danger"
           type="button"
-          on:click="{showDeletePostModal(data.post)}">
+          on:click="{showDeletePostModal(data.post)}"
+        >
           <i class="fas fa-trash"></i>
         </button>
       {/if}
@@ -33,7 +35,8 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{onDraftClick}">
+          on:click="{onDraftClick}"
+        >
           <i class="fas fa-bookmark"></i>
           <span class="d-md-inline d-none ml-1">Taslaklara Taşı</span>
         </button>
@@ -42,7 +45,8 @@
         class="btn btn-link"
         role="button"
         target="_blank"
-        href="/preview/post/{data.post.id}">
+        href="/preview/post/{data.post.id}"
+      >
         <i class="fas fa-eye"></i>
         <span class="d-md-inline d-none ml-1">Görüntüle</span>
       </a>
@@ -55,11 +59,13 @@
         disabled="{loading ||
           extractContent(data.post.text).length === 0 ||
           data.post.title.length === 0}"
-        on:click="{onSubmit}">
+        on:click="{onSubmit}"
+      >
         <span
           >{data.post.status === StatusTypes.PUBLISHED
             ? "Güncelle"
-            : "Yayınla"}</span>
+            : "Yayınla"}</span
+        >
       </button>
     </div>
   </section>
@@ -74,7 +80,8 @@
             class="form-control form-control-lg display-3 mb-2"
             type="text"
             placeholder="Yazı Başlığı"
-            bind:value="{data.post.title}" />
+            bind:value="{data.post.title}"
+          />
 
           <div class="align-selft-center w-100 h-75">
             <!-- Editor -->
@@ -154,7 +161,8 @@
             {:else}
               <select
                 class="form-control form-control-sm mb-3"
-                bind:value="{data.post.category}">
+                bind:value="{data.post.category}"
+              >
                 <option class="text-primary" value="-1">Kategorisiz</option>
 
                 {#each data.categories as category, index (category)}
@@ -166,7 +174,8 @@
           <button
             class="btn btn-link btn-block bg-lightprimary"
             type="button"
-            on:click="{onCreateCategoryClick}">
+            on:click="{onCreateCategoryClick}"
+          >
             <i class="fas fa-plus mr-1"></i>
             Kategori Oluştur
           </button>
@@ -182,12 +191,14 @@
             href="javascript:void(0);"
             data-target="#setPostThumbnailModal"
             data-toggle="modal"
-            class="form-group">
+            class="form-group"
+          >
             <img
               src="{base}/assets/img/vanilla.png"
               class="border rounded img-fluid"
               title="Küçük Resim"
-              alt="Küçük Resim" />
+              alt="Küçük Resim"
+            />
           </a>
         </div>
       </div>
@@ -200,12 +211,7 @@
 <PostCategoriesAddEditModal />
 
 <script context="module">
-  import { browser } from "$app/env";
-
   import ApiUtil from "$lib/api.util";
-  import { showNetworkErrorOnCatch } from "$lib/store";
-
-  let refreshable = false;
 
   export const Modes = Object.freeze({
     EDIT: "edit",
@@ -220,82 +226,41 @@
 
   export const DefaultMode = Modes.CREATE;
 
-  async function loadPost(id) {
+  async function loadPost({ id, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post("panel/initPage/editPost", {
-        id: parseInt(id),
-      })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            const post = response.data.post;
+      ApiUtil.post({
+        path: "/api/panel/initPage/editPost",
+        body: {
+          id: parseInt(id),
+        },
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          const data = body;
 
-            resolve(post);
-          } else if (response.data.result === "error") {
-            const errorCode = response.data.error;
+          data.id = parseInt(id);
 
-            reject(errorCode, response.data);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  }
-
-  async function loadCategories() {
-    return new Promise((resolve, reject) => {
-      ApiUtil.get("panel/post/category/categories")
-        .then((response) => {
-          if (response.data.result === "ok") {
-            const data = response.data;
-
-            resolve(data);
-          } else if (response.data.result === "error") {
-            const errorCode = response.data.error;
-
-            reject(errorCode, response.data);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  }
-
-  async function initData(id) {
-    return new Promise((resolvePromise, rejectPromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        loadPost(id)
-          .then((data) => {
-            data.id = id;
-
-            resolvePromise(data);
-          })
-          .catch((errorCode, data) => {
-            if (errorCode === "POST_NOT_FOUND") {
-              resolve();
-            } else {
-              reject();
-            }
-
-            rejectPromise(errorCode, data);
-          });
+          resolve(data);
+        } else {
+          reject(body);
+        }
       });
     });
   }
 
-  async function initCategories() {
-    return new Promise((resolvePromise, rejectPromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        loadCategories()
-          .then((data) => {
-            resolvePromise(data);
-          })
-          .catch((errorCode, data) => {
-            reject();
-
-            rejectPromise(errorCode, data);
-          });
+  async function loadCategories({ request, CSRFToken }) {
+    return new Promise((resolve, reject) => {
+      ApiUtil.get({
+        path: "/api/panel/post/category/categories",
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          resolve(body);
+        } else {
+          reject(body);
+        }
       });
     });
   }
@@ -303,7 +268,7 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, session }, mode = DefaultMode) {
+  export async function load(request, mode = DefaultMode) {
     let output = {
       props: {
         data: {
@@ -324,38 +289,26 @@
       },
     };
 
-    if (
-      page.path === session.loadedPath &&
-      !refreshable &&
-      !!session.data &&
-      session.data.error === "POST_NOT_FOUND"
-    )
-      return null;
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
 
-    if (browser && (page.path !== session.loadedPath || refreshable)) {
-      // from another page
-      if (mode === Modes.EDIT)
-        await initData(parseInt(page.params.id))
-          .then((post) => {
-            output.props.data.post = post;
-          })
-          .catch((errorCode) => {
-            if (!!errorCode && errorCode === "POST_NOT_FOUND") {
-              return null;
-            }
-          });
+      return output;
     }
 
-    if (browser)
-      await initCategories().then((data) => {
-        output.props.data = { ...output.props.data, ...data };
+    if (mode === Modes.EDIT) {
+      await loadPost({ id: request.page.params.id || -1, request })
+        .then(async (body) => {
+          output.props.data.post = body.post;
+        })
+        .catch((body) => {
+          if (body.error === "POST_NOT_FOUND") output = null;
+        });
+    }
+
+    if (output !== null)
+      await loadCategories({ request }).then((body) => {
+        output.props.data = { ...output.props.data, ...body };
       });
-
-    if (page.path === session.loadedPath && !refreshable) {
-      if (browser) refreshable = true;
-
-      output.props.data.post = session.data.post;
-    }
 
     return output;
   }
@@ -364,6 +317,9 @@
 <script>
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
+  import { session, page } from "$app/stores";
+
+  import { showNetworkErrorOnCatch } from "$lib/store";
 
   import { extractContent } from "$lib/text.util";
 
@@ -380,6 +336,42 @@
   } from "../components/modals/PostCategoriesAddEditModal.svelte";
 
   export let data;
+
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch(async (resolve, reject) => {
+      if (data.mode === Modes.EDIT) {
+        await loadPost({
+          id: $page.params.id || -1,
+          CSRFToken: $session.CSRFToken,
+        })
+          .then(async (body) => {
+            data.post = body.post;
+
+            resolve();
+          })
+          .catch((body) => {
+            if (body.error === "POST_NOT_FOUND") {
+              resolve();
+
+              goto(base + "/error-404");
+            } else reject();
+          });
+      } else {
+        resolve();
+      }
+
+      showNetworkErrorOnCatch((resolve, reject) => {
+        loadCategories({ CSRFToken: $session.CSRFToken })
+          .then((body) => {
+            data = { ...data, ...body };
+            resolve();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    }, true);
+  }
 
   let loading = false;
   // let quill;
@@ -412,22 +404,26 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/post/publish", data.post)
-        .then((response) => {
-          if (response.data.result === "ok") {
+      ApiUtil.post({
+        path: "/api/panel/post/publish",
+        body: data.post,
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
             loading = false;
 
             if (data.mode === Modes.CREATE) {
-              goto(base + "/posts/post/" + response.data.id);
+              goto(base + "/posts/post/" + body.id);
             }
 
             //TODO: TOAST
 
             resolve();
-          } else if (response.data.result === "error") {
+          } else if (body.result === "error") {
             loading = false;
 
-            data.error = response.data.error;
+            data.error = body.error;
 
             resolve();
           } else reject();
@@ -442,9 +438,13 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/post/moveDraft", data.post)
-        .then((response) => {
-          if (response.data.result === "ok") {
+      ApiUtil.post({
+        path: "/api/panel/post/moveDraft",
+        body: data.post,
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
             loading = false;
 
             goto(base + "/posts/draft");

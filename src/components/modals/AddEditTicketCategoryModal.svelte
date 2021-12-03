@@ -103,6 +103,8 @@
 </script>
 
 <script>
+  import { session } from "$app/stores";
+
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
@@ -112,12 +114,15 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post(
-        "panel/ticket/category/" + (get(mode) === "edit" ? "update" : "add"),
-        get(category)
-      )
-        .then((response) => {
-          if (response.data.result === "ok") {
+      ApiUtil.post({
+        path:
+          "/api/panel/ticket/category/" +
+          (get(mode) === "edit" ? "update" : "add"),
+        body: get(category),
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
             loading = false;
 
             hide();
@@ -125,10 +130,10 @@
             callback(true);
 
             resolve();
-          } else if (response.data.result === "error") {
+          } else if (body.result === "error") {
             loading = false;
 
-            errors.set(response.data.error);
+            errors.set(body.error);
 
             resolve();
           } else reject();

@@ -1,31 +1,44 @@
-import routeDataLoader from "$lib/route-data-loader";
+import cookie from "cookie";
+import * as api from "$lib/api.util.server";
+import {
+  COOKIE_PREFIX,
+  JWT_COOKIE_NAME,
+  CSRF_TOKEN_COOKIE_NAME,
+} from "$lib/variables";
+
+async function fetchBasicData(token) {
+  return api.get("panel/basicData", token);
+}
 
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ request, resolve }) {
-  const routeData = await routeDataLoader(request.headers, request.path);
+  const locals = {};
+  const { path } = request;
 
-  const notAllowed = ["headers"];
+  const cookies = cookie.parse(request.headers.cookie || "");
 
-  request.locals = Object.keys(routeData)
-    .filter((key) => !notAllowed.includes(key))
-    .reduce((object, key) => {
-      object[key] = routeData[key];
+  const jwt = cookies[COOKIE_PREFIX + JWT_COOKIE_NAME];
+  const CSRFToken = cookies[COOKIE_PREFIX + CSRF_TOKEN_COOKIE_NAME];
 
-      return object;
-    }, {});
+  locals.basicData =
+    !path.startsWith("/api/") &&
+    !path.startsWith("/auth/") &&
+    (await fetchBasicData(jwt));
 
-  const response = await resolve(request);
+  locals.jwt = jwt;
+  locals.CSRFToken = CSRFToken;
 
-  return {
-    ...response,
-    headers: {
-      ...response.headers,
-      ...routeData.headers,
-    },
-  };
+  request.locals = locals;
+
+  return await resolve(request);
 }
 
 /** @type {import('@sveltejs/kit').GetSession} */
 export async function getSession({ locals }) {
-  return locals;
+  const { basicData, CSRFToken } = locals;
+
+  return {
+    basicData,
+    CSRFToken,
+  };
 }

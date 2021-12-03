@@ -65,6 +65,8 @@
 </script>
 
 <script>
+  import { session } from "$app/stores";
+
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
@@ -78,9 +80,12 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/notifications/deleteAll")
-        .then((response) => {
-          if (response.data.result === "ok") {
+      ApiUtil.post({
+        path: "/api/panel/notifications/deleteAll",
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
             loading = false;
 
             hide();

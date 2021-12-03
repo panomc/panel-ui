@@ -161,18 +161,23 @@
 
 <script>
   import { servers } from "$lib/store";
-  import { NETWORK_ERROR, ApiUtil } from "$lib/api.util";
+  import { session } from "$app/stores";
+
+  import ApiUtil, { NETWORK_ERROR } from "$lib/api.util";
 
   let serverListLoading = false;
 
   function getServerList() {
     return new Promise((resolve, reject) => {
-      ApiUtil.get("panel/server/list")
-        .then((response) => {
-          if (response.data.result === "ok") {
-            resolve(response);
-          } else if (response.data.result === "error") {
-            const error = response.data.error;
+      ApiUtil.get({
+        path: "/api/panel/server/list",
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
+            resolve(body);
+          } else if (body.result === "error") {
+            const error = body.error;
 
             reject(error);
           } else {
@@ -189,10 +194,10 @@
     serverListLoading = true;
 
     getServerList()
-      .then((response) => {
+      .then((body) => {
         serverListLoading = false;
 
-        servers.set(response.data.servers);
+        servers.set(body.servers);
       })
       .catch(() => {
         serverListLoading = false;

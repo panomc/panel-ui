@@ -5,7 +5,8 @@
     <section class="row justify-content-between align-items-center mb-3">
       <div class="col-md-4 d-flex align-items-center">
         <strong class="text-primary mx-2 animate__animated animate__slideInUp"
-          >2 Güncelleme Mevcut</strong>
+          >2 Güncelleme Mevcut</strong
+        >
       </div>
       <div class="col text-right">
         <button class="btn btn-outline-primary" type="button">
@@ -17,7 +18,8 @@
     <!-- Available Updates -->
     <div class="card">
       <div
-        class="card-body position-relative animate__animated animate__fadeIn">
+        class="card-body position-relative animate__animated animate__fadeIn"
+      >
         <span class="notification"></span>
         <h5 class="card-title">
           <a href="#">Pano 1.2</a>
@@ -48,7 +50,8 @@
 
     <div class="card">
       <div
-        class="card-body position-relative animate__animated animate__fadeIn">
+        class="card-body position-relative animate__animated animate__fadeIn"
+      >
         <span class="notification"></span>
         <h5 class="card-title">
           <a href="#">Sayfalar 1.1</a>

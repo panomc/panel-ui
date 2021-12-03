@@ -13,13 +13,15 @@
         class="ml-auto animated {getListOfChecked($checkedList).length > 0
           ? 'fadeIn'
           : 'fadeOut'}
-      faster">
+      faster"
+      >
         <a
           class="btn btn-outline-bittersweet"
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
-          on:click="{onShowCloseTicketsModalClick}">
+          on:click="{onShowCloseTicketsModalClick}"
+        >
           <i class="fas fa-times mr-1"></i>
           Kapat
         </a>
@@ -28,7 +30,8 @@
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
-          on:click="{onShowDeleteTicketsModalClick}">
+          on:click="{onShowDeleteTicketsModalClick}"
+        >
           <i class="fas fa-trash mr-1"></i>
           Sil
         </a>
@@ -58,21 +61,24 @@
               class="btn btn-sm btn-outline-light btn-link"
               class:active="{data.pageType === PageTypes.ALL}"
               role="button"
-              href="{base}/tickets/all">
+              href="{base}/tickets/all"
+            >
               Tümü
             </a>
             <a
               class="btn btn-sm btn-outline-light btn-link"
               class:active="{data.pageType === PageTypes.WAITING_REPLY}"
               role="button"
-              href="{base}/tickets/waitingReply">
+              href="{base}/tickets/waitingReply"
+            >
               Yeni
             </a>
             <a
               class="btn btn-sm btn-outline-light btn-link text-danger"
               class:active="{data.pageType === PageTypes.CLOSED}"
               role="button"
-              href="{base}/tickets/closed">
+              href="{base}/tickets/closed"
+            >
               Kapalı
             </a>
           </div>
@@ -82,7 +88,8 @@
       <!-- No Tickets -->
       {#if data.tickets_count === 0}
         <div
-          class="container text-center animate__animated animate__headShake animate__slower">
+          class="container text-center animate__animated animate__headShake animate__slower"
+        >
           <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -102,7 +109,8 @@
                         data.tickets,
                         $checkedList
                       )}"
-                      id="selectAll" />
+                      id="selectAll"
+                    />
                     <label class="custom-control-label" for="selectAll"></label>
                   </div>
                 </th>
@@ -123,7 +131,8 @@
                           class="custom-control-input"
                           id="postCheck{ticket.id}"
                           type="checkbox"
-                          bind:checked="{$checkedList[ticket.id]}" />
+                          bind:checked="{$checkedList[ticket.id]}"
+                        />
                         <label
                           class="custom-control-label"
                           for="postCheck{ticket.id}"></label>
@@ -135,19 +144,22 @@
                           aria-haspopup="true"
                           data-toggle="dropdown"
                           href="javascript:void(0);"
-                          id="postAction">
+                          id="postAction"
+                        >
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div
                           aria-labelledby="postAction"
-                          class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
+                          class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast"
+                        >
                           {#if ticket.status !== 3}
                             <a
                               class="dropdown-item"
                               href="javascript:void(0);"
                               on:click="{onShowCloseTicketModalClick(
                                 ticket.id
-                              )}">
+                              )}"
+                            >
                               <i class="fas fa-times mr-1 text-bittersweet"></i>
                               Kapat
                             </a>
@@ -156,9 +168,8 @@
                           <a
                             class="dropdown-item"
                             href="javascript:void(0);"
-                            on:click="{onShowDeleteTicketModalClick(
-                              ticket.id
-                            )}">
+                            on:click="{onShowDeleteTicketModalClick(ticket.id)}"
+                          >
                             <i class="fas fa-trash text-danger mr-1"></i>
                             Sil
                           </a>
@@ -169,7 +180,8 @@
                   <td class="align-middle text-nowrap">
                     <a
                       href="{base}/tickets/ticket/{ticket.id}"
-                      title="Talebi Görüntüle">
+                      title="Talebi Görüntüle"
+                    >
                       #{ticket.id}
                       {ticket.title}
                     </a>
@@ -188,14 +200,16 @@
                       use:tooltip="{[
                         ticket.writer.username,
                         { placement: 'top' },
-                      ]}">
+                      ]}"
+                    >
                       <img
                         src="https://minotar.net/avatar/{ticket.writer
                           .username}/32"
                         alt="Oyuncu Adı"
                         class="rounded-circle border"
                         height="32"
-                        width="32" />
+                        width="32"
+                      />
                     </a>
                   </td>
                   <td class="align-middle text-nowrap">
@@ -213,7 +227,8 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
+      />
     </div>
   </div>
 </article>
@@ -222,13 +237,11 @@
 <ConfirmDeleteTicketModal />
 
 <script context="module">
-  import { browser } from "$app/env";
   import { writable, get } from "svelte/store";
 
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
 
-  let refreshable = false;
   let checkedList = writable([]);
 
   export const PageTypes = Object.freeze({
@@ -247,48 +260,27 @@
       : 3;
   }
 
-  async function loadData(page, pageType) {
+  async function loadData({ page, pageType, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post("panel/initPage/ticketPage", {
-        page: parseInt(page),
-        page_type: getStatusFromPageType(pageType),
-      })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            const data = response.data;
+      ApiUtil.post({
+        path: "/api/panel/initPage/ticketPage",
+        body: {
+          page: parseInt(page),
+          page_type: getStatusFromPageType(pageType),
+        },
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          const data = body;
 
-            resolve(data);
-          } else if (response.data.result === "error") {
-            const errorCode = response.data.error;
+          data.page = parseInt(page);
+          data.pageType = pageType;
 
-            reject(errorCode, response.data);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  }
-
-  async function initData(page, pageType) {
-    return new Promise((resolvePromise, rejectPromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        loadData(page, pageType)
-          .then((data) => {
-            data.page = parseInt(page);
-            data.pageType = pageType;
-
-            resolvePromise(data);
-          })
-          .catch((errorCode, data) => {
-            if (errorCode === "PAGE_NOT_FOUND") {
-              resolve();
-            } else {
-              reject();
-            }
-
-            rejectPromise(errorCode, data);
-          });
+          resolve(data);
+        } else {
+          reject(body);
+        }
       });
     });
   }
@@ -296,7 +288,7 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, session }, pageType = DefaultPageType) {
+  export async function load(request, pageType = DefaultPageType) {
     let output = {
       props: {
         data: {
@@ -304,44 +296,24 @@
           tickets: [],
           total_page: 1,
           page: 1,
+          pageType,
         },
       },
     };
 
-    if (
-      page.path === session.loadedPath &&
-      !refreshable &&
-      !!session.data &&
-      session.data.error === "PAGE_NOT_FOUND"
-    )
-      return null;
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
 
-    if (browser && (page.path !== session.loadedPath || refreshable)) {
-      // from another page
-      await initData(
-        !!page.params.page ? parseInt(page.params.page) : 1,
-        pageType
-      )
-        .then((data) => {
-          output.props.data = { ...output.props.data, ...data };
-        })
-        .catch((errorCode) => {
-          if (!!errorCode && errorCode === "PAGE_NOT_FOUND") {
-            return null;
-          }
-        });
+      return output;
     }
 
-    if (page.path === session.loadedPath && !refreshable) {
-      if (browser) refreshable = true;
-
-      output.props.data = { ...output.props.data, ...session.data };
-
-      output.props.data.page = !!page.params.page
-        ? parseInt(page.params.page)
-        : 1;
-      output.props.data.pageType = pageType;
-    }
+    await loadData({ page: request.page.params.page || 1, pageType, request })
+      .then((data) => {
+        output.props.data = { ...output.props.data, ...data };
+      })
+      .catch((body) => {
+        if (body.error === "PAGE_NOT_FOUND") output = null;
+      });
 
     return output;
   }
@@ -350,6 +322,7 @@
 <script>
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
+  import { page, session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -370,11 +343,35 @@
 
   export let data;
 
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadData({
+        page: $page.params.page || 1,
+        pageType: data.pageType,
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((loadedData) => {
+          data = loadedData;
+
+          resolve();
+        })
+        .catch((body) => {
+          if (body.error === "PAGE_NOT_FOUND") {
+            goto(base + "/error-404");
+
+            resolve();
+          } else {
+            reject();
+          }
+        });
+    }, true);
+  }
+
   let firstLoad = true;
 
   function reloadData(page = data.page, pageType = data.pageType) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData(page, pageType)
+      loadData({ page, pageType, CSRFToken: $session.CSRFToken })
         .then((loadedData) => {
           resolve();
 
@@ -382,13 +379,10 @@
             goto(base + "/tickets/" + data.pageType + "/" + page);
           } else {
             data = loadedData;
-
-            data.page = page;
-            data.pageType = pageType;
           }
         })
-        .catch((errorCode) => {
-          if (!!errorCode && errorCode === "PAGE_NOT_FOUND") {
+        .catch((body) => {
+          if (body.error === "PAGE_NOT_FOUND") {
             resolve();
 
             reloadData(page - 1);

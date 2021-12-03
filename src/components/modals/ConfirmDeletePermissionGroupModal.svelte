@@ -110,6 +110,7 @@
 
 <script>
   import { base } from "$app/paths";
+  import { session } from "$app/stores";
 
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
@@ -125,11 +126,15 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/permission/delete/group", {
-        id: get(permissionGroup).id,
+      ApiUtil.post({
+        path: "/api/panel/permission/delete/group",
+        body: {
+          id: get(permissionGroup).id,
+        },
+        CSRFToken: $session.CSRFToken,
       })
-        .then((response) => {
-          if (response.data.result === "ok") {
+        .then((body) => {
+          if (body.result === "ok") {
             loading = false;
 
             hide();
