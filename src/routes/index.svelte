@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>{getTitle("İstatistikler")}</title>
+</svelte:head>
+
 <!-- Dashboard Page -->
 <div class="container">
   <!-- Welcome Alerts -->
@@ -342,6 +346,7 @@
   import { session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
+  import { getTitle } from "$lib/title.util";
 
   import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
   // import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";

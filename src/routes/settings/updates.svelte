@@ -1,3 +1,11 @@
+<script>
+  import { getTitle } from "$lib/title.util";
+</script>
+
+<svelte:head>
+  <title>{getTitle("Güncellemeler")}</title>
+</svelte:head>
+
 <!-- Updates Sub Page -->
 <div class="tab-pane">
   <div>

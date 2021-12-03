@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>{getTitle("Temalar")}</title>
+</svelte:head>
+
 <!-- Themes Sub Page -->
 <div class="tab-pane">
   <!-- Themes: Current Themes Sub Title -->
@@ -42,6 +46,9 @@
 </div>
 
 <script>
-  import ConfirmDeleteThemeModal from "../../components/modals/ConfirmDeleteThemeModal.svelte";
   import { base } from "$app/paths";
+
+  import { getTitle } from "$lib/title.util";
+
+  import ConfirmDeleteThemeModal from "../../components/modals/ConfirmDeleteThemeModal.svelte";
 </script>

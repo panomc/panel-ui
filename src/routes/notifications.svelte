@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>{getTitle("Bildirimler")}</title>
+</svelte:head>
+
 <div class="container">
   <!-- Action Menu -->
   <div class="row mb-3">
@@ -7,8 +11,7 @@
         <button
           type="button"
           class="btn btn-link text-danger"
-          on:click="{() => onDeleteAllClick()}"
-        >
+          on:click="{() => onDeleteAllClick()}">
           <span class="d-md-inline d-none">Tümünü Sil</span>
         </button>
       </div>
@@ -21,15 +24,13 @@
     <div class="card-body">
       <div
         class="d-flex flex-column justify-content-center align-items-center
-        border rounded"
-      >
+        border rounded">
         {#each $notifications as notification, index (notification)}
           <div class="d-flex flex-row align-items-center w-100 border-bottom">
             <a
               href="javascript:void(0);"
               class="dropdown-item d-flex flex-row py-2"
-              class:notification-unread="{notification.status === 'NOT_READ'}"
-            >
+              class:notification-unread="{notification.status === 'NOT_READ'}">
               <div class="col-auto pl-0">
                 <i class="fas fa-dot-circle text-primary"></i>
               </div>
@@ -43,8 +44,7 @@
             <button
               class="btn btn-link text-danger mx-2"
               use:tooltip="{['Bildirimi Sil', { placement: 'right' }]}"
-              on:click="{deleteNotification(notification.id)}"
-            >
+              on:click="{deleteNotification(notification.id)}">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -52,8 +52,7 @@
 
         {#if $notifications.length === 0}
           <div
-            class="d-flex flex-column align-items-center justify-content-center"
-          >
+            class="d-flex flex-column align-items-center justify-content-center">
             <i class="fas fa-bell fa-3x text-glass m-3"></i>
             <p class="text-gray">Bildirim yok.</p>
           </div>
@@ -167,12 +166,13 @@
   import { session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
+  import { showNetworkErrorOnCatch } from "$lib/store";
+  import { getTitle } from "$lib/title.util";
 
   import ConfirmRemoveAllNotificationsModal, {
     show as showDeleteAllNotificationsModal,
     setCallback as setDeleteAllNotificationsModalCallback,
   } from "../components/modals/ConfirmRemoveAllNotificationsModal.svelte";
-  import { showNetworkErrorOnCatch } from "$lib/store";
 
   export let data;
 

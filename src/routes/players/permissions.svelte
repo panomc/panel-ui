@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>{getTitle("Yetkiler")}</title>
+</svelte:head>
+
 <div class="container">
   <!-- Action Menu -->
   <div class="row justify-content-between align-items-center mb-3">
@@ -291,6 +295,7 @@
   import { session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
+  import { getTitle } from "$lib/title.util";
 
   import AddEditPermGroupModal, {
     show as showPermissionGroupAddEditModal,

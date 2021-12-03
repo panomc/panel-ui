@@ -1,5 +1,8 @@
-<!-- Categories Page -->
+<svelte:head>
+  <title>{getTitle("Yazı Kategorileri")}</title>
+</svelte:head>
 
+<!-- Categories Page -->
 <article class="container">
   <!-- Action Menu -->
   <div class="row justify-content-between align-items-center mb-3">
@@ -203,6 +206,8 @@
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { session, page } from "$app/stores";
+
+  import { getTitle } from "$lib/title.util";
 
   import Pagination from "../components/Pagination.svelte";
 

@@ -1,3 +1,16 @@
+<svelte:head>
+  <title
+    >{getTitle(
+      (data.pageType === PageTypes.PUBLISHED
+        ? "Yayınlanmış" + " "
+        : data.pageType === PageTypes.DRAFT
+        ? "Taslak" + " "
+        : data.pageType === PageTypes.TRASH
+        ? "Çöp" + " "
+        : "") + "Yazılar"
+    )}</title>
+</svelte:head>
+
 <!-- Posts Page -->
 <article class="container">
   <!-- Action Menu -->
@@ -12,8 +25,7 @@
       <a
         class="btn btn-primary ml-auto"
         role="button"
-        href="{base}/posts/create-post"
-      >
+        href="{base}/posts/create-post">
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
       </a>
@@ -43,16 +55,14 @@
               class:active="{data.pageType === PageTypes.PUBLISHED}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/posts/published"
-            >
+              href="{base}/posts/published">
               Yayınlanmış
             </a>
             <a
               class:active="{data.pageType === PageTypes.DRAFT}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/posts/draft"
-            >
+              href="{base}/posts/draft">
               Taslak
             </a>
 
@@ -60,8 +70,7 @@
               class:active="{data.pageType === PageTypes.TRASH}"
               class="btn btn-sm btn-outline-light btn-link text-danger"
               role="button"
-              href="{base}/posts/trash"
-            >
+              href="{base}/posts/trash">
               Çöp
             </a>
           </div>
@@ -71,8 +80,7 @@
       <!-- No Posts -->
       {#if data.posts_count === 0}
         <div
-          class="container text-center animate__animated animate__headShake animate__slower"
-        >
+          class="container text-center animate__animated animate__headShake animate__slower">
           <i class="fas fa-sticky-note fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -102,19 +110,16 @@
                         data-toggle="dropdown"
                         href="javascript:void(0);"
                         id="postAction"
-                        title="Eylemler"
-                      >
+                        title="Eylemler">
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div
                         aria-labelledby="postAction"
-                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast"
-                      >
+                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
                         <a
                           class="dropdown-item"
                           target="_blank"
-                          href="/preview/post/{post.id}"
-                        >
+                          href="/preview/post/{post.id}">
                           <i class="fas fa-eye text-primary mr-1"></i>
                           Görüntüle
                         </a>
@@ -124,8 +129,7 @@
                             href="javascript:void(0);"
                             on:click="{onMoveToDraft(post.id)}"
                             class:disabled="{buttonsLoading}"
-                            disabled="{buttonsLoading}"
-                          >
+                            disabled="{buttonsLoading}">
                             <span>
                               <i class="fas fa-bookmark text-primary mr-1"></i>
                               Taslaklara Taşı
@@ -139,8 +143,7 @@
                             href="javascript:void(0);"
                             class:disabled="{buttonsLoading}"
                             disabled="{buttonsLoading}"
-                            on:click="{onPublishClick(post.id)}"
-                          >
+                            on:click="{onPublishClick(post.id)}">
                             <span>
                               <i class="fas fa-globe-americas text-primary mr-1"
                               ></i>
@@ -154,8 +157,7 @@
                           data-target="#confirmDeletePost"
                           data-toggle="modal"
                           href="javascript:void(0);"
-                          on:click="{onDeletePostClick(post)}"
-                        >
+                          on:click="{onDeletePostClick(post)}">
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
                         </a>
@@ -165,8 +167,7 @@
                   <td class="align-middle text-nowrap">
                     <a
                       href="{base + '/posts/post/' + post.id}"
-                      title="Yazıyı Düzenle"
-                    >
+                      title="Yazıyı Düzenle">
                       {post.title}
                     </a>
                   </td>
@@ -178,8 +179,7 @@
                         class:px-0="{post.category.title === '-'}"
                         style="{post.category.title === '-'
                           ? ''
-                          : 'background: #' + post.category.color}"
-                      >
+                          : 'background: #' + post.category.color}">
                         {post.category.title === "-"
                           ? "Kategorisiz"
                           : post.category.title}
@@ -192,15 +192,13 @@
                       use:tooltip="{[
                         post.writer.username,
                         { placement: 'top' },
-                      ]}"
-                    >
+                      ]}">
                       <img
                         alt="{post.writer.username}"
                         class="rounded-circle border"
                         height="32"
                         src="https://minotar.net/avatar/{post.writer.username}"
-                        width="32"
-                      />
+                        width="32" />
                     </a>
                   </td>
                   <td class="align-middle text-nowrap">{post.views}</td>
@@ -219,8 +217,7 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
       <!-- Pagination End -->
     </div>
   </div>
@@ -314,6 +311,7 @@
   import { base } from "$app/paths";
 
   import tooltip from "$lib/tooltip.util";
+  import { getTitle } from "$lib/title.util";
 
   import Pagination from "../components/Pagination.svelte";
   import Date from "../components/Date.svelte";

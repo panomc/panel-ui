@@ -2,6 +2,10 @@
   @import "../styles/style";
 </style>
 
+<svelte:head>
+  <title>{getTitle()}</title>
+</svelte:head>
+
 {#if showSplash}
   <Splash />
 {/if}
@@ -26,7 +30,7 @@
     networkErrorCallbacks,
     showNetworkErrorOnCatch,
     notLoggedIn,
-    setDefaults
+    setDefaults,
   } from "$lib/store";
 
   import ApiUtil, { NETWORK_ERROR } from "$lib/api.util";
@@ -53,7 +57,7 @@
    * @type {import('@sveltejs/kit').Load}
    */
   export async function load(request) {
-    setDefaults()
+    setDefaults();
 
     const output = {
       stuff: {},
@@ -98,6 +102,7 @@
   }
 
   import { logoutLoading } from "$lib/store";
+  import { getTitle } from "$lib/title.util";
 
   import Splash from "../components/Splash.svelte";
   import Navbar from "../components/Navbar.svelte";

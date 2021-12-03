@@ -1,5 +1,8 @@
-<!-- Ticket Categories Page -->
+<svelte:head>
+  <title>{getTitle("Talep Kategorileri")}</title>
+</svelte:head>
 
+<!-- Ticket Categories Page -->
 <!-- Add / Edit Ticket Category Modal -->
 <AddEditTicketCategoryModal />
 
@@ -194,6 +197,7 @@
     show as showDeleteTicketCategoryModal,
     onHide as onConfirmDeleteTicketCategoryModalHide,
   } from "../components/modals/ConfirmDeleteTicketCategoryModal.svelte";
+  import { getTitle } from "$lib/title.util.js";
 
   export let data;
 

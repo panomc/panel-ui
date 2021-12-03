@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>{getTitle("Website Ayarları")}</title>
+</svelte:head>
+
 <!-- Site Settings Sub Page -->
 <div class="tab-pane">
   <div class="card">
@@ -14,8 +18,7 @@
               aria-describedby="siteTitle"
               class="form-control"
               id="siteTitle"
-              type="text"
-            />
+              type="text" />
           </div>
         </div>
         <div class="form-group row">
@@ -59,8 +62,7 @@
                   class="d-block ml-auto"
                   height="48"
                   src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
-                  width="48"
-                />
+                  width="48" />
               </div>
               <div class="col">
                 <input class="form-control-file" id="siteFavicon" type="file" />
@@ -80,3 +82,7 @@
     </div>
   </div>
 </div>
+
+<script>
+  import { getTitle } from "$lib/title.util";
+</script>

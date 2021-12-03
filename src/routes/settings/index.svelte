@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>{getTitle("Genel Ayarlar")}</title>
+</svelte:head>
+
 <!-- General Settings Sub Page -->
 <div class="tab-pane">
   <div class="card">
@@ -38,3 +42,7 @@
     </div>
   </div>
 </div>
+
+<script>
+  import { getTitle } from "$lib/title.util";
+</script>

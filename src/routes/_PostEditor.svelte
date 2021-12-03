@@ -1,6 +1,9 @@
 <!--<style lang="scss" global>-->
 <!--  @import "node_modules/quill/dist/quill.snow";-->
 <!--</style>-->
+<svelte:head>
+  <title>{getTitle(data.mode === Modes.EDIT ? "Yazıyı Düzenle" : "Yeni Yazı Oluştur")}</title>
+</svelte:head>
 
 <article class="container">
   <!-- Action Menu -->
@@ -320,8 +323,8 @@
   import { session, page } from "$app/stores";
 
   import { showNetworkErrorOnCatch } from "$lib/store";
-
   import { extractContent } from "$lib/text.util";
+  import { getTitle } from "$lib/title.util";
 
   import SetPostThumbnailModal from "../components/modals/SetPostThumbnailModal.svelte";
 

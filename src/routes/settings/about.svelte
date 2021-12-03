@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>{getTitle("Pano Hakkında")}</title>
+</svelte:head>
+
 <!-- About Sup Page -->
 <div class="tab-pane">
   <div class="card">
@@ -12,8 +16,7 @@
             <h5
               aria-describedby="panoVersion"
               class="m-0 text-muted"
-              id="panoVersion"
-            >
+              id="panoVersion">
               1.0
             </h5>
           </div>
@@ -26,8 +29,7 @@
             <h5
               aria-describedby="panoRelease"
               class="m-0 text-muted"
-              id="panoRelease"
-            >
+              id="panoRelease">
               Beta
             </h5>
             <small>Beta sürüm bilinmeyen hatalar içerebilir.</small>
@@ -42,8 +44,7 @@
               aria-describedby="panoWebsite"
               href="https://panocms.com"
               id="panoWebsite"
-              target="_blank"
-            >
+              target="_blank">
               www.panocms.com
             </a>
           </div>
@@ -57,8 +58,7 @@
               aria-describedby="panoWebsite"
               href="https://panocms.com/discord"
               id="panoWebsite"
-              target="_blank"
-            >
+              target="_blank">
               Pano Discord
             </a>
           </div>
@@ -70,8 +70,7 @@
   <div class="card">
     <div class="card-body animate__animated animate__fadeIn">
       <h5
-        class="card-title animate__animated animate__heartBeat animate__slower animate__repeat-2 d-inline-block"
-      >
+        class="card-title animate__animated animate__heartBeat animate__slower animate__repeat-2 d-inline-block">
         Açık Kaynak Lisansları ❤️
       </h5>
 
@@ -99,3 +98,7 @@
     </div>
   </div>
 </div>
+
+<script>
+  import { getTitle } from "$lib/title.util";
+</script>
