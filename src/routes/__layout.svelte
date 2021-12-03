@@ -26,6 +26,7 @@
     networkErrorCallbacks,
     showNetworkErrorOnCatch,
     notLoggedIn,
+    setDefaults
   } from "$lib/store";
 
   import ApiUtil, { NETWORK_ERROR } from "$lib/api.util";
@@ -52,6 +53,8 @@
    * @type {import('@sveltejs/kit').Load}
    */
   export async function load(request) {
+    setDefaults()
+
     const output = {
       stuff: {},
     };

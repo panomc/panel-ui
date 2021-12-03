@@ -30,6 +30,13 @@ export const logoutLoading = writable(false);
 
 export const notLoggedIn = writable(false);
 
+export function setDefaults() {
+  networkErrorCallbacks.set([]);
+  retryingNetworkErrors.set(false);
+  notLoggedIn.set(false);
+  logoutLoading.set(false);
+}
+
 export function toggleSidebar() {
   isSidebarOpen.update((value) => {
     PanelSidebarStorageUtil.savePanelSidebarStorageUtil(!value);
