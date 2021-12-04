@@ -86,7 +86,7 @@
         </div>
       {:else}
         <!-- Posts Table -->
-        <div class="table-responsive animate__animated animate__zoomIn">
+        <div class="table-responsive animate__animated animate__fadeIn">
           <table class="table mb-0">
             <thead>
               <tr>

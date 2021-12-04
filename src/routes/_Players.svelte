@@ -70,7 +70,7 @@
       {:else}
         <!-- Players Table -->
         <div
-          class="table-responsive animate__animated animate__zoomIn animate__faster">
+          class="table-responsive animate__animated animate__fadeIn">
           <table class="table mb-0">
             <thead>
               <tr>
@@ -131,7 +131,7 @@
                       href="{base}/players/player/{player.username}">
                       <img
                         alt="{player.username}"
-                        class="rounded-circle border mr-3"
+                        class="rounded-circle border mr-3 animate__animated animate__zoomIn"
                         height="32"
                         src="https://minotar.net/avatar/{player.username}"
                         width="32" />

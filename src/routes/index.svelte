@@ -8,14 +8,12 @@
   {#if data.getting_started_blocks.welcome_board}
     <div
       class="alert alert-dark bg-minecraft animate__animated animate__pulse animate__repeat-2 mb-3"
-      role="alert"
-    >
+      role="alert">
       <button
         class="close"
         data-dismiss="alert"
         type="button"
-        on:click="{onCloseGettingStartedCard}"
-      >
+        on:click="{onCloseGettingStartedCard}">
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="card-body">
@@ -36,8 +34,7 @@
             <button
               class="btn btn-sm btn-primary"
               data-target="#connectServer"
-              data-toggle="modal"
-            >
+              data-toggle="modal">
               <i class="fas fa-plus mr-2"></i>
               Sunucu Bağla
             </button>
@@ -105,58 +102,54 @@
     </div>
   {/if}
 
-  <div class="row justify-content-between animate__animated animate__zoomIn">
+  <a
+    href="/players"
+    class="row mb-3 justify-content-between animate__animated animate__slideInUp">
     <div class="col-lg-4">
-      <div class="card border-0 bg-transparent">
-        <div class="p-3">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <i class="fas fa-globe fa-2x text-gray d-block mr-5"></i>
-            </div>
-            <div class="col">
-              <h3 class="font-weight-bolder text-primary">12</h3>
-              <span class="text-primary">Çevrimiçi</span>
-            </div>
+      <div class="p-3 text-secondary">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-globe fa-2x d-block mr-3"></i>
+          </div>
+          <div class="col">
+            <h3 class="font-weight-bolder">12</h3>
+            Çevrimiçi
           </div>
         </div>
       </div>
     </div>
     <div class="col-lg-4">
-      <div class="card border-0 bg-transparent">
-        <div class="p-3">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <i class="fas fa-user-plus fa-2x text-gray d-block mr-5"></i>
-            </div>
-            <div class="col">
-              <h3 class="font-weight-bolder text-primary">
-                {data.registered_player_count}
-                <i class="fas fa-caret-up ml-2"></i>
-              </h3>
-              <span class="text-primary">Yeni Kayıt</span>
-            </div>
+      <div class="p-3 text-warning">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-user-plus fa-2x d-block mr-3"></i>
+          </div>
+          <div class="col">
+            <h3 class="font-weight-bolder">
+              {data.registered_player_count}
+              <i class="fas fa-caret-up ml-2"></i>
+            </h3>
+            Yeni Kayıt
           </div>
         </div>
       </div>
     </div>
     <div class="col-lg-4">
-      <div class="card border-0 bg-transparent">
-        <div class="p-3">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <i class="fas fa-users fa-2x text-gray d-block mr-5"></i>
-            </div>
-            <div class="col">
-              <h3 class="font-weight-bolder text-primary">
-                {data.registered_player_count}
-              </h3>
-              <span class="text-primary">Toplam Oyuncu</span>
-            </div>
+      <div class="p-3 text-bittersweet">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-users fa-2x d-block mr-3"></i>
+          </div>
+          <div class="col">
+            <h3 class="font-weight-bolder">
+              {data.registered_player_count}
+            </h3>
+            Toplam Oyuncu
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </a>
 
   <div class="card">
     <div class="card-body">
@@ -194,9 +187,7 @@
       </div>
 
       {#if data.tickets.length === 0}
-        <div
-          class="container text-center animate__animated animate__zoomIn"
-        >
+        <div class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -205,23 +196,20 @@
           {#each data.tickets as ticket, index (ticket)}
             <a
               href="{base}/tickets/ticket/{ticket.id}"
-              class="list-group-item list-group-item-action rounded d-flex flex-row"
-            >
+              class="list-group-item list-group-item-action rounded d-flex flex-row">
               <a href="{base}/players/player/{ticket.writer.username}">
                 <div
                   class="col-auto"
                   use:tooltip="{[
                     ticket.writer.username,
                     { placement: 'bottom' },
-                  ]}"
-                >
+                  ]}">
                   <img
                     src="https://minotar.net/avatar/{ticket.writer.username}"
                     alt="{ticket.writer.username}"
                     width="48"
                     height="48"
-                    class="border rounded-circle"
-                  />
+                    class="border rounded-circle" />
                 </div>
               </a>
               <div class="col">
@@ -247,9 +235,9 @@
 
   <!-- Statistic Table -->
   <div class="card">
-    <div class="card-body animate__animated animate__zoomIn">
+    <div class="card-body">
       <h5 class="card-title">İstatistik</h5>
-      <div class="table-responsive">
+      <div class="table-responsive animate__animated animate__fadeIn">
         <table class="table table-sm m-0">
           <tbody class="text-muted">
             <tr>

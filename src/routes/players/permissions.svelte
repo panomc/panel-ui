@@ -24,7 +24,7 @@
   </div>
 
   <div class="card">
-    <div class="card-body table-responsive">
+    <div class="card-body table-responsive animate__animated animate__fadeIn">
       <table class="table table-borderless">
         <thead>
           <tr class="text-center text-muted align-top">

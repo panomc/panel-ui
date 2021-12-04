@@ -100,7 +100,7 @@
         </div>
       {:else}
         <!-- Tickets Table -->
-        <div class="table-responsive animate__animated animate__zoomIn">
+        <div class="table-responsive animate__animated animate__fadeIn">
           <table class="table mb-0">
             <thead>
               <tr>
@@ -205,7 +205,7 @@
                         src="https://minotar.net/avatar/{ticket.writer
                           .username}/32"
                         alt="Oyuncu Adı"
-                        class="rounded-circle border"
+                        class="rounded-circle border animate__animated animate__zoomIn"
                         height="32"
                         width="32" />
                     </a>

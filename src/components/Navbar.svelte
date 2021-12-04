@@ -24,7 +24,7 @@
 
   <ul class="nav navbar-nav ml-auto">
     <li
-      class="nav-item dropdown animate__animated animate__zoomIn animate__slow"
+      class="nav-item dropdown"
       id="quickNotificationsDropdown">
       <a
         class="icon-link nav-link position-relative"

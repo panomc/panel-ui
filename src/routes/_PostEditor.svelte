@@ -135,7 +135,7 @@
     <!-- Post Option Cards -->
     <div class="col-lg-3">
       <div class="card">
-        <div class="p-2 animate__animated animate__slideInUp">
+        <div class="p-2 animate__animated animate__slideInDown">
           <form>
             <ul class="list-group">
               <li class="list-group-item">
@@ -153,7 +153,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-body animate__animated animate__slideInUp">
+        <div class="card-body animate__animated animate__slideInDown">
           <h6>
             <i class="fas fa-folder-open text-primary mr-1"></i>
             Kategori:
@@ -185,7 +185,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-body animate__animated animate__slideInUp">
+        <div class="card-body animate__animated animate__slideInDown">
           <h6>
             <i class="fas fa-image text-primary mr-1"></i>
             Küçük Resim:
