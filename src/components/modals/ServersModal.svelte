@@ -148,7 +148,7 @@
 
           <!-- No Server -->
           {#if $servers.length === 0}
-            <div class="container text-center">
+            <div class="container text-center animate__animated animate__zoomIn">
               <i class="fas fa-cube fa-3x m-3 text-glass"></i>
               <p class="text-gray">Bağlı sunucu yok.</p>
             </div>

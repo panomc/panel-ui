@@ -18,7 +18,7 @@
     </li>
   </ul>
   <div
-    class="container text-center animate__animated animate__headShake animate__slower"
+    class="container text-center animate__animated animate__zoomIn"
   >
     <i class="fas fa-cube mx-2 fa-3x m-3 text-glass"></i>
 

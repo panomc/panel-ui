@@ -10,9 +10,9 @@
 <div class="tab-pane">
   <div>
     <!-- Action Menu -->
-    <section class="row justify-content-between align-items-center mb-3">
+    <section class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
       <div class="col-md-4 d-flex align-items-center">
-        <strong class="text-primary mx-2 animate__animated animate__slideInUp"
+        <strong class="text-primary mx-2 animate__animated animate__zoomIn"
           >2 Güncelleme Mevcut</strong
         >
       </div>

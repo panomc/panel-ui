@@ -4,7 +4,7 @@
 
 <div class="container">
   <!-- Action Menu -->
-  <div class="row mb-3">
+  <div class="row mb-3 animate__animated animate__slideInUp">
     <div class="col-6"></div>
     {#if $notifications.length !== 0}
       <div class="col text-right">

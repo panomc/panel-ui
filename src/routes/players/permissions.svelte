@@ -4,7 +4,7 @@
 
 <div class="container">
   <!-- Action Menu -->
-  <div class="row justify-content-between align-items-center mb-3">
+  <div class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-6">
       <a class="btn btn-link" role="button" href="{base}/players">
         <i class="fas fa-arrow-left mr-1"></i>

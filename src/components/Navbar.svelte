@@ -3,23 +3,17 @@
   <ul class="nav navbar-nav mr-auto">
     <li class="nav-item mr-2">
       <a
-        class="icon-link nav-link"
+        class="icon-link nav-link text-sunflower"
         class:invisible="{$isSidebarOpen}"
         href="javascript:void(0);"
         title="Menüyü Aç/Kapa"
-        on:click="{onSideBarCollapseClick}"
-      >
+        on:click="{onSideBarCollapseClick}">
         <i class="fas fa-bars"></i>
       </a>
     </li>
-    <li class="nav-item d-none">
-      <a
-        href="javascript:void(0);"
-        target="_blank"
-        class="btn btn-link border-lightprimary text-secondary"
-      >
-        <i class="fas fa-store d-lg-none d-inline"></i>
-        <span class="d-lg-inline d-none">Web Market</span>
+    <li class="nav-item animate__animated animate__zoomIn">
+      <a href="javascript:void(0);" target="_blank" class="btn btn-link">
+        <i class="fa fa-store-alt mr-1"></i> Pano Market
       </a>
     </li>
   </ul>
@@ -29,14 +23,15 @@
   <!-- Notifications Dropdown -->
 
   <ul class="nav navbar-nav ml-auto">
-    <li class="nav-item dropdown" id="quickNotificationsDropdown">
+    <li
+      class="nav-item dropdown animate__animated animate__zoomIn animate__slow"
+      id="quickNotificationsDropdown">
       <a
         class="icon-link nav-link position-relative"
         data-toggle="dropdown"
         href="javascript:void(0);"
         role="button"
-        title="Bildirimler"
-      >
+        title="Bildirimler">
         {#if $notificationsCount !== 0}
           <div class="unread-badge"></div>
         {/if}
@@ -45,8 +40,7 @@
 
       <div
         class="dropdown-menu animate__animated animate__zoomIn animate__fast dropdown-menu-right
-        notifications"
-      >
+        notifications">
         <h6 class="dropdown-header">
           Bildirimler {$notificationsCount === 0
             ? ""
@@ -58,8 +52,7 @@
             <a
               href="javascript:void(0);"
               class="dropdown-item d-flex flex-row border-bottom py-2"
-              class:notification-unread="{notification.status === 'NOT_READ'}"
-            >
+              class:notification-unread="{notification.status === 'NOT_READ'}">
               <div class="col-auto pl-0">
                 <i class="fas fa-dot-circle text-primary"></i>
               </div>
@@ -75,8 +68,7 @@
 
         {#if quickNotifications.length === 0 && !notificationsLoading}
           <div
-            class="d-flex flex-column align-items-center justify-content-center"
-          >
+            class="d-flex flex-column align-items-center justify-content-center">
             <i class="fas fa-bell text-glass m-3"></i>
             <p class="text-gray">Bildirim yok.</p>
           </div>
@@ -87,47 +79,43 @@
           <div class="d-flex justify-content-center m-3">
             <div
               class="spinner-border spinner-border-sm text-primary"
-              role="status"
-            ></div>
+              role="status">
+            </div>
           </div>
         {/if}
 
         <a
           class="dropdown-item text-primary font-weight-bolder text-center small
           pt-2"
-          href="{base}/notifications"
-        >
+          href="{base}/notifications">
           Tümünü Görüntüle
         </a>
       </div>
     </li>
 
-    <li class="nav-item dropdown">
+    <li
+      class="nav-item dropdown animate__animated animate__zoomIn animate__slow">
       <a
         aria-expanded="false"
         aria-haspopup="true"
         class="icon-link nav-link p-1"
         data-toggle="dropdown"
         href="javascript:void(0);"
-        title="Oturum"
-      >
+        title="Oturum">
         <img
           src="https://minotar.net/avatar/{$user.username}"
           width="32"
           height="32"
           class="border rounded-circle"
-          alt="{$user.username}"
-        />
+          alt="{$user.username}" />
       </a>
       <div
-        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast"
-      >
+        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a
               class="nav-link text-primary"
-              href="{base}/players/player/{$user.username}"
-            >
+              href="{base}/players/player/{$user.username}">
               <i class="fas fa-user mr-1"></i>
               {$user.username}
             </a>
@@ -136,8 +124,7 @@
             <a
               class="nav-link"
               href="javascript:void(0);"
-              on:click="{onLogout}"
-            >
+              on:click="{onLogout}">
               <i class="fas fa-sign-out-alt mr-1"></i>
               Çıkış Yap
             </a>

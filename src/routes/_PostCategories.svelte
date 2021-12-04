@@ -5,7 +5,7 @@
 <!-- Categories Page -->
 <article class="container">
   <!-- Action Menu -->
-  <div class="row justify-content-between align-items-center mb-3">
+  <div class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-6">
       <a class="btn btn-link" role="button" href="{base}/posts">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -35,7 +35,7 @@
       <!-- No Category -->
       {#if data.category_count === 0}
         <div
-          class="container text-center animate__animated animate__headShake animate__slower"
+          class="container text-center animate__animated animate__zoomIn"
         >
           <i class="fas fa-sticky-note fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>

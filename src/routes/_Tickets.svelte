@@ -11,7 +11,8 @@
 
 <!-- Tickets Page -->
 <article class="container">
-  <div class="row mb-3">
+  <!-- Action Menu -->
+  <div class="row mb-3 animate__animated animate__slideInUp">
     <div class="col-md-4 col-6">
       <a class="btn btn-link" role="button" href="{base}/tickets/categories">
         <i class="fas fa-list-alt mr-1"></i>
@@ -93,7 +94,7 @@
       <!-- No Tickets -->
       {#if data.tickets_count === 0}
         <div
-          class="container text-center animate__animated animate__headShake animate__slower">
+          class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>

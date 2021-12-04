@@ -7,7 +7,7 @@
 
 <article class="container">
   <!-- Action Menu -->
-  <section class="row justify-content-between align-items-center mb-3">
+  <section class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-auto text-left">
       <a
         href="{base}/posts{data.post.status === StatusTypes.TRASH
@@ -78,7 +78,7 @@
     <!-- Post -->
     <div class="col-lg-9 d-flex flex-fill">
       <div class="card w-100">
-        <div class="card-body">
+        <div class="card-body animate__animated animate__zoomIn">
           <input
             class="form-control form-control-lg display-3 mb-2"
             type="text"
@@ -135,7 +135,7 @@
     <!-- Post Option Cards -->
     <div class="col-lg-3">
       <div class="card">
-        <div class="p-2">
+        <div class="p-2 animate__animated animate__slideInUp">
           <form>
             <ul class="list-group">
               <li class="list-group-item">
@@ -153,7 +153,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-body">
+        <div class="card-body animate__animated animate__slideInUp">
           <h6>
             <i class="fas fa-folder-open text-primary mr-1"></i>
             Kategori:
@@ -185,7 +185,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-body">
+        <div class="card-body animate__animated animate__slideInUp">
           <h6>
             <i class="fas fa-image text-primary mr-1"></i>
             Küçük Resim:

@@ -7,8 +7,7 @@
   <!-- Welcome Alerts -->
   {#if data.getting_started_blocks.welcome_board}
     <div
-      class="alert alert-welcome alert-dismissible flex-fill w-100
-      show border mb-4"
+      class="alert alert-dark bg-minecraft animate__animated animate__pulse animate__repeat-2 mb-3"
       role="alert"
     >
       <button
@@ -35,7 +34,7 @@
               üzerinden erişin.
             </p>
             <button
-              class="btn btn-sm btn-outline-primary"
+              class="btn btn-sm btn-primary"
               data-target="#connectServer"
               data-toggle="modal"
             >
@@ -106,7 +105,7 @@
     </div>
   {/if}
 
-  <div class="row justify-content-between animate__animated animate__slideInUp">
+  <div class="row justify-content-between animate__animated animate__zoomIn">
     <div class="col-lg-4">
       <div class="card border-0 bg-transparent">
         <div class="p-3">
@@ -196,7 +195,7 @@
 
       {#if data.tickets.length === 0}
         <div
-          class="container text-center animate__animated animate__headShake animate__slower"
+          class="container text-center animate__animated animate__zoomIn"
         >
           <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
@@ -248,7 +247,7 @@
 
   <!-- Statistic Table -->
   <div class="card">
-    <div class="card-body">
+    <div class="card-body animate__animated animate__zoomIn">
       <h5 class="card-title">İstatistik</h5>
       <div class="table-responsive">
         <table class="table table-sm m-0">
