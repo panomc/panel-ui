@@ -1,4 +1,5 @@
 @import "../pano-ui/scss/main";
+@import "node_modules/animate.css/animate.min";
 @import "node_modules/tippy.js/dist/tippy";
 
 :root {
@@ -31,7 +32,7 @@
   position: relative;
   background: url("/assets/img/header-bg.jpg") no-repeat top;
   background-size: cover;
-    border-radius: $border-radius;
+  border-radius: $border-radius;
   &:before {
     position: absolute;
     bottom: 0;
