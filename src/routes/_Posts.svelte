@@ -195,7 +195,7 @@
                       ]}">
                       <img
                         alt="{post.writer.username}"
-                        class="rounded-circle border"
+                        class="rounded-circle border animate__animated animate__zoomIn"
                         height="32"
                         src="https://minotar.net/avatar/{post.writer.username}"
                         width="32" />
