@@ -16,6 +16,8 @@
   "devDependencies": {
     "@sveltejs/adapter-node": "^1.0.0-next.55",
     "@sveltejs/kit": "^1.0.0-next.199",
+    "@tiptap/core": "^2.0.0-beta.150",
+    "@tiptap/starter-kit": "^2.0.0-beta.153",
     "axios": "^0.24.0",
     "chart.js": "^3.6.0",
     "cookie": "^0.4.1",
