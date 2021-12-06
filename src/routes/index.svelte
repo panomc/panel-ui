@@ -7,7 +7,7 @@
   <!-- Welcome Alerts -->
   {#if data.getting_started_blocks.welcome_board}
     <div
-      class="alert alert-dark bg-minecraft animate__animated animate__pulse animate__repeat-2 mb-3"
+      class="alert alert-dark border-0 bg-minecraft animate__animated animate__slideInUp mb-3"
       role="alert">
       <button
         class="close"

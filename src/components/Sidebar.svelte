@@ -4,7 +4,7 @@
 
 <div class="sidebar bg-primary" class:active="{$isSidebarOpen}">
   <!-- Sidebar Logo -->
-  <div class="sidebar-logo border-bottom border-glass">
+  <div class="sidebar-logo">
     <a
       href="javascript:void(0);"
       class="sidebar-toggler btn btn-link text-light"

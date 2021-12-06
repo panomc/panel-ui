@@ -3,7 +3,7 @@
   <ul class="nav navbar-nav mr-auto">
     <li class="nav-item mr-2">
       <a
-        class="icon-link nav-link text-sunflower"
+        class="icon-link nav-link text-dark"
         class:invisible="{$isSidebarOpen}"
         href="javascript:void(0);"
         title="Menüyü Aç/Kapa"
@@ -11,10 +11,8 @@
         <i class="fas fa-bars"></i>
       </a>
     </li>
-    <li class="nav-item animate__animated animate__zoomIn">
-      <a href="javascript:void(0);" target="_blank" class="btn btn-link">
-        <i class="fa fa-store-alt mr-1"></i> Pano Market
-      </a>
+    <li class="nav-item">
+      <!-- Quick Search Component Here -->
     </li>
   </ul>
 
@@ -23,9 +21,7 @@
   <!-- Notifications Dropdown -->
 
   <ul class="nav navbar-nav ml-auto">
-    <li
-      class="nav-item dropdown"
-      id="quickNotificationsDropdown">
+    <li class="nav-item dropdown" id="quickNotificationsDropdown">
       <a
         class="icon-link nav-link position-relative"
         data-toggle="dropdown"
@@ -93,8 +89,7 @@
       </div>
     </li>
 
-    <li
-      class="nav-item dropdown animate__animated animate__zoomIn animate__slow">
+    <li class="nav-item dropdown">
       <a
         aria-expanded="false"
         aria-haspopup="true"
@@ -106,7 +101,7 @@
           src="https://minotar.net/avatar/{$user.username}"
           width="32"
           height="32"
-          class="border rounded-circle"
+          class="border rounded-circle animate__animated animate__zoomIn"
           alt="{$user.username}" />
       </a>
       <div

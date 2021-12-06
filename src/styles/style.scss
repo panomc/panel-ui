@@ -79,7 +79,7 @@
 
 .sidebar.active {
   @include media-breakpoint-down(md) {
-    box-shadow: 5px 0 3px 0 $glass;
+    box-shadow: 10px 0 0 0 $glass;
   }
 }
 
