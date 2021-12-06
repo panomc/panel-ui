@@ -1,7 +1,3 @@
-<svelte:head>
-  <title>{getTitle("Pano Hakkında")}</title>
-</svelte:head>
-
 <!-- About Sup Page -->
 <div class="tab-pane">
   <div class="card">
@@ -100,5 +96,7 @@
 </div>
 
 <script>
-  import { getTitle } from "$lib/title.util";
+  import { pageTitle } from "$lib/store";
+
+  pageTitle.set("Pano Hakkında")
 </script>

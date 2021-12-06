@@ -1,7 +1,3 @@
-<svelte:head>
-  <title>{getTitle("Tema Ayarları")}</title>
-</svelte:head>
-
 <!-- Theme Options Categories -->
 <section>
   <div class="card">
@@ -108,5 +104,7 @@
 </section>
 
 <script>
-  import { getTitle } from "$lib/title.util";
+  import { pageTitle } from "$lib/store";
+
+  pageTitle.set("Tema Ayarları")
 </script>

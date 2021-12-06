@@ -1,7 +1,3 @@
-<svelte:head>
-  <title>{getTitle("Talep Kategorileri")}</title>
-</svelte:head>
-
 <!-- Ticket Categories Page -->
 <!-- Add / Edit Ticket Category Modal -->
 <AddEditTicketCategoryModal />
@@ -185,6 +181,8 @@
   import { base } from "$app/paths";
   import { session, page } from "$app/stores";
 
+  import { pageTitle } from "$lib/store";
+
   import Pagination from "$lib/component/Pagination.svelte";
 
   import AddEditTicketCategoryModal, {
@@ -197,9 +195,10 @@
     show as showDeleteTicketCategoryModal,
     onHide as onConfirmDeleteTicketCategoryModalHide,
   } from "$lib/component/modals/ConfirmDeleteTicketCategoryModal.svelte";
-  import { getTitle } from "$lib/title.util.js";
 
   export let data;
+
+  pageTitle.set("Talep Kategorileri")
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

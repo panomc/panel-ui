@@ -16,7 +16,7 @@
     </li>
   </ul>
 
-  <div class="h4 m-0 animate__animated animate__slideInDown">Panel</div>
+  <div class="h4 m-0 animate__animated animate__slideInDown">{$pageTitle}</div>
 
   <!-- Notifications Dropdown -->
 
@@ -147,6 +147,7 @@
     logoutLoading,
     showNetworkErrorOnCatch,
     isSidebarOpen,
+    pageTitle
   } from "$lib/store";
 
   let notificationsLoading = true;

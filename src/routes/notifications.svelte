@@ -1,7 +1,3 @@
-<svelte:head>
-  <title>{getTitle("Bildirimler")}</title>
-</svelte:head>
-
 <div class="container">
   <!-- Action Menu -->
   <div class="row mb-3 animate__animated animate__slideInUp">
@@ -166,8 +162,7 @@
   import { session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
-  import { showNetworkErrorOnCatch } from "$lib/store";
-  import { getTitle } from "$lib/title.util";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
 
   import ConfirmRemoveAllNotificationsModal, {
     show as showDeleteAllNotificationsModal,
@@ -175,6 +170,8 @@
   } from "$lib/component/modals/ConfirmRemoveAllNotificationsModal.svelte";
 
   export let data;
+
+  pageTitle.set("Bildirimler")
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

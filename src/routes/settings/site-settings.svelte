@@ -1,7 +1,3 @@
-<svelte:head>
-  <title>{getTitle("Website Ayarları")}</title>
-</svelte:head>
-
 <!-- Site Settings Sub Page -->
 <div class="tab-pane">
   <div class="card">
@@ -84,5 +80,7 @@
 </div>
 
 <script>
-  import { getTitle } from "$lib/title.util";
+  import { pageTitle } from "$lib/store";
+
+  pageTitle.set("Website Ayarları")
 </script>

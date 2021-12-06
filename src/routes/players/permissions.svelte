@@ -1,7 +1,3 @@
-<svelte:head>
-  <title>{getTitle("Yetkiler")}</title>
-</svelte:head>
-
 <div class="container">
   <!-- Action Menu -->
   <div class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
@@ -295,7 +291,7 @@
   import { session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
-  import { getTitle } from "$lib/title.util";
+  import { pageTitle } from "$lib/store";
 
   import AddEditPermGroupModal, {
     show as showPermissionGroupAddEditModal,
@@ -308,6 +304,8 @@
   } from "$lib/component/modals/ConfirmDeletePermissionGroupModal.svelte";
 
   export let data;
+
+  pageTitle.set("Yetkiler")
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

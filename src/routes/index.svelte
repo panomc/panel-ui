@@ -1,6 +1,6 @@
-<svelte:head>
-  <title>{getTitle("İstatistikler")}</title>
-</svelte:head>
+<!--<svelte:head>-->
+<!--  <title>{getTitle("İstatistikler")}</title>-->
+<!--</svelte:head>-->
 
 <!-- Dashboard Page -->
 <div class="container">
@@ -333,7 +333,7 @@
   import { session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
-  import { getTitle } from "$lib/title.util";
+  import { pageTitle } from "$lib/store";
 
   import VisitorsChart from "$lib/component/charts/Dashboard/VisitorsChart.svelte";
   // import PlayersChart from "$lib/component/charts/Dashboard/PlayersChart.svelte";
@@ -342,6 +342,8 @@
   import Date from "$lib/component/Date.svelte";
 
   export let data;
+
+  pageTitle.set("İstatistikler")
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

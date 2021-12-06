@@ -3,7 +3,7 @@
 </style>
 
 <svelte:head>
-  <title>{getTitle()}</title>
+  <title>{title}</title>
 </svelte:head>
 
 {#if showSplash}
@@ -97,17 +97,22 @@
 
   import { browser } from "$app/env";
 
+  import { pageTitle, options } from "$lib/store";
+
   if (browser) {
     import("$lib/init.libs");
   }
 
   import { logoutLoading } from "$lib/store";
-  import { getTitle } from "$lib/title.util";
 
   import Splash from "$lib/component/Splash.svelte";
   import Navbar from "$lib/component/Navbar.svelte";
   import Sidebar from "$lib/component/Sidebar.svelte";
   import PageLoading from "$lib/component/PageLoading.svelte";
+
+  $: title = $pageTitle
+    ? `${$pageTitle} \u2014 ${options.DEFAULT_PAGE_TITLE}`
+    : options.DEFAULT_PAGE_TITLE;
 
   let showSplash = true;
   let showSplashAlways = false;

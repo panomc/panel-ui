@@ -1,12 +1,3 @@
-<svelte:head>
-  <title
-    >{(data.pageType === PageTypes.HAS_PERM
-      ? "Yetkili" + " "
-      : data.pageType === PageTypes.BANNED
-      ? "Yasaklı" + " "
-      : "") + getTitle("Oyuncular")}</title>
-</svelte:head>
-
 <!-- All Players Page -->
 <div class="container">
   <!-- Action Menu -->
@@ -62,15 +53,13 @@
 
       <!-- No Players -->
       {#if data.players_count === 0}
-        <div
-          class="container text-center animate__animated animate__zoomIn">
+        <div class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-users fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}
         <!-- Players Table -->
-        <div
-          class="table-responsive animate__animated animate__fadeIn">
+        <div class="table-responsive animate__animated animate__fadeIn">
           <table class="table mb-0">
             <thead>
               <tr>
@@ -271,7 +260,7 @@
   import { page, session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
-  import { getTitle } from "$lib/title.util";
+  import { pageTitle } from "$lib/store";
 
   import Date from "$lib/component/Date.svelte";
   import Pagination from "$lib/component/Pagination.svelte";
@@ -286,6 +275,14 @@
   } from "$lib/component/modals/EditPlayerModal.svelte";
 
   export let data;
+
+  pageTitle.set(
+    (data.pageType === PageTypes.HAS_PERM
+      ? "Yetkili" + " "
+      : data.pageType === PageTypes.BANNED
+      ? "Yasaklı" + " "
+      : "") + "Oyuncular"
+  );
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

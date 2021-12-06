@@ -1,7 +1,3 @@
-<svelte:head>
-  <title>{getTitle(data.player.username)}</title>
-</svelte:head>
-
 <!-- Player Detail Page -->
 <div class="container">
   <!-- Action Menu -->
@@ -151,7 +147,7 @@
 
 <script context="module">
   import ApiUtil from "$lib/api.util";
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
 
   async function loadData({ username, page, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
@@ -169,6 +165,8 @@
 
           data.username = username;
           data.page = parseInt(page);
+
+          pageTitle.set(username);
 
           resolve(data);
         } else {
@@ -225,8 +223,6 @@
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { session, page } from "$app/stores";
-
-  import { getTitle } from "$lib/title.util";
 
   import ConfirmBanPlayerModal from "$lib/component/modals/ConfirmBanPlayerModal.svelte";
   import EditPlayerModal, {

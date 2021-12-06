@@ -1,16 +1,3 @@
-<svelte:head>
-  <title
-    >{getTitle(
-      (data.pageType === PageTypes.PUBLISHED
-        ? "Yayınlanmış" + " "
-        : data.pageType === PageTypes.DRAFT
-        ? "Taslak" + " "
-        : data.pageType === PageTypes.TRASH
-        ? "Çöp" + " "
-        : "") + "Yazılar"
-    )}</title>
-</svelte:head>
-
 <!-- Posts Page -->
 <article class="container">
   <!-- Action Menu -->
@@ -79,8 +66,7 @@
 
       <!-- No Posts -->
       {#if data.posts_count === 0}
-        <div
-          class="container text-center animate__animated animate__zoomIn">
+        <div class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-sticky-note fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -311,7 +297,7 @@
   import { base } from "$app/paths";
 
   import tooltip from "$lib/tooltip.util";
-  import { getTitle } from "$lib/title.util";
+  import { pageTitle } from "$lib/store";
 
   import Pagination from "$lib/component/Pagination.svelte";
   import Date from "$lib/component/Date.svelte";
@@ -323,6 +309,16 @@
   } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
 
   export let data;
+
+  pageTitle.set(
+    (data.pageType === PageTypes.PUBLISHED
+      ? "Yayınlanmış" + " "
+      : data.pageType === PageTypes.DRAFT
+      ? "Taslak" + " "
+      : data.pageType === PageTypes.TRASH
+      ? "Çöp" + " "
+      : "") + "Yazılar"
+  );
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

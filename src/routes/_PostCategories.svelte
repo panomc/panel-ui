@@ -1,11 +1,8 @@
-<svelte:head>
-  <title>{getTitle("Yazı Kategorileri")}</title>
-</svelte:head>
-
 <!-- Categories Page -->
 <article class="container">
   <!-- Action Menu -->
-  <div class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
+  <div
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-6">
       <a class="btn btn-link" role="button" href="{base}/posts">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -16,8 +13,7 @@
       <button
         class="btn btn-primary"
         type="button"
-        on:click="{onCreateCategoryClick}"
-      >
+        on:click="{onCreateCategoryClick}">
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
       </button>
@@ -34,9 +30,7 @@
 
       <!-- No Category -->
       {#if data.category_count === 0}
-        <div
-          class="container text-center animate__animated animate__zoomIn"
-        >
+        <div class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-sticky-note fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -67,19 +61,18 @@
                         data-toggle="dropdown"
                         href="javascript:void(0);"
                         id="postAction"
-                        title="Eylemler"
-                      >
+                        title="Eylemler">
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div
                         aria-labelledby="postAction"
-                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast"
-                      >
+                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          on:click="{onShowDeletePostCategoryModalClick(index)}"
-                        >
+                          on:click="{onShowDeletePostCategoryModalClick(
+                            index
+                          )}">
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
                         </a>
@@ -92,8 +85,7 @@
                       data-toggle="modal"
                       href="javascript:void(0);"
                       title="Kategoriyi Düzenle"
-                      on:click="{onShowEditCategoryButtonClick(index)}"
-                    >
+                      on:click="{onShowEditCategoryButtonClick(index)}">
                       {category.title}
                     </a>
                   </td>
@@ -102,8 +94,7 @@
                     <a
                       href="/category/{category.url}"
                       target="_blank"
-                      title="Kategoriyi Görüntüle"
-                    >
+                      title="Kategoriyi Görüntüle">
                       /category/
                       <b class="text-muted">{category.url}</b>
                     </a>
@@ -113,8 +104,7 @@
                       value="#{category.color}"
                       class="form-control form-control-sm bg-transparent"
                       disabled
-                      type="color"
-                    />
+                      type="color" />
                   </td>
                 </tr>
               {/each}
@@ -128,8 +118,7 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
     </div>
   </div>
 </article>
@@ -207,7 +196,7 @@
   import { base } from "$app/paths";
   import { session, page } from "$app/stores";
 
-  import { getTitle } from "$lib/title.util";
+  import { pageTitle } from "$lib/store";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -223,6 +212,8 @@
   } from "$lib/component/modals/ConfirmDeletePostCategoryModal.svelte";
 
   export let data;
+
+  pageTitle.set("Yazı Kategorileri")
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

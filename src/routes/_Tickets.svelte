@@ -1,14 +1,3 @@
-<svelte:head>
-  <title
-    >{getTitle(
-      (data.pageType === PageTypes.WAITING_REPLY
-        ? "Yeni" + " "
-        : data.pageType === PageTypes.CLOSED
-        ? "Kapalı" + " "
-        : "") + "Talepler"
-    )}</title>
-</svelte:head>
-
 <!-- Tickets Page -->
 <article class="container">
   <!-- Action Menu -->
@@ -93,8 +82,7 @@
 
       <!-- No Tickets -->
       {#if data.tickets_count === 0}
-        <div
-          class="container text-center animate__animated animate__zoomIn">
+        <div class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -322,7 +310,7 @@
   import { page, session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
-  import { getTitle } from "$lib/title.util";
+  import { pageTitle } from "$lib/store";
 
   import Pagination from "$lib/component/Pagination.svelte";
   import TicketStatus from "$lib/component/TicketStatus.svelte";
@@ -340,6 +328,14 @@
   } from "$lib/component/modals/ConfirmDeleteTicketModal.svelte";
 
   export let data;
+
+  pageTitle.set(
+    (data.pageType === PageTypes.WAITING_REPLY
+      ? "Yeni" + " "
+      : data.pageType === PageTypes.CLOSED
+      ? "Kapalı" + " "
+      : "") + "Talepler"
+  );
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

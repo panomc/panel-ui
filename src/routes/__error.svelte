@@ -1,7 +1,3 @@
-<svelte:head>
-  <title>{getTitle("404")}</title>
-</svelte:head>
-
 <!-- 404 Page  -->
 <div class="container">
   <div
@@ -21,5 +17,7 @@
 </div>
 
 <script>
-  import { getTitle } from "$lib/title.util";
+  import { pageTitle } from "$lib/store";
+
+  pageTitle.set("Error 404");
 </script>
