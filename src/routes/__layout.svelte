@@ -104,10 +104,10 @@
   import { logoutLoading } from "$lib/store";
   import { getTitle } from "$lib/title.util";
 
-  import Splash from "../components/Splash.svelte";
-  import Navbar from "../components/Navbar.svelte";
-  import Sidebar from "../components/Sidebar.svelte";
-  import PageLoading from "../components/PageLoading.svelte";
+  import Splash from "$lib/component/Splash.svelte";
+  import Navbar from "$lib/component/Navbar.svelte";
+  import Sidebar from "$lib/component/Sidebar.svelte";
+  import PageLoading from "$lib/component/PageLoading.svelte";
 
   let showSplash = true;
   let showSplashAlways = false;

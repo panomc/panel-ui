@@ -335,11 +335,11 @@
   import tooltip from "$lib/tooltip.util";
   import { getTitle } from "$lib/title.util";
 
-  import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
-  // import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";
-  // import TrafficChart from "../components/charts/Dashboard/TrafficChart.svelte";
-  import TicketStatus from "../components/TicketStatus.svelte";
-  import Date from "../components/Date.svelte";
+  import VisitorsChart from "$lib/component/charts/Dashboard/VisitorsChart.svelte";
+  // import PlayersChart from "$lib/component/charts/Dashboard/PlayersChart.svelte";
+  // import TrafficChart from "$lib/component/charts/Dashboard/TrafficChart.svelte";
+  import TicketStatus from "$lib/component/TicketStatus.svelte";
+  import Date from "$lib/component/Date.svelte";
 
   export let data;
 

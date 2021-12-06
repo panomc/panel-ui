@@ -228,19 +228,19 @@
 
   import { getTitle } from "$lib/title.util";
 
-  import ConfirmBanPlayerModal from "../components/modals/ConfirmBanPlayerModal.svelte";
+  import ConfirmBanPlayerModal from "$lib/component/modals/ConfirmBanPlayerModal.svelte";
   import EditPlayerModal, {
     show as showEditPlayerModal,
     setCallback as setEditPlayerModalCallback,
-  } from "../components/modals/EditPlayerModal.svelte";
+  } from "$lib/component/modals/EditPlayerModal.svelte";
   import AuthorizePlayerModal, {
     show as showAuthorizePlayerModal,
     setCallback as setAuthorizePlayerModalCallback,
-  } from "../components/modals/AuthorizePlayerModal.svelte";
+  } from "$lib/component/modals/AuthorizePlayerModal.svelte";
 
-  import TicketStatus from "../components/TicketStatus.svelte";
-  import Date from "../components/Date.svelte";
-  import Pagination from "../components/Pagination.svelte";
+  import TicketStatus from "$lib/component/TicketStatus.svelte";
+  import Date from "$lib/component/Date.svelte";
+  import Pagination from "$lib/component/Pagination.svelte";
 
   export let data;
 

@@ -229,7 +229,7 @@
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
 
-  import { TicketStatuses } from "../../../components/TicketStatus.svelte";
+  import { TicketStatuses } from "$lib/component/TicketStatus.svelte";
 
   async function loadTicket({ id, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
@@ -326,14 +326,14 @@
   import ConfirmCloseTicketModal, {
     setCallback as setCloseTicketModalCallback,
     show as showCloseTicketModal,
-  } from "../../../components/modals/ConfirmCloseTicketModal.svelte";
+  } from "$lib/component/modals/ConfirmCloseTicketModal.svelte";
   import ConfirmDeleteTicketModal, {
     setCallback as setDeleteTicketModalCallback,
     show as showDeleteTicketModal,
-  } from "../../../components/modals/ConfirmDeleteTicketModal.svelte";
+  } from "$lib/component/modals/ConfirmDeleteTicketModal.svelte";
 
-  import Date from "../../../components/Date.svelte";
-  import TicketStatus from "../../../components/TicketStatus.svelte";
+  import Date from "$lib/component/Date.svelte";
+  import TicketStatus from "$lib/component/TicketStatus.svelte";
 
   export let data;
 

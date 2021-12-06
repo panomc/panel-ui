@@ -50,5 +50,5 @@
 
   import { getTitle } from "$lib/title.util";
 
-  import ConfirmDeleteThemeModal from "../../components/modals/ConfirmDeleteThemeModal.svelte";
+  import ConfirmDeleteThemeModal from "$lib/component/modals/ConfirmDeleteThemeModal.svelte";
 </script>

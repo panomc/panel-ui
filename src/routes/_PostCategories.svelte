@@ -209,18 +209,18 @@
 
   import { getTitle } from "$lib/title.util";
 
-  import Pagination from "../components/Pagination.svelte";
+  import Pagination from "$lib/component/Pagination.svelte";
 
   import PostCategoriesAddEditModal, {
     show as showPostCategoriesAddEditModal,
     setCallback as setCallbackForPostCategoriesAddEditModal,
     onHide as onAddEditPostCategoryModalHide,
-  } from "../components/modals/PostCategoriesAddEditModal.svelte";
+  } from "$lib/component/modals/PostCategoriesAddEditModal.svelte";
   import ConfirmDeletePostCategoryModal, {
     setCallback as setDeletePostCategoryModalCallback,
     show as showDeletePostCategoryModal,
     onHide as onConfirmDeletePostCategoryModalHide,
-  } from "../components/modals/ConfirmDeletePostCategoryModal.svelte";
+  } from "$lib/component/modals/ConfirmDeletePostCategoryModal.svelte";
 
   export let data;
 

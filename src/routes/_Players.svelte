@@ -273,17 +273,17 @@
   import tooltip from "$lib/tooltip.util";
   import { getTitle } from "$lib/title.util";
 
-  import Date from "../components/Date.svelte";
-  import Pagination from "../components/Pagination.svelte";
+  import Date from "$lib/component/Date.svelte";
+  import Pagination from "$lib/component/Pagination.svelte";
 
   import AuthorizePlayerModal, {
     show as showAuthorizePlayerModal,
     setCallback as setAuthorizePlayerModalCallback,
-  } from "../components/modals/AuthorizePlayerModal.svelte";
+  } from "$lib/component/modals/AuthorizePlayerModal.svelte";
   import EditPlayerModal, {
     show as showEditPlayerModal,
     setCallback as setEditPlayerModalCallback,
-  } from "../components/modals/EditPlayerModal.svelte";
+  } from "$lib/component/modals/EditPlayerModal.svelte";
 
   export let data;
 

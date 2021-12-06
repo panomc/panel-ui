@@ -172,7 +172,7 @@
   import ConfirmRemoveAllNotificationsModal, {
     show as showDeleteAllNotificationsModal,
     setCallback as setDeleteAllNotificationsModalCallback,
-  } from "../components/modals/ConfirmRemoveAllNotificationsModal.svelte";
+  } from "$lib/component/modals/ConfirmRemoveAllNotificationsModal.svelte";
 
   export let data;
 

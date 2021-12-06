@@ -300,12 +300,12 @@
   import AddEditPermGroupModal, {
     show as showPermissionGroupAddEditModal,
     setCallback as setCallbackForPermissionGroupAddEditModal,
-  } from "../../components/modals/AddEditPermGroupModal.svelte";
+  } from "$lib/component/modals/AddEditPermGroupModal.svelte";
 
   import ConfirmDeletePermissionGroupModal, {
     setCallback as setDeletePermissionGroupModalCallback,
     show as showDeletePermissionGroupModal,
-  } from "../../components/modals/ConfirmDeletePermissionGroupModal.svelte";
+  } from "$lib/component/modals/ConfirmDeletePermissionGroupModal.svelte";
 
   export let data;
 

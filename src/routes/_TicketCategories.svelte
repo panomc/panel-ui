@@ -185,18 +185,18 @@
   import { base } from "$app/paths";
   import { session, page } from "$app/stores";
 
-  import Pagination from "../components/Pagination.svelte";
+  import Pagination from "$lib/component/Pagination.svelte";
 
   import AddEditTicketCategoryModal, {
     show as showTicketCategoriesAddEditModal,
     setCallback as setCallbackForTicketCategoriesAddEditModal,
     onHide as onAddEditTicketCategoryModalHide,
-  } from "../components/modals/AddEditTicketCategoryModal.svelte";
+  } from "$lib/component/modals/AddEditTicketCategoryModal.svelte";
   import ConfirmDeleteTicketCategoryModal, {
     setCallback as setDeleteTicketCategoryModalCallback,
     show as showDeleteTicketCategoryModal,
     onHide as onConfirmDeleteTicketCategoryModalHide,
-  } from "../components/modals/ConfirmDeleteTicketCategoryModal.svelte";
+  } from "$lib/component/modals/ConfirmDeleteTicketCategoryModal.svelte";
   import { getTitle } from "$lib/title.util.js";
 
   export let data;

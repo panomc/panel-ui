@@ -289,17 +289,17 @@
   import { extractContent } from "$lib/text.util";
   import { getTitle } from "$lib/title.util";
 
-  import SetPostThumbnailModal from "../components/modals/SetPostThumbnailModal.svelte";
+  import SetPostThumbnailModal from "$lib/component/modals/SetPostThumbnailModal.svelte";
 
   import ConfirmDeletePostModal, {
     setCallback as setDeletePostModalCallback,
     show as showDeletePostModal,
-  } from "../components/modals/ConfirmDeletePostModal.svelte";
+  } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
 
   import PostCategoriesAddEditModal, {
     show as showPostCategoriesAddEditModal,
     setCallback as setCallbackForPostCategoriesAddEditModal,
-  } from "../components/modals/PostCategoriesAddEditModal.svelte";
+  } from "$lib/component/modals/PostCategoriesAddEditModal.svelte";
 
   import Editor from "$lib/component/Editor.svelte";
 

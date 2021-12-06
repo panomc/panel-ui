@@ -313,14 +313,14 @@
   import tooltip from "$lib/tooltip.util";
   import { getTitle } from "$lib/title.util";
 
-  import Pagination from "../components/Pagination.svelte";
-  import Date from "../components/Date.svelte";
+  import Pagination from "$lib/component/Pagination.svelte";
+  import Date from "$lib/component/Date.svelte";
 
   import ConfirmDeletePostModal, {
     setCallback as setDeletePostModalCallback,
     show as showDeletePostModal,
     onHide as onDeletePostModalHide,
-  } from "../components/modals/ConfirmDeletePostModal.svelte";
+  } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
 
   export let data;
 

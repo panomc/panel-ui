@@ -324,20 +324,20 @@
   import tooltip from "$lib/tooltip.util";
   import { getTitle } from "$lib/title.util";
 
-  import Pagination from "../components/Pagination.svelte";
-  import TicketStatus from "../components/TicketStatus.svelte";
-  import Date from "../components/Date.svelte";
+  import Pagination from "$lib/component/Pagination.svelte";
+  import TicketStatus from "$lib/component/TicketStatus.svelte";
+  import Date from "$lib/component/Date.svelte";
 
   import ConfirmCloseTicketModal, {
     setCallback as setCloseTicketModalCallback,
     show as showCloseTicketModal,
     onHide as onConfirmCloseTicketModalHide,
-  } from "../components/modals/ConfirmCloseTicketModal.svelte";
+  } from "$lib/component/modals/ConfirmCloseTicketModal.svelte";
   import ConfirmDeleteTicketModal, {
     setCallback as setDeleteTicketModalCallback,
     show as showDeleteTicketModal,
     onHide as onConfirmDeleteTicketModalHide,
-  } from "../components/modals/ConfirmDeleteTicketModal.svelte";
+  } from "$lib/component/modals/ConfirmDeleteTicketModal.svelte";
 
   export let data;
 
