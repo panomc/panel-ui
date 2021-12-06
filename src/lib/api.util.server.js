@@ -12,7 +12,7 @@ async function send({ method, path, data, token }) {
     opts.headers["Authorization"] = `Bearer ${token}`;
   }
 
-  return fetch(`${API_URL}/${path}`, opts)
+  return fetch(`${API_URL}${path}`, opts)
     .then((r) => r.text())
     .then((json) => {
       try {
