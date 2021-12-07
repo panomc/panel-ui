@@ -96,9 +96,6 @@
   </div>
 </div>
 
-<EditPlayerModal />
-<AuthorizePlayerModal />
-
 <script context="module">
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
@@ -187,11 +184,11 @@
 
   import Pagination from "$lib/component/Pagination.svelte";
 
-  import AuthorizePlayerModal, {
+  import {
     show as showAuthorizePlayerModal,
     setCallback as setAuthorizePlayerModalCallback,
   } from "$lib/component/modals/AuthorizePlayerModal.svelte";
-  import EditPlayerModal, {
+  import {
     show as showEditPlayerModal,
     setCallback as setEditPlayerModalCallback,
   } from "$lib/component/modals/EditPlayerModal.svelte";
