@@ -105,7 +105,7 @@
           alt="{$user.username}" />
       </a>
       <div
-        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
+        class="dropdown-menu dropdown-menu-right animate__animated animate__slideInUp animate__fast">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a
@@ -147,7 +147,7 @@
     logoutLoading,
     showNetworkErrorOnCatch,
     isSidebarOpen,
-    pageTitle
+    pageTitle,
   } from "$lib/store";
 
   let notificationsLoading = true;

@@ -21,7 +21,7 @@
         editor.chain().focus().toggleHeading({ level: 1 }).run()}"
       class:bg-glass="{editor.isActive('heading', { level: 1 })}"
       class:text-primary="{editor.isActive('heading', { level: 1 })}"
-      use:tooltip="{['Header Level 1', { placement: 'bottom' }]}">
+      use:tooltip="{['Başlık 1', { placement: 'bottom' }]}">
       H1
     </button>
     <button
@@ -29,7 +29,8 @@
       on:click="{() =>
         editor.chain().focus().toggleHeading({ level: 2 }).run()}"
       class:glass="{editor.isActive('heading', { level: 2 })}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      use:tooltip="{['Başlık 2', { placement: 'bottom' }]}">
       H2
     </button>
     <button
@@ -37,7 +38,8 @@
       on:click="{() =>
         editor.chain().focus().toggleHeading({ level: 3 }).run()}"
       class:glass="{editor.isActive('heading', { level: 3 })}"
-      class:text-primary="{editor.isActive('heading', { level: 3 })}">
+      class:text-primary="{editor.isActive('heading', { level: 3 })}"
+      use:tooltip="{['Başlık 3', { placement: 'bottom' }]}">
       H3
     </button>
 
@@ -46,28 +48,32 @@
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
       class:glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      use:tooltip="{['Kalın', { placement: 'bottom' }]}">
       <b>B</b>
     </button>
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
       class:glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      use:tooltip="{['İtalik', { placement: 'bottom' }]}">
       <i>I</i>
     </button>
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
       class:glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      use:tooltip="{['Altı Çizili', { placement: 'bottom' }]}">
       <u>U</u>
     </button>
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
       class:glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      use:tooltip="{['Üstü Çizili', { placement: 'bottom' }]}">
       <s>S</s>
     </button>
 
@@ -76,14 +82,16 @@
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
       class:glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      use:tooltip="{['Liste', { placement: 'bottom' }]}">
       <i class="fas fa-list"></i>
     </button>
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
       class:glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      use:tooltip="{['Sırali Liste', { placement: 'bottom' }]}">
       <i class="fas fa-list-ol"></i>
     </button>
 
@@ -92,21 +100,24 @@
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
       class:glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      use:tooltip="{['Resim', { placement: 'bottom' }]}">
       <i class="fas fa-image"></i>
     </button>
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
       class:glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      use:tooltip="{['Bağlantı', { placement: 'bottom' }]}">
       <i class="fas fa-link"></i>
     </button>
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
       class:glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      use:tooltip="{['Yazı Rengi', { placement: 'bottom' }]}">
       <i class="fas fa-palette"></i>
     </button>
   </div>
