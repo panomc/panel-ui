@@ -66,7 +66,7 @@
                       </a>
                       <div
                         aria-labelledby="postAction"
-                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
+                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn">
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
@@ -213,7 +213,7 @@
 
   export let data;
 
-  pageTitle.set("Yazı Kategorileri")
+  pageTitle.set("Yazı Kategorileri");
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

@@ -108,7 +108,7 @@
                       </button>
                       <div
                         aria-labelledby="serverOptions"
-                        class="dropdown-menu"
+                        class="dropdown-menu animate__animated animate__zoomIn"
                       >
                         <a
                           class="dropdown-item"

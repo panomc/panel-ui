@@ -88,7 +88,7 @@
                       </a>
                       <div
                         aria-labelledby="playerAction"
-                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
+                        class="dropdown-menu animate__animated animate__zoomIn">
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"

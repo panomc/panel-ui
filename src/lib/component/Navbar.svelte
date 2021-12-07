@@ -35,7 +35,7 @@
       </a>
 
       <div
-        class="dropdown-menu animate__animated animate__zoomIn animate__fast dropdown-menu-right
+        class="dropdown-menu animate__animated animate__zoomInUp dropdown-menu-right
         notifications">
         <h6 class="dropdown-header">
           Bildirimler {$notificationsCount === 0
@@ -105,7 +105,7 @@
           alt="{$user.username}" />
       </a>
       <div
-        class="dropdown-menu dropdown-menu-right animate__animated animate__slideInUp animate__fast">
+        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomInUp">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a

@@ -140,7 +140,7 @@
                         </a>
                         <div
                           aria-labelledby="postAction"
-                          class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn animate__fast">
+                          class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn">
                           {#if ticket.status !== 3}
                             <a
                               class="dropdown-item"
