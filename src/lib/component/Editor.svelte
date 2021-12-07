@@ -17,6 +17,7 @@
     <!-- Headings -->
     <button
       class="btn btn-small small"
+      title="Başlık 1"
       on:click="{() =>
         editor.chain().focus().toggleHeading({ level: 1 }).run()}"
       class:bg-glass="{editor.isActive('heading', { level: 1 })}"
@@ -100,6 +101,13 @@
       class:glass="{editor.isActive('paragraph')}"
       class:text-primary="{editor.isActive('heading', { level: 1 })}">
       <i class="fas fa-link"></i>
+    </button>
+    <button
+      class="btn btn-small small"
+      on:click="{() => editor.chain().focus().setParagraph().run()}"
+      class:glass="{editor.isActive('paragraph')}"
+      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      <i class="fas fa-palette"></i>
     </button>
   </div>
 {/if}
