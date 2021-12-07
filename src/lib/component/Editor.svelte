@@ -98,7 +98,7 @@
     <!-- Media -->
     <button
       class="btn btn-small small"
-      on:click="{() => editor.chain().focus().setParagraph().run()}"
+      on:click="{addImage}"
       use:tooltip="{['Resim', { placement: 'bottom' }]}">
       <i class="fas fa-image"></i>
     </button>
@@ -136,6 +136,7 @@
   import StarterKit from "@tiptap/starter-kit";
   import Underline from "@tiptap/extension-underline";
   import Link from "@tiptap/extension-link";
+  import Image from "@tiptap/extension-image";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -145,6 +146,14 @@
   let editor;
 
   export let content = "";
+
+  function addImage() {
+    const url = window.prompt("URL");
+
+    if (url) {
+      editor.chain().focus().setImage({ src: url }).run();
+    }
+  }
 
   function setLink() {
     const previousUrl = editor.getAttributes("link").href;
@@ -163,12 +172,7 @@
     }
 
     // update link
-    editor
-      .chain()
-      .focus()
-      .extendMarkRange("link")
-      .setLink({ href: url })
-      .run();
+    editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
   }
 
   onMount(() => {
@@ -180,6 +184,7 @@
         Link.configure({
           openOnClick: false,
         }),
+        Image,
       ],
       content: content,
       onTransaction: () => {
