@@ -144,7 +144,7 @@
 </div>
 
 <script>
-  import { onMount, onDestroy, createEventDispatcher } from "svelte";
+  import { onMount, onDestroy } from "svelte";
 
   import { Editor } from "@tiptap/core";
   import StarterKit from "@tiptap/starter-kit";
@@ -156,16 +156,16 @@
 
   import tooltip from "$lib/tooltip.util";
 
-  const dispatch = createEventDispatcher();
-
   let element;
   let colorPickerElement;
   let editor;
+  let editorContent = "";
 
   export let content = "";
+  export let isEmpty = true;
 
   $: {
-    if (editor) {
+    if (editor && editorContent !== content) {
       editor.commands.setContent(content);
     }
   }
@@ -221,16 +221,14 @@
         editor = editor;
       },
       onUpdate: ({ editor }) => {
-        dispatch("contentChange", {
-          content: editor.getHTML(),
-          isEmpty: editor.isEmpty,
-        });
+        content = editor.getHTML();
+        editorContent = editor.getHTML();
+        isEmpty = editor.isEmpty;
       },
       onCreate: ({ editor }) => {
-        dispatch("contentChange", {
-          content: editor.getHTML(),
-          isEmpty: editor.isEmpty,
-        });
+        content = editor.getHTML();
+        editorContent = editor.getHTML();
+        isEmpty = editor.isEmpty;
       },
     });
   });

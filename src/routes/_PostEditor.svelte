@@ -73,8 +73,8 @@
           <div class="align-selft-center w-100 h-75">
             <!-- Editor -->
             <Editor
-              content="{data.post.text}"
-              on:contentChange="{onEditorContentChange}" />
+              bind:content="{data.post.text}"
+              bind:isEmpty="{isEditorEmpty}" />
             <!-- Editor End -->
           </div>
         </div>
@@ -414,13 +414,6 @@
 
   function onCreateCategoryClick() {
     showPostCategoriesAddEditModal("create");
-  }
-
-  function onEditorContentChange(event) {
-    if (event.detail.content !== data.post.text) {
-      data.post.text = event.detail.content;
-      isEditorEmpty = event.detail.isEmpty;
-    }
   }
 
   // onMount(async () => {

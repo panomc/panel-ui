@@ -153,8 +153,8 @@
         <div class="col-auto d-flex flex-column">
           <!-- Editor -->
           <Editor
-            content="{messageText}"
-            on:contentChange="{onEditorContentChange}" />
+            bind:content="{messageText}"
+            bind:isEmpty="{isEditorEmpty}"/>
           <!-- Editor End -->
         </div>
         <div class="col">
@@ -317,13 +317,6 @@
   let shouldScroll = true;
 
   const messagesSectionClientHeight = writable(0);
-
-  function onEditorContentChange(event) {
-    if (event.detail.content !== messageText) {
-      messageText = event.detail.content;
-      isEditorEmpty = event.detail.isEmpty;
-    }
-  }
 
   function loadMore() {
     loadMoreLoading = true;
