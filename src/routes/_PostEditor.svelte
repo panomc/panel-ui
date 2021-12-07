@@ -286,6 +286,7 @@
   export let data;
 
   let isEditorEmpty = true;
+  let loading = false;
 
   pageTitle.set(
     data.mode === Modes.EDIT ? "Yazıyı Düzenle" : "Yeni Yazı Oluştur"
@@ -327,10 +328,6 @@
     }, true);
   }
 
-  let loading = false;
-  // let quill;
-  // let Quill;
-
   function getStatusByPostStatus(status) {
     return status === StatusTypes.TRASH
       ? "Çöp"
@@ -340,19 +337,6 @@
       ? "Taslak"
       : "Yeni";
   }
-
-  // function imageHandler() {
-  //   const range = quill.getSelection();
-  //   const value = prompt("What is the image URL");
-  //
-  //   if (value) {
-  //     quill.insertEmbed(range.index, "image", value, Quill.sources.USER);
-  //   }
-  // }
-  //
-  // function initPost() {
-  //   quill.setHTML(data.post.text);
-  // }
 
   function onSubmit() {
     loading = true;
@@ -415,36 +399,6 @@
   function onCreateCategoryClick() {
     showPostCategoriesAddEditModal("create");
   }
-
-  // onMount(async () => {
-  //   const { default: Quill } = await import("quill");
-  //
-  //   quill = new Quill("#editor", {
-  //     modules: {
-  //       toolbar: {
-  //         container: "#editorToolbar",
-  //         handlers: {
-  //           image: imageHandler,
-  //         },
-  //       },
-  //     },
-  //     theme: "snow",
-  //   });
-  //
-  //   quill.setHTML = (html) => {
-  //     quill.container.firstChild.innerHTML = html;
-  //   };
-  //
-  //   quill.getHTML = () => {
-  //     return quill.container.firstChild.innerHTML;
-  //   };
-  //
-  //   quill.on("text-change", () => {
-  //     data.post.text = quill.getHTML();
-  //   });
-  //
-  //   initPost();
-  // });
 
   setCallbackForPostCategoriesAddEditModal((routeFirstPage, category) => {
     showNetworkErrorOnCatch((resolve, reject) => {
