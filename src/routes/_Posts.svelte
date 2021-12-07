@@ -86,112 +86,14 @@
             </thead>
             <tbody>
               {#each data.posts as post, index (post)}
-                <tr class:bg-lightprimary="{post.selected}">
-                  <th class="min-w-50px" scope="row">
-                    <div class="dropdown position-absolute">
-                      <a
-                        class="btn btn-sm py-0"
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        data-toggle="dropdown"
-                        href="javascript:void(0);"
-                        id="postAction"
-                        title="Eylemler">
-                        <i class="fas fa-ellipsis-v"></i>
-                      </a>
-                      <div
-                        aria-labelledby="postAction"
-                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn">
-                        <a
-                          class="dropdown-item"
-                          target="_blank"
-                          href="/preview/post/{post.id}">
-                          <i class="fas fa-eye text-primary mr-1"></i>
-                          Görüntüle
-                        </a>
-                        {#if data.pageType !== PageTypes.DRAFT}
-                          <a
-                            class="dropdown-item"
-                            href="javascript:void(0);"
-                            on:click="{onMoveToDraft(post.id)}"
-                            class:disabled="{buttonsLoading}"
-                            disabled="{buttonsLoading}">
-                            <span>
-                              <i class="fas fa-bookmark text-primary mr-1"></i>
-                              Taslaklara Taşı
-                            </span>
-                          </a>
-                        {/if}
-
-                        {#if data.pageType !== PageTypes.PUBLISHED}
-                          <a
-                            class="dropdown-item"
-                            href="javascript:void(0);"
-                            class:disabled="{buttonsLoading}"
-                            disabled="{buttonsLoading}"
-                            on:click="{onPublishClick(post.id)}">
-                            <span>
-                              <i class="fas fa-globe-americas text-primary mr-1"
-                              ></i>
-                              Yayınla
-                            </span>
-                          </a>
-                        {/if}
-
-                        <a
-                          class="dropdown-item"
-                          data-target="#confirmDeletePost"
-                          data-toggle="modal"
-                          href="javascript:void(0);"
-                          on:click="{onDeletePostClick(post)}">
-                          <i class="fas fa-trash text-danger mr-1"></i>
-                          Sil
-                        </a>
-                      </div>
-                    </div>
-                  </th>
-                  <td class="align-middle text-nowrap">
-                    <a
-                      href="{base + '/posts/post/' + post.id}"
-                      title="Yazıyı Düzenle">
-                      {post.title}
-                    </a>
-                  </td>
-                  <td class="align-middle text-nowrap">
-                    <a href="{base}/posts/category/{post.category.title}">
-                      <span
-                        class="badge badge-pill"
-                        class:text-dark="{post.category.title === '-'}"
-                        class:px-0="{post.category.title === '-'}"
-                        style="{post.category.title === '-'
-                          ? ''
-                          : 'background: #' + post.category.color}">
-                        {post.category.title === "-"
-                          ? "Kategorisiz"
-                          : post.category.title}
-                      </span>
-                    </a>
-                  </td>
-                  <td class="align-middle text-nowrap">
-                    <a
-                      href="{base}/players/player/{post.writer.username}"
-                      use:tooltip="{[
-                        post.writer.username,
-                        { placement: 'top' },
-                      ]}">
-                      <img
-                        alt="{post.writer.username}"
-                        class="rounded-circle border animate__animated animate__zoomIn"
-                        height="32"
-                        src="https://minotar.net/avatar/{post.writer.username}"
-                        width="32" />
-                    </a>
-                  </td>
-                  <td class="align-middle text-nowrap">{post.views}</td>
-                  <td class="align-middle text-nowrap">
-                    <Date time="{post.date}" />
-                  </td>
-                </tr>
+                <PostRow
+                  post="{post}"
+                  pageType="{data.pageType}"
+                  buttonsLoading="{buttonsLoading}"
+                  on:moveToDraft="{(event) => onMoveToDraft(event.detail.id)}"
+                  on:publish="{(event) => onPublishClick(event.detail.id)}"
+                  on:deletePost="{(event) =>
+                    onDeletePostClick(event.detail.post)}" />
               {/each}
             </tbody>
           </table>
@@ -296,17 +198,16 @@
   import { page, session } from "$app/stores";
   import { base } from "$app/paths";
 
-  import tooltip from "$lib/tooltip.util";
   import { pageTitle } from "$lib/store";
 
   import Pagination from "$lib/component/Pagination.svelte";
-  import Date from "$lib/component/Date.svelte";
 
   import ConfirmDeletePostModal, {
     setCallback as setDeletePostModalCallback,
     show as showDeletePostModal,
     onHide as onDeletePostModalHide,
   } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
+  import PostRow from "$lib/component/PostRow.svelte";
 
   export let data;
 
