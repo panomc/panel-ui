@@ -79,7 +79,7 @@
   <td class="align-middle text-nowrap">
     <a
       href="{base}/players/player/{post.writer.username}"
-      use:tooltip="{[post.writer.username, { placement: 'top' }]}">
+      use:tooltip="{[post.writer.username, { placement: 'bottom' }]}">
       <img
         alt="{post.writer.username}"
         class="rounded-circle border animate__animated animate__zoomIn"
