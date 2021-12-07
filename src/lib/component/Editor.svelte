@@ -62,9 +62,9 @@
     </button>
     <button
       class="btn btn-small small"
-      on:click="{() => editor.chain().focus().setParagraph().run()}"
-      class:bg-glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      on:click="{() => editor.chain().focus().toggleUnderline().run()}"
+      class:bg-glass="{editor.isActive('underline')}"
+      class:text-primary="{editor.isActive('underline')}"
       use:tooltip="{['Altı Çizili', { placement: 'bottom' }]}">
       <u>U</u>
     </button>
@@ -132,6 +132,7 @@
 
   import { Editor } from "@tiptap/core";
   import StarterKit from "@tiptap/starter-kit";
+  import Underline from '@tiptap/extension-underline'
 
   import tooltip from "$lib/tooltip.util";
 
@@ -145,7 +146,7 @@
   onMount(() => {
     editor = new Editor({
       element: element,
-      extensions: [StarterKit],
+      extensions: [StarterKit, Underline],
       content: content,
       onTransaction: () => {
         // force re-render so `editor.isActive` works as expected
