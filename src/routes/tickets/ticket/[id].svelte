@@ -266,7 +266,7 @@
 </script>
 
 <script>
-  import { onDestroy } from "svelte";
+  import { afterUpdate, onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { session, page } from "$app/stores";
@@ -313,6 +313,8 @@
 
   let messageText = "";
   let isEditorEmpty = true;
+
+  let shouldScroll = true;
 
   const messagesSectionClientHeight = writable(0);
 
@@ -366,6 +368,8 @@
       })
         .then((body) => {
           if (body.result === "ok") {
+            shouldScroll = true;
+
             data.ticket.messages.push(body.message);
 
             data.ticket.status = TicketStatuses.REPLIED;
@@ -392,11 +396,15 @@
     goto(base + "/tickets");
   });
 
-  onDestroy(
-    messagesSectionClientHeight.subscribe((height) => {
-      if (height !== 0 && messagesSectionDiv) {
-        messagesSectionDiv.scrollTo(0, height);
-      }
-    })
-  );
+  afterUpdate(() => {
+    if (shouldScroll && messagesSectionDiv.scrollHeight > 0) {
+      messagesSectionDiv.scrollTo(0, messagesSectionDiv.scrollHeight);
+
+      shouldScroll = false;
+    }
+  });
+
+  onMount(() => {
+    shouldScroll = true;
+  });
 </script>
