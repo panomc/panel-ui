@@ -128,11 +128,14 @@
 </div>
 
 <script>
-  import { onMount, onDestroy } from "svelte";
+  import { onMount, onDestroy, createEventDispatcher } from "svelte";
+
   import { Editor } from "@tiptap/core";
   import StarterKit from "@tiptap/starter-kit";
 
-  import tooltip from "$lib/tooltip.util"
+  import tooltip from "$lib/tooltip.util";
+
+  const dispatch = createEventDispatcher();
 
   let element;
   let editor;
@@ -147,6 +150,18 @@
       onTransaction: () => {
         // force re-render so `editor.isActive` works as expected
         editor = editor;
+      },
+      onUpdate: ({ editor }) => {
+        dispatch("contentChange", {
+          content: editor.getHTML(),
+          isEmpty: editor.isEmpty,
+        });
+      },
+      onCreate: ({ editor }) => {
+        dispatch("contentChange", {
+          content: editor.getHTML(),
+          isEmpty: editor.isEmpty,
+        });
       },
     });
   });

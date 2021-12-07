@@ -51,16 +51,13 @@
         class="btn btn-secondary"
         type="button"
         class:disabled="{loading ||
-          extractContent(data.post.text).length === 0 ||
+          isEditorEmpty ||
           data.post.title.length === 0}"
-        disabled="{loading ||
-          extractContent(data.post.text).length === 0 ||
-          data.post.title.length === 0}"
+        disabled="{loading || isEditorEmpty || data.post.title.length === 0}"
         on:click="{onSubmit}">
-        <span
-          >{data.post.status === StatusTypes.PUBLISHED
-            ? "Güncelle"
-            : "Yayınla"}</span>
+        <span>
+          {data.post.status === StatusTypes.PUBLISHED ? "Güncelle" : "Yayınla"}
+        </span>
       </button>
     </div>
   </section>
@@ -79,7 +76,9 @@
 
           <div class="align-selft-center w-100 h-75">
             <!-- Editor -->
-            <Editor content="{data.post.text}" />
+            <Editor
+              content="{data.post.text}"
+              on:contentChange="{onEditorContentChange}" />
             <!-- Editor End -->
           </div>
         </div>
@@ -273,7 +272,6 @@
   import { session, page } from "$app/stores";
 
   import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
-  import { extractContent } from "$lib/text.util";
 
   import SetPostThumbnailModal from "$lib/component/modals/SetPostThumbnailModal.svelte";
 
@@ -290,6 +288,8 @@
   import Editor from "$lib/component/Editor.svelte";
 
   export let data;
+
+  let isEditorEmpty = true;
 
   pageTitle.set(
     data.mode === Modes.EDIT ? "Yazıyı Düzenle" : "Yeni Yazı Oluştur"
@@ -418,6 +418,13 @@
 
   function onCreateCategoryClick() {
     showPostCategoriesAddEditModal("create");
+  }
+
+  function onEditorContentChange(event) {
+    if (event.detail.content !== data.post.text) {
+      data.post.text = event.detail.content;
+      isEditorEmpty = event.detail.isEmpty;
+    }
   }
 
   // onMount(async () => {
