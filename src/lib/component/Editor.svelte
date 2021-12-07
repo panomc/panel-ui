@@ -99,24 +99,18 @@
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
-      class:bg-glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}"
       use:tooltip="{['Resim', { placement: 'bottom' }]}">
       <i class="fas fa-image"></i>
     </button>
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
-      class:bg-glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}"
       use:tooltip="{['Bağlantı', { placement: 'bottom' }]}">
       <i class="fas fa-link"></i>
     </button>
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
-      class:bg-glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}"
       use:tooltip="{['Yazı Rengi', { placement: 'bottom' }]}">
       <i class="fas fa-palette"></i>
     </button>
