@@ -116,7 +116,8 @@
       use:tooltip="{['Yazı Rengi', { placement: 'bottom' }]}">
       <i
         class="fas fa-tint"
-        style="color: {editor.getAttributes('textStyle').color};"></i>
+        style="{editor.getAttributes('textStyle').color &&
+          'color:' + editor.getAttributes('textStyle').color + ';'}"></i>
     </button>
 
     <input
