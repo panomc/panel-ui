@@ -111,8 +111,6 @@
   </div>
 </article>
 
-<ConfirmDeletePostModal />
-
 <script context="module">
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
@@ -202,7 +200,7 @@
 
   import Pagination from "$lib/component/Pagination.svelte";
 
-  import ConfirmDeletePostModal, {
+  import {
     setCallback as setDeletePostModalCallback,
     show as showDeletePostModal,
     onHide as onDeletePostModalHide,

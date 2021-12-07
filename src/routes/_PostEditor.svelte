@@ -154,7 +154,6 @@
   </section>
 </article>
 
-<ConfirmDeletePostModal />
 <SetPostThumbnailModal />
 <PostCategoriesAddEditModal />
 
@@ -271,7 +270,7 @@
 
   import SetPostThumbnailModal from "$lib/component/modals/SetPostThumbnailModal.svelte";
 
-  import ConfirmDeletePostModal, {
+  import {
     setCallback as setDeletePostModalCallback,
     show as showDeletePostModal,
   } from "$lib/component/modals/ConfirmDeletePostModal.svelte";

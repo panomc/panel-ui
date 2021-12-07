@@ -1,7 +1,7 @@
 <Posts data="{data}" />
 
 <script context="module">
-  import { load as loadPosts } from "./_Posts.svelte";
+  import { load as loadPosts } from "../_Posts.svelte";
 
   /**
    * @type {import('@sveltejs/kit').Load}
@@ -21,7 +21,7 @@
 </script>
 
 <script>
-  import Posts from "./_Posts.svelte";
+  import Posts from "../_Posts.svelte";
 
   export let data;
 </script>
