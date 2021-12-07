@@ -161,8 +161,6 @@
   </div>
 </div>
 
-<ConfirmBanPlayerModal />
-
 <script context="module">
   import ApiUtil from "$lib/api.util";
   import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
@@ -244,7 +242,6 @@
 
   import tooltip from "$lib/tooltip.util";
 
-  import ConfirmBanPlayerModal from "$lib/component/modals/ConfirmBanPlayerModal.svelte";
   import {
     show as showEditPlayerModal,
     setCallback as setEditPlayerModalCallback,
