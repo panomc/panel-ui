@@ -138,9 +138,6 @@
   </div>
 </article>
 
-<ConfirmCloseTicketModal />
-<ConfirmDeleteTicketModal />
-
 <script context="module">
   import { writable, get } from "svelte/store";
 
@@ -233,12 +230,12 @@
 
   import Pagination from "$lib/component/Pagination.svelte";
 
-  import ConfirmCloseTicketModal, {
+  import {
     setCallback as setCloseTicketModalCallback,
     show as showCloseTicketModal,
     onHide as onConfirmCloseTicketModalHide,
   } from "$lib/component/modals/ConfirmCloseTicketModal.svelte";
-  import ConfirmDeleteTicketModal, {
+  import {
     setCallback as setDeleteTicketModalCallback,
     show as showDeleteTicketModal,
     onHide as onConfirmDeleteTicketModalHide,

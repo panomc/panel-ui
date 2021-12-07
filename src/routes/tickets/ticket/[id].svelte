@@ -167,9 +167,6 @@
   </div>
 </article>
 
-<ConfirmCloseTicketModal />
-<ConfirmDeleteTicketModal />
-
 <script context="module">
   import { writable } from "svelte/store";
 
@@ -271,11 +268,11 @@
 
   import tooltip from "$lib/tooltip.util";
 
-  import ConfirmCloseTicketModal, {
+  import {
     setCallback as setCloseTicketModalCallback,
     show as showCloseTicketModal,
   } from "$lib/component/modals/ConfirmCloseTicketModal.svelte";
-  import ConfirmDeleteTicketModal, {
+  import {
     setCallback as setDeleteTicketModalCallback,
     show as showDeleteTicketModal,
   } from "$lib/component/modals/ConfirmDeleteTicketModal.svelte";
