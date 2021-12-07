@@ -60,7 +60,7 @@
   <td class="align-middle">
     <a
       href="{base}/players/player/{ticket.writer.username}"
-      use:tooltip="{[ticket.writer.username, { placement: 'top' }]}">
+      use:tooltip="{[ticket.writer.username, { placement: 'bottom' }]}">
       <img
         src="https://minotar.net/avatar/{ticket.writer.username}/32"
         alt="Oyuncu Adı"
