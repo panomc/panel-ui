@@ -67,7 +67,7 @@
             class:disabled="{loadMoreLoading}"
             on:click="{loadMore}"
             >Eski Mesajları Göster ({data.ticket.count -
-              data.ticket.messages.length})
+              (data.ticket.messages.length - sentMessageCount)})
           </button>
         {/if}
 
@@ -152,9 +152,7 @@
       <div class="row">
         <div class="col-auto d-flex flex-column">
           <!-- Editor -->
-          <Editor
-            bind:content="{messageText}"
-            bind:isEmpty="{isEditorEmpty}"/>
+          <Editor bind:content="{messageText}" bind:isEmpty="{isEditorEmpty}" />
           <!-- Editor End -->
         </div>
         <div class="col">
@@ -316,6 +314,8 @@
 
   let shouldScroll = true;
 
+  let sentMessageCount = 0;
+
   const messagesSectionClientHeight = writable(0);
 
   function loadMore() {
@@ -364,6 +364,8 @@
             shouldScroll = true;
 
             data.ticket.messages.push(body.message);
+
+            sentMessageCount++;
 
             data.ticket.status = TicketStatuses.REPLIED;
             messageText = "";
