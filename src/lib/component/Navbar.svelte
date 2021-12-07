@@ -16,7 +16,9 @@
     </li>
   </ul>
 
-  <div class="h4 m-0">{$pageTitle}</div>
+  <div class="h4 m-0">
+    {$pageTitle ? $pageTitle : options.DEFAULT_PAGE_TITLE}
+  </div>
 
   <!-- Notifications Dropdown -->
 
@@ -148,6 +150,7 @@
     showNetworkErrorOnCatch,
     isSidebarOpen,
     pageTitle,
+    options,
   } from "$lib/store";
 
   let notificationsLoading = true;
