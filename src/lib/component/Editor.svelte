@@ -17,11 +17,11 @@
     <!-- Headings -->
     <button
       class="btn btn-small small"
-      title="Başlık 1"
       on:click="{() =>
         editor.chain().focus().toggleHeading({ level: 1 }).run()}"
       class:bg-glass="{editor.isActive('heading', { level: 1 })}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}">
+      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      use:tooltip="{['Header Level 1', { placement: 'bottom' }]}">
       H1
     </button>
     <button
@@ -120,6 +120,8 @@
   import { onMount, onDestroy } from "svelte";
   import { Editor } from "@tiptap/core";
   import StarterKit from "@tiptap/starter-kit";
+
+  import tooltip from "$lib/tooltip.util"
 
   let element;
   let editor;
