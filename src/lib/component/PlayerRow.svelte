@@ -59,12 +59,12 @@
     <i
       aria-hidden="true"
       class="fa fa-times text-danger fa-fw"
-      use:tooltip="{['Talepleri Yasaklı', { placement: 'top' }]}"></i>
+      use:tooltip="{['Talepleri Yasaklı', { placement: 'bottom' }]}"></i>
   </td>
   <td class="align-middle text-nowrap">
     <span
       class="badge badge-pill badge-lightsecondary text-success"
-      use:tooltip="{['Sitede', { placement: 'top' }]}">
+      use:tooltip="{['Sitede', { placement: 'bottom' }]}">
       <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
       <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
     </span>
