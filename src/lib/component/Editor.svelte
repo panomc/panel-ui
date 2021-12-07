@@ -127,9 +127,6 @@
         editor.chain().focus().setColor(event.target.value).run()}"
       hidden />
 
-    <!--      @input="editor.chain().focus().setColor($event.target.value).run()"-->
-    <!--      :value="editor.getAttributes('textStyle').color"-->
-
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().unsetColor().run()}"
