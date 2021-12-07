@@ -54,9 +54,9 @@
     </button>
     <button
       class="btn btn-small small"
-      on:click="{() => editor.chain().focus().setParagraph().run()}"
-      class:bg-glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      on:click="{() => editor.chain().focus().toggleItalic().run()}"
+      class:bg-glass="{editor.isActive('italic')}"
+      class:text-primary="{editor.isActive('italic')}"
       use:tooltip="{['İtalik', { placement: 'bottom' }]}">
       <i>I</i>
     </button>
