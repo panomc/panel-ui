@@ -88,9 +88,9 @@
     </button>
     <button
       class="btn btn-small small"
-      on:click="{() => editor.chain().focus().setParagraph().run()}"
-      class:bg-glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      on:click="{() => editor.chain().focus().toggleOrderedList().run()}"
+      class:bg-glass="{editor.isActive('orderedList')}"
+      class:text-primary="{editor.isActive('orderedList')}"
       use:tooltip="{['Sırali Liste', { placement: 'bottom' }]}">
       <i class="fas fa-list-ol"></i>
     </button>
