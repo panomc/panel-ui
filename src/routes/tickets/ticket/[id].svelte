@@ -333,8 +333,10 @@
         .then((body) => {
           if (body.result === "ok") {
             body.messages.reverse().forEach((message) => {
-              data.ticket.messages = data.ticket.messages.unshift(message);
+              data.ticket.messages.unshift(message);
             });
+
+            data.ticket.messages = data.ticket.messages;
 
             loadMoreLoading = false;
           } else if (body.error === "NOT_EXISTS") {
