@@ -1,7 +1,3 @@
-<!--<style lang="scss" global>-->
-<!--  @import "node_modules/quill/dist/quill.snow";-->
-<!--</style>-->
-
 <article class="container">
   <!-- Action Menu -->
   <section
