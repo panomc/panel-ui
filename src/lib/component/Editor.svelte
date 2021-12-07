@@ -112,7 +112,13 @@
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().setParagraph().run()}"
       use:tooltip="{['Yazı Rengi', { placement: 'bottom' }]}">
-      <i class="fas fa-palette"></i>
+      <i class="fas fa-tint" style="color: red;"></i>
+    </button>
+    <button
+      class="btn btn-small small"
+      on:click="{() => editor.chain().focus().setParagraph().run()}"
+      use:tooltip="{['Yazı Rengini Kaldır', { placement: 'bottom' }]}">
+      <i class="fas fa-tint-slash"></i>
     </button>
   </div>
 {/if}
