@@ -46,9 +46,9 @@
     <!-- Text Formatting -->
     <button
       class="btn btn-small small"
-      on:click="{() => editor.chain().focus().setParagraph().run()}"
-      class:bg-glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      on:click="{() => editor.chain().focus().toggleBold().run()}"
+      class:bg-glass="{editor.isActive('bold')}"
+      class:text-primary="{editor.isActive('bold')}"
       use:tooltip="{['Kalın', { placement: 'bottom' }]}">
       <b>B</b>
     </button>
