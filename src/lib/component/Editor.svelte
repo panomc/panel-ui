@@ -164,6 +164,12 @@
 
   export let content = "";
 
+  $: {
+    if (editor) {
+      editor.commands.setContent(content);
+    }
+  }
+
   function openColorPicker() {
     colorPickerElement.click();
   }
