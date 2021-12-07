@@ -80,9 +80,9 @@
     <!-- Lists -->
     <button
       class="btn btn-small small"
-      on:click="{() => editor.chain().focus().setParagraph().run()}"
-      class:bg-glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      on:click="{() => editor.chain().focus().toggleBulletList().run()}"
+      class:bg-glass="{editor.isActive('bulletList')}"
+      class:text-primary="{editor.isActive('bulletList')}"
       use:tooltip="{['Liste', { placement: 'bottom' }]}">
       <i class="fas fa-list"></i>
     </button>
@@ -132,7 +132,7 @@
 
   import { Editor } from "@tiptap/core";
   import StarterKit from "@tiptap/starter-kit";
-  import Underline from '@tiptap/extension-underline'
+  import Underline from "@tiptap/extension-underline";
 
   import tooltip from "$lib/tooltip.util";
 
