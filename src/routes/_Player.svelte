@@ -1,35 +1,47 @@
 <!-- Player Detail Page -->
 <div class="container">
   <!-- Action Menu -->
-  <div class="row mb-3 animate__animated animate__slideInUp">
-    <div class="col-md-4 col-6">
+  <div
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+    <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/players">
         <i class="fas fa-arrow-left mr-1"></i>
         Oyuncular
       </a>
     </div>
-    <div class="col text-right">
+    <div class="col-auto text-right">
+      <a
+        class="btn btn-link"
+        use:tooltip="{[
+          'Oyuncu e-postasına bir doğrulama bağlantısı gönder',
+          { placement: 'bottom' },
+        ]}"
+        href="javascript:void(0);"
+        on:click="{() => showAuthorizePlayerModal(data.player)}">
+        <i class="fas fa-envelope"></i>
+        <span class="ml-1 d-lg-inline d-none">Doğrula</span>
+      </a>
       <a
         class="btn btn-link"
         href="javascript:void(0);"
         on:click="{() => showAuthorizePlayerModal(data.player)}">
-        <i class="fas fa-user-circle mr-1"></i>
-        Yetkilendir
+        <i class="fas fa-user-circle"></i>
+        <span class="ml-1 d-lg-inline d-none">Yetkilendir</span>
       </a>
       <a
         class="btn btn-link"
         href="javascript:void(0);"
         on:click="{() => showEditPlayerModal(data.player)}">
-        <i class="fas fa-pencil-alt mr-1"></i>
-        Düzenle
+        <i class="fas fa-pencil-alt"></i>
+        <span class="ml-1 d-lg-inline d-none">Düzenle</span>
       </a>
       <a
         class="btn btn-outline-danger"
         data-target="#conformBanPlayer"
         data-toggle="modal"
         href="javascript:void(0);">
-        <i class="fas fa-gavel mr-1"></i>
-        Yasakla
+        <i class="fas fa-gavel"></i>
+        <span class="ml-1 d-lg-inline d-none">Yasakla</span>
       </a>
     </div>
   </div>
@@ -48,7 +60,7 @@
             src="https://minotar.net/avatar/{data.player.username}" />
 
           <h4 class="card-title">{data.player.username}</h4>
-          <h6 class="text-muted">{data.player.email}</h6>
+          <h6 class="text-muted mb-3">{data.player.email}</h6>
           {#if data.player.isBanned}
             <hr />
             <div class="badge badge-pill badge-danger d-block">
@@ -56,10 +68,16 @@
               Yasaklı
             </div>
           {/if}
+          <span
+            class="badge badge-pill badge-lightsecondary text-success"
+            use:tooltip="{['Sitede', { placement: 'top' }]}">
+            <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
+            <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
+          </span>
           <hr />
 
           <ul class="list-inline my-0">
-            <li class="list-inline-item">
+            <li class="list-inline-item mb-2">
               <div class="badge text-dark border text-capitalize">
                 <a
                   href="{base}/players/permission/{data.player
@@ -70,9 +88,13 @@
                 </a>
               </div>
             </li>
-            <li class="list-inline-item">
+            <li class="list-inline-item mb-2">
+              <div class="badge text-success border">Doğrulandı</div>
+              <div class="badge text-dark border">Doğrulannadı</div>
+            </li>
+            <li class="list-inline-item mb-2">
               <div class="badge text-dark border">
-                Kayıt: <Date time="{data.player.registerDate}" />
+                <Date time="{data.player.registerDate}" />
               </div>
             </li>
           </ul>
@@ -223,6 +245,8 @@
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { session, page } from "$app/stores";
+
+  import tooltip from "$lib/tooltip.util";
 
   import ConfirmBanPlayerModal from "$lib/component/modals/ConfirmBanPlayerModal.svelte";
   import EditPlayerModal, {
