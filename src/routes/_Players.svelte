@@ -76,9 +76,9 @@
                 <PlayerRow
                   player="{player}"
                   on:showAuthorizePlayerModalClick="{(event) =>
-                    showAuthorizePlayerModal(event.detail.player)}"
+                    onShowAuthorizePlayerModalClick(event.detail.player)}"
                   on:showEditPlayerModalClick="{(event) =>
-                    showEditPlayerModal(event.detail.player)}" />
+                    onShowEditPlayerModalClick(event.detail.player)}" />
               {/each}
             </tbody>
           </table>
@@ -187,13 +187,19 @@
   import {
     show as showAuthorizePlayerModal,
     setCallback as setAuthorizePlayerModalCallback,
+    onHide as onAuthorizePlayerModalHide,
   } from "$lib/component/modals/AuthorizePlayerModal.svelte";
   import {
     show as showEditPlayerModal,
     setCallback as setEditPlayerModalCallback,
+    onHide as onEditPlayerModalHide,
   } from "$lib/component/modals/EditPlayerModal.svelte";
 
   import PlayerRow from "$lib/component/PlayerRow.svelte";
+  import {
+    onHide as onDeletePostModalHide,
+    setCallback as setDeletePostModalCallback,
+  } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
 
   export let data;
 
@@ -252,10 +258,24 @@
     });
   }
 
+  function onShowAuthorizePlayerModalClick(player) {
+    data.players[data.players.indexOf(player)].selected = true;
+
+    showAuthorizePlayerModal(player);
+  }
+
+  function onShowEditPlayerModalClick(player) {
+    data.players[data.players.indexOf(player)].selected = true;
+
+    showEditPlayerModal(player);
+  }
+
   setAuthorizePlayerModalCallback((newPlayer) => {
     data.players.forEach((player) => {
-      if (player.id === newPlayer.id)
+      if (player.id === newPlayer.id) {
         player.permission_group = newPlayer.permission_group;
+        player.selected = false;
+      }
     });
 
     data.players = data.players;
@@ -266,6 +286,27 @@
       if (player.id === newPlayer.id) {
         player.username = newPlayer.username;
         player.email = newPlayer.email;
+        player.selected = false;
+      }
+    });
+
+    data.players = data.players;
+  });
+
+  onAuthorizePlayerModalHide((newPlayer) => {
+    data.players.forEach((player) => {
+      if (player.id === newPlayer.id) {
+        player.selected = false;
+      }
+    });
+
+    data.players = data.players;
+  });
+
+  onEditPlayerModalHide((newPlayer) => {
+    data.players.forEach((player) => {
+      if (player.id === newPlayer.id) {
+        player.selected = false;
       }
     });
 

@@ -1,4 +1,4 @@
-<tr>
+<tr class:bg-lightprimary="{player.selected}">
   <th class="min-w-50px" scope="row">
     <div class="dropdown position-absolute">
       <a
