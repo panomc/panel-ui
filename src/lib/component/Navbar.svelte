@@ -16,7 +16,7 @@
     </li>
   </ul>
 
-  <div class="h4 m-0 animate__animated animate__slideInDown">{$pageTitle}</div>
+  <div class="h4 m-0">{$pageTitle}</div>
 
   <!-- Notifications Dropdown -->
 
