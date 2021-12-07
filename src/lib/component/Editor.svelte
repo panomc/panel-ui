@@ -70,9 +70,9 @@
     </button>
     <button
       class="btn btn-small small"
-      on:click="{() => editor.chain().focus().setParagraph().run()}"
-      class:bg-glass="{editor.isActive('paragraph')}"
-      class:text-primary="{editor.isActive('heading', { level: 1 })}"
+      on:click="{() => editor.chain().focus().toggleStrike().run()}"
+      class:bg-glass="{editor.isActive('strike')}"
+      class:text-primary="{editor.isActive('strike')}"
       use:tooltip="{['Üstü Çizili', { placement: 'bottom' }]}">
       <s>S</s>
     </button>
