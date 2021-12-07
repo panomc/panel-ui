@@ -104,8 +104,10 @@
     </button>
     <button
       class="btn btn-small small"
-      on:click="{() => editor.chain().focus().setParagraph().run()}"
-      use:tooltip="{['Bağlantı', { placement: 'bottom' }]}">
+      on:click="{setLink}"
+      use:tooltip="{['Bağlantı', { placement: 'bottom' }]}"
+      class:bg-glass="{editor.isActive('link')}"
+      class:text-primary="{editor.isActive('link')}">
       <i class="fas fa-link"></i>
     </button>
     <button
@@ -133,6 +135,7 @@
   import { Editor } from "@tiptap/core";
   import StarterKit from "@tiptap/starter-kit";
   import Underline from "@tiptap/extension-underline";
+  import Link from "@tiptap/extension-link";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -143,10 +146,41 @@
 
   export let content = "";
 
+  function setLink() {
+    const previousUrl = editor.getAttributes("link").href;
+    const url = window.prompt("URL", previousUrl);
+
+    // cancelled
+    if (url === null) {
+      return;
+    }
+
+    // empty
+    if (url === "") {
+      editor.chain().focus().extendMarkRange("link").unsetLink().run();
+
+      return;
+    }
+
+    // update link
+    editor
+      .chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({ href: url })
+      .run();
+  }
+
   onMount(() => {
     editor = new Editor({
       element: element,
-      extensions: [StarterKit, Underline],
+      extensions: [
+        StarterKit,
+        Underline,
+        Link.configure({
+          openOnClick: false,
+        }),
+      ],
       content: content,
       onTransaction: () => {
         // force re-render so `editor.isActive` works as expected
