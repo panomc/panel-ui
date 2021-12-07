@@ -112,13 +112,27 @@
     </button>
     <button
       class="btn btn-small small"
-      on:click="{() => editor.chain().focus().setParagraph().run()}"
+      on:click="{openColorPicker}"
       use:tooltip="{['Yazı Rengi', { placement: 'bottom' }]}">
-      <i class="fas fa-tint" style="color: red;"></i>
+      <i
+        class="fas fa-tint"
+        style="color: {editor.getAttributes('textStyle').color};"></i>
     </button>
+
+    <input
+      type="color"
+      bind:this="{colorPickerElement}"
+      value="{editor.getAttributes('textStyle').color}"
+      on:input="{(event) =>
+        editor.chain().focus().setColor(event.target.value).run()}"
+      hidden />
+
+    <!--      @input="editor.chain().focus().setColor($event.target.value).run()"-->
+    <!--      :value="editor.getAttributes('textStyle').color"-->
+
     <button
       class="btn btn-small small"
-      on:click="{() => editor.chain().focus().setParagraph().run()}"
+      on:click="{() => editor.chain().focus().unsetColor().run()}"
       use:tooltip="{['Yazı Rengini Kaldır', { placement: 'bottom' }]}">
       <i class="fas fa-tint-slash"></i>
     </button>
@@ -137,15 +151,22 @@
   import Underline from "@tiptap/extension-underline";
   import Link from "@tiptap/extension-link";
   import Image from "@tiptap/extension-image";
+  import TextStyle from "@tiptap/extension-text-style";
+  import Color from "@tiptap/extension-color";
 
   import tooltip from "$lib/tooltip.util";
 
   const dispatch = createEventDispatcher();
 
   let element;
+  let colorPickerElement;
   let editor;
 
   export let content = "";
+
+  function openColorPicker() {
+    colorPickerElement.click();
+  }
 
   function addImage() {
     const url = window.prompt("URL");
@@ -185,6 +206,8 @@
           openOnClick: false,
         }),
         Image,
+        TextStyle,
+        Color,
       ],
       content: content,
       onTransaction: () => {
