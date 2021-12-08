@@ -63,7 +63,7 @@
         id="messageSection"
         bind:this="{messagesSectionDiv}"
         bind:clientHeight="{$messagesSectionClientHeight}">
-        {#if data.ticket.messages.length < data.ticket.count && data.ticket.count > 5 + 5}
+        {#if data.ticket.messages.length < data.ticket.count && data.ticket.count > 5}
           <button
             class="btn text-primary bg-lightprimary d-block m-auto"
             class:disabled="{loadMoreLoading}"
