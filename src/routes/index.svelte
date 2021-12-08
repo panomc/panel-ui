@@ -104,7 +104,7 @@
 
   <a
     href="/players"
-    class="row mb-3 justify-content-between animate__animated animate__slideInUp">
+    class="row mb-3 justify-content-between animate__animated animate__fadeIn">
     <div class="col-lg-4">
       <div class="p-3 text-secondary">
         <div class="row align-items-center">
@@ -209,7 +209,7 @@
                     alt="{ticket.writer.username}"
                     width="48"
                     height="48"
-                    class="border rounded-circle" />
+                    class="border rounded-circle animate__animated animate__zoomIn" />
                 </div>
               </a>
               <div class="col">
@@ -343,7 +343,7 @@
 
   export let data;
 
-  pageTitle.set("İstatistikler")
+  pageTitle.set("İstatistikler");
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

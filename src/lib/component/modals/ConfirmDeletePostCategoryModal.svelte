@@ -14,7 +14,7 @@
         </div>
         Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?
         {#if $category.post_count !== 0}
-          <div class="mt-3 alert alert-warning">
+          <div class="mt-3 alert alert-warning text-left">
             Kategori içerisindeki şu yazılar Kategorisiz olarak değişecek:
             <br />
             <br />

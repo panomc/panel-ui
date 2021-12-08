@@ -1,11 +1,10 @@
 <style global>
   .ProseMirror {
+    display: block;
     padding: 0;
-    min-height: 100%;
     outline: none;
     border: none;
     margin: 0.5rem;
-    min-height: 100%;
   }
 
   .ProseMirror p {
@@ -139,7 +138,7 @@
 {/if}
 
 <!-- Editor Content -->
-<div class="border border-top-0 rounded-bottom p-1" style="min-height: 100%;">
+<div class="border border-top-0 rounded-bottom p-1 h-100">
   <div bind:this="{element}"></div>
 </div>
 

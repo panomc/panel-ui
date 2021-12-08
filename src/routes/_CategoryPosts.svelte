@@ -43,26 +43,27 @@
         <div class="table-responsive animate__animated animate__fadeIn">
           <table class="table mb-0">
             <thead>
-            <tr>
-              <th scope="col"></th>
-              <th class="min-w-200px align-middle" scope="col">Başlık</th>
-              <th scope="col align-middle">Kategori</th>
-              <th scope="col align-middle">Yazar</th>
-              <th scope="col align-middle">Görüntülenme</th>
-              <th scope="col align-middle">Tarih</th>
-            </tr>
+              <tr>
+                <th scope="col"></th>
+                <th class="min-w-200px align-middle" scope="col">Başlık</th>
+                <th scope="col align-middle" class="bg-lightprimary text-black"
+                  >Kategori</th>
+                <th scope="col align-middle">Yazar</th>
+                <th scope="col align-middle">Görüntülenme</th>
+                <th scope="col align-middle">Tarih</th>
+              </tr>
             </thead>
             <tbody>
-            {#each data.posts as post, index (post)}
-              <PostRow
-                post="{post}"
-                pageType="{data.pageType}"
-                buttonsLoading="{buttonsLoading}"
-                on:moveToDraft="{(event) => onMoveToDraft(event.detail.id)}"
-                on:publish="{(event) => onPublishClick(event.detail.id)}"
-                on:deletePost="{(event) =>
+              {#each data.posts as post, index (post)}
+                <PostRow
+                  post="{post}"
+                  pageType="{data.pageType}"
+                  buttonsLoading="{buttonsLoading}"
+                  on:moveToDraft="{(event) => onMoveToDraft(event.detail.id)}"
+                  on:publish="{(event) => onPublishClick(event.detail.id)}"
+                  on:deletePost="{(event) =>
                     onDeletePostClick(event.detail.post)}" />
-            {/each}
+              {/each}
             </tbody>
           </table>
         </div>
@@ -123,7 +124,7 @@
           category: {
             id: -1,
             title: "-",
-          }
+          },
         },
       },
     };
@@ -134,12 +135,17 @@
       return output;
     }
 
-    await loadData({ page: request.page.params.page || 1, url: request.page.params.url, request })
+    await loadData({
+      page: request.page.params.page || 1,
+      url: request.page.params.url,
+      request,
+    })
       .then((data) => {
         output.props.data = { ...output.props.data, ...data };
       })
       .catch((body) => {
-        if (body.error === "PAGE_NOT_FOUND" || body.error === "NOT_EXISTS") output = null;
+        if (body.error === "PAGE_NOT_FOUND" || body.error === "NOT_EXISTS")
+          output = null;
       });
 
     return output;
@@ -164,7 +170,11 @@
 
   export let data;
 
-  pageTitle.set(`"${data.category.title === "-" ? "Kategorisiz" : data.category.title}" Kategorisindeki Yazılar`)
+  pageTitle.set(
+    `"${
+      data.category.title === "-" ? "Kategorisiz" : data.category.title
+    }" Kategorisindeki Yazılar`
+  );
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -262,10 +272,10 @@
 
             reloadData(page - 1);
           } else if (body.error === "NOT_EXISTS") {
-            resolve()
+            resolve();
 
-            goto(base + "/error-404")
-          }else {
+            goto(base + "/error-404");
+          } else {
             reject();
           }
         });

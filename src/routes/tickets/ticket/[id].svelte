@@ -1,5 +1,5 @@
 <article class="container">
-  <div class="row mb-3">
+  <div class="row mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -21,13 +21,15 @@
         role="button"
         href="javascript:void(0);"
         on:click="{() => showDeleteTicketModal([data.ticket.id])}">
-        <i class="fas fa-trash mr-1"></i>
-        Talebi Sil
+        <i class="fas fa-trash"></i>
+
+        <span class="d-lg-inline d-none ml-1">Talebi Sil</span>
       </a>
     </div>
   </div>
 
-  <h3 class="text-muted badge badge-lightprimary panel-subtitle">
+  <h3
+    class="text-muted badge badge-lightprimary panel-subtitle animate__animated animate__slideInLeft">
     Talep: #{data.ticket.id}
   </h3>
 
@@ -145,22 +147,26 @@
     </div>
   {/if}
 
+  <!-- Send Message Section -->
   <div
-    class="card"
+    class="card animate__animated animate__fadeIn animate__slower"
     class:d-none="{data.ticket.status === TicketStatuses.CLOSED}">
     <div class="card-body">
-      <div class="row">
-        <div class="col-auto d-flex flex-column">
+      <div class="row align-items-end">
+        <div class="col d-flex flex-column">
           <!-- Editor -->
           <Editor bind:content="{messageText}" bind:isEmpty="{isEditorEmpty}" />
           <!-- Editor End -->
         </div>
-        <div class="col">
+        <div class="col-auto">
           <button
-            class="btn btn-block btn-primary mt-lg-0 mt-3"
+            class="btn btn-primary mt-lg-0 mt-3"
             on:click="{sendMessage}"
             class:disabled="{messageSendLoading || isEditorEmpty}"
-            :disabled="{messageSendLoading || isEditorEmpty}">Gönder</button>
+            :disabled="{messageSendLoading || isEditorEmpty}">
+            <i class="fas fa-paper-plane"></i>
+            <span class="d-lg-inline d-none ml-1">Gönder</span>
+          </button>
         </div>
       </div>
     </div>

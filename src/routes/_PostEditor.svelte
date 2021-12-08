@@ -331,7 +331,7 @@
     return status === StatusTypes.TRASH
       ? "Çöp"
       : status === StatusTypes.PUBLISHED
-      ? "Yayında"
+      ? "Yayınlanmış"
       : status === StatusTypes.DRAFT
       ? "Taslak"
       : "Yeni";
