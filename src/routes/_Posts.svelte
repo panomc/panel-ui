@@ -109,7 +109,7 @@
       <!-- Pagination End -->
     </div>
   </div>
-</article>-1, "-", "", "", ""
+</article>
 
 <script context="module">
   import ApiUtil from "$lib/api.util";
