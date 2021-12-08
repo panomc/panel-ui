@@ -171,7 +171,7 @@
         path: "/api/panel/initPage/playerDetail",
         body: {
           username,
-          page,
+          page: parseInt(page),
         },
         request,
         CSRFToken,
