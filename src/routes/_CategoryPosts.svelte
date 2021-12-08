@@ -3,9 +3,9 @@
   <!-- Action Menu -->
   <div class="row mb-3 animate__animated animate__slideInUp">
     <div class="col-md-4 col-6">
-      <a class="btn btn-link" role="button" href="{base}/posts/categories">
-        <i class="fas fa-list-alt mr-1"></i>
-        Yazı Kategorileri
+      <a class="btn btn-link" role="button" href="{base}/posts">
+        <i class="fas fa-arrow-left mr-1"></i>
+        Yazılar
       </a>
     </div>
     <div class="col d-flex">
@@ -27,40 +27,8 @@
         <div class="col-md-6 col-12 text-md-left text-center">
           <h5 class="card-title mb-md-0">
             {data.posts_count}
-            {data.pageType === PageTypes.PUBLISHED
-              ? "Yayınlanmış"
-              : data.pageType === PageTypes.DRAFT
-              ? "Taslak"
-              : data.pageType === PageTypes.TRASH
-              ? "Çöp"
-              : ""} Yazı
+            Yazı
           </h5>
-        </div>
-        <div class="col-md-6 col-12 text-md-right text-center">
-          <div class="btn-group">
-            <a
-              class:active="{data.pageType === PageTypes.PUBLISHED}"
-              class="btn btn-sm btn-outline-light btn-link"
-              role="button"
-              href="{base}/posts/published">
-              Yayınlanmış
-            </a>
-            <a
-              class:active="{data.pageType === PageTypes.DRAFT}"
-              class="btn btn-sm btn-outline-light btn-link"
-              role="button"
-              href="{base}/posts/draft">
-              Taslak
-            </a>
-
-            <a
-              class:active="{data.pageType === PageTypes.TRASH}"
-              class="btn btn-sm btn-outline-light btn-link text-danger"
-              role="button"
-              href="{base}/posts/trash">
-              Çöp
-            </a>
-          </div>
         </div>
       </div>
 
@@ -75,26 +43,26 @@
         <div class="table-responsive animate__animated animate__fadeIn">
           <table class="table mb-0">
             <thead>
-              <tr>
-                <th scope="col"></th>
-                <th class="min-w-200px align-middle" scope="col">Başlık</th>
-                <th scope="col align-middle">Kategori</th>
-                <th scope="col align-middle">Yazar</th>
-                <th scope="col align-middle">Görüntülenme</th>
-                <th scope="col align-middle">Tarih</th>
-              </tr>
+            <tr>
+              <th scope="col"></th>
+              <th class="min-w-200px align-middle" scope="col">Başlık</th>
+              <th scope="col align-middle">Kategori</th>
+              <th scope="col align-middle">Yazar</th>
+              <th scope="col align-middle">Görüntülenme</th>
+              <th scope="col align-middle">Tarih</th>
+            </tr>
             </thead>
             <tbody>
-              {#each data.posts as post, index (post)}
-                <PostRow
-                  post="{post}"
-                  pageType="{data.pageType}"
-                  buttonsLoading="{buttonsLoading}"
-                  on:moveToDraft="{(event) => onMoveToDraft(event.detail.id)}"
-                  on:publish="{(event) => onPublishClick(event.detail.id)}"
-                  on:deletePost="{(event) =>
+            {#each data.posts as post, index (post)}
+              <PostRow
+                post="{post}"
+                pageType="{data.pageType}"
+                buttonsLoading="{buttonsLoading}"
+                on:moveToDraft="{(event) => onMoveToDraft(event.detail.id)}"
+                on:publish="{(event) => onPublishClick(event.detail.id)}"
+                on:deletePost="{(event) =>
                     onDeletePostClick(event.detail.post)}" />
-              {/each}
+            {/each}
             </tbody>
           </table>
         </div>
@@ -109,37 +77,19 @@
       <!-- Pagination End -->
     </div>
   </div>
-</article>-1, "-", "", "", ""
+</article>
 
 <script context="module">
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
 
-  import { StatusTypes as PostStatusTypes } from "./_PostEditor.svelte";
-
-  export const PageTypes = Object.freeze({
-    PUBLISHED: "published",
-    DRAFT: "draft",
-    TRASH: "trash",
-  });
-
-  export const DefaultPageType = PageTypes.PUBLISHED;
-
-  export function getStatusFromPageType(pageType) {
-    return pageType === PageTypes.PUBLISHED
-      ? PostStatusTypes.PUBLISHED
-      : pageType === PageTypes.DRAFT
-      ? PostStatusTypes.DRAFT
-      : PostStatusTypes.TRASH;
-  }
-
-  async function loadData({ page, pageType, request, CSRFToken }) {
+  async function loadData({ page, url, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
       ApiUtil.post({
-        path: "/api/panel/initPage/postPage",
+        path: "/api/panel/post/category/postsByCategory",
         body: {
           page: parseInt(page),
-          page_type: getStatusFromPageType(pageType),
+          url,
         },
         request,
         CSRFToken,
@@ -148,7 +98,7 @@
           const data = body;
 
           data.page = parseInt(page);
-          data.pageType = pageType;
+          data.url = url;
 
           resolve(data);
         } else {
@@ -161,14 +111,19 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load(request, pageType = DefaultPageType) {
+  export async function load(request) {
     let output = {
       props: {
         data: {
           posts_count: 0,
           posts: [],
           total_page: 1,
-          page: 1,
+          page: request.page.params.page || 1,
+          url: request.page.params.url,
+          category: {
+            id: -1,
+            title: "-",
+          }
         },
       },
     };
@@ -179,12 +134,12 @@
       return output;
     }
 
-    await loadData({ page: request.page.params.page || 1, pageType, request })
+    await loadData({ page: request.page.params.page || 1, url: request.page.params.url, request })
       .then((data) => {
         output.props.data = { ...output.props.data, ...data };
       })
       .catch((body) => {
-        if (body.error === "PAGE_NOT_FOUND") output = null;
+        if (body.error === "PAGE_NOT_FOUND" || body.error === "NOT_EXISTS") output = null;
       });
 
     return output;
@@ -209,21 +164,13 @@
 
   export let data;
 
-  pageTitle.set(
-    (data.pageType === PageTypes.PUBLISHED
-      ? "Yayınlanmış" + " "
-      : data.pageType === PageTypes.DRAFT
-      ? "Taslak" + " "
-      : data.pageType === PageTypes.TRASH
-      ? "Çöp" + " "
-      : "") + "Yazılar"
-  );
+  pageTitle.set(`"${data.category.title === "-" ? "Kategorisiz" : data.category.title}" Kategorisindeki Yazılar`)
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         page: $page.params.page || 1,
-        pageType: data.pageType,
+        url: $page.params.url,
         CSRFToken: $session.CSRFToken,
       })
         .then((loadedData) => {
@@ -232,7 +179,7 @@
           resolve();
         })
         .catch((body) => {
-          if (body.error === "PAGE_NOT_FOUND") {
+          if (body.error === "PAGE_NOT_FOUND" || body.error === "NOT_EXISTS") {
             goto(base + "/error-404");
 
             resolve();
@@ -297,14 +244,14 @@
     });
   }
 
-  function reloadData(page = data.page, pageType = data.pageType) {
+  function reloadData(page = data.page, url = data.url) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ page, pageType, CSRFToken: $session.CSRFToken })
+      loadData({ page, url, CSRFToken: $session.CSRFToken })
         .then((loadedData) => {
           resolve();
 
           if (page !== data.page) {
-            goto(base + "/posts/" + data.pageType + "/" + page);
+            goto(base + "/posts/category/" + data.url + "/" + page);
           } else {
             data = loadedData;
           }
@@ -314,7 +261,11 @@
             resolve();
 
             reloadData(page - 1);
-          } else {
+          } else if (body.error === "NOT_EXISTS") {
+            resolve()
+
+            goto(base + "/error-404")
+          }else {
             reject();
           }
         });
