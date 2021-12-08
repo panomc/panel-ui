@@ -2,6 +2,10 @@
   @import "../styles/style";
 </style>
 
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
+
 {#if showSplash}
   <Splash />
 {/if}
@@ -21,37 +25,60 @@
 </div>
 
 <script context="module">
-  import ApiUtil from "$lib/api.util";
-  import { API_URL } from "$lib/variables";
-
   import {
-    getBasicData,
     initializeBasicData,
     networkErrorCallbacks,
     showNetworkErrorOnCatch,
     notLoggedIn,
+    setDefaults,
   } from "$lib/store";
+
+  import ApiUtil, { NETWORK_ERROR } from "$lib/api.util";
+
+  function getBasicData({ request, CSRFToken }) {
+    return new Promise((resolve, reject) => {
+      ApiUtil.get({ path: "/api/panel/basicData", request, CSRFToken })
+        .then((body) => {
+          if (body.result === "ok") {
+            initializeBasicData(body);
+
+            resolve(body);
+          } else {
+            reject(body);
+          }
+        })
+        .catch(() => {
+          reject(NETWORK_ERROR);
+        });
+    });
+  }
 
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ session }) {
-    ApiUtil.init(API_URL);
+  export async function load(request) {
+    setDefaults();
 
-    if (session.basicData.result === "ok") {
-      initializeBasicData(session.basicData);
+    const output = {
+      stuff: {},
+    };
+
+    if (request.session.basicData.result === "ok") {
+      initializeBasicData(request.session.basicData);
     } else {
-      if (session.basicData.error === "NOT_LOGGED_IN") {
+      if (request.session.basicData.error === "NOT_LOGGED_IN") {
         notLoggedIn.set(true);
       }
 
+      output.stuff.NETWORK_ERROR = true;
+
       showNetworkErrorOnCatch((resolve, reject) => {
-        getBasicData()
+        getBasicData({ request })
           .then(() => {
             resolve();
           })
-          .catch((errorCode) => {
-            if (errorCode === "NOT_LOGGED_IN") {
+          .catch((body) => {
+            if (body.error === "NOT_LOGGED_IN") {
               notLoggedIn.set(true);
             }
 
@@ -60,7 +87,7 @@
       }, true);
     }
 
-    return {};
+    return output;
   }
 </script>
 
@@ -70,16 +97,22 @@
 
   import { browser } from "$app/env";
 
+  import { pageTitle, options } from "$lib/store";
+
   if (browser) {
     import("$lib/init.libs");
   }
 
   import { logoutLoading } from "$lib/store";
 
-  import Splash from "../components/Splash.svelte";
-  import Navbar from "../components/Navbar.svelte";
-  import Sidebar from "../components/Sidebar.svelte";
-  import PageLoading from "../components/PageLoading.svelte";
+  import Splash from "$lib/component/Splash.svelte";
+  import Navbar from "$lib/component/Navbar.svelte";
+  import Sidebar from "$lib/component/Sidebar.svelte";
+  import PageLoading from "$lib/component/PageLoading.svelte";
+
+  $: title = $pageTitle
+    ? `${$pageTitle} \u2014 ${options.DEFAULT_PAGE_TITLE}`
+    : options.DEFAULT_PAGE_TITLE;
 
   let showSplash = true;
   let showSplashAlways = false;

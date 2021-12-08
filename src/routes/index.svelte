@@ -1,10 +1,13 @@
+<!--<svelte:head>-->
+<!--  <title>{getTitle("İstatistikler")}</title>-->
+<!--</svelte:head>-->
+
 <!-- Dashboard Page -->
 <div class="container">
   <!-- Welcome Alerts -->
   {#if data.getting_started_blocks.welcome_board}
     <div
-      class="alert alert-welcome alert-dismissible flex-fill w-100
-      show border mb-4"
+      class="alert alert-dark border-0 bg-minecraft animate__animated animate__slideInUp mb-3"
       role="alert">
       <button
         class="close"
@@ -29,7 +32,7 @@
               üzerinden erişin.
             </p>
             <button
-              class="btn btn-sm btn-outline-primary"
+              class="btn btn-sm btn-primary"
               data-target="#connectServer"
               data-toggle="modal">
               <i class="fas fa-plus mr-2"></i>
@@ -99,58 +102,54 @@
     </div>
   {/if}
 
-  <div class="row justify-content-between">
+  <a
+    href="/players"
+    class="row mb-3 justify-content-between animate__animated animate__fadeIn">
     <div class="col-lg-4">
-      <div class="card border-0 bg-transparent">
-        <div class="p-3">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <i class="fas fa-globe fa-2x text-gray d-block mr-5"></i>
-            </div>
-            <div class="col">
-              <h3 class="font-weight-bolder text-primary">12</h3>
-              <span class="text-primary">Çevrimiçi</span>
-            </div>
+      <div class="p-3 text-secondary">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-globe fa-2x d-block mr-3"></i>
+          </div>
+          <div class="col">
+            <h3 class="font-weight-bolder">12</h3>
+            Çevrimiçi
           </div>
         </div>
       </div>
     </div>
     <div class="col-lg-4">
-      <div class="card border-0 bg-transparent">
-        <div class="p-3">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <i class="fas fa-user-plus fa-2x text-gray d-block mr-5"></i>
-            </div>
-            <div class="col">
-              <h3 class="font-weight-bolder text-primary">
-                {data.registered_player_count}
-                <i class="fas fa-caret-up ml-2"></i>
-              </h3>
-              <span class="text-primary">Yeni Kayıt</span>
-            </div>
+      <div class="p-3 text-warning">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-user-plus fa-2x d-block mr-3"></i>
+          </div>
+          <div class="col">
+            <h3 class="font-weight-bolder">
+              {data.registered_player_count}
+              <i class="fas fa-caret-up ml-2"></i>
+            </h3>
+            Yeni Kayıt
           </div>
         </div>
       </div>
     </div>
     <div class="col-lg-4">
-      <div class="card border-0 bg-transparent">
-        <div class="p-3">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <i class="fas fa-users fa-2x text-gray d-block mr-5"></i>
-            </div>
-            <div class="col">
-              <h3 class="font-weight-bolder text-primary">
-                {data.registered_player_count}
-              </h3>
-              <span class="text-primary">Toplam Oyuncu</span>
-            </div>
+      <div class="p-3 text-bittersweet">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-users fa-2x d-block mr-3"></i>
+          </div>
+          <div class="col">
+            <h3 class="font-weight-bolder">
+              {data.registered_player_count}
+            </h3>
+            Toplam Oyuncu
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </a>
 
   <div class="card">
     <div class="card-body">
@@ -188,7 +187,7 @@
       </div>
 
       {#if data.tickets.length === 0}
-        <div class="container text-center">
+        <div class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -210,7 +209,7 @@
                     alt="{ticket.writer.username}"
                     width="48"
                     height="48"
-                    class="border rounded-circle" />
+                    class="border rounded-circle animate__animated animate__zoomIn" />
                 </div>
               </a>
               <div class="col">
@@ -238,7 +237,7 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">İstatistik</h5>
-      <div class="table-responsive">
+      <div class="table-responsive animate__animated animate__fadeIn">
         <table class="table table-sm m-0">
           <tbody class="text-muted">
             <tr>
@@ -277,31 +276,21 @@
 </div>
 
 <script context="module">
-  import { browser } from "$app/env";
-
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
-  let refreshable = false;
-
-  async function loadData() {
-    return new Promise((resolvePromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        ApiUtil.get("panel/initPage/dashboard")
-          .then((response) => {
-            if (response.data.result === "ok") {
-              resolve();
-              resolvePromise(response.data);
-            } else {
-              reject();
-
-              resolvePromise(response.data);
-            }
-          })
-          .catch((e) => {
-            reject();
-            console.log(e);
-          });
+  async function loadData({ request, CSRFToken }) {
+    return new Promise((resolve, reject) => {
+      ApiUtil.get({
+        path: "/api/panel/initPage/dashboard",
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          resolve(body);
+        } else {
+          reject(body);
+        }
       });
     });
   }
@@ -309,7 +298,7 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, session }) {
+  export async function load(request) {
     let output = {
       props: {
         data: {
@@ -325,15 +314,15 @@
       },
     };
 
-    if (browser && (page.path !== session.loadedPath || refreshable)) {
-      // from another page
-      output.props.data = {...output.props.data, ...await loadData()};
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
+
+      return output;
     }
 
-    if (page.path === session.loadedPath && !refreshable) {
-      refreshable = true;
-      output.props.data = {...output.props.data, ...session.data};
-    }
+    await loadData({ request }).then((body) => {
+      output.props.data = { ...output.props.data, ...body };
+    });
 
     return output;
   }
@@ -341,20 +330,40 @@
 
 <script>
   import { base } from "$app/paths";
+  import { session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
+  import { pageTitle } from "$lib/store";
 
-  import VisitorsChart from "../components/charts/Dashboard/VisitorsChart.svelte";
-  // import PlayersChart from "../components/charts/Dashboard/PlayersChart.svelte";
-  // import TrafficChart from "../components/charts/Dashboard/TrafficChart.svelte";
-  import TicketStatus from "../components/TicketStatus.svelte";
-  import Date from "../components/Date.svelte";
+  import VisitorsChart from "$lib/component/charts/Dashboard/VisitorsChart.svelte";
+  // import PlayersChart from "$lib/component/charts/Dashboard/PlayersChart.svelte";
+  // import TrafficChart from "$lib/component/charts/Dashboard/TrafficChart.svelte";
+  import TicketStatus from "$lib/component/TicketStatus.svelte";
+  import Date from "$lib/component/Date.svelte";
 
   export let data;
 
+  pageTitle.set("İstatistikler");
+
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadData({ CSRFToken: $session.CSRFToken })
+        .then((body) => {
+          data = { ...data, ...body };
+          resolve();
+        })
+        .catch(() => {
+          reject();
+        });
+    }, true);
+  }
+
   function onCloseGettingStartedCard() {
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/dashboard/closeGettingStartedCard", {})
+      ApiUtil.post({
+        path: "/api/panel/dashboard/closeGettingStartedCard",
+        CSRFToken: $session.CSRFToken,
+      })
         .then(() => {
           resolve();
         })

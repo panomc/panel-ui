@@ -1,14 +1,13 @@
 <div class="container">
   <!-- Action Menu -->
-  <div class="row mb-3">
+  <div class="row mb-3 animate__animated animate__slideInUp">
     <div class="col-6"></div>
     {#if $notifications.length !== 0}
       <div class="col text-right">
         <button
           type="button"
           class="btn btn-link text-danger"
-          on:click="{() => onDeleteAllClick()}"
-        >
+          on:click="{() => onDeleteAllClick()}">
           <span class="d-md-inline d-none">Tümünü Sil</span>
         </button>
       </div>
@@ -21,15 +20,13 @@
     <div class="card-body">
       <div
         class="d-flex flex-column justify-content-center align-items-center
-        border rounded"
-      >
+        border rounded">
         {#each $notifications as notification, index (notification)}
           <div class="d-flex flex-row align-items-center w-100 border-bottom">
             <a
               href="javascript:void(0);"
               class="dropdown-item d-flex flex-row py-2"
-              class:notification-unread="{notification.status === 'NOT_READ'}"
-            >
+              class:notification-unread="{notification.status === 'NOT_READ'}">
               <div class="col-auto pl-0">
                 <i class="fas fa-dot-circle text-primary"></i>
               </div>
@@ -43,8 +40,7 @@
             <button
               class="btn btn-link text-danger mx-2"
               use:tooltip="{['Bildirimi Sil', { placement: 'right' }]}"
-              on:click="{deleteNotification(notification.id)}"
-            >
+              on:click="{deleteNotification(notification.id)}">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -52,8 +48,7 @@
 
         {#if $notifications.length === 0}
           <div
-            class="d-flex flex-column align-items-center justify-content-center"
-          >
+            class="d-flex flex-column align-items-center justify-content-center">
             <i class="fas fa-bell fa-3x text-glass m-3"></i>
             <p class="text-gray">Bildirim yok.</p>
           </div>
@@ -81,10 +76,7 @@
 
   import { browser } from "$app/env";
 
-  import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
-
-  let refreshable = false;
 
   const notifications = writable([]);
   const count = writable(0);
@@ -121,24 +113,18 @@
     }
   }
 
-  async function loadData() {
-    return new Promise((resolvePromise, rejectPromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        ApiUtil.get("panel/notifications")
-          .then((response) => {
-            if (response.data.result === "ok") {
-              resolve();
-              resolvePromise(response.data);
-            } else {
-              reject();
-
-              rejectPromise(response.data);
-            }
-          })
-          .catch((e) => {
-            reject();
-            console.log(e);
-          });
+  async function loadData({ request, CSRFToken }) {
+    return new Promise((resolve, reject) => {
+      ApiUtil.get({
+        path: "/api/panel/notifications",
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          resolve(body);
+        } else {
+          reject(body);
+        }
       });
     });
   }
@@ -146,32 +132,24 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, session }) {
+  export async function load(request) {
     let output = {
       props: {
-        data: {
-          notifications: [],
-          notifications_count: 0,
-        },
+        data: {},
       },
     };
 
-    if (browser && (page.path !== session.loadedPath || refreshable)) {
-      // from another page
-      await loadData().then((data) => {
-        setNotifications(data.notifications);
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
 
-        count.set(parseInt(data.notifications_count));
-      });
+      return output;
     }
 
-    if (page.path === session.loadedPath && !refreshable) {
-      if (browser) refreshable = true;
+    await loadData({ request }).then((body) => {
+      setNotifications(body.notifications);
 
-      setNotifications(session.data.notifications);
-
-      count.set(parseInt(session.data.notifications_count));
-    }
+      count.set(parseInt(body.notifications_count));
+    });
 
     return output;
   }
@@ -181,12 +159,35 @@
   import { onDestroy, onMount } from "svelte";
   import { formatDistanceToNow } from "date-fns";
 
+  import { session } from "$app/stores";
+
   import tooltip from "$lib/tooltip.util";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
 
   import ConfirmRemoveAllNotificationsModal, {
     show as showDeleteAllNotificationsModal,
     setCallback as setDeleteAllNotificationsModalCallback,
-  } from "../components/modals/ConfirmRemoveAllNotificationsModal.svelte";
+  } from "$lib/component/modals/ConfirmRemoveAllNotificationsModal.svelte";
+
+  export let data;
+
+  pageTitle.set("Bildirimler")
+
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadData({ CSRFToken: $session.CSRFToken })
+        .then((body) => {
+          setNotifications(body.notifications);
+
+          count.set(parseInt(body.notifications_count));
+
+          resolve();
+        })
+        .catch(() => {
+          reject();
+        });
+    }, true);
+  }
 
   let notificationProcessID = 0;
   let page = 0;
@@ -196,20 +197,28 @@
   let interval;
 
   function getNotifications(id) {
-    loadData().then((data) => {
-      if (notificationProcessID === id) {
-        if (data.result === "ok") {
-          setNotifications(data.notifications);
-
-          count.set(parseInt(data.notifications_count));
-        }
-
-        setTimeout(() => {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadData({ CSRFToken: $session.CSRFToken })
+        .then((data) => {
           if (notificationProcessID === id) {
-            startNotificationsCountdown();
+            if (data.result === "ok") {
+              setNotifications(data.notifications);
+
+              count.set(parseInt(data.notifications_count));
+            }
+
+            setTimeout(() => {
+              if (notificationProcessID === id) {
+                startNotificationsCountdown();
+              }
+            }, 1000);
           }
-        }, 1000);
-      }
+
+          resolve();
+        })
+        .catch(() => {
+          reject();
+        });
     });
   }
 
@@ -217,12 +226,16 @@
     loadMoreLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/notifications/loadMore", {
-        id: get(notifications)[get(notifications).length - 1].id,
+      ApiUtil.post({
+        path: "/api/panel/notifications/loadMore",
+        body: {
+          id: get(notifications)[get(notifications).length - 1].id,
+        },
+        CSRFToken: $session.CSRFToken,
       })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            response.data.notifications.forEach((notification) => {
+        .then((body) => {
+          if (body.result === "ok") {
+            body.notifications.forEach((notification) => {
               notifications.update((value) =>
                 value.insert(value.length, notification)
               );
@@ -241,11 +254,15 @@
 
   function deleteNotification(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/notifications/delete", {
-        id,
+      ApiUtil.post({
+        path: "/api/panel/notifications/delete",
+        body: {
+          id,
+        },
+        CSRFToken: $session.CSRFToken,
       })
-        .then((response) => {
-          if (response.data.result === "ok") {
+        .then((body) => {
+          if (body.result === "ok") {
             get(notifications).forEach((notification) => {
               if (notification.id === id) {
                 notifications.update((value) =>

@@ -1,10 +1,7 @@
-<!--<style lang="scss" global>-->
-<!--  @import "node_modules/quill/dist/quill.snow";-->
-<!--</style>-->
-
 <article class="container">
   <!-- Action Menu -->
-  <section class="row justify-content-between align-items-center mb-3">
+  <section
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-auto text-left">
       <a
         href="{base}/posts{data.post.status === StatusTypes.TRASH
@@ -50,16 +47,13 @@
         class="btn btn-secondary"
         type="button"
         class:disabled="{loading ||
-          extractContent(data.post.text).length === 0 ||
+          isEditorEmpty ||
           data.post.title.length === 0}"
-        disabled="{loading ||
-          extractContent(data.post.text).length === 0 ||
-          data.post.title.length === 0}"
+        disabled="{loading || isEditorEmpty || data.post.title.length === 0}"
         on:click="{onSubmit}">
-        <span
-          >{data.post.status === StatusTypes.PUBLISHED
-            ? "Güncelle"
-            : "Yayınla"}</span>
+        <span>
+          {data.post.status === StatusTypes.PUBLISHED ? "Güncelle" : "Yayınla"}
+        </span>
       </button>
     </div>
   </section>
@@ -69,7 +63,7 @@
     <!-- Post -->
     <div class="col-lg-9 d-flex flex-fill">
       <div class="card w-100">
-        <div class="card-body">
+        <div class="card-body animate__animated animate__zoomIn">
           <input
             class="form-control form-control-lg display-3 mb-2"
             type="text"
@@ -78,44 +72,9 @@
 
           <div class="align-selft-center w-100 h-75">
             <!-- Editor -->
-            <div id="editorToolbar">
-              <span class="ql-formats">
-                <select class="ql-size"></select>
-              </span>
-              <span class="ql-formats">
-                <button class="ql-bold"></button>
-                <button class="ql-italic"></button>
-                <button class="ql-underline"></button>
-                <button class="ql-strike"></button>
-              </span>
-              <span class="ql-formats">
-                <select class="ql-color"></select>
-                <select class="ql-background"></select>
-              </span>
-              <span class="ql-formats">
-                <button class="ql-header" value="1"></button>
-                <button class="ql-header" value="2"></button>
-                <button class="ql-blockquote"></button>
-                <button class="ql-code-block"></button>
-              </span>
-              <span class="ql-formats">
-                <button class="ql-list" value="ordered"></button>
-                <button class="ql-list" value="bullet"></button>
-                <button class="ql-indent" value="-1"></button>
-                <button class="ql-indent" value="+1"></button>
-              </span>
-              <span class="ql-formats">
-                <button class="ql-direction" value="rtl"></button>
-                <select class="ql-align"></select>
-              </span>
-              <span class="ql-formats">
-                <button class="ql-link"></button>
-                <button class="ql-image"></button>
-                <button class="ql-video"></button>
-              </span>
-            </div>
-
-            <div id="editor"></div>
+            <Editor
+              bind:content="{data.post.text}"
+              bind:isEmpty="{isEditorEmpty}" />
             <!-- Editor End -->
           </div>
         </div>
@@ -125,7 +84,7 @@
     <!-- Post Option Cards -->
     <div class="col-lg-3">
       <div class="card">
-        <div class="p-2">
+        <div class="p-2 animate__animated animate__slideInDown">
           <form>
             <ul class="list-group">
               <li class="list-group-item">
@@ -143,7 +102,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-body">
+        <div class="card-body animate__animated animate__slideInDown">
           <h6>
             <i class="fas fa-folder-open text-primary mr-1"></i>
             Kategori:
@@ -173,7 +132,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-body">
+        <div class="card-body animate__animated animate__slideInDown">
           <h6>
             <i class="fas fa-image text-primary mr-1"></i>
             Küçük Resim:
@@ -195,17 +154,11 @@
   </section>
 </article>
 
-<ConfirmDeletePostModal />
 <SetPostThumbnailModal />
 <PostCategoriesAddEditModal />
 
 <script context="module">
-  import { browser } from "$app/env";
-
   import ApiUtil from "$lib/api.util";
-  import { showNetworkErrorOnCatch } from "$lib/store";
-
-  let refreshable = false;
 
   export const Modes = Object.freeze({
     EDIT: "edit",
@@ -220,82 +173,41 @@
 
   export const DefaultMode = Modes.CREATE;
 
-  async function loadPost(id) {
+  async function loadPost({ id, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post("panel/initPage/editPost", {
-        id: parseInt(id),
-      })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            const post = response.data.post;
+      ApiUtil.post({
+        path: "/api/panel/initPage/editPost",
+        body: {
+          id: parseInt(id),
+        },
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          const data = body;
 
-            resolve(post);
-          } else if (response.data.result === "error") {
-            const errorCode = response.data.error;
+          data.id = parseInt(id);
 
-            reject(errorCode, response.data);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  }
-
-  async function loadCategories() {
-    return new Promise((resolve, reject) => {
-      ApiUtil.get("panel/post/category/categories")
-        .then((response) => {
-          if (response.data.result === "ok") {
-            const data = response.data;
-
-            resolve(data);
-          } else if (response.data.result === "error") {
-            const errorCode = response.data.error;
-
-            reject(errorCode, response.data);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  }
-
-  async function initData(id) {
-    return new Promise((resolvePromise, rejectPromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        loadPost(id)
-          .then((data) => {
-            data.id = id;
-
-            resolvePromise(data);
-          })
-          .catch((errorCode, data) => {
-            if (errorCode === "POST_NOT_FOUND") {
-              resolve();
-            } else {
-              reject();
-            }
-
-            rejectPromise(errorCode, data);
-          });
+          resolve(data);
+        } else {
+          reject(body);
+        }
       });
     });
   }
 
-  async function initCategories() {
-    return new Promise((resolvePromise, rejectPromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        loadCategories()
-          .then((data) => {
-            resolvePromise(data);
-          })
-          .catch((errorCode, data) => {
-            reject();
-
-            rejectPromise(errorCode, data);
-          });
+  async function loadCategories({ request, CSRFToken }) {
+    return new Promise((resolve, reject) => {
+      ApiUtil.get({
+        path: "/api/panel/post/category/categories",
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          resolve(body);
+        } else {
+          reject(body);
+        }
       });
     });
   }
@@ -303,7 +215,7 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, session }, mode = DefaultMode) {
+  export async function load(request, mode = DefaultMode) {
     let output = {
       props: {
         data: {
@@ -324,38 +236,26 @@
       },
     };
 
-    if (
-      page.path === session.loadedPath &&
-      !refreshable &&
-      !!session.data &&
-      session.data.error === "POST_NOT_FOUND"
-    )
-      return null;
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
 
-    if (browser && (page.path !== session.loadedPath || refreshable)) {
-      // from another page
-      if (mode === Modes.EDIT)
-        await initData(parseInt(page.params.id))
-          .then((post) => {
-            output.props.data.post = post;
-          })
-          .catch((errorCode) => {
-            if (!!errorCode && errorCode === "POST_NOT_FOUND") {
-              return null;
-            }
-          });
+      return output;
     }
 
-    if (browser)
-      await initCategories().then((data) => {
-        output.props.data = { ...output.props.data, ...data };
+    if (mode === Modes.EDIT) {
+      await loadPost({ id: request.page.params.id || -1, request })
+        .then(async (body) => {
+          output.props.data.post = body.post;
+        })
+        .catch((body) => {
+          if (body.error === "POST_NOT_FOUND") output = null;
+        });
+    }
+
+    if (output !== null)
+      await loadCategories({ request }).then((body) => {
+        output.props.data = { ...output.props.data, ...body };
       });
-
-    if (page.path === session.loadedPath && !refreshable) {
-      if (browser) refreshable = true;
-
-      output.props.data.post = session.data.post;
-    }
 
     return output;
   }
@@ -364,70 +264,103 @@
 <script>
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
+  import { session, page } from "$app/stores";
 
-  import { extractContent } from "$lib/text.util";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
 
-  import SetPostThumbnailModal from "../components/modals/SetPostThumbnailModal.svelte";
+  import SetPostThumbnailModal from "$lib/component/modals/SetPostThumbnailModal.svelte";
 
-  import ConfirmDeletePostModal, {
+  import {
     setCallback as setDeletePostModalCallback,
     show as showDeletePostModal,
-  } from "../components/modals/ConfirmDeletePostModal.svelte";
+  } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
 
   import PostCategoriesAddEditModal, {
     show as showPostCategoriesAddEditModal,
     setCallback as setCallbackForPostCategoriesAddEditModal,
-  } from "../components/modals/PostCategoriesAddEditModal.svelte";
+  } from "$lib/component/modals/PostCategoriesAddEditModal.svelte";
+
+  import Editor from "$lib/component/Editor.svelte";
 
   export let data;
 
+  let isEditorEmpty = true;
   let loading = false;
-  // let quill;
-  // let Quill;
+
+  pageTitle.set(
+    data.mode === Modes.EDIT ? "Yazıyı Düzenle" : "Yeni Yazı Oluştur"
+  );
+
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch(async (resolve, reject) => {
+      if (data.mode === Modes.EDIT) {
+        await loadPost({
+          id: $page.params.id || -1,
+          CSRFToken: $session.CSRFToken,
+        })
+          .then(async (body) => {
+            data.post = body.post;
+
+            resolve();
+          })
+          .catch((body) => {
+            if (body.error === "POST_NOT_FOUND") {
+              resolve();
+
+              goto(base + "/error-404");
+            } else reject();
+          });
+      } else {
+        resolve();
+      }
+
+      showNetworkErrorOnCatch((resolve, reject) => {
+        loadCategories({ CSRFToken: $session.CSRFToken })
+          .then((body) => {
+            data = { ...data, ...body };
+            resolve();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    }, true);
+  }
 
   function getStatusByPostStatus(status) {
     return status === StatusTypes.TRASH
       ? "Çöp"
       : status === StatusTypes.PUBLISHED
-      ? "Yayında"
+      ? "Yayınlanmış"
       : status === StatusTypes.DRAFT
       ? "Taslak"
       : "Yeni";
   }
 
-  // function imageHandler() {
-  //   const range = quill.getSelection();
-  //   const value = prompt("What is the image URL");
-  //
-  //   if (value) {
-  //     quill.insertEmbed(range.index, "image", value, Quill.sources.USER);
-  //   }
-  // }
-  //
-  // function initPost() {
-  //   quill.setHTML(data.post.text);
-  // }
-
   function onSubmit() {
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/post/publish", data.post)
-        .then((response) => {
-          if (response.data.result === "ok") {
+      ApiUtil.post({
+        path: "/api/panel/post/publish",
+        body: data.post,
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
             loading = false;
 
             if (data.mode === Modes.CREATE) {
-              goto(base + "/posts/post/" + response.data.id);
+              goto(base + "/posts/post/" + body.id);
             }
 
             //TODO: TOAST
 
             resolve();
-          } else if (response.data.result === "error") {
+          } else if (body.result === "error") {
             loading = false;
 
-            data.error = response.data.error;
+            data.error = body.error;
 
             resolve();
           } else reject();
@@ -442,9 +375,13 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/post/moveDraft", data.post)
-        .then((response) => {
-          if (response.data.result === "ok") {
+      ApiUtil.post({
+        path: "/api/panel/post/moveDraft",
+        body: data.post,
+        CSRFToken: $session.CSRFToken,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
             loading = false;
 
             goto(base + "/posts/draft");
@@ -461,36 +398,6 @@
   function onCreateCategoryClick() {
     showPostCategoriesAddEditModal("create");
   }
-
-  // onMount(async () => {
-  //   const { default: Quill } = await import("quill");
-  //
-  //   quill = new Quill("#editor", {
-  //     modules: {
-  //       toolbar: {
-  //         container: "#editorToolbar",
-  //         handlers: {
-  //           image: imageHandler,
-  //         },
-  //       },
-  //     },
-  //     theme: "snow",
-  //   });
-  //
-  //   quill.setHTML = (html) => {
-  //     quill.container.firstChild.innerHTML = html;
-  //   };
-  //
-  //   quill.getHTML = () => {
-  //     return quill.container.firstChild.innerHTML;
-  //   };
-  //
-  //   quill.on("text-change", () => {
-  //     data.post.text = quill.getHTML();
-  //   });
-  //
-  //   initPost();
-  // });
 
   setCallbackForPostCategoriesAddEditModal((routeFirstPage, category) => {
     showNetworkErrorOnCatch((resolve, reject) => {

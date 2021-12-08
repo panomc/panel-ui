@@ -8,7 +8,7 @@
 
   <section class="row">
     <div class="col-lg-4 col-md-6">
-      <div class="card shadow selected">
+      <div class="card shadow selected animate__animated animate__fadeIn">
         <img
           alt="Vanilla"
           class="rounded p-2"
@@ -42,6 +42,11 @@
 </div>
 
 <script>
-  import ConfirmDeleteThemeModal from "../../components/modals/ConfirmDeleteThemeModal.svelte";
   import { base } from "$app/paths";
+
+  import { pageTitle } from "$lib/store";
+
+  import ConfirmDeleteThemeModal from "$lib/component/modals/ConfirmDeleteThemeModal.svelte";
+
+  pageTitle.set("Temalar")
 </script>

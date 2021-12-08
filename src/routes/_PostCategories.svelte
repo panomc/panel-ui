@@ -1,8 +1,8 @@
 <!-- Categories Page -->
-
 <article class="container">
   <!-- Action Menu -->
-  <div class="row justify-content-between align-items-center mb-3">
+  <div
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-6">
       <a class="btn btn-link" role="button" href="{base}/posts">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -13,8 +13,7 @@
       <button
         class="btn btn-primary"
         type="button"
-        on:click="{onCreateCategoryClick}"
-      >
+        on:click="{onCreateCategoryClick}">
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
       </button>
@@ -31,7 +30,7 @@
 
       <!-- No Category -->
       {#if data.category_count === 0}
-        <div class="container text-center">
+        <div class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-sticky-note fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -39,7 +38,7 @@
 
       <!-- Tickets Table -->
       {#if data.category_count > 0}
-        <div class="table-responsive">
+        <div class="table-responsive animate__animated animate__fadeIn">
           <table class="table mb-0">
             <thead>
               <tr>
@@ -62,19 +61,18 @@
                         data-toggle="dropdown"
                         href="javascript:void(0);"
                         id="postAction"
-                        title="Eylemler"
-                      >
+                        title="Eylemler">
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div
                         aria-labelledby="postAction"
-                        class="dropdown-menu dropdown-menu-right"
-                      >
+                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn">
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          on:click="{onShowDeletePostCategoryModalClick(index)}"
-                        >
+                          on:click="{onShowDeletePostCategoryModalClick(
+                            index
+                          )}">
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
                         </a>
@@ -87,8 +85,7 @@
                       data-toggle="modal"
                       href="javascript:void(0);"
                       title="Kategoriyi Düzenle"
-                      on:click="{onShowEditCategoryButtonClick(index)}"
-                    >
+                      on:click="{onShowEditCategoryButtonClick(index)}">
                       {category.title}
                     </a>
                   </td>
@@ -97,8 +94,7 @@
                     <a
                       href="/category/{category.url}"
                       target="_blank"
-                      title="Kategoriyi Görüntüle"
-                    >
+                      title="Kategoriyi Görüntüle">
                       /category/
                       <b class="text-muted">{category.url}</b>
                     </a>
@@ -108,8 +104,7 @@
                       value="#{category.color}"
                       class="form-control form-control-sm bg-transparent"
                       disabled
-                      type="color"
-                    />
+                      type="color" />
                   </td>
                 </tr>
               {/each}
@@ -123,8 +118,7 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
     </div>
   </div>
 </article>
@@ -136,53 +130,28 @@
 <PostCategoriesAddEditModal />
 
 <script context="module">
-  import { browser } from "$app/env";
-
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
 
-  let refreshable = false;
-
-  async function loadData(page) {
+  async function loadData({ page, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post("panel/initPage/posts/categoryPage", {
-        page: parseInt(page),
-      })
-        .then((response) => {
-          if (response.data.result === "ok") {
-            const data = response.data;
+      ApiUtil.post({
+        path: "/api/panel/initPage/posts/categoryPage",
+        body: {
+          page: parseInt(page),
+        },
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          const data = body;
 
-            resolve(data);
-          } else if (response.data.result === "error") {
-            const errorCode = response.data.error;
+          data.page = parseInt(page);
 
-            reject(errorCode, response.data);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  }
-
-  async function initData(page) {
-    return new Promise((resolvePromise, rejectPromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        loadData(page)
-          .then((data) => {
-            data.page = parseInt(page);
-
-            resolvePromise(data);
-          })
-          .catch((errorCode, data) => {
-            if (errorCode === "PAGE_NOT_FOUND") {
-              resolve();
-            } else {
-              reject();
-            }
-
-            rejectPromise(errorCode, data);
-          });
+          resolve(data);
+        } else {
+          reject(body);
+        }
       });
     });
   }
@@ -190,7 +159,7 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, session }) {
+  export async function load(request) {
     let output = {
       props: {
         data: {
@@ -202,36 +171,21 @@
       },
     };
 
-    if (
-      page.path === session.loadedPath &&
-      !refreshable &&
-      !!session.data &&
-      session.data.error === "PAGE_NOT_FOUND"
-    )
-      return null;
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
 
-    if (browser && (page.path !== session.loadedPath || refreshable)) {
-      // from another page
-      await initData(!!page.params.page ? parseInt(page.params.page) : 1)
-        .then((data) => {
-          output.props.data = {...output.props.data, ...data};
-        })
-        .catch((errorCode) => {
-          if (!!errorCode && errorCode === "PAGE_NOT_FOUND") {
-            return null;
-          }
-        });
+      return output;
     }
 
-    if (page.path === session.loadedPath && !refreshable) {
-      if (browser) refreshable = true;
-
-      output.props.data = {...output.props.data, ...session.data};
-
-      output.props.data.page = !!page.params.page
-        ? parseInt(page.params.page)
-        : 1;
-    }
+    await loadData({ page: request.page.params.page || 1, request })
+      .then((data) => {
+        output.props.data = { ...output.props.data, ...data };
+      })
+      .catch((body) => {
+        if (body.error === "PAGE_NOT_FOUND") {
+          output = null;
+        }
+      });
 
     return output;
   }
@@ -240,37 +194,60 @@
 <script>
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
+  import { session, page } from "$app/stores";
 
-  import Pagination from "../components/Pagination.svelte";
+  import { pageTitle } from "$lib/store";
+
+  import Pagination from "$lib/component/Pagination.svelte";
 
   import PostCategoriesAddEditModal, {
     show as showPostCategoriesAddEditModal,
     setCallback as setCallbackForPostCategoriesAddEditModal,
     onHide as onAddEditPostCategoryModalHide,
-  } from "../components/modals/PostCategoriesAddEditModal.svelte";
+  } from "$lib/component/modals/PostCategoriesAddEditModal.svelte";
   import ConfirmDeletePostCategoryModal, {
     setCallback as setDeletePostCategoryModalCallback,
     show as showDeletePostCategoryModal,
     onHide as onConfirmDeletePostCategoryModalHide,
-  } from "../components/modals/ConfirmDeletePostCategoryModal.svelte";
+  } from "$lib/component/modals/ConfirmDeletePostCategoryModal.svelte";
 
   export let data;
 
+  pageTitle.set("Yazı Kategorileri");
+
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadData({ page: $page.params.page || 1, CSRFToken: $session.CSRFToken })
+        .then((loadedData) => {
+          data = loadedData;
+          resolve();
+        })
+        .catch((body) => {
+          if (body.error === "PAGE_NOT_FOUND") {
+            goto(base + "/error-404");
+
+            resolve();
+          } else {
+            reject();
+          }
+        });
+    }, true);
+  }
+
   function reloadData(page = data.page) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData(page)
+      loadData({ page, CSRFToken: $session.CSRFToken })
         .then((loadedData) => {
-          resolve();
-
           if (page !== data.page) {
             goto(base + "/posts/categories/" + page);
           } else {
             data = loadedData;
-            data.page = page;
           }
+
+          resolve();
         })
-        .catch((errorCode) => {
-          if (!!errorCode && errorCode === "PAGE_NOT_FOUND") {
+        .catch((body) => {
+          if (body.error === "PAGE_NOT_FOUND") {
             resolve();
 
             reloadData(page - 1);

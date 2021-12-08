@@ -1,7 +1,7 @@
 <!-- General Settings Sub Page -->
 <div class="tab-pane">
   <div class="card">
-    <div class="card-body">
+    <div class="card-body animate__animated animate__fadeIn">
       <h5 class="card-title">Platform Ayarları</h5>
       <form>
         <div class="form-group row">
@@ -38,3 +38,9 @@
     </div>
   </div>
 </div>
+
+<script>
+  import { pageTitle } from "$lib/store";
+
+  pageTitle.set("Genel Ayarlar")
+</script>

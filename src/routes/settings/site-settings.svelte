@@ -1,7 +1,7 @@
 <!-- Site Settings Sub Page -->
 <div class="tab-pane">
   <div class="card">
-    <div class="card-body">
+    <div class="card-body  animate__animated animate__fadeIn">
       <h5 class="card-title">Website Ayarları</h5>
       <form>
         <div class="form-group row">
@@ -14,8 +14,7 @@
               aria-describedby="siteTitle"
               class="form-control"
               id="siteTitle"
-              type="text"
-            />
+              type="text" />
           </div>
         </div>
         <div class="form-group row">
@@ -59,8 +58,7 @@
                   class="d-block ml-auto"
                   height="48"
                   src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
-                  width="48"
-                />
+                  width="48" />
               </div>
               <div class="col">
                 <input class="form-control-file" id="siteFavicon" type="file" />
@@ -80,3 +78,9 @@
     </div>
   </div>
 </div>
+
+<script>
+  import { pageTitle } from "$lib/store";
+
+  pageTitle.set("Website Ayarları")
+</script>

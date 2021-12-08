@@ -1,6 +1,6 @@
 <div class="container">
   <!-- Action Menu -->
-  <div class="row justify-content-between align-items-center mb-3">
+  <div class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-6">
       <a class="btn btn-link" role="button" href="{base}/players">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -19,12 +19,8 @@
     </div>
   </div>
 
-  <h3 class="text-muted badge badge-lightprimary panel-subtitle">
-    Yetki Grupları
-  </h3>
-
   <div class="card">
-    <div class="card-body table-responsive">
+    <div class="card-body table-responsive animate__animated animate__fadeIn">
       <table class="table table-borderless">
         <thead>
           <tr class="text-center text-muted align-top">
@@ -130,7 +126,7 @@
                     </a>
                     <div
                       aria-labelledby="permAction"
-                      class="dropdown-menu dropdown-menu-left"
+                      class="dropdown-menu dropdown-menu-left animate__animated animate__zoomIn animate__faster"
                     >
                       <a
                         class="dropdown-item"
@@ -179,6 +175,7 @@
                         >
                           <a href="{base}/players/player/{user}">
                             <img
+                              class="animate__animated animate__zoomIn"
                               src="https://minotar.net/avatar/{user}"
                               width="32"
                               height="32"
@@ -242,45 +239,21 @@
 <ConfirmDeletePermissionGroupModal />
 
 <script context="module">
-  import { browser } from "$app/env";
-
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
 
-  let refreshable = false;
-
-  async function loadData() {
+  async function loadData({ request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.get("panel/initPage/permissionsPage")
-        .then((response) => {
-          if (response.data.result === "ok") {
-            const data = response.data;
-
-            resolve(data);
-          } else if (response.data.result === "error") {
-            const errorCode = response.data.error;
-
-            reject(errorCode, response.data);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  }
-
-  async function initData() {
-    return new Promise((resolvePromise, rejectPromise) => {
-      showNetworkErrorOnCatch((resolve, reject) => {
-        loadData()
-          .then((data) => {
-            resolvePromise(data);
-          })
-          .catch((errorCode, data) => {
-            reject();
-
-            rejectPromise(errorCode, data);
-          });
+      ApiUtil.get({
+        path: "/api/panel/initPage/permissionsPage",
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          resolve(body);
+        } else {
+          reject(body);
+        }
       });
     });
   }
@@ -288,7 +261,7 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, session }) {
+  export async function load(request) {
     let output = {
       props: {
         data: {
@@ -299,23 +272,15 @@
       },
     };
 
-    if (browser && (page.path !== session.loadedPath || refreshable)) {
-      // from another page
-      await initData().then((data) => {
-        output.props.data = {...output.props.data, ...data};
-      });
-      // .catch((errorCode, data) => {
-      //   if (!!errorCode && errorCode === "PAGE_NOT_FOUND") {
-      //     return null;
-      //   }
-      // });
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
+
+      return output;
     }
 
-    if (page.path === session.loadedPath && !refreshable) {
-      if (browser) refreshable = true;
-
-      output.props.data = {...output.props.data, ...session.data};
-    }
+    await loadData({ request }).then((data) => {
+      output.props.data = { ...output.props.data, ...data };
+    });
 
     return output;
   }
@@ -323,26 +288,44 @@
 
 <script>
   import { base } from "$app/paths";
+  import { session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
+  import { pageTitle } from "$lib/store";
 
   import AddEditPermGroupModal, {
     show as showPermissionGroupAddEditModal,
     setCallback as setCallbackForPermissionGroupAddEditModal,
-  } from "../../components/modals/AddEditPermGroupModal.svelte";
+  } from "$lib/component/modals/AddEditPermGroupModal.svelte";
 
   import ConfirmDeletePermissionGroupModal, {
     setCallback as setDeletePermissionGroupModalCallback,
     show as showDeletePermissionGroupModal,
-  } from "../../components/modals/ConfirmDeletePermissionGroupModal.svelte";
+  } from "$lib/component/modals/ConfirmDeletePermissionGroupModal.svelte";
 
   export let data;
+
+  pageTitle.set("Yetkiler")
+
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadData({ CSRFToken: $session.CSRFToken })
+        .then((body) => {
+          data = { ...data, ...body };
+
+          resolve();
+        })
+        .catch(() => {
+          reject();
+        });
+    }, true);
+  }
 
   let loadingPermissionsList = [];
 
   function reloadData() {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData()
+      loadData({ CSRFToken: $session.CSRFToken })
         .then((loadedData) => {
           resolve();
 
@@ -404,13 +387,17 @@
       : "ADD";
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post("panel/permission/set", {
-        mode: mode,
-        permission_group_id: permissionGroup.id,
-        permission_id: permission.id,
+      ApiUtil.post({
+        path: "/api/panel/permission/set",
+        body: {
+          mode: mode,
+          permission_group_id: permissionGroup.id,
+          permission_id: permission.id,
+        },
+        CSRFToken: $session.CSRFToken,
       })
-        .then((response) => {
-          if (response.data.result === "ok") {
+        .then((body) => {
+          if (body.result === "ok") {
             loadingPermissionsList[
               permission.name + "_" + permissionGroup.name
             ] = false;
@@ -437,7 +424,7 @@
             }
 
             resolve();
-          } else if (response.data.error === "NOT_EXISTS") refreshBrowserPage();
+          } else if (body.error === "NOT_EXISTS") refreshBrowserPage();
           else reject();
         })
         .catch(() => {

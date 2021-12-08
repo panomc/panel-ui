@@ -9,7 +9,7 @@
         <a href="" class="nav-item nav-link">Diğer</a>
       </div>
     </nav>
-    <div class="card-body">
+    <div class="card-body animate__animated animate__fadeIn">
       <div class="row justify-content-between pb-2">
         <div class="col-6 text-left">
           <h5 class="card-title">Yazı Seçenekleri</h5>
@@ -42,12 +42,10 @@
                 id="dateFormat1"
                 name="dateFormats"
                 type="radio"
-                value="option1"
-              />
+                value="option1" />
               <label
                 class="form-check-label custom-control-label"
-                for="dateFormat1"
-              >
+                for="dateFormat1">
                 01/01/2019
               </label>
             </div>
@@ -57,12 +55,10 @@
                 id="dateFormat2"
                 name="dateFormats"
                 type="radio"
-                value="option2"
-              />
+                value="option2" />
               <label
                 class="form-check-label custom-control-label"
-                for="dateFormat2"
-              >
+                for="dateFormat2">
                 01.01.2019
               </label>
             </div>
@@ -72,12 +68,10 @@
                 id="dateFormat3"
                 name="dateFormats"
                 type="radio"
-                value="option3"
-              />
+                value="option3" />
               <label
                 class="form-check-label custom-control-label"
-                for="dateFormat3"
-              >
+                for="dateFormat3">
                 01-01-2019
               </label>
             </div>
@@ -92,8 +86,7 @@
               <input
                 class="custom-control-input"
                 id="siteLanguageSwitch"
-                type="checkbox"
-              />
+                type="checkbox" />
               <label class="custom-control-label" for="siteLanguageSwitch">
                 Göster
               </label>
@@ -109,3 +102,9 @@
     </div>
   </div>
 </section>
+
+<script>
+  import { pageTitle } from "$lib/store";
+
+  pageTitle.set("Tema Ayarları")
+</script>
