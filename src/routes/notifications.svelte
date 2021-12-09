@@ -48,7 +48,7 @@
 
         {#if $notifications.length === 0}
           <div
-            class="d-flex flex-column align-items-center justify-content-center">
+            class="d-flex flex-column align-items-center justify-content-center animate__animated animate__zoomIn">
             <i class="fas fa-bell fa-3x text-glass m-3"></i>
             <p class="text-gray">Bildirim yok.</p>
           </div>

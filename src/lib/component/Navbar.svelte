@@ -67,7 +67,7 @@
         {#if quickNotifications.length === 0 && !notificationsLoading}
           <div
             class="d-flex flex-column align-items-center justify-content-center">
-            <i class="fas fa-bell text-glass m-3"></i>
+            <i class="fas fa-bell fa-2x text-glass m-2"></i>
             <p class="text-gray">Bildirim yok.</p>
           </div>
         {/if}

@@ -65,39 +65,37 @@
         bind:clientHeight="{$messagesSectionClientHeight}">
         {#if data.ticket.messages.length < data.ticket.count && data.ticket.count > 5}
           <button
-            class="btn text-primary bg-lightprimary d-block m-auto"
+            class="btn btn-link btn-sm bg-lightprimary d-block m-auto"
             class:disabled="{loadMoreLoading}"
             on:click="{loadMore}"
-            >Eski Mesajları Göster ({data.ticket.count -
+            >Önceki Mesajlar ({data.ticket.count -
               (data.ticket.messages.length - sentMessageCount)})
           </button>
         {/if}
 
         {#each data.ticket.messages as message, index (message)}
           {#if message.panel}
-            <div class="row py-3 flex-nowrap">
-              <div class="col-2 d-flex justify-content-end"></div>
-              <div
-                class="col d-flex flex-nowrap justify-content-end align-items-center">
-                <a
-                  class="btn btn-link mr-3 d-none"
+            <div class="row py-2 flex-nowrap justify-content-end">
+              <div class="col-auto d-flex align-items-center">
+                <!-- <a
+                  class="btn btn-link btn-sm text-gray mr-2"
                   role="button"
                   href="javascript:void(0);">
                   <i class="fas fa-ellipsis-v"></i>
-                </a>
-                <div
-                  class="d-inline-block p-2 bg-lightsecondary border rounded">
-                  <div class="pb-2 text-black">{@html message.message}</div>
-                  <small class="text-muted pt-2"
-                    ><Date time="{message.date}" /></small>
+                </a> -->
+                <div class="p-2 bg-lightsecondary border">
+                  <div class="text-black">{@html message.message}</div>
+                  <small class="text-muted"
+                    ><Date time="{message.date}" />
+                  </small>
                 </div>
               </div>
-              <div class="col-2">
+              <div class="col-auto">
                 <a href="{base}/players/player/{message.username}">
                   <img
                     src="https://minotar.net/avatar/{message.username}/48"
                     alt="{message.username}"
-                    class="ml-3 border rounded-circle d-block mr-auto"
+                    class="ml-2 border rounded-circle d-block mr-auto animate__animated animate__zoomIn"
                     use:tooltip="{[message.username, { placement: 'bottom' }]}"
                     width="48"
                     height="48" />
@@ -105,25 +103,26 @@
               </div>
             </div>
           {:else}
-            <div class="row py-3 flex-nowrap">
-              <div class="col-2 text-right">
+            <div class="row py-2 flex-nowrap justify-content-start">
+              <div class="col-auto text-right">
                 <a href="{base}/players/player/{message.username}">
                   <img
                     src="https://minotar.net/avatar/{message.username}/48"
                     alt="{message.username}"
-                    class="mr-3 border rounded-circle"
+                    class="mr-2 border rounded-circle animate__animated animate__zoomIn"
                     use:tooltip="{[message.username, { placement: 'bottom' }]}"
                     width="48"
                     height="48" />
                 </a>
               </div>
-              <div class="col d-flex flex-nowrap align-items-center">
+              <div class="col-auto d-flex flex-nowrap align-items-center">
                 <div class="p-2 rounded bg-lightprimary border d-inline-block">
                   <div class="pb-2 text-black">
                     {message.message}
                   </div>
-                  <small class="text-muted pt-2"
-                    ><Date time="{message.date}" /></small>
+                  <small class="text-muted pt-2">
+                    <Date time="{message.date}" />
+                  </small>
                 </div>
                 <a
                   class="btn btn-link d-none ml-3"
@@ -132,7 +131,6 @@
                   <i class="fas fa-ellipsis-v"></i>
                 </a>
               </div>
-              <div class="col-2"></div>
             </div>
           {/if}
         {/each}

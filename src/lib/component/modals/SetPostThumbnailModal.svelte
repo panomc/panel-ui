@@ -4,8 +4,7 @@
   aria-hidden="true"
   class="modal fade"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -15,8 +14,7 @@
           class="close"
           data-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button"
-        >
+          type="button">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -24,7 +22,7 @@
         <div class="modal-body">
           <div class="form-group">
             <div class="container text-center">
-              <i class="fas fa-image fa-3x mr-3 text-glass"></i>
+              <i class="fas fa-image fa-3x mx-2 text-glass"></i>
               <p class="text-gray">Küçük resim belirlenmedi.</p>
             </div>
           </div>
@@ -35,14 +33,13 @@
 
           <div class="form-group text-center">
             <button href="#" class="btn btn-link text-danger mr-2">
-              <i class="fas fa-trash"></i>
+              <i class="fas fa-times mr-1"></i> Kaldır
             </button>
             <input
               type="file"
               id="postThumbnail"
               name="postThumbnail"
-              class="btn bg-lightprimary text-primary"
-            />
+              class="btn bg-lightprimary text-primary" />
           </div>
         </div>
         <div class="modal-footer">
