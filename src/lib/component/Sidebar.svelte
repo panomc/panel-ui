@@ -6,11 +6,10 @@
   <!-- Sidebar Logo -->
   <div class="sidebar-logo">
     <a
-      href="javascript:void(0);"
+      href="./"
       class="sidebar-toggler btn btn-link text-light"
       title="Menüyü Aç/kapa"
-      on:click="{onMobileSideBarCollapseClick}"
-    >
+      on:click="{onMobileSideBarCollapseClick}">
       <i class="fas fa-bars"></i>
     </a>
 
@@ -19,8 +18,7 @@
         alt="Pano"
         title="Pano"
         src="{base + '/assets/img/logo.svg'}"
-        width="20"
-      />
+        width="20" />
     </a>
   </div>
 
@@ -34,8 +32,7 @@
           width="64"
           height="64"
           src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
-          use:tooltip="{['Website Ayaları', { placement: 'right' }]}"
-        />
+          use:tooltip="{['Website Ayaları', { placement: 'right' }]}" />
       </a>
 
       <h5 class="text-light">{$website.name}</h5>
@@ -54,8 +51,7 @@
             class="btn btn-aqua btn-sm text-white"
             data-target="#showServers"
             data-toggle="modal"
-            type="button"
-          >
+            type="button">
             Sunucuları Görüntüle
           </button>
         </a>
@@ -71,8 +67,7 @@
           use:tooltip="{['Website', { placement: 'bottom' }]}"
           on:click="{onWebsiteMenuClick}"
           class:active="{$sidebarTabsState === 'website'}"
-          class:text-light="{$sidebarTabsState !== 'website'}"
-        >
+          class:text-light="{$sidebarTabsState !== 'website'}">
           <i class="fas fa-globe fa-1g"></i>
         </a>
       </li>
@@ -83,8 +78,7 @@
           use:tooltip="{['Sunucu', { placement: 'bottom' }]}"
           on:click="{onGameMenuClick}"
           class:active="{$sidebarTabsState === 'game'}"
-          class:text-light="{$sidebarTabsState !== 'game'}"
-        >
+          class:text-light="{$sidebarTabsState !== 'game'}">
           <i class="fas fa-cube fa-1g"></i>
         </a>
       </li>

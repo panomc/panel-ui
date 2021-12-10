@@ -3,7 +3,7 @@
   <div class="card">
     <nav class="border-bottom border-glass rounded-top page-category">
       <div class="nav nav-link d-flex flex-row w-100">
-        <a href="" class="nav-item nav-link active"> Yazılar </a>
+        <a href="javasc" class="nav-item nav-link active"> Yazılar </a>
         <a href="" class="nav-item nav-link">Renkler</a>
         <a href="" class="nav-item nav-link">Düzen</a>
         <a href="" class="nav-item nav-link">Diğer</a>
