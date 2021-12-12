@@ -61,8 +61,7 @@
             </div>
           </div>
           <small class="text-muted">
-            Kod {timeToRefreshKey}{timeToRefreshKey === "..." ? "" : " saniye"}
-            sonra yenilenecek.
+            Kod {timeToRefreshKey} saniye sonra yenilenecek.
           </small>
 
           <div class="my-4">
