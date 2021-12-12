@@ -4,8 +4,7 @@
   class="modal fade"
   id="connectServer"
   role="document"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,8 +13,7 @@
           class="close"
           data-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button"
-        >
+          type="button">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -47,8 +45,7 @@
               bind:value="{commandText}"
               class="form-control shadow-sm"
               id="platformToken"
-              type="text"
-            />
+              type="text" />
             <div class="input-group-append">
               <button
                 on:click="{onCopyCommandTextClick}"
@@ -57,9 +54,8 @@
                 type="button"
                 use:tooltip="{[
                   isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala',
-                  { placement: 'top' },
-                ]}"
-              >
+                  { placement: 'top', hideOnClick: false },
+                ]}">
                 <i class="fas fa-clipboard"></i>
               </button>
             </div>
