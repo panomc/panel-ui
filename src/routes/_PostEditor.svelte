@@ -114,7 +114,7 @@
               <select
                 class="form-control form-control-sm mb-3"
                 bind:value="{data.post.category}">
-                <option class="text-primary" value="-1">Kategorisiz</option>
+                <option class="text-primary" value="{-1}">Kategorisiz</option>
 
                 {#each data.categories as category, index (category)}
                   <option value="{category.id}">{category.title}</option>
