@@ -72,19 +72,19 @@
             <ul class="list-unstyled mb-1">
               <h5>Daha Fazlası</h5>
               <li>
-                <a href="javascript:void(0);">
+                <a href="#">
                   <i class="fas fa-puzzle-piece mr-1"></i>
                   Eklenti Ekleyin
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0);">
+                <a href="#">
                   <i class="fas fa-palette mr-1"></i>
                   Tema Ekleyin
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0);" target="_blank">
+                <a href="#" target="_blank">
                   <i class="fas fa-book-open mr-1"></i>
                   Dökümantasyonları İnceleyin
                 </a>
@@ -151,7 +151,7 @@
     </div>
   </a>
 
-  <div class="card">
+  <div class="card bg-pink color-400">
     <div class="card-body">
       <div class="row justify-content-between">
         <div class="col-4">

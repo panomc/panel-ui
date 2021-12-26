@@ -69,14 +69,6 @@
   margin-left: -250px;
 }
 
-.sidebar-toggler {
-  position: absolute;
-  left: 1rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  align-self: center;
-}
-
 .sidebar.active {
   @include media-breakpoint-down(md) {
     box-shadow: 10px 0 0 0 $glass;
@@ -112,6 +104,10 @@
   margin: 1rem auto;
   box-shadow: 0 0 0 10px $lightglass;
   border-radius: 50%;
+}
+
+.navbar-toggler {
+  border: 0;
 }
 
 .menu.navbar-nav li.nav-item {
@@ -236,10 +232,6 @@
 
 .min-w-50px {
   min-width: 50px;
-}
-
-.btn-secondary {
-  color: $white;
 }
 
 .tool-card {
