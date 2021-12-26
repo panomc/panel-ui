@@ -12,14 +12,12 @@
         <i class="fas fa-bars"></i>
       </a>
     </div>
-    <div class="container pl-5">
-      <!-- Page Title -->
-      <h4 class="mb-0">
-        {$pageTitle ? $pageTitle : options.DEFAULT_PAGE_TITLE}
-      </h4>
-    </div>
+    <!-- Page Title -->
+    <h4 class="m-auto text-black">
+      {$pageTitle ? $pageTitle : options.DEFAULT_PAGE_TITLE}
+    </h4>
     <div class="navbar-nav">
-    <!-- Notifications Dropdown -->
+      <!-- Notifications Dropdown -->
       <div class="nav-item dropdown">
         <a
           href="#"
@@ -88,8 +86,8 @@
           </a>
         </div>
       </div>
-      
-    <!-- Account Dropdown -->
+
+      <!-- Account Dropdown -->
       <div class="nav-item dropdown">
         <a
           href="#"

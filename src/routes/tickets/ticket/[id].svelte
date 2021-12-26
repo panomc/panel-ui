@@ -1,3 +1,10 @@
+<style>
+  .messages-section {
+    overflow-y: auto;
+    max-height: 450px;
+  }
+</style>
+
 <article class="container">
   <div class="row mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">

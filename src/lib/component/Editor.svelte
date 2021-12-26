@@ -10,6 +10,10 @@
   .ProseMirror p {
     margin: 5px;
   }
+
+  .ql-editor {
+    font-size: 16px;
+  }
 </style>
 
 {#if editor}

@@ -29,20 +29,9 @@
 }
 
 .bg-minecraft {
-  position: relative;
-  background: url("/assets/img/header-bg.jpg") no-repeat top;
+  background: url("/assets/img/header-bg-t.png") no-repeat top;
   background-size: cover;
   border-radius: $border-radius;
-  &:before {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    content: "";
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba($white, 0.1) 0%, $white 80%);
-    border-radius: $border-radius;
-  }
 }
 
 .sidebar {
@@ -287,11 +276,6 @@
   }
 }
 
-.messages-section {
-  overflow-y: auto;
-  max-height: 450px;
-}
-
 .overlapping-avatar {
   position: relative;
   border: 4px solid $white;
@@ -301,8 +285,4 @@
 
 .overlapping-avatar:not(:last-child) {
   margin-left: -12px;
-}
-
-.ql-editor {
-  font-size: 16px;
 }
