@@ -39,7 +39,7 @@
         class="btn btn-link"
         role="button"
         target="_blank"
-        href="/preview/post/{data.post.id}">
+        href="{UI_URL}/preview/post/{data.post.id}">
         <i class="fas fa-eye"></i>
         <span class="d-md-inline d-none ml-1">Görüntüle</span>
       </a>
@@ -267,6 +267,7 @@
   import { session, page } from "$app/stores";
 
   import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
+  import { UI_URL } from "$lib/variables";
 
   import SetPostThumbnailModal from "$lib/component/modals/SetPostThumbnailModal.svelte";
 

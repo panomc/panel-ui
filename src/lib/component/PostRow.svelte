@@ -14,7 +14,7 @@
       <div
         aria-labelledby="postAction"
         class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn">
-        <a class="dropdown-item" target="_blank" href="/preview/post/{post.id}">
+        <a class="dropdown-item" target="_blank" href="{UI_URL}/preview/post/{post.id}">
           <i class="fas fa-eye text-primary mr-1"></i>
           Görüntüle
         </a>
@@ -102,6 +102,7 @@
   import Date from "$lib/component/Date.svelte";
 
   import tooltip from "$lib/tooltip.util";
+  import { UI_URL } from "$lib/variables";
 
   import { PageTypes } from "../../routes/_Posts.svelte";
 
