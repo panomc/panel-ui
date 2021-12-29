@@ -12,8 +12,8 @@
         <h5 class="modal-title">Küçük Resim Belirle</h5>
         <button
           aria-label="Kapat"
-          class="close"
-          data-dismiss="modal"
+          class="btn-close"
+          data-bs-dismiss="modal"
           title="Pencereyi Kapat"
           type="button"
         >
@@ -24,7 +24,7 @@
         <div class="modal-body">
           <div class="form-group">
             <div class="container text-center">
-              <i class="fas fa-image fa-3x mr-3 text-glass"></i>
+              <i class="fas fa-image fa-3x mr-3 text-dark text-opacity-25"></i>
               <p class="text-gray">Küçük resim belirlenmedi.</p>
             </div>
           </div>
@@ -41,7 +41,7 @@
               type="file"
               id="postThumbnail"
               name="postThumbnail"
-              class="btn bg-lightprimary text-primary"
+              class="btn bg-light text-primary"
             />
           </div>
         </div>
