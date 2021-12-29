@@ -2,7 +2,7 @@
   <!-- Action Menu -->
   <section
     class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
-    <div class="col-auto text-left">
+    <div class="col-auto">
       <a
         href="{base}/posts{data.post.status === StatusTypes.TRASH
           ? '/trash'
@@ -15,7 +15,7 @@
         Yazılar
       </a>
     </div>
-    <div class="col text-right">
+    <div class="col-auto">
       {#if data.mode === Modes.EDIT}
         <button
           class="btn btn-link text-danger"
@@ -123,10 +123,9 @@
             {/if}
           </form>
           <button
-            class="btn btn-link btn-block bg-lightprimary"
+            class="btn btn-link btn-block bg-light"
             type="button"
             on:click="{onCreateCategoryClick}">
-            <i class="fas fa-plus mr-1"></i>
             Kategori Oluştur
           </button>
         </div>
@@ -138,9 +137,9 @@
             Küçük Resim:
           </h6>
           <a
-            href="javascript:void(0);"
-            data-target="#setPostThumbnailModal"
-            data-toggle="modal"
+            href="#"
+            data-bs-target="#setPostThumbnailModal"
+            data-bs-toggle="modal"
             class="form-group">
             <img
               src="{base}/assets/img/vanilla.png"
