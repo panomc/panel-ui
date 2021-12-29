@@ -3,13 +3,13 @@
   <!-- Action Menu -->
   <div
     class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
-    <div class="col-6">
+    <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts">
         <i class="fas fa-arrow-left mr-1"></i>
         Yazılar
       </a>
     </div>
-    <div class="col-6 text-right">
+    <div class="col-auto">
       <button
         class="btn btn-primary"
         type="button"
@@ -23,11 +23,14 @@
   <!-- Post categories -->
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title text-sm-left text-center">
-        {data.category_count}
-        Yazı Kategorisi
-      </h5>
-
+      <div class="row justify-content-between pb-3 align-items-center">
+        <div class="col-md-auto col-12 text-md-left text-center">
+          <h5 class="card-title">
+            {data.category_count}
+            Yazı Kategorisi
+          </h5>
+        </div>
+      </div>
       <!-- No Category -->
       {#if data.category_count === 0}
         <div class="container text-center animate__animated animate__zoomIn">

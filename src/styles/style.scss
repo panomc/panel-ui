@@ -89,12 +89,6 @@
   text-align: center;
 }
 
-.sidebar-server-icon {
-  margin: 1rem auto;
-  box-shadow: 0 0 0 10px $lightglass;
-  border-radius: 50%;
-}
-
 .navbar-toggler {
   border: 0;
 }
@@ -129,7 +123,7 @@
 .menu > li.nav-item {
   position: relative;
   border-radius: 0.5rem;
-  color: $lightglass;
+  /* color: $lightglass; */
 
   &:hover {
     transition: 250ms all;
@@ -217,10 +211,6 @@
 
 .min-w-200px {
   min-width: 200px;
-}
-
-.min-w-50px {
-  min-width: 50px;
 }
 
 .tool-card {

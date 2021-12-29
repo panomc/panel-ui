@@ -1,23 +1,6 @@
 <nav class="sidebar-nav navbar-dark" v-if="sidebarTabsState === 'game'">
-  <ul
-    class="menu navbar-nav font-weight-normal d-none animate__animated animate__slideInRight">
-    <!--        :class="{ 'active': path.startsWith('{base}/server-panel') }"-->
-    <li class="nav-item">
-      <a class="nav-link" href="{base}/tools">
-        <i class="fas fa-tachometer-alt mx-2"></i>
-        Sunucu Durumu
-      </a>
-    </li>
-    <!--        :class="{ 'active': path.startsWith('{base}/server-preferences') }"-->
-    <li class="nav-item">
-      <a class="nav-link" href="{base}/tools">
-        <i class="fas fa-cogs mx-2"></i>
-        Konfigürasyon
-      </a>
-    </li>
-  </ul>
   <div class="container text-center animate__animated animate__zoomIn">
-    <i class="fas fa-cube mx-2 fa-3x m-3 text-glass"></i>
+    <i class="fas fa-cube mx-2 fa-3x m-3 text-light text-opacity-25"></i>
 
     <p class="text-gray">
       Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın.

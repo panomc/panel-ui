@@ -1,18 +1,16 @@
 <!-- Posts Page -->
 <article class="container">
   <!-- Action Menu -->
-  <div class="row mb-3 animate__animated animate__slideInUp">
-    <div class="col-md-4 col-6">
+  <div
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+    <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts">
         <i class="fas fa-arrow-left mr-1"></i>
         Yazılar
       </a>
     </div>
-    <div class="col d-flex">
-      <a
-        class="btn btn-primary ml-auto"
-        role="button"
-        href="{base}/posts/create-post">
+    <div class="col-auto">
+      <a class="btn btn-primary" role="button" href="{base}/posts/create-post">
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
       </a>
@@ -24,7 +22,7 @@
   <div class="card">
     <div class="card-body">
       <div class="row justify-content-between pb-3 align-items-center">
-        <div class="col-md-6 col-12 text-md-left text-center">
+        <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title mb-md-0">
             {data.posts_count}
             Yazı
@@ -46,8 +44,7 @@
               <tr>
                 <th scope="col"></th>
                 <th class="min-w-200px align-middle" scope="col">Başlık</th>
-                <th scope="col align-middle" class="bg-lightprimary text-black"
-                  >Kategori</th>
+                <th scope="col align-middle" class="table-primary">Kategori</th>
                 <th scope="col align-middle">Yazar</th>
                 <th scope="col align-middle">Görüntülenme</th>
                 <th scope="col align-middle">Tarih</th>

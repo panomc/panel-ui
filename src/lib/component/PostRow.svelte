@@ -1,19 +1,17 @@
-<tr class:bg-lightprimary="{post.selected}">
-  <th class="min-w-50px" scope="row">
-    <div class="dropdown position-absolute">
+<tr class:table-primary="{post.selected}">
+  <th scope="row">
+    <div class="dropdown">
       <a
         class="btn btn-sm py-0"
         aria-expanded="false"
         aria-haspopup="true"
-        data-toggle="dropdown"
-        href="javascript:void(0);"
-        id="postAction"
+        data-bs-toggle="dropdown"
+        href="#"
         title="Eylemler">
         <i class="fas fa-ellipsis-v"></i>
       </a>
       <div
-        aria-labelledby="postAction"
-        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn">
+        class="dropdown-menu dropdown-menu-start animate__animated animate__zoomInLeft">
         <a class="dropdown-item" target="_blank" href="/preview/post/{post.id}">
           <i class="fas fa-eye text-primary mr-1"></i>
           Görüntüle
@@ -21,7 +19,7 @@
         {#if pageType !== PageTypes.DRAFT}
           <a
             class="dropdown-item"
-            href="javascript:void(0);"
+            href="#"
             on:click="{onMoveToDraft}"
             class:disabled="{buttonsLoading}"
             disabled="{buttonsLoading}">
@@ -35,7 +33,7 @@
         {#if pageType !== PageTypes.PUBLISHED}
           <a
             class="dropdown-item"
-            href="javascript:void(0);"
+            href="#"
             class:disabled="{buttonsLoading}"
             disabled="{buttonsLoading}"
             on:click="{onPublishClick}">
@@ -48,9 +46,9 @@
 
         <a
           class="dropdown-item"
-          data-target="#confirmDeletePost"
-          data-toggle="modal"
-          href="javascript:void(0);"
+          data-bs-target="#confirmDeletePost"
+          data-bs-toggle="modal"
+          href="#"
           on:click="{onDeletePostClick}">
           <i class="fas fa-trash text-danger mr-1"></i>
           Sil
@@ -66,9 +64,8 @@
   <td class="align-middle text-nowrap">
     <a href="{base}/posts/category/{post.category.title}">
       <span
-        class="badge badge-pill"
+        class="badge badge-primary border rounded-pill"
         class:text-dark="{post.category.title === '-'}"
-        class:px-0="{post.category.title === '-'}"
         style="{post.category.title === '-'
           ? ''
           : 'background: #' + post.category.color}">
