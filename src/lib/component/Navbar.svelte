@@ -108,13 +108,13 @@
           <li><hr class="dropdown-divider" /></li>
           <li>
             <a
-              class="dropdown-item"
+              class="dropdown-item text-primary"
               href="{base}/players/player/{$user.username}">
               Profil
             </a>
           </li>
           <li>
-            <a class="dropdown-item" href="#" on:click="{onLogout}">
+            <a class="dropdown-item text-danger" href="#" on:click="{onLogout}">
               Çıkış Yap
             </a>
           </li>
