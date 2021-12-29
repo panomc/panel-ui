@@ -23,7 +23,7 @@
       class="btn btn-small small"
       on:click="{() =>
         editor.chain().focus().toggleHeading({ level: 1 }).run()}"
-      class:bg-glass="{editor.isActive('heading', { level: 1 })}"
+      class:border-primary="{editor.isActive('heading', { level: 1 })}"
       class:text-primary="{editor.isActive('heading', { level: 1 })}"
       use:tooltip="{['Başlık 1', { placement: 'bottom' }]}">
       H1
@@ -32,7 +32,7 @@
       class="btn btn-small small"
       on:click="{() =>
         editor.chain().focus().toggleHeading({ level: 2 }).run()}"
-      class:bg-glass="{editor.isActive('heading', { level: 2 })}"
+      class:border-primary="{editor.isActive('heading', { level: 2 })}"
       class:text-primary="{editor.isActive('heading', { level: 2 })}"
       use:tooltip="{['Başlık 2', { placement: 'bottom' }]}">
       H2
@@ -41,7 +41,7 @@
       class="btn btn-small small"
       on:click="{() =>
         editor.chain().focus().toggleHeading({ level: 3 }).run()}"
-      class:bg-glass="{editor.isActive('heading', { level: 3 })}"
+      class:border-primary="{editor.isActive('heading', { level: 3 })}"
       class:text-primary="{editor.isActive('heading', { level: 3 })}"
       use:tooltip="{['Başlık 3', { placement: 'bottom' }]}">
       H3
@@ -51,7 +51,7 @@
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().toggleBold().run()}"
-      class:bg-glass="{editor.isActive('bold')}"
+      class:border-primary="{editor.isActive('bold')}"
       class:text-primary="{editor.isActive('bold')}"
       use:tooltip="{['Kalın', { placement: 'bottom' }]}">
       <b>B</b>
@@ -59,7 +59,7 @@
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().toggleItalic().run()}"
-      class:bg-glass="{editor.isActive('italic')}"
+      class:border-primary="{editor.isActive('italic')}"
       class:text-primary="{editor.isActive('italic')}"
       use:tooltip="{['İtalik', { placement: 'bottom' }]}">
       <i>I</i>
@@ -67,7 +67,7 @@
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().toggleUnderline().run()}"
-      class:bg-glass="{editor.isActive('underline')}"
+      class:border-primary="{editor.isActive('underline')}"
       class:text-primary="{editor.isActive('underline')}"
       use:tooltip="{['Altı Çizili', { placement: 'bottom' }]}">
       <u>U</u>
@@ -75,7 +75,7 @@
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().toggleStrike().run()}"
-      class:bg-glass="{editor.isActive('strike')}"
+      class:border-primary="{editor.isActive('strike')}"
       class:text-primary="{editor.isActive('strike')}"
       use:tooltip="{['Üstü Çizili', { placement: 'bottom' }]}">
       <s>S</s>
@@ -85,7 +85,7 @@
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().toggleBulletList().run()}"
-      class:bg-glass="{editor.isActive('bulletList')}"
+      class:border-primary="{editor.isActive('bulletList')}"
       class:text-primary="{editor.isActive('bulletList')}"
       use:tooltip="{['Liste', { placement: 'bottom' }]}">
       <i class="fas fa-list"></i>
@@ -93,7 +93,7 @@
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().toggleOrderedList().run()}"
-      class:bg-glass="{editor.isActive('orderedList')}"
+      class:border-primary="{editor.isActive('orderedList')}"
       class:text-primary="{editor.isActive('orderedList')}"
       use:tooltip="{['Sırali Liste', { placement: 'bottom' }]}">
       <i class="fas fa-list-ol"></i>
@@ -110,7 +110,7 @@
       class="btn btn-small small"
       on:click="{setLink}"
       use:tooltip="{['Bağlantı', { placement: 'bottom' }]}"
-      class:bg-glass="{editor.isActive('link')}"
+      class:border-primary="{editor.isActive('link')}"
       class:text-primary="{editor.isActive('link')}">
       <i class="fas fa-link"></i>
     </button>
