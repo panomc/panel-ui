@@ -4,30 +4,26 @@
   class="modal fade"
   id="connectServer"
   role="document"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Sunucu Bağla</h5>
         <button
-          class="close"
-          data-dismiss="modal"
+          class="btn-close"
+          data-bs-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button"
-        >
-          <span aria-hidden="true">&times;</span>
+          type="button">
         </button>
       </div>
       <div class="modal-body">
         <div class="card-body text-center">
+
           <div class="mb-3">
             <i class="fas fa-download fa-3x text-primary"></i>
           </div>
 
-          <h5 class="text-primary" for="downloadPlugin">
-            1. Oyun Eklentisini Sunucunuza İndirin:
-          </h5>
+          <h5 class="text-primary">1. Oyun Eklentisini Sunucunuza İndirin:</h5>
           <button class="btn btn-link bg-light">
             <i class="fas fa-file-download mr-1"></i>
             Pano Minecraft Eklentisini İndir
@@ -39,30 +35,24 @@
             <i class="fas fa-terminal fa-3x text-primary"></i>
           </div>
 
-          <h5 class="text-primary" for="platformToken">
-            2. Bağlantı Komutunu Çalıştırın:
-          </h5>
-          <div class="input-group mb-2">
+          <h5 class="text-primary">2. Bağlantı Komutunu Çalıştırın:</h5>
+          <div class="input-group">
             <input
               bind:value="{commandText}"
-              class="form-control shadow-sm"
+              class="form-control"
               id="platformToken"
-              type="text"
-            />
-            <div class="input-group-append">
-              <button
-                on:click="{onCopyCommandTextClick}"
-                class="btn btn-link bg-light border shadow-sm"
-                id="copyPlatformToken"
-                type="button"
-                use:tooltip="{[
-                  isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala',
-                  { placement: 'top' },
-                ]}"
-              >
-                <i class="fas fa-clipboard"></i>
-              </button>
-            </div>
+              type="text" />
+            <button
+              on:click="{onCopyCommandTextClick}"
+              class="btn btn-outline-gray text-primary"
+              id="copyPlatformToken"
+              type="button"
+              use:tooltip="{[
+                isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala',
+                { placement: 'top' },
+              ]}">
+              <i class="fas fa-clipboard"></i>
+            </button>
           </div>
           <small class="text-muted">
             Kod {timeToRefreshKey}{timeToRefreshKey === "..." ? "" : " saniye"}
