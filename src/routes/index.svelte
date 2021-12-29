@@ -1,18 +1,14 @@
-<!--<svelte:head>-->
-<!--  <title>{getTitle("İstatistikler")}</title>-->
-<!--</svelte:head>-->
-
 <!-- Dashboard Page -->
 <div class="container">
   <!-- Welcome Alerts -->
   {#if data.getting_started_blocks.welcome_board}
     <div
-      class="alert alert-primary bg-minecraft alert-dismissible animate__animated animate__slideInUp mb-3">
+      class="alert alert-primary bg-minecraft alert-dismissible animate__animated animate__zoomIn mb-3">
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 pb-3">
           <h4 class="card-title">Hoş Geldiniz</h4>
           <p class="lead">
-            Pano kullanıma hazır! İşte başlarken yapabileceklerinz:
+            Pano kullanıma hazır! 🚀 İşte başlarken yapabileceklerinz:
           </p>
         </div>
         <div class="col-lg-4 mb-lg-0 mb-3">
@@ -20,8 +16,8 @@
           <p>Oyun sunucunuzu platforma bağlayın ve panel üzerinden erişin.</p>
           <button
             class="btn btn-sm btn-primary"
-            data-target="#connectServer"
-            data-toggle="modal">
+            data-bs-target="#connectServer"
+            data-bs-toggle="modal">
             <i class="fas fa-plus mr-2"></i>
             Sunucu Bağla
           </button>
