@@ -112,7 +112,7 @@
               <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
             {:else}
               <select
-                class="form-control form-control-sm mb-3"
+                class="form-control form-control-sm"
                 bind:value="{data.post.category}">
                 <option class="text-primary" value="-1">Kategorisiz</option>
 
@@ -122,12 +122,6 @@
               </select>
             {/if}
           </form>
-          <button
-            class="btn btn-link btn-block bg-light"
-            type="button"
-            on:click="{onCreateCategoryClick}">
-            Kategori Oluştur
-          </button>
         </div>
       </div>
       <div class="card">
