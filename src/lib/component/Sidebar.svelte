@@ -28,7 +28,7 @@
       <a href="{base}/settings/site-settings">
         <img
           alt="Server İkon"
-          class="sidebar-server-icon d-inline-block"
+          class="m-2 rounded-circle"
           width="64"
           height="64"
           src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
@@ -38,23 +38,19 @@
       <h5 class="text-light">{$website.name}</h5>
 
       {#if $sidebarTabsState === "website"}
-        <a href="/" class="z-1" target="_blank">
-          <button class="btn btn-secondary btn-sm" type="button">
-            Websiteyi Görüntüle
-          </button>
+        <a href="/" class="btn btn-sm btn-secondary" target="_blank">
+          Websiteyi Görüntüle
         </a>
       {/if}
 
       {#if $sidebarTabsState === "game"}
-        <a href="javascript:void(0);" class="z-1">
-          <button
-            class="btn btn-aqua btn-sm text-white"
-            data-target="#showServers"
-            data-toggle="modal"
-            type="button">
-            Sunucuları Görüntüle
-          </button>
-        </a>
+        <button
+          class="btn btn-sm btn-aqua"
+          data-bs-target="#showServers"
+          data-bs-toggle="modal"
+          type="button">
+          Sunucuları Görüntüle
+        </button>
       {/if}
     </div>
 
@@ -62,24 +58,24 @@
     <ul class="sidebar-tab nav nav-pills nav-fill flex-row flex-nowrap p-2">
       <li class="nav-item">
         <a
-          href="javascript:void(0)"
+          href="#"
           class="nav-link"
           use:tooltip="{['Website', { placement: 'bottom' }]}"
           on:click="{onWebsiteMenuClick}"
           class:active="{$sidebarTabsState === 'website'}"
           class:text-light="{$sidebarTabsState !== 'website'}">
-          <i class="fas fa-globe fa-1g"></i>
+          <i class="fas fa-globe fa-lg"></i>
         </a>
       </li>
       <li class="nav-item">
         <a
-          href="javascript:void(0)"
+          href="#"
           class="nav-link"
           use:tooltip="{['Sunucu', { placement: 'bottom' }]}"
           on:click="{onGameMenuClick}"
           class:active="{$sidebarTabsState === 'game'}"
           class:text-light="{$sidebarTabsState !== 'game'}">
-          <i class="fas fa-cube fa-1g"></i>
+          <i class="fas fa-cube fa-lg"></i>
         </a>
       </li>
     </ul>
