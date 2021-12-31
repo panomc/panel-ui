@@ -30,8 +30,8 @@
           {/if} -->
           <i class="fas fa-bell fa-lg"></i>
           <span
-            class="position-absolute p-1 top-0 mt-n1 start-75 translate-middle badge rounded-pill bg-danger">
-            99+
+            class="position-absolute p-2 start-75 translate-middle badge rounded-pill bg-danger">
+            99
             <span class="visually-hidden">unread messages</span>
           </span>
         </a>
