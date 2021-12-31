@@ -18,17 +18,22 @@
     </h4>
     <div class="navbar-nav">
       <!-- Notifications Dropdown -->
-      <div class="nav-item dropdown">
+      <div class="nav-item dropdown d-flex align-items-center">
         <a
           href="#"
-          class="nav-link"
+          class="nav-link position-relative"
           data-bs-toggle="dropdown"
           role="button"
           title="Bildirimler">
           <!-- {#if $notificationsCount !== 0}
             <div class="unread-badge"></div>
           {/if} -->
-          <i class="fas fa-bell"></i>
+          <i class="fas fa-bell fa-lg"></i>
+          <span
+            class="position-absolute p-1 top-0 mt-n1 start-75 translate-middle badge rounded-pill bg-danger">
+            99+
+            <span class="visually-hidden">unread messages</span>
+          </span>
         </a>
 
         <div
@@ -80,7 +85,7 @@
           {/if}
 
           <a
-            class="dropdown-item text-center small"
+            class="dropdown-item text-primary text-center small"
             href="{base}/notifications">
             Tümünü Görüntüle
           </a>
@@ -108,7 +113,7 @@
           <li><hr class="dropdown-divider" /></li>
           <li>
             <a
-              class="dropdown-item text-primary"
+              class="dropdown-item"
               href="{base}/players/player/{$user.username}">
               Profil
             </a>

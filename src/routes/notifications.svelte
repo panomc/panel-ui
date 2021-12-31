@@ -54,7 +54,7 @@
         {/if}
 
         {#if $notifications.length < $count && $count > 10 + 10 * page}
-          <div class="form-group mt-4">
+          <div class="mt-4">
             <button
               class="btn text-primary bg-lightprimary d-block m-auto"
               class:disabled="{loadMoreLoading}"
