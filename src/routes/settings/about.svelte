@@ -4,35 +4,32 @@
     <div class="card-body">
       <h5 class="card-title">Pano Hakkında</h5>
       <form class="animate__animated animate__fadeIn">
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-labeel" for="panoVersion">
+        <div class="row">
+          <label class="col-sm-2 col-form-label" for="panoVersion">
             Versiyon:
           </label>
           <div class="col">
-            <h5
+            <span
               aria-describedby="panoVersion"
-              class="m-0 text-muted"
               id="panoVersion">
               1.0
-            </h5>
+          </span>
           </div>
         </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-labeel" for="siteKeywords">
+        <div class="row">
+          <label class="col-sm-2 col-form-label" for="siteKeywords">
             Sürüm:
           </label>
           <div class="col">
-            <h5
+            <span
               aria-describedby="panoRelease"
-              class="m-0 text-muted"
               id="panoRelease">
               Beta
-            </h5>
-            <small>Beta sürüm bilinmeyen hatalar içerebilir.</small>
+            </span>
           </div>
         </div>
-        <div class="form-group row mb-0">
-          <label class="col-sm-2 col-form-labeel" for="siteKeywords">
+        <div class="row mb-0">
+          <label class="col-sm-2 col-form-label" for="siteKeywords">
             Resmi Website:
           </label>
           <div class="col">
@@ -45,8 +42,8 @@
             </a>
           </div>
         </div>
-        <div class="form-group row mb-0">
-          <label class="col-sm-2 col-form-labeel" for="siteKeywords">
+        <div class="row mb-0">
+          <label class="col-sm-2 col-form-label" for="siteKeywords">
             Discord:
           </label>
           <div class="col">
