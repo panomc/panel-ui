@@ -93,54 +93,43 @@
     </div>
   {/if}
 
-  <a
-    href="/players"
-    class="row mb-3 justify-content-between animate__animated animate__fadeIn">
-    <div class="col-lg-4">
-      <div class="p-3 text-secondary">
+  <div
+    class="row my-3 justify-content-between animate__animated animate__fadeIn">
+    <div class="col-auto">
+      <div class="text-secondary">
         <div class="row align-items-center">
           <div class="col-auto">
-            <i class="fas fa-globe fa-2x d-block mr-3"></i>
+            <h2 class="mb-0">12</h2>
           </div>
-          <div class="col">
-            <h3 class="font-weight-bolder">12</h3>
-            Çevrimiçi
-          </div>
+          <div class="col-auto">Çevrimiçi</div>
         </div>
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="p-3 text-warning">
+    <div class="col-auto">
+      <div class="text-warning">
         <div class="row align-items-center">
           <div class="col-auto">
-            <i class="fas fa-user-plus fa-2x d-block mr-3"></i>
-          </div>
-          <div class="col">
-            <h3 class="font-weight-bolder">
+            <h2 class="mb-0">
               {data.registered_player_count}
-              <i class="fas fa-caret-up ml-2"></i>
-            </h3>
-            Yeni Kayıt
+            </h2>
           </div>
+          <div class="col-auto">Yeni Kayıt</div>
         </div>
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="p-3 text-bittersweet">
+    <div class="col-auto">
+      <div class="text-bittersweet">
         <div class="row align-items-center">
           <div class="col-auto">
-            <i class="fas fa-users fa-2x d-block mr-3"></i>
-          </div>
-          <div class="col">
-            <h3 class="font-weight-bolder">
+            <h2 class="mb-0">
               {data.registered_player_count}
-            </h3>
-            Toplam Oyuncu
+            </h2>
           </div>
+          <div class="col-auto">Toplam Oyuncu</div>
         </div>
       </div>
     </div>
-  </a>
+  </div>
 
   <div class="card">
     <div class="card-body">
