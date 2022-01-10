@@ -31,7 +31,7 @@
           class="m-2 rounded-circle"
           width="64"
           height="64"
-          src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
+          src="https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/img/minecraft-creeper-face.jpg"
           use:tooltip="{['Website Ayaları', { placement: 'right' }]}" />
       </a>
 
