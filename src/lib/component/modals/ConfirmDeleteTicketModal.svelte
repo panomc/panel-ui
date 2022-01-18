@@ -43,7 +43,6 @@
 </div>
 
 <script context="module">
-  import jquery from "jquery";
   import { writable, get } from "svelte/store";
 
   const dialogID = "confirmDeleteTicket";
@@ -51,11 +50,13 @@
 
   let callback = (selectedTickets) => {};
   let hideCallback = (selectedTickets) => {};
+  let modal;
 
   export function show(newSelectedTickets) {
     selectedTickets.set(newSelectedTickets);
 
-    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
+    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal.show();
   }
 
   export function setCallback(newCallback) {
@@ -65,7 +66,7 @@
   export function hide() {
     hideCallback(get(selectedTickets));
 
-    jquery("#" + dialogID).modal("hide");
+    modal.hide();
   }
 
   export function onHide(newCallback) {

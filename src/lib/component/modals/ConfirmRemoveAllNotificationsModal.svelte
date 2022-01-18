@@ -38,15 +38,15 @@
 </div>
 
 <script context="module">
-  import jquery from "jquery";
-
   const dialogID = "confirmDeleteAllNotifications";
 
   let callback = () => {};
   let hideCallback = () => {};
+  let modal;
 
   export function show() {
-    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
+    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal.show();
   }
 
   export function setCallback(newCallback) {
@@ -56,7 +56,7 @@
   export function hide() {
     hideCallback();
 
-    jquery("#" + dialogID).modal("hide");
+    modal.hide();
   }
 
   export function onHide(newCallback) {

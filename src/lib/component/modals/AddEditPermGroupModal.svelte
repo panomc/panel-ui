@@ -54,7 +54,6 @@
 </div>
 
 <script context="module">
-  import jquery from "jquery";
   import { writable, get } from "svelte/store";
 
   const dialogID = "addEditPermissionGroup";
@@ -64,6 +63,7 @@
 
   let callback = (permissionGroup) => {};
   let hideCallback = (permissionGroup) => {};
+  let modal;
 
   export function show(newMode, newPermissionGroup = { id: -1, name: "" }) {
     mode.set(newMode);
@@ -71,13 +71,14 @@
     permissionGroup.set(newPermissionGroup);
     errors.set([]);
 
-    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
+    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal.show();
   }
 
   export function hide() {
     if (get(mode) === "edit") hideCallback(get(permissionGroup));
 
-    jquery("#" + dialogID).modal("hide");
+    modal.hide();
   }
 
   export function setCallback(newCallback) {

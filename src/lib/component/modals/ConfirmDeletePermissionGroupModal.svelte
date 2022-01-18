@@ -73,7 +73,6 @@
 </div>
 
 <script context="module">
-  import jquery from "jquery";
   import { writable, get } from "svelte/store";
 
   const dialogID = "permissionGroupDeleteConfirmationModal";
@@ -86,11 +85,13 @@
 
   let callback = (permissionGroup) => {};
   let hideCallback = (permissionGroup) => {};
+  let modal;
 
   export function show(newPermissionGroup) {
     permissionGroup.set(newPermissionGroup);
 
-    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
+    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal.show();
   }
 
   export function setCallback(newCallback) {
@@ -100,7 +101,7 @@
   export function hide() {
     hideCallback(get(permissionGroup));
 
-    jquery("#" + dialogID).modal("hide");
+    modal.hide();
   }
 
   export function onHide(newCallback) {

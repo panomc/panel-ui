@@ -59,7 +59,6 @@
 </div>
 
 <script context="module">
-  import jquery from "jquery";
   import { writable, get } from "svelte/store";
 
   const dialogID = "postCategoryDeleteConfirmationModal";
@@ -69,11 +68,13 @@
 
   let callback = (category) => {};
   let hideCallback = (category) => {};
+  let modal;
 
   export function show(newCategory) {
     category.set(newCategory);
 
-    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
+    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal.show();
   }
 
   export function setCallback(newCallback) {
@@ -83,7 +84,7 @@
   export function hide() {
     hideCallback(get(category));
 
-    jquery("#" + dialogID).modal("hide");
+    modal.hide()
   }
 
   export function onHide(newCallback) {

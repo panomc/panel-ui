@@ -18,7 +18,7 @@
     </h4>
     <div class="navbar-nav">
       <!-- Notifications Dropdown -->
-      <div class="nav-item dropdown d-flex align-items-center">
+      <div class="nav-item dropdown d-flex align-items-center" id="quickNotificationsDropdown">
         <a
           href="#"
           class="nav-link position-relative"
@@ -130,7 +130,6 @@
 </nav>
 
 <script>
-  import jQuery from "jquery";
   import { onMount, onDestroy } from "svelte";
   import { formatDistanceToNow } from "date-fns";
 
@@ -297,13 +296,17 @@
   }
 
   onMount(() => {
-    jQuery("#quickNotificationsDropdown")
-      .on("show.bs.dropdown", function () {
+    const dropdown = document.getElementById("quickNotificationsDropdown")
+
+    dropdown
+      .addEventListener("show.bs.dropdown", function () {
         notificationsLoading = true;
         quickNotifications = [];
         startQuickNotificationsAndReadCountDown();
       })
-      .on("hide.bs.dropdown", function () {
+
+    dropdown
+      .addEventListener("hide.bs.dropdown", function () {
         startQuickNotificationsCountDown();
       });
 

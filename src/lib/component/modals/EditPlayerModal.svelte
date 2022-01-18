@@ -128,7 +128,6 @@
 </div>
 
 <script context="module">
-  import jquery from "jquery";
   import { writable, get } from "svelte/store";
 
   const dialogID = "editPlayerModal";
@@ -144,6 +143,7 @@
 
   let callback = (player) => {};
   let hideCallback = (player) => {};
+  let modal;
 
   export function show(newPlayer) {
     player.set(Object.assign({}, newPlayer));
@@ -157,13 +157,14 @@
 
     errors.set(defaultErrors);
 
-    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
+    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal.show();
   }
 
   export function hide() {
     hideCallback(get(player));
 
-    jquery("#" + dialogID).modal("hide");
+    modal.hide();
   }
 
   export function setCallback(newCallback) {
