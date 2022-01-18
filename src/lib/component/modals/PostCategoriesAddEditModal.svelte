@@ -14,6 +14,7 @@
           title="Pencereyi Kapat"
           type="button"
           class="btn-close"
+          data-bs-dissmiss="modal"
           on:click="{hide}"></button>
       </div>
       <form on:submit|preventDefault="{onSubmit}">
