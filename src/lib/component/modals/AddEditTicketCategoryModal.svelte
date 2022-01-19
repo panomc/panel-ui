@@ -37,13 +37,14 @@
           </div>
           <div class="form-group">
             <label for="categoryDescription">Açıklama:</label>
-            <input
+            <textarea
               class="form-control"
+              class:border-danger="{$errors.description}"
+              placeholder="Açıklama"
               id="categoryDescription"
               type="text"
-              bind:value="{$category.description}"
-              class:border-danger="{$errors.description}"
-            />
+              rows="5"
+              bind:value="{$category.description}"></textarea>
           </div>
         </div>
         <div class="modal-footer">
