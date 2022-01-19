@@ -9,105 +9,95 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Oyuncu Bilgilerini Düzenle</h5>
-
         <button
-          aria-label="Kapat"
-          class="close"
           title="Pencereyi Kapat"
           type="button"
-          on:click="{hide}">
-          <span aria-hidden="true">&times;</span>
-        </button>
+          class="btn-close"
+          data-bs-dismiss="modal"
+          on:click="{hide}"></button>
       </div>
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
           <div class="row">
-            <div class="col-6">
-              <div class="form-gro">
-                <label for="username">Kullanıcı Adı:</label>
-                <input
-                  class="form-control"
-                  id="username"
-                  type="text"
-                  bind:value="{$player.username}"
-                  class:border-danger="{!!$errors.username}" />
-                {#if !!$errors["username"]}
-                  <small class="text-danger">
-                    {#if $errors["username"] === "INVALID"}
-                      Kulanıcı adı geçerli değil
-                    {/if}
-                    {#if $errors["username"] === "EXISTS"}
-                      Bu kullanıcı adı başka bir oyuncu tarafından kullanılıyor
-                    {/if}
-                  </small>
-                {/if}
-              </div>
+            <div class="col-6 mb-3">
+              <label for="username">Kullanıcı Adı:</label>
+              <input
+                class="form-control"
+                id="username"
+                type="text"
+                bind:value="{$player.username}"
+                class:border-danger="{!!$errors.username}" />
+              {#if !!$errors["username"]}
+                <small class="text-danger">
+                  {#if $errors["username"] === "INVALID"}
+                    Kulanıcı adı geçerli değil
+                  {/if}
+                  {#if $errors["username"] === "EXISTS"}
+                    Bu kullanıcı adı başka bir oyuncu tarafından kullanılıyor
+                  {/if}
+                </small>
+              {/if}
+            </div>
+            <div class="col-6 mb-3">
+              <label for="email">E-mail:</label>
+              <input
+                class="form-control"
+                id="email"
+                type="text"
+                bind:value="{$player.email}"
+                class:border-danger="{!!$errors.email}" />
+              {#if !!$errors["email"]}
+                <small class="text-danger">
+                  {#if $errors["email"] === "INVALID"}
+                    E-Posta geçerli değil
+                  {/if}
+                  {#if $errors["email"] === "EXISTS"}
+                    Bu E-Posta adresi başka bir oyuncu tarafından kullanılıyor
+                  {/if}
+                </small>
+              {/if}
+            </div>
+            <div class="col-6 mb-3">
+              <label for="newPassword">Yeni Şifre:</label>
+              <input
+                class="form-control"
+                id="newPassword"
+                type="password"
+                bind:value="{$player.new_password}"
+                class:border-danger="{!!$errors.newPassword}" />
+              {#if !!$errors["newPassword"]}
+                <small class="text-danger">
+                  {#if $errors["newPassword"] === "INVALID"}
+                    Yeni şifre minimum 6 maksimum 128 karakterden oluşmalıdır
+                  {/if}
+                </small>
+              {/if}
+            </div>
+            <div class="col-6 mb-3">
+              <label for="newPasswordRepeat">Yeni Şifre Tekrarı:</label>
+              <input
+                class="form-control"
+                id="newPasswordRepeat"
+                type="password"
+                bind:value="{$player.new_password_repeat}"
+                class:border-danger="{!!$errors.newPasswordRepeat}" />
+              {#if !!$errors["newPasswordRepeat"]}
+                <small class="text-danger">
+                  {#if $errors["newPasswordRepeat"] === "NOT_MATCH"}
+                    Yeni şifre ve yeni şifre tekrarı aynı değil
+                  {/if}
+                </small>
+              {/if}
             </div>
             <div class="col-6">
-              <div class="form-group">
-                <label for="email">E-mail:</label>
+              <div class="form-check form-switch">
                 <input
-                  class="form-control"
-                  id="email"
-                  type="text"
-                  bind:value="{$player.email}"
-                  class:border-danger="{!!$errors.email}" />
-                {#if !!$errors["email"]}
-                  <small class="text-danger">
-                    {#if $errors["email"] === "INVALID"}
-                      E-Posta geçerli değil
-                    {/if}
-                    {#if $errors["email"] === "EXISTS"}
-                      Bu E-Posta adresi başka bir oyuncu tarafından kullanılıyor
-                    {/if}
-                  </small>
-                {/if}
-              </div>
-            </div>
-
-            <div class="col-6">
-              <div class="form-group">
-                <label for="newPassword">Yeni Şifre:</label>
-                <input
-                  class="form-control"
-                  id="newPassword"
-                  type="password"
-                  bind:value="{$player.new_password}"
-                  class:border-danger="{!!$errors.newPassword}" />
-                {#if !!$errors["newPassword"]}
-                  <small class="text-danger">
-                    {#if $errors["newPassword"] === "INVALID"}
-                      Yeni şifre minimum 6 maksimum 128 karakterden oluşmalıdır
-                    {/if}
-                  </small>
-                {/if}
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group">
-                <label for="newPasswordRepeat">Yeni Şifre Tekrarı:</label>
-                <input
-                  class="form-control"
-                  id="newPasswordRepeat"
-                  type="password"
-                  bind:value="{$player.new_password_repeat}"
-                  class:border-danger="{!!$errors.newPasswordRepeat}" />
-                {#if !!$errors["newPasswordRepeat"]}
-                  <small class="text-danger">
-                    {#if $errors["newPasswordRepeat"] === "NOT_MATCH"}
-                      Yeni şifre ve yeni şifre tekrarı aynı değil
-                    {/if}
-                  </small>
-                {/if}
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="custom-control custom-switch">
-                <input
+                  class="form-check-input"
                   type="checkbox"
-                  class="custom-control-input"
-                  id="customSwitch1" />
-                <label class="custom-control-label" for="customSwitch1"
+                  role="switch"
+                  id="flexSwitchCheckChecked"
+                  checked />
+                <label class="form-check-label" for="flexSwitchCheckChecked"
                   >Talep oluşturabilir</label>
               </div>
             </div>
@@ -115,7 +105,7 @@
         </div>
         <div class="modal-footer">
           <button
-            class="btn btn-block btn-primary"
+            class="btn btn-primary w-100"
             type="submit"
             class:disabled="{loading}"
             disabled="{loading}">
@@ -157,7 +147,10 @@
 
     errors.set(defaultErrors);
 
-    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
     modal.show();
   }
 
