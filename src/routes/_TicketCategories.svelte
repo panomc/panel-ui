@@ -1,10 +1,4 @@
 <!-- Ticket Categories Page -->
-<!-- Add / Edit Ticket Category Modal -->
-<AddEditTicketCategoryModal />
-
-<!-- Confirm Delete Ticket Category Modal -->
-<ConfirmDeleteTicketCategoryModal />
-
 <article class="container">
   <!-- Action Menu -->
   <div
@@ -42,7 +36,7 @@
       <!-- No Category -->
       {#if data.category_count === 0}
         <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
+          <i class="fas fa-ticket-alt fa-3x text-dark text-opacity-25 m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {/if}
@@ -68,14 +62,14 @@
                         aria-expanded="false"
                         aria-haspopup="true"
                         data-toggle="dropdown"
-                        href="javascript:void(0);">
+                        href="#">
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div
                         class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn">
                         <a
                           class="dropdown-item"
-                          href="javascript:void(0);"
+                          href="#"
                           on:click="{onShowDeleteTicketCategoryModalClick(
                             index
                           )}">
@@ -87,7 +81,7 @@
                   </th>
                   <td class="text-nowrap">
                     <a
-                      href="javascript:void(0);"
+                      href="#"
                       title="Kategoriyi Düzenle"
                       on:click="{onShowEditCategoryButtonClick(index)}">
                       {category.title}
@@ -110,6 +104,12 @@
     </div>
   </div>
 </article>
+
+<!-- Add / Edit Ticket Category Modal -->
+<AddEditTicketCategoryModal />
+
+<!-- Confirm Delete Ticket Category Modal -->
+<ConfirmDeleteTicketCategoryModal />
 
 <script context="module">
   import ApiUtil from "$lib/api.util";

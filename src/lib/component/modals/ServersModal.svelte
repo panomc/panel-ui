@@ -15,7 +15,7 @@
           data-bs-target="#connectServer"
           data-bs-toggle="modal"
           type="button">
-          <i class="fas fa-plus mr-2"></i>
+          <i class="fas fa-plus mr-1"></i>
           Sunucu Bağla
         </button>
         <button
@@ -29,7 +29,7 @@
       <div class="modal-body">
         <div class="row">
           {#if serverListLoading}
-            <div class="spinner-border text-primary mr-2" role="status"></div>
+            <div class="spinner-border text-primary mr-1" role="status"></div>
           {/if}
 
           <!-- Server Card -->
@@ -46,7 +46,7 @@
                           <i class="fas fa-home mr-1 text-light"></i>
                           {server.name} Panocraft
                         </h4>
-                        <h5 class="badge badge-sunflower">Spigot</h5>
+                        <h5 class="badge bg-sunflower">Spigot</h5>
                       </div>
                     </div>
                     <div class="position-relative">

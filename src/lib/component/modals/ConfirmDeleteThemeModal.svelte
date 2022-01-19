@@ -4,8 +4,7 @@
   class="modal fade"
   id="confirmDeleteTheme"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
@@ -17,9 +16,8 @@
       <div class="modal-footer">
         <button
           class="btn btn-link text-muted"
-          data-dismiss="modal"
-          type="button"
-        >
+          data-bs-dismiss="modal"
+          type="button">
           İptal
         </button>
         <button class="btn btn-danger" type="button">Evet</button>

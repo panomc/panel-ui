@@ -19,7 +19,7 @@
             Yetki grubu içerisindeki şu kullanıcılar Oyuncu olarak değişecek:
             <br />
             <br />
-            <span class="badge badge-warning badge-pill mr-1">
+            <span class="badge bg-warning rounded-pill mr-1">
               {$permissionGroup.name}
             </span>
             <div
