@@ -18,22 +18,23 @@
     </h4>
     <div class="navbar-nav">
       <!-- Notifications Dropdown -->
-      <div class="nav-item dropdown d-flex align-items-center" id="quickNotificationsDropdown">
+      <div
+        class="nav-item dropdown d-flex align-items-center"
+        id="quickNotificationsDropdown">
         <a
           href="#"
           class="nav-link position-relative"
           data-bs-toggle="dropdown"
           role="button"
           title="Bildirimler">
-          <!-- {#if $notificationsCount !== 0}
-            <div class="unread-badge"></div>
-          {/if} -->
           <i class="fas fa-bell fa-lg"></i>
-          <span
-            class="position-absolute p-2 start-75 translate-middle badge rounded-pill bg-danger">
-            99
-            <span class="visually-hidden">unread messages</span>
-          </span>
+          {#if $notificationsCount !== 0}
+            <span
+              class="position-absolute p-2 start-75 translate-middle badge rounded-pill bg-danger">
+              {$notificationsCount}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          {/if}
         </a>
 
         <div
@@ -296,19 +297,17 @@
   }
 
   onMount(() => {
-    const dropdown = document.getElementById("quickNotificationsDropdown")
+    const dropdown = document.getElementById("quickNotificationsDropdown");
 
-    dropdown
-      .addEventListener("show.bs.dropdown", function () {
-        notificationsLoading = true;
-        quickNotifications = [];
-        startQuickNotificationsAndReadCountDown();
-      })
+    dropdown.addEventListener("show.bs.dropdown", function () {
+      notificationsLoading = true;
+      quickNotifications = [];
+      startQuickNotificationsAndReadCountDown();
+    });
 
-    dropdown
-      .addEventListener("hide.bs.dropdown", function () {
-        startQuickNotificationsCountDown();
-      });
+    dropdown.addEventListener("hide.bs.dropdown", function () {
+      startQuickNotificationsCountDown();
+    });
 
     interval = setInterval(() => {
       checkTime += 1;
