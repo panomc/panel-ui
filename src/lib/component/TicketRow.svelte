@@ -1,31 +1,25 @@
-<tr class:bg-lightprimary="{ticket.selected}">
+<tr class:table-primary="{ticket.selected}">
   <th scope="row">
-    <div class="row flex-nowrap">
-      <div class="custom-control custom-checkbox mx-2">
-        <input
-          class="custom-control-input"
-          id="postCheck{ticket.id}"
-          type="checkbox"
-          bind:checked="{$checkedList[ticket.id]}" />
-        <label class="custom-control-label" for="postCheck{ticket.id}"></label>
-      </div>
-      <div class="dropdown">
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        id="postCheck{ticket.id}"
+        type="checkbox"
+        bind:checked="{$checkedList[ticket.id]}" />
+    </div>
+    <!-- <div class="dropdown">
         <a
-          class="btn btn-sm py-0"
+          class="btn btn-sm"
           aria-expanded="false"
-          aria-haspopup="true"
-          data-toggle="dropdown"
-          href="javascript:void(0);"
-          id="postAction">
+          data-bs-toggle="dropdown"
+          href="#">
           <i class="fas fa-ellipsis-v"></i>
         </a>
-        <div
-          aria-labelledby="postAction"
-          class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn">
+        <div class="dropdown-menu dropdown-menu-start">
           {#if ticket.status !== 3}
             <a
               class="dropdown-item"
-              href="javascript:void(0);"
+              href="#"
               on:click="{onShowCloseTicketModalClick}">
               <i class="fas fa-times mr-1 text-bittersweet"></i>
               Kapat
@@ -34,14 +28,13 @@
 
           <a
             class="dropdown-item"
-            href="javascript:void(0);"
+            href="#"
             on:click="{onShowDeleteTicketModalClick}">
             <i class="fas fa-trash text-danger mr-1"></i>
             Sil
           </a>
         </div>
-      </div>
-    </div>
+      </div> -->
   </th>
   <td class="align-middle text-nowrap">
     <a href="{base}/tickets/ticket/{ticket.id}" title="Talebi Görüntüle">
