@@ -33,7 +33,7 @@
         {#if pageType !== PageTypes.PUBLISHED}
           <a
             class="dropdown-item"
-            href="#"
+            href="javascript:void(0);"
             class:disabled="{buttonsLoading}"
             disabled="{buttonsLoading}"
             on:click="{onPublishClick}">
@@ -46,9 +46,7 @@
 
         <a
           class="dropdown-item"
-          data-bs-target="#confirmDeletePost"
-          data-bs-toggle="modal"
-          href="#"
+          href="javascript:void(0);"
           on:click="{onDeletePostClick}">
           <i class="fas fa-trash text-danger mr-1"></i>
           Sil
