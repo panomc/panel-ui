@@ -1,9 +1,5 @@
 <!-- Add / Edit Category Modal -->
-<div
-  class="modal fade"
-  id="{dialogID}"
-  role="dialog"
-  tabindex="-1">
+<div class="modal fade" id="{dialogID}" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,7 +10,7 @@
           title="Pencereyi Kapat"
           type="button"
           class="btn-close"
-          data-bs-dissmiss="modal"
+          data-bs-dismiss="modal"
           on:click="{hide}"></button>
       </div>
       <form on:submit|preventDefault="{onSubmit}">
@@ -39,7 +35,7 @@
               rows="5"
               bind:value="{$category.description}"></textarea>
           </div>
-          <div class="input-group mb-3">
+          <div class="mb-3 input-group">
             <span class="input-group-text">/category/</span>
             <input
               class:border-danger="{$errors.url}"
