@@ -9,11 +9,7 @@
             Versiyon:
           </label>
           <div class="col">
-            <span
-              aria-describedby="panoVersion"
-              id="panoVersion">
-              1.0
-          </span>
+            <span aria-describedby="panoVersion" id="panoVersion"> 1.0 </span>
           </div>
         </div>
         <div class="row">
@@ -21,11 +17,7 @@
             Sürüm:
           </label>
           <div class="col">
-            <span
-              aria-describedby="panoRelease"
-              id="panoRelease">
-              Beta
-            </span>
+            <span aria-describedby="panoRelease" id="panoRelease"> Beta </span>
           </div>
         </div>
         <div class="row mb-0">
@@ -63,7 +55,7 @@
   <div class="card">
     <div class="card-body animate__animated animate__fadeIn">
       <h5
-        class="card-title animate__animated animate__heartBeat animate__slower animate__repeat-2 d-inline-block">
+        class="card-title animate__animated animate__heartBeat animate__slower d-inline-block">
         Açık Kaynak Lisansları ❤️
       </h5>
 
@@ -95,5 +87,5 @@
 <script>
   import { pageTitle } from "$lib/store";
 
-  pageTitle.set("Pano Hakkında")
+  pageTitle.set("Pano Hakkında");
 </script>
