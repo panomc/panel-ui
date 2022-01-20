@@ -11,7 +11,7 @@
     </div>
     <div class="col-auto">
       <button
-        class="btn btn-primary"
+        class="btn btn-secondary"
         type="button"
         on:click="{onCreateCategoryClick}">
         <i class="fas fa-plus"></i>
@@ -34,7 +34,7 @@
       <!-- No Category -->
       {#if data.category_count === 0}
         <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-sticky-note fa-3x text-glass m-3"></i>
+          <i class="fas fa-sticky-note fa-3x text-dark text-opacity-25 m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {/if}
@@ -54,25 +54,21 @@
             </thead>
             <tbody>
               {#each data.categories as category, index (category)}
-                <tr class:bg-lightprimary="{category.selected}">
-                  <th class="min-w-50px" scope="row">
-                    <div class="dropdown position-absolute">
+                <tr class:table-primary="{category.selected}">
+                  <th scope="row">
+                    <div class="dropdown">
                       <a
-                        aria-expanded="false"
-                        aria-haspopup="true"
                         class="btn btn-sm py-0"
-                        data-toggle="dropdown"
-                        href="javascript:void(0);"
-                        id="postAction"
+                        data-bs-toggle="dropdown"
+                        href="#"
                         title="Eylemler">
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div
-                        aria-labelledby="postAction"
                         class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn">
                         <a
                           class="dropdown-item"
-                          href="javascript:void(0);"
+                          href="#"
                           on:click="{onShowDeletePostCategoryModalClick(
                             index
                           )}">
@@ -84,9 +80,9 @@
                   </th>
                   <td>
                     <a
-                      data-target="#addEditCategory"
-                      data-toggle="modal"
-                      href="javascript:void(0);"
+                      data-bs-target="#addEditCategory"
+                      data-bs-toggle="modal"
+                      href="#"
                       title="Kategoriyi Düzenle"
                       on:click="{onShowEditCategoryButtonClick(index)}">
                       {category.title}
@@ -98,8 +94,7 @@
                       href="/category/{category.url}"
                       target="_blank"
                       title="Kategoriyi Görüntüle">
-                      /category/
-                      <b class="text-muted">{category.url}</b>
+                      /category/{category.url}
                     </a>
                   </td>
                   <td class="d-none">

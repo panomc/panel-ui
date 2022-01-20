@@ -11,7 +11,7 @@
     </div>
     <div class="col-auto">
       <a
-        class="btn btn-primary ml-auto"
+        class="btn btn-secondary ml-auto"
         role="button"
         href="{base}/posts/create-post">
         <i class="fas fa-plus"></i>

@@ -46,9 +46,8 @@
               bind:value="{$category.url}" />
           </div>
           <small class:text-danger="{$errors.url}">
-            <i aria-hidden="true" class="fa fa-exclamation-circle mr-1"></i>
-            Yanlızca [A-Z/a-z/0-9/-] içerebilir ve minimum 3, maksimum 32 karkater
-            olabilir.
+            Yanlızca [A-Z/a-z/0-9/-] içerebilir ve minimum 3, maksimum 32
+            karkater olabilir.
           </small>
         </div>
         <div class="modal-footer">
@@ -61,10 +60,8 @@
             disabled="{loading}">
             <span>
               {#if $mode === "edit"}
-                <i aria-hidden="true" class="fa fa-save mr-1"></i>
                 Kaydet
               {:else}
-                <i aria-hidden="true" class="fa fa-plus mr-1"></i>
                 Oluştur
               {/if}
             </span>
