@@ -15,15 +15,6 @@
       </a>
     </div>
     <div class="col-auto ml-auto">
-      {#if data.ticket.status !== TicketStatuses.CLOSED}
-        <a
-          class="btn btn-bittersweet"
-          role="button"
-          on:click="{() => showCloseTicketModal([data.ticket.id])}"
-          href="#">
-          Talebi Kapat
-        </a>
-      {/if}
       <a
         class="btn btn-outline-danger"
         role="button"
@@ -31,8 +22,18 @@
         on:click="{() => showDeleteTicketModal([data.ticket.id])}">
         <i class="fas fa-trash"></i>
 
-        <span class="d-lg-inline d-none ml-1">Talebi Sil</span>
+        <span class="d-lg-inline d-none ml-1">Sil</span>
       </a>
+      {#if data.ticket.status !== TicketStatuses.CLOSED}
+        <a
+          class="btn btn-bittersweet"
+          role="button"
+          on:click="{() => showCloseTicketModal([data.ticket.id])}"
+          href="#">
+          <i class="fas fa-check mr-1"></i>
+          Kapat
+        </a>
+      {/if}
     </div>
   </div>
 
@@ -40,7 +41,7 @@
 
   <div
     class="card border mb-3"
-    class:border-secondary="{data.ticket.status === TicketStatuses.NEW}"
+    class:border-mint="{data.ticket.status === TicketStatuses.NEW}"
     class:border-sunflower="{data.ticket.status === TicketStatuses.REPLIED}"
     class:border-bittersweet="{data.ticket.status === TicketStatuses.CLOSED}">
     <div class="card-body">

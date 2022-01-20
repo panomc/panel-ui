@@ -1,7 +1,7 @@
 {#if status === TicketStatuses.NEW}
   <a href="{base}/tickets/waitingReply"
     ><span
-      class="badge bg-secondary rounded-pill"
+      class="badge bg-mint rounded-pill"
       use:tooltip="{['Tüm Yeni Talepleri Göster', { placement: 'bottom' }]}"
       >Yeni</span
     ></a>

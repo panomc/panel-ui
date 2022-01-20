@@ -11,7 +11,7 @@
     </div>
     <div class="col-auto">
       <button
-        class="btn btn-primary"
+        class="btn btn-secondary"
         type="button"
         on:click="{onCreateCategoryClick}">
         <i class="fas fa-plus"></i>
@@ -54,19 +54,18 @@
             </thead>
             <tbody>
               {#each data.categories as category, index (category)}
-                <tr class:bg-lightprimary="{category.selected}">
+                <tr class:table-primary="{category.selected}">
                   <th scope="row">
                     <div class="dropdown">
                       <a
                         class="btn btn-sm py-0"
                         aria-expanded="false"
-                        aria-haspopup="true"
-                        data-toggle="dropdown"
+                        data-bs-toggle="dropdown"
                         href="#">
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div
-                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn">
+                        class="dropdown-menu dropdown-menu-start animate__animated animate__zoomInLeft">
                         <a
                           class="dropdown-item"
                           href="#"

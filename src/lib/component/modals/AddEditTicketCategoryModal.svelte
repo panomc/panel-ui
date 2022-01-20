@@ -1,41 +1,30 @@
 <!-- Add / Edit Ticket Category Modal -->
-<div
-  aria-hidden="true"
-  class="modal fade"
-  id="{dialogID}"
-  role="dialog"
-  tabindex="-1"
->
+<div class="modal fade" id="{dialogID}" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
           {$mode === "edit" ? "Kategoriyi Düzenle" : "Kategori Ekle"}
         </h5>
-
         <button
-          aria-label="Kapat"
-          class="close"
           title="Pencereyi Kapat"
           type="button"
-          on:click="{hide}"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+          class="btn-close"
+          data-bs-dismiss="modal"
+          on:click="{hide}"></button>
       </div>
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
-          <div class="form-group">
+          <div class="mb-3">
             <label for="category">Kategori:</label>
             <input
               class="form-control"
               id="category"
               type="text"
               bind:value="{$category.title}"
-              class:border-danger="{$errors.title}"
-            />
+              class:border-danger="{$errors.title}" />
           </div>
-          <div class="form-group">
+          <div class="mb-3">
             <label for="categoryDescription">Açıklama:</label>
             <textarea
               class="form-control"
@@ -49,11 +38,12 @@
         </div>
         <div class="modal-footer">
           <button
-            class="btn btn-block btn-secondary"
+            class="btn w-100"
             type="submit"
+            class:btn-secondary="{$mode === 'create'}"
+            class:btn-primary="{$mode === 'edit'}"
             class:disabled="{loading}"
-            disabled="{loading}"
-          >
+            disabled="{loading}">
             {$mode === "edit" ? "Kaydet" : "Oluştur"}
           </button>
         </div>
@@ -85,7 +75,10 @@
     category.set(newCategory);
     errors.set([]);
 
-    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
     modal.show();
   }
 

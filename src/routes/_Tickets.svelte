@@ -1,7 +1,8 @@
 <!-- Tickets Page -->
 <article class="container">
   <!-- Action Menu -->
-  <div class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+  <div
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets/categories">
         <i class="fas fa-list-alt mr-1"></i>
@@ -16,22 +17,22 @@
           : 'animate__fadeOut'}
       faster">
         <a
-          class="btn btn-outline-bittersweet"
-          class:disabled="{getListOfChecked($checkedList).length === 0}"
-          role="button"
-          href="javascript:void(0);"
-          on:click="{onShowCloseTicketsModalClick}">
-          <i class="fas fa-times mr-1"></i>
-          Kapat
-        </a>
-        <a
           class="btn btn-outline-danger"
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
-          href="javascript:void(0);"
+          href="#"
           on:click="{onShowDeleteTicketsModalClick}">
           <i class="fas fa-trash mr-1"></i>
           Sil
+        </a>
+        <a
+          class="btn btn-bittersweet"
+          class:disabled="{getListOfChecked($checkedList).length === 0}"
+          role="button"
+          href="#"
+          on:click="{onShowCloseTicketsModalClick}">
+          <i class="fas fa-check mr-1"></i>
+          Kapat
         </a>
       </div>
     </div>
@@ -63,14 +64,14 @@
               Tümü
             </a>
             <a
-              class="btn btn-sm btn-outline-light btn-link"
+              class="btn btn-sm btn-outline-light btn-link text-mint"
               class:active="{data.pageType === PageTypes.WAITING_REPLY}"
               role="button"
               href="{base}/tickets/waitingReply">
               Yeni
             </a>
             <a
-              class="btn btn-sm btn-outline-light btn-link text-danger"
+              class="btn btn-sm btn-outline-light btn-link text-bittersweet"
               class:active="{data.pageType === PageTypes.CLOSED}"
               role="button"
               href="{base}/tickets/closed">
@@ -83,7 +84,7 @@
       <!-- No Tickets -->
       {#if data.tickets_count === 0}
         <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
+          <i class="fas fa-ticket-alt fa-3x m-3 text-dark text-opacity-25"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}
@@ -92,21 +93,20 @@
           <table class="table mb-0">
             <thead>
               <tr>
-                <th class="text-nowrap align-middle" scope="col">
-                  <div class="custom-control custom-checkbox">
+                <th class="align-middle" scope="col">
+                  <div class="form-check">
                     <input
-                      type="checkbox"
-                      class="custom-control-input"
+                      class="form-check-input"
                       on:click="{onSelectAllClick}"
                       checked="{isAllTicketsSelected(
                         data.tickets,
                         $checkedList
                       )}"
-                      id="selectAll" />
-                    <label class="custom-control-label" for="selectAll"></label>
+                      id="selectAll"
+                      type="checkbox" />
                   </div>
                 </th>
-                <th class="min-w-200px align-middle" scope="col">Başlık</th>
+                <th class="align-middle" scope="col">Başlık</th>
                 <th class="align-middle" scope="col">Durum</th>
                 <th class="align-middle" scope="col">Kategori</th>
                 <th class="align-middle" scope="col">Açan</th>
