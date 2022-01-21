@@ -69,9 +69,9 @@
 
           {#if quickNotifications.length === 0 && !notificationsLoading}
             <div
-              class="d-flex flex-column align-items-center justify-content-center">
-              <i class="fas fa-2x fa-bell text-gray m-2"></i>
-              <span class="text-gray">Bildirim yok.</span>
+              class="d-flex flex-column align-items-center justify-content-center mb-3">
+              <i class="fas fa-2x fa-bell text-gray mx-5 my-3"></i>
+              <small class="text-gray">Yeni bildirim yok.</small>
             </div>
           {/if}
 
