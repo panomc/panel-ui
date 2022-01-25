@@ -31,7 +31,7 @@
         <p class="text-danger">Bağlantı hatası!</p>
       {/if}
       <button
-        class="btn btn-link bg-lightprimary btn-sm"
+        class="btn btn-outline-primary"
         on:click="{onResumeClick}"
         class:disabled="{$retryingNetworkErrors}"
         disabled="{$retryingNetworkErrors}">
