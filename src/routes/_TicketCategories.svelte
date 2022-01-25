@@ -56,16 +56,19 @@
               {#each data.categories as category, index (category)}
                 <tr class:table-primary="{category.selected}">
                   <th scope="row">
-                    <div class="dropdown">
-                      <a
-                        class="btn btn-sm py-0"
+                    <div class="dropdown position-static">
+                      <button
+                        type="button"
+                        class="btn btn-link btn-sm"
                         aria-expanded="false"
+                        aria-haspopup="true"
                         data-bs-toggle="dropdown"
-                        href="#">
-                        <i class="fas fa-ellipsis-v"></i>
-                      </a>
+                        href="#"
+                        title="Eylemler">
+                        <span class="fas fa-ellipsis-h"></span>
+                      </button>
                       <div
-                        class="dropdown-menu dropdown-menu-start animate__animated animate__zoomInLeft">
+                        class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
                         <a
                           class="dropdown-item"
                           href="#"

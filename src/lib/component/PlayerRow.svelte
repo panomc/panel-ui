@@ -1,15 +1,17 @@
 <tr class:table-primary="{player.selected}">
   <th scope="row">
-    <div class="dropdown">
-      <a
-        class="btn btn-sm py-0"
+    <div class="dropdown position-static">
+      <button
+        type="button"
+        class="btn btn-link btn-sm"
         aria-expanded="false"
+        aria-haspopup="true"
         data-bs-toggle="dropdown"
         href="#"
         title="Eylemler">
-        <i class="fas fa-ellipsis-v"></i>
-      </a>
-      <div class="dropdown-menu animate__animated animate__zoomIn">
+        <span class="fas fa-ellipsis-h"></span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
         <a class="dropdown-item" href="#" on:click="{showAuthorizePlayerModal}">
           <i class="fas fa-user-circle mr-1 text-primary"></i>
           Yetkilendir
