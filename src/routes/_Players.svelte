@@ -14,7 +14,7 @@
   <div class="card">
     <div class="card-body">
       <div class="row justify-content-between">
-        <div class="col-md-6 col-12 text-md-left text-center">
+        <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
             {data.players_count}
             {data.pageType === PageTypes.HAS_PERM
@@ -24,7 +24,7 @@
               : ""} Oyuncu
           </h5>
         </div>
-        <div class="col-md-6 col-12 text-md-right text-center">
+        <div class="col-md-auto col-12 text-md-right text-center">
           <div class="btn-group">
             <a
               class:active="{data.pageType === PageTypes.ALL}"
@@ -54,7 +54,7 @@
       <!-- No Players -->
       {#if data.players_count === 0}
         <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-users fa-3x text-glass m-3"></i>
+          <i class="fas fa-users fa-3x m-3 text-dark text-opacity-25"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}

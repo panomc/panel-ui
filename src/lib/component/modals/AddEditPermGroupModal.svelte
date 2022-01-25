@@ -38,7 +38,7 @@
         </div>
         <div class="modal-footer">
           <button
-            class="btn btn-block"
+            class="btn"
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
             type="submit"

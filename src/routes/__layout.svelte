@@ -13,7 +13,7 @@
 <div class:d-flex="{!showSplash}" hidden="{showSplash}">
   <Sidebar />
   <!--  Main  -->
-  <main class="panel-content">
+  <main class="w-100 overflow-scroll" style="height: 100vh;">
     <Navbar />
 
     <div hidden="{showLoading}">

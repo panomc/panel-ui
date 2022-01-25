@@ -1,30 +1,20 @@
-<tr class:bg-lightprimary="{player.selected}">
-  <th class="min-w-50px" scope="row">
-    <div class="dropdown position-absolute">
+<tr class:table-primary="{player.selected}">
+  <th scope="row">
+    <div class="dropdown">
       <a
         class="btn btn-sm py-0"
         aria-expanded="false"
-        aria-haspopup="true"
-        data-toggle="dropdown"
-        href="javascript:void(0);"
-        id="playerAction"
+        data-bs-toggle="dropdown"
+        href="#"
         title="Eylemler">
         <i class="fas fa-ellipsis-v"></i>
       </a>
-      <div
-        aria-labelledby="playerAction"
-        class="dropdown-menu animate__animated animate__zoomIn">
-        <a
-          class="dropdown-item"
-          href="javascript:void(0);"
-          on:click="{showAuthorizePlayerModal}">
+      <div class="dropdown-menu animate__animated animate__zoomIn">
+        <a class="dropdown-item" href="#" on:click="{showAuthorizePlayerModal}">
           <i class="fas fa-user-circle mr-1 text-primary"></i>
           Yetkilendir
         </a>
-        <a
-          class="dropdown-item"
-          href="javascript:void(0);"
-          on:click="{showEditPlayerModal}">
+        <a class="dropdown-item" href="#" on:click="{showEditPlayerModal}">
           <i class="fas fa-pencil-alt mr-1 text-primary"></i>
           Düzenle
         </a>
@@ -32,7 +22,7 @@
           class="dropdown-item"
           data-target="#conformBanTickets"
           data-toggle="modal"
-          href="javascript:void(0);">
+          href="#">
           <i class="fas fa-gavel mr-1 text-danger"></i>
           Yasakla
         </a>
@@ -56,14 +46,10 @@
     <a href="{base}/players/permission/{player.permission_group}">
       {player.permission_group === "-" ? "Oyuncu" : player.permission_group}
     </a>
-    <i
-      aria-hidden="true"
-      class="fa fa-times text-danger fa-fw"
-      use:tooltip="{['Talepleri Yasaklı', { placement: 'bottom' }]}"></i>
   </td>
   <td class="align-middle text-nowrap">
     <span
-      class="badge badge-pill badge-lightsecondary text-success"
+      class="badge rounded-pill bg-secondary"
       use:tooltip="{['Sitede', { placement: 'bottom' }]}">
       <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
       <span class="d-md-inline d-none ml-1">Çevrimiçi</span>

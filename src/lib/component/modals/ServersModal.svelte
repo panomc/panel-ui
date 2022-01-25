@@ -39,7 +39,7 @@
                 <!--            :class="{ 'selected': selected_server.id === server.id }"-->
                 <div class="card w-100">
                   <!--              @click="selectServer(server)"-->
-                  <a href="javascript:void(0);">
+                  <a href="#">
                     <div class="card-img-top bg-primary border-0">
                       <div class="card-body">
                         <h4 class="card-title text-white lead">
@@ -101,10 +101,10 @@
                       </button>
                       <div
                         aria-labelledby="serverOptions"
-                        class="dropdown-menu animate__animated animate__zoomIn">
+                        class="dropdown-menu animate__animated animate__zoomInLeft">
                         <a
                           class="dropdown-item"
-                          href="javascript:void(0);"
+                          href="#"
                           v-if="main_server.id !== server.id">
                           <i class="fas fa-home mr-1 text-primary"></i>
                           Ana Sunucu Olarak Belirle
@@ -112,7 +112,7 @@
 
                         <a
                           class="dropdown-item"
-                          href="javascript:void(0);"
+                          href="#"
                           v-if="main_server.id === server.id">
                           <i class="fas fa-times mr-1 text-primary"></i>
                           Ana Sunuculuğunu Kaldır
@@ -123,7 +123,7 @@
                           data-dismiss="modal"
                           data-target="#confirmRemoveServer"
                           data-toggle="modal"
-                          href="javascript:void(0);">
+                          href="#">
                           <i class="fas fa-times mr-1 text-danger"></i>
                           Sunucuyu Kaldır
                         </a>

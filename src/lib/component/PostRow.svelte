@@ -62,7 +62,7 @@
   <td class="align-middle text-nowrap">
     <a href="{base}/posts/category/{post.category.title}">
       <span
-        class="badge bg-lightglass border rounded-pill"
+        class="badge border rounded-pill text-dark"
         class:text-dark="{post.category.title === '-'}"
         style="{post.category.title === '-'
           ? ''

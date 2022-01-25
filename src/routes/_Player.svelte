@@ -9,7 +9,7 @@
         Oyuncular
       </a>
     </div>
-    <div class="col-auto text-right">
+    <div class="col-auto">
       <a
         class="btn btn-link"
         use:tooltip="{[
@@ -63,13 +63,13 @@
           <h6 class="text-muted mb-3">{data.player.email}</h6>
           {#if data.player.isBanned}
             <hr />
-            <div class="badge badge-pill badge-danger d-block">
+            <div class="badge rounded-pill bg-danger d-block">
               <i class="fas fa-gavel mr-1"></i>
               Yasaklı
             </div>
           {/if}
           <span
-            class="badge badge-pill badge-lightsecondary text-success"
+            class="badge rounded-pill bg-lightsecondary text-success"
             use:tooltip="{['Sitede', { placement: 'top' }]}">
             <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
             <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
