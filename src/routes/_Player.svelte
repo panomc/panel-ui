@@ -16,15 +16,14 @@
           'Oyuncu e-postasına bir doğrulama bağlantısı gönder',
           { placement: 'bottom' },
         ]}"
-        href="javascript:void(0);"
-        on:click="{() => showAuthorizePlayerModal(data.player)}">
+        href="javascript:void(0);">
         <i class="fas fa-envelope"></i>
         <span class="ml-1 d-lg-inline d-none">Doğrula</span>
       </a>
       <a
         class="btn btn-link"
         href="javascript:void(0);"
-        on:click="{() => showAuthorizePlayerModal(data.player)}">
+        on:click="{() => showAuthorizePlayerModal(data.player, $session.CSRFToken)}">
         <i class="fas fa-user-circle"></i>
         <span class="ml-1 d-lg-inline d-none">Yetkilendir</span>
       </a>

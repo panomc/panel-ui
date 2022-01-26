@@ -92,12 +92,12 @@
   let hideCallback = (player) => {};
   let modal;
 
-  export function show(newPlayer) {
+  export function show(newPlayer, CSRFToken) {
     player.set(Object.assign({}, newPlayer));
     errors.set(defaultErrors);
     submitLoading.set(false);
 
-    initData();
+    initData(CSRFToken);
 
     modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
     modal.show();
@@ -119,13 +119,13 @@
     hideCallback = newCallback;
   }
 
-  function initData() {
+  function initData(CSRFToken) {
     loading.set(true);
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get({
         path: "/api/panel/permission/groups",
-        CSRFToken: get(session).CSRFToken,
+        CSRFToken,
       })
         .then((body) => {
           if (body.result === "ok") {

@@ -261,7 +261,7 @@
   function onShowAuthorizePlayerModalClick(player) {
     data.players[data.players.indexOf(player)].selected = true;
 
-    showAuthorizePlayerModal(player);
+    showAuthorizePlayerModal(player, $session.CSRFToken);
   }
 
   function onShowEditPlayerModalClick(player) {
