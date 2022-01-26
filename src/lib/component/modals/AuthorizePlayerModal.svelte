@@ -1,19 +1,11 @@
 <!-- Authorize Player Modal -->
-<div
-  class="modal fade"
-  id="{dialogID}"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="{dialogID}" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       {#if $loading}
         <div class="modal-body">
           <div class="text-center">
-            <div class="spinner-border text-primary" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
+            <div class="spinner-border text-primary" role="status"></div>
           </div>
         </div>
       {:else}
@@ -23,47 +15,41 @@
           </h5>
           <button
             type="button"
-            class="close"
-            on:click="{hide}"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Kapat"
+            on:click="{hide}"></button>
         </div>
         <div class="modal-body">
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Yetki grubu seç</label>
+          <div class="mb-3">
+            <label for="selectPermGroup">Yetki grubu seç</label>
             <select
               class="form-control"
               class:border-danger="{$errors['LAST_ADMIN']}"
-              id="exampleFormControlSelect1"
-              bind:value="{$player.permission_group}"
-            >
+              id="selectPermGroup"
+              bind:value="{$player.permission_group}">
               <option class="text-primary" value="-">Oyuncu</option>
 
               {#each $permissionGroups as permissionGroup, index (permissionGroup)}
                 <option value="{permissionGroup.name}"
-                  >{permissionGroup.name}</option
-                >
+                  >{permissionGroup.name}</option>
               {/each}
             </select>
-            {#if $errors["LAST_ADMIN"]}
-              <small class="text-danger">
-                <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"
-                ></i>
-                Bu kullanıcının yetkisi son yönetici olduğu için değiştirilemez.
-              </small>
-            {/if}
           </div>
+          {#if $errors["LAST_ADMIN"]}
+            <small class="text-danger">
+              <i aria-hidden="true" class="fa fa-exclamation-circle mr-2  "></i>
+              Bu kullanıcının yetkisi son yönetici olduğu için değiştirilemez.
+            </small>
+          {/if}
         </div>
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-primary w-100"
             class:disabled="{$submitLoading}"
             disabled="{$submitLoading}"
-            on:click="{onSubmit}">Kaydet</button
-          >
+            on:click="{onSubmit}">Kaydet</button>
         </div>
       {/if}
     </div>
@@ -99,7 +85,10 @@
 
     initData(CSRFToken);
 
-    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
     modal.show();
   }
 
