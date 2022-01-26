@@ -10,16 +10,18 @@
       </a>
     </div>
     <div class="col-auto">
-      <a
-        class="btn btn-link"
-        use:tooltip="{[
-          'Oyuncu e-postasına bir doğrulama bağlantısı gönder',
-          { placement: 'bottom' },
-        ]}"
-        href="#">
-        <i class="fas fa-envelope"></i>
-        <span class="ml-1 d-lg-inline d-none">Doğrula</span>
-      </a>
+      {#if !data.player.isEmailVerified}
+        <a
+          class="btn btn-link"
+          use:tooltip="{[
+            'Oyuncu e-postasına bir doğrulama bağlantısı gönder',
+            { placement: 'bottom' },
+          ]}"
+          href="#">
+          <i class="fas fa-envelope"></i>
+          <span class="ml-1 d-lg-inline d-none">Doğrula</span>
+        </a>
+      {/if}
       <a
         class="btn btn-link"
         href="#"
@@ -88,8 +90,11 @@
               </div>
             </li>
             <li class="list-inline-item mb-2">
-              <div class="badge text-dark border">Doğrulandı</div>
-              <div class="badge text-dark border">Doğrulannadı</div>
+              {#if data.player.isEmailVerified}
+                <div class="badge text-dark border">Doğrulandı</div>
+              {:else}
+                <div class="badge text-dark border">Doğrulannadı</div>
+              {/if}
             </li>
             <li class="list-inline-item mb-2">
               <div class="badge text-dark border">
