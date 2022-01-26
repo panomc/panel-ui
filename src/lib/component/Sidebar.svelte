@@ -4,7 +4,7 @@
 
 <div class="sidebar bg-primary" class:active="{$isSidebarOpen}">
   <!-- Sidebar Toggler & Logo -->
-  <div class="navbar navbar-dark w-100">
+  <div class="navbar navbar-dark w-100 px-2">
     <button
       type="button"
       class="navbar-toggler position-absolute"
