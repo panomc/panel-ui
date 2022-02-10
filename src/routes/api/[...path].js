@@ -8,7 +8,7 @@ async function handle(request) {
 
   let response;
 
-  if (headers[CSRF_HEADER] !== CSRFToken) {
+  if (path !== "testNotification" && headers[CSRF_HEADER] !== CSRFToken) {
     return null;
   }
 

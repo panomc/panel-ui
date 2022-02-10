@@ -1,163 +1,143 @@
-<!--<svelte:head>-->
-<!--  <title>{getTitle("İstatistikler")}</title>-->
-<!--</svelte:head>-->
-
 <!-- Dashboard Page -->
 <div class="container">
   <!-- Welcome Alerts -->
   {#if data.getting_started_blocks.welcome_board}
     <div
-      class="alert alert-dark border-0 bg-minecraft animate__animated animate__slideInUp mb-3"
-      role="alert">
-      <button
-        class="close"
-        data-dismiss="alert"
-        type="button"
-        on:click="{onCloseGettingStartedCard}">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-12">
-            <h4 class="card-title">Hoş Geldiniz</h4>
-            <p>
-              Pano kullanıma hazır! İşte başlarken yapabileceklerinizden
-              bazıları:
-            </p>
-          </div>
-          <div class="col-lg-4 mb-lg-0 mb-3">
-            <h5>Sunucu Bağlayın</h5>
-            <p>
-              Oyun sunucunuzu platforma bağlayın ve sunucu bilgilerine panel
-              üzerinden erişin.
-            </p>
-            <button
-              class="btn btn-sm btn-primary"
-              data-target="#connectServer"
-              data-toggle="modal">
-              <i class="fas fa-plus mr-2"></i>
-              Sunucu Bağla
-            </button>
-          </div>
-          <div class="col-lg-4 mb-lg-0 mb-3">
-            <ul class="list-unstyled mb-1">
-              <h5>Başlarken</h5>
-              <li>
-                <a href="{base}/posts/create-post">
-                  <i class="fas fa-pen mr-1"></i>
-                  İlk Yazınızı Yayınlayın
-                </a>
-              </li>
-              <li>
-                <a href="{base}/view">
-                  <i class="fas fa-brush mr-1"></i>
-                  Sitenizin Görünümünü Belirleyin
-                </a>
-              </li>
-              <li>
-                <a href="{base}/tools">
-                  <i class="fas fa-tools mr-1"></i>
-                  Araçları Yönetin
-                </a>
-              </li>
-              <li>
-                <a href="{base}/players">
-                  <i class="fas fa-user-cog mr-1"></i>
-                  Oyuncularınızı İnceleyin
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-4 mb-lg-0 mb-3">
-            <ul class="list-unstyled mb-1">
-              <h5>Daha Fazlası</h5>
-              <li>
-                <a href="javascript:void(0);">
-                  <i class="fas fa-puzzle-piece mr-1"></i>
-                  Eklenti Ekleyin
-                </a>
-              </li>
-              <li>
-                <a href="javascript:void(0);">
-                  <i class="fas fa-palette mr-1"></i>
-                  Tema Ekleyin
-                </a>
-              </li>
-              <li>
-                <a href="javascript:void(0);" target="_blank">
-                  <i class="fas fa-book-open mr-1"></i>
-                  Dökümantasyonları İnceleyin
-                </a>
-              </li>
-              <li>
-                <a href="https://panomc.com/discord" target="_blank">
-                  <i class="fab fa-discord mr-1"></i>
-                  Discord Topluluğumuza Katılın
-                </a>
-              </li>
-            </ul>
-          </div>
+      class="alert alert-primary bg-minecraft alert-dismissible animate__animated animate__zoomIn mb-3">
+      <div class="row">
+        <div class="col-12 pb-3">
+          <h4 class="card-title">Hoş Geldiniz</h4>
+          <p class="lead">
+            Pano kullanıma hazır! 🚀 İşte başlarken yapabileceklerinz:
+          </p>
+        </div>
+        <div class="col-lg-4 mb-lg-0 mb-3">
+          <h5>Sunucu Bağlayın</h5>
+          <p>Oyun sunucunuzu platforma bağlayın ve panel üzerinden erişin.</p>
+          <button
+            class="btn btn-sm btn-primary"
+            data-bs-target="#connectServer"
+            data-bs-toggle="modal">
+            <i class="fas fa-plus mr-2"></i>
+            Sunucu Bağla
+          </button>
+        </div>
+        <div class="col-lg-4 mb-lg-0 mb-3">
+          <ul class="list-unstyled mb-1">
+            <h5>Başlarken</h5>
+            <li>
+              <a class="alert-link" href="{base}/posts/create-post">
+                <i class="fas fa-pen mr-2"></i>
+                İlk Yazınızı Yayınlayın
+              </a>
+            </li>
+            <li>
+              <a class="alert-link" href="{base}/view">
+                <i class="fas fa-brush mr-1"></i>
+                Sitenizin Görünümünü Belirleyin
+              </a>
+            </li>
+            <li>
+              <a class="alert-link" href="{base}/tools">
+                <i class="fas fa-tools mr-2"></i>
+                Araçları Yönetin
+              </a>
+            </li>
+            <li>
+              <a class="alert-link" href="{base}/players">
+                <i class="fas fa-user-cog mr-2"></i>
+                Oyuncularınızı İnceleyin
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-4 mb-lg-0 mb-3">
+          <ul class="list-unstyled mb-2">
+            <h5>Daha Fazlası</h5>
+            <li>
+              <a class="alert-link" href="#">
+                <i class="fas fa-puzzle-piece mr-2"></i>
+                Eklenti Ekleyin
+              </a>
+            </li>
+            <li>
+              <a class="alert-link" href="#">
+                <i class="fas fa-palette mr-2"></i>
+                Tema Ekleyin
+              </a>
+            </li>
+            <li>
+              <a class="alert-link" href="#" target="_blank">
+                <i class="fas fa-book-open mr-2"></i>
+                Dökümantasyonları İnceleyin
+              </a>
+            </li>
+            <li>
+              <a
+                class="alert-link"
+                href="https://panomc.com/discord"
+                target="_blank">
+                <i class="fab fa-discord mr-2"></i>
+                Discord Topluluğumuza Katılın
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
+
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        on:click="{onCloseGettingStartedCard}"></button>
     </div>
   {/if}
 
-  <a
-    href="/players"
-    class="row mb-3 justify-content-between animate__animated animate__fadeIn">
-    <div class="col-lg-4">
-      <div class="p-3 text-secondary">
+  <div
+    class="row my-3 justify-content-between animate__animated animate__fadeIn">
+    <div class="col-auto">
+      <div class="text-secondary">
         <div class="row align-items-center">
           <div class="col-auto">
-            <i class="fas fa-globe fa-2x d-block mr-3"></i>
+            <h2 class="mb-0">12</h2>
           </div>
-          <div class="col">
-            <h3 class="font-weight-bolder">12</h3>
-            Çevrimiçi
-          </div>
+          <div class="col-auto">Çevrimiçi</div>
         </div>
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="p-3 text-warning">
+    <div class="col-auto">
+      <div class="text-warning">
         <div class="row align-items-center">
           <div class="col-auto">
-            <i class="fas fa-user-plus fa-2x d-block mr-3"></i>
-          </div>
-          <div class="col">
-            <h3 class="font-weight-bolder">
+            <h2 class="mb-0">
               {data.registered_player_count}
-              <i class="fas fa-caret-up ml-2"></i>
-            </h3>
-            Yeni Kayıt
+            </h2>
           </div>
+          <div class="col-auto">Yeni Kayıt</div>
         </div>
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="p-3 text-bittersweet">
+    <div class="col-auto">
+      <div class="text-bittersweet">
         <div class="row align-items-center">
           <div class="col-auto">
-            <i class="fas fa-users fa-2x d-block mr-3"></i>
-          </div>
-          <div class="col">
-            <h3 class="font-weight-bolder">
+            <h2 class="mb-0">
               {data.registered_player_count}
-            </h3>
-            Toplam Oyuncu
+            </h2>
           </div>
+          <div class="col-auto">Toplam Oyuncu</div>
         </div>
       </div>
     </div>
-  </a>
+  </div>
 
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between">
-        <div class="col-4">
+      <div class="row justify-content-between mb-3">
+        <div class="col">
           <h5 class="card-title">Website Aktivitesi</h5>
         </div>
-        <div class="col-8 text-right">
+        <div class="col-auto">
           <div class="btn-group">
             <button class="btn btn-sm btn-outline-light btn-link active">
               Haftalık
@@ -175,11 +155,11 @@
   <!-- Latest Tickets -->
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between">
-        <div class="col-6">
+      <div class="row justify-content-between mb-3">
+        <div class="col">
           <h5 class="card-title">Son Talepler</h5>
         </div>
-        <div class="col-6 text-right">
+        <div class="col-auto text-right">
           <a href="{base}/tickets" class="btn btn-link bg-light btn-sm">
             Tüm Talepler
           </a>
@@ -188,7 +168,7 @@
 
       {#if data.tickets.length === 0}
         <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
+          <i class="fas fa-ticket-alt fa-3x m-3 text-dark text-opacity-25"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}
@@ -197,23 +177,8 @@
             <a
               href="{base}/tickets/ticket/{ticket.id}"
               class="list-group-item list-group-item-action rounded d-flex flex-row">
-              <a href="{base}/players/player/{ticket.writer.username}">
-                <div
-                  class="col-auto"
-                  use:tooltip="{[
-                    ticket.writer.username,
-                    { placement: 'bottom' },
-                  ]}">
-                  <img
-                    src="https://minotar.net/avatar/{ticket.writer.username}"
-                    alt="{ticket.writer.username}"
-                    width="48"
-                    height="48"
-                    class="border rounded-circle animate__animated animate__zoomIn" />
-                </div>
-              </a>
-              <div class="col">
-                <span class="text-primary"> #{ticket.id} {ticket.title} </span>
+              <div class="text-primary">
+                {ticket.title}
                 <br />
                 <small class="text-muted">
                   <b> <Date time="{ticket.last_update}" /> </b>,
@@ -222,9 +187,6 @@
                   </a>
                   kategorisine açıldı.
                 </small>
-              </div>
-              <div class="col-auto d-flex align-items-center">
-                <TicketStatus status="{ticket.status}" />
               </div>
             </a>
           {/each}
@@ -331,8 +293,6 @@
 <script>
   import { base } from "$app/paths";
   import { session } from "$app/stores";
-
-  import tooltip from "$lib/tooltip.util";
   import { pageTitle } from "$lib/store";
 
   import VisitorsChart from "$lib/component/charts/Dashboard/VisitorsChart.svelte";

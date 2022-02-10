@@ -1,14 +1,13 @@
 <div class="container">
   <!-- Action Menu -->
   <div class="row mb-3 animate__animated animate__slideInUp">
-    <div class="col-6"></div>
     {#if $notifications.length !== 0}
-      <div class="col text-right">
+      <div class="col-auto">
         <button
           type="button"
-          class="btn btn-link text-danger"
-          on:click="{() => onDeleteAllClick()}">
-          <span class="d-md-inline d-none">Tümünü Sil</span>
+          class="btn btn-outline-danger"
+          on:click="{() => onDeleteAllClick()}"
+          >Tümünü Sil
         </button>
       </div>
     {/if}
@@ -48,14 +47,14 @@
 
         {#if $notifications.length === 0}
           <div
-            class="d-flex flex-column align-items-center justify-content-center animate__animated animate__zoomIn">
-            <i class="fas fa-bell fa-3x text-glass m-3"></i>
+            class="d-flex flex-column align-items-center justify-content-center">
+            <i class="fas fa-bell fa-3x text-dark text-opacity-25 m-3"></i>
             <p class="text-gray">Bildirim yok.</p>
           </div>
         {/if}
 
         {#if $notifications.length < $count && $count > 10 + 10 * page}
-          <div class="form-group mt-4">
+          <div class="mt-4">
             <button
               class="btn text-primary bg-lightprimary d-block m-auto"
               class:disabled="{loadMoreLoading}"
@@ -171,7 +170,7 @@
 
   export let data;
 
-  pageTitle.set("Bildirimler")
+  pageTitle.set("Bildirimler");
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

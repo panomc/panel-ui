@@ -1,6 +1,7 @@
 <div class="container">
   <!-- Action Menu -->
-  <div class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
+  <div
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-6">
       <a class="btn btn-link" role="button" href="{base}/players">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -9,10 +10,9 @@
     </div>
     <div class="col-6 text-right">
       <a
-        href="javascript:void(0);"
+        href="#"
         class="btn btn-primary"
-        on:click="{() => onCreatePermissionGroupClick()}"
-      >
+        on:click="{() => onCreatePermissionGroupClick()}">
         <i class="fas fa-plus mr-1"></i>
         Yetki Grubu Oluştur
       </a>
@@ -30,8 +30,7 @@
               use:tooltip="{[
                 'Panele erişebilir, ayarları ve panel içeriklerini görüntüleyebilir',
                 { placement: 'top' },
-              ]}"
-            >
+              ]}">
               <i class="fas fa-sign-in-alt text-primary d-block m-auto"></i>
               <small class="mb-0 font-weight-bolder">Panel Erişimi</small>
             </th>
@@ -41,8 +40,7 @@
                 use:tooltip="{[
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
                   { placement: 'top' },
-                ]}"
-              >
+                ]}">
                 <!--              TODO: Icon system-->
                 <!--              <Icon-->
                 <!--                data="{icon[convertIconName(permission.iconName)]}"-->
@@ -112,32 +110,29 @@
             <tr>
               <th scope="row">
                 <div class="d-flex flex-row align-items-center">
-                  <div class="dropdown mr-3">
-                    <a
-                      class="btn btn-sm py-0"
+                  <div class="dropdown position-static mr-3">
+                    <button
+                      type="button"
+                      class="btn btn-link btn-sm"
                       aria-expanded="false"
                       aria-haspopup="true"
-                      data-toggle="dropdown"
-                      href="javascript:void(0);"
-                      id="permAction"
-                      title="Eylemler"
-                    >
-                      <i class="fas fa-ellipsis-v"></i>
-                    </a>
+                      data-bs-toggle="dropdown"
+                      href="#"
+                      title="Eylemler">
+                      <span class="fas fa-ellipsis-h"></span>
+                    </button>
                     <div
                       aria-labelledby="permAction"
-                      class="dropdown-menu dropdown-menu-left animate__animated animate__zoomIn animate__faster"
-                    >
+                      class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
                       <a
                         class="dropdown-item"
                         data-target="#addEditPermGroup"
                         data-toggle="modal"
-                        href="javascript:void(0);"
+                        href="#"
                         on:click="{() =>
                           onShowEditPermissionGroupButtonClick(
                             permissionGroup
-                          )}"
-                      >
+                          )}">
                         <i class="fas fa-pencil-alt text-primary mr-1"></i>
                         Düzenle
                       </a>
@@ -146,12 +141,11 @@
                           class="dropdown-item"
                           data-target="#confirmDeletePermGroup"
                           data-toggle="modal"
-                          href="javascript:void(0);"
+                          href="#"
                           on:click="{() =>
                             onShowDeletePermissionGroupModalClick(
                               permissionGroup
-                            )}"
-                        >
+                            )}">
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
                         </a>
@@ -161,26 +155,22 @@
                   <div>
                     <h5 class="text-capitalize">{permissionGroup.name}</h5>
                     <div
-                      class="d-flex flex-row flex-row-reverse justify-content-end align-items-center mr-3"
-                    >
+                      class="d-flex flex-row flex-row-reverse justify-content-end align-items-center mr-3">
                       {#if permissionGroup.user_count > 3}
                         <small class="pl-1"
-                          >+{permissionGroup.user_count - 3}</small
-                        >
+                          >+{permissionGroup.user_count - 3}</small>
                       {/if}
                       {#each permissionGroup.users as user, index (user)}
                         <span
                           class="overlapping-avatar"
-                          use:tooltip="{[user, { placement: 'bottom' }]}"
-                        >
+                          use:tooltip="{[user, { placement: 'bottom' }]}">
                           <a href="{base}/players/player/{user}">
                             <img
                               class="animate__animated animate__zoomIn"
                               src="https://minotar.net/avatar/{user}"
                               width="32"
                               height="32"
-                              alt="{user}"
-                            />
+                              alt="{user}" />
                           </a>
                         </span>
                       {/each}
@@ -195,8 +185,7 @@
                     class="custom-control-input active"
                     id="access_panel_{permissionGroup.name}"
                     checked="true"
-                    disabled
-                  />
+                    disabled />
                   <label
                     class="custom-control-label"
                     for="access_panel_{permissionGroup.name}"></label>
@@ -219,8 +208,7 @@
                         permission,
                         permissionGroup,
                         loadingPermissionsList
-                      )}"
-                    />
+                      )}" />
                     <label
                       class="custom-control-label"
                       for="{permission.name}_{permissionGroup.name}"></label>
@@ -305,7 +293,7 @@
 
   export let data;
 
-  pageTitle.set("Yetkiler")
+  pageTitle.set("Yetkiler");
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

@@ -1,19 +1,18 @@
-<tr class:bg-lightprimary="{post.selected}">
-  <th class="min-w-50px" scope="row">
-    <div class="dropdown position-absolute">
-      <a
-        class="btn btn-sm py-0"
+<tr class:table-primary="{post.selected}">
+  <th scope="row">
+    <div class="dropdown position-static">
+      <button
+        type="button"
+        class="btn btn-link btn-sm"
         aria-expanded="false"
         aria-haspopup="true"
-        data-toggle="dropdown"
-        href="javascript:void(0);"
-        id="postAction"
+        data-bs-toggle="dropdown"
+        href="#"
         title="Eylemler">
-        <i class="fas fa-ellipsis-v"></i>
-      </a>
+        <span class="fas fa-ellipsis-h"></span>
+      </button>
       <div
-        aria-labelledby="postAction"
-        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn">
+        class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
         <a class="dropdown-item" target="_blank" href="{UI_URL}/preview/post/{post.id}">
           <i class="fas fa-eye text-primary mr-1"></i>
           Görüntüle
@@ -48,8 +47,6 @@
 
         <a
           class="dropdown-item"
-          data-target="#confirmDeletePost"
-          data-toggle="modal"
           href="javascript:void(0);"
           on:click="{onDeletePostClick}">
           <i class="fas fa-trash text-danger mr-1"></i>
@@ -66,9 +63,8 @@
   <td class="align-middle text-nowrap">
     <a href="{base}/posts/category/{post.category.title}">
       <span
-        class="badge badge-pill"
+        class="badge border rounded-pill text-dark"
         class:text-dark="{post.category.title === '-'}"
-        class:px-0="{post.category.title === '-'}"
         style="{post.category.title === '-'
           ? ''
           : 'background: #' + post.category.color}">
@@ -82,7 +78,7 @@
       use:tooltip="{[post.writer.username, { placement: 'bottom' }]}">
       <img
         alt="{post.writer.username}"
-        class="rounded-circle border animate__animated animate__zoomIn"
+        class="rounded-circle border"
         height="32"
         src="https://minotar.net/avatar/{post.writer.username}"
         width="32" />

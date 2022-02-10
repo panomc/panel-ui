@@ -1,5 +1,13 @@
+<style>
+  .messages-section {
+    overflow-y: auto;
+    max-height: 450px;
+  }
+</style>
+
 <article class="container">
-  <div class="row mb-3 animate__animated animate__slideInUp">
+  <div
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -7,35 +15,33 @@
       </a>
     </div>
     <div class="col-auto ml-auto">
+      <a
+        class="btn btn-outline-danger"
+        role="button"
+        href="#"
+        on:click="{() => showDeleteTicketModal([data.ticket.id])}">
+        <i class="fas fa-trash"></i>
+
+        <span class="d-lg-inline d-none ml-1">Sil</span>
+      </a>
       {#if data.ticket.status !== TicketStatuses.CLOSED}
         <a
           class="btn btn-bittersweet"
           role="button"
           on:click="{() => showCloseTicketModal([data.ticket.id])}"
-          href="javascript:void(0);">
-          Talebi Kapat
+          href="#">
+          <i class="fas fa-check mr-1"></i>
+          Kapat
         </a>
       {/if}
-      <a
-        class="btn btn-outline-danger"
-        role="button"
-        href="javascript:void(0);"
-        on:click="{() => showDeleteTicketModal([data.ticket.id])}">
-        <i class="fas fa-trash"></i>
-
-        <span class="d-lg-inline d-none ml-1">Talebi Sil</span>
-      </a>
     </div>
   </div>
 
-  <h3
-    class="text-muted badge badge-lightprimary panel-subtitle animate__animated animate__slideInLeft">
-    Talep: #{data.ticket.id}
-  </h3>
+  <h3>Talep: #{data.ticket.id}</h3>
 
   <div
     class="card border mb-3"
-    class:border-secondary="{data.ticket.status === TicketStatuses.NEW}"
+    class:border-mint="{data.ticket.status === TicketStatuses.NEW}"
     class:border-sunflower="{data.ticket.status === TicketStatuses.REPLIED}"
     class:border-bittersweet="{data.ticket.status === TicketStatuses.CLOSED}">
     <div
@@ -142,7 +148,7 @@
 
   {#if data.ticket.status === TicketStatuses.CLOSED}
     <div class="container text-center">
-      <i class="fas fa-times fa-3x text-glass m-3"></i>
+      <i class="fas fa-times fa-3x text-dark text-opacity-25 m-3"></i>
       <p class="text-gray">Bu talep kapalı.</p>
     </div>
   {/if}

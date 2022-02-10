@@ -1,31 +1,21 @@
 <!-- Add / Edit Category Modal -->
-<div
-  aria-hidden="true"
-  class="modal fade"
-  id="{dialogID}"
-  role="dialog"
-  tabindex="-1"
->
+<div class="modal fade" id="{dialogID}" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
           {$mode === "create" ? "Kategori Oluştur" : "Kategoriyi Düzenle"}
         </h5>
-
         <button
-          aria-label="Kapat"
-          class="close"
           title="Pencereyi Kapat"
           type="button"
-          on:click="{hide}"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+          class="btn-close"
+          data-bs-dismiss="modal"
+          on:click="{hide}"></button>
       </div>
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
-          <div class="form-group">
+          <div class="mb-3">
             <input
               class:border-danger="{$errors.title}"
               class="form-control"
@@ -33,10 +23,9 @@
               id="category"
               type="text"
               bind:value="{$category.title}"
-              on:input="{() => setURL()}"
-            />
+              on:input="{() => setURL()}" />
           </div>
-          <div class="form-group">
+          <div class="mb-3">
             <textarea
               class:border-danger="{$errors.description}"
               class="form-control"
@@ -46,53 +35,33 @@
               rows="5"
               bind:value="{$category.description}"></textarea>
           </div>
-          <div class="form-group">
-            <div class="input-group input-group-sm shadow-0">
-              <div class="input-group-prepend bg-lightprimary shadow-0">
-                <span class="input-group-text">/category/</span>
-              </div>
-              <input
-                class:border-danger="{$errors.url}"
-                class="form-control"
-                placeholder="..."
-                id="categoryURL"
-                type="text"
-                bind:value="{$category.url}"
-              />
-            </div>
-            <small class:text-danger="{$errors.url}">
-              <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i>
-              Yanlızca [A-Z/a-z/0-9/-] içerebilir ve minimum 3, maksimum 32 karkater
-              olabilir.
-            </small>
+          <div class="mb-3 input-group">
+            <span class="input-group-text">/category/</span>
+            <input
+              class:border-danger="{$errors.url}"
+              class="form-control"
+              placeholder="..."
+              id="categoryURL"
+              type="text"
+              bind:value="{$category.url}" />
           </div>
-          <div class="form-group d-none">
-            <label for="categoryColor">Renk:</label>
-            <div class="input-group">
-              <input
-                class="form-control rounded-pill"
-                id="categoryColor"
-                type="color"
-                bind:value="{$category.color}"
-              />
-            </div>
-          </div>
+          <small class:text-danger="{$errors.url}">
+            Yanlızca [A-Z/a-z/0-9/-] içerebilir ve minimum 3, maksimum 32
+            karkater olabilir.
+          </small>
         </div>
         <div class="modal-footer">
           <button
-            class="btn btn-block"
+            class="btn w-100"
             type="submit"
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
             class:disabled="{loading}"
-            disabled="{loading}"
-          >
+            disabled="{loading}">
             <span>
               {#if $mode === "edit"}
-                <i aria-hidden="true" class="fa fa-save fa-fw"></i>
                 Kaydet
               {:else}
-                <i aria-hidden="true" class="fa fa-plus fa-fw"></i>
                 Oluştur
               {/if}
             </span>
@@ -104,7 +73,6 @@
 </div>
 
 <script context="module">
-  import jquery from "jquery";
   import { writable, get } from "svelte/store";
 
   const dialogID = "postCategoriesAddEditCategory";
@@ -114,6 +82,7 @@
 
   let callback = (routeFirstPage, category) => {};
   let hideCallback = (category) => {};
+  let modal;
 
   export function show(
     newMode,
@@ -135,13 +104,17 @@
     category.set(newCategory);
     errors.set([]);
 
-    jquery("#" + dialogID).modal({ backdrop: "static", keyboard: false });
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
+    modal.show();
   }
 
   export function hide() {
     if (get(mode) === "edit") hideCallback(get(category));
 
-    jquery("#" + dialogID).modal("hide");
+    modal.hide();
   }
 
   export function setCallback(newCallback) {

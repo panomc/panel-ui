@@ -20,32 +20,18 @@
   border-radius: 50%;
 }
 
-.notifications {
-  min-width: 300px;
-}
-
 .card {
   margin-bottom: 1rem;
 }
 
 .bg-minecraft {
-  position: relative;
-  background: url("/assets/img/header-bg.jpg") no-repeat top;
+  background: url("/assets/img/header-bg-t.png") no-repeat top;
   background-size: cover;
   border-radius: $border-radius;
-  &:before {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    content: "";
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba($white, 0.1) 0%, $white 80%);
-    border-radius: $border-radius;
-  }
 }
 
 .sidebar {
+  height: 1vvh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -67,14 +53,6 @@
 
 .sidebar:not(.active) {
   margin-left: -250px;
-}
-
-.sidebar-toggler {
-  position: absolute;
-  left: 1rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  align-self: center;
 }
 
 .sidebar.active {
@@ -108,10 +86,8 @@
   text-align: center;
 }
 
-.sidebar-server-icon {
-  margin: 1rem auto;
-  box-shadow: 0 0 0 10px $lightglass;
-  border-radius: 50%;
+.navbar-toggler {
+  border: 0;
 }
 
 .menu.navbar-nav li.nav-item {
@@ -128,23 +104,10 @@
   bottom: 0;
 }
 
-.panel-content {
-  display: block;
-  height: 100vh;
-  min-width: 300px;
-  width: 100%;
-  overflow-y: auto;
-  transition: 250ms ease-in;
-}
-
-.table-responsive {
-  overflow-x: auto;
-}
-
 .menu > li.nav-item {
   position: relative;
   border-radius: 0.5rem;
-  color: $lightglass;
+  /* color: $lightglass; */
 
   &:hover {
     transition: 250ms all;
@@ -190,27 +153,6 @@
   }
 }
 
-.panel-subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-.page-category-v {
-  background: $white;
-  width: 100%;
-  height: calc(100vh - 74px);
-  padding: 1rem 1.5rem;
-  @include media-breakpoint-down(md) {
-    padding: 0.5rem 0.5rem;
-  }
-}
-
-.settings-form {
-  padding: 0.5rem 1rem;
-  min-width: 400px;
-  max-width: 800px;
-}
-
 .selected {
   box-shadow: 0 0 0 4px inset $primary !important;
   position: relative;
@@ -228,30 +170,6 @@
     background-color: $primary;
     border-bottom-left-radius: 75px;
   }
-}
-
-.min-w-200px {
-  min-width: 200px;
-}
-
-.min-w-50px {
-  min-width: 50px;
-}
-
-.btn-secondary {
-  color: $white;
-}
-
-.tool-card {
-  width: 100px;
-  height: 100px;
-}
-
-.player-profile-icon {
-  display: block;
-  margin: 0 1rem;
-  border: 10px solid;
-  border-radius: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -295,11 +213,6 @@
   }
 }
 
-.messages-section {
-  overflow-y: auto;
-  max-height: 450px;
-}
-
 .overlapping-avatar {
   position: relative;
   border: 4px solid $white;
@@ -309,8 +222,4 @@
 
 .overlapping-avatar:not(:last-child) {
   margin-left: -12px;
-}
-
-.ql-editor {
-  font-size: 16px;
 }

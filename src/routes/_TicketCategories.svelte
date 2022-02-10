@@ -1,25 +1,19 @@
 <!-- Ticket Categories Page -->
-<!-- Add / Edit Ticket Category Modal -->
-<AddEditTicketCategoryModal />
-
-<!-- Confirm Delete Ticket Category Modal -->
-<ConfirmDeleteTicketCategoryModal />
-
 <article class="container">
   <!-- Action Menu -->
-  <div class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
-    <div class="col-6">
+  <div
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
+    <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
         <i class="fas fa-arrow-left mr-1"></i>
         Talepler
       </a>
     </div>
-    <div class="col-6 text-right">
+    <div class="col-auto">
       <button
-        class="btn btn-primary"
+        class="btn btn-secondary"
         type="button"
-        on:click="{onCreateCategoryClick}"
-      >
+        on:click="{onCreateCategoryClick}">
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
       </button>
@@ -30,17 +24,19 @@
 
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title text-sm-left text-center">
-        {data.category_count}
-        Talep Kategorisi
-      </h5>
+      <div class="row justify-content-between pb-3 align-items-center">
+        <div class="col-md-auto col-12 text-md-left text-center">
+          <h5 class="card-title text-sm-left text-center">
+            {data.category_count}
+            Talep Kategorisi
+          </h5>
+        </div>
+      </div>
 
       <!-- No Category -->
       {#if data.category_count === 0}
-        <div
-          class="container text-center animate__animated animate__zoomIn"
-        >
-          <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
+        <div class="container text-center animate__animated animate__zoomIn">
+          <i class="fas fa-ticket-alt fa-3x text-dark text-opacity-25 m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {/if}
@@ -58,28 +54,27 @@
             </thead>
             <tbody>
               {#each data.categories as category, index (category)}
-                <tr class:bg-lightprimary="{category.selected}">
+                <tr class:table-primary="{category.selected}">
                   <th scope="row">
-                    <div class="dropdown">
-                      <a
-                        class="btn btn-sm py-0"
+                    <div class="dropdown position-static">
+                      <button
+                        type="button"
+                        class="btn btn-link btn-sm"
                         aria-expanded="false"
                         aria-haspopup="true"
-                        data-toggle="dropdown"
-                        href="javascript:void(0);"
-                      >
-                        <i class="fas fa-ellipsis-v"></i>
-                      </a>
+                        data-bs-toggle="dropdown"
+                        href="#"
+                        title="Eylemler">
+                        <span class="fas fa-ellipsis-h"></span>
+                      </button>
                       <div
-                        class="dropdown-menu dropdown-menu-right animate__animated animate__zoomIn"
-                      >
+                        class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
                         <a
                           class="dropdown-item"
-                          href="javascript:void(0);"
+                          href="#"
                           on:click="{onShowDeleteTicketCategoryModalClick(
                             index
-                          )}"
-                        >
+                          )}">
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
                         </a>
@@ -88,10 +83,9 @@
                   </th>
                   <td class="text-nowrap">
                     <a
-                      href="javascript:void(0);"
+                      href="#"
                       title="Kategoriyi Düzenle"
-                      on:click="{onShowEditCategoryButtonClick(index)}"
-                    >
+                      on:click="{onShowEditCategoryButtonClick(index)}">
                       {category.title}
                     </a>
                   </td>
@@ -108,11 +102,16 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
     </div>
   </div>
 </article>
+
+<!-- Add / Edit Ticket Category Modal -->
+<AddEditTicketCategoryModal />
+
+<!-- Confirm Delete Ticket Category Modal -->
+<ConfirmDeleteTicketCategoryModal />
 
 <script context="module">
   import ApiUtil from "$lib/api.util";
@@ -196,7 +195,7 @@
 
   export let data;
 
-  pageTitle.set("Talep Kategorileri")
+  pageTitle.set("Talep Kategorileri");
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {

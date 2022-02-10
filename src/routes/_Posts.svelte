@@ -1,16 +1,17 @@
 <!-- Posts Page -->
 <article class="container">
   <!-- Action Menu -->
-  <div class="row mb-3 animate__animated animate__slideInUp">
-    <div class="col-md-4 col-6">
+  <div
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+    <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts/categories">
         <i class="fas fa-list-alt mr-1"></i>
         Yazı Kategorileri
       </a>
     </div>
-    <div class="col d-flex">
+    <div class="col-auto">
       <a
-        class="btn btn-primary ml-auto"
+        class="btn btn-secondary ml-auto"
         role="button"
         href="{base}/posts/create-post">
         <i class="fas fa-plus"></i>
@@ -24,7 +25,7 @@
   <div class="card">
     <div class="card-body">
       <div class="row justify-content-between pb-3 align-items-center">
-        <div class="col-md-6 col-12 text-md-left text-center">
+        <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title mb-md-0">
             {data.posts_count}
             {data.pageType === PageTypes.PUBLISHED
@@ -36,7 +37,7 @@
               : ""} Yazı
           </h5>
         </div>
-        <div class="col-md-6 col-12 text-md-right text-center">
+        <div class="col-md-auto col-12 text-md-right text-center">
           <div class="btn-group">
             <a
               class:active="{data.pageType === PageTypes.PUBLISHED}"
@@ -67,7 +68,7 @@
       <!-- No Posts -->
       {#if data.posts_count === 0}
         <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-sticky-note fa-3x text-glass m-3"></i>
+          <i class="fas fa-sticky-note fa-3x text-dark text-opacity-25 m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}
@@ -77,11 +78,11 @@
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th class="min-w-200px align-middle" scope="col">Başlık</th>
+                <th class="min-w-200px align-middle" scope="col">Yazı</th>
                 <th scope="col align-middle">Kategori</th>
                 <th scope="col align-middle">Yazar</th>
                 <th scope="col align-middle">Görüntülenme</th>
-                <th scope="col align-middle">Tarih</th>
+                <th scope="col align-middle">Son Güncelleme</th>
               </tr>
             </thead>
             <tbody>

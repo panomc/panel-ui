@@ -4,31 +4,21 @@
 <article class="container">
   <!-- View Categories Navigation -->
   <nav>
-    <div class="nav nav-pills d-flex flex-row w-100">
+    <div class="nav nav-pills d-flex flex-row w-100 mb-3">
       <a
         class="nav-item nav-link"
         href="{base}/view"
-        class:active="{matching($page.path, base + '/view')}"
-      >
+        class:active="{matching($page.path, base + '/view')}">
         Temalar
       </a>
-
       <a
         class="nav-item nav-link"
         href="{base}/view/theme-options"
-        class:active="{matching($page.path, base + '/view/theme-options')}"
-      >
+        class:active="{matching($page.path, base + '/view/theme-options')}">
         Tema Seçenekleri
       </a>
-
-      <button class="btn btn-primary ml-auto">
-        <i class="fas fa-plus mr-1"></i>
-        Tema Ekle
-      </button>
     </div>
   </nav>
-
-  <hr />
 
   <slot />
 </article>

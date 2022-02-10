@@ -9,28 +9,30 @@
         Oyuncular
       </a>
     </div>
-    <div class="col-auto text-right">
+    <div class="col-auto">
+      {#if !data.player.isEmailVerified}
+        <a
+          class="btn btn-link"
+          use:tooltip="{[
+            'Oyuncu e-postasına bir doğrulama bağlantısı gönder',
+            { placement: 'bottom' },
+          ]}"
+          href="#">
+          <i class="fas fa-envelope"></i>
+          <span class="ml-1 d-lg-inline d-none">Doğrula</span>
+        </a>
+      {/if}
       <a
         class="btn btn-link"
-        use:tooltip="{[
-          'Oyuncu e-postasına bir doğrulama bağlantısı gönder',
-          { placement: 'bottom' },
-        ]}"
-        href="javascript:void(0);"
-        on:click="{() => showAuthorizePlayerModal(data.player)}">
-        <i class="fas fa-envelope"></i>
-        <span class="ml-1 d-lg-inline d-none">Doğrula</span>
-      </a>
-      <a
-        class="btn btn-link"
-        href="javascript:void(0);"
-        on:click="{() => showAuthorizePlayerModal(data.player)}">
+        href="#"
+        on:click="{() =>
+          showAuthorizePlayerModal(data.player, $session.CSRFToken)}">
         <i class="fas fa-user-circle"></i>
         <span class="ml-1 d-lg-inline d-none">Yetkilendir</span>
       </a>
       <a
         class="btn btn-link"
-        href="javascript:void(0);"
+        href="#"
         on:click="{() => showEditPlayerModal(data.player)}">
         <i class="fas fa-pencil-alt"></i>
         <span class="ml-1 d-lg-inline d-none">Düzenle</span>
@@ -39,7 +41,7 @@
         class="btn btn-outline-danger"
         data-target="#conformBanPlayer"
         data-toggle="modal"
-        href="javascript:void(0);">
+        href="#">
         <i class="fas fa-gavel"></i>
         <span class="ml-1 d-lg-inline d-none">Yasakla</span>
       </a>
@@ -55,30 +57,29 @@
           <img
             alt="{data.player.username}"
             class="mb-3 rounded-circle animate__animated animate__zoomIn"
-            width="64"
-            height="64"
+            width="128"
+            height="128"
             src="https://minotar.net/avatar/{data.player.username}" />
 
           <h4 class="card-title">{data.player.username}</h4>
-          <h6 class="text-muted mb-3">{data.player.email}</h6>
-          {#if data.player.isBanned}
-            <hr />
-            <div class="badge badge-pill badge-danger d-block">
-              <i class="fas fa-gavel mr-1"></i>
-              Yasaklı
-            </div>
-          {/if}
-          <span
-            class="badge badge-pill badge-lightsecondary text-success"
-            use:tooltip="{['Sitede', { placement: 'top' }]}">
-            <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
-            <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
-          </span>
+          <h6 class="text-muted">{data.player.email}</h6>
           <hr />
 
-          <ul class="list-inline my-0">
+          <ul class="list-inline mb-0">
             <li class="list-inline-item mb-2">
-              <div class="badge text-dark border text-capitalize">
+              {#if data.player.isBanned}
+                <div class="badge bg-danger text-white">
+                  <i class="fas fa-gavel mr-1"></i>
+                  Yasaklı
+                </div>
+              {/if}
+              <div
+                class="badge bg-lightsecondary text-success"
+                use:tooltip="{['Sitede', { placement: 'top' }]}">
+                <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
+                <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
+              </div>
+              <div class="badge text-dark border">
                 <a
                   href="{base}/players/permission/{data.player
                     .permission_group}">
@@ -89,8 +90,11 @@
               </div>
             </li>
             <li class="list-inline-item mb-2">
-              <div class="badge text-success border">Doğrulandı</div>
-              <div class="badge text-dark border">Doğrulannadı</div>
+              {#if data.player.isEmailVerified}
+                <div class="badge text-dark border">Doğrulandı</div>
+              {:else}
+                <div class="badge text-dark border">Doğrulannadı</div>
+              {/if}
             </li>
             <li class="list-inline-item mb-2">
               <div class="badge text-dark border">
@@ -105,13 +109,11 @@
       <!-- User's Tickets -->
       <div class="card">
         <div class="card-body">
-          <div class="row justify-content-between">
-            <div class="col-6">
-              <h5 class="card-title">
-                {data.player.username} tarafından Son Talepler
-              </h5>
+          <div class="row justify-content-between mb-3">
+            <div class="col-auto">
+              <h5 class="card-title">Son Talepler</h5>
             </div>
-            <div class="col-6 text-right">
+            <div class="col-auto">
               <a href="{base}/tickets" class="btn btn-link bg-light btn-sm">
                 Tüm Talepler
               </a>

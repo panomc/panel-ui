@@ -1,34 +1,26 @@
 <!-- Themes Sub Page -->
 <div class="tab-pane">
   <!-- Themes: Current Themes Sub Title -->
-  <section class="row justify-content-between align-items-center">
-    <div class="col-6"></div>
-    <div class="col-6 text-right"></div>
-  </section>
-
   <section class="row">
     <div class="col-lg-4 col-md-6">
-      <div class="card shadow selected animate__animated animate__fadeIn">
+      <div class="card selected animate__animated animate__fadeIn">
         <img
           alt="Vanilla"
           class="rounded p-2"
           height="auto"
           src="{base}/assets/img/vanilla.png"
-          width="100%"
-        />
+          width="100%" />
         <div class="card-body">
-          <div class="row justify-content-between align-items-center">
-            <div class="col-6 text-left">
+          <div class="row justify-content-between align-items-end">
+            <div class="col-auto">
               <h5 class="card-title mb-0">Vanilla</h5>
               Yapımcı: Butlu
             </div>
-            <div class="col-6 text-right">
+            <div class="col-auto">
               <button
-                class="btn btn-outline-danger btn-sm disabled"
-                data-target="#confirmDeleteTheme"
-                data-toggle="modal"
-                disabled
-              >
+                class="btn btn-outline-danger btn-sm"
+                data-bs-target="#confirmDeleteTheme"
+                data-bs-toggle="modal">
                 Kaldır
               </button>
             </div>
@@ -48,5 +40,5 @@
 
   import ConfirmDeleteThemeModal from "$lib/component/modals/ConfirmDeleteThemeModal.svelte";
 
-  pageTitle.set("Temalar")
+  pageTitle.set("Temalar");
 </script>
