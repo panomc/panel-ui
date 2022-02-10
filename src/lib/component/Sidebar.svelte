@@ -69,7 +69,7 @@
       </li>
       <li class="nav-item">
         <a
-          href="#"
+          href="javascript:void(0)"
           class="nav-link"
           use:tooltip="{['Sunucu', { placement: 'bottom' }]}"
           on:click="{onGameMenuClick}"

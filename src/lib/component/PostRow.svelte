@@ -13,14 +13,14 @@
       </button>
       <div
         class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
-        <a class="dropdown-item" target="_blank" href="/preview/post/{post.id}">
+        <a class="dropdown-item" target="_blank" href="{UI_URL}/preview/post/{post.id}">
           <i class="fas fa-eye text-primary mr-1"></i>
           Görüntüle
         </a>
         {#if pageType !== PageTypes.DRAFT}
           <a
             class="dropdown-item"
-            href="#"
+            href="javascript:void(0);"
             on:click="{onMoveToDraft}"
             class:disabled="{buttonsLoading}"
             disabled="{buttonsLoading}">
@@ -98,6 +98,7 @@
   import Date from "$lib/component/Date.svelte";
 
   import tooltip from "$lib/tooltip.util";
+  import { UI_URL } from "$lib/variables";
 
   import { PageTypes } from "../../routes/_Posts.svelte";
 

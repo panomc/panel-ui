@@ -4,9 +4,9 @@
     <!-- Navbar Toggler -->
     <div class="navbar-nav ml-auto">
       <a
-        href="#"
         class="nav-link"
         class:invisible="{$isSidebarOpen}"
+        href="javascript:void(0);"
         title="Menüyü Aç/Kapa"
         on:click="{onSideBarCollapseClick}">
         <i class="fas fa-bars"></i>

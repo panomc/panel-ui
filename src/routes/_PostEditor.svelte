@@ -39,7 +39,7 @@
         class="btn btn-link"
         role="button"
         target="_blank"
-        href="/preview/post/{data.post.id}">
+        href="{UI_URL}/preview/post/{data.post.id}">
         <i class="fas fa-eye"></i>
         <span class="d-md-inline d-none ml-1">Görüntüle</span>
       </a>
@@ -114,7 +114,7 @@
               <select
                 class="form-control form-control-sm"
                 bind:value="{data.post.category}">
-                <option class="text-primary" value="-1">Kategorisiz</option>
+                <option class="text-primary" value="{-1}">Kategorisiz</option>
 
                 {#each data.categories as category, index (category)}
                   <option value="{category.id}">{category.title}</option>
@@ -260,6 +260,7 @@
   import { session, page } from "$app/stores";
 
   import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
+  import { UI_URL } from "$lib/variables";
 
   import SetPostThumbnailModal from "$lib/component/modals/SetPostThumbnailModal.svelte";
 

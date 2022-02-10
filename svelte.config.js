@@ -17,6 +17,13 @@ const config = {
   },
 
   preprocess: SveltePreprocess(),
+
+  onwarn: (warning, handler) => {
+    if (warning.code === "a11y-invalid-attribute") return;
+    if (warning.code === "a11y-missing-attribute") return;
+
+    handler(warning);
+  },
 };
 
 export default config;

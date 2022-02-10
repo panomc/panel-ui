@@ -44,7 +44,11 @@
     class:border-mint="{data.ticket.status === TicketStatuses.NEW}"
     class:border-sunflower="{data.ticket.status === TicketStatuses.REPLIED}"
     class:border-bittersweet="{data.ticket.status === TicketStatuses.CLOSED}">
-    <div class="card-body">
+    <div
+      class="card-header border-bottom bg-lightbittersweet"
+      class:border-secondary="{data.ticket.status === TicketStatuses.NEW}"
+      class:border-sunflower="{data.ticket.status === TicketStatuses.REPLIED}"
+      class:border-bittersweet="{data.ticket.status === TicketStatuses.CLOSED}">
       <div class="row">
         <div class="col">
           <h5 class="card-title">{data.ticket.title}</h5>
@@ -57,92 +61,88 @@
               ? data.ticket.category
               : data.ticket.category.title}</a>
           kategorisine açıldı.
-          <hr />
         </div>
-        <div class="col-auto ml-auto">
+        <div class="col-auto">
           <TicketStatus status="{data.ticket.status}" />
         </div>
       </div>
+    </div>
+    <div
+      class="card-body messages-section"
+      id="messageSection"
+      bind:this="{messagesSectionDiv}"
+      bind:clientHeight="{$messagesSectionClientHeight}">
+      {#if data.ticket.messages.length < data.ticket.count && data.ticket.count > 5}
+        <button
+          class="btn btn-link btn-sm bg-lightprimary d-block m-auto"
+          class:disabled="{loadMoreLoading}"
+          on:click="{loadMore}"
+          >Önceki Mesajlar ({data.ticket.count -
+            (data.ticket.messages.length - sentMessageCount)})
+        </button>
+      {/if}
 
-      <div
-        class="card-body messages-section"
-        id="messageSection"
-        bind:this="{messagesSectionDiv}"
-        bind:clientHeight="{$messagesSectionClientHeight}">
-        {#if data.ticket.messages.length < data.ticket.count && data.ticket.count > 5}
-          <button
-            class="btn text-primary bg-lightprimary d-block m-auto"
-            class:disabled="{loadMoreLoading}"
-            on:click="{loadMore}"
-            >Eski Mesajları Göster ({data.ticket.count -
-              (data.ticket.messages.length - sentMessageCount)})
-          </button>
+      {#each data.ticket.messages as message, index (message)}
+        {#if message.panel}
+          <div class="row py-2 flex-nowrap justify-content-end">
+            <div class="col-auto d-flex align-items-center">
+              <!-- <a
+                  class="btn btn-link btn-sm text-gray mr-2"
+                  role="button"
+                  href="javascript:void(0);">
+                  <i class="fas fa-ellipsis-v"></i>
+                </a> -->
+              <div class="p-2 rounded bg-lightsecondary">
+                <div class="text-black">{@html message.message}</div>
+                <small class="text-muted"
+                  ><Date time="{message.date}" />
+                </small>
+              </div>
+            </div>
+            <div class="col-auto">
+              <a href="{base}/players/player/{message.username}">
+                <img
+                  src="https://minotar.net/avatar/{message.username}/48"
+                  alt="{message.username}"
+                  class="ml-2 border rounded-circle d-block mr-auto animate__animated animate__zoomIn"
+                  use:tooltip="{[message.username, { placement: 'bottom' }]}"
+                  width="48"
+                  height="48" />
+              </a>
+            </div>
+          </div>
+        {:else}
+          <div class="row py-2 flex-nowrap justify-content-start">
+            <div class="col-auto text-right">
+              <a href="{base}/players/player/{message.username}">
+                <img
+                  src="https://minotar.net/avatar/{message.username}/48"
+                  alt="{message.username}"
+                  class="mr-2 border rounded-circle animate__animated animate__zoomIn"
+                  use:tooltip="{[message.username, { placement: 'bottom' }]}"
+                  width="48"
+                  height="48" />
+              </a>
+            </div>
+            <div class="col-auto d-flex flex-nowrap align-items-center">
+              <div class="p-2 rounded bg-lightprimary d-inline-block">
+                <div class="pb-2 text-black">
+                  {message.message}
+                </div>
+                <small class="text-muted pt-2">
+                  <Date time="{message.date}" />
+                </small>
+              </div>
+              <a
+                class="btn btn-link d-none ml-3"
+                role="button"
+                href="javascript:void(0);">
+                <i class="fas fa-ellipsis-v"></i>
+              </a>
+            </div>
+          </div>
         {/if}
-
-        {#each data.ticket.messages as message, index (message)}
-          {#if message.panel}
-            <div class="row py-3 flex-nowrap">
-              <div class="col-2 d-flex justify-content-end"></div>
-              <div
-                class="col d-flex flex-nowrap justify-content-end align-items-center">
-                <a
-                  class="btn btn-link mr-3 d-none"
-                  role="button"
-                  href="javascript:void(0);">
-                  <i class="fas fa-ellipsis-v"></i>
-                </a>
-                <div
-                  class="d-inline-block p-2 bg-lightsecondary border rounded">
-                  <div class="pb-2 text-black">{@html message.message}</div>
-                  <small class="text-muted pt-2"
-                    ><Date time="{message.date}" /></small>
-                </div>
-              </div>
-              <div class="col-2">
-                <a href="{base}/players/player/{message.username}">
-                  <img
-                    src="https://minotar.net/avatar/{message.username}/48"
-                    alt="{message.username}"
-                    class="ml-3 border rounded-circle d-block mr-auto"
-                    use:tooltip="{[message.username, { placement: 'bottom' }]}"
-                    width="48"
-                    height="48" />
-                </a>
-              </div>
-            </div>
-          {:else}
-            <div class="row py-3 flex-nowrap">
-              <div class="col-2 text-right">
-                <a href="{base}/players/player/{message.username}">
-                  <img
-                    src="https://minotar.net/avatar/{message.username}/48"
-                    alt="{message.username}"
-                    class="mr-3 border rounded-circle"
-                    use:tooltip="{[message.username, { placement: 'bottom' }]}"
-                    width="48"
-                    height="48" />
-                </a>
-              </div>
-              <div class="col d-flex flex-nowrap align-items-center">
-                <div class="p-2 rounded bg-lightprimary border d-inline-block">
-                  <div class="pb-2 text-black">
-                    {message.message}
-                  </div>
-                  <small class="text-muted pt-2"
-                    ><Date time="{message.date}" /></small>
-                </div>
-                <a
-                  class="btn btn-link d-none ml-3"
-                  role="button"
-                  href="javascript:void(0);">
-                  <i class="fas fa-ellipsis-v"></i>
-                </a>
-              </div>
-              <div class="col-2"></div>
-            </div>
-          {/if}
-        {/each}
-      </div>
+      {/each}
     </div>
   </div>
 

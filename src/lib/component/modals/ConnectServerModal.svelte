@@ -49,14 +49,13 @@
               type="button"
               use:tooltip="{[
                 isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala',
-                { placement: 'top' },
+                { placement: 'top', hideOnClick: false },
               ]}">
               <i class="fas fa-clipboard"></i>
             </button>
           </div>
           <small class="text-muted">
-            Kod {timeToRefreshKey}{timeToRefreshKey === "..." ? "" : " saniye"}
-            sonra yenilenecek.
+            Kod {timeToRefreshKey} saniye sonra yenilenecek.
           </small>
 
           <div class="my-4">
