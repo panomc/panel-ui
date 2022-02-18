@@ -17,53 +17,48 @@
 
   <div class="card">
     <div class="card-body">
-      <div
-        class="d-flex flex-column justify-content-center align-items-center
-        border rounded">
-        {#each $notifications as notification, index (notification)}
-          <div class="d-flex flex-row align-items-center w-100 border-bottom">
-            <a
-              href="javascript:void(0);"
-              class="dropdown-item d-flex flex-row py-2"
-              class:notification-unread="{notification.status === 'NOT_READ'}">
-              <div class="col-auto pl-0">
-                <i class="fas fa-dot-circle text-primary"></i>
-              </div>
-              <div class="col">
-                <span class="text-wrap text-dark">{notification.type_ID}</span>
-                <small class="text-gray d-block">
-                  {getTime(checkTime, parseInt(notification.date), "")}
-                </small>
-              </div>
-            </a>
-            <button
-              class="btn btn-link text-danger mx-2"
-              use:tooltip="{['Bildirimi Sil', { placement: 'right' }]}"
-              on:click="{deleteNotification(notification.id)}">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        {/each}
+      {#each $notifications as notification, index (notification)}
+        <div class="list-group w-100 flex-row align-items-center">
+          <a
+            href="#"
+            class="list-group-item list-group-item-action  d-flex flex-row w-100"
+            class:notification-unread="{notification.status === 'NOT_READ'}">
+            <div class="col-auto">
+              <i class="fa fa-bell mx-3 text-primary"></i>
+            </div>
+            <div class="col">
+              <span class="text-wrap text-dark">{notification.type_ID}</span>
+              <small class="text-gray d-block">
+                {getTime(checkTime, parseInt(notification.date), "")}
+              </small>
+            </div>
+          </a>
+          <button
+            class="btn-close text-danger btn-sm mx-2"
+            use:tooltip="{['Bildirimi Sil', { placement: 'right' }]}"
+            on:click="{deleteNotification(notification.id)}">
+          </button>
+        </div>
+      {/each}
 
-        {#if $notifications.length === 0}
-          <div
-            class="d-flex flex-column align-items-center justify-content-center">
-            <i class="fas fa-bell fa-3x text-dark text-opacity-25 m-3"></i>
-            <p class="text-gray">Bildirim yok.</p>
-          </div>
-        {/if}
+      {#if $notifications.length === 0}
+        <div
+          class="d-flex flex-column align-items-center justify-content-center">
+          <i class="fas fa-bell fa-3x text-dark text-opacity-25 m-3"></i>
+          <p class="text-gray">Bildirim yok.</p>
+        </div>
+      {/if}
 
-        {#if $notifications.length < $count && $count > 10 + 10 * page}
-          <div class="mt-4">
-            <button
-              class="btn text-primary bg-lightprimary d-block m-auto"
-              class:disabled="{loadMoreLoading}"
-              on:click="{loadMore}"
-              >Daha Fazla Göster ({$count - $notifications.length})
-            </button>
-          </div>
-        {/if}
-      </div>
+      {#if $notifications.length < $count && $count > 10 + 10 * page}
+        <div class="mt-4">
+          <button
+            class="btn text-primary bg-lightprimary d-block m-auto"
+            class:disabled="{loadMoreLoading}"
+            on:click="{loadMore}"
+            >Daha Fazla Göster ({$count - $notifications.length})
+          </button>
+        </div>
+      {/if}
     </div>
   </div>
 </div>
