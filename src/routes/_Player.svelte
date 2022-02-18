@@ -17,14 +17,14 @@
             'Oyuncu e-postasına bir doğrulama bağlantısı gönder',
             { placement: 'bottom' },
           ]}"
-          href="#">
+          href="javascript:void(0);">
           <i class="fas fa-envelope"></i>
           <span class="ml-1 d-lg-inline d-none">Doğrula</span>
         </a>
       {/if}
       <a
         class="btn btn-link"
-        href="#"
+        href="javascript:void(0);"
         on:click="{() =>
           showAuthorizePlayerModal(data.player, $session.CSRFToken)}">
         <i class="fas fa-user-circle"></i>
@@ -32,7 +32,7 @@
       </a>
       <a
         class="btn btn-link"
-        href="#"
+        href="javascript:void(0);"
         on:click="{() => showEditPlayerModal(data.player)}">
         <i class="fas fa-pencil-alt"></i>
         <span class="ml-1 d-lg-inline d-none">Düzenle</span>
@@ -41,7 +41,7 @@
         class="btn btn-outline-danger"
         data-target="#conformBanPlayer"
         data-toggle="modal"
-        href="#">
+        href="javascript:void(0);">
         <i class="fas fa-gavel"></i>
         <span class="ml-1 d-lg-inline d-none">Yasakla</span>
       </a>

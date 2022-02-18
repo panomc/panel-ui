@@ -7,7 +7,7 @@
         aria-expanded="false"
         aria-haspopup="true"
         data-bs-toggle="dropdown"
-        href="#"
+        href="javascript:void(0);"
         title="Eylemler">
         <span class="fas fa-ellipsis-h"></span>
       </button>

@@ -20,7 +20,7 @@
           class="btn btn-outline-danger"
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
-          href="#"
+          href="javascript:void(0);"
           on:click="{onShowDeleteTicketsModalClick}">
           <i class="fas fa-trash mr-1"></i>
           Sil
@@ -29,7 +29,7 @@
           class="btn btn-bittersweet"
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
-          href="#"
+          href="javascript:void(0);"
           on:click="{onShowCloseTicketsModalClick}">
           <i class="fas fa-check mr-1"></i>
           Kapat

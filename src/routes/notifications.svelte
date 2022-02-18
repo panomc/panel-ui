@@ -20,7 +20,7 @@
       {#each $notifications as notification, index (notification)}
         <div class="list-group w-100 flex-row align-items-center">
           <a
-            href="#"
+            href="javascript:void(0);"
             class="list-group-item list-group-item-action  d-flex flex-row w-100"
             class:notification-unread="{notification.status === 'NOT_READ'}">
             <div class="col-auto">

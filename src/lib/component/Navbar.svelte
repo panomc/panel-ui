@@ -28,7 +28,7 @@
         class="nav-item dropdown d-flex align-items-center"
         id="quickNotificationsDropdown">
         <a
-          href="#"
+          href="javascript:void(0);"
           class="nav-link position-relative"
           data-bs-toggle="dropdown"
           role="button"
@@ -53,7 +53,7 @@
           {#if !notificationsLoading}
             {#each quickNotifications as notification, index (notification)}
           <a
-            href="#"
+            href="javascript:void(0);"
             class="list-group-item list-group-item-action  d-flex flex-row w-100"
             class:notification-unread="{notification.status === 'NOT_READ'}">
             <div class="col-auto">
@@ -98,7 +98,7 @@
       <!-- Account Dropdown -->
       <div class="nav-item dropdown">
         <a
-          href="#"
+          href="javascript:void(0);"
           class="nav-link"
           data-bs-toggle="dropdown"
           role="button"
@@ -121,7 +121,7 @@
             </a>
           </li>
           <li>
-            <a class="dropdown-item text-danger" href="#" on:click="{onLogout}">
+            <a class="dropdown-item text-danger" href="javascript:void(0);" on:click="{onLogout}">
               Çıkış Yap
             </a>
           </li>

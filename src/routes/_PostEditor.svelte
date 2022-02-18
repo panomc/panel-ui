@@ -131,7 +131,7 @@
             Küçük Resim:
           </h6>
           <a
-            href="#"
+            href="javascript:void(0);"
             data-bs-target="#setPostThumbnailModal"
             data-bs-toggle="modal"
             class="form-group">

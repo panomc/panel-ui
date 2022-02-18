@@ -30,7 +30,7 @@
           </div> -->
 
           <div class="text-center">
-            <button href="#" class="btn btn-link text-danger mr-1">
+            <button href="javascript:void(0);" class="btn btn-link text-danger mr-1">
               <i class="fas fa-trash"></i>
             </button>
             <input

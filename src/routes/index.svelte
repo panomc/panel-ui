@@ -55,19 +55,19 @@
           <ul class="list-unstyled mb-2">
             <h5>Daha Fazlası</h5>
             <li>
-              <a class="alert-link" href="#">
+              <a class="alert-link" href="javascript:void(0);">
                 <i class="fas fa-puzzle-piece mr-2"></i>
                 Eklenti Ekleyin
               </a>
             </li>
             <li>
-              <a class="alert-link" href="#">
+              <a class="alert-link" href="javascript:void(0);">
                 <i class="fas fa-palette mr-2"></i>
                 Tema Ekleyin
               </a>
             </li>
             <li>
-              <a class="alert-link" href="#" target="_blank">
+              <a class="alert-link" href="javascript:void(0);" target="_blank">
                 <i class="fas fa-book-open mr-2"></i>
                 Dökümantasyonları İnceleyin
               </a>

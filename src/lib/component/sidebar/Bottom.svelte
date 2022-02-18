@@ -7,7 +7,7 @@
   </a>
   <a
     class="nav-link text-light"
-    href="#"
+    href="javascript:void(0);"
     use:tooltip="{['Pano Market', { placement: 'top' }]}">
     <i class="fas fa-store-alt"></i>
   </a>

@@ -23,7 +23,7 @@
       <a
         class="btn btn-outline-danger"
         role="button"
-        href="#"
+        href="javascript:void(0);"
         on:click="{() => showDeleteTicketModal([data.ticket.id])}">
         <i class="fas fa-trash"></i>
 
@@ -34,7 +34,7 @@
           class="btn btn-bittersweet"
           role="button"
           on:click="{() => showCloseTicketModal([data.ticket.id])}"
-          href="#">
+          href="javascript:void(0);">
           <i class="fas fa-check mr-1"></i>
           Kapat
         </a>
@@ -61,7 +61,7 @@
             >{data.ticket.username}</a>
           tarafından,
           <Date time="{data.ticket.date}" />,
-          <a href="#"
+          <a href="javascript:void(0);"
             >{data.ticket.category === "-"
               ? data.ticket.category
               : data.ticket.category.title}</a>

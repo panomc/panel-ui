@@ -58,7 +58,7 @@
     <ul class="sidebar-tab nav nav-pills nav-fill flex-row flex-nowrap p-2">
       <li class="nav-item">
         <a
-          href="#"
+          href="javascript:void(0);"
           class="nav-link"
           use:tooltip="{['Website', { placement: 'bottom' }]}"
           on:click="{onWebsiteMenuClick}"
@@ -69,7 +69,7 @@
       </li>
       <li class="nav-item">
         <a
-          href="javascript:void(0)"
+          href="javascript:void(0);"
           class="nav-link"
           use:tooltip="{['Sunucu', { placement: 'bottom' }]}"
           on:click="{onGameMenuClick}"

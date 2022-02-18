@@ -63,7 +63,7 @@
                         aria-expanded="false"
                         aria-haspopup="true"
                         data-bs-toggle="dropdown"
-                        href="#"
+                        href="javascript:void(0);"
                         title="Eylemler">
                         <span class="fas fa-ellipsis-h"></span>
                       </button>
@@ -71,7 +71,7 @@
                         class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
                         <a
                           class="dropdown-item"
-                          href="#"
+                          href="javascript:void(0);"
                           on:click="{onShowDeletePostCategoryModalClick(
                             index
                           )}">
@@ -85,7 +85,7 @@
                     <a
                       data-bs-target="#addEditCategory"
                       data-bs-toggle="modal"
-                      href="#"
+                      href="javascript:void(0);"
                       title="Kategoriyi Düzenle"
                       on:click="{onShowEditCategoryButtonClick(index)}">
                       {category.title}

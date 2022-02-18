@@ -12,14 +12,14 @@
           class="btn btn-sm"
           aria-expanded="false"
           data-bs-toggle="dropdown"
-          href="#">
+          href="javascript:void(0);">
           <i class="fas fa-ellipsis-v"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-start">
           {#if ticket.status !== 3}
             <a
               class="dropdown-item"
-              href="#"
+              href="javascript:void(0);"
               on:click="{onShowCloseTicketModalClick}">
               <i class="fas fa-times mr-1 text-bittersweet"></i>
               Kapat
@@ -28,7 +28,7 @@
 
           <a
             class="dropdown-item"
-            href="#"
+            href="javascript:void(0);"
             on:click="{onShowDeleteTicketModalClick}">
             <i class="fas fa-trash text-danger mr-1"></i>
             Sil

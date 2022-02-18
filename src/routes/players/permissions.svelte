@@ -10,7 +10,7 @@
     </div>
     <div class="col-auto">
       <a
-        href="#"
+        href="javascript:void(0);"
         class="btn btn-secondary"
         on:click="{() => onCreatePermissionGroupClick()}">
         <i class="fas fa-plus mr-1"></i>
@@ -116,7 +116,7 @@
                       aria-expanded="false"
                       aria-haspopup="true"
                       data-bs-toggle="dropdown"
-                      href="#"
+                      href="javascript:void(0);"
                       title="Eylemler">
                       <span class="fas fa-ellipsis-h"></span>
                     </button>
@@ -125,7 +125,7 @@
                       <a
                         class="dropdown-item"
                         data-bs-toggle="modal"
-                        href="#"
+                        href="javascript:void(0);"
                         on:click="{() =>
                           onShowEditPermissionGroupButtonClick(
                             permissionGroup
@@ -138,7 +138,7 @@
                           class="dropdown-item"
                           data-target="#confirmDeletePermGroup"
                           data-toggle="modal"
-                          href="#"
+                          href="javascript:void(0);"
                           on:click="{() =>
                             onShowDeletePermissionGroupModalClick(
                               permissionGroup
