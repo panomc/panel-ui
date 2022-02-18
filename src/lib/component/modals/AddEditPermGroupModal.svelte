@@ -42,8 +42,8 @@
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
             type="submit"
-            class:disabled="{loading}"
-            disabled="{loading}"
+            class:disabled="{loading || !$permissionGroup.name}"
+            disabled="{loading || !$permissionGroup.name}"
           >
             {$mode === "edit" ? "Kaydet" : "Oluştur"}
           </button>
