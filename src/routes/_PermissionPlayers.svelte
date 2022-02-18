@@ -36,7 +36,9 @@
               <tr>
                 <th class="align-middle text-nowrap" scope="col"></th>
                 <th class="align-middle text-nowrap" scope="col">İsim</th>
-                <th class="align-middle text-nowrap table-primary" scope="col">Yetki</th>
+                <th class="align-middle text-nowrap table-primary" scope="col"
+                  >Yetki</th
+                >
                 <th class="align-middle text-nowrap" scope="col">Durum</th>
                 <th class="align-middle text-nowrap" scope="col">Son Oturum</th>
                 <th class="align-middle text-nowrap" scope="col">Kayıt</th>
@@ -49,7 +51,8 @@
                   on:showAuthorizePlayerModalClick="{(event) =>
                     onShowAuthorizePlayerModalClick(event.detail.player)}"
                   on:showEditPlayerModalClick="{(event) =>
-                    onShowEditPlayerModalClick(event.detail.player)}" />
+                    onShowEditPlayerModalClick(event.detail.player)}"
+                />
               {/each}
             </tbody>
           </table>
@@ -62,7 +65,8 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
+      />
     </div>
   </div>
 </div>
@@ -191,14 +195,23 @@
     }, true);
   }
 
-  function reloadData(page = data.page, permissionGroupName = data.permissionGroup.name) {
+  function reloadData(
+    page = data.page,
+    permissionGroupName = data.permissionGroup.name
+  ) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ page, permissionGroup: permissionGroupName, CSRFToken: $session.CSRFToken })
+      loadData({
+        page,
+        permissionGroup: permissionGroupName,
+        CSRFToken: $session.CSRFToken,
+      })
         .then((loadedData) => {
           resolve();
 
           if (page !== data.page) {
-            goto(base + "/players/permission/" + permissionGroupName + "/" + page);
+            goto(
+              base + "/players/permission/" + permissionGroupName + "/" + page
+            );
           } else {
             data = loadedData;
           }

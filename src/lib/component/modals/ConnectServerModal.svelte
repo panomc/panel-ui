@@ -4,7 +4,8 @@
   class="modal fade"
   id="connectServer"
   role="document"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -13,12 +14,12 @@
           class="btn-close"
           data-bs-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button">
+          type="button"
+        >
         </button>
       </div>
       <div class="modal-body">
         <div class="card-body text-center">
-
           <div class="mb-3">
             <i class="fas fa-download fa-3x text-primary"></i>
           </div>
@@ -41,7 +42,8 @@
               bind:value="{commandText}"
               class="form-control"
               id="platformToken"
-              type="text" />
+              type="text"
+            />
             <button
               on:click="{onCopyCommandTextClick}"
               class="btn btn-outline-gray text-primary"
@@ -50,7 +52,8 @@
               use:tooltip="{[
                 isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala',
                 { placement: 'top', hideOnClick: false },
-              ]}">
+              ]}"
+            >
               <i class="fas fa-clipboard"></i>
             </button>
           </div>

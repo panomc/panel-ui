@@ -4,7 +4,8 @@
   aria-hidden="true"
   class="modal fade"
   role="dialog"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,7 +15,8 @@
           class="btn-close"
           data-bs-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button">
+          type="button"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -30,20 +32,22 @@
           </div> -->
 
           <div class="text-center">
-            <button href="javascript:void(0);" class="btn btn-link text-danger mr-1">
+            <button
+              href="javascript:void(0);"
+              class="btn btn-link text-danger mr-1"
+            >
               <i class="fas fa-trash"></i>
             </button>
             <input
               type="file"
               id="postThumbnail"
               name="postThumbnail"
-              class="btn bg-light text-primary" />
+              class="btn bg-light text-primary"
+            />
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn w-100 btn-primary" type="submit">
-            Kaydet
-          </button>
+          <button class="btn w-100 btn-primary" type="submit"> Kaydet </button>
         </div>
       </form>
     </div>

@@ -5,7 +5,8 @@
         class="form-check-input"
         id="postCheck{ticket.id}"
         type="checkbox"
-        bind:checked="{$checkedList[ticket.id]}" />
+        bind:checked="{$checkedList[ticket.id]}"
+      />
     </div>
     <!-- <div class="dropdown">
         <a
@@ -53,13 +54,15 @@
   <td class="align-middle">
     <a
       href="{base}/players/player/{ticket.writer.username}"
-      use:tooltip="{[ticket.writer.username, { placement: 'bottom' }]}">
+      use:tooltip="{[ticket.writer.username, { placement: 'bottom' }]}"
+    >
       <img
         src="https://minotar.net/avatar/{ticket.writer.username}/32"
         alt="Oyuncu Adı"
         class="rounded-circle border animate__animated animate__zoomIn"
         height="32"
-        width="32" />
+        width="32"
+      />
     </a>
   </td>
   <td class="align-middle text-nowrap">

@@ -10,7 +10,8 @@
       class="btn bg-lightprimary text-primary btn-sm"
       data-target="#connectServer"
       data-toggle="modal"
-      type="button">
+      type="button"
+    >
       <i class="fas fa-plus mr-1"></i>
       Sunucu Bağla
     </button>

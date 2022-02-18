@@ -8,12 +8,18 @@
         aria-haspopup="true"
         data-bs-toggle="dropdown"
         href="javascript:void(0);"
-        title="Eylemler">
+        title="Eylemler"
+      >
         <span class="fas fa-ellipsis-h"></span>
       </button>
       <div
-        class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
-        <a class="dropdown-item" target="_blank" href="{UI_URL}/preview/post/{post.id}">
+        class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn"
+      >
+        <a
+          class="dropdown-item"
+          target="_blank"
+          href="{UI_URL}/preview/post/{post.id}"
+        >
           <i class="fas fa-eye text-primary mr-1"></i>
           Görüntüle
         </a>
@@ -23,7 +29,8 @@
             href="javascript:void(0);"
             on:click="{onMoveToDraft}"
             class:disabled="{buttonsLoading}"
-            disabled="{buttonsLoading}">
+            disabled="{buttonsLoading}"
+          >
             <span>
               <i class="fas fa-bookmark text-primary mr-1"></i>
               Taslaklara Taşı
@@ -37,7 +44,8 @@
             href="javascript:void(0);"
             class:disabled="{buttonsLoading}"
             disabled="{buttonsLoading}"
-            on:click="{onPublishClick}">
+            on:click="{onPublishClick}"
+          >
             <span>
               <i class="fas fa-globe-americas text-primary mr-1"></i>
               Yayınla
@@ -48,7 +56,8 @@
         <a
           class="dropdown-item"
           href="javascript:void(0);"
-          on:click="{onDeletePostClick}">
+          on:click="{onDeletePostClick}"
+        >
           <i class="fas fa-trash text-danger mr-1"></i>
           Sil
         </a>
@@ -67,7 +76,8 @@
         class:text-dark="{post.category.title === '-'}"
         style="{post.category.title === '-'
           ? ''
-          : 'background: #' + post.category.color}">
+          : 'background: #' + post.category.color}"
+      >
         {post.category.title === "-" ? "Kategorisiz" : post.category.title}
       </span>
     </a>
@@ -75,13 +85,15 @@
   <td class="align-middle text-nowrap">
     <a
       href="{base}/players/player/{post.writer.username}"
-      use:tooltip="{[post.writer.username, { placement: 'bottom' }]}">
+      use:tooltip="{[post.writer.username, { placement: 'bottom' }]}"
+    >
       <img
         alt="{post.writer.username}"
         class="rounded-circle border"
         height="32"
         src="https://minotar.net/avatar/{post.writer.username}"
-        width="32" />
+        width="32"
+      />
     </a>
   </td>
   <td class="align-middle text-nowrap">{post.views}</td>

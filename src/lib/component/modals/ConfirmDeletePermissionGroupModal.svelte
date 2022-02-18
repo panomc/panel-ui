@@ -90,7 +90,10 @@
   export function show(newPermissionGroup) {
     permissionGroup.set(newPermissionGroup);
 
-    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
     modal.show();
   }
 

@@ -23,7 +23,8 @@
               id="category"
               type="text"
               bind:value="{$category.title}"
-              on:input="{() => setURL()}" />
+              on:input="{() => setURL()}"
+            />
           </div>
           <div class="mb-3">
             <textarea
@@ -43,7 +44,8 @@
               placeholder="..."
               id="categoryURL"
               type="text"
-              bind:value="{$category.url}" />
+              bind:value="{$category.url}"
+            />
           </div>
           <small class:text-danger="{$errors.url}">
             Yanlızca [A-Z/a-z/0-9/-] içerebilir ve minimum 3, maksimum 32
@@ -57,7 +59,8 @@
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
             class:disabled="{loading}"
-            disabled="{loading}">
+            disabled="{loading}"
+          >
             <span>
               {#if $mode === "edit"}
                 Kaydet

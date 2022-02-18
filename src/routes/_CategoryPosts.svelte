@@ -2,7 +2,8 @@
 <article class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp"
+  >
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -59,7 +60,8 @@
                   on:moveToDraft="{(event) => onMoveToDraft(event.detail.id)}"
                   on:publish="{(event) => onPublishClick(event.detail.id)}"
                   on:deletePost="{(event) =>
-                    onDeletePostClick(event.detail.post)}" />
+                    onDeletePostClick(event.detail.post)}"
+                />
               {/each}
             </tbody>
           </table>
@@ -71,7 +73,8 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
+      />
       <!-- Pagination End -->
     </div>
   </div>

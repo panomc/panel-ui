@@ -2,7 +2,8 @@
 <article class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp"
+  >
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -15,13 +16,15 @@
         class="animate__animated {getListOfChecked($checkedList).length > 0
           ? 'animate__fadeIn'
           : 'animate__fadeOut'}
-      faster">
+      faster"
+      >
         <a
           class="btn btn-outline-danger"
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
-          on:click="{onShowDeleteTicketsModalClick}">
+          on:click="{onShowDeleteTicketsModalClick}"
+        >
           <i class="fas fa-trash mr-1"></i>
           Sil
         </a>
@@ -30,7 +33,8 @@
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
-          on:click="{onShowCloseTicketsModalClick}">
+          on:click="{onShowCloseTicketsModalClick}"
+        >
           <i class="fas fa-check mr-1"></i>
           Kapat
         </a>
@@ -74,7 +78,8 @@
                         $checkedList
                       )}"
                       id="selectAll"
-                      type="checkbox" />
+                      type="checkbox"
+                    />
                   </div>
                 </th>
                 <th class="min-w-200px align-middle" scope="col">Başlık</th>
@@ -92,7 +97,8 @@
                   on:showCloseTicketModalClick="{(event) =>
                     onShowCloseTicketModalClick(event.detail.id)}"
                   on:showDeleteTicketModalClick="{(event) =>
-                    onShowDeleteTicketModalClick(event.detail.id)}" />
+                    onShowDeleteTicketModalClick(event.detail.id)}"
+                />
               {/each}
             </tbody>
           </table>
@@ -104,7 +110,8 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
+      />
     </div>
   </div>
 </article>

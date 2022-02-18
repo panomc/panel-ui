@@ -73,7 +73,10 @@
   export function show(newCategory) {
     category.set(newCategory);
 
-    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
     modal.show();
   }
 

@@ -45,7 +45,10 @@
   let modal;
 
   export function show() {
-    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
     modal.show();
   }
 

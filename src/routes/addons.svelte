@@ -3,5 +3,5 @@
 <script>
   import { pageTitle } from "$lib/store";
 
-  pageTitle.set("Eklentiler")
+  pageTitle.set("Eklentiler");
 </script>

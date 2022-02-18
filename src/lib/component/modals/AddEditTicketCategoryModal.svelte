@@ -22,7 +22,8 @@
               id="category"
               type="text"
               bind:value="{$category.title}"
-              class:border-danger="{$errors.title}" />
+              class:border-danger="{$errors.title}"
+            />
           </div>
           <div class="mb-3">
             <label for="categoryDescription">Açıklama:</label>
@@ -43,7 +44,8 @@
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
             class:disabled="{loading}"
-            disabled="{loading}">
+            disabled="{loading}"
+          >
             {$mode === "edit" ? "Kaydet" : "Oluştur"}
           </button>
         </div>

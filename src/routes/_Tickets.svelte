@@ -2,7 +2,8 @@
 <article class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp"
+  >
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets/categories">
         <i class="fas fa-list-alt mr-1"></i>
@@ -15,13 +16,15 @@
         class="animate__animated {getListOfChecked($checkedList).length > 0
           ? 'animate__fadeIn'
           : 'animate__fadeOut'}
-      faster">
+      faster"
+      >
         <a
           class="btn btn-outline-danger"
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
-          on:click="{onShowDeleteTicketsModalClick}">
+          on:click="{onShowDeleteTicketsModalClick}"
+        >
           <i class="fas fa-trash mr-1"></i>
           Sil
         </a>
@@ -30,7 +33,8 @@
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
-          on:click="{onShowCloseTicketsModalClick}">
+          on:click="{onShowCloseTicketsModalClick}"
+        >
           <i class="fas fa-check mr-1"></i>
           Kapat
         </a>
@@ -60,21 +64,24 @@
               class="btn btn-sm btn-outline-light btn-link"
               class:active="{data.pageType === PageTypes.ALL}"
               role="button"
-              href="{base}/tickets/all">
+              href="{base}/tickets/all"
+            >
               Tümü
             </a>
             <a
               class="btn btn-sm btn-outline-light btn-link text-mint"
               class:active="{data.pageType === PageTypes.WAITING_REPLY}"
               role="button"
-              href="{base}/tickets/waitingReply">
+              href="{base}/tickets/waitingReply"
+            >
               Yeni
             </a>
             <a
               class="btn btn-sm btn-outline-light btn-link text-bittersweet"
               class:active="{data.pageType === PageTypes.CLOSED}"
               role="button"
-              href="{base}/tickets/closed">
+              href="{base}/tickets/closed"
+            >
               Kapalı
             </a>
           </div>
@@ -103,7 +110,8 @@
                         $checkedList
                       )}"
                       id="selectAll"
-                      type="checkbox" />
+                      type="checkbox"
+                    />
                   </div>
                 </th>
                 <th class="align-middle" scope="col">Başlık</th>
@@ -121,7 +129,8 @@
                   on:showCloseTicketModalClick="{(event) =>
                     onShowCloseTicketModalClick(event.detail.id)}"
                   on:showDeleteTicketModalClick="{(event) =>
-                    onShowDeleteTicketModalClick(event.detail.id)}" />
+                    onShowDeleteTicketModalClick(event.detail.id)}"
+                />
               {/each}
             </tbody>
           </table>
@@ -133,7 +142,8 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
+      />
     </div>
   </div>
 </article>

@@ -2,7 +2,8 @@
 <div class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp"
+  >
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/players">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -17,7 +18,8 @@
             'Oyuncu e-postasına bir doğrulama bağlantısı gönder',
             { placement: 'bottom' },
           ]}"
-          href="javascript:void(0);">
+          href="javascript:void(0);"
+        >
           <i class="fas fa-envelope"></i>
           <span class="ml-1 d-lg-inline d-none">Doğrula</span>
         </a>
@@ -26,14 +28,16 @@
         class="btn btn-link"
         href="javascript:void(0);"
         on:click="{() =>
-          showAuthorizePlayerModal(data.player, $session.CSRFToken)}">
+          showAuthorizePlayerModal(data.player, $session.CSRFToken)}"
+      >
         <i class="fas fa-user-circle"></i>
         <span class="ml-1 d-lg-inline d-none">Yetkilendir</span>
       </a>
       <a
         class="btn btn-link"
         href="javascript:void(0);"
-        on:click="{() => showEditPlayerModal(data.player)}">
+        on:click="{() => showEditPlayerModal(data.player)}"
+      >
         <i class="fas fa-pencil-alt"></i>
         <span class="ml-1 d-lg-inline d-none">Düzenle</span>
       </a>
@@ -41,7 +45,8 @@
         class="btn btn-outline-danger"
         data-target="#conformBanPlayer"
         data-toggle="modal"
-        href="javascript:void(0);">
+        href="javascript:void(0);"
+      >
         <i class="fas fa-gavel"></i>
         <span class="ml-1 d-lg-inline d-none">Yasakla</span>
       </a>
@@ -53,13 +58,15 @@
       <div class="card">
         <div
           class="card-body d-flex flex-column justify-content-center
-          align-items-center">
+          align-items-center"
+        >
           <img
             alt="{data.player.username}"
             class="mb-3 rounded-circle animate__animated animate__zoomIn"
             width="128"
             height="128"
-            src="https://minotar.net/avatar/{data.player.username}" />
+            src="https://minotar.net/avatar/{data.player.username}"
+          />
 
           <h4 class="card-title">{data.player.username}</h4>
           <h6 class="text-muted">{data.player.email}</h6>
@@ -75,14 +82,16 @@
               {/if}
               <div
                 class="badge bg-lightsecondary text-success"
-                use:tooltip="{['Sitede', { placement: 'top' }]}">
+                use:tooltip="{['Sitede', { placement: 'top' }]}"
+              >
                 <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
                 <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
               </div>
               <div class="badge text-dark border">
                 <a
                   href="{base}/players/permission/{data.player
-                    .permission_group}">
+                    .permission_group}"
+                >
                   {data.player.permission_group === "-"
                     ? "Oyuncu"
                     : data.player.permission_group}
@@ -122,7 +131,8 @@
 
           {#if data.ticketCount === 0}
             <div
-              class="container text-center animate__animated animate__zoomIn">
+              class="container text-center animate__animated animate__zoomIn"
+            >
               <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
               <p class="text-gray">Burada içerik yok.</p>
             </div>
@@ -130,7 +140,8 @@
             {#each data.tickets as ticket, index (ticket)}
               <a
                 href="{base}/tickets/ticket/{ticket.id}"
-                class="list-group-item list-group-item-action rounded d-flex flex-row">
+                class="list-group-item list-group-item-action rounded d-flex flex-row"
+              >
                 <div class="col">
                   <span class="text-primary">
                     #{ticket.id}
@@ -156,7 +167,8 @@
             totalPage="{data.ticketTotalPage}"
             on:firstPageClick="{() => reloadData(1)}"
             on:lastPageClick="{() => reloadData(data.ticketTotalPage)}"
-            on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+            on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
+          />
         </div>
       </div>
     </div>

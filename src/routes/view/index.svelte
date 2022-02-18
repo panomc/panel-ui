@@ -9,7 +9,8 @@
           class="rounded p-2"
           height="auto"
           src="{base}/assets/img/vanilla.png"
-          width="100%" />
+          width="100%"
+        />
         <div class="card-body">
           <div class="row justify-content-between align-items-end">
             <div class="col-auto">
@@ -20,7 +21,8 @@
               <button
                 class="btn btn-outline-danger btn-sm"
                 data-bs-target="#confirmDeleteTheme"
-                data-bs-toggle="modal">
+                data-bs-toggle="modal"
+              >
                 Kaldır
               </button>
             </div>

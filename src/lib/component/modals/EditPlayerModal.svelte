@@ -4,7 +4,8 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1">
+  tabindex="-1"
+>
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -26,7 +27,8 @@
                 id="username"
                 type="text"
                 bind:value="{$player.username}"
-                class:border-danger="{!!$errors.username}" />
+                class:border-danger="{!!$errors.username}"
+              />
               {#if !!$errors["username"]}
                 <small class="text-danger">
                   {#if $errors["username"] === "INVALID"}
@@ -45,7 +47,8 @@
                 id="email"
                 type="text"
                 bind:value="{$player.email}"
-                class:border-danger="{!!$errors.email}" />
+                class:border-danger="{!!$errors.email}"
+              />
               {#if !!$errors["email"]}
                 <small class="text-danger">
                   {#if $errors["email"] === "INVALID"}
@@ -64,7 +67,8 @@
                 id="newPassword"
                 type="password"
                 bind:value="{$player.new_password}"
-                class:border-danger="{!!$errors.newPassword}" />
+                class:border-danger="{!!$errors.newPassword}"
+              />
               {#if !!$errors["newPassword"]}
                 <small class="text-danger">
                   {#if $errors["newPassword"] === "INVALID"}
@@ -80,7 +84,8 @@
                 id="newPasswordRepeat"
                 type="password"
                 bind:value="{$player.new_password_repeat}"
-                class:border-danger="{!!$errors.newPasswordRepeat}" />
+                class:border-danger="{!!$errors.newPasswordRepeat}"
+              />
               {#if !!$errors["newPasswordRepeat"]}
                 <small class="text-danger">
                   {#if $errors["newPasswordRepeat"] === "NOT_MATCH"}
@@ -96,9 +101,11 @@
                   type="checkbox"
                   role="switch"
                   id="flexSwitchCheckChecked"
-                  checked />
+                  checked
+                />
                 <label class="form-check-label" for="flexSwitchCheckChecked"
-                  >Talep oluşturabilir</label>
+                  >Talep oluşturabilir</label
+                >
               </div>
             </div>
           </div>
@@ -108,7 +115,8 @@
             class="btn btn-primary w-100"
             type="submit"
             class:disabled="{loading}"
-            disabled="{loading}">
+            disabled="{loading}"
+          >
             Kaydet
           </button>
         </div>

@@ -1,9 +1,7 @@
-<div class="container">
-  Tools page!
-</div>
+<div class="container">Tools page!</div>
 
 <script>
   import { pageTitle } from "$lib/store";
 
-  pageTitle.set("Araçlar")
+  pageTitle.set("Araçlar");
 </script>

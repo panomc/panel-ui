@@ -3,7 +3,8 @@
   <!-- Welcome Alerts -->
   {#if data.getting_started_blocks.welcome_board}
     <div
-      class="alert alert-primary bg-minecraft alert-dismissible animate__animated animate__zoomIn mb-3">
+      class="alert alert-primary bg-minecraft alert-dismissible animate__animated animate__zoomIn mb-3"
+    >
       <div class="row">
         <div class="col-12 pb-3">
           <h4 class="card-title">Hoş Geldiniz</h4>
@@ -17,7 +18,8 @@
           <button
             class="btn btn-sm btn-primary"
             data-bs-target="#connectServer"
-            data-bs-toggle="modal">
+            data-bs-toggle="modal"
+          >
             <i class="fas fa-plus mr-2"></i>
             Sunucu Bağla
           </button>
@@ -76,7 +78,8 @@
               <a
                 class="alert-link"
                 href="https://panomc.com/discord"
-                target="_blank">
+                target="_blank"
+              >
                 <i class="fab fa-discord mr-2"></i>
                 Discord Topluluğumuza Katılın
               </a>
@@ -94,7 +97,8 @@
   {/if}
 
   <div
-    class="row my-3 justify-content-between animate__animated animate__fadeIn">
+    class="row my-3 justify-content-between animate__animated animate__fadeIn"
+  >
     <div class="col-auto">
       <div class="text-secondary">
         <div class="row align-items-center">
@@ -176,7 +180,8 @@
           {#each data.tickets as ticket, index (ticket)}
             <a
               href="{base}/tickets/ticket/{ticket.id}"
-              class="list-group-item list-group-item-action rounded d-flex flex-row">
+              class="list-group-item list-group-item-action rounded d-flex flex-row"
+            >
               <div class="text-primary">
                 {ticket.title}
                 <br />

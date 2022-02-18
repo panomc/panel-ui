@@ -14,7 +14,8 @@
         class:invisible="{$isSidebarOpen}"
         href="javascript:void(0);"
         title="Menüyü Aç/Kapa"
-        on:click="{onSideBarCollapseClick}">
+        on:click="{onSideBarCollapseClick}"
+      >
         <i class="fas fa-bars"></i>
       </a>
     </div>
@@ -26,24 +27,28 @@
       <!-- Notifications Dropdown -->
       <div
         class="nav-item dropdown d-flex align-items-center"
-        id="quickNotificationsDropdown">
+        id="quickNotificationsDropdown"
+      >
         <a
           href="javascript:void(0);"
           class="nav-link position-relative"
           data-bs-toggle="dropdown"
           role="button"
-          title="Bildirimler">
+          title="Bildirimler"
+        >
           <i class="fas fa-bell fa-lg"></i>
           {#if $notificationsCount !== 0}
             <span
-              class="position-absolute p-2 start-75 translate-middle badge rounded-pill bg-danger">
+              class="position-absolute p-2 start-75 translate-middle badge rounded-pill bg-danger"
+            >
               {$notificationsCount}
             </span>
           {/if}
         </a>
 
         <div
-          class="notifications dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
+          class="notifications dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp"
+        >
           <h6 class="dropdown-header">
             Bildirimler {$notificationsCount === 0
               ? ""
@@ -52,26 +57,29 @@
 
           {#if !notificationsLoading}
             {#each quickNotifications as notification, index (notification)}
-          <a
-            href="javascript:void(0);"
-            class="list-group-item list-group-item-action  d-flex flex-row w-100"
-            class:notification-unread="{notification.status === 'NOT_READ'}">
-            <div class="col-auto">
-              <i class="fa fa-bell mx-3 text-primary"></i>
-            </div>
-            <div class="col">
-              <span class="text-wrap text-dark">{notification.type_ID}</span>
-              <small class="text-gray d-block">
-                {getTime(checkTime, parseInt(notification.date), "")}
-              </small>
-            </div>
-          </a>
+              <a
+                href="javascript:void(0);"
+                class="list-group-item list-group-item-action  d-flex flex-row w-100"
+                class:notification-unread="{notification.status === 'NOT_READ'}"
+              >
+                <div class="col-auto">
+                  <i class="fa fa-bell mx-3 text-primary"></i>
+                </div>
+                <div class="col">
+                  <span class="text-wrap text-dark">{notification.type_ID}</span
+                  >
+                  <small class="text-gray d-block">
+                    {getTime(checkTime, parseInt(notification.date), "")}
+                  </small>
+                </div>
+              </a>
             {/each}
           {/if}
 
           {#if quickNotifications.length === 0 && !notificationsLoading}
             <div
-              class="d-flex flex-column align-items-center justify-content-center mb-3">
+              class="d-flex flex-column align-items-center justify-content-center mb-3"
+            >
               <i class="fas fa-2x fa-bell text-gray mx-5 my-3"></i>
               <small class="text-gray">Yeni bildirim yok.</small>
             </div>
@@ -82,14 +90,15 @@
             <div class="d-flex justify-content-center m-3">
               <div
                 class="spinner-border spinner-border-sm text-primary"
-                role="status">
-              </div>
+                role="status"
+              ></div>
             </div>
           {/if}
 
           <a
             class="dropdown-item text-primary text-center small"
-            href="{base}/notifications">
+            href="{base}/notifications"
+          >
             Tümünü Görüntüle
           </a>
         </div>
@@ -102,26 +111,34 @@
           class="nav-link"
           data-bs-toggle="dropdown"
           role="button"
-          title="Oturum">
+          title="Oturum"
+        >
           <img
             src="https://minotar.net/avatar/{$user.username}"
             width="32"
             height="32"
             class="border rounded-circle animate__animated animate__zoomIn"
-            alt="{$user.username}" />
+            alt="{$user.username}"
+          />
         </a>
         <ul
-          class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
+          class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp"
+        >
           <h6 class="dropdown-header">{$user.username}</h6>
           <li>
             <a
               class="dropdown-item"
-              href="{base}/players/player/{$user.username}">
+              href="{base}/players/player/{$user.username}"
+            >
               Profil
             </a>
           </li>
           <li>
-            <a class="dropdown-item text-danger" href="javascript:void(0);" on:click="{onLogout}">
+            <a
+              class="dropdown-item text-danger"
+              href="javascript:void(0);"
+              on:click="{onLogout}"
+            >
               Çıkış Yap
             </a>
           </li>

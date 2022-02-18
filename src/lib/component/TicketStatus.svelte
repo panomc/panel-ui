@@ -4,7 +4,8 @@
       class="badge bg-mint rounded-pill"
       use:tooltip="{['Tüm Yeni Talepleri Göster', { placement: 'bottom' }]}"
       >Yeni</span
-    ></a>
+    ></a
+  >
 {:else if status === TicketStatuses.REPLIED}
   <a href="{base}/tickets"
     ><span
@@ -13,14 +14,16 @@
         'Tüm Yanıtlanan Talepleri Göster',
         { placement: 'bottom' },
       ]}">Yanıtlandı</span
-    ></a>
+    ></a
+  >
 {:else if status === TicketStatuses.CLOSED}
   <a href="{base}/tickets/closed"
     ><span
       class="badge bg-bittersweet rounded-pill"
       use:tooltip="{['Tüm Kapalı Talepleri göster', { placement: 'bottom' }]}"
       >Kapalı</span
-    ></a>
+    ></a
+  >
 {/if}
 
 <script context="module">

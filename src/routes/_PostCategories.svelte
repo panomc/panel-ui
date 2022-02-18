@@ -2,7 +2,8 @@
 <article class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp"
+  >
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -13,7 +14,8 @@
       <button
         class="btn btn-secondary"
         type="button"
-        on:click="{onCreateCategoryClick}">
+        on:click="{onCreateCategoryClick}"
+      >
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
       </button>
@@ -64,17 +66,18 @@
                         aria-haspopup="true"
                         data-bs-toggle="dropdown"
                         href="javascript:void(0);"
-                        title="Eylemler">
+                        title="Eylemler"
+                      >
                         <span class="fas fa-ellipsis-h"></span>
                       </button>
                       <div
-                        class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
+                        class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn"
+                      >
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          on:click="{onShowDeletePostCategoryModalClick(
-                            index
-                          )}">
+                          on:click="{onShowDeletePostCategoryModalClick(index)}"
+                        >
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
                         </a>
@@ -87,7 +90,8 @@
                       data-bs-toggle="modal"
                       href="javascript:void(0);"
                       title="Kategoriyi Düzenle"
-                      on:click="{onShowEditCategoryButtonClick(index)}">
+                      on:click="{onShowEditCategoryButtonClick(index)}"
+                    >
                       {category.title}
                     </a>
                   </td>
@@ -96,7 +100,8 @@
                     <a
                       href="/category/{category.url}"
                       target="_blank"
-                      title="Kategoriyi Görüntüle">
+                      title="Kategoriyi Görüntüle"
+                    >
                       /category/{category.url}
                     </a>
                   </td>
@@ -105,7 +110,8 @@
                       value="#{category.color}"
                       class="form-control form-control-sm bg-transparent"
                       disabled
-                      type="color" />
+                      type="color"
+                    />
                   </td>
                 </tr>
               {/each}
@@ -119,7 +125,8 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
+      />
     </div>
   </div>
 </article>

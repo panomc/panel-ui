@@ -73,7 +73,10 @@
   export function show(newCategory) {
     category.set(newCategory);
 
-    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
     modal.show();
   }
 
@@ -84,7 +87,7 @@
   export function hide() {
     hideCallback(get(category));
 
-    modal.hide()
+    modal.hide();
   }
 
   export function onHide(newCallback) {

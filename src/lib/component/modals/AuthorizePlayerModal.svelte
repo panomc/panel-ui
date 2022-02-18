@@ -27,12 +27,14 @@
               class="form-control"
               class:border-danger="{$errors['LAST_ADMIN']}"
               id="selectPermGroup"
-              bind:value="{$player.permission_group}">
+              bind:value="{$player.permission_group}"
+            >
               <option class="text-primary" value="-">Oyuncu</option>
 
               {#each $permissionGroups as permissionGroup, index (permissionGroup)}
                 <option value="{permissionGroup.name}"
-                  >{permissionGroup.name}</option>
+                  >{permissionGroup.name}</option
+                >
               {/each}
             </select>
           </div>
@@ -49,7 +51,8 @@
             class="btn btn-primary w-100"
             class:disabled="{$submitLoading}"
             disabled="{$submitLoading}"
-            on:click="{onSubmit}">Kaydet</button>
+            on:click="{onSubmit}">Kaydet</button
+          >
         </div>
       {/if}
     </div>

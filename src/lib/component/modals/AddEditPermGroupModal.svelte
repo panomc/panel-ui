@@ -1,9 +1,5 @@
 <!-- Add / Edit Permission Group Modal -->
-<div
-  aria-hidden="true"
-  class="modal fade"
-  id="{dialogID}"
-  tabindex="-1">
+<div aria-hidden="true" class="modal fade" id="{dialogID}" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -26,7 +22,8 @@
               id="permName"
               type="text"
               bind:value="{$permissionGroup.name}"
-              class:border-danger="{$errors.name}" />
+              class:border-danger="{$errors.name}"
+            />
           </div>
         </div>
         <div class="modal-footer">

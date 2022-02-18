@@ -2,7 +2,8 @@
 <article class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp"
+  >
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts/categories">
         <i class="fas fa-list-alt mr-1"></i>
@@ -13,7 +14,8 @@
       <a
         class="btn btn-secondary ml-auto"
         role="button"
-        href="{base}/posts/create-post">
+        href="{base}/posts/create-post"
+      >
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
       </a>
@@ -43,14 +45,16 @@
               class:active="{data.pageType === PageTypes.PUBLISHED}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/posts/published">
+              href="{base}/posts/published"
+            >
               Yayınlanmış
             </a>
             <a
               class:active="{data.pageType === PageTypes.DRAFT}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/posts/draft">
+              href="{base}/posts/draft"
+            >
               Taslak
             </a>
 
@@ -58,7 +62,8 @@
               class:active="{data.pageType === PageTypes.TRASH}"
               class="btn btn-sm btn-outline-light btn-link text-danger"
               role="button"
-              href="{base}/posts/trash">
+              href="{base}/posts/trash"
+            >
               Çöp
             </a>
           </div>
@@ -94,7 +99,8 @@
                   on:moveToDraft="{(event) => onMoveToDraft(event.detail.id)}"
                   on:publish="{(event) => onPublishClick(event.detail.id)}"
                   on:deletePost="{(event) =>
-                    onDeletePostClick(event.detail.post)}" />
+                    onDeletePostClick(event.detail.post)}"
+                />
               {/each}
             </tbody>
           </table>
@@ -106,7 +112,8 @@
         totalPage="{data.total_page}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.total_page)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
+      />
       <!-- Pagination End -->
     </div>
   </div>

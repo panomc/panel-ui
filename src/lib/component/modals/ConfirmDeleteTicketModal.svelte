@@ -55,7 +55,10 @@
   export function show(newSelectedTickets) {
     selectedTickets.set(newSelectedTickets);
 
-    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
     modal.show();
   }
 

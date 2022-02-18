@@ -1,7 +1,8 @@
 <div class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp"
+  >
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/players">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -12,7 +13,8 @@
       <a
         href="javascript:void(0);"
         class="btn btn-secondary"
-        on:click="{() => onCreatePermissionGroupClick()}">
+        on:click="{() => onCreatePermissionGroupClick()}"
+      >
         <i class="fas fa-plus mr-1"></i>
         Yetki Grubu Oluştur
       </a>
@@ -30,7 +32,8 @@
               use:tooltip="{[
                 'Panele erişebilir, ayarları ve panel içeriklerini görüntüleyebilir',
                 { placement: 'top' },
-              ]}">
+              ]}"
+            >
               <small class="mb-0 fw-bolder">Panel Erişimi</small>
             </th>
             {#each data.permissions as permission, index (permission)}
@@ -39,7 +42,8 @@
                 use:tooltip="{[
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
                   { placement: 'top' },
-                ]}">
+                ]}"
+              >
                 <!--              TODO: Icon system-->
                 <!--              <Icon-->
                 <!--                data="{icon[convertIconName(permission.iconName)]}"-->
@@ -117,11 +121,13 @@
                       aria-haspopup="true"
                       data-bs-toggle="dropdown"
                       href="javascript:void(0);"
-                      title="Eylemler">
+                      title="Eylemler"
+                    >
                       <span class="fas fa-ellipsis-h"></span>
                     </button>
                     <div
-                      class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
+                      class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn"
+                    >
                       <a
                         class="dropdown-item"
                         data-bs-toggle="modal"
@@ -129,7 +135,8 @@
                         on:click="{() =>
                           onShowEditPermissionGroupButtonClick(
                             permissionGroup
-                          )}">
+                          )}"
+                      >
                         <i class="fas fa-pencil-alt text-primary mr-1"></i>
                         Düzenle
                       </a>
@@ -142,7 +149,8 @@
                           on:click="{() =>
                             onShowDeletePermissionGroupModalClick(
                               permissionGroup
-                            )}">
+                            )}"
+                        >
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
                         </a>
@@ -152,22 +160,26 @@
                   <div>
                     <h5 class="text-capitalize">{permissionGroup.name}</h5>
                     <div
-                      class="d-flex flex-row flex-row-reverse justify-content-end align-items-center mr-3">
+                      class="d-flex flex-row flex-row-reverse justify-content-end align-items-center mr-3"
+                    >
                       {#if permissionGroup.user_count > 3}
                         <small class="pl-1"
-                          >+{permissionGroup.user_count - 3}</small>
+                          >+{permissionGroup.user_count - 3}</small
+                        >
                       {/if}
                       {#each permissionGroup.users as user, index (user)}
                         <span
                           class="overlapping-avatar"
-                          use:tooltip="{[user, { placement: 'bottom' }]}">
+                          use:tooltip="{[user, { placement: 'bottom' }]}"
+                        >
                           <a href="{base}/players/player/{user}">
                             <img
                               class="animate__animated animate__zoomIn"
                               src="https://minotar.net/avatar/{user}"
                               width="32"
                               height="32"
-                              alt="{user}" />
+                              alt="{user}"
+                            />
                           </a>
                         </span>
                       {/each}
@@ -177,19 +189,22 @@
               </th>
               <td class="align-middle">
                 <div
-                  class="form-check form-switch d-flex justify-content-center">
+                  class="form-check form-switch d-flex justify-content-center"
+                >
                   <input
                     type="checkbox"
                     class="form-check-input"
                     id="access_panel_{permissionGroup.name}"
                     checked="true"
-                    disabled />
+                    disabled
+                  />
                 </div>
               </td>
               {#each data.permissions as permission, index (permission)}
                 <td class="align-middle">
                   <div
-                    class="form-check form-switch d-flex justify-content-center">
+                    class="form-check form-switch d-flex justify-content-center"
+                  >
                     <input
                       type="checkbox"
                       class="form-check-input"
@@ -204,7 +219,8 @@
                         permission,
                         permissionGroup,
                         loadingPermissionsList
-                      )}" />
+                      )}"
+                    />
                   </div>
                 </td>
               {/each}
