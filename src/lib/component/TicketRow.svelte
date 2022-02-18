@@ -47,7 +47,7 @@
     <TicketStatus status="{ticket.status}" />
   </td>
   <td class="align-middle text-nowrap">
-    <a href="{base}/tickets/category/{ticket.category.title}">
+    <a href="{base}/tickets/category/{ticket.category.url}">
       {ticket.category.title}
     </a>
   </td>
