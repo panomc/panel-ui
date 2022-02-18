@@ -2,16 +2,16 @@
   <!-- Action Menu -->
   <div
     class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
-    <div class="col-6">
+    <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/players">
         <i class="fas fa-arrow-left mr-1"></i>
         Oyuncular
       </a>
     </div>
-    <div class="col-6 text-right">
+    <div class="col-auto">
       <a
         href="#"
-        class="btn btn-primary"
+        class="btn btn-secondary"
         on:click="{() => onCreatePermissionGroupClick()}">
         <i class="fas fa-plus mr-1"></i>
         Yetki Grubu Oluştur
@@ -31,8 +31,7 @@
                 'Panele erişebilir, ayarları ve panel içeriklerini görüntüleyebilir',
                 { placement: 'top' },
               ]}">
-              <i class="fas fa-sign-in-alt text-primary d-block m-auto"></i>
-              <small class="mb-0 font-weight-bolder">Panel Erişimi</small>
+              <small class="mb-0 fw-bolder">Panel Erişimi</small>
             </th>
             {#each data.permissions as permission, index (permission)}
               <th
@@ -122,12 +121,10 @@
                       <span class="fas fa-ellipsis-h"></span>
                     </button>
                     <div
-                      aria-labelledby="permAction"
                       class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
                       <a
                         class="dropdown-item"
-                        data-target="#addEditPermGroup"
-                        data-toggle="modal"
+                        data-bs-toggle="modal"
                         href="#"
                         on:click="{() =>
                           onShowEditPermissionGroupButtonClick(
@@ -178,25 +175,24 @@
                   </div>
                 </div>
               </th>
-              <td class="align-middle text-center">
-                <div class="custom-control custom-switch">
+              <td class="align-middle">
+                <div
+                  class="form-check form-switch d-flex justify-content-center">
                   <input
                     type="checkbox"
-                    class="custom-control-input active"
+                    class="form-check-input"
                     id="access_panel_{permissionGroup.name}"
                     checked="true"
                     disabled />
-                  <label
-                    class="custom-control-label"
-                    for="access_panel_{permissionGroup.name}"></label>
                 </div>
               </td>
               {#each data.permissions as permission, index (permission)}
-                <td class="align-middle text-center">
-                  <div class="custom-control custom-switch">
+                <td class="align-middle">
+                  <div
+                    class="form-check form-switch d-flex justify-content-center">
                     <input
                       type="checkbox"
-                      class="custom-control-input"
+                      class="form-check-input"
                       id="{permission.name}_{permissionGroup.name}"
                       checked="{isPermissionChecked(
                         permissionGroup,
@@ -209,9 +205,6 @@
                         permissionGroup,
                         loadingPermissionsList
                       )}" />
-                    <label
-                      class="custom-control-label"
-                      for="{permission.name}_{permissionGroup.name}"></label>
                   </div>
                 </td>
               {/each}

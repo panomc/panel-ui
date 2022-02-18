@@ -14,7 +14,7 @@
   <div class="card">
     <div class="card-body">
       <div class="row justify-content-between">
-        <div class="col-md-6 col-12 text-md-left text-center">
+        <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
             {data.players_count}
             Oyuncu
@@ -36,7 +36,7 @@
               <tr>
                 <th class="align-middle text-nowrap" scope="col"></th>
                 <th class="align-middle text-nowrap" scope="col">İsim</th>
-                <th class="align-middle text-nowrap" scope="col">Yetki</th>
+                <th class="align-middle text-nowrap table-primary" scope="col">Yetki</th>
                 <th class="align-middle text-nowrap" scope="col">Durum</th>
                 <th class="align-middle text-nowrap" scope="col">Son Oturum</th>
                 <th class="align-middle text-nowrap" scope="col">Kayıt</th>
