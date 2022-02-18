@@ -3,6 +3,11 @@
     overflow-y: auto;
     max-height: 450px;
   }
+
+  .message-balloon p {
+    margin: 0;
+    padding: 0;
+  }
 </style>
 
 <article class="container">
@@ -92,11 +97,8 @@
                   href="javascript:void(0);">
                   <i class="fas fa-ellipsis-v"></i>
                 </a> -->
-              <div class="p-2 rounded bg-lightsecondary">
-                <div class="text-black">{@html message.message}</div>
-                <small class="text-muted"
-                  ><Date time="{message.date}" />
-                </small>
+              <div class="message-balloon p-2 rounded bg-secondary text-white">
+                {@html message.message}
               </div>
             </div>
             <div class="col-auto">
@@ -125,13 +127,9 @@
               </a>
             </div>
             <div class="col-auto d-flex flex-nowrap align-items-center">
-              <div class="p-2 rounded bg-lightprimary d-inline-block">
-                <div class="pb-2 text-black">
-                  {message.message}
-                </div>
-                <small class="text-muted pt-2">
-                  <Date time="{message.date}" />
-                </small>
+              <div
+                class="message-balloon p-2 rounded bg-primary d-inline-block text-white">
+                {message.message}
               </div>
               <a
                 class="btn btn-link d-none ml-3"
