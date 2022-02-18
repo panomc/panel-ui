@@ -1,37 +1,38 @@
 <!-- Tickets Page -->
 <article class="container">
   <!-- Action Menu -->
-  <div class="row mb-3 animate__animated animate__slideInUp">
-    <div class="col-md-4 col-6">
+  <div
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
+    <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
         <i class="fas fa-arrow-left mr-1"></i>
         Talepler
       </a>
     </div>
-    <div class="col d-flex">
+    <div class="col-auto">
       <div
         class:d-none="{firstLoad}"
-        class="ml-auto animated {getListOfChecked($checkedList).length > 0
-          ? 'fadeIn'
-          : 'fadeOut'}
+        class="animate__animated {getListOfChecked($checkedList).length > 0
+          ? 'animate__fadeIn'
+          : 'animate__fadeOut'}
       faster">
-        <a
-          class="btn btn-outline-bittersweet"
-          class:disabled="{getListOfChecked($checkedList).length === 0}"
-          role="button"
-          href="javascript:void(0);"
-          on:click="{onShowCloseTicketsModalClick}">
-          <i class="fas fa-times mr-1"></i>
-          Kapat
-        </a>
         <a
           class="btn btn-outline-danger"
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
-          href="javascript:void(0);"
+          href="#"
           on:click="{onShowDeleteTicketsModalClick}">
           <i class="fas fa-trash mr-1"></i>
           Sil
+        </a>
+        <a
+          class="btn btn-bittersweet"
+          class:disabled="{getListOfChecked($checkedList).length === 0}"
+          role="button"
+          href="#"
+          on:click="{onShowCloseTicketsModalClick}">
+          <i class="fas fa-check mr-1"></i>
+          Kapat
         </a>
       </div>
     </div>
@@ -41,7 +42,7 @@
   <div class="card">
     <div class="card-body">
       <div class="row justify-content-between pb-3 align-items-center">
-        <div class="col-md-6 col-12 text-md-left text-center">
+        <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title mb-md-0">
             {data.tickets_count}
             Talep{getListOfChecked($checkedList).length > 0
@@ -64,22 +65,21 @@
             <thead>
               <tr>
                 <th class="text-nowrap align-middle" scope="col">
-                  <div class="custom-control custom-checkbox">
+                  <div class="form-check">
                     <input
-                      type="checkbox"
-                      class="custom-control-input"
+                      class="form-check-input"
                       on:click="{onSelectAllClick}"
                       checked="{isAllTicketsSelected(
                         data.tickets,
                         $checkedList
                       )}"
-                      id="selectAll" />
-                    <label class="custom-control-label" for="selectAll"></label>
+                      id="selectAll"
+                      type="checkbox" />
                   </div>
                 </th>
                 <th class="min-w-200px align-middle" scope="col">Başlık</th>
                 <th class="align-middle" scope="col">Durum</th>
-                <th class="align-middle" scope="col">Kategori</th>
+                <th class="align-middle table-primary" scope="col">Kategori</th>
                 <th class="align-middle" scope="col">Açan</th>
                 <th class="align-middle" scope="col">Son Yanıt</th>
               </tr>
