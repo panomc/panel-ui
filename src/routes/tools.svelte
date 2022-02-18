@@ -1,7 +1,5 @@
-<div class="container">Tools page!</div>
+<Tools />
 
 <script>
-  import { pageTitle } from "$lib/store";
-
-  pageTitle.set("Araçlar");
+  import Tools from "$lib/component/pages/Tools.svelte";
 </script>
