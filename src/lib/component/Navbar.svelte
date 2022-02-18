@@ -1,3 +1,9 @@
+<style>
+  .notifications {
+    width: 250px;
+  }
+</style>
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand navbar-light">
   <div class="container-fluid">
@@ -32,38 +38,34 @@
             <span
               class="position-absolute p-2 start-75 translate-middle badge rounded-pill bg-danger">
               {$notificationsCount}
-              <span class="visually-hidden">unread messages</span>
             </span>
           {/if}
         </a>
 
         <div
-          class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
+          class="notifications dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
           <h6 class="dropdown-header">
             Bildirimler {$notificationsCount === 0
               ? ""
               : "(" + $notificationsCount + " Okunmamış)"}
           </h6>
-          <li><hr class="dropdown-divider" /></li>
 
           {#if !notificationsLoading}
             {#each quickNotifications as notification, index (notification)}
-              <a
-                href="#"
-                class="dropdown-item d-flex flex-row border-bottom py-2"
-                class:notification-unread="{notification.status ===
-                  'NOT_READ'}">
-                <div class="col-auto pl-0">
-                  <i class="fas fa-dot-circle text-primary"></i>
-                </div>
-                <div class="col">
-                  <span class="text-wrap text-dark"
-                    >{notification.type_ID}</span>
-                  <small class="text-gray d-block">
-                    {getTime(checkTime, parseInt(notification.date), "")}
-                  </small>
-                </div>
-              </a>
+          <a
+            href="#"
+            class="list-group-item list-group-item-action  d-flex flex-row w-100"
+            class:notification-unread="{notification.status === 'NOT_READ'}">
+            <div class="col-auto">
+              <i class="fa fa-bell mx-3 text-primary"></i>
+            </div>
+            <div class="col">
+              <span class="text-wrap text-dark">{notification.type_ID}</span>
+              <small class="text-gray d-block">
+                {getTime(checkTime, parseInt(notification.date), "")}
+              </small>
+            </div>
+          </a>
             {/each}
           {/if}
 
@@ -111,7 +113,6 @@
         <ul
           class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
           <h6 class="dropdown-header">{$user.username}</h6>
-          <li><hr class="dropdown-divider" /></li>
           <li>
             <a
               class="dropdown-item"
