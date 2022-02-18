@@ -3,42 +3,35 @@
   aria-hidden="true"
   class="modal fade"
   id="{dialogID}"
-  role="dialog"
-  tabindex="-1"
->
-  <div class="modal-dialog modal-dialog-centered" role="dialog">
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
           {$mode === "edit" ? "Yetki Grubu Düzenle" : "Yetki Grubu Ekle"}
         </h5>
-
         <button
-          aria-label="Kapat"
-          class="close"
           title="Pencereyi Kapat"
           type="button"
-          on:click="{hide}"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+          class="btn-close"
+          data-bs-dismiss="modal"
+          on:click="{hide}"></button>
       </div>
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
-          <div class="form-group">
-            <label for="name">Yetki Grubu Adı:</label>
+          <div class="mb-3">
+            <label for="permName">Yetki Grubu Adı:</label>
             <input
               class="form-control"
-              id="name"
+              id="permName"
               type="text"
               bind:value="{$permissionGroup.name}"
-              class:border-danger="{$errors.name}"
-            />
+              class:border-danger="{$errors.name}" />
           </div>
         </div>
         <div class="modal-footer">
           <button
-            class="btn"
+            class="btn w-100"
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
             type="submit"
@@ -71,7 +64,10 @@
     permissionGroup.set(newPermissionGroup);
     errors.set([]);
 
-    modal = new window.bootstrap.Modal(document.getElementById( dialogID), {backdrop: "static", keyboard: false});
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
     modal.show();
   }
 
