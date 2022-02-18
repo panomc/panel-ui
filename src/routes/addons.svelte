@@ -1,7 +1,5 @@
-<div class="container">Addons page!</div>
+<Addons />
 
 <script>
-  import { pageTitle } from "$lib/store";
-
-  pageTitle.set("Eklentiler");
+  import Addons from "$lib/component/pages/Addons.svelte";
 </script>
