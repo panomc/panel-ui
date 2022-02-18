@@ -79,10 +79,10 @@
       bind:clientHeight="{$messagesSectionClientHeight}">
       {#if data.ticket.messages.length < data.ticket.count && data.ticket.count > 5}
         <button
-          class="btn btn-link btn-sm bg-lightprimary d-block m-auto"
+          class="btn btn-link bg-light d-block m-auto"
           class:disabled="{loadMoreLoading}"
           on:click="{loadMore}"
-          >Önceki Mesajlar ({data.ticket.count -
+          ><i class="fas fa-arrow-up mr-1"></i> Önceki Mesajlar ({data.ticket.count -
             (data.ticket.messages.length - sentMessageCount)})
         </button>
       {/if}
