@@ -61,7 +61,7 @@
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    <a href="{base}/posts/category/{post.category.title}">
+    <a href="{base}/posts/category/{post.category.url}">
       <span
         class="badge border rounded-pill text-dark"
         class:text-dark="{post.category.title === '-'}"
