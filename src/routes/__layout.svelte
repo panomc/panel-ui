@@ -3,7 +3,7 @@
 </Layout>
 
 <script context="module">
-  import { load as loadLayout } from "$lib/component/layouts/Layout.svelte";
+  import { load as loadLayout } from "$lib/component/layouts/MainLayout.svelte";
 
   /**
    * @type {import('@sveltejs/kit').Load}
@@ -23,5 +23,5 @@
 </script>
 
 <script>
-  import Layout from "$lib/component/layouts/Layout.svelte";
+  import Layout from "$lib/component/layouts/MainLayout.svelte";
 </script>
