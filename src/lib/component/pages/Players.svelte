@@ -102,8 +102,8 @@
 </div>
 
 <script context="module">
-  import ApiUtil from "$lib/api.util";
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import ApiUtil from "$lib/api.util.js";
+  import { showNetworkErrorOnCatch } from "$lib/store.js";
 
   export const PageTypes = Object.freeze({
     ALL: "all",
@@ -185,7 +185,7 @@
   import { base } from "$app/paths";
   import { page, session } from "$app/stores";
 
-  import { pageTitle } from "$lib/store";
+  import { pageTitle } from "$lib/store.js";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
