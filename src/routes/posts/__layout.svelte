@@ -1,7 +1,7 @@
-<slot />
-
-<ConfirmDeletePostModal />
+<Layout>
+  <slot />
+</Layout>
 
 <script>
-  import ConfirmDeletePostModal from "$lib/component/modals/ConfirmDeletePostModal.svelte";
+  import Layout from "$lib/component/layouts/PostsLayout.svelte";
 </script>
