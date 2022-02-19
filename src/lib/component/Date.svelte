@@ -4,7 +4,8 @@
   use:tooltip="{[
     format(new Date(parseInt(date)), 'dd/MM/yyyy, HH:mm'),
     { placement: 'bottom' },
-  ]}">
+  ]}"
+>
   <slot>
     {formatRelative(new Date(parseInt(date)), new Date()).capitalize()}
   </slot>

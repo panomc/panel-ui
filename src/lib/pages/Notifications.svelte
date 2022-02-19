@@ -7,7 +7,7 @@
           type="button"
           class="btn btn-outline-danger"
           on:click="{() => onDeleteAllClick()}"
-        >Tümünü Sil
+          >Tümünü Sil
         </button>
       </div>
     {/if}
@@ -58,7 +58,7 @@
             class="btn text-primary bg-lightprimary d-block m-auto"
             class:disabled="{loadMoreLoading}"
             on:click="{loadMore}"
-          >Daha Fazla Göster ({$count - $notifications.length})
+            >Daha Fazla Göster ({$count - $notifications.length})
           </button>
         </div>
       {/if}

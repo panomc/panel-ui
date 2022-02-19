@@ -7,7 +7,7 @@
     >
       <div class="col-auto">
         <strong class="animate__animated animate__zoomIn"
-        >2 Güncelleme Mevcut</strong
+          >2 Güncelleme Mevcut</strong
         >
       </div>
       <div class="col-auto">

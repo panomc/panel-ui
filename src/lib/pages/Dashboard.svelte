@@ -207,34 +207,34 @@
       <div class="table-responsive animate__animated animate__fadeIn">
         <table class="table table-sm m-0">
           <tbody class="text-muted">
-          <tr>
-            <th scope="row">Yazılar:</th>
-            <td>{data.post_count}</td>
-          </tr>
-          <tr>
-            <th scope="row">Oyuncular:</th>
-            <td>{data.registered_player_count}</td>
-          </tr>
-          <tr>
-            <th scope="row">Yöneticiler:</th>
-            <td>?</td>
-          </tr>
-          <tr>
-            <th scope="row">Talepler:</th>
-            <td>{data.tickets_count}</td>
-          </tr>
-          <tr>
-            <th scope="row">Bağlı Sunucular:</th>
-            <td>?</td>
-          </tr>
-          <tr>
-            <th scope="row">Eklentiler:</th>
-            <td>?</td>
-          </tr>
-          <tr>
-            <th scope="row">Temalar:</th>
-            <td>?</td>
-          </tr>
+            <tr>
+              <th scope="row">Yazılar:</th>
+              <td>{data.post_count}</td>
+            </tr>
+            <tr>
+              <th scope="row">Oyuncular:</th>
+              <td>{data.registered_player_count}</td>
+            </tr>
+            <tr>
+              <th scope="row">Yöneticiler:</th>
+              <td>?</td>
+            </tr>
+            <tr>
+              <th scope="row">Talepler:</th>
+              <td>{data.tickets_count}</td>
+            </tr>
+            <tr>
+              <th scope="row">Bağlı Sunucular:</th>
+              <td>?</td>
+            </tr>
+            <tr>
+              <th scope="row">Eklentiler:</th>
+              <td>?</td>
+            </tr>
+            <tr>
+              <th scope="row">Temalar:</th>
+              <td>?</td>
+            </tr>
           </tbody>
         </table>
       </div>
