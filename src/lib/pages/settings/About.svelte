@@ -88,7 +88,7 @@
 </div>
 
 <script>
-  import { pageTitle } from "$lib/store";
+  import { pageTitle } from "$lib/store.js";
 
   pageTitle.set("Pano Hakkında");
 </script>

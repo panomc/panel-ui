@@ -31,9 +31,9 @@
     showNetworkErrorOnCatch,
     notLoggedIn,
     setDefaults,
-  } from "$lib/store";
+  } from "$lib/store.js";
 
-  import ApiUtil, { NETWORK_ERROR } from "$lib/api.util";
+  import ApiUtil, { NETWORK_ERROR } from "$lib/api.util.js";
 
   function getBasicData({ request, CSRFToken }) {
     return new Promise((resolve, reject) => {
@@ -97,13 +97,13 @@
 
   import { browser } from "$app/env";
 
-  import { pageTitle, options } from "$lib/store";
+  import { pageTitle, options } from "$lib/store.js";
 
   if (browser) {
-    import("$lib/init.libs");
+    import("$lib/init.libs.js");
   }
 
-  import { logoutLoading } from "$lib/store";
+  import { logoutLoading } from "$lib/store.js";
 
   import Splash from "$lib/component/Splash.svelte";
   import Navbar from "$lib/component/Navbar.svelte";

@@ -39,7 +39,7 @@
 </section>
 
 <script>
-  import { pageTitle } from "$lib/store";
+  import { pageTitle } from "$lib/store.js";
 
   pageTitle.set("Tema Ayarları");
 </script>

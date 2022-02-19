@@ -1,7 +1,7 @@
 <TicketDetail data="{data}" />
 
 <script context="module">
-  import { load as loadTicketDetail } from "$lib/component/pages/tickets/TicketDetail.svelte";
+  import { load as loadTicketDetail } from "$lib/pages/tickets/TicketDetail.svelte";
 
   /**
    * @type {import('@sveltejs/kit').Load}
@@ -21,7 +21,7 @@
 </script>
 
 <script>
-  import TicketDetail from "$lib/component/pages/tickets/TicketDetail.svelte";
+  import TicketDetail from "$lib/pages/tickets/TicketDetail.svelte";
 
   export let data;
 </script>

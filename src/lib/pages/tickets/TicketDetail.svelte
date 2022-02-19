@@ -195,8 +195,8 @@
 <script context="module">
   import { writable } from "svelte/store";
 
-  import ApiUtil from "$lib/api.util";
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import ApiUtil from "$lib/api.util.js";
+  import { showNetworkErrorOnCatch } from "$lib/store.js";
 
   import { TicketStatuses } from "$lib/component/TicketStatus.svelte";
   import Editor from "$lib/component/Editor.svelte";
@@ -291,7 +291,7 @@
   import { base } from "$app/paths";
   import { session, page } from "$app/stores";
 
-  import tooltip from "$lib/tooltip.util";
+  import tooltip from "$lib/tooltip.util.js";
 
   import {
     setCallback as setCloseTicketModalCallback,

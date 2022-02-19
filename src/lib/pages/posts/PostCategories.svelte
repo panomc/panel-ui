@@ -1,13 +1,13 @@
-<!-- Ticket Categories Page -->
+<!-- Categories Page -->
 <article class="container">
   <!-- Action Menu -->
   <div
     class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp"
   >
     <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/tickets">
+      <a class="btn btn-link" role="button" href="{base}/posts">
         <i class="fas fa-arrow-left mr-1"></i>
-        Talepler
+        Yazılar
       </a>
     </div>
     <div class="col-auto">
@@ -22,23 +22,21 @@
     </div>
   </div>
 
-  <!-- Ticket Categories -->
-
+  <!-- Post categories -->
   <div class="card">
     <div class="card-body">
       <div class="row justify-content-between pb-3 align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title text-sm-left text-center">
+          <h5 class="card-title">
             {data.category_count}
-            Talep Kategorisi
+            Yazı Kategorisi
           </h5>
         </div>
       </div>
-
       <!-- No Category -->
       {#if data.category_count === 0}
         <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-ticket-alt fa-3x text-dark text-opacity-25 m-3"></i>
+          <i class="fas fa-sticky-note fa-3x text-dark text-opacity-25 m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {/if}
@@ -52,6 +50,8 @@
                 <th scope="col"></th>
                 <th class="min-w-200px" scope="col">Kategori</th>
                 <th scope="col">Açıklama</th>
+                <th scope="col">URL</th>
+                <th scope="col" class="d-none">Renk</th>
               </tr>
             </thead>
             <tbody>
@@ -76,9 +76,7 @@
                         <a
                           class="dropdown-item"
                           href="javascript:void(0);"
-                          on:click="{onShowDeleteTicketCategoryModalClick(
-                            index
-                          )}"
+                          on:click="{onShowDeletePostCategoryModalClick(index)}"
                         >
                           <i class="fas fa-trash text-danger mr-1"></i>
                           Sil
@@ -86,8 +84,10 @@
                       </div>
                     </div>
                   </th>
-                  <td class="text-nowrap">
+                  <td>
                     <a
+                      data-bs-target="#addEditCategory"
+                      data-bs-toggle="modal"
                       href="javascript:void(0);"
                       title="Kategoriyi Düzenle"
                       on:click="{onShowEditCategoryButtonClick(index)}"
@@ -95,7 +95,24 @@
                       {category.title}
                     </a>
                   </td>
-                  <td class="text-nowrap">{category.description}</td>
+                  <td>{category.description}</td>
+                  <td>
+                    <a
+                      href="/category/{category.url}"
+                      target="_blank"
+                      title="Kategoriyi Görüntüle"
+                    >
+                      /category/{category.url}
+                    </a>
+                  </td>
+                  <td class="d-none">
+                    <input
+                      value="#{category.color}"
+                      class="form-control form-control-sm bg-transparent"
+                      disabled
+                      type="color"
+                    />
+                  </td>
                 </tr>
               {/each}
             </tbody>
@@ -114,11 +131,11 @@
   </div>
 </article>
 
-<!-- Add / Edit Ticket Category Modal -->
-<AddEditTicketCategoryModal />
+<!-- Post Category Delete Confirmation Modal -->
+<ConfirmDeletePostCategoryModal />
 
-<!-- Confirm Delete Ticket Category Modal -->
-<ConfirmDeleteTicketCategoryModal />
+<!-- Add / Edit Post Category Modal -->
+<PostCategoriesAddEditModal />
 
 <script context="module">
   import ApiUtil from "$lib/api.util";
@@ -127,7 +144,7 @@
   async function loadData({ page, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
       ApiUtil.post({
-        path: "/api/panel/initPage/tickets/categoryPage",
+        path: "/api/panel/initPage/posts/categoryPage",
         body: {
           page: parseInt(page),
         },
@@ -173,7 +190,9 @@
         output.props.data = { ...output.props.data, ...data };
       })
       .catch((body) => {
-        if (body.error === "PAGE_NOT_FOUND") output = null;
+        if (body.error === "PAGE_NOT_FOUND") {
+          output = null;
+        }
       });
 
     return output;
@@ -189,20 +208,20 @@
 
   import Pagination from "$lib/component/Pagination.svelte";
 
-  import AddEditTicketCategoryModal, {
-    show as showTicketCategoriesAddEditModal,
-    setCallback as setCallbackForTicketCategoriesAddEditModal,
-    onHide as onAddEditTicketCategoryModalHide,
-  } from "$lib/component/modals/AddEditTicketCategoryModal.svelte";
-  import ConfirmDeleteTicketCategoryModal, {
-    setCallback as setDeleteTicketCategoryModalCallback,
-    show as showDeleteTicketCategoryModal,
-    onHide as onConfirmDeleteTicketCategoryModalHide,
-  } from "$lib/component/modals/ConfirmDeleteTicketCategoryModal.svelte";
+  import PostCategoriesAddEditModal, {
+    show as showPostCategoriesAddEditModal,
+    setCallback as setCallbackForPostCategoriesAddEditModal,
+    onHide as onAddEditPostCategoryModalHide,
+  } from "$lib/component/modals/PostCategoriesAddEditModal.svelte";
+  import ConfirmDeletePostCategoryModal, {
+    setCallback as setDeletePostCategoryModalCallback,
+    show as showDeletePostCategoryModal,
+    onHide as onConfirmDeletePostCategoryModalHide,
+  } from "$lib/component/modals/ConfirmDeletePostCategoryModal.svelte";
 
   export let data;
 
-  pageTitle.set("Talep Kategorileri");
+  pageTitle.set("Yazı Kategorileri");
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -228,7 +247,7 @@
       loadData({ page, CSRFToken: $session.CSRFToken })
         .then((loadedData) => {
           if (page !== data.page) {
-            goto(base + "/tickets/categories/" + page);
+            goto(base + "/posts/categories/" + page);
           } else {
             data = loadedData;
           }
@@ -248,35 +267,40 @@
   }
 
   function onCreateCategoryClick() {
-    showTicketCategoriesAddEditModal("create");
+    showPostCategoriesAddEditModal("create");
   }
 
   function onShowEditCategoryButtonClick(index) {
     data.categories[index].selected = true;
 
-    showTicketCategoriesAddEditModal("edit", data.categories[index]);
+    showPostCategoriesAddEditModal("edit", data.categories[index]);
   }
 
-  function onShowDeleteTicketCategoryModalClick(index) {
+  function onShowDeletePostCategoryModalClick(index) {
     data.categories[index].selected = true;
 
-    showDeleteTicketCategoryModal(data.categories[index]);
+    showDeletePostCategoryModal(data.categories[index]);
   }
 
-  setCallbackForTicketCategoriesAddEditModal((routeFirstPage) => {
+  setCallbackForPostCategoriesAddEditModal((routeFirstPage) => {
     reloadData(routeFirstPage ? 1 : data.page);
   });
 
-  onAddEditTicketCategoryModalHide((category) => {
-    if (data.categories.indexOf(category) !== -1)
-      data.categories[data.categories.indexOf(category)].selected = false;
+  onAddEditPostCategoryModalHide((category) => {
+    for (let loopCategory of data.categories) {
+      if (parseInt(loopCategory.id) === parseInt(category.id)) {
+        data.categories[data.categories.indexOf(loopCategory)].selected = false;
+
+        break;
+      }
+    }
   });
 
-  setDeleteTicketCategoryModalCallback(() => {
+  setDeletePostCategoryModalCallback(() => {
     reloadData(data.page);
   });
 
-  onConfirmDeleteTicketCategoryModalHide((category) => {
+  onConfirmDeletePostCategoryModalHide((category) => {
     if (data.categories.indexOf(category) !== -1)
       data.categories[data.categories.indexOf(category)].selected = false;
   });

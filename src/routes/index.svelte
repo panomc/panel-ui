@@ -1,7 +1,7 @@
 <Dashboard data="{data}" />
 
 <script context="module">
-  import { load as loadDashboard } from "$lib/component/pages/Dashboard.svelte";
+  import { load as loadDashboard } from "$lib/pages/Dashboard.svelte";
 
   /**
    * @type {import('@sveltejs/kit').Load}
@@ -21,7 +21,7 @@
 </script>
 
 <script>
-  import Dashboard from "$lib/component/pages/Dashboard.svelte";
+  import Dashboard from "$lib/pages/Dashboard.svelte";
 
   export let data;
 </script>

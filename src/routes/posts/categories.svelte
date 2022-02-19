@@ -1,7 +1,7 @@
 <PostCategories data="{data}" />
 
 <script context="module">
-  import { load as loadPostCategories } from "$lib/component/pages/posts/PostCategories.svelte";
+  import { load as loadPostCategories } from "$lib/pages/posts/PostCategories.svelte";
 
   /**
    * @type {import('@sveltejs/kit').Load}
@@ -21,7 +21,7 @@
 </script>
 
 <script>
-  import PostCategories from "$lib/component/pages/posts/PostCategories.svelte";
+  import PostCategories from "$lib/pages/posts/PostCategories.svelte";
 
   export let data;
 </script>

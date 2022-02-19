@@ -162,7 +162,7 @@
 <PostCategoriesAddEditModal />
 
 <script context="module">
-  import ApiUtil from "$lib/api.util.js";
+  import ApiUtil from "$lib/api.util";
 
   export const Modes = Object.freeze({
     EDIT: "edit",
@@ -270,8 +270,8 @@
   import { goto } from "$app/navigation";
   import { session, page } from "$app/stores";
 
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store.js";
-  import { UI_URL } from "$lib/variables.js";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
+  import { UI_URL } from "$lib/variables";
 
   import SetPostThumbnailModal from "$lib/component/modals/SetPostThumbnailModal.svelte";
 

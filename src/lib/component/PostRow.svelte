@@ -112,7 +112,7 @@
   import tooltip from "$lib/tooltip.util";
   import { UI_URL } from "$lib/variables";
 
-  import { PageTypes } from "$lib/component/pages/Posts.svelte";
+  import { PageTypes } from "$lib/pages/Posts.svelte";
 
   export let post;
   export let pageType;

@@ -1,5 +1,5 @@
 <SiteSettings />
 
 <script>
-  import SiteSettings from "$lib/component/pages/settings/SiteSettings.svelte";
+  import SiteSettings from "$lib/pages/settings/SiteSettings.svelte";
 </script>

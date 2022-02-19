@@ -1,5 +1,5 @@
 <GeneralSettings />
 
 <script>
-  import GeneralSettings from "$lib/component/pages/settings/GeneralSettings.svelte";
+  import GeneralSettings from "$lib/pages/settings/GeneralSettings.svelte";
 </script>

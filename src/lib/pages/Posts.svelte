@@ -120,10 +120,10 @@
 </article>
 
 <script context="module">
-  import ApiUtil from "$lib/api.util";
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import ApiUtil from "$lib/api.util.js";
+  import { showNetworkErrorOnCatch } from "$lib/store.js";
 
-  import { StatusTypes as PostStatusTypes } from "$lib/component/pages/PostEditor.svelte";
+  import { StatusTypes as PostStatusTypes } from "$lib/pages/PostEditor.svelte";
 
   export const PageTypes = Object.freeze({
     PUBLISHED: "published",
@@ -204,7 +204,7 @@
   import { page, session } from "$app/stores";
   import { base } from "$app/paths";
 
-  import { pageTitle } from "$lib/store";
+  import { pageTitle } from "$lib/store.js";
 
   import Pagination from "$lib/component/Pagination.svelte";
 

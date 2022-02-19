@@ -1,7 +1,7 @@
 <Permissions data="{data}" />
 
 <script context="module">
-  import { load as loadPermissions } from "$lib/component/pages/players/Permissions.svelte";
+  import { load as loadPermissions } from "$lib/pages/players/Permissions.svelte";
 
   /**
    * @type {import('@sveltejs/kit').Load}
@@ -21,7 +21,7 @@
 </script>
 
 <script>
-  import Permissions from "$lib/component/pages/players/Permissions.svelte";
+  import Permissions from "$lib/pages/players/Permissions.svelte";
 
   export let data;
 </script>

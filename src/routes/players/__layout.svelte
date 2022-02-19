@@ -3,5 +3,5 @@
 </Layout>
 
 <script>
-  import Layout from "$lib/component/layouts/PlayersLayout.svelte";
+  import Layout from "$lib/layouts/PlayersLayout.svelte";
 </script>

@@ -72,8 +72,8 @@
 </div>
 
 <script context="module">
-  import ApiUtil from "$lib/api.util.js";
-  import { showNetworkErrorOnCatch } from "$lib/store.js";
+  import ApiUtil from "$lib/api.util";
+  import { showNetworkErrorOnCatch } from "$lib/store";
 
   async function loadData({ page, permissionGroup, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
@@ -146,7 +146,7 @@
   import { base } from "$app/paths";
   import { page, session } from "$app/stores";
 
-  import { pageTitle } from "$lib/store.js";
+  import { pageTitle } from "$lib/store";
 
   import Pagination from "$lib/component/Pagination.svelte";
 

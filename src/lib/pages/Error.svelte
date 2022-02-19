@@ -14,12 +14,12 @@
     <p class="text-muted">
       Yaramaz Enderman, bu sayfanın yüklenmesini engelledi.
     </p>
-    <a class="btn btn-primary" role="button" href="./">Geri Git</a>
+    <a class="btn btn-primary" role="button" href="../../..">Geri Git</a>
   </div>
 </div>
 
 <script>
-  import { pageTitle } from "$lib/store";
+  import { pageTitle } from "$lib/store.js";
 
   pageTitle.set("Error 404");
 </script>

@@ -1,7 +1,7 @@
 <Notifications data="{data}" />
 
 <script context="module">
-  import { load as loadNotifications } from "$lib/component/pages/Notifications.svelte";
+  import { load as loadNotifications } from "$lib/pages/Notifications.svelte";
 
   /**
    * @type {import('@sveltejs/kit').Load}
@@ -21,7 +21,7 @@
 </script>
 
 <script>
-  import Notifications from "$lib/component/pages/Notifications.svelte";
+  import Notifications from "$lib/pages/Notifications.svelte";
 
   export let data;
 </script>

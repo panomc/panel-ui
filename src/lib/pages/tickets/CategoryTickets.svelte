@@ -2,12 +2,12 @@
 <article class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp"
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp"
   >
     <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/tickets/categories">
-        <i class="fas fa-list-alt mr-1"></i>
-        Talep Kategorileri
+      <a class="btn btn-link" role="button" href="{base}/tickets">
+        <i class="fas fa-arrow-left mr-1"></i>
+        Talepler
       </a>
     </div>
     <div class="col-auto">
@@ -49,49 +49,17 @@
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title mb-md-0">
             {data.tickets_count}
-            {data.pageType === PageTypes.WAITING_REPLY
-              ? "Yeni"
-              : data.pageType === PageTypes.CLOSED
-              ? "Kapalı"
-              : ""} Talep{getListOfChecked($checkedList).length > 0
+            Talep{getListOfChecked($checkedList).length > 0
               ? ", " + getListOfChecked($checkedList).length + " adet seçildi"
               : ""}
           </h5>
-        </div>
-        <div class="col-md-auto col-12 text-md-right text-center">
-          <div class="btn-group">
-            <a
-              class="btn btn-sm btn-outline-light btn-link"
-              class:active="{data.pageType === PageTypes.ALL}"
-              role="button"
-              href="{base}/tickets/all"
-            >
-              Tümü
-            </a>
-            <a
-              class="btn btn-sm btn-outline-light btn-link text-mint"
-              class:active="{data.pageType === PageTypes.WAITING_REPLY}"
-              role="button"
-              href="{base}/tickets/waitingReply"
-            >
-              Yeni
-            </a>
-            <a
-              class="btn btn-sm btn-outline-light btn-link text-bittersweet"
-              class:active="{data.pageType === PageTypes.CLOSED}"
-              role="button"
-              href="{base}/tickets/closed"
-            >
-              Kapalı
-            </a>
-          </div>
         </div>
       </div>
 
       <!-- No Tickets -->
       {#if data.tickets_count === 0}
         <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-ticket-alt fa-3x m-3 text-dark text-opacity-25"></i>
+          <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}
@@ -100,7 +68,7 @@
           <table class="table mb-0">
             <thead>
               <tr>
-                <th class="align-middle" scope="col">
+                <th class="text-nowrap align-middle" scope="col">
                   <div class="form-check">
                     <input
                       class="form-check-input"
@@ -114,9 +82,9 @@
                     />
                   </div>
                 </th>
-                <th class="align-middle" scope="col">Başlık</th>
+                <th class="min-w-200px align-middle" scope="col">Başlık</th>
                 <th class="align-middle" scope="col">Durum</th>
-                <th class="align-middle" scope="col">Kategori</th>
+                <th class="align-middle table-primary" scope="col">Kategori</th>
                 <th class="align-middle" scope="col">Açan</th>
                 <th class="align-middle" scope="col">Son Yanıt</th>
               </tr>
@@ -151,34 +119,18 @@
 <script context="module">
   import { writable, get } from "svelte/store";
 
-  import ApiUtil from "$lib/api.util.js";
-  import { showNetworkErrorOnCatch } from "$lib/store.js";
+  import ApiUtil from "$lib/api.util";
+  import { showNetworkErrorOnCatch } from "$lib/store";
 
   let checkedList = writable([]);
 
-  export const PageTypes = Object.freeze({
-    ALL: "all",
-    WAITING_REPLY: "waitingReply",
-    CLOSED: "closed",
-  });
-
-  export const DefaultPageType = PageTypes.ALL;
-
-  export function getStatusFromPageType(pageType) {
-    return pageType === PageTypes.ALL
-      ? 2
-      : pageType === PageTypes.WAITING_REPLY
-      ? 1
-      : 3;
-  }
-
-  async function loadData({ page, pageType, request, CSRFToken }) {
+  async function loadData({ page, url, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
       ApiUtil.post({
-        path: "/api/panel/initPage/ticketPage",
+        path: "/api/panel/ticket/byCategory",
         body: {
           page: parseInt(page),
-          page_type: getStatusFromPageType(pageType),
+          url,
         },
         request,
         CSRFToken,
@@ -187,7 +139,7 @@
           const data = body;
 
           data.page = parseInt(page);
-          data.pageType = pageType;
+          data.url = url;
 
           resolve(data);
         } else {
@@ -200,7 +152,7 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load(request, pageType = DefaultPageType) {
+  export async function load(request) {
     let output = {
       props: {
         data: {
@@ -208,7 +160,13 @@
           tickets: [],
           total_page: 1,
           page: 1,
-          pageType,
+          url: request.page.params.url,
+          category: {
+            id: -1,
+            title: "-",
+            description: "",
+            url: "-",
+          },
         },
       },
     };
@@ -219,12 +177,17 @@
       return output;
     }
 
-    await loadData({ page: request.page.params.page || 1, pageType, request })
+    await loadData({
+      page: request.page.params.page || 1,
+      url: request.page.params.url,
+      request,
+    })
       .then((data) => {
         output.props.data = { ...output.props.data, ...data };
       })
       .catch((body) => {
-        if (body.error === "PAGE_NOT_FOUND") output = null;
+        if (body.error === "PAGE_NOT_FOUND" || body.error === "NOT_EXISTS")
+          output = null;
       });
 
     return output;
@@ -236,7 +199,7 @@
   import { base } from "$app/paths";
   import { page, session } from "$app/stores";
 
-  import { pageTitle } from "$lib/store.js";
+  import { pageTitle } from "$lib/store";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -255,19 +218,21 @@
 
   export let data;
 
-  pageTitle.set(
-    (data.pageType === PageTypes.WAITING_REPLY
-      ? "Yeni" + " "
-      : data.pageType === PageTypes.CLOSED
-      ? "Kapalı" + " "
-      : "") + "Talepler"
-  );
+  let firstLoad = true;
+
+  $: {
+    pageTitle.set(
+      `"${
+        data.category.title === "-" ? "Kategorisiz" : data.category.title
+      }" Kategorisindeki Talepler`
+    );
+  }
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         page: $page.params.page || 1,
-        pageType: data.pageType,
+        url: $page.params.url,
         CSRFToken: $session.CSRFToken,
       })
         .then((loadedData) => {
@@ -276,7 +241,7 @@
           resolve();
         })
         .catch((body) => {
-          if (body.error === "PAGE_NOT_FOUND") {
+          if (body.error === "PAGE_NOT_FOUND" || body.error === "NOT_EXISTS") {
             goto(base + "/error-404");
 
             resolve();
@@ -287,16 +252,14 @@
     }, true);
   }
 
-  let firstLoad = true;
-
-  function reloadData(page = data.page, pageType = data.pageType) {
+  function reloadData(page = data.page, url = data.url) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ page, pageType, CSRFToken: $session.CSRFToken })
+      loadData({ page, url, CSRFToken: $session.CSRFToken })
         .then((loadedData) => {
           resolve();
 
           if (page !== data.page) {
-            goto(base + "/tickets/" + data.pageType + "/" + page);
+            goto(base + "/tickets/category/" + data.url + "/" + page);
           } else {
             data = loadedData;
           }
@@ -306,6 +269,8 @@
             resolve();
 
             reloadData(page - 1);
+          } else if (body.error === "NOT_EXISTS") {
+            goto(base + "/error-404");
           } else {
             reject();
           }

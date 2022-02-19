@@ -73,7 +73,7 @@
 
   import { browser } from "$app/env";
 
-  import ApiUtil from "$lib/api.util";
+  import ApiUtil from "$lib/api.util.js";
 
   const notifications = writable([]);
   const count = writable(0);
@@ -158,8 +158,8 @@
 
   import { session } from "$app/stores";
 
-  import tooltip from "$lib/tooltip.util";
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
+  import tooltip from "$lib/tooltip.util.js";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store.js";
 
   import ConfirmRemoveAllNotificationsModal, {
     show as showDeleteAllNotificationsModal,

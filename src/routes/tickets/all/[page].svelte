@@ -1,7 +1,7 @@
 <Tickets data="{data}" />
 
 <script context="module">
-  import { load as loadTickets } from "$lib/component/pages/Tickets.svelte";
+  import { load as loadTickets } from "$lib/pages/Tickets.svelte";
 
   /**
    * @type {import('@sveltejs/kit').Load}
@@ -21,7 +21,7 @@
 </script>
 
 <script>
-  import Tickets from "$lib/component/pages/Tickets.svelte";
+  import Tickets from "$lib/pages/Tickets.svelte";
 
   export let data;
 </script>

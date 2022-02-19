@@ -243,8 +243,8 @@
 </div>
 
 <script context="module">
-  import { showNetworkErrorOnCatch } from "$lib/store";
-  import ApiUtil from "$lib/api.util";
+  import { showNetworkErrorOnCatch } from "$lib/store.js";
+  import ApiUtil from "$lib/api.util.js";
 
   async function loadData({ request, CSRFToken }) {
     return new Promise((resolve, reject) => {
@@ -298,7 +298,7 @@
 <script>
   import { base } from "$app/paths";
   import { session } from "$app/stores";
-  import { pageTitle } from "$lib/store";
+  import { pageTitle } from "$lib/store.js";
 
   import VisitorsChart from "$lib/component/charts/Dashboard/VisitorsChart.svelte";
   // import PlayersChart from "$lib/component/charts/Dashboard/PlayersChart.svelte";

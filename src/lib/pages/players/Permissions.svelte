@@ -236,8 +236,8 @@
 <ConfirmDeletePermissionGroupModal />
 
 <script context="module">
-  import ApiUtil from "$lib/api.util";
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import ApiUtil from "$lib/api.util.js";
+  import { showNetworkErrorOnCatch } from "$lib/store.js";
 
   async function loadData({ request, CSRFToken }) {
     return new Promise((resolve, reject) => {
@@ -287,8 +287,8 @@
   import { base } from "$app/paths";
   import { session } from "$app/stores";
 
-  import tooltip from "$lib/tooltip.util";
-  import { pageTitle } from "$lib/store";
+  import tooltip from "$lib/tooltip.util.js";
+  import { pageTitle } from "$lib/store.js";
 
   import AddEditPermGroupModal, {
     show as showPermissionGroupAddEditModal,

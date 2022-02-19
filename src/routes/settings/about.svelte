@@ -1,5 +1,5 @@
 <About />
 
 <script>
-  import About from "$lib/component/pages/settings/About.svelte";
+  import About from "$lib/pages/settings/About.svelte";
 </script>
