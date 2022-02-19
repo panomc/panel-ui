@@ -1,5 +1,5 @@
 <View />
 
 <script>
-  import View from "$lib/component/pages/View.svelte";
+  import View from "$lib/component/pages/Themes.svelte";
 </script>
