@@ -151,8 +151,8 @@
 <script context="module">
   import { writable, get } from "svelte/store";
 
-  import ApiUtil from "$lib/api.util";
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import ApiUtil from "$lib/api.util.js";
+  import { showNetworkErrorOnCatch } from "$lib/store.js";
 
   let checkedList = writable([]);
 
@@ -236,7 +236,7 @@
   import { base } from "$app/paths";
   import { page, session } from "$app/stores";
 
-  import { pageTitle } from "$lib/store";
+  import { pageTitle } from "$lib/store.js";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
