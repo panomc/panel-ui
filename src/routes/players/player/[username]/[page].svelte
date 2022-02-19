@@ -1,7 +1,7 @@
 <Player data="{data}" />
 
 <script context="module">
-  import { load as loadPlayer } from "../../../_Player.svelte";
+  import { load as loadPlayer } from "$lib/component/pages/players/PlayerDetail.svelte";
 
   /**
    * @type {import('@sveltejs/kit').Load}
@@ -21,7 +21,7 @@
 </script>
 
 <script>
-  import Player from "../../../_Player.svelte";
+  import Player from "$lib/component/pages/players/PlayerDetail.svelte";
 
   export let data;
 </script>

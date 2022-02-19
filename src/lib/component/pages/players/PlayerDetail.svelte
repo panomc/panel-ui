@@ -176,8 +176,8 @@
 </div>
 
 <script context="module">
-  import ApiUtil from "$lib/api.util";
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
+  import ApiUtil from "$lib/api.util.js";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store.js";
 
   async function loadData({ username, page, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
@@ -254,7 +254,7 @@
   import { base } from "$app/paths";
   import { session, page } from "$app/stores";
 
-  import tooltip from "$lib/tooltip.util";
+  import tooltip from "$lib/tooltip.util.js";
 
   import {
     show as showEditPlayerModal,
