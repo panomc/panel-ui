@@ -1,9 +1,7 @@
-<slot />
-
-<ConfirmCloseTicketModal />
-<ConfirmDeleteTicketModal />
+<Layout>
+  <slot />
+</Layout>
 
 <script>
-  import ConfirmCloseTicketModal from "$lib/component/modals/ConfirmCloseTicketModal.svelte";
-  import ConfirmDeleteTicketModal from "$lib/component/modals/ConfirmDeleteTicketModal.svelte";
+  import Layout from "$lib/component/layouts/TicketsLayout.svelte";
 </script>
