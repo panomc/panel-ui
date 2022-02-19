@@ -1,7 +1,7 @@
 <PostEditor data="{data}" />
 
 <script context="module">
-  import { load as loadPostEditor, Modes } from "../../_PostEditor.svelte";
+  import { load as loadPostEditor, Modes } from "$lib/component/pages/PostEditor.svelte";
 
   /**
    * @type {import('@sveltejs/kit').Load}
@@ -21,7 +21,7 @@
 </script>
 
 <script>
-  import PostEditor from "../../_PostEditor.svelte";
+  import PostEditor from "$lib/component/pages/PostEditor.svelte";
 
   export let data;
 </script>

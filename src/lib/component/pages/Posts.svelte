@@ -123,7 +123,7 @@
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/store";
 
-  import { StatusTypes as PostStatusTypes } from "./_PostEditor.svelte";
+  import { StatusTypes as PostStatusTypes } from "$lib/component/pages/PostEditor.svelte";
 
   export const PageTypes = Object.freeze({
     PUBLISHED: "published",
