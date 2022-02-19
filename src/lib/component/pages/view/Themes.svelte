@@ -38,7 +38,7 @@
 <script>
   import { base } from "$app/paths";
 
-  import { pageTitle } from "$lib/store";
+  import { pageTitle } from "$lib/store.js";
 
   import ConfirmDeleteThemeModal from "$lib/component/modals/ConfirmDeleteThemeModal.svelte";
 
