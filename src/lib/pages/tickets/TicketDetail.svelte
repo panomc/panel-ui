@@ -277,7 +277,7 @@
       return output;
     }
 
-    await loadTicket({ id: request.page.params.id, request })
+    await loadTicket({ id: request.params.id, request })
       .then((body) => {
         output.props.data.ticket = body;
       })

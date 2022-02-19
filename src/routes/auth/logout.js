@@ -6,8 +6,9 @@ import {
 } from "$lib/variables";
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function post(request) {
-  const { headers, locals } = request;
+export async function post(event) {
+  const { request, locals } = event;
+  const { headers } = request;
 
   return (
     headers &&

@@ -219,7 +219,7 @@
       return output;
     }
 
-    await loadData({ page: request.page.params.page || 1, pageType, request })
+    await loadData({ page: request.params.page || 1, pageType, request })
       .then((data) => {
         output.props.data = { ...output.props.data, ...data };
       })

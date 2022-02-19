@@ -1,14 +1,16 @@
 import * as api from "$lib/api.util.server";
 import { CSRF_HEADER } from "$lib/variables";
 
-async function handle(request) {
-  const { method, params, body, headers } = request;
-  const { path } = params;
-  const { jwt, CSRFToken } = request.locals;
-
+/** @type {import('@sveltejs/kit').RequestHandler} */
+async function handle({
+  request: { method, headers },
+  request,
+  params: { path },
+  locals: { jwt, CSRFToken },
+}) {
   let response;
 
-  if (path !== "testNotification" && headers[CSRF_HEADER] !== CSRFToken) {
+  if (path !== "testNotification" && headers.get(CSRF_HEADER) !== CSRFToken) {
     return null;
   }
 
@@ -21,32 +23,32 @@ async function handle(request) {
   }
 
   if (method === "POST") {
-    response = await api.post(path, body, jwt);
+    response = await api.post(path, await request.text(), jwt);
   }
 
   if (method === "PUT") {
-    response = await api.put(path, body, jwt);
+    response = await api.put(path, await request.text(), jwt);
   }
 
   return { body: response };
 }
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function get(request) {
-  return await handle(request);
+export async function get(event) {
+  return await handle(event);
 }
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function del(request) {
-  return await handle(request);
+export async function del(event) {
+  return await handle(event);
 }
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function post(request) {
-  return await handle(request);
+export async function post(event) {
+  return await handle(event);
 }
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function put(request) {
-  return await handle(request);
+export async function put(event) {
+  return await handle(event);
 }

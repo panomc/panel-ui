@@ -119,8 +119,8 @@
           posts_count: 0,
           posts: [],
           total_page: 1,
-          page: request.page.params.page || 1,
-          url: request.page.params.url,
+          page: request.params.page || 1,
+          url: request.params.url,
           category: {
             id: -1,
             title: "-",
@@ -136,8 +136,8 @@
     }
 
     await loadData({
-      page: request.page.params.page || 1,
-      url: request.page.params.url,
+      page: request.params.page || 1,
+      url: request.params.url,
       request,
     })
       .then((data) => {

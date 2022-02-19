@@ -233,8 +233,8 @@
     }
 
     await loadData({
-      username: request.page.params.username,
-      page: request.page.params.page || 1,
+      username: request.params.username,
+      page: request.params.page || 1,
       request,
     })
       .then((data) => {

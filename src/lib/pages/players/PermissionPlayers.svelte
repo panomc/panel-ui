@@ -112,7 +112,7 @@
           page: 1,
           permissionGroup: {
             id: -1,
-            name: request.page.params.permissionGroup,
+            name: request.params.permissionGroup,
           },
         },
       },
@@ -125,8 +125,8 @@
     }
 
     await loadData({
-      page: request.page.params.page || 1,
-      permissionGroup: request.page.params.permissionGroup,
+      page: request.params.page || 1,
+      permissionGroup: request.params.permissionGroup,
       request,
     })
       .then((data) => {

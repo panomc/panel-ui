@@ -6,7 +6,7 @@
       <a
         class="nav-item nav-link"
         href="{base}/settings"
-        class:active="{matching($page.path, base + '/settings')}"
+        class:active="{matching($page.url.pathname, base + '/settings')}"
       >
         Genel
       </a>
@@ -14,7 +14,7 @@
         class="nav-item nav-link"
         href="{base}/settings/site-settings"
         class:active="{matching(
-          $page.path,
+          $page.url.pathname,
           base + '/settings/site-settings',
           true
         )}"
@@ -24,7 +24,11 @@
       <a
         class="nav-item nav-link border position-relative"
         href="{base}/settings/updates"
-        class:active="{matching($page.path, base + '/settings/updates', true)}"
+        class:active="{matching(
+          $page.url.pathname,
+          base + '/settings/updates',
+          true
+        )}"
       >
         Güncellemeler
         <span
@@ -36,7 +40,11 @@
       <a
         class="nav-item nav-link"
         href="{base}/settings/about"
-        class:active="{matching($page.path, base + '/settings/about', true)}"
+        class:active="{matching(
+          $page.url.pathname,
+          base + '/settings/about',
+          true
+        )}"
       >
         Hakkında
       </a>

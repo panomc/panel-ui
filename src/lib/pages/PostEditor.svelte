@@ -247,7 +247,7 @@
     }
 
     if (mode === Modes.EDIT) {
-      await loadPost({ id: request.page.params.id || -1, request })
+      await loadPost({ id: request.params.id || -1, request })
         .then(async (body) => {
           output.props.data.post = body.post;
         })
