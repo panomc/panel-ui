@@ -1,10 +1,14 @@
 <!--  .format('DD/MM/YYYY, HH:mm')-->
+
 <span
   use:tooltip="{[
     format(new Date(parseInt(date)), 'dd/MM/yyyy, HH:mm'),
     { placement: 'bottom' },
-  ]}">{formatRelative(new Date(parseInt(date)), new Date()).capitalize()}</span
->
+  ]}">
+  <slot>
+    {formatRelative(new Date(parseInt(date)), new Date()).capitalize()}
+  </slot>
+</span>
 
 <script>
   import { format, formatRelative } from "date-fns";
