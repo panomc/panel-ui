@@ -1,7 +1,3 @@
-<style lang="scss" global>
-  @import "src/styles/style";
-</style>
-
 <svelte:head>
   <title>{title}</title>
 </svelte:head>
@@ -95,13 +91,7 @@
   import { onDestroy, onMount } from "svelte";
   import { get } from "svelte/store";
 
-  import { browser } from "$app/env";
-
   import { pageTitle, options } from "$lib/store.js";
-
-  if (browser) {
-    import("$lib/init.libs.js");
-  }
 
   import { logoutLoading } from "$lib/store.js";
 
