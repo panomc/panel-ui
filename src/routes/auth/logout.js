@@ -6,13 +6,10 @@ import {
 } from "$lib/variables";
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function post(event) {
-  const { request, locals } = event;
-  const { headers } = request;
-
+export async function post({ locals, request: { headers } }) {
   return (
     headers &&
-    headers[CSRF_HEADER] === locals.CSRFToken && {
+    headers.get(CSRF_HEADER) === locals.CSRFToken && {
       headers: {
         "set-cookie": [
           `${
