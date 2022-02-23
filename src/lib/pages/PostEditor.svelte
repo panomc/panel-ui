@@ -65,11 +65,11 @@
   </section>
 
   <!-- Post & Post Options -->
-  <section class="row">
+  <section class="row animate__animated animate__fadeIn">
     <!-- Post -->
     <div class="col-lg-9 d-flex flex-fill">
       <div class="card w-100">
-        <div class="card-body animate__animated animate__zoomIn">
+        <div class="card-body">
           <input
             class="form-control form-control-lg display-3 mb-2"
             type="text"
@@ -92,7 +92,7 @@
     <!-- Post Option Cards -->
     <div class="col-lg-3">
       <div class="card">
-        <div class="p-2 animate__animated animate__slideInDown">
+        <div class="p-2">
           <form>
             <ul class="list-group">
               <li class="list-group-item">
@@ -110,7 +110,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-body animate__animated animate__slideInDown">
+        <div class="card-body">
           <h6>
             <i class="fas fa-folder-open text-primary mr-1"></i>
             Kategori:
@@ -134,7 +134,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-body animate__animated animate__slideInDown">
+        <div class="card-body">
           <h6>
             <i class="fas fa-image text-primary mr-1"></i>
             Küçük Resim:

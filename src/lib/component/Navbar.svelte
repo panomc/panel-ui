@@ -124,7 +124,7 @@
         <ul
           class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp"
         >
-          <h6 class="dropdown-header">{$user.username}</h6>
+          <h6 class="dropdown-header text-black">{$user.username}</h6>
           <li>
             <a
               class="dropdown-item"
