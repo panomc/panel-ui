@@ -22,9 +22,13 @@
               id="permName"
               type="text"
               bind:value="{$permissionGroup.name}"
-              class:border-danger="{$errors.name}"
-            />
+              class:border-danger="{$errors.name}" />
           </div>
+          {#if $errors.error}
+            <small class="text-danger">
+              {$errors.error}
+            </small>
+          {/if}
         </div>
         <div class="modal-footer">
           <button
@@ -33,8 +37,7 @@
             class:btn-primary="{$mode === 'edit'}"
             type="submit"
             class:disabled="{loading || !$permissionGroup.name}"
-            disabled="{loading || !$permissionGroup.name}"
-          >
+            disabled="{loading || !$permissionGroup.name}">
             {$mode === "edit" ? "Kaydet" : "Oluştur"}
           </button>
         </div>
@@ -93,6 +96,7 @@
 
   function onSubmit() {
     loading = true;
+    errors.set([]);
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post({
@@ -115,7 +119,11 @@
           } else if (body.result === "error") {
             loading = false;
 
-            errors.set(body.error);
+            if (body.error === "CANT_UPDATE_ADMIN_PERMISSION") {
+              errors.set({ "error": body.error });
+            } else {
+              errors.set(body.error);
+            }
 
             resolve();
           } else reject();
