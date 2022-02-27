@@ -57,15 +57,16 @@
       <div class="row">
         <div class="col">
           <h5 class="card-title">{data.ticket.title}</h5>
-          <a href="{base}/players/player/{data.ticket.username}"
-            >{data.ticket.username}</a>
-          tarafından,
-          <Date time="{data.ticket.date}" />,
-          <a href="javascript:void(0);"
-            >{data.ticket.category === "-"
-              ? data.ticket.category
-              : data.ticket.category.title}</a>
-          kategorisine açıldı.
+          <small>
+            <a href="{base}/players/player/{data.ticket.username}"
+              >{data.ticket.username}</a>
+            tarafından,
+            <Date time="{data.ticket.date}" />,
+            <a href="javascript:void(0);"
+              >{data.ticket.category === "-"
+                ? data.ticket.category
+                : data.ticket.category.title}</a>
+            kategorisine açıldı.</small>
         </div>
         <div class="col-auto">
           <TicketStatus status="{data.ticket.status}" />
@@ -100,7 +101,7 @@
                 </a> -->
               <Date time="{message.date}">
                 <div
-                  class="message-balloon p-2 rounded bg-secondary text-white">
+                  class="message-balloon p-2 rounded bg-white border shadow-sm">
                   {@html message.message}
                 </div>
               </Date>
@@ -133,7 +134,7 @@
             <div class="col-auto d-flex flex-nowrap align-items-center">
               <Date time="{message.date}">
                 <div
-                  class="message-balloon p-2 rounded bg-primary d-inline-block text-white">
+                  class="message-balloon p-2 rounded d-inline-block bg-white border shadow-sm">
                   {message.message}
                 </div>
               </Date>
