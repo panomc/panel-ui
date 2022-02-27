@@ -1,8 +1,5 @@
-import Tokens from "csrf";
+import { default as Default } from "../pano-ui/js/csrf.js";
 
-export default function generateToken() {
-  const tokens = new Tokens();
-  const secret = tokens.secretSync();
+export * from "../pano-ui/js/csrf.js";
 
-  return tokens.create(secret);
-}
+export default Default;
