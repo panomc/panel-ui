@@ -108,6 +108,20 @@
                 >
               </div>
             </div>
+            <div class="col-6">
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckChecked2"
+                  checked
+                />
+                <label class="form-check-label" for="flexSwitchCheckChecked2"
+                  >E-postası doğrulandı</label
+                >
+              </div>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
