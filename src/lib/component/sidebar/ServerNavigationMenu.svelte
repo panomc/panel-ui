@@ -7,11 +7,10 @@
     </p>
 
     <button
-      class="btn bg-lightprimary text-primary btn-sm"
-      data-target="#connectServer"
-      data-toggle="modal"
-      type="button"
-    >
+      class="btn btn-white text-primary btn-sm"
+      data-bs-target="#connectServer"
+      data-bs-toggle="modal"
+      type="button">
       <i class="fas fa-plus mr-1"></i>
       Sunucu Bağla
     </button>
