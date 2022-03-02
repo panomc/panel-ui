@@ -24,9 +24,9 @@
       <table class="table table-borderless">
         <thead>
           <tr class="align-top">
-            <th scope="col" class="w-25"></th>
+            <th scope="col" class="w-25 d-inline-block"></th>
             {#each data.permission_groups as permissionGroup, index (permissionGroup)}
-              <th scope="col" class="w-25 text-center">
+              <th scope="col" class="w-25 d-inline-block text-center">
                 <a
                   class="text-capitalize"
                   href="javascript:(void);"
@@ -66,7 +66,7 @@
             <tr>
               <th
                 scope="col"
-                class="w-25"
+                class="w-25 d-inline-block"
                 use:tooltip="{[
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
                   { placement: 'left' },
@@ -80,7 +80,7 @@
                 </small>
               </th>
               {#each data.permission_groups as permissionGroup, index (permissionGroup)}
-                <td class="align-middle w-25">
+                <td class="align-middle w-25 d-inline-block">
                   <div
                     class="form-check form-switch d-flex justify-content-center align-content-center">
                     <input
