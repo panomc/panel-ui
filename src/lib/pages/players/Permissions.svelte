@@ -324,16 +324,20 @@
   });
 
   setDeletePermissionGroupModalCallback((permissionGroup) => {
-    data.permission_groups.splice(
-      data.permission_groups.indexOf(permissionGroup),
-      1
-    );
+    data.permission_groups.forEach((permGroup, index) => {
+      if (permGroup.id === permissionGroup.id) {
+        data.permission_groups.splice(index, 1);
+      }
+    });
+
     data.permission_groups = data.permission_groups;
 
-    if (typeof data.permission_group_perms[permissionGroup.id] !== "undefined")
-      data.permission_group_perms.splice(
-        data.permission_group_perms.indexOf(permissionGroup.id),
-        1
-      );
+    Object.keys(data.permission_group_perms).forEach((permissionGroupPermsId, index) => {
+      if (permissionGroupPermsId === permissionGroup.id) {
+        data.permission_groups.splice(index, 1);
+      }
+    });
+
+    data.permission_group_perms = data.permission_group_perms;
   });
 </script>
