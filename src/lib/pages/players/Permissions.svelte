@@ -23,74 +23,39 @@
     <div class="card-body table-responsive animate__animated animate__fadeIn">
       <table class="table table-borderless">
         <thead>
-          <tr class="text-center text-muted align-top">
-            <th scope="col"></th>
+          <tr class="align-top">
+            <th scope="col" class="w-25"></th>
             {#each data.permission_groups as permissionGroup, index (permissionGroup)}
-              <th scope="col">
-                <div class="d-flex flex-row align-items-center">
-                  <div class="dropdown position-static mr-3">
-                    <button
-                      type="button"
-                      class="btn btn-link btn-sm"
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      data-bs-toggle="dropdown"
-                      href="javascript:void(0);"
-                      title="Eylemler">
-                      <span class="fas fa-ellipsis-h"></span>
-                    </button>
-                    <div
-                      class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
-                      <a
-                        class="dropdown-item"
-                        href="javascript:void(0);"
-                        on:click="{() =>
-                          onShowEditPermissionGroupButtonClick(
-                            permissionGroup
-                          )}">
-                        <i class="fas fa-pencil-alt text-primary mr-1"></i>
-                        Düzenle
+              <th scope="col" class="w-25 text-center">
+                <a
+                  class="text-capitalize"
+                  href="javascript:(void);"
+                  on:click="{() =>
+                    onShowEditPermissionGroupButtonClick(permissionGroup)}"
+                  Z>
+                  {permissionGroup.name}
+                </a>
+                <div
+                  class="d-flex flex-row flex-row-reverse justify-content-center align-items-center">
+                  {#if permissionGroup.user_count > 3}
+                    <small>
+                      +{permissionGroup.user_count - 3}
+                    </small>
+                  {/if}
+                  {#each permissionGroup.users as user, index (user)}
+                    <span
+                      class="overlapping-avatar"
+                      use:tooltip="{[user, { placement: 'bottom' }]}">
+                      <a href="{base}/players/player/{user}">
+                        <img
+                          class="animate__animated animate__zoomIn"
+                          src="https://minotar.net/avatar/{user}"
+                          width="28"
+                          height="28"
+                          alt="{user}" />
                       </a>
-                      {#if permissionGroup.name !== "admin"}
-                        <a
-                          class="dropdown-item"
-                          data-target="#confirmDeletePermGroup"
-                          data-toggle="modal"
-                          href="javascript:void(0);"
-                          on:click="{() =>
-                            onShowDeletePermissionGroupModalClick(
-                              permissionGroup
-                            )}">
-                          <i class="fas fa-trash text-danger mr-1"></i>
-                          Sil
-                        </a>
-                      {/if}
-                    </div>
-                  </div>
-                  <div>
-                    <h5 class="text-capitalize">{permissionGroup.name}</h5>
-                    <div
-                      class="d-flex flex-row flex-row-reverse justify-content-end align-items-center mr-3">
-                      {#if permissionGroup.user_count > 3}
-                        <small class="pl-1"
-                          >+{permissionGroup.user_count - 3}</small>
-                      {/if}
-                      {#each permissionGroup.users as user, index (user)}
-                        <span
-                          class="overlapping-avatar"
-                          use:tooltip="{[user, { placement: 'bottom' }]}">
-                          <a href="{base}/players/player/{user}">
-                            <img
-                              class="animate__animated animate__zoomIn"
-                              src="https://minotar.net/avatar/{user}"
-                              width="32"
-                              height="32"
-                              alt="{user}" />
-                          </a>
-                        </span>
-                      {/each}
-                    </div>
-                  </div>
+                    </span>
+                  {/each}
                 </div>
               </th>
             {/each}
@@ -101,6 +66,7 @@
             <tr>
               <th
                 scope="col"
+                class="w-25"
                 use:tooltip="{[
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
                   { placement: 'left' },
@@ -109,14 +75,14 @@
                 <!--              <Icon-->
                 <!--                data="{icon[convertIconName(permission.iconName)]}"-->
                 <!--                class="text-primary d-block m-auto" />-->
-                <small class="mb-0 font-weight-bolder">
+                <small class="mb-0">
                   {permission.name}
                 </small>
               </th>
               {#each data.permission_groups as permissionGroup, index (permissionGroup)}
-                <td class="align-middle">
+                <td class="align-middle w-25">
                   <div
-                    class="form-check form-switch d-flex justify-content-center">
+                    class="form-check form-switch d-flex justify-content-center align-content-center">
                     <input
                       type="checkbox"
                       class="form-check-input"
