@@ -63,6 +63,13 @@
 
           <h4 class="card-title">{data.player.username}</h4>
           <h6 class="text-muted">{data.player.email}</h6>
+
+          <div
+            class="badge bg-success rounded-pill"
+            use:tooltip="{['Sitede', { placement: 'top' }]}">
+            <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
+            <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
+          </div>
           <hr />
 
           <ul class="list-inline mb-0">
@@ -73,13 +80,7 @@
                   Yasaklı
                 </div>
               {/if}
-              <div
-                class="badge bg-lightsecondary text-success"
-                use:tooltip="{['Sitede', { placement: 'top' }]}">
-                <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
-                <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
-              </div>
-              <div class="badge text-dark border">
+              <div class="badge text-dark border text-capitalize">
                 <a
                   href="{base}/players/permission/{data.player
                     .permission_group}">
