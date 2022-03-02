@@ -73,7 +73,7 @@
           <input
             class="form-control form-control-lg display-3 mb-2"
             type="text"
-            placeholder="Yazı Başlığı"
+            placeholder="Başlık"
             bind:value="{data.post.title}"
           />
 

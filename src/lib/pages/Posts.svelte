@@ -83,7 +83,7 @@
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th class="min-w-200px align-middle" scope="col">Yazı</th>
+                <th class="min-w-200px align-middle" scope="col">Başlık</th>
                 <th scope="col align-middle">Kategori</th>
                 <th scope="col align-middle">Yazar</th>
                 <th scope="col align-middle">Görüntülenme</th>

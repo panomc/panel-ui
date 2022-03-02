@@ -19,7 +19,7 @@
             <input
               class:border-danger="{$errors.title}"
               class="form-control"
-              placeholder="Kategori"
+              placeholder="Başlık"
               id="category"
               type="text"
               bind:value="{$category.title}"
@@ -41,7 +41,7 @@
             <input
               class:border-danger="{$errors.url}"
               class="form-control"
-              placeholder="..."
+              placeholder="URL"
               id="categoryURL"
               type="text"
               bind:value="{$category.url}"
