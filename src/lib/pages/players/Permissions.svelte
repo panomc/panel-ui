@@ -21,21 +21,18 @@
 
   <div class="card">
     <div class="card-body table-responsive animate__animated animate__fadeIn">
-      <table class="table table-borderless">
+      <table class="table table-borderless" style="width: auto !important;">
         <thead>
           <tr class="align-top">
 
             <!-- Blank Cell -->
-            <th scope="col" 
-                class="d-inline-block"
-                style="width: 250px;"></th>
+            <th scope="col" ></th>
 
             <!-- Perm Group Name & User Pictures Cell -->
             {#each data.permission_groups as permissionGroup, index (permissionGroup)}
               <th
                 scope="col"
-                class="text-center bg-dangermin-width"
-                style="width: 150px;">
+                class="text-center">
                 <a
                   class="text-capitalize"
                   href="javascript:(void);"
@@ -75,11 +72,9 @@
             <tr>
               <th
                 scope="col"
-                class="d-inline-block"
-                style="width: 250px;"
                 use:tooltip="{[
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
-                  { placement: 'left' },
+                  { placement: 'right' },
                 ]}">
                 <!--              TODO: Icon system-->
                 <!--              <Icon-->
@@ -92,7 +87,7 @@
 
               <!-- Checkboxes Section -->
               {#each data.permission_groups as permissionGroup, index (permissionGroup)}
-                <td class="align-middlemin-width" style="width: 150px;">
+                <td class="align-middle">
                   <div
                     class="form-check form-switch d-flex justify-content-center align-content-center">
                     <input
