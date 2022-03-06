@@ -7,14 +7,16 @@
     >
       <div class="row">
         <div class="col-12 pb-3">
-          <h4 class="card-title">Hoş Geldiniz</h4>
-          <p class="lead">
-            Pano kullanıma hazır! 🚀 İşte başlarken yapabileceklerinz:
+          <h3 class="card-title">Hoş Geldiniz</h3>
+          <p class="lead fw-bold">
+            Pano, web sunucunuza başarıyla kuruldu ve kullanıma hazır! 🚀
+            <br />
+            İşte başlarken yapabilecekleriniz 👇:
           </p>
         </div>
         <div class="col-lg-4 mb-lg-0 mb-3">
           <h5>Sunucu Bağlayın</h5>
-          <p>Oyun sunucunuzu platforma bağlayın ve panel üzerinden erişin.</p>
+          <p>Pano'yu oyun sunucunuza bağlayın ve daha fazla yönetim özelliklerine erişin.</p>
           <button
             class="btn btn-sm btn-primary"
             data-bs-target="#connectServer"
@@ -26,7 +28,7 @@
         </div>
         <div class="col-lg-4 mb-lg-0 mb-3">
           <ul class="list-unstyled mb-1">
-            <h5>Başlarken</h5>
+            <h5>Menüden Öneriler</h5>
             <li>
               <a class="alert-link" href="{base}/posts/create-post">
                 <i class="fas fa-pen mr-2"></i>
@@ -59,13 +61,13 @@
             <li>
               <a class="alert-link" href="javascript:void(0);">
                 <i class="fas fa-puzzle-piece mr-2"></i>
-                Eklenti Ekleyin
+                Pano Eklentilerini Keşfedin
               </a>
             </li>
             <li>
               <a class="alert-link" href="javascript:void(0);">
                 <i class="fas fa-palette mr-2"></i>
-                Tema Ekleyin
+                Pano Temalarını Keşfedin
               </a>
             </li>
             <li>
