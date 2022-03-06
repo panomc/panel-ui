@@ -7,8 +7,7 @@
         editor.chain().focus().toggleHeading({ level: 1 }).run()}"
       class:border-primary="{editor.isActive('heading', { level: 1 })}"
       class:text-primary="{editor.isActive('heading', { level: 1 })}"
-      use:tooltip="{['Başlık 1', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['Başlık 1', { placement: 'bottom' }]}">
       H1
     </button>
     <button
@@ -17,8 +16,7 @@
         editor.chain().focus().toggleHeading({ level: 2 }).run()}"
       class:border-primary="{editor.isActive('heading', { level: 2 })}"
       class:text-primary="{editor.isActive('heading', { level: 2 })}"
-      use:tooltip="{['Başlık 2', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['Başlık 2', { placement: 'bottom' }]}">
       H2
     </button>
     <button
@@ -27,8 +25,7 @@
         editor.chain().focus().toggleHeading({ level: 3 }).run()}"
       class:border-primary="{editor.isActive('heading', { level: 3 })}"
       class:text-primary="{editor.isActive('heading', { level: 3 })}"
-      use:tooltip="{['Başlık 3', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['Başlık 3', { placement: 'bottom' }]}">
       H3
     </button>
 
@@ -38,8 +35,7 @@
       on:click="{() => editor.chain().focus().toggleBold().run()}"
       class:border-primary="{editor.isActive('bold')}"
       class:text-primary="{editor.isActive('bold')}"
-      use:tooltip="{['Kalın', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['Kalın', { placement: 'bottom' }]}">
       <b>B</b>
     </button>
     <button
@@ -47,8 +43,7 @@
       on:click="{() => editor.chain().focus().toggleItalic().run()}"
       class:border-primary="{editor.isActive('italic')}"
       class:text-primary="{editor.isActive('italic')}"
-      use:tooltip="{['İtalik', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['İtalik', { placement: 'bottom' }]}">
       <i>I</i>
     </button>
     <button
@@ -56,8 +51,7 @@
       on:click="{() => editor.chain().focus().toggleUnderline().run()}"
       class:border-primary="{editor.isActive('underline')}"
       class:text-primary="{editor.isActive('underline')}"
-      use:tooltip="{['Altı Çizili', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['Altı Çizili', { placement: 'bottom' }]}">
       <u>U</u>
     </button>
     <button
@@ -65,8 +59,7 @@
       on:click="{() => editor.chain().focus().toggleStrike().run()}"
       class:border-primary="{editor.isActive('strike')}"
       class:text-primary="{editor.isActive('strike')}"
-      use:tooltip="{['Üstü Çizili', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['Üstü Çizili', { placement: 'bottom' }]}">
       <s>S</s>
     </button>
 
@@ -76,8 +69,7 @@
       on:click="{() => editor.chain().focus().toggleBulletList().run()}"
       class:border-primary="{editor.isActive('bulletList')}"
       class:text-primary="{editor.isActive('bulletList')}"
-      use:tooltip="{['Liste', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['Liste', { placement: 'bottom' }]}">
       <i class="fas fa-list"></i>
     </button>
     <button
@@ -85,8 +77,7 @@
       on:click="{() => editor.chain().focus().toggleOrderedList().run()}"
       class:border-primary="{editor.isActive('orderedList')}"
       class:text-primary="{editor.isActive('orderedList')}"
-      use:tooltip="{['Sırali Liste', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['Sırali Liste', { placement: 'bottom' }]}">
       <i class="fas fa-list-ol"></i>
     </button>
 
@@ -94,8 +85,7 @@
     <button
       class="btn btn-small small"
       on:click="{addImage}"
-      use:tooltip="{['Resim', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['Resim', { placement: 'bottom' }]}">
       <i class="fas fa-image"></i>
     </button>
     <button
@@ -103,15 +93,13 @@
       on:click="{setLink}"
       use:tooltip="{['Bağlantı', { placement: 'bottom' }]}"
       class:border-primary="{editor.isActive('link')}"
-      class:text-primary="{editor.isActive('link')}"
-    >
+      class:text-primary="{editor.isActive('link')}">
       <i class="fas fa-link"></i>
     </button>
     <button
       class="btn btn-small small"
       on:click="{openColorPicker}"
-      use:tooltip="{['Yazı Rengi', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['Yazı Rengi', { placement: 'bottom' }]}">
       <i
         class="fas fa-tint"
         style="{editor.getAttributes('textStyle').color &&
@@ -124,21 +112,22 @@
       value="{editor.getAttributes('textStyle').color}"
       on:input="{(event) =>
         editor.chain().focus().setColor(event.target.value).run()}"
-      hidden
-    />
+      hidden />
 
     <button
       class="btn btn-small small"
       on:click="{() => editor.chain().focus().unsetColor().run()}"
-      use:tooltip="{['Yazı Rengini Kaldır', { placement: 'bottom' }]}"
-    >
+      use:tooltip="{['Yazı Rengini Kaldır', { placement: 'bottom' }]}">
       <i class="fas fa-tint-slash"></i>
     </button>
   </div>
 {/if}
 
 <!-- Editor Content -->
-<div class="border border-top-0 rounded-bottom p-1 h-100 " bind:this="{element}"></div>
+<div
+  class="border border-top-0 rounded-bottom p-1 h-100 "
+  bind:this="{element}">
+</div>
 
 <script>
   import { onMount, onDestroy } from "svelte";
@@ -152,7 +141,6 @@
   import Color from "@tiptap/extension-color";
 
   import tooltip from "$lib/tooltip.util";
-  import HardBreak from "@tiptap/extension-hard-break";
 
   let element;
   let colorPickerElement;
@@ -212,13 +200,6 @@
         Image,
         TextStyle,
         Color,
-        HardBreak.extend({
-          addKeyboardShortcuts () {
-            return {
-              Enter: () => this.editor.commands.setHardBreak()
-            }
-          }
-        })
       ],
       content: content,
       onTransaction: () => {
