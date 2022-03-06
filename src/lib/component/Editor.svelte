@@ -152,6 +152,7 @@
   import Color from "@tiptap/extension-color";
 
   import tooltip from "$lib/tooltip.util";
+  import HardBreak from "@tiptap/extension-hard-break";
 
   let element;
   let colorPickerElement;
@@ -211,6 +212,13 @@
         Image,
         TextStyle,
         Color,
+        HardBreak.extend({
+          addKeyboardShortcuts () {
+            return {
+              Enter: () => this.editor.commands.setHardBreak()
+            }
+          }
+        })
       ],
       content: content,
       onTransaction: () => {
