@@ -1,10 +1,10 @@
-<style>
+<style global>
   .messages-section {
     overflow-y: auto;
     max-height: 450px;
   }
 
-  .message-balloon p {
+  .message-balloon > p {
     margin: 0;
     padding: 0;
   }
