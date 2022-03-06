@@ -24,9 +24,18 @@
       <table class="table table-borderless">
         <thead>
           <tr class="align-top">
-            <th scope="col" class="w-25 d-inline-block"></th>
+
+            <!-- Blank Cell -->
+            <th scope="col" 
+                class="d-inline-block"
+                style="width: 250px;"></th>
+
+            <!-- Perm Group Name & User Pictures Cell -->
             {#each data.permission_groups as permissionGroup, index (permissionGroup)}
-              <th scope="col" class="w-25 d-inline-block text-center">
+              <th
+                scope="col"
+                class="text-center bg-dangermin-width"
+                style="width: 150px;">
                 <a
                   class="text-capitalize"
                   href="javascript:(void);"
@@ -66,7 +75,8 @@
             <tr>
               <th
                 scope="col"
-                class="w-25 d-inline-block"
+                class="d-inline-block"
+                style="width: 250px;"
                 use:tooltip="{[
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
                   { placement: 'left' },
@@ -79,8 +89,10 @@
                   {permission.name}
                 </small>
               </th>
+
+              <!-- Checkboxes Section -->
               {#each data.permission_groups as permissionGroup, index (permissionGroup)}
-                <td class="align-middle w-25 d-inline-block">
+                <td class="align-middlemin-width" style="width: 150px;">
                   <div
                     class="form-check form-switch d-flex justify-content-center align-content-center">
                     <input
@@ -332,11 +344,13 @@
 
     data.permission_groups = data.permission_groups;
 
-    Object.keys(data.permission_group_perms).forEach((permissionGroupPermsId, index) => {
-      if (permissionGroupPermsId === permissionGroup.id) {
-        data.permission_groups.splice(index, 1);
+    Object.keys(data.permission_group_perms).forEach(
+      (permissionGroupPermsId, index) => {
+        if (permissionGroupPermsId === permissionGroup.id) {
+          data.permission_groups.splice(index, 1);
+        }
       }
-    });
+    );
 
     data.permission_group_perms = data.permission_group_perms;
   });
