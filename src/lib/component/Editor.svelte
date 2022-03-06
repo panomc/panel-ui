@@ -1,21 +1,3 @@
-<style global>
-  .ProseMirror {
-    display: block;
-    padding: 0;
-    outline: none;
-    border: none;
-    margin: 0.5rem;
-  }
-
-  .ProseMirror p {
-    margin: 5px;
-  }
-
-  .ql-editor {
-    font-size: 16px;
-  }
-</style>
-
 {#if editor}
   <div class="p-1 border rounded-top">
     <!-- Headings -->
@@ -156,9 +138,7 @@
 {/if}
 
 <!-- Editor Content -->
-<div class="border border-top-0 rounded-bottom p-1 h-100">
-  <div bind:this="{element}"></div>
-</div>
+<div class="border border-top-0 rounded-bottom p-1 h-100 " bind:this="{element}"></div>
 
 <script>
   import { onMount, onDestroy } from "svelte";
