@@ -137,7 +137,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card mb-3">
     <div class="card-body">
       <div class="row justify-content-between mb-3">
         <div class="col">
@@ -159,7 +159,7 @@
   </div>
 
   <!-- Latest Tickets -->
-  <div class="card">
+  <div class="card mb-3">
     <div class="card-body">
       <div class="row justify-content-between mb-3">
         <div class="col">
