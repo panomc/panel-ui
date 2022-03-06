@@ -6,23 +6,7 @@
   --animate-duration: 250ms;
 }
 
-// Control Panel Styles
-
-.unread-badge {
-  position: absolute;
-  right: 8px;
-  top: 6px;
-  width: 14px;
-  height: 14px;
-  background: $primary;
-  border: 2px solid $white;
-
-  border-radius: 50%;
-}
-
-.card {
-  margin-bottom: 1rem;
-}
+// Panel UI Styles
 
 .bg-minecraft {
   background: url("/assets/img/header-bg-t.png") no-repeat top;
@@ -61,14 +45,6 @@
   }
 }
 
-.sidebar-logo {
-  height: 73px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .sidebar-inner {
   display: flex;
   flex-direction: column;
@@ -86,22 +62,8 @@
   text-align: center;
 }
 
-.navbar-toggler {
-  border: 0;
-}
-
 .menu.navbar-nav li.nav-item {
   padding: 0.2rem 2rem;
-}
-
-.sidebar-bottom {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
 }
 
 .menu > li.nav-item {
