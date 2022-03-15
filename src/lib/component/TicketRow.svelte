@@ -66,7 +66,7 @@
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    <Date time="{ticket.last_update}" />
+    <Date time="{ticket.lastUpdate}" />
   </td>
 </tr>
 

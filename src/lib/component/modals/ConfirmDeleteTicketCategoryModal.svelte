@@ -12,7 +12,7 @@
         <div class="pb-3">
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
-        {#if $category.ticket_count !== 0}
+        {#if $category.ticketCount !== 0}
           Not: Eğer bu kategoriyi silerseniz, şu talepler kategorisiz olarak
           kalacaklardır:
           <br />
@@ -25,8 +25,8 @@
             <br />
           {/each}
 
-          {#if $category.ticket_count > 5}
-            +{$category.ticket_count - 5}
+          {#if $category.ticketCount > 5}
+            +{$category.ticketCount - 5}
             talep daha
           {/if}
 

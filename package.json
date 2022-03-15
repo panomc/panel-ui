@@ -38,7 +38,6 @@
   "dependencies": {
     "@tiptap/core": "^2.0.0-beta.174",
     "@tiptap/extension-color": "^2.0.0-beta.9",
-    "@tiptap/extension-hard-break": "^2.0.0-beta.30",
     "@tiptap/extension-image": "^2.0.0-beta.27",
     "@tiptap/extension-link": "^2.0.0-beta.36",
     "@tiptap/extension-text-style": "^2.0.0-beta.23",

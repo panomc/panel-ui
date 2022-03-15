@@ -27,7 +27,7 @@
               class="form-control"
               class:border-danger="{$errors['LAST_ADMIN']}"
               id="selectPermGroup"
-              bind:value="{$player.permission_group}"
+              bind:value="{$player.permissionGroup}"
             >
               <option class="text-primary" value="-">Oyuncu</option>
 

@@ -66,7 +66,7 @@
                 class="form-control"
                 id="newPassword"
                 type="password"
-                bind:value="{$player.new_password}"
+                bind:value="{$player.newPassword}"
                 class:border-danger="{!!$errors.newPassword}"
               />
               {#if !!$errors["newPassword"]}
@@ -83,7 +83,7 @@
                 class="form-control"
                 id="newPasswordRepeat"
                 type="password"
-                bind:value="{$player.new_password_repeat}"
+                bind:value="{$player.newPasswordRepeat}"
                 class:border-danger="{!!$errors.newPasswordRepeat}"
               />
               {#if !!$errors["newPasswordRepeat"]}
@@ -160,8 +160,8 @@
   export function show(newPlayer) {
     player.set(Object.assign({}, newPlayer));
     player.update((player) => {
-      player.new_password = "";
-      player.new_password_repeat = "";
+      player.newPassword = "";
+      player.newPasswordRepeat = "";
 
       return player;
     });
@@ -228,8 +228,8 @@
             hide();
 
             player.update((player) => {
-              player.new_password = "";
-              player.new_password_repeat = "";
+              player.newPassword = "";
+              player.newPasswordRepeat = "";
 
               return player;
             });

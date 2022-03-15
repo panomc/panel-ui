@@ -25,14 +25,14 @@
       <div class="row justify-content-between pb-3 align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title mb-md-0">
-            {data.posts_count}
+            {data.postCount}
             Yazı
           </h5>
         </div>
       </div>
 
       <!-- No Posts -->
-      {#if data.posts_count === 0}
+      {#if data.postCount === 0}
         <div class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-sticky-note fa-3x text-glass m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
@@ -70,9 +70,9 @@
       <!-- Pagination -->
       <Pagination
         page="{data.page}"
-        totalPage="{data.total_page}"
+        totalPage="{data.totalPage}"
         on:firstPageClick="{() => reloadData(1)}"
-        on:lastPageClick="{() => reloadData(data.total_page)}"
+        on:lastPageClick="{() => reloadData(data.totalPage)}"
         on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
       />
       <!-- Pagination End -->
@@ -116,9 +116,9 @@
     let output = {
       props: {
         data: {
-          posts_count: 0,
+          postCount: 0,
           posts: [],
-          total_page: 1,
+          totalPage: 1,
           page: request.params.page || 1,
           url: request.params.url,
           category: {

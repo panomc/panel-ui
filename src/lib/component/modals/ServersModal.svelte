@@ -39,7 +39,7 @@
           {#if !serverListLoading && $servers.length > 0}
             {#each $servers as server}
               <div class="col-lg-4 col-md-6">
-                <!--            :class="{ 'selected': selected_server.id === server.id }"-->
+                <!--            :class="{ 'selected': selectedServer.id === server.id }"-->
                 <div class="card w-100">
                   <!--              @click="selectServer(server)"-->
                   <a href="javascript:void(0);">
@@ -70,9 +70,9 @@
                         <div>
                           <span class="lead">
                             {server.status === "online"
-                              ? server.player_count
+                              ? server.playerCount
                               : 0}
-                            / {server.max_player_count}
+                            / {server.maxPlayerCount}
                           </span>
                           <br />
                           <strong>Oyuncu</strong>

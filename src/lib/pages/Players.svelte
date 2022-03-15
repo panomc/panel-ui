@@ -16,7 +16,7 @@
       <div class="row justify-content-between">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
-            {data.players_count}
+            {data.playerCount}
             {data.pageType === PageTypes.HAS_PERM
               ? "Yetkili"
               : data.pageType === PageTypes.BANNED
@@ -55,7 +55,7 @@
       </div>
 
       <!-- No Players -->
-      {#if data.players_count === 0}
+      {#if data.playerCount === 0}
         <div class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-users fa-3x m-3 text-dark text-opacity-25"></i>
           <p class="text-gray">Burada içerik yok.</p>
@@ -92,9 +92,9 @@
       <!-- Pagination -->
       <Pagination
         page="{data.page}"
-        totalPage="{data.total_page}"
+        totalPage="{data.totalPage}"
         on:firstPageClick="{() => reloadData(1)}"
-        on:lastPageClick="{() => reloadData(data.total_page)}"
+        on:lastPageClick="{() => reloadData(data.totalPage)}"
         on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
       />
     </div>
@@ -127,7 +127,7 @@
         path: "/api/panel/initPage/playersPage",
         body: {
           page: parseInt(page),
-          page_type: getStatusFromPageType(pageType),
+          pageType: getStatusFromPageType(pageType),
         },
         request,
         CSRFToken,
@@ -153,9 +153,9 @@
     let output = {
       props: {
         data: {
-          players_count: 0,
+          playerCount: 0,
           players: [],
-          total_page: 1,
+          totalPage: 1,
           page: 1,
           pageType,
         },
@@ -278,7 +278,7 @@
   setAuthorizePlayerModalCallback((newPlayer) => {
     data.players.forEach((player) => {
       if (player.id === newPlayer.id) {
-        player.permission_group = newPlayer.permission_group;
+        player.permissionGroup = newPlayer.permissionGroup;
         player.selected = false;
       }
     });

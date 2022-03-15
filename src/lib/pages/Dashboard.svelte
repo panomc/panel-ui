@@ -1,7 +1,7 @@
 <!-- Dashboard Page -->
 <div class="container">
   <!-- Welcome Alerts -->
-  {#if data.getting_started_blocks.welcome_board}
+  {#if data.gettingStartedBlocks.welcomeBoard}
     <div
       class="alert alert-primary bg-minecraft alert-dismissible animate__animated animate__zoomIn mb-3"
     >
@@ -116,7 +116,7 @@
         <div class="row align-items-center">
           <div class="col-auto">
             <h2 class="mb-0">
-              {data.registered_player_count}
+              {data.registeredPlayerCount}
             </h2>
           </div>
           <div class="col-auto">Yeni Kayıt</div>
@@ -128,7 +128,7 @@
         <div class="row align-items-center">
           <div class="col-auto">
             <h2 class="mb-0">
-              {data.registered_player_count}
+              {data.registeredPlayerCount}
             </h2>
           </div>
           <div class="col-auto">Toplam Oyuncu</div>
@@ -188,7 +188,7 @@
                 {ticket.title}
                 <br />
                 <small class="text-muted">
-                  <b> <Date time="{ticket.last_update}" /> </b>,
+                  <b> <Date time="{ticket.lastUpdate}" /> </b>,
                   <a href="{base}/tickets/category/{ticket.category.title}">
                     <b>{ticket.category.title}</b>
                   </a>
@@ -211,11 +211,11 @@
           <tbody class="text-muted">
             <tr>
               <th scope="row">Yazılar:</th>
-              <td>{data.post_count}</td>
+              <td>{data.postCount}</td>
             </tr>
             <tr>
               <th scope="row">Oyuncular:</th>
-              <td>{data.registered_player_count}</td>
+              <td>{data.registeredPlayerCount}</td>
             </tr>
             <tr>
               <th scope="row">Yöneticiler:</th>
@@ -223,7 +223,7 @@
             </tr>
             <tr>
               <th scope="row">Talepler:</th>
-              <td>{data.tickets_count}</td>
+              <td>{data.ticketCount}</td>
             </tr>
             <tr>
               <th scope="row">Bağlı Sunucular:</th>
@@ -271,13 +271,13 @@
     let output = {
       props: {
         data: {
-          getting_started_blocks: {
-            welcome_board: false,
+          gettingStartedBlocks: {
+            welcomeBoard: false,
           },
-          registered_player_count: 0,
-          post_count: 0,
-          tickets_count: 0,
-          open_tickets_count: 0,
+          registeredPlayerCount: 0,
+          postCount: 0,
+          ticketCount: 0,
+          openTicketCount: 0,
           tickets: [],
         },
       },

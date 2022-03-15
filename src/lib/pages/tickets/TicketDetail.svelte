@@ -340,7 +340,7 @@
         path: "/api/panel/ticket/detail/message/page",
         body: {
           id: parseInt(data.ticket.id),
-          last_message_id: data.ticket.messages[0].id,
+          lastMessageId: data.ticket.messages[0].id,
         },
         CSRFToken: $session.CSRFToken,
       })
@@ -370,7 +370,7 @@
       ApiUtil.post({
         path: "/api/panel/ticket/detail/message/send",
         body: {
-          ticket_id: parseInt(data.ticket.id),
+          ticketId: parseInt(data.ticket.id),
           message: messageText,
         },
         CSRFToken: $session.CSRFToken,
