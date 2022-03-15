@@ -15,27 +15,23 @@
       </div>
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
-          <div class="mb-3">
-            <input
-              class:border-danger="{$errors.title}"
-              class="form-control"
-              placeholder="Başlık"
-              id="category"
-              type="text"
-              bind:value="{$category.title}"
-              on:input="{() => setURL()}"
-            />
-          </div>
-          <div class="mb-3">
-            <textarea
-              class:border-danger="{$errors.description}"
-              class="form-control"
-              placeholder="Açıklama"
-              id="categoryDescription"
-              type="text"
-              rows="5"
-              bind:value="{$category.description}"></textarea>
-          </div>
+          <input
+            class:border-danger="{$errors.title}"
+            class="form-control mb-3"
+            placeholder="Başlık"
+            id="category"
+            type="text"
+            bind:value="{$category.title}"
+            on:input="{() => setURL()}"
+          />
+          <textarea
+            class:border-danger="{$errors.description}"
+            class="form-control mb-3"
+            placeholder="Açıklama"
+            id="categoryDescription"
+            type="text"
+            rows="5"
+            bind:value="{$category.description}"></textarea>
           <div class="mb-3 input-group">
             <span class="input-group-text">/category/</span>
             <input
