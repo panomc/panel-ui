@@ -66,7 +66,7 @@
                   <i class="fa fa-bell mx-3 text-primary"></i>
                 </div>
                 <div class="col">
-                  <span class="text-wrap text-dark">{notification.type_ID}</span
+                  <span class="text-wrap text-dark">{notification.typeId}</span
                   >
                   <small class="text-gray d-block">
                     {getTime(checkTime, parseInt(notification.date), "")}
@@ -247,7 +247,7 @@
           if (quickNotificationProcessID === id) {
             if (body.result === "ok") {
               setNotifications(body.notifications);
-              notificationsCount.set(body.notifications_count);
+              notificationsCount.set(body.notificationCount);
 
               notificationsLoading = false;
             }
@@ -276,7 +276,7 @@
         .then((body) => {
           if (quickNotificationProcessID === id) {
             if (body.result === "ok") {
-              notificationsCount.set(body.notifications_count);
+              notificationsCount.set(body.notificationCount);
             }
 
             setTimeout(() => {

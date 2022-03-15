@@ -54,8 +54,8 @@
   <td class="align-middle text-nowrap text-capitalize">
     <a
       class="badge text-dark border"
-      href="{base}/players/permission/{player.permission_group}">
-      {player.permission_group === "-" ? "Oyuncu" : player.permission_group}
+      href="{base}/players/permission/{player.permissionGroup}">
+      {player.permissionGroup === "-" ? "Oyuncu" : player.permissionGroup}
     </a>
   </td>
   <td class="align-middle text-nowrap">
@@ -68,7 +68,7 @@
   </td>
   <td class="align-middle text-nowrap">10 dakika önce</td>
   <td class="align-middle text-nowrap">
-    <Date time="{player.register_date}" />
+    <Date time="{player.registerDate}" />
   </td>
 </tr>
 

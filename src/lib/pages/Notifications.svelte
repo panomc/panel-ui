@@ -28,7 +28,7 @@
               <i class="fa fa-bell mx-3 text-primary"></i>
             </div>
             <div class="col">
-              <span class="text-wrap text-dark">{notification.type_ID}</span>
+              <span class="text-wrap text-dark">{notification.typeId}</span>
               <small class="text-gray d-block">
                 {getTime(checkTime, parseInt(notification.date), "")}
               </small>
@@ -145,7 +145,7 @@
     await loadData({ request }).then((body) => {
       setNotifications(body.notifications);
 
-      count.set(parseInt(body.notifications_count));
+      count.set(parseInt(body.notificationCount));
     });
 
     return output;
@@ -176,7 +176,7 @@
         .then((body) => {
           setNotifications(body.notifications);
 
-          count.set(parseInt(body.notifications_count));
+          count.set(parseInt(body.notificationCount));
 
           resolve();
         })
@@ -201,7 +201,7 @@
             if (data.result === "ok") {
               setNotifications(data.notifications);
 
-              count.set(parseInt(data.notifications_count));
+              count.set(parseInt(data.notificationCount));
             }
 
             setTimeout(() => {

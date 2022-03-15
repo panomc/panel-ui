@@ -116,7 +116,7 @@
             Kategori:
           </h6>
           <form>
-            {#if data.category_count === 0}
+            {#if data.categoryCount === 0}
               <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
             {:else}
               <select
@@ -232,7 +232,7 @@
             date: 0,
             imageCode: "",
           },
-          category_count: 0,
+          categoryCount: 0,
           categories: [],
           mode,
           error: {},
@@ -409,7 +409,7 @@
       loadCategories()
         .then((loadedData) => {
           data.categories = loadedData.categories;
-          data.category_count = loadedData.category_count;
+          data.categoryCount = loadedData.categoryCount;
           data.post.category = category.id;
         })
         .catch(() => {

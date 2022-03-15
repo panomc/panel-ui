@@ -83,10 +83,10 @@
               <div class="badge text-dark border text-capitalize">
                 <a
                   href="{base}/players/permission/{data.player
-                    .permission_group}">
-                  {data.player.permission_group === "-"
+                    .permissionGroup}">
+                  {data.player.permissionGroup === "-"
                     ? "Oyuncu"
-                    : data.player.permission_group}
+                    : data.player.permissionGroup}
                 </a>
               </div>
             </li>
@@ -140,7 +140,7 @@
                   </span>
                   <br />
                   <small class="text-muted">
-                    <b><Date time="{ticket.last_update}" /></b>,
+                    <b><Date time="{ticket.lastUpdate}" /></b>,
                     <b>{ticket.category.title}</b>
                     kategorisine açıldı.
                   </small>
@@ -207,7 +207,7 @@
             username: "",
             isBanned: false,
             registerDate: 0,
-            permission_group: "",
+            permissionGroup: "",
           },
           tickets: [],
           ticketCount: 0,
@@ -314,7 +314,7 @@
   }
 
   setAuthorizePlayerModalCallback((newPlayer) => {
-    data.player.permission_group = newPlayer.permission_group;
+    data.player.permissionGroup = newPlayer.permissionGroup;
   });
 
   setEditPlayerModalCallback((newPlayer) => {

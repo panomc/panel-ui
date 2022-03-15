@@ -28,13 +28,13 @@
       <div class="row justify-content-between pb-3 align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
-            {data.category_count}
+            {data.categoryCount}
             Yazı Kategorisi
           </h5>
         </div>
       </div>
       <!-- No Category -->
-      {#if data.category_count === 0}
+      {#if data.categoryCount === 0}
         <div class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-sticky-note fa-3x text-dark text-opacity-25 m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
@@ -42,7 +42,7 @@
       {/if}
 
       <!-- Tickets Table -->
-      {#if data.category_count > 0}
+      {#if data.categoryCount > 0}
         <div class="table-responsive animate__animated animate__fadeIn">
           <table class="table mb-0">
             <thead>
@@ -122,9 +122,9 @@
       <!-- Pagination -->
       <Pagination
         page="{data.page}"
-        totalPage="{data.total_page}"
+        totalPage="{data.totalPage}"
         on:firstPageClick="{() => reloadData(1)}"
-        on:lastPageClick="{() => reloadData(data.total_page)}"
+        on:lastPageClick="{() => reloadData(data.totalPage)}"
         on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
       />
     </div>
@@ -171,9 +171,9 @@
     let output = {
       props: {
         data: {
-          category_count: 0,
+          categoryCount: 0,
           categories: [],
-          total_page: 1,
+          totalPage: 1,
           page: 1,
         },
       },

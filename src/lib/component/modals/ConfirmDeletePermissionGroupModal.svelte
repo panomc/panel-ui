@@ -14,7 +14,7 @@
         </div>
         Bu yetki grubunu kalıcı olarak silmek istediğinizden emin misiniz?
 
-        {#if $permissionGroup.user_count > 0}
+        {#if $permissionGroup.userCount > 0}
           <div class="mt-3 alert alert-warning">
             Yetki grubu içerisindeki şu kullanıcılar Oyuncu olarak değişecek:
             <br />
@@ -25,8 +25,8 @@
             <div
               class="d-flex flex-row flex-row-reverse justify-content-center align-items-center mt-3 mr-3"
             >
-              {#if $permissionGroup.user_count > 3}
-                <small class="pl-1">+{$permissionGroup.user_count - 3}</small>
+              {#if $permissionGroup.userCount > 3}
+                <small class="pl-1">+{$permissionGroup.userCount - 3}</small>
               {/if}
 
               {#each $permissionGroup.users as user, index (user)}
@@ -80,7 +80,7 @@
     id: -1,
     name: "",
     users: [],
-    user_count: 0,
+    userCount: 0,
   });
 
   let callback = (permissionGroup) => {};

@@ -13,7 +13,7 @@
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
         Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?
-        {#if $category.post_count !== 0}
+        {#if $category.postCount !== 0}
           <div class="mt-3 alert alert-warning text-left">
             Kategori içerisindeki şu yazılar Kategorisiz olarak değişecek:
             <br />
@@ -28,8 +28,8 @@
               </a>
             {/each}
           </div>
-          {#if $category.post_count > 5}
-            +{$category.post_count - 5}
+          {#if $category.postCount > 5}
+            +{$category.postCount - 5}
             yazı daha
           {/if}
         {/if}

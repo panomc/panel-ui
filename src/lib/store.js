@@ -118,9 +118,9 @@ export function initializeBasicData(data) {
 
   user.set(data.user);
   website.set(data.website);
-  currentServerPlatformMatchKey.set(data.platform_server_match_key);
-  platformKeyRefreshedTime.set(data.platform_server_match_key_time_started);
-  platformAddress.set(data.platform_host_address);
+  currentServerPlatformMatchKey.set(data.platformServerMatchKey);
+  platformKeyRefreshedTime.set(data.platformServerMatchKeyTimeStarted);
+  platformAddress.set(data.platformHostAddress);
   servers.set(data.servers);
-  notificationsCount.set(data.notifications_count);
+  notificationsCount.set(data.notificationCount);
 }

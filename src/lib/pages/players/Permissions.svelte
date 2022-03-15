@@ -29,7 +29,7 @@
             <th scope="col" ></th>
 
             <!-- Perm Group Name & User Pictures Cell -->
-            {#each data.permission_groups as permissionGroup, index (permissionGroup)}
+            {#each data.permissionGroups as permissionGroup, index (permissionGroup)}
               <th
                 scope="col"
                 class="text-center">
@@ -43,9 +43,9 @@
                 </a>
                 <div
                   class="d-flex flex-row flex-row-reverse justify-content-center align-items-center">
-                  {#if permissionGroup.user_count > 3}
+                  {#if permissionGroup.userCount > 3}
                     <small>
-                      +{permissionGroup.user_count - 3}
+                      +{permissionGroup.userCount - 3}
                     </small>
                   {/if}
                   {#each permissionGroup.users as user, index (user)}
@@ -86,7 +86,7 @@
               </th>
 
               <!-- Checkboxes Section -->
-              {#each data.permission_groups as permissionGroup, index (permissionGroup)}
+              {#each data.permissionGroups as permissionGroup, index (permissionGroup)}
                 <td class="align-middle">
                   <div
                     class="form-check form-switch d-flex justify-content-center align-content-center">
@@ -147,8 +147,8 @@
       props: {
         data: {
           permissions: [],
-          permission_groups: [],
-          permission_group_perms: {},
+          permissionGroups: [],
+          permissionGroupPerms: {},
         },
       },
     };
@@ -242,9 +242,9 @@
   function isPermissionChecked(permissionGroup, permission) {
     return (
       permissionGroup.name === "admin" ||
-      (typeof data.permission_group_perms[permissionGroup.id] === "undefined"
+      (typeof data.permissionGroupPerms[permissionGroup.id] === "undefined"
         ? false
-        : !!data.permission_group_perms[permissionGroup.id].includes(
+        : !!data.permissionGroupPerms[permissionGroup.id].includes(
             permission.id
           ))
     );
@@ -272,8 +272,8 @@
         path: "/api/panel/permission/set",
         body: {
           mode: mode,
-          permission_group_id: permissionGroup.id,
-          permission_id: permission.id,
+          permissionGroupId: permissionGroup.id,
+          permissionId: permission.id,
         },
         CSRFToken: $session.CSRFToken,
       })
@@ -285,19 +285,19 @@
 
             if (mode === "ADD") {
               if (
-                typeof data.permission_group_perms[permissionGroup.id] ===
+                typeof data.permissionGroupPerms[permissionGroup.id] ===
                 "undefined"
               )
-                data.permission_group_perms[permissionGroup.id] = [
+                data.permissionGroupPerms[permissionGroup.id] = [
                   permission.id,
                 ];
               else
-                data.permission_group_perms[permissionGroup.id].push(
+                data.permissionGroupPerms[permissionGroup.id].push(
                   permission.id
                 );
             } else {
-              data.permission_group_perms[permissionGroup.id].splice(
-                data.permission_group_perms[permissionGroup.id].indexOf(
+              data.permissionGroupPerms[permissionGroup.id].splice(
+                data.permissionGroupPerms[permissionGroup.id].indexOf(
                   permission.id
                 ),
                 1
@@ -331,22 +331,22 @@
   });
 
   setDeletePermissionGroupModalCallback((permissionGroup) => {
-    data.permission_groups.forEach((permGroup, index) => {
+    data.permissionGroups.forEach((permGroup, index) => {
       if (permGroup.id === permissionGroup.id) {
-        data.permission_groups.splice(index, 1);
+        data.permissionGroups.splice(index, 1);
       }
     });
 
-    data.permission_groups = data.permission_groups;
+    data.permissionGroups = data.permissionGroups;
 
-    Object.keys(data.permission_group_perms).forEach(
+    Object.keys(data.permissionGroupPerms).forEach(
       (permissionGroupPermsId, index) => {
         if (permissionGroupPermsId === permissionGroup.id) {
-          data.permission_groups.splice(index, 1);
+          data.permissionGroups.splice(index, 1);
         }
       }
     );
 
-    data.permission_group_perms = data.permission_group_perms;
+    data.permissionGroupPerms = data.permissionGroupPerms;
   });
 </script>
