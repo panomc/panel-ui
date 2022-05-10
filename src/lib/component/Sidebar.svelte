@@ -7,11 +7,10 @@
   <div class="navbar navbar-dark w-100 px-2">
     <button
       type="button"
-      class="navbar-toggler position-absolute"
+      class="btn-close btn-close-white position-absolute"
       title="Menüyü Aç/kapa"
       on:click="{onMobileSideBarCollapseClick}"
     >
-      <i class="fas fa-bars"></i>
     </button>
 
     <a class="navbar-brand m-auto" href="{base}/">
