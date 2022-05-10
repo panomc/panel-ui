@@ -24,7 +24,7 @@
           class="dropdown-item"
           href="javascript:void(0);"
           on:click="{showEditPlayerModal}">
-          <i class="fas fa-pencil-alt mr-1 text-primary"></i>
+          <i class="fa-solid fa-pencil-alt mr-1 text-primary"></i>
           Düzenle
         </a>
         <a

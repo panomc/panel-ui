@@ -96,7 +96,7 @@
           <form>
             <ul class="list-group">
               <li class="list-group-item">
-                <i class="fas fa-sticky-note text-primary mr-1"></i>
+                <i class="fas fa-pen text-primary mr-1"></i>
                 <b>Durum:</b>
                 {getStatusByPostStatus(data.post.status)}
               </li>

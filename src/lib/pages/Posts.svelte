@@ -73,7 +73,7 @@
       <!-- No Posts -->
       {#if data.postCount === 0}
         <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-sticky-note fa-3x text-dark text-opacity-25 m-3"></i>
+          <i class="fa-solid fa-pen fa-3x text-dark text-opacity-25 m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}

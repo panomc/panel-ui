@@ -15,7 +15,7 @@
       class:active="{matching($page.url.pathname, base + '/posts', true)}"
     >
       <a class="nav-link" href="{base}/posts">
-        <i class="fas fa-sticky-note mx-2"></i>
+        <i class="fa-solid fa-pen mx-2"></i>
         Yazılar
       </a>
     </li>
