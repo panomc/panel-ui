@@ -1,4 +1,4 @@
-<ServersModal />
+<ServersOffcanvas />
 <ConnectServerModal />
 <RemoveServerModal />
 
@@ -49,7 +49,7 @@
         <button
           class="btn btn-sm btn-aqua"
           data-bs-target="#showServers"
-          data-bs-toggle="modal"
+          data-bs-toggle="offcanvas"
           type="button"
         >
           Sunucuları Görüntüle
@@ -113,7 +113,7 @@
   import SiteNavigationMenu from "./sidebar/SiteNavigationMenu.svelte";
   import ServerNavigationMenu from "./sidebar/ServerNavigationMenu.svelte";
 
-  import ServersModal from "./modals/ServersModal.svelte";
+  import ServersOffcanvas from "./offcanvas/ServersOffcanvas.svelte";
   import ConnectServerModal from "./modals/ConnectServerModal.svelte";
   import RemoveServerModal from "./modals/RemoveServerModal.svelte";
 
