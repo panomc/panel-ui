@@ -4,8 +4,7 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
@@ -22,8 +21,7 @@
               <a
                 class="badge bg-warning rounded-pill mr-1"
                 href="{base}/posts/post/{post.id}"
-                target="_blank"
-              >
+                target="_blank">
                 {post.title}
               </a>
             {/each}
@@ -34,23 +32,21 @@
           {/if}
         {/if}
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer flex-nowrap">
         <button
-          class="btn btn-link text-muted"
+          class="btn btn-link col-6 m-0"
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{hide}"
-        >
+          on:click="{hide}">
           İptal
         </button>
         <button
-          class="btn btn-danger"
+          class="btn btn-danger col-6 m-0"
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{onYesClick}"
-        >
+          on:click="{onYesClick}">
           Evet
         </button>
       </div>

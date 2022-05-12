@@ -40,7 +40,7 @@
           <div class="input-group">
             <input
               bind:value="{commandText}"
-              class="form-control"
+              class="form-control user-select-all"
               id="platformToken"
               type="text"
             />

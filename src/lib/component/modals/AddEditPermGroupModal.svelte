@@ -15,15 +15,13 @@
       </div>
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
-          <div class="mb-3">
-            <label for="permName">Yetki Grubu Adı:</label>
             <input
               class="form-control"
+              placeholder="İsim"
               id="permName"
               type="text"
               bind:value="{$permissionGroup.name}"
               class:border-danger="{$errors.name}" />
-          </div>
           {#if $errors.error}
             <small class="text-danger">
               {$errors.error}
