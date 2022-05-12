@@ -65,7 +65,7 @@
     </div>
   </th>
   <td class="align-middle text-nowrap">
-    <a href="{base + '/posts/post/' + post.id}" title="Yazıyı Düzenle">
+    <a href="{base + '/posts/post/' + post.id}" title="Düzenle">
       {post.title}
     </a>
   </td>

@@ -39,9 +39,7 @@
     </div>
   </th>
   <td class="min-w-200px align-middle text-nowrap">
-    <a
-      title="Oyuncu Profiline Git"
-      href="{base}/players/player/{player.username}">
+    <a title="Görüntüle" href="{base}/players/player/{player.username}">
       <img
         alt="{player.username}"
         class="rounded-circle border mr-3 animate__animated animate__zoomIn"
@@ -53,6 +51,7 @@
   </td>
   <td class="align-middle text-nowrap text-capitalize">
     <a
+      title="Filtrele"
       class="badge text-dark border"
       href="{base}/players/permission/{player.permissionGroup}">
       {player.permissionGroup === "-" ? "Oyuncu" : player.permissionGroup}

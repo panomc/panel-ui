@@ -83,11 +83,11 @@
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th class="min-w-200px align-middle" scope="col">Başlık</th>
-                <th scope="col align-middle">Kategori</th>
-                <th scope="col align-middle">Yazar</th>
-                <th scope="col align-middle">Görüntülenme</th>
-                <th scope="col align-middle">Son Güncelleme</th>
+                <th class="align-middle" scope="col">Başlık</th>
+                <th scope="col" class="align-middle">Kategori</th>
+                <th scope="col" class="align-middle">Yazar</th>
+                <th scope="col" class="align-middle">Görüntülenme</th>
+                <th scope="col" class="align-middle">Son Güncelleme</th>
               </tr>
             </thead>
             <tbody>

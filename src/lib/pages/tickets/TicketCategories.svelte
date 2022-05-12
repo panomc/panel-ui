@@ -2,8 +2,7 @@
 <article class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp"
-  >
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -14,8 +13,7 @@
       <button
         class="btn btn-secondary"
         type="button"
-        on:click="{onCreateCategoryClick}"
-      >
+        on:click="{onCreateCategoryClick}">
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
       </button>
@@ -50,52 +48,32 @@
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th class="min-w-200px" scope="col">Kategori</th>
-                <th scope="col">Açıklama</th>
+                <th class="align-middle" scope="col">Kategori</th>
+                <th scope="col" class="align-middle">Açıklama</th>
               </tr>
             </thead>
             <tbody>
               {#each data.categories as category, index (category)}
                 <tr class:table-primary="{category.selected}">
-                  <th scope="row">
-                    <div class="dropdown position-static">
-                      <button
-                        type="button"
-                        class="btn btn-link btn-sm"
-                        aria-expanded="false"
-                        aria-haspopup="true"
-                        data-bs-toggle="dropdown"
-                        href="javascript:void(0);"
-                        title="Eylemler"
-                      >
-                        <span class="fas fa-ellipsis-h"></span>
-                      </button>
-                      <div
-                        class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn"
-                      >
-                        <a
-                          class="dropdown-item"
-                          href="javascript:void(0);"
-                          on:click="{onShowDeleteTicketCategoryModalClick(
-                            index
-                          )}"
-                        >
-                          <i class="fas fa-trash text-danger mr-1"></i>
-                          Sil
-                        </a>
-                      </div>
-                    </div>
+                  <th scope="row" class="align-middle">
+                    <a
+                      title="Sil"
+                      class="btn btn-sm btn-link link-danger"
+                      href="javascript:void(0);"
+                      on:click="{onShowDeleteTicketCategoryModalClick(index)}">
+                      <i class="fas fa-trash"></i>
+                    </a>
                   </th>
-                  <td class="text-nowrap">
+                  <td class="text-nowrap align-middle">
                     <a
                       href="javascript:void(0);"
-                      title="Kategoriyi Düzenle"
-                      on:click="{onShowEditCategoryButtonClick(index)}"
-                    >
+                      title="Düzenle"
+                      on:click="{onShowEditCategoryButtonClick(index)}">
                       {category.title}
                     </a>
                   </td>
-                  <td class="text-nowrap">{category.description}</td>
+                  <td class="text-nowrap align-middle"
+                    >{category.description}</td>
                 </tr>
               {/each}
             </tbody>
@@ -108,8 +86,7 @@
         totalPage="{data.totalPage}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.totalPage)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
     </div>
   </div>
 </article>

@@ -2,8 +2,7 @@
 <article class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp"
-  >
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts">
         <i class="fas fa-arrow-left mr-1"></i>
@@ -11,7 +10,7 @@
       </a>
     </div>
     <div class="col-auto">
-      <a class="btn btn-primary" role="button" href="{base}/posts/create-post">
+      <a class="btn btn-secondary" role="button" href="{base}/posts/create-post">
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
       </a>
@@ -44,11 +43,11 @@
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th class="min-w-200px align-middle" scope="col">Başlık</th>
-                <th scope="col align-middle" class="table-primary">Kategori</th>
-                <th scope="col align-middle">Yazar</th>
-                <th scope="col align-middle">Görüntülenme</th>
-                <th scope="col align-middle">Tarih</th>
+                <th class="align-middle" scope="col">Başlık</th>
+                <th scope="col" class="table-primary align-middle">Kategori</th>
+                <th scope="col" class="align-middle">Yazar</th>
+                <th scope="col" class="align-middle">Görüntülenme</th>
+                <th scope="col" class="align-middle">Tarih</th>
               </tr>
             </thead>
             <tbody>
@@ -60,8 +59,7 @@
                   on:moveToDraft="{(event) => onMoveToDraft(event.detail.id)}"
                   on:publish="{(event) => onPublishClick(event.detail.id)}"
                   on:deletePost="{(event) =>
-                    onDeletePostClick(event.detail.post)}"
-                />
+                    onDeletePostClick(event.detail.post)}" />
               {/each}
             </tbody>
           </table>
@@ -73,8 +71,7 @@
         totalPage="{data.totalPage}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.totalPage)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
       <!-- Pagination End -->
     </div>
   </div>
