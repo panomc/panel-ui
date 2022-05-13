@@ -43,7 +43,7 @@
 
       <!-- Tickets Table -->
       {#if data.categoryCount > 0}
-        <div class="table-responsive animate__animated animate__fadeIn">
+        <div class="table-responsive">
           <table class="table mb-0">
             <thead>
               <tr>

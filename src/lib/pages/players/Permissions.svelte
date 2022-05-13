@@ -20,7 +20,7 @@
   </div>
 
   <div class="card">
-    <div class="card-body table-responsive animate__animated animate__fadeIn">
+    <div class="card-body table-responsive">
       <table class="table table-borderless" style="width: auto !important;">
         <thead>
           <tr class="align-top">
