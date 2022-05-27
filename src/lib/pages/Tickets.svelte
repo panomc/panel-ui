@@ -164,21 +164,13 @@
 
   export const DefaultPageType = PageTypes.ALL;
 
-  export function getStatusFromPageType(pageType) {
-    return pageType === PageTypes.ALL
-      ? 2
-      : pageType === PageTypes.WAITING_REPLY
-      ? 1
-      : 3;
-  }
-
   async function loadData({ page, pageType, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
       ApiUtil.post({
         path: "/api/panel/initPage/ticketPage",
         body: {
           page: parseInt(page),
-          pageType: getStatusFromPageType(pageType),
+          pageType: pageType
         },
         request,
         CSRFToken,
