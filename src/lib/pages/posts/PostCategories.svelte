@@ -120,11 +120,8 @@
 
   async function loadData({ page, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/initPage/posts/categoryPage",
-        body: {
-          page: parseInt(page),
-        },
+      ApiUtil.get({
+        path: `/api/panel/post/categories?page=${page}`,
         request,
         CSRFToken,
       }).then((body) => {

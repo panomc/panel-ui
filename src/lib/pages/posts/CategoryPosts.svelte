@@ -83,12 +83,8 @@
 
   async function loadData({ page, url, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/post/category/postsByCategory",
-        body: {
-          page: parseInt(page),
-          url,
-        },
+      ApiUtil.get({
+        path: `/api/panel/posts?page=${page}&categoryUrl=${url}`,
         request,
         CSRFToken,
       }).then((body) => {
@@ -207,9 +203,11 @@
     buttonsLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/post/moveDraft",
-        body: { id },
+      ApiUtil.put({
+        path: `/api/panel/posts/${id}/status`,
+        body: {
+          to: "draft"
+        },
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
@@ -231,9 +229,11 @@
     buttonsLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/post/onlyPublish",
-        body: { id },
+      ApiUtil.put({
+        path: `/api/panel/posts/${id}/status`,
+        body: {
+          to: "publish"
+        },
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {

@@ -106,30 +106,46 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
+      const bodyHandler = (body) => {
+        if (body.result === "ok") {
+          loading = false;
+
+          hide();
+
+          callback(true);
+
+          resolve();
+        } else if (body.result === "error") {
+          loading = false;
+
+          errors.set(body.error);
+
+          resolve();
+        } else reject();
+      }
+
+      if (get(mode) === "edit") {
+        ApiUtil.update({
+          path:
+            `/api/panel/ticket/categories/${get(category).id}`,
+          body: get(category),
+          CSRFToken: $session.CSRFToken,
+        })
+          .then(bodyHandler)
+          .catch(() => {
+            reject();
+          });
+
+        return
+      }
+
       ApiUtil.post({
         path:
-          "/api/panel/ticket/category/" +
-          (get(mode) === "edit" ? "update" : "add"),
+          "/api/panel/ticket/category",
         body: get(category),
         CSRFToken: $session.CSRFToken,
       })
-        .then((body) => {
-          if (body.result === "ok") {
-            loading = false;
-
-            hide();
-
-            callback(true);
-
-            resolve();
-          } else if (body.result === "error") {
-            loading = false;
-
-            errors.set(body.error);
-
-            resolve();
-          } else reject();
-        })
+        .then(bodyHandler)
         .catch(() => {
           reject();
         });

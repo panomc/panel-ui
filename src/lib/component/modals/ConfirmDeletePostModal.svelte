@@ -88,30 +88,45 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
+      const bodyHandler = (body) => {
+        if (body.result === "ok") {
+          loading = false;
+
+          hide();
+
+          // if (get(post).status === 0)
+
+          //TODO TOAST
+
+          callback(get(post));
+
+          resolve();
+        } else refreshBrowserPage();
+      }
+
+      if (get(post).status === 0) {
+        ApiUtil.delete({
+          path:
+            `/api/panel/posts/${get(post).id}`,
+          CSRFToken: $session.CSRFToken,
+        })
+          .then(bodyHandler)
+          .catch(() => {
+            reject();
+          });
+
+        return
+      }
+
+      ApiUtil.put({
         path:
-          "/api/panel/post/" +
-          (get(post).status === 0 ? "delete" : "moveTrash"),
+          `/api/panel/posts/${get(post).id}/status`,
         body: {
-          id: get(post).id,
+          to: "trash"
         },
         CSRFToken: $session.CSRFToken,
       })
-        .then((body) => {
-          if (body.result === "ok") {
-            loading = false;
-
-            hide();
-
-            // if (get(post).status === 0)
-
-            //TODO TOAST
-
-            callback(get(post));
-
-            resolve();
-          } else refreshBrowserPage();
-        })
+        .then(bodyHandler)
         .catch(() => {
           reject();
         });

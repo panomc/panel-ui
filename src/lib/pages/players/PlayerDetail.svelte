@@ -171,12 +171,8 @@
 
   async function loadData({ username, page, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/initPage/playerDetail",
-        body: {
-          username,
-          page: parseInt(page),
-        },
+      ApiUtil.get({
+        path: `/api/panel/players/${username}?page=${page}`,
         request,
         CSRFToken,
       }).then((body) => {

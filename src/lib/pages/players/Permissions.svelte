@@ -268,12 +268,10 @@
       : "ADD";
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/permission/set",
+      ApiUtil.put({
+        path: `/api/panel/permissionGroups/${permissionGroup.id}/permissions/${permission.id}`,
         body: {
           mode: mode,
-          permissionGroupId: permissionGroup.id,
-          permissionId: permission.id,
         },
         CSRFToken: $session.CSRFToken,
       })

@@ -112,11 +112,8 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/ticket/category/delete",
-        body: {
-          id: get(category).id,
-        },
+      ApiUtil.delete({
+        path: `/api/panel/ticket/categories/${get(category).id}`,
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {

@@ -83,8 +83,8 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/notifications/deleteAll",
+      ApiUtil.delete({
+        path: "/api/panel/notifications",
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {

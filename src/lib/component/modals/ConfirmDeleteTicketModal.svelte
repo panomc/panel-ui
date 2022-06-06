@@ -93,8 +93,8 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/ticket/delete/selectedTickets",
+      ApiUtil.delete({
+        path: "/api/panel/tickets",
         body: {
           tickets: Object.values(get(selectedTickets)),
         },

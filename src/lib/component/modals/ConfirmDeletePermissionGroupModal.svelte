@@ -130,11 +130,8 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/permission/delete/group",
-        body: {
-          id: get(permissionGroup).id,
-        },
+      ApiUtil.delete({
+        path: `/api/panel/permissions/${get(permissionGroup).id}`,
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {

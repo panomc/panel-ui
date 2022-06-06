@@ -223,11 +223,8 @@
     loadMoreLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/notifications/loadMore",
-        body: {
-          id: get(notifications)[get(notifications).length - 1].id,
-        },
+      ApiUtil.get({
+        path: `/api/panel/notifications/${get(notifications)[get(notifications).length - 1].id}/more`,
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
@@ -251,11 +248,8 @@
 
   function deleteNotification(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/notifications/delete",
-        body: {
-          id,
-        },
+      ApiUtil.delete({
+        path: `/api/panel/notifications/${id}`,
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {

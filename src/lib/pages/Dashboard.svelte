@@ -249,7 +249,7 @@
   async function loadData({ request, CSRFToken }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/initPage/dashboard",
+        path: "/api/panel/dashboard",
         request,
         CSRFToken,
       }).then((body) => {

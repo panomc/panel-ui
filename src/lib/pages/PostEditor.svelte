@@ -179,11 +179,8 @@
 
   async function loadPost({ id, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/initPage/editPost",
-        body: {
-          id: parseInt(id),
-        },
+      ApiUtil.get({
+        path: `/api/panel/posts/${id}`,
         request,
         CSRFToken,
       }).then((body) => {
@@ -203,7 +200,7 @@
   async function loadCategories({ request, CSRFToken }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/post/category/categories",
+        path: "/api/panel/post/categories",
         request,
         CSRFToken,
       }).then((body) => {
@@ -346,30 +343,46 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/post/publish",
+      const bodyHandler = (body) => {
+        if (body.result === "ok") {
+          loading = false;
+
+          if (data.mode === Modes.CREATE) {
+            goto(base + "/posts/post/" + body.id);
+          }
+
+          //TODO: TOAST
+
+          resolve();
+        } else if (body.result === "error") {
+          loading = false;
+
+          data.error = body.error;
+
+          resolve();
+        } else reject();
+      }
+
+      if (data.post.id === -1) {
+        ApiUtil.post({
+          path: "/api/panel/post",
+          body: data.post,
+          CSRFToken: $session.CSRFToken,
+        })
+          .then(bodyHandler)
+          .catch(() => {
+            reject();
+          });
+
+        return
+      }
+
+      ApiUtil.put({
+        path: `/api/panel/posts/${data.post.id}`,
         body: data.post,
         CSRFToken: $session.CSRFToken,
       })
-        .then((body) => {
-          if (body.result === "ok") {
-            loading = false;
-
-            if (data.mode === Modes.CREATE) {
-              goto(base + "/posts/post/" + body.id);
-            }
-
-            //TODO: TOAST
-
-            resolve();
-          } else if (body.result === "error") {
-            loading = false;
-
-            data.error = body.error;
-
-            resolve();
-          } else reject();
-        })
+        .then(bodyHandler)
         .catch(() => {
           reject();
         });
@@ -380,9 +393,11 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/post/moveDraft",
-        body: data.post,
+      ApiUtil.put({
+        path: `/api/panel/posts/${data.post.id}/status`,
+        body: {
+          to: "draft"
+        },
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {

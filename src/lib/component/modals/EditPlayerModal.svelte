@@ -207,8 +207,8 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/player/edit/info",
+      ApiUtil.put({
+        path: `/api/panel/players/${get(player).id}`,
         body: get(player),
         CSRFToken: $session.CSRFToken,
       })

@@ -77,12 +77,8 @@
 
   async function loadData({ page, permissionGroup, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/players/byPermission",
-        body: {
-          page: parseInt(page),
-          permissionGroup,
-        },
+      ApiUtil.get({
+        path: `/api/panel/players?permissionGroup=${permissionGroup}&page=${parseInt(page)}`,
         request,
         CSRFToken,
       }).then((body) => {

@@ -113,21 +113,12 @@
 
   export const DefaultPageType = PageTypes.ALL;
 
-  export function getStatusFromPageType(pageType) {
-    return pageType === PageTypes.ALL
-      ? 1
-      : pageType === PageTypes.HAS_PERM
-      ? 2
-      : 0;
-  }
-
   async function loadData({ page, pageType, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/initPage/playersPage",
+      ApiUtil.get({
+        path: `/api/panel/players?page=${page}&status=${pageType}`,
         body: {
           page: parseInt(page),
-          pageType: getStatusFromPageType(pageType),
         },
         request,
         CSRFToken,

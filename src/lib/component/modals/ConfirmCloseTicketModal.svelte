@@ -94,10 +94,11 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/ticket/close/selectedList",
+      ApiUtil.put({
+        path: "/api/panel/tickets",
         body: {
           tickets: Object.values(get(selectedTickets)),
+          status: "close"
         },
         CSRFToken: $session.CSRFToken,
       })

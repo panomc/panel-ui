@@ -123,8 +123,6 @@
   import ApiUtil from "$lib/api.util.js";
   import { showNetworkErrorOnCatch } from "$lib/store.js";
 
-  import { StatusTypes as PostStatusTypes } from "$lib/pages/PostEditor.svelte";
-
   export const PageTypes = Object.freeze({
     PUBLISHED: "published",
     DRAFT: "draft",
@@ -133,22 +131,10 @@
 
   export const DefaultPageType = PageTypes.PUBLISHED;
 
-  export function getStatusFromPageType(pageType) {
-    return pageType === PageTypes.PUBLISHED
-      ? PostStatusTypes.PUBLISHED
-      : pageType === PageTypes.DRAFT
-      ? PostStatusTypes.DRAFT
-      : PostStatusTypes.TRASH;
-  }
-
   async function loadData({ page, pageType, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/initPage/postPage",
-        body: {
-          page: parseInt(page),
-          pageType: getStatusFromPageType(pageType),
-        },
+      ApiUtil.get({
+        path: `/api/panel/posts?page=${page}&pageType=${pageType}`,
         request,
         CSRFToken,
       }).then((body) => {
@@ -261,9 +247,11 @@
     buttonsLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/post/moveDraft",
-        body: { id },
+      ApiUtil.put({
+        path: `/api/panel/posts/${id}/status`,
+        body: {
+          to: "draft"
+        },
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
@@ -285,9 +273,11 @@
     buttonsLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/post/onlyPublish",
-        body: { id },
+      ApiUtil.put({
+        path: `/api/panel/posts/${id}/status`,
+        body: {
+          to: "publish"
+        },
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {

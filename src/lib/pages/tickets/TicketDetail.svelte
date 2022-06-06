@@ -195,11 +195,8 @@
 
   async function loadTicket({ id, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/initPage/ticket/detail",
-        body: {
-          id: parseInt(id),
-        },
+      ApiUtil.get({
+        path: `/api/panel/tickets/${id}`,
         request,
         CSRFToken,
       }).then((body) => {
@@ -336,12 +333,8 @@
     loadMoreLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/ticket/detail/message/page",
-        body: {
-          id: parseInt(data.ticket.id),
-          lastMessageId: data.ticket.messages[0].id,
-        },
+      ApiUtil.get({
+        path: `/api/panel/tickets/${data.ticket.id}/messages?lastMessageId=${data.ticket.messages[0].id}`,
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
@@ -368,9 +361,8 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post({
-        path: "/api/panel/ticket/detail/message/send",
+        path: `/api/panel/tickets/${data.ticket.id}/message`,
         body: {
-          ticketId: parseInt(data.ticket.id),
           message: messageText,
         },
         CSRFToken: $session.CSRFToken,

@@ -15,13 +15,13 @@
       </div>
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
-            <input
-              class="form-control"
-              placeholder="İsim"
-              id="permName"
-              type="text"
-              bind:value="{$permissionGroup.name}"
-              class:border-danger="{$errors.name}" />
+          <input
+            class="form-control"
+            placeholder="İsim"
+            id="permName"
+            type="text"
+            bind:value="{$permissionGroup.name}"
+            class:border-danger="{$errors.name}" />
           {#if $errors.error}
             <small class="text-danger">
               {$errors.error}
@@ -97,35 +97,48 @@
     errors.set([]);
 
     showNetworkErrorOnCatch((resolve, reject) => {
+      const bodyHandler = (body) => {
+        if (body.result === "ok") {
+          loading = false;
+
+          hide();
+
+          callback(true);
+
+          resolve();
+        } else if (body.result === "error") {
+          loading = false;
+
+          if (body.error === "CANT_UPDATE_ADMIN_PERMISSION") {
+            errors.set({ "error": body.error });
+          } else {
+            errors.set(body.error);
+          }
+
+          resolve();
+        } else reject();
+      };
+
+      if (get(mode) == "edit") {
+        ApiUtil.put({
+          path: `/api/panel/permissionGroups/${get(permissionGroup).id}`,
+          body: get(permissionGroup),
+          CSRFToken: $session.CSRFToken,
+        })
+          .then(bodyHandler)
+          .catch(() => {
+            reject();
+          });
+
+        return;
+      }
+
       ApiUtil.post({
-        path:
-          "/api/panel/permission/" +
-          (get(mode) === "edit" ? "update" : "add") +
-          "/group",
+        path: `/api/panel/permissionGroups`,
         body: get(permissionGroup),
         CSRFToken: $session.CSRFToken,
       })
-        .then((body) => {
-          if (body.result === "ok") {
-            loading = false;
-
-            hide();
-
-            callback(true);
-
-            resolve();
-          } else if (body.result === "error") {
-            loading = false;
-
-            if (body.error === "CANT_UPDATE_ADMIN_PERMISSION") {
-              errors.set({ "error": body.error });
-            } else {
-              errors.set(body.error);
-            }
-
-            resolve();
-          } else reject();
-        })
+        .then(bodyHandler)
         .catch(() => {
           reject();
         });

@@ -116,7 +116,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/permission/groups",
+        path: "/api/panel/permissionGroups",
         CSRFToken,
       })
         .then((body) => {
@@ -143,9 +143,11 @@
     submitLoading.set(true);
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({
-        path: "/api/panel/player/set/permissionGroup",
-        body: get(player),
+      ApiUtil.put({
+        path: `/api/panel/players/${get(player).username}/permissionGroup`,
+        body: {
+          permissionGroup: get(player).permissionGroup
+        },
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
