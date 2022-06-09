@@ -125,7 +125,7 @@
       }
 
       if (get(mode) === "edit") {
-        ApiUtil.update({
+        ApiUtil.put({
           path:
             `/api/panel/ticket/categories/${get(category).id}`,
           body: get(category),
