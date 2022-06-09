@@ -160,7 +160,6 @@
       }
 
       if (get(mode) === "edit") {
-
         ApiUtil.put({
           path:
             `/api/panel/post/categories/${get(category).id}`,
@@ -172,6 +171,7 @@
             reject();
           });
 
+        return
       }
 
       ApiUtil.post({
