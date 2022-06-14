@@ -21,13 +21,11 @@
     </div>
     <div class="col-auto ml-auto">
       <a
-        class="btn btn-outline-danger"
+        class="btn btn-link link-danger"
         role="button"
         href="javascript:void(0);"
         on:click="{() => showDeleteTicketModal([data.ticket.id])}">
         <i class="fas fa-trash"></i>
-
-        <span class="d-lg-inline d-none ml-1">Sil</span>
       </a>
       {#if data.ticket.status !== TicketStatuses.CLOSED}
         <a
@@ -45,7 +43,7 @@
   <h3>Talep: #{data.ticket.id}</h3>
 
   <div
-    class="card border mb-3"
+    class="card mb-3"
     class:border-mint="{data.ticket.status === TicketStatuses.NEW}"
     class:border-sunflower="{data.ticket.status === TicketStatuses.REPLIED}"
     class:border-bittersweet="{data.ticket.status === TicketStatuses.CLOSED}">
@@ -83,8 +81,7 @@
           class="btn btn-link bg-light d-block m-auto"
           class:disabled="{loadMoreLoading}"
           on:click="{loadMore}"
-          ><i class="fas fa-arrow-up mr-1"></i> Önceki Mesajlar ({data.ticket
-            .count -
+          ><i class="fas fa-arrow-up"></i> Önceki Mesajlar ({data.ticket.count -
             (data.ticket.messages.length - sentMessageCount)})
         </button>
       {/if}
@@ -94,7 +91,7 @@
           <div class="row py-2 flex-nowrap justify-content-end">
             <div class="col-auto d-flex align-items-center">
               <!-- <a
-                  class="btn btn-link btn-sm text-gray mr-2"
+                  class="btn btn-link btn-sm text-gray"
                   role="button"
                   href="javascript:void(0);">
                   <i class="fas fa-ellipsis-v"></i>
@@ -125,7 +122,7 @@
                 <img
                   src="https://minotar.net/avatar/{message.username}/48"
                   alt="{message.username}"
-                  class="mr-2 border rounded-circle animate__animated animate__zoomIn"
+                  class="border rounded-circle animate__animated animate__zoomIn"
                   use:tooltip="{[message.username, { placement: 'bottom' }]}"
                   width="48"
                   height="48" />
