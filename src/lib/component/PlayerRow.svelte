@@ -17,22 +17,22 @@
           class="dropdown-item"
           href="javascript:void(0);"
           on:click="{showAuthorizePlayerModal}">
-          <i class="fas fa-user-circle mr-1 text-primary"></i>
+          <i class="fas fa-user-circle"></i>
           Yetkilendir
         </a>
         <a
           class="dropdown-item"
           href="javascript:void(0);"
           on:click="{showEditPlayerModal}">
-          <i class="fa-solid fa-pencil-alt mr-1 text-primary"></i>
+          <i class="fa-solid fa-pencil-alt"></i>
           Düzenle
         </a>
         <a
-          class="dropdown-item"
+          class="dropdown-item link-danger"
           data-target="#conformBanTickets"
           data-toggle="modal"
           href="javascript:void(0);">
-          <i class="fas fa-gavel mr-1 text-danger"></i>
+          <i class="fas fa-gavel"></i>
           Yasakla
         </a>
       </div>

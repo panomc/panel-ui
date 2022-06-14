@@ -22,7 +22,7 @@
               class="dropdown-item"
               href="javascript:void(0);"
               on:click="{onShowCloseTicketModalClick}">
-              <i class="fas fa-times mr-1 text-bittersweet"></i>
+              <i class="fas fa-times text-bittersweet"></i>
               Kapat
             </a>
           {/if}
@@ -31,14 +31,14 @@
             class="dropdown-item"
             href="javascript:void(0);"
             on:click="{onShowDeleteTicketModalClick}">
-            <i class="fas fa-trash text-danger mr-1"></i>
+            <i class="fas fa-trash text-danger"></i>
             Sil
           </a>
         </div>
       </div> -->
   </th>
   <td class="align-middle text-nowrap">
-    <a href="{base}/tickets/ticket/{ticket.id}" title="Talebi Görüntüle">
+    <a href="{base}/tickets/ticket/{ticket.id}" title="Görüntüle">
       #{ticket.id}
       {ticket.title}
     </a>

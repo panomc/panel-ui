@@ -2,7 +2,7 @@
   <a href="{base}/tickets/waitingReply"
     ><span
       class="badge bg-mint rounded-pill"
-      use:tooltip="{['Tüm Yeni Talepleri Göster', { placement: 'bottom' }]}"
+      use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
       >Yeni</span
     ></a
   >
@@ -11,7 +11,7 @@
     ><span
       class="badge bg-sunflower rounded-pill"
       use:tooltip="{[
-        'Tüm Yanıtlanan Talepleri Göster',
+        'Filtrele',
         { placement: 'bottom' },
       ]}">Yanıtlandı</span
     ></a
@@ -20,7 +20,7 @@
   <a href="{base}/tickets/closed"
     ><span
       class="badge bg-bittersweet rounded-pill"
-      use:tooltip="{['Tüm Kapalı Talepleri göster', { placement: 'bottom' }]}"
+      use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
       >Kapalı</span
     ></a
   >
