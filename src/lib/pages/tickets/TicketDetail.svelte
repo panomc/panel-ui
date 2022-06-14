@@ -40,8 +40,6 @@
     </div>
   </div>
 
-  <h3>Talep: #{data.ticket.id}</h3>
-
   <div class="card mb-3">
     <div
       class="card-header bg-opacity-25 pt-3"
