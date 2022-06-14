@@ -42,11 +42,7 @@
 
   <h3>Talep: #{data.ticket.id}</h3>
 
-  <div
-    class="card mb-3"
-    class:border-mint="{data.ticket.status === TicketStatuses.NEW}"
-    class:border-sunflower="{data.ticket.status === TicketStatuses.REPLIED}"
-    class:border-bittersweet="{data.ticket.status === TicketStatuses.CLOSED}">
+  <div class="card mb-3">
     <div
       class="card-header bg-opacity-25 pt-3"
       class:bg-secondary="{data.ticket.status === TicketStatuses.NEW}"
