@@ -112,7 +112,7 @@
 <ConfirmDeletePostCategoryModal />
 
 <!-- Add / Edit Post Category Modal -->
-<PostCategoriesAddEditModal />
+<AddEditPostCategoryModal />
 
 <script context="module">
   import ApiUtil from "$lib/api.util";
@@ -182,11 +182,11 @@
 
   import Pagination from "$lib/component/Pagination.svelte";
 
-  import PostCategoriesAddEditModal, {
-    show as showPostCategoriesAddEditModal,
-    setCallback as setCallbackForPostCategoriesAddEditModal,
+  import AddEditPostCategoryModal, {
+    show as showAddEditPostCategoryModal,
+    setCallback as setCallbackForAddEditPostCategoryModal,
     onHide as onAddEditPostCategoryModalHide,
-  } from "$lib/component/modals/PostCategoriesAddEditModal.svelte";
+  } from "$lib/component/modals/AddEditPostCategoryModal.svelte";
   import ConfirmDeletePostCategoryModal, {
     setCallback as setDeletePostCategoryModalCallback,
     show as showDeletePostCategoryModal,
@@ -241,13 +241,13 @@
   }
 
   function onCreateCategoryClick() {
-    showPostCategoriesAddEditModal("create");
+    showAddEditPostCategoryModal("create");
   }
 
   function onShowEditCategoryButtonClick(index) {
     data.categories[index].selected = true;
 
-    showPostCategoriesAddEditModal("edit", data.categories[index]);
+    showAddEditPostCategoryModal("edit", data.categories[index]);
   }
 
   function onShowDeletePostCategoryModalClick(index) {
@@ -256,7 +256,7 @@
     showDeletePostCategoryModal(data.categories[index]);
   }
 
-  setCallbackForPostCategoriesAddEditModal((routeFirstPage) => {
+  setCallbackForAddEditPostCategoryModal((routeFirstPage) => {
     reloadData(routeFirstPage ? 1 : data.page);
   });
 
