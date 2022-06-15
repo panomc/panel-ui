@@ -15,14 +15,13 @@
       </div>
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
-            <input
-              class="form-control mb-3"
-              placeholder="Başlık"
-              id="category"
-              type="text"
-              bind:value="{$category.title}"
-              class:border-danger="{$errors.title}"
-            />
+          <input
+            class="form-control mb-3"
+            placeholder="Başlık"
+            id="category"
+            type="text"
+            bind:value="{$category.title}"
+            class:border-danger="{$errors.title}" />
           <textarea
             class="form-control"
             class:border-danger="{$errors.description}"
@@ -38,9 +37,8 @@
             type="submit"
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
-            class:disabled="{loading}"
-            disabled="{loading}"
-          >
+            class:disabled="{loading || buttonDisabled}"
+            disabled="{loading || buttonDisabled}">
             {$mode === "edit" ? "Kaydet" : "Oluştur"}
           </button>
         </div>
@@ -101,6 +99,7 @@
   import ApiUtil from "$lib/api.util";
 
   let loading = false;
+  $: buttonDisabled = !$category.title;
 
   function onSubmit() {
     loading = true;
@@ -122,12 +121,11 @@
 
           resolve();
         } else reject();
-      }
+      };
 
       if (get(mode) === "edit") {
         ApiUtil.put({
-          path:
-            `/api/panel/ticket/categories/${get(category).id}`,
+          path: `/api/panel/ticket/categories/${get(category).id}`,
           body: get(category),
           CSRFToken: $session.CSRFToken,
         })
@@ -136,12 +134,11 @@
             reject();
           });
 
-        return
+        return;
       }
 
       ApiUtil.post({
-        path:
-          "/api/panel/ticket/category",
+        path: "/api/panel/ticket/category",
         body: get(category),
         CSRFToken: $session.CSRFToken,
       })
