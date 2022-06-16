@@ -54,8 +54,8 @@
             type="submit"
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
-            class:disabled="{loading}"
-            disabled="{loading}"
+            class:disabled="{loading || buttonDisabled}"
+            disabled="{loading || buttonDisabled}"
           >
             <span>
               {#if $mode === "edit"}
@@ -132,6 +132,7 @@
   import ApiUtil from "$lib/api.util";
 
   let loading = false;
+  $: buttonDisabled = !$category.title
 
   function onSubmit() {
     loading = true;

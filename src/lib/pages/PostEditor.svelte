@@ -141,7 +141,7 @@
 </article>
 
 <SetPostThumbnailModal />
-<PostCategoriesAddEditModal />
+<AddEditPostCategoryModal />
 
 <script context="module">
   import ApiUtil from "$lib/api.util";
@@ -259,10 +259,10 @@
     show as showDeletePostModal,
   } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
 
-  import PostCategoriesAddEditModal, {
-    show as showPostCategoriesAddEditModal,
-    setCallback as setCallbackForPostCategoriesAddEditModal,
-  } from "$lib/component/modals/PostCategoriesAddEditModal.svelte";
+  import AddEditPostCategoryModal, {
+    show as showAddEditPostCategoryModal,
+    setCallback as setCallbackForAddEditPostCategoryModal,
+  } from "$lib/component/modals/AddEditPostCategoryModal.svelte";
 
   import Editor from "$lib/component/Editor.svelte";
 
@@ -398,10 +398,10 @@
   }
 
   function onCreateCategoryClick() {
-    showPostCategoriesAddEditModal("create");
+    showAddEditPostCategoryModal("create");
   }
 
-  setCallbackForPostCategoriesAddEditModal((routeFirstPage, category) => {
+  setCallbackForAddEditPostCategoryModal((routeFirstPage, category) => {
     showNetworkErrorOnCatch((resolve, reject) => {
       loadCategories()
         .then((loadedData) => {
