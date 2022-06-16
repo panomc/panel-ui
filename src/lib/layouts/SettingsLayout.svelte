@@ -1,60 +1,55 @@
 <!-- Settings Contents -->
-<article class="container">
-  <!-- Settings Categories Nav -->
-  <nav>
-    <div class="nav nav-pills d-flex justify-content-center flex-row w-100">
-      <a
-        class="nav-item nav-link"
-        href="{base}/settings"
-        class:active="{matching($page.url.pathname, base + '/settings')}"
-      >
-        Genel
-      </a>
-      <a
-        class="nav-item nav-link"
-        href="{base}/settings/site-settings"
-        class:active="{matching(
-          $page.url.pathname,
-          base + '/settings/site-settings',
-          true
-        )}"
-      >
-        Website
-      </a>
-      <a
-        class="nav-item nav-link border position-relative"
-        href="{base}/settings/updates"
-        class:active="{matching(
-          $page.url.pathname,
-          base + '/settings/updates',
-          true
-        )}"
-      >
-        Güncellemeler
-        <span
-          class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"
-        >
-          <span class="visually-hidden">New alerts</span>
-        </span>
-      </a>
-      <a
-        class="nav-item nav-link"
-        href="{base}/settings/about"
-        class:active="{matching(
-          $page.url.pathname,
-          base + '/settings/about',
-          true
-        )}"
-      >
-        Hakkında
-      </a>
+<div class="container">
+  <div class="row justify-content-around">
+    <div class="col-auto">
+      <!-- Settings Nav -->
+      <div
+        class="nav nav-pills d-flex flex-row justify-content-center mb-3 w-100">
+        <a
+          class="nav-item nav-link"
+          href="{base}/settings"
+          class:active="{matching($page.url.pathname, base + '/settings')}">
+          Genel
+        </a>
+        <a
+          class="nav-item nav-link"
+          href="{base}/settings/site-settings"
+          class:active="{matching(
+            $page.url.pathname,
+            base + '/settings/site-settings',
+            true
+          )}">
+          Website
+        </a>
+        <a
+          class="nav-item nav-link position-relative"
+          href="{base}/settings/updates"
+          class:active="{matching(
+            $page.url.pathname,
+            base + '/settings/updates',
+            true
+          )}">
+          Güncellemeler
+          <span
+            class="position-absolute top-0 start-100 translate-middle p-2 bg-danger rounded-circle">
+          </span>
+        </a>
+        <a
+          class="nav-item nav-link"
+          href="{base}/settings/about"
+          class:active="{matching(
+            $page.url.pathname,
+            base + '/settings/about',
+            true
+          )}">
+          Hakkında
+        </a>
+      </div>
     </div>
-  </nav>
-
-  <hr />
+  </div>
 
   <slot />
-</article>
+</div>
 
 <script>
   import { base } from "$app/paths";
