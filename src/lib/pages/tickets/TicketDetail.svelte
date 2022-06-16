@@ -91,8 +91,7 @@
                   <i class="fas fa-ellipsis-v"></i>
                 </a> -->
               <Date time="{message.date}">
-                <div
-                  class="message-balloon p-2 rounded bg-white border shadow-sm">
+                <div class="message-balloon p-2 rounded bg-primary text-white">
                   {@html message.message}
                 </div>
               </Date>
@@ -102,7 +101,7 @@
                 <img
                   src="https://minotar.net/avatar/{message.username}/48"
                   alt="{message.username}"
-                  class="ml-2 border rounded-circle d-block mr-auto animate__animated animate__zoomIn"
+                  class="ml-2 rounded-circle d-block mr-auto animate__animated animate__zoomIn"
                   use:tooltip="{[message.username, { placement: 'bottom' }]}"
                   width="48"
                   height="48" />
@@ -116,7 +115,7 @@
                 <img
                   src="https://minotar.net/avatar/{message.username}/48"
                   alt="{message.username}"
-                  class="border rounded-circle animate__animated animate__zoomIn"
+                  class="rounded-circle animate__animated animate__zoomIn"
                   use:tooltip="{[message.username, { placement: 'bottom' }]}"
                   width="48"
                   height="48" />
@@ -125,7 +124,7 @@
             <div class="col-auto d-flex flex-nowrap align-items-center">
               <Date time="{message.date}">
                 <div
-                  class="message-balloon p-2 rounded d-inline-block bg-white border shadow-sm">
+                  class="message-balloon p-2 rounded d-inline-block bg-light">
                   {message.message}
                 </div>
               </Date>
@@ -162,12 +161,12 @@
         </div>
         <div class="col-auto">
           <button
-            class="btn btn-primary mt-lg-0 mt-3"
+            class="btn btn-secondary mt-lg-0 mt-3"
             on:click="{sendMessage}"
             class:disabled="{messageSendLoading || isEditorEmpty}"
             :disabled="{messageSendLoading || isEditorEmpty}">
             <i class="fas fa-paper-plane"></i>
-            <span class="d-lg-inline d-none ml-1">Gönder</span>
+            <span class="d-lg-inline d-none">Gönder</span>
           </button>
         </div>
       </div>
@@ -284,6 +283,7 @@
 
   import Date from "$lib/component/Date.svelte";
   import TicketStatus from "$lib/component/TicketStatus.svelte";
+  
 
   export let data;
 
