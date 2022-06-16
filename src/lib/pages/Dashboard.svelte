@@ -23,57 +23,57 @@
             class="btn btn-sm btn-primary"
             data-bs-target="#connectServer"
             data-bs-toggle="modal">
-            <i class="fas fa-plus mr-2"></i>
+            <i class="fas fa-plus"></i>
             Sunucu Bağla
           </button>
         </div>
         <div class="col-lg-4 mb-lg-0 mb-3">
-          <ul class="list-unstyled mb-1">
+          <ul class="list-unstyled">
             <h5>Menüden Öneriler</h5>
             <li>
               <a class="alert-link" href="{base}/posts/create-post">
-                <i class="fas fa-pen mr-2"></i>
+                <i class="fas fa-pen"></i>
                 İlk Yazınızı Yayınlayın
               </a>
             </li>
             <li>
               <a class="alert-link" href="{base}/view">
-                <i class="fas fa-brush mr-1"></i>
+                <i class="fas fa-brush"></i>
                 Sitenizin Görünümünü Belirleyin
               </a>
             </li>
             <li>
               <a class="alert-link" href="{base}/tools">
-                <i class="fas fa-tools mr-2"></i>
+                <i class="fas fa-tools"></i>
                 Araçları Yönetin
               </a>
             </li>
             <li>
               <a class="alert-link" href="{base}/players">
-                <i class="fas fa-user-cog mr-2"></i>
+                <i class="fas fa-user-cog"></i>
                 Oyuncularınızı İnceleyin
               </a>
             </li>
           </ul>
         </div>
         <div class="col-lg-4 mb-lg-0 mb-3">
-          <ul class="list-unstyled mb-2">
+          <ul class="list-unstyled">
             <h5>Daha Fazlası</h5>
             <li>
               <a class="alert-link" href="javascript:void(0);">
-                <i class="fas fa-puzzle-piece mr-2"></i>
+                <i class="fas fa-puzzle-piece"></i>
                 Pano Eklentilerini Keşfedin
               </a>
             </li>
             <li>
               <a class="alert-link" href="javascript:void(0);">
-                <i class="fas fa-palette mr-2"></i>
+                <i class="fas fa-palette"></i>
                 Pano Temalarını Keşfedin
               </a>
             </li>
             <li>
               <a class="alert-link" href="javascript:void(0);" target="_blank">
-                <i class="fas fa-book-open mr-2"></i>
+                <i class="fas fa-book-open"></i>
                 Dökümantasyonları İnceleyin
               </a>
             </li>
@@ -82,7 +82,7 @@
                 class="alert-link"
                 href="https://panomc.com/discord"
                 target="_blank">
-                <i class="fab fa-discord mr-2"></i>
+                <i class="fab fa-discord"></i>
                 Discord Topluluğumuza Katılın
               </a>
             </li>
@@ -164,11 +164,6 @@
         <div class="col">
           <h5 class="card-title">Son Talepler</h5>
         </div>
-        <div class="col-auto text-right">
-          <a href="{base}/tickets" class="btn btn-link bg-light btn-sm">
-            Tüm Talepler
-          </a>
-        </div>
       </div>
 
       {#if data.tickets.length === 0}
@@ -179,21 +174,7 @@
       {:else}
         <ul class="list-group">
           {#each data.tickets as ticket, index (ticket)}
-            <a
-              href="{base}/tickets/ticket/{ticket.id}"
-              class="list-group-item list-group-item-action rounded d-flex flex-row">
-              <div class="text-primary">
-                {ticket.title}
-                <br />
-                <small class="text-muted">
-                  <b> <Date time="{ticket.lastUpdate}" /> </b>,
-                  <a href="{base}/tickets/category/{ticket.category.title}">
-                    <b>{ticket.category.title}</b>
-                  </a>
-                  kategorisine açıldı.
-                </small>
-              </div>
-            </a>
+            <a href="{base}/tickets/ticket/{ticket.id}">ticket</a>
           {/each}
         </ul>
       {/if}
@@ -204,7 +185,7 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">İstatistik</h5>
-      <div class="table-responsive animate__animated animate__fadeIn">
+      <div class="table-responsive">
         <table class="table table-sm m-0">
           <tbody class="text-muted">
             <tr>
