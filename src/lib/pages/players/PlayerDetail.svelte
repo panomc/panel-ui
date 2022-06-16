@@ -10,6 +10,14 @@
       </a>
     </div>
     <div class="col-auto">
+      <a
+        class="btn btn-link link-danger"
+        data-target="#conformBanPlayer"
+        data-toggle="modal"
+        href="javascript:void(0);">
+        <i class="fas fa-gavel"></i>
+        <span class="ml-1 d-lg-inline d-none">Yasakla</span>
+      </a>
       {#if !data.player.isEmailVerified}
         <a
           class="btn btn-link"
@@ -31,19 +39,11 @@
         <span class="ml-1 d-lg-inline d-none">Yetkilendir</span>
       </a>
       <a
-        class="btn btn-link"
+        class="btn btn-primary"
         href="javascript:void(0);"
         on:click="{() => showEditPlayerModal(data.player)}">
         <i class="fas fa-pencil-alt"></i>
         <span class="ml-1 d-lg-inline d-none">Düzenle</span>
-      </a>
-      <a
-        class="btn btn-outline-danger"
-        data-target="#conformBanPlayer"
-        data-toggle="modal"
-        href="javascript:void(0);">
-        <i class="fas fa-gavel"></i>
-        <span class="ml-1 d-lg-inline d-none">Yasakla</span>
       </a>
     </div>
   </div>
@@ -64,12 +64,11 @@
           <h4 class="card-title">{data.player.username}</h4>
           <h6 class="text-muted">{data.player.email}</h6>
 
-          <div
-            class="badge bg-success rounded-pill"
+          <span
+            class="badge bg-secondary rounded-pill"
             use:tooltip="{['Sitede', { placement: 'top' }]}">
-            <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
-            <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
-          </div>
+            Çevrimiçi
+          </span>
           <hr />
 
           <ul class="list-inline mb-0">
@@ -80,7 +79,7 @@
                   Yasaklı
                 </div>
               {/if}
-              <div class="badge text-dark border text-capitalize">
+              <div class="badge bg-light text-black">
                 <a
                   href="{base}/players/permission/{data.player
                     .permissionGroup}">
@@ -92,13 +91,13 @@
             </li>
             <li class="list-inline-item mb-2">
               {#if data.player.isEmailVerified}
-                <div class="badge text-dark border">Doğrulandı</div>
+                <div class="badge bg-light text-black">Doğrulandı</div>
               {:else}
-                <div class="badge text-dark border">Doğrulannadı</div>
+                <div class="badge bg-light text-black">Doğrulannadı</div>
               {/if}
             </li>
             <li class="list-inline-item mb-2">
-              <div class="badge text-dark border">
+              <div class="badge bg-light text-black">
                 <Date time="{data.player.registerDate}" />
               </div>
             </li>
