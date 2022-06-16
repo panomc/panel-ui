@@ -219,8 +219,8 @@
   $: {
     pageTitle.set(
       `"${
-        data.category.title === "-" ? "Kategorisiz" : data.category.title
-      }" Kategorisindeki Talepler`
+        data.category.title === "" ? "Kategorisiz" : data.category.title
+      }" Talepler`
     );
   }
 
