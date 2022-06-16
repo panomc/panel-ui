@@ -5,8 +5,8 @@
     class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets/categories">
-        <i class="fas fa-list-alt "></i>
-        Talep Kategorileri
+        <i class="fas fa-list-alt me-2"></i>
+        Yazı Kategorileri
       </a>
     </div>
     <div class="col-auto">
@@ -30,7 +30,7 @@
           role="button"
           href="javascript:void(0);"
           on:click="{onShowCloseTicketsModalClick}">
-          <i class="fas fa-check"></i>
+          <i class="fas fa-check me-2"></i>
           Kapat
         </a>
       </div>

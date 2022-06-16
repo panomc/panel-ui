@@ -2,30 +2,28 @@
 <article class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp"
-  >
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
-        <i class="fas fa-arrow-left mr-1"></i>
+        <i class="fas fa-arrow-left me-2"></i>
         Talepler
       </a>
     </div>
     <div class="col-auto">
       <div
         class:d-none="{firstLoad}"
-        class="animate__animated {getListOfChecked($checkedList).length > 0
-          ? 'animate__fadeIn'
-          : 'animate__fadeOut'}
-      faster"
-      >
+        class="animate__animated animate__faster {getListOfChecked($checkedList)
+          .length > 0
+          ? 'animate__slideInUp'
+          : 'animate__slideOutDown'}
+      faster">
         <a
-          class="btn btn-outline-danger"
+          class="btn btn-link link-danger"
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
-          on:click="{onShowDeleteTicketsModalClick}"
-        >
-          <i class="fas fa-trash mr-1"></i>
+          on:click="{onShowDeleteTicketsModalClick}">
+          <i class="fas fa-trash me-2"></i>
           Sil
         </a>
         <a
@@ -33,9 +31,8 @@
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
-          on:click="{onShowCloseTicketsModalClick}"
-        >
-          <i class="fas fa-check mr-1"></i>
+          on:click="{onShowCloseTicketsModalClick}">
+          <i class="fas fa-check me-2"></i>
           Kapat
         </a>
       </div>
@@ -78,8 +75,7 @@
                         $checkedList
                       )}"
                       id="selectAll"
-                      type="checkbox"
-                    />
+                      type="checkbox" />
                   </div>
                 </th>
                 <th class="min-w-200px align-middle" scope="col">Başlık</th>
@@ -97,8 +93,7 @@
                   on:showCloseTicketModalClick="{(event) =>
                     onShowCloseTicketModalClick(event.detail.id)}"
                   on:showDeleteTicketModalClick="{(event) =>
-                    onShowDeleteTicketModalClick(event.detail.id)}"
-                />
+                    onShowDeleteTicketModalClick(event.detail.id)}" />
               {/each}
             </tbody>
           </table>
@@ -110,8 +105,7 @@
         totalPage="{data.totalPage}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.totalPage)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
     </div>
   </div>
 </article>

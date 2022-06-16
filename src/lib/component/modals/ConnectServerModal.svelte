@@ -4,8 +4,7 @@
   class="modal fade"
   id="connectServer"
   role="document"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,8 +13,7 @@
           class="btn-close"
           data-bs-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button"
-        >
+          type="button">
         </button>
       </div>
       <div class="modal-body">
@@ -25,11 +23,9 @@
           </div>
 
           <h5 class="text-primary">1. Oyun Eklentisini Sunucunuza İndirin:</h5>
-          <button class="btn btn-link bg-light">
-            <i class="fas fa-file-download mr-1"></i>
-            Pano Minecraft Eklentisini İndir
-            <br />
-            <small>BungeeCord, Bukkit, Spigot, PaperSpigot</small>
+          <button class="btn btn-outline-primary">
+            <i class="fas fa-file-download me-2"></i>
+            Pano Oyun Eklentisini İndir
           </button>
 
           <div class="my-4">
@@ -42,8 +38,7 @@
               bind:value="{commandText}"
               class="form-control user-select-all"
               id="platformToken"
-              type="text"
-            />
+              type="text" />
             <button
               on:click="{onCopyCommandTextClick}"
               class="btn btn-outline-gray text-primary"
@@ -52,8 +47,7 @@
               use:tooltip="{[
                 isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala',
                 { placement: 'top', hideOnClick: false },
-              ]}"
-            >
+              ]}">
               <i class="fas fa-clipboard"></i>
             </button>
           </div>
@@ -67,9 +61,9 @@
 
           <h5 class="text-primary">3. Bağlantı İsteğine Onay Verin:</h5>
           <p class="mb-0">
-            Bildirim panelinden (
+            Bildirim panelinden
             <i class="fas fa-bell"></i>
-            ) "Sunucu Bağlantısı İsteği" bildirimini açarak, onay verin.
+            "Sunucu Bağlantısı İsteği" bildirimini açarak, onay verin.
           </p>
         </div>
       </div>

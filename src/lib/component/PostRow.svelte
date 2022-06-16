@@ -7,7 +7,7 @@
         class="btn btn-sm btn-link"
         data-bs-toggle="dropdown"
         title="Eylemler">
-        <span class="fas fa-ellipsis-h"></span>
+        <span class="fas fa-ellipsis-v"></span>
       </a>
       <div
         class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
@@ -15,7 +15,7 @@
           class="dropdown-item"
           target="_blank"
           href="{UI_URL}/preview/post/{post.id}">
-          <i class="fas fa-eye"></i>
+          <i class="fas fa-eye me-2"></i>
           Görüntüle
         </a>
         {#if pageType !== PageTypes.DRAFT}
@@ -26,7 +26,7 @@
             class:disabled="{buttonsLoading}"
             disabled="{buttonsLoading}">
             <span>
-              <i class="fa-solid fa-floppy-disk"></i>
+              <i class="fa-solid fa-floppy-disk me-2"></i>
               Taslaklara Taşı
             </span>
           </a>
@@ -40,7 +40,7 @@
             disabled="{buttonsLoading}"
             on:click="{onPublishClick}">
             <span>
-              <i class="fas fa-globe-americas"></i>
+              <i class="fas fa-globe-americas me-2"></i>
               Yayınla
             </span>
           </a>
@@ -50,7 +50,7 @@
           class="dropdown-item link-danger"
           href="javascript:void(0);"
           on:click="{onDeletePostClick}">
-          <i class="fas fa-trash"></i>
+          <i class="fas fa-trash me-2"></i>
           Sil
         </a>
       </div>
@@ -80,7 +80,7 @@
       use:tooltip="{[post.writer.username, { placement: 'bottom' }]}">
       <img
         alt="{post.writer.username}"
-        class="rounded-circle border"
+        class="rounded-circle"
         height="32"
         src="https://minotar.net/avatar/{post.writer.username}"
         width="32" />

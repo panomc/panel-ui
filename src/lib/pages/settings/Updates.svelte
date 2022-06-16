@@ -13,7 +13,7 @@
       <div class="col-auto">
         <button class="btn btn-outline-primary" type="button">
           <i class="fas fa-sync"></i>
-          <span class="ml-1 d-md-inline d-none">Güncellemeleri Denetle</span>
+          <span class="ms-2 d-md-inline d-none">Güncellemeleri Denetle</span>
         </button>
       </div>
     </section>
@@ -24,7 +24,7 @@
         <h5 class="card-title">Update</h5>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
         <button class="btn btn-secondary" type="button">
-          <i class="fa fa-download mr-1"></i>
+          <i class="fa fa-download me-2"></i>
           Kur
         </button>
         <button class="btn btn-outline-primary" type="button">

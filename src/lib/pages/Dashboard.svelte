@@ -23,7 +23,7 @@
             class="btn btn-sm btn-primary"
             data-bs-target="#connectServer"
             data-bs-toggle="modal">
-            <i class="fas fa-plus"></i>
+            <i class="fas fa-plus me-2"></i>
             Sunucu Bağla
           </button>
         </div>
@@ -32,25 +32,25 @@
             <h5>Menüden Öneriler</h5>
             <li>
               <a class="alert-link" href="{base}/posts/create-post">
-                <i class="fas fa-pen"></i>
+                <i class="fas fa-pen me-2"></i>
                 İlk Yazınızı Yayınlayın
               </a>
             </li>
             <li>
               <a class="alert-link" href="{base}/view">
-                <i class="fas fa-brush"></i>
+                <i class="fas fa-brush me-2"></i>
                 Sitenizin Görünümünü Belirleyin
               </a>
             </li>
             <li>
               <a class="alert-link" href="{base}/tools">
-                <i class="fas fa-tools"></i>
+                <i class="fas fa-tools me-2"></i>
                 Araçları Yönetin
               </a>
             </li>
             <li>
               <a class="alert-link" href="{base}/players">
-                <i class="fas fa-user-cog"></i>
+                <i class="fas fa-user-cog me-2"></i>
                 Oyuncularınızı İnceleyin
               </a>
             </li>
@@ -61,19 +61,19 @@
             <h5>Daha Fazlası</h5>
             <li>
               <a class="alert-link" href="javascript:void(0);">
-                <i class="fas fa-puzzle-piece"></i>
+                <i class="fas fa-puzzle-piece me-2"></i>
                 Pano Eklentilerini Keşfedin
               </a>
             </li>
             <li>
               <a class="alert-link" href="javascript:void(0);">
-                <i class="fas fa-palette"></i>
+                <i class="fas fa-palette me-2"></i>
                 Pano Temalarını Keşfedin
               </a>
             </li>
             <li>
               <a class="alert-link" href="javascript:void(0);" target="_blank">
-                <i class="fas fa-book-open"></i>
+                <i class="fas fa-book-open me-2"></i>
                 Dökümantasyonları İnceleyin
               </a>
             </li>
@@ -82,7 +82,7 @@
                 class="alert-link"
                 href="https://panomc.com/discord"
                 target="_blank">
-                <i class="fab fa-discord"></i>
+                <i class="fab fa-discord me-2"></i>
                 Discord Topluluğumuza Katılın
               </a>
             </li>

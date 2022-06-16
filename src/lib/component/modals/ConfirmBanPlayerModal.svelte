@@ -21,3 +21,5 @@
     </div>
   </div>
 </div>
+
+<!-- Bu komponent düzenlenmeli -->

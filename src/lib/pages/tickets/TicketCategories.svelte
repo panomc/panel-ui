@@ -5,7 +5,7 @@
     class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
-        <i class="fas fa-arrow-left mr-1"></i>
+        <i class="fas fa-arrow-left me-2"></i>
         Talepler
       </a>
     </div>
@@ -15,7 +15,7 @@
         type="button"
         on:click="{onCreateCategoryClick}">
         <i class="fas fa-plus"></i>
-        <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
+        <span class="d-md-inline d-none ms-2">Kategori Oluştur</span>
       </button>
     </div>
   </div>

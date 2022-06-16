@@ -5,7 +5,7 @@
     class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/players">
-        <i class="fas fa-arrow-left mr-1"></i>
+        <i class="fas fa-arrow-left me-2"></i>
         Oyuncular
       </a>
     </div>
@@ -16,7 +16,7 @@
         data-toggle="modal"
         href="javascript:void(0);">
         <i class="fas fa-gavel"></i>
-        <span class="ml-1 d-lg-inline d-none">Yasakla</span>
+        <span class="ms-2 d-lg-inline d-none">Yasakla</span>
       </a>
       {#if !data.player.isEmailVerified}
         <a
@@ -27,7 +27,7 @@
           ]}"
           href="javascript:void(0);">
           <i class="fas fa-envelope"></i>
-          <span class="ml-1 d-lg-inline d-none">Doğrula</span>
+          <span class="ms-2 d-lg-inline d-none">Doğrula</span>
         </a>
       {/if}
       <a
@@ -36,14 +36,14 @@
         on:click="{() =>
           showAuthorizePlayerModal(data.player, $session.CSRFToken)}">
         <i class="fas fa-user-circle"></i>
-        <span class="ml-1 d-lg-inline d-none">Yetkilendir</span>
+        <span class="ms-2 d-lg-inline d-none">Yetkilendir</span>
       </a>
       <a
         class="btn btn-primary"
         href="javascript:void(0);"
         on:click="{() => showEditPlayerModal(data.player)}">
         <i class="fas fa-pencil-alt"></i>
-        <span class="ml-1 d-lg-inline d-none">Düzenle</span>
+        <span class="ms-2 d-lg-inline d-none">Düzenle</span>
       </a>
     </div>
   </div>
@@ -74,10 +74,7 @@
           <ul class="list-inline mb-0">
             <li class="list-inline-item mb-2">
               {#if data.player.isBanned}
-                <div class="badge bg-danger text-white">
-                  <i class="fas fa-gavel mr-1"></i>
-                  Yasaklı
-                </div>
+                <div class="badge bg-danger text-white">Yasaklı</div>
               {/if}
               <div class="badge bg-light text-black">
                 <a
@@ -109,16 +106,7 @@
       <!-- User's Tickets -->
       <div class="card">
         <div class="card-body">
-          <div class="row justify-content-between mb-3">
-            <div class="col-auto">
-              <h5 class="card-title">Son Talepler</h5>
-            </div>
-            <div class="col-auto">
-              <a href="{base}/tickets" class="btn btn-link bg-light btn-sm">
-                Tüm Talepler
-              </a>
-            </div>
-          </div>
+          <h5 class="card-title">Son Talepler</h5>
 
           {#if data.ticketCount === 0}
             <div
@@ -129,25 +117,7 @@
             </div>
           {:else}
             {#each data.tickets as ticket, index (ticket)}
-              <a
-                href="{base}/tickets/ticket/{ticket.id}"
-                class="list-group-item list-group-item-action rounded d-flex flex-row">
-                <div class="col">
-                  <span class="text-primary">
-                    #{ticket.id}
-                    {ticket.title}
-                  </span>
-                  <br />
-                  <small class="text-muted">
-                    <b><Date time="{ticket.lastUpdate}" /></b>,
-                    <b>{ticket.category.title}</b>
-                    kategorisine açıldı.
-                  </small>
-                </div>
-                <div class="col-auto d-flex align-items-center">
-                  <TicketStatus status="{ticket.status}" />
-                </div>
-              </a>
+              <a href="{base}/tickets/ticket/{ticket.id}">Ticket</a>
             {/each}
           {/if}
 

@@ -4,7 +4,7 @@
     class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/players">
-        <i class="fas fa-arrow-left mr-1"></i>
+        <i class="fas fa-arrow-left me-2"></i>
         Oyuncular
       </a>
     </div>
@@ -13,7 +13,7 @@
         href="javascript:void(0);"
         class="btn btn-secondary"
         on:click="{() => onCreatePermissionGroupClick()}">
-        <i class="fas fa-plus mr-1"></i>
+        <i class="fas fa-plus me-2"></i>
         Yetki Grubu Oluştur
       </a>
     </div>

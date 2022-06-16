@@ -11,7 +11,7 @@
           : ''}"
         class="btn btn-link"
         role="button">
-        <i class="fas fa-arrow-left mr-1"></i>
+        <i class="fas fa-arrow-left me-2"></i>
         Yazılar
       </a>
     </div>
@@ -39,7 +39,7 @@
         role="button"
         target="_blank"
         href="{UI_URL}/preview/post/{data.post.id}">
-        <i class="fas fa-eye"></i>
+        <i class="fas fa-eye me-2"></i>
         <span class="d-md-inline d-none">Görüntüle</span>
       </a>
       <button

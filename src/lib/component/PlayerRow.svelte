@@ -9,7 +9,7 @@
         data-bs-toggle="dropdown"
         href="javascript:void(0);"
         title="Eylemler">
-        <span class="fas fa-ellipsis-h"></span>
+        <span class="fas fa-ellipsis-v"></span>
       </button>
       <div
         class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
@@ -17,14 +17,14 @@
           class="dropdown-item"
           href="javascript:void(0);"
           on:click="{showAuthorizePlayerModal}">
-          <i class="fas fa-user-circle"></i>
+          <i class="fas fa-user-circle me-2"></i>
           Yetkilendir
         </a>
         <a
           class="dropdown-item"
           href="javascript:void(0);"
           on:click="{showEditPlayerModal}">
-          <i class="fa-solid fa-pencil-alt"></i>
+          <i class="fa-solid fa-pencil-alt me-2"></i>
           Düzenle
         </a>
         <a
@@ -32,7 +32,7 @@
           data-target="#conformBanTickets"
           data-toggle="modal"
           href="javascript:void(0);">
-          <i class="fas fa-gavel"></i>
+          <i class="fas fa-gavel me-2"></i>
           Yasakla
         </a>
       </div>

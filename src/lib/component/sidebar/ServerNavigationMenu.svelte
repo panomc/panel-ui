@@ -11,7 +11,7 @@
       data-bs-target="#connectServer"
       data-bs-toggle="modal"
       type="button">
-      <i class="fas fa-plus"></i>
+      <i class="fas fa-plus me-2"></i>
       Sunucu Bağla
     </button>
   </div>

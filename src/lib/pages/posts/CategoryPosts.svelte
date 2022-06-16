@@ -5,7 +5,7 @@
     class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts">
-        <i class="fas fa-arrow-left mr-1"></i>
+        <i class="fas fa-arrow-left ms-2"></i>
         Yazılar
       </a>
     </div>
@@ -15,7 +15,7 @@
         role="button"
         href="{base}/posts/create-post">
         <i class="fas fa-plus"></i>
-        <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
+        <span class="d-md-inline d-none ms-2">Yazı Oluştur</span>
       </a>
     </div>
   </div>

@@ -15,7 +15,7 @@
     class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
-        <i class="fas fa-arrow-left mr-1"></i>
+        <i class="fas fa-arrow-left me-2"></i>
         Talepler
       </a>
     </div>
@@ -33,7 +33,7 @@
           role="button"
           on:click="{() => showCloseTicketModal([data.ticket.id])}"
           href="javascript:void(0);">
-          <i class="fas fa-check mr-1"></i>
+          <i class="fas fa-check me-2"></i>
           Kapat
         </a>
       {/if}
@@ -75,7 +75,7 @@
           class="btn btn-link bg-light d-block m-auto"
           class:disabled="{loadMoreLoading}"
           on:click="{loadMore}"
-          ><i class="fas fa-arrow-up"></i> Önceki Mesajlar ({data.ticket.count -
+          ><i class="fas fa-arrow-up me-2"></i> Önceki Mesajlar ({data.ticket.count -
             (data.ticket.messages.length - sentMessageCount)})
         </button>
       {/if}
@@ -101,7 +101,7 @@
                 <img
                   src="https://minotar.net/avatar/{message.username}/48"
                   alt="{message.username}"
-                  class="ml-2 rounded-circle d-block mr-auto animate__animated animate__zoomIn"
+                  class="rounded-circle d-block mr-auto animate__animated animate__zoomIn"
                   use:tooltip="{[message.username, { placement: 'bottom' }]}"
                   width="48"
                   height="48" />
@@ -129,7 +129,7 @@
                 </div>
               </Date>
               <a
-                class="btn btn-link d-none ml-3"
+                class="btn btn-link d-none me-2"
                 role="button"
                 href="javascript:void(0);">
                 <i class="fas fa-ellipsis-v"></i>
@@ -166,7 +166,7 @@
             class:disabled="{messageSendLoading || isEditorEmpty}"
             :disabled="{messageSendLoading || isEditorEmpty}">
             <i class="fas fa-paper-plane"></i>
-            <span class="d-lg-inline d-none">Gönder</span>
+            <span class="d-lg-inline d-none ms-2">Gönder</span>
           </button>
         </div>
       </div>

@@ -4,12 +4,10 @@
   <div
     class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
-      <!-- Settings Nav -->
-      <div class="nav nav-pills d-flex flex-row justify-content-center w-100">
-        <a class="nav-item nav-link active" href="{base}/posts">Yazılar</a>
-        <a class="nav-item nav-link" href="{base}/posts/categories"
-          >Kategoriler</a>
-      </div>
+      <a class="btn btn-link" role="button" href="{base}/posts/categories">
+        <i class="fas fa-list-alt me-2"></i>
+        Yazı Kategorileri
+      </a>
     </div>
     <div class="col-auto">
       <a href="#" class="btn btn-secondary ml-auto" role="button">

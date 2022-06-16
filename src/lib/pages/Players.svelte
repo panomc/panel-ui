@@ -4,7 +4,7 @@
   <div class="row mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/players/permissions">
-        <i class="fas fa-user-circle mr-1"></i>
+        <i class="fas fa-user-circle me-2"></i>
         Yetkiler
       </a>
     </div>
