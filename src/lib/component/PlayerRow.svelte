@@ -42,7 +42,7 @@
     <a title="Görüntüle" href="{base}/players/player/{player.username}">
       <img
         alt="{player.username}"
-        class="rounded-circle border mr-3 animate__animated animate__zoomIn"
+        class="rounded-circle mr-3 animate__animated animate__zoomIn me-2"
         height="32"
         src="https://minotar.net/avatar/{player.username}"
         width="32" />
@@ -52,17 +52,16 @@
   <td class="align-middle text-nowrap text-capitalize">
     <a
       title="Filtrele"
-      class="badge text-dark border"
+      class="badge bg-light text-black rounded-pill"
       href="{base}/players/permission/{player.permissionGroup}">
       {player.permissionGroup === "-" ? "Oyuncu" : player.permissionGroup}
     </a>
   </td>
   <td class="align-middle text-nowrap">
     <div
-      class="badge bg-success rounded-pill"
+      class="badge bg-secondary rounded-pill text-white"
       use:tooltip="{['Sitede', { placement: 'bottom' }]}">
-      <i aria-hidden="true" class="fa fa-globe fa-fw"></i>
-      <span class="d-md-inline d-none ml-1">Çevrimiçi</span>
+      <span>Çevrimiçi</span>
     </div>
   </td>
   <td class="align-middle text-nowrap">10 dakika önce</td>
