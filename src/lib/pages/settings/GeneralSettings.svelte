@@ -22,11 +22,11 @@
             Otomatik güncellemeleri denetle:
           </label>
           <div class="col">
-            <select class="form-control" id="autoUpdatesOptions">
-              <option id="autoUpdatesOption1" selected>Asla</option>
-              <option id="autoUpdatesOption2" selected>Günde bir kez</option>
-              <option id="autoUpdatesOption3">Haftada bir kez</option>
-              <option id="autoUpdatesOption4">Ayda bir kez</option>
+            <select class="form-control" bind:value="{data.updatePeriod}">
+              <option value="{UpdatePeriod.NEVER}">Asla</option>
+              <option value="{UpdatePeriod.ONCE_PER_DAY}">Günde bir kez</option>
+              <option value="{UpdatePeriod.ONCE_PER_WEEK}">Haftada bir kez</option>
+              <option value="{UpdatePeriod.ONCE_PER_MONTH}">Ayda bir kez</option>
             </select>
           </div>
         </div>
@@ -37,8 +37,80 @@
   </div>
 </div>
 
+<script context="module">
+  import ApiUtil from "$lib/api.util.js";
+
+  export const UpdatePeriod = Object.freeze({
+    NEVER: "never",
+    ONCE_PER_DAY: "oncePerDay",
+    ONCE_PER_WEEK: "oncePerWeek",
+    ONCE_PER_MONTH: "oncePerMonth",
+  });
+
+  async function loadData({ request, CSRFToken }) {
+    return new Promise((resolve, reject) => {
+      ApiUtil.get({
+        path: "/api/panel/settings?type=general",
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          resolve(body);
+        } else {
+          reject(body);
+        }
+      });
+    });
+  }
+
+  /**
+   * @type {import('@sveltejs/kit').Load}
+   */
+  export async function load(request) {
+    let output = {
+      props: {
+        data: {
+          updatePeriod: UpdatePeriod.ONCE_PER_DAY,
+        },
+      },
+    };
+
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
+
+      return output;
+    }
+
+    await loadData({ request }).then((body) => {
+      output.props.data = { ...output.props.data, ...body };
+    });
+
+    return output;
+  }
+</script>
+
 <script>
-  import { pageTitle } from "$lib/store.js";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store.js";
+  import { session } from "$app/stores";
 
   pageTitle.set("Genel Ayarlar");
+
+  export let data;
+
+  if (data.NETWORK_ERROR) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadData({ CSRFToken: $session.CSRFToken })
+        .then((body) => {
+          data = { ...data, ...body };
+          resolve();
+        })
+        .catch(() => {
+          reject();
+        });
+    }, true);
+  }
+
+  function save() {
+
+  }
 </script>
