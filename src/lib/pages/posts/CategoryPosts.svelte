@@ -10,7 +10,10 @@
       </a>
     </div>
     <div class="col-auto">
-      <a class="btn btn-secondary" role="button" href="{base}/posts/create-post">
+      <a
+        class="btn btn-secondary"
+        role="button"
+        href="{base}/posts/create-post">
         <i class="fas fa-plus"></i>
         <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
       </a>
@@ -166,7 +169,7 @@
   pageTitle.set(
     `"${
       data.category.title === "-" ? "Kategorisiz" : data.category.title
-    }" Kategorisindeki Yazılar`
+    }" Yazılar`
   );
 
   if (data.NETWORK_ERROR) {
@@ -206,7 +209,7 @@
       ApiUtil.put({
         path: `/api/panel/posts/${id}/status`,
         body: {
-          to: "draft"
+          to: "draft",
         },
         CSRFToken: $session.CSRFToken,
       })
@@ -232,7 +235,7 @@
       ApiUtil.put({
         path: `/api/panel/posts/${id}/status`,
         body: {
-          to: "publish"
+          to: "publish",
         },
         CSRFToken: $session.CSRFToken,
       })

@@ -14,8 +14,7 @@
         class="btn btn-secondary"
         type="button"
         on:click="{onCreateCategoryClick}">
-        <i class="fas fa-plus"></i>
-        <span class="d-md-inline d-none ml-1">Kategori Oluştur</span>
+        <i class="fas fa-plus me-2"></i>Kategori Oluştur
       </button>
     </div>
   </div>

@@ -4,7 +4,7 @@
       <a
         role="button"
         href="javascript:void(0);"
-        class="btn btn-sm btn-link text-bittersweet"
+        class="btn btn-sm btn-link"
         data-bs-toggle="dropdown"
         title="Eylemler">
         <span class="fas fa-ellipsis-h"></span>
@@ -64,7 +64,7 @@
   <td class="align-middle text-nowrap">
     <a href="{base}/posts/category/{post.category.url}">
       <span
-        class="badge border rounded-pill text-dark"
+        class="badge bg-light text-black rounded-pill"
         class:text-dark="{post.category.title === '-'}"
         style="{post.category.title === '-'
           ? ''
@@ -73,6 +73,7 @@
       </span>
     </a>
   </td>
+  <td class="align-middle text-nowrap">{post.views}</td>
   <td class="align-middle text-nowrap">
     <a
       href="{base}/players/player/{post.writer.username}"
@@ -85,7 +86,6 @@
         width="32" />
     </a>
   </td>
-  <td class="align-middle text-nowrap">{post.views}</td>
   <td class="align-middle text-nowrap">
     <Date time="{post.date}" />
   </td>

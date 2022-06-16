@@ -1,8 +1,7 @@
 <article class="container">
   <!-- Action Menu -->
   <section
-    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp"
-  >
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a
         href="{base}/posts{data.post.status === StatusTypes.TRASH
@@ -11,8 +10,7 @@
           ? '/draft'
           : ''}"
         class="btn btn-link"
-        role="button"
-      >
+        role="button">
         <i class="fas fa-arrow-left mr-1"></i>
         Yazılar
       </a>
@@ -22,8 +20,7 @@
         <button
           class="btn btn-link text-danger"
           type="button"
-          on:click="{showDeletePostModal(data.post)}"
-        >
+          on:click="{showDeletePostModal(data.post)}">
           <i class="fas fa-trash"></i>
         </button>
       {/if}
@@ -33,20 +30,17 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{onDraftClick}"
-        >
-          <i class="fas fa-bookmark"></i>
-          <span class="d-md-inline d-none ml-1">Taslaklara Taşı</span>
+          on:click="{onDraftClick}">
+          <i class="fa-solid fa-floppy-disk"></i>
         </button>
       {/if}
       <a
         class="btn btn-link"
         role="button"
         target="_blank"
-        href="{UI_URL}/preview/post/{data.post.id}"
-      >
+        href="{UI_URL}/preview/post/{data.post.id}">
         <i class="fas fa-eye"></i>
-        <span class="d-md-inline d-none ml-1">Görüntüle</span>
+        <span class="d-md-inline d-none">Görüntüle</span>
       </a>
       <button
         class="btn btn-secondary"
@@ -55,8 +49,7 @@
           isEditorEmpty ||
           data.post.title.length === 0}"
         disabled="{loading || isEditorEmpty || data.post.title.length === 0}"
-        on:click="{onSubmit}"
-      >
+        on:click="{onSubmit}">
         <span>
           {data.post.status === StatusTypes.PUBLISHED ? "Güncelle" : "Yayınla"}
         </span>
@@ -74,15 +67,13 @@
             class="form-control form-control-lg border-0 mb-2"
             type="text"
             placeholder="Yazı başlığını girin"
-            bind:value="{data.post.title}"
-          />
+            bind:value="{data.post.title}" />
 
           <div class="align-selft-center w-100 h-75">
             <!-- Editor -->
             <Editor
               bind:content="{data.post.text}"
-              bind:isEmpty="{isEditorEmpty}"
-            />
+              bind:isEmpty="{isEditorEmpty}" />
             <!-- Editor End -->
           </div>
         </div>
@@ -92,66 +83,57 @@
     <!-- Post Option Cards -->
     <div class="col-lg-3">
       <div class="card">
-        <div class="p-2">
-          <form>
-            <ul class="list-group">
-              <li class="list-group-item">
-                <i class="fas fa-pen text-primary mr-1"></i>
-                <b>Durum:</b>
-                {getStatusByPostStatus(data.post.status)}
-              </li>
-              <li class="list-group-item">
-                <i class="fas fa-eye text-primary mr-1"></i>
-                <b>Görüntülenme:</b>
-                {data.mode === Modes.CREATE ? "0" : data.post.views}
-              </li>
-            </ul>
-          </form>
-        </div>
-      </div>
-      <div class="card">
         <div class="card-body">
-          <h6>
-            <i class="fas fa-folder-open text-primary mr-1"></i>
-            Kategori:
-          </h6>
-          <form>
-            {#if data.categoryCount === 0}
-              <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
-            {:else}
-              <select
-                class="form-control form-control-sm"
-                bind:value="{data.post.category}"
-              >
-                <option class="text-primary" value="{-1}">Kategorisiz</option>
+          <ul class="list-group p-0 m-0">
+            <li class="list-group-item">
+              Durum:
+              {getStatusByPostStatus(data.post.status)}
+            </li>
+            <li class="list-group-item">
+              Görüntülenme:
+              {data.mode === Modes.CREATE ? "0" : data.post.views}
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-auto">Kategori:</div>
+                <div class="col">
+                  <form>
+                    {#if data.categoryCount === 0}
+                      <p class="text-muted small">
+                        Hiç kategori oluşturulmamış.
+                      </p>
+                    {:else}
+                      <select
+                        class="form-control form-control-sm"
+                        bind:value="{data.post.category}">
+                        <option class="text-primary" value="{-1}"
+                          >Kategorisiz</option>
 
-                {#each data.categories as category, index (category)}
-                  <option value="{category.id}">{category.title}</option>
-                {/each}
-              </select>
-            {/if}
-          </form>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <h6>
-            <i class="fas fa-image text-primary mr-1"></i>
-            Küçük Resim:
-          </h6>
-          <a
-            href="javascript:void(0);"
-            data-bs-target="#setPostThumbnailModal"
-            data-bs-toggle="modal"
-            class="form-group"
-          >
-            <img
-              src="{base}/assets/img/vanilla.png"
-              class="border rounded img-fluid"
-              title="Küçük Resim"
-              alt="Küçük Resim"
-            />
-          </a>
+                        {#each data.categories as category, index (category)}
+                          <option value="{category.id}"
+                            >{category.title}</option>
+                        {/each}
+                      </select>
+                    {/if}
+                  </form>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              Küçük Resim:
+              <a
+                href="javascript:void(0);"
+                data-bs-target="#setPostThumbnailModal"
+                data-bs-toggle="modal"
+                class="form-group">
+                <img
+                  src="{base}/assets/img/vanilla.png"
+                  class="border rounded img-fluid"
+                  title="Küçük Resim"
+                  alt="Küçük Resim" />
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

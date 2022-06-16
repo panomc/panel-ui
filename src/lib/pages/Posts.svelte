@@ -2,22 +2,18 @@
 <article class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp"
-  >
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/posts/categories">
-        <i class="fas fa-list-alt mr-1"></i>
-        Yazı Kategorileri
-      </a>
+      <!-- Settings Nav -->
+      <div class="nav nav-pills d-flex flex-row justify-content-center w-100">
+        <a class="nav-item nav-link active" href="{base}/posts">Yazılar</a>
+        <a class="nav-item nav-link" href="{base}/posts/categories"
+          >Kategoriler</a>
+      </div>
     </div>
     <div class="col-auto">
-      <a
-        class="btn btn-secondary ml-auto"
-        role="button"
-        href="{base}/posts/create-post"
-      >
-        <i class="fas fa-plus"></i>
-        <span class="d-md-inline d-none ml-1">Yazı Oluştur</span>
+      <a href="#" class="btn btn-secondary ml-auto" role="button">
+        <i class="fas fa-plus me-2"></i> Yazı Oluştur
       </a>
     </div>
   </div>
@@ -45,16 +41,14 @@
               class:active="{data.pageType === PageTypes.PUBLISHED}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/posts/published"
-            >
+              href="{base}/posts/published">
               Yayınlanmış
             </a>
             <a
               class:active="{data.pageType === PageTypes.DRAFT}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/posts/draft"
-            >
+              href="{base}/posts/draft">
               Taslak
             </a>
 
@@ -62,8 +56,7 @@
               class:active="{data.pageType === PageTypes.TRASH}"
               class="btn btn-sm btn-outline-light btn-link text-danger"
               role="button"
-              href="{base}/posts/trash"
-            >
+              href="{base}/posts/trash">
               Çöp
             </a>
           </div>
@@ -85,8 +78,8 @@
                 <th scope="col"></th>
                 <th class="align-middle" scope="col">Başlık</th>
                 <th scope="col" class="align-middle">Kategori</th>
-                <th scope="col" class="align-middle">Yazar</th>
                 <th scope="col" class="align-middle">Görüntülenme</th>
+                <th scope="col" class="align-middle">Yazar</th>
                 <th scope="col" class="align-middle">Son Güncelleme</th>
               </tr>
             </thead>
@@ -99,8 +92,7 @@
                   on:moveToDraft="{(event) => onMoveToDraft(event.detail.id)}"
                   on:publish="{(event) => onPublishClick(event.detail.id)}"
                   on:deletePost="{(event) =>
-                    onDeletePostClick(event.detail.post)}"
-                />
+                    onDeletePostClick(event.detail.post)}" />
               {/each}
             </tbody>
           </table>
@@ -112,8 +104,7 @@
         totalPage="{data.totalPage}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.totalPage)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
       <!-- Pagination End -->
     </div>
   </div>
@@ -250,7 +241,7 @@
       ApiUtil.put({
         path: `/api/panel/posts/${id}/status`,
         body: {
-          to: "draft"
+          to: "draft",
         },
         CSRFToken: $session.CSRFToken,
       })
@@ -276,7 +267,7 @@
       ApiUtil.put({
         path: `/api/panel/posts/${id}/status`,
         body: {
-          to: "publish"
+          to: "publish",
         },
         CSRFToken: $session.CSRFToken,
       })
