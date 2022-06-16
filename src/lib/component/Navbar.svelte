@@ -115,7 +115,7 @@
                 src="https://minotar.net/avatar/{$user.username}"
                 width="32"
                 height="32"
-                class="border rounded-circle animate__animated animate__zoomIn"
+                class="rounded-circle animate__animated animate__zoomIn"
                 alt="{$user.username}" />
             </a>
             <ul
