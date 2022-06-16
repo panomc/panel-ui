@@ -62,51 +62,6 @@
   text-align: center;
 }
 
-.menu.navbar-nav li.nav-item {
-  padding: 0.2rem 2rem;
-}
-
-.menu > li.nav-item {
-  position: relative;
-  border-radius: 0.5rem;
-  /* color: $lightglass; */
-
-  &:hover {
-    transition: 250ms all;
-
-    &:before {
-      background: $gray;
-      border-radius: 20px;
-      content: " ";
-      height: 35%;
-      left: -6px;
-      top: 35%;
-      position: absolute;
-      width: 12px;
-      transition: 250ms all;
-    }
-  }
-}
-
-.menu > li.nav-item.active {
-  position: relative;
-  transition: 250ms all;
-
-  &:before {
-    display: flex;
-    align-items: center;
-    background: $sunflower;
-    border-radius: 20px;
-    content: " ";
-    height: 100%;
-    top: 0;
-    left: -6px;
-    position: absolute;
-    width: 12px;
-    transition: 250ms all;
-  }
-}
-
 .sidebar-tab > li.nav-item {
   a.nav-link.active {
     background: $lightglass;
