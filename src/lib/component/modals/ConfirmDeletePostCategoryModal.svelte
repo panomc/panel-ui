@@ -19,7 +19,7 @@
             <br />
             {#each $category.posts as post, index (post)}
               <a
-                class="badge bg-warning rounded-pill mr-1"
+                class="badge bg-warning rounded-pill"
                 href="{base}/posts/post/{post.id}"
                 target="_blank">
                 {post.title}
