@@ -7,10 +7,10 @@
   <div class="navbar navbar-dark w-100 px-2">
     <button
       type="button"
-      class="btn-close btn-close-white position-absolute"
+      class="btn btn-link link-white position-absolute"
       title="Menüyü Aç/kapa"
       on:click="{onMobileSideBarCollapseClick}"
-    >
+      ><i class="fa-solid fa-bars"></i>
     </button>
 
     <a class="navbar-brand m-auto" href="{base}/">
@@ -18,8 +18,7 @@
         alt="Pano"
         title="Pano"
         src="{base + '/assets/img/logo.svg'}"
-        width="20"
-      />
+        width="20" />
     </a>
   </div>
 
@@ -33,8 +32,7 @@
           width="64"
           height="64"
           src="https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/img/minecraft-creeper-face.jpg"
-          use:tooltip="{['Website Ayaları', { placement: 'right' }]}"
-        />
+          use:tooltip="{['Website Ayaları', { placement: 'right' }]}" />
       </a>
 
       <h5 class="text-light">{$website.name}</h5>
@@ -50,8 +48,7 @@
           class="btn btn-sm btn-aqua"
           data-bs-target="#showServers"
           data-bs-toggle="offcanvas"
-          type="button"
-        >
+          type="button">
           Sunucuları Görüntüle
         </button>
       {/if}
@@ -66,8 +63,7 @@
           use:tooltip="{['Website', { placement: 'bottom' }]}"
           on:click="{onWebsiteMenuClick}"
           class:active="{$sidebarTabsState === 'website'}"
-          class:text-light="{$sidebarTabsState !== 'website'}"
-        >
+          class:text-light="{$sidebarTabsState !== 'website'}">
           <i class="fas fa-globe fa-lg"></i>
         </a>
       </li>
@@ -78,8 +74,7 @@
           use:tooltip="{['Sunucu', { placement: 'bottom' }]}"
           on:click="{onGameMenuClick}"
           class:active="{$sidebarTabsState === 'game'}"
-          class:text-light="{$sidebarTabsState !== 'game'}"
-        >
+          class:text-light="{$sidebarTabsState !== 'game'}">
           <i class="fas fa-cube fa-lg"></i>
         </a>
       </li>
