@@ -21,26 +21,21 @@
             on:click="{hide}"></button>
         </div>
         <div class="modal-body">
-          <div class="mb-3">
-            <label for="selectPermGroup">Yetki grubu seç</label>
-            <select
-              class="form-control"
-              class:border-danger="{$errors['LAST_ADMIN']}"
-              id="selectPermGroup"
-              bind:value="{$player.permissionGroup}"
-            >
-              <option class="text-primary" value="-">Oyuncu</option>
+          <select
+            class="form-control"
+            class:border-danger="{$errors['LAST_ADMIN']}"
+            id="selectPermGroup"
+            bind:value="{$player.permissionGroup}">
+            <option class="text-primary" value="-">Oyuncu</option>
 
-              {#each $permissionGroups as permissionGroup, index (permissionGroup)}
-                <option value="{permissionGroup.name}"
-                  >{permissionGroup.name}</option
-                >
-              {/each}
-            </select>
-          </div>
+            {#each $permissionGroups as permissionGroup, index (permissionGroup)}
+              <option value="{permissionGroup.name}"
+                >{permissionGroup.name}</option>
+            {/each}
+          </select>
           {#if $errors["LAST_ADMIN"]}
             <small class="text-danger">
-              <i aria-hidden="true" class="fa fa-exclamation-circle mr-2  "></i>
+              <i aria-hidden="true" class="fa fa-exclamation-circle"></i>
               Bu kullanıcının yetkisi son yönetici olduğu için değiştirilemez.
             </small>
           {/if}
@@ -51,8 +46,7 @@
             class="btn btn-primary w-100"
             class:disabled="{$submitLoading}"
             disabled="{$submitLoading}"
-            on:click="{onSubmit}">Kaydet</button
-          >
+            on:click="{onSubmit}">Kaydet</button>
         </div>
       {/if}
     </div>
