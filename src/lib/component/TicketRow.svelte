@@ -1,5 +1,5 @@
 <tr class:table-primary="{ticket.selected}">
-  <th scope="row">
+  <th scope="row" class="align-middle">
     <div class="form-check">
       <input
         class="form-check-input"
