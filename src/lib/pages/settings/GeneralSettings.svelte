@@ -62,7 +62,7 @@
         CSRFToken,
       }).then((body) => {
         if (body.result === "ok") {
-          body.oldSettings = body
+          body.oldSettings = body;
 
           resolve(body);
         } else {
@@ -82,7 +82,7 @@
           updatePeriod: UpdatePeriod.ONCE_PER_DAY,
           oldSettings: {
             updatePeriod: UpdatePeriod.ONCE_PER_DAY,
-          }
+          },
         },
       },
     };
@@ -110,7 +110,7 @@
   export let data;
 
   let saveButtonLoading = false;
-  $: isSaveButtonDisabled = data.oldSettings.updatePeriod === data.updatePeriod
+  $: isSaveButtonDisabled = data.oldSettings.updatePeriod === data.updatePeriod;
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -139,6 +139,13 @@
         .then((body) => {
           if (body.result === "ok") {
             saveButtonLoading = false;
+
+            data.oldSettings = Object.keys(data)
+              .filter((key) => key !== "oldSettings")
+              .reduce((obj, key) => {
+                obj[key] = data[key];
+                return obj;
+              }, {});
 
             //TODO TOAST
 

@@ -179,13 +179,12 @@
               };
             });
 
-            data.oldSettings = Object.keys(data).filter(key =>
-              key !== 'oldSettings').reduce((obj, key) =>
-              {
+            data.oldSettings = Object.keys(data)
+              .filter((key) => key !== "oldSettings")
+              .reduce((obj, key) => {
                 obj[key] = data[key];
                 return obj;
-              }, {}
-            );
+              }, {});
 
             //TODO TOAST
 
