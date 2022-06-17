@@ -23,10 +23,7 @@
           </div>
 
           <h5 class="text-primary">1. Oyun Eklentisini Sunucunuza İndirin:</h5>
-          <button class="btn btn-outline-primary">
-            <i class="fas fa-file-download me-2"></i>
-            Pano Oyun Eklentisini İndir
-          </button>
+          <button class="btn btn-outline-primary"> Dosyayı İndir </button>
 
           <div class="my-4">
             <i class="fas fa-terminal fa-3x text-primary"></i>
@@ -41,7 +38,7 @@
               type="text" />
             <button
               on:click="{onCopyCommandTextClick}"
-              class="btn btn-outline-gray text-primary"
+              class="btn btn-outline-gray link-primary"
               id="copyPlatformToken"
               type="button"
               use:tooltip="{[
