@@ -34,9 +34,9 @@
 
       <button
         class="btn btn-secondary"
-        class:disabled="{saveButtonLoading}"
-        aria-disabled="{saveButtonLoading}"
-        disabled="{saveButtonLoading}"
+        class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
+        aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
+        disabled="{saveButtonLoading || isSaveButtonDisabled}"
         on:click="{save}"
         >Kaydet
       </button>
@@ -62,6 +62,8 @@
         CSRFToken,
       }).then((body) => {
         if (body.result === "ok") {
+          body.oldSettings = body
+
           resolve(body);
         } else {
           reject(body);
@@ -78,6 +80,9 @@
       props: {
         data: {
           updatePeriod: UpdatePeriod.ONCE_PER_DAY,
+          oldSettings: {
+            updatePeriod: UpdatePeriod.ONCE_PER_DAY,
+          }
         },
       },
     };
@@ -105,6 +110,7 @@
   export let data;
 
   let saveButtonLoading = false;
+  $: isSaveButtonDisabled = data.oldSettings.updatePeriod === data.updatePeriod
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
