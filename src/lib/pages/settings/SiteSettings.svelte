@@ -34,23 +34,21 @@
           Anahtar Kelimeler:
         </label>
         <div class="col">
-          <input
-            class="form-control mb-3"
-            placeholder="Eklemek için Enter'a basın"
-            type="text"
-            name="keyword" />
-          <a
-            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
-            href="#"
-            class="badge rounded-pill bg-light link-danger">Kelime</a>
-          <a
-            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
-            href="#"
-            class="badge rounded-pill bg-light link-danger">Kelime</a>
-          <a
-            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
-            href="#"
-            class="badge rounded-pill bg-light link-danger">Kelime</a>
+          <form on:submit|preventDefault="{addKeyWord}">
+            <input
+              class="form-control mb-3"
+              placeholder="Eklemek için Enter'a basın"
+              type="text"
+              name="keyword"
+              bind:value="{keyWord}" />
+          </form>
+          {#each data.keyWords as keyWord, index (keyWord)}
+            <a
+              use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
+              href="javascript:void(0);"
+              on:click="{() => removeKeyWord(index)}"
+              class="badge rounded-pill bg-light link-danger">{keyWord}</a>
+          {/each}
         </div>
       </div>
       <div class="row mb-3">
@@ -97,7 +95,8 @@
         CSRFToken,
       }).then((body) => {
         if (body.result === "ok") {
-          body.oldSettings = body;
+          body.oldSettings = { ...body };
+          body.oldSettings.keyWords = [...body.keyWords];
 
           resolve(body);
         } else {
@@ -116,9 +115,11 @@
         data: {
           websiteName: "",
           websiteDescription: "",
+          keyWords: [],
           oldSettings: {
             websiteName: "",
             websiteDescription: "",
+            keyWords: [],
           },
         },
       },
@@ -146,10 +147,12 @@
 
   export let data;
 
+  let keyWord;
   let saveButtonLoading = false;
   $: isSaveButtonDisabled =
     data.oldSettings.websiteName === data.websiteName &&
-    data.oldSettings.websiteDescription === data.websiteDescription;
+    data.oldSettings.websiteDescription === data.websiteDescription &&
+    data.oldSettings.keyWords.join() === data.keyWords.join();
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -173,6 +176,7 @@
         body: {
           websiteName: data.websiteName,
           websiteDescription: data.websiteDescription,
+          keyWords: data.keyWords,
         },
         CSRFToken: $session.CSRFToken,
       })
@@ -204,5 +208,21 @@
           reject();
         });
     });
+  }
+
+  function addKeyWord() {
+    if (!keyWord) {
+      return;
+    }
+
+    data.keyWords.push(keyWord);
+
+    data.keyWords = data.keyWords;
+
+    keyWord = "";
+  }
+
+  function removeKeyWord(index) {
+    data.keyWords = data.keyWords.remove(index);
   }
 </script>
