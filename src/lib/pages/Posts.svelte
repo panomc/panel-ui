@@ -10,7 +10,7 @@
       </a>
     </div>
     <div class="col-auto">
-      <a href="#" class="btn btn-secondary ml-auto" role="button">
+      <a href="{base}/posts/create-post" class="btn btn-secondary ml-auto" role="button">
         <i class="fas fa-plus me-2"></i> Yazı Oluştur
       </a>
     </div>
