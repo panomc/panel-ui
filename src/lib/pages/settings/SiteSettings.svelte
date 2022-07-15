@@ -40,14 +40,14 @@
               placeholder="Eklemek için Enter'a basın"
               type="text"
               name="keyword"
-              bind:value="{keyWord}" />
+              bind:value="{keyword}" />
           </form>
-          {#each data.keyWords as keyWord, index (keyWord)}
+          {#each data.keywords as keyword, index (keyword)}
             <a
               use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
               href="javascript:void(0);"
               on:click="{() => removeKeyWord(index)}"
-              class="badge rounded-pill bg-light link-danger">{keyWord}</a>
+              class="badge rounded-pill bg-light link-danger">{keyword}</a>
           {/each}
         </div>
       </div>
@@ -96,7 +96,7 @@
       }).then((body) => {
         if (body.result === "ok") {
           body.oldSettings = { ...body };
-          body.oldSettings.keyWords = [...body.keyWords];
+          body.oldSettings.keywords = [...body.keywords];
 
           resolve(body);
         } else {
@@ -115,11 +115,11 @@
         data: {
           websiteName: "",
           websiteDescription: "",
-          keyWords: [],
+          keywords: [],
           oldSettings: {
             websiteName: "",
             websiteDescription: "",
-            keyWords: [],
+            keywords: [],
           },
         },
       },
@@ -147,12 +147,12 @@
 
   export let data;
 
-  let keyWord;
+  let keyword;
   let saveButtonLoading = false;
   $: isSaveButtonDisabled =
     data.oldSettings.websiteName === data.websiteName &&
     data.oldSettings.websiteDescription === data.websiteDescription &&
-    data.oldSettings.keyWords.join() === data.keyWords.join();
+    data.oldSettings.keywords.join() === data.keywords.join();
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -176,7 +176,7 @@
         body: {
           websiteName: data.websiteName,
           websiteDescription: data.websiteDescription,
-          keyWords: data.keyWords,
+          keywords: data.keywords,
         },
         CSRFToken: $session.CSRFToken,
       })
@@ -211,18 +211,18 @@
   }
 
   function addKeyWord() {
-    if (!keyWord) {
+    if (!keyword) {
       return;
     }
 
-    data.keyWords.push(keyWord);
+    data.keywords.push(keyword);
 
-    data.keyWords = data.keyWords;
+    data.keywords = data.keywords;
 
-    keyWord = "";
+    keyword = "";
   }
 
   function removeKeyWord(index) {
-    data.keyWords = data.keyWords.remove(index);
+    data.keywords = data.keywords.remove(index);
   }
 </script>
