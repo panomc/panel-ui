@@ -34,15 +34,23 @@
           Anahtar Kelimeler:
         </label>
         <div class="col">
-          <textarea
-            aria-describedby="siteKeywords"
-            class="form-control"
-            id="siteKeywords"
-            rows="2"></textarea>
-          <small>
-            Anahtar kelimeleri virgül ile ayırın. Örnek: panocraft, minecraft,
-            server
-          </small>
+          <input
+            class="form-control mb-3"
+            placeholder="Eklemek için Enter'a basın"
+            type="text"
+            name="keyword" />
+          <a
+            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
+            href="#"
+            class="badge rounded-pill bg-light link-danger">Kelime</a>
+          <a
+            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
+            href="#"
+            class="badge rounded-pill bg-light link-danger">Kelime</a>
+          <a
+            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
+            href="#"
+            class="badge rounded-pill bg-light link-danger">Kelime</a>
         </div>
       </div>
       <div class="row mb-3">
@@ -79,6 +87,7 @@
 
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
+  import tooltip from "$lib/tooltip.util";
 
   async function loadData({ request, CSRFToken }) {
     return new Promise((resolve, reject) => {

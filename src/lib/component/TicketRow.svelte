@@ -26,10 +26,11 @@
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    <a href="{base}/tickets/category/{ticket.category.url}">
-      <div class="badge bg-light text-black rounded-pill">
-        {ticket.category.title}
-      </div>
+    <a
+      class="badge bg-light link-dark rounded-pill"
+      use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
+      href="{base}/tickets/category/{ticket.category.url}">
+      {ticket.category.title}
     </a>
   </td>
   <td class="align-middle text-nowrap">
