@@ -2,7 +2,7 @@
 <div class="tab-pane">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Pano Hakkında</h5>
+      <h5 class="card-title">Pano CMS</h5>
       <form class="animate__animated animate__fadeIn">
         <div class="row">
           <label class="col-sm-2 col-form-label" for="panoVersion">
@@ -22,16 +22,15 @@
         </div>
         <div class="row mb-0">
           <label class="col-sm-2 col-form-label" for="siteKeywords">
-            Resmi Website:
+            Web site:
           </label>
           <div class="col">
             <a
               aria-describedby="panoWebsite"
               href="https://panocms.com"
               id="panoWebsite"
-              target="_blank"
-            >
-              www.panocms.com
+              target="_blank">
+              panocms.com <i class="fa-solid fa-up-right-from-square ms-2"></i>
             </a>
           </div>
         </div>
@@ -44,9 +43,8 @@
               aria-describedby="panoWebsite"
               href="https://panocms.com/discord"
               id="panoWebsite"
-              target="_blank"
-            >
-              Pano Discord
+              target="_blank">
+              Qm8bfzJ9HB <i class="fa-solid fa-up-right-from-square ms-2"></i>
             </a>
           </div>
         </div>
@@ -57,9 +55,8 @@
   <div class="card">
     <div class="card-body animate__animated animate__fadeIn">
       <h5
-        class="card-title animate__animated animate__heartBeat animate__slower d-inline-block"
-      >
-        Açık Kaynak Lisansları ❤️
+        class="card-title animate__animated animate__heartBeat animate__slower d-inline-block">
+        Açık Kaynak Lisanslar ❤️
       </h5>
 
       <!-- Bootstrap 4.3 License -->
