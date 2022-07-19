@@ -174,7 +174,23 @@
       {:else}
         <ul class="list-group">
           {#each data.tickets as ticket, index (ticket)}
-            <a href="{base}/tickets/ticket/{ticket.id}">ticket</a>
+            <a
+              href="{base}/tickets/ticket/{ticket.id}"
+              class="list-group-item list-group-item-action rounded d-flex flex-row">
+              <div class="text-primary">
+                {ticket.title}
+                <br />
+                <small class="text-muted">
+                  <b>
+                    <Date time="{ticket.lastUpdate}" />
+                  </b>,
+                  <a href="{base}/tickets/category/{ticket.category.title}">
+                    <b>{ticket.category.title}</b>
+                  </a>
+                  kategorisine açıldı.
+                </small>
+              </div>
+            </a>
           {/each}
         </ul>
       {/if}
