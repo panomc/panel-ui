@@ -172,27 +172,64 @@
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}
-        <ul class="list-group">
+        <table class="table mb-0">
           {#each data.tickets as ticket, index (ticket)}
-            <a
-              href="{base}/tickets/ticket/{ticket.id}"
-              class="list-group-item list-group-item-action rounded d-flex flex-row">
-              <div class="text-primary">
-                {ticket.title}
-                <br />
-                <small class="text-muted">
-                  <b>
-                    <Date time="{ticket.lastUpdate}" />
-                  </b>,
-                  <a href="{base}/tickets/category/{ticket.category.title}">
-                    <b>{ticket.category.title}</b>
-                  </a>
-                  kategorisine açıldı.
-                </small>
-              </div>
-            </a>
+            <tr>
+              <td class="align-middle">
+                <a
+                  use:tooltip="{[ 
+                    ticket.writer.username,
+                    { placement: 'bottom' },
+                  ]}"
+                  href="{base}/players/player/{ticket.writer.username}">
+                  <img
+                    src="https://minotar.net/avatar/{ticket.writer.username}/32"
+                    alt="Oyuncu Adı"
+                    class="rounded-circle animate__animated animate__zoomIn m-2"
+                    height="32"
+                    width="32" />
+                </a>
+              </td>
+              <td class="align-middle text-nowrap">
+                <a href="/ticket/{ticket.id}" title="Talebi Görüntüle"
+                  >#{ticket.id} {ticket.title}</a>
+              </td>
+              <td class="align-middle text-nowrap">
+                <a
+                  use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
+                  class="badge rounded-pill bg-light text-black"
+                  href="/tickets/category/{ticket.category.url}">
+                  {ticket.category.title === "-"
+                    ? "Kategorisiz"
+                    : ticket.category.title}
+                </a>
+              </td>
+              <td class="align-middle text-nowrap">
+                <TicketStatus status="{ticket.status}" />
+              </td>
+              <td class="align-middle text-nowrap"
+                ><span><Date time="{ticket.lastUpdate}" /></span></td>
+            </tr>
+
+            <!-- <a
+            href="{base}/tickets/ticket/{ticket.id}"
+            class="list-group-item list-group-item-action rounded d-flex flex-row">
+            <div class="text-primary">
+              {ticket.title}
+              <br />
+              <small class="text-muted">
+                <b>
+                  <Date time="{ticket.lastUpdate}" />
+                </b>,
+                <a href="{base}/tickets/category/{ticket.category.title}">
+                  <b>{ticket.category.title}</b>
+                </a>
+                kategorisine açıldı.
+              </small>
+            </div>
+          </a> -->
           {/each}
-        </ul>
+        </table>
       {/if}
     </div>
   </div>
@@ -297,10 +334,14 @@
   import { session } from "$app/stores";
   import { pageTitle } from "$lib/store.js";
 
+  import tooltip from "$lib/tooltip.util";
+
   import VisitorsChart from "$lib/component/charts/Dashboard/VisitorsChart.svelte";
   // import PlayersChart from "$lib/component/charts/Dashboard/PlayersChart.svelte";
   // import TrafficChart from "$lib/component/charts/Dashboard/TrafficChart.svelte";
-  import TicketStatus from "$lib/component/TicketStatus.svelte";
+  import TicketStatus, {
+    TicketStatuses,
+  } from "$lib/component/TicketStatus.svelte";
   import Date from "$lib/component/Date.svelte";
 
   export let data;
