@@ -126,7 +126,7 @@
   async function loadData({ request, CSRFToken }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/initPage/permissionsPage",
+        path: "/api/panel/permissions",
         request,
         CSRFToken,
       }).then((body) => {
