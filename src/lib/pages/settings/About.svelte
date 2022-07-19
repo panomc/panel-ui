@@ -2,7 +2,7 @@
 <div class="tab-pane">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Pano CMS</h5>
+      <h5 class="card-title">Pano</h5>
       <form class="animate__animated animate__fadeIn">
         <div class="row">
           <label class="col-sm-2 col-form-label" for="panoVersion">
@@ -87,5 +87,5 @@
 <script>
   import { pageTitle } from "$lib/store.js";
 
-  pageTitle.set("Pano Hakkında");
+  pageTitle.set("Hakkında");
 </script>

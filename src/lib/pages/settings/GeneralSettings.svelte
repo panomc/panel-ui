@@ -5,7 +5,7 @@
       <h5 class="card-title">Platform Ayarları</h5>
       <div class="row mb-3">
         <label class="col-md-4 col-form-label" for="platformLangueage">
-          Platform Dili:
+          Görüntüleme Dili:
         </label>
         <div class="col">
           <select class="form-control" id="platformLanguage">

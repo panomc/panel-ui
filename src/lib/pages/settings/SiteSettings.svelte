@@ -46,9 +46,11 @@
             <a
               use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
               href="javascript:void(0);"
-              on:click="{() => removeKeyWord(index)}"
-              class="badge rounded-pill bg-light link-primary"
-              >{keyword} <i class="fa-solid fa-xmark ms-2 mb-2"></i></a>
+              on:click="{() => removeKeyWord(index)}">
+              <span class="badge rounded-pill bg-light link-primary">
+                {keyword}
+              </span>
+            </a>
           {/each}
         </div>
       </div>

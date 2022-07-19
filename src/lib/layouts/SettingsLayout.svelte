@@ -9,7 +9,7 @@
           class="nav-item nav-link"
           href="{base}/settings"
           class:active="{matching($page.url.pathname, base + '/settings')}">
-          Genel
+          Platform
         </a>
         <a
           class="nav-item nav-link"
