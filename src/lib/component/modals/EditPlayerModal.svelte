@@ -21,7 +21,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-6 mb-3">
-              <label for="username">Kullanıcı Adı:</label>
+              <label for="username">Kullanıcı Adı</label>
               <input
                 class="form-control"
                 id="username"
@@ -41,7 +41,7 @@
               {/if}
             </div>
             <div class="col-6 mb-3">
-              <label for="email">E-mail:</label>
+              <label for="email">E-Posta</label>
               <input
                 class="form-control"
                 id="email"
@@ -61,7 +61,7 @@
               {/if}
             </div>
             <div class="col-6 mb-3">
-              <label for="newPassword">Yeni Şifre:</label>
+              <label for="newPassword">Yeni Şifre</label>
               <input
                 class="form-control"
                 id="newPassword"
@@ -78,7 +78,7 @@
               {/if}
             </div>
             <div class="col-6 mb-3">
-              <label for="newPasswordRepeat">Yeni Şifre Tekrarı:</label>
+              <label for="newPasswordRepeat">Yeni Şifre Tekrarı</label>
               <input
                 class="form-control"
                 id="newPasswordRepeat"
@@ -89,7 +89,7 @@
               {#if !!$errors["newPasswordRepeat"]}
                 <small class="text-danger">
                   {#if $errors["newPasswordRepeat"] === "NOT_MATCH"}
-                    Yeni şifre ve yeni şifre tekrarı aynı değil
+                    Şifreler aynı değil
                   {/if}
                 </small>
               {/if}

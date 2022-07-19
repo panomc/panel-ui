@@ -36,6 +36,7 @@
                 <a
                   class="text-capitalize"
                   href="javascript:(void);"
+                  title="Düzenle"
                   on:click="{() =>
                     onShowEditPermissionGroupButtonClick(permissionGroup)}"
                   Z>

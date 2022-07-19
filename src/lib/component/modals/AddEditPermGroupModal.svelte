@@ -16,7 +16,7 @@
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
           <input
-            class="form-control"
+            class="form-control mb-3"
             placeholder="İsim"
             id="permName"
             type="text"
@@ -27,6 +27,41 @@
               {$errors.error}
             </small>
           {/if}
+          <label for="exampleDataList" class="form-label">Oyuncu Ekle</label>
+          <input
+            class="form-control mb-3"
+            list="datalistOptions"
+            id="exampleDataList"
+            placeholder="Eklemek için Enter'a basın" />
+          <datalist id="datalistOptions">
+            <option value="Ahmo"> </option>
+          </datalist>
+
+          <a
+            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
+            href="javascript:void(0);">
+            <span class="badge rounded-pill bg-light link-primary text-center">
+              <img
+                class="d-inline rounded-circle me-2"
+                src="https://minotar.net/avatar/Ahmo"
+                alt="Butlu"
+                width="28"
+                height="28" /> Ahmo
+            </span>
+          </a>
+
+          <a
+            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
+            href="javascript:void(0);">
+            <span class="badge rounded-pill bg-light link-primary text-center">
+              <img
+                class="d-inline rounded-circle me-2"
+                src="https://minotar.net/avatar/Butlu"
+                alt="Butlu"
+                width="28"
+                height="28" /> Butlu
+            </span>
+          </a>
         </div>
         <div class="modal-footer">
           <button
@@ -46,6 +81,7 @@
 
 <script context="module">
   import { writable, get } from "svelte/store";
+  import tooltip from "$lib/tooltip.util";
 
   const dialogID = "addEditPermissionGroup";
   const mode = writable("create");
