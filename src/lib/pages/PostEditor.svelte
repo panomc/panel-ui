@@ -64,7 +64,7 @@
       <div class="card w-100">
         <div class="card-body">
           <input
-            class="form-control form-control-lg border-0 mb-2"
+            class="form-control form-control-lg text-black border-0 p-0 mb-2"
             type="text"
             placeholder="Yazı başlığını girin"
             bind:value="{data.post.title}" />
@@ -343,7 +343,7 @@
 
           resolve();
         } else reject();
-      }
+      };
 
       if (data.post.id === -1) {
         ApiUtil.post({
@@ -356,7 +356,7 @@
             reject();
           });
 
-        return
+        return;
       }
 
       ApiUtil.put({
@@ -378,7 +378,7 @@
       ApiUtil.put({
         path: `/api/panel/posts/${data.post.id}/status`,
         body: {
-          to: "draft"
+          to: "draft",
         },
         CSRFToken: $session.CSRFToken,
       })

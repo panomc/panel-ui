@@ -11,7 +11,7 @@
           <input
             bind:value="{data.websiteName}"
             aria-describedby="siteTitle"
-            class="form-control"
+            class="form-control form-control-lg border-0 text-black p-0"
             id="siteTitle"
             type="text" />
         </div>
@@ -47,7 +47,8 @@
               use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
               href="javascript:void(0);"
               on:click="{() => removeKeyWord(index)}"
-              class="badge rounded-pill bg-light link-danger">{keyword}</a>
+              class="badge rounded-pill bg-light link-primary"
+              >{keyword} <i class="fa-solid fa-xmark ms-2 mb-2"></i></a>
           {/each}
         </div>
       </div>
