@@ -70,7 +70,7 @@
       {:else}
         <!-- Posts Table -->
         <div class="table-responsive">
-          <table class="table mb-0">
+          <table class="table table-hover mb-0">
             <thead>
               <tr>
                 <th scope="col"></th>

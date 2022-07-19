@@ -172,62 +172,48 @@
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}
-        <table class="table mb-0">
+        <table class="table table-borderless table-hover mb-0">
           {#each data.tickets as ticket, index (ticket)}
-            <tr>
-              <td class="align-middle">
-                <a
-                  use:tooltip="{[ 
-                    ticket.writer.username,
-                    { placement: 'bottom' },
-                  ]}"
-                  href="{base}/players/player/{ticket.writer.username}">
-                  <img
-                    src="https://minotar.net/avatar/{ticket.writer.username}/32"
-                    alt="Oyuncu Adı"
-                    class="rounded-circle animate__animated animate__zoomIn m-2"
-                    height="32"
-                    width="32" />
-                </a>
-              </td>
-              <td class="align-middle text-nowrap">
-                <a href="/ticket/{ticket.id}" title="Talebi Görüntüle"
-                  >#{ticket.id} {ticket.title}</a>
-              </td>
-              <td class="align-middle text-nowrap">
-                <a
-                  use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
-                  class="badge rounded-pill bg-light text-black"
-                  href="/tickets/category/{ticket.category.url}">
-                  {ticket.category.title === "-"
-                    ? "Kategorisiz"
-                    : ticket.category.title}
-                </a>
-              </td>
-              <td class="align-middle text-nowrap">
-                <TicketStatus status="{ticket.status}" />
-              </td>
-              <td class="align-middle text-nowrap"
-                ><span><Date time="{ticket.lastUpdate}" /></span></td>
-            </tr>
-
-            <!-- <a
-            href="{base}/tickets/ticket/{ticket.id}"
-            class="list-group-item list-group-item-action rounded d-flex flex-row">
-            <div class="text-primary">
-              {ticket.title}
-              <br />
-              <small class="text-muted">
-                <b>
-                  <Date time="{ticket.lastUpdate}" />
-                </b>,
-                <a href="{base}/tickets/category/{ticket.category.title}">
-                  <b>{ticket.category.title}</b>
-                </a>
-                kategorisine açıldı.
-              </small>
-            </div>
-          </a> -->
+            <tbody>
+              <tr>
+                <td class="align-middle">
+                  <a
+                    use:tooltip="{[
+                      ticket.writer.username,
+                      { placement: 'bottom' },
+                    ]}"
+                    href="{base}/players/player/{ticket.writer.username}">
+                    <img
+                      src="https://minotar.net/avatar/{ticket.writer
+                        .username}/32"
+                      alt="Oyuncu Adı"
+                      class="rounded-circle animate__animated animate__zoomIn"
+                      height="32"
+                      width="32" />
+                  </a>
+                </td>
+                <td class="align-middle text-nowrap">
+                  <a href="/ticket/{ticket.id}" title="Talebi Görüntüle"
+                    >#{ticket.id} {ticket.title}</a>
+                </td>
+                <td class="align-middle text-nowrap">
+                  <a
+                    use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
+                    href="/tickets/category/{ticket.category.url}">
+                    <span class="badge rounded-pill bg-light text-black">
+                      {ticket.category.title === "-"
+                        ? "Kategorisiz"
+                        : ticket.category.title}
+                    </span>
+                  </a>
+                </td>
+                <td class="align-middle text-nowrap">
+                  <TicketStatus status="{ticket.status}" />
+                </td>
+                <td class="align-middle text-nowrap"
+                  ><span><Date time="{ticket.lastUpdate}" /></span></td>
+              </tr>
+            </tbody>
           {/each}
         </table>
       {/if}
@@ -239,7 +225,7 @@
     <div class="card-body">
       <h5 class="card-title">İstatistik</h5>
       <div class="table-responsive">
-        <table class="table table-sm m-0">
+        <table class="table table-borderless table-hover m-0">
           <tbody class="text-muted">
             <tr>
               <th scope="row">Yazılar:</th>

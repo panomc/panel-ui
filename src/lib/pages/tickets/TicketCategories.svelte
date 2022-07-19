@@ -44,7 +44,7 @@
       <!-- Tickets Table -->
       {#if data.categoryCount > 0}
         <div class="table-responsive">
-          <table class="table mb-0">
+          <table class="table table-borderless table-hover mb-0">
             <thead>
               <tr>
                 <th scope="col"></th>

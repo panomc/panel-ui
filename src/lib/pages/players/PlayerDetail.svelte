@@ -116,9 +116,33 @@
               <p class="text-gray">Burada içerik yok.</p>
             </div>
           {:else}
-            {#each data.tickets as ticket, index (ticket)}
-              <a href="{base}/tickets/ticket/{ticket.id}">Ticket</a>
-            {/each}
+            <table class="table table-borderless table-hover mb-0">
+              {#each data.tickets as ticket, index (ticket)}
+                <tbody>
+                  <tr>
+                    <td class="align-middle text-nowrap">
+                      <a href="/ticket/{ticket.id}" title="Talebi Görüntüle"
+                        >#{ticket.id} {ticket.title}</a>
+                    </td>
+                    <td class="align-middle text-nowrap">
+                      <a
+                        use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
+                        href="/tickets/category/{ticket.category.url}">
+                        <span class="badge rounded-pill bg-light text-black">
+                          {ticket.category.title === "-"
+                            ? "Kategorisiz"
+                            : ticket.category.title}</span>
+                      </a>
+                    </td>
+                    <td class="align-middle text-nowrap">
+                      <TicketStatus status="{ticket.status}" />
+                    </td>
+                    <td class="align-middle text-nowrap"
+                      ><span><Date time="{ticket.lastUpdate}" /></span></td>
+                  </tr>
+                </tbody>
+              {/each}
+            </table>
           {/if}
 
           <!-- Pagination -->
