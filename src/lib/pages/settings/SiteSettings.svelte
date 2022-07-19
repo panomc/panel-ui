@@ -1,24 +1,25 @@
 <!-- Site Settings Sub Page -->
 <div class="tab-pane">
   <div class="card">
-    <div class="card-body  animate__animated animate__fadeIn">
+    <div class="card-body animate__animated animate__fadeIn">
       <h5 class="card-title">Website Ayarları</h5>
       <div class="row mb-3">
         <label class="col-md-4 col-form-label" for="siteTitle">
-          Site Başlığı:
+          Site İsmi
         </label>
-        <div class="col">
+        <div class="col col-form-label">
           <input
             bind:value="{data.websiteName}"
             aria-describedby="siteTitle"
             class="form-control form-control-lg border-0 text-black p-0"
+            placeholder="İsim"
             id="siteTitle"
             type="text" />
         </div>
       </div>
       <div class="row mb-3">
         <label class="col-md-4 col-form-label" for="siteDesc">
-          Site Açıklaması:
+          Site Açıklaması
         </label>
         <div class="col">
           <textarea
@@ -31,9 +32,9 @@
       </div>
       <div class="row mb-3">
         <label class="col-md-4 col-form-label" for="siteKeywords">
-          Anahtar Kelimeler:
+          Anahtar Kelimeler
         </label>
-        <div class="col">
+        <div class="col col-form-label">
           <form on:submit|preventDefault="{addKeyWord}">
             <input
               class="form-control mb-3"
@@ -56,9 +57,9 @@
       </div>
       <div class="row mb-3">
         <label class="col-md-4 col-form-label" for="siteFavicon">
-          Favicon:
+          Favicon
         </label>
-        <div class="col">
+        <div class="col col-form-label">
           <div class="row">
             <div class="col-auto">
               <img

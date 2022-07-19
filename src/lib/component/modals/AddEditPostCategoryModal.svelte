@@ -17,13 +17,12 @@
         <div class="modal-body">
           <input
             class:border-danger="{$errors.title}"
-            class="form-control mb-3"
+            class="form-control form-control-lg border-0 text-black p-0 mb-3"
             placeholder="Başlık"
             id="category"
             type="text"
             bind:value="{$category.title}"
-            on:input="{() => setURL()}"
-          />
+            on:input="{() => setURL()}" />
           <textarea
             class:border-danger="{$errors.description}"
             class="form-control mb-3"
@@ -40,8 +39,7 @@
               placeholder="URL"
               id="categoryURL"
               type="text"
-              bind:value="{$category.url}"
-            />
+              bind:value="{$category.url}" />
           </div>
           <small class:text-danger="{$errors.url}">
             Yanlızca [A-Z/a-z/0-9/-] içerebilir ve minimum 3, maksimum 32
@@ -55,8 +53,7 @@
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
             class:disabled="{loading || buttonDisabled}"
-            disabled="{loading || buttonDisabled}"
-          >
+            disabled="{loading || buttonDisabled}">
             <span>
               {#if $mode === "edit"}
                 Kaydet
@@ -132,7 +129,7 @@
   import ApiUtil from "$lib/api.util";
 
   let loading = false;
-  $: buttonDisabled = !$category.title
+  $: buttonDisabled = !$category.title;
 
   function onSubmit() {
     loading = true;
@@ -158,12 +155,11 @@
 
           resolve();
         } else reject();
-      }
+      };
 
       if (get(mode) === "edit") {
         ApiUtil.put({
-          path:
-            `/api/panel/post/categories/${get(category).id}`,
+          path: `/api/panel/post/categories/${get(category).id}`,
           body: get(category),
           CSRFToken: $session.CSRFToken,
         })
@@ -172,12 +168,11 @@
             reject();
           });
 
-        return
+        return;
       }
 
       ApiUtil.post({
-        path:
-          "/api/panel/post/category",
+        path: "/api/panel/post/category",
         body: get(category),
         CSRFToken: $session.CSRFToken,
       })

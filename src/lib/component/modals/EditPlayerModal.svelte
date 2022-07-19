@@ -4,8 +4,7 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -20,15 +19,14 @@
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
           <div class="row">
-            <div class="col-6 mb-3">
-              <label for="username">Kullanıcı Adı</label>
+            <div class="col-12">
               <input
-                class="form-control"
+                class="form-control form-control-lg text-black border-0 p-0"
                 id="username"
+                placeholder="İsim"
                 type="text"
                 bind:value="{$player.username}"
-                class:border-danger="{!!$errors.username}"
-              />
+                class:border-danger="{!!$errors.username}" />
               {#if !!$errors["username"]}
                 <small class="text-danger">
                   {#if $errors["username"] === "INVALID"}
@@ -40,15 +38,15 @@
                 </small>
               {/if}
             </div>
-            <div class="col-6 mb-3">
+            <div class="col-12 mb-3"></div>
+            <div class="col-12 mb-3">
               <label for="email">E-Posta</label>
               <input
                 class="form-control"
                 id="email"
                 type="text"
                 bind:value="{$player.email}"
-                class:border-danger="{!!$errors.email}"
-              />
+                class:border-danger="{!!$errors.email}" />
               {#if !!$errors["email"]}
                 <small class="text-danger">
                   {#if $errors["email"] === "INVALID"}
@@ -67,8 +65,7 @@
                 id="newPassword"
                 type="password"
                 bind:value="{$player.newPassword}"
-                class:border-danger="{!!$errors.newPassword}"
-              />
+                class:border-danger="{!!$errors.newPassword}" />
               {#if !!$errors["newPassword"]}
                 <small class="text-danger">
                   {#if $errors["newPassword"] === "INVALID"}
@@ -84,8 +81,7 @@
                 id="newPasswordRepeat"
                 type="password"
                 bind:value="{$player.newPasswordRepeat}"
-                class:border-danger="{!!$errors.newPasswordRepeat}"
-              />
+                class:border-danger="{!!$errors.newPasswordRepeat}" />
               {#if !!$errors["newPasswordRepeat"]}
                 <small class="text-danger">
                   {#if $errors["newPasswordRepeat"] === "NOT_MATCH"}
@@ -101,11 +97,9 @@
                   type="checkbox"
                   role="switch"
                   id="flexSwitchCheckChecked"
-                  checked
-                />
+                  checked />
                 <label class="form-check-label" for="flexSwitchCheckChecked"
-                  >Talep oluşturabilir</label
-                >
+                  >Talep oluşturabilir</label>
               </div>
             </div>
             <div class="col-6">
@@ -115,11 +109,9 @@
                   type="checkbox"
                   role="switch"
                   id="flexSwitchCheckChecked2"
-                  checked
-                />
+                  checked />
                 <label class="form-check-label" for="flexSwitchCheckChecked2"
-                  >E-postası doğrulandı</label
-                >
+                  >E-postası doğrulandı</label>
               </div>
             </div>
           </div>
@@ -129,8 +121,7 @@
             class="btn btn-primary w-100"
             type="submit"
             class:disabled="{loading}"
-            disabled="{loading}"
-          >
+            disabled="{loading}">
             Kaydet
           </button>
         </div>

@@ -6,7 +6,7 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets/categories">
         <i class="fas fa-list-alt me-2"></i>
-        Yazı Kategorileri
+        Talep Kategorileri
       </a>
     </div>
     <div class="col-auto">

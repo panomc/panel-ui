@@ -6,25 +6,25 @@
       <form class="animate__animated animate__fadeIn">
         <div class="row">
           <label class="col-sm-2 col-form-label" for="panoVersion">
-            Versiyon:
+            Versiyon
           </label>
-          <div class="col">
+          <div class="col col-form-label">
             <span aria-describedby="panoVersion" id="panoVersion"> 1.0 </span>
           </div>
         </div>
         <div class="row">
           <label class="col-sm-2 col-form-label" for="siteKeywords">
-            Sürüm:
+            Sürüm
           </label>
-          <div class="col">
+          <div class="col col-form-label">
             <span aria-describedby="panoRelease" id="panoRelease"> Beta </span>
           </div>
         </div>
         <div class="row mb-0">
           <label class="col-sm-2 col-form-label" for="siteKeywords">
-            Web site:
+            Web site
           </label>
-          <div class="col">
+          <div class="col col-form-label">
             <a
               aria-describedby="panoWebsite"
               href="https://panocms.com"
@@ -36,9 +36,9 @@
         </div>
         <div class="row mb-0">
           <label class="col-sm-2 col-form-label" for="siteKeywords">
-            Discord:
+            Discord
           </label>
-          <div class="col">
+          <div class="col col-form-label">
             <a
               aria-describedby="panoWebsite"
               href="https://panocms.com/discord"
