@@ -94,7 +94,7 @@
       ApiUtil.put({
         path: "/api/panel/tickets",
         body: {
-          tickets: Object.values(get(selectedTickets)),
+          tickets: Object.values(get(selectedTickets).map(id => parseInt(id))),
           status: "close"
         },
         CSRFToken: $session.CSRFToken,
