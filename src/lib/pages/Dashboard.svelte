@@ -193,13 +193,13 @@
                   </a>
                 </td>
                 <td class="align-middle text-nowrap">
-                  <a href="/ticket/{ticket.id}" title="Talebi Görüntüle"
+                  <a href="{base}/tickets/ticket/{ticket.id}" title="Talebi Görüntüle"
                     >#{ticket.id} {ticket.title}</a>
                 </td>
                 <td class="align-middle text-nowrap">
                   <a
                     use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
-                    href="/tickets/category/{ticket.category.url}">
+                    href="{base}/tickets/category/{ticket.category.url}">
                     <span class="badge rounded-pill bg-light text-black">
                       {ticket.category.title === "-"
                         ? "Kategorisiz"
