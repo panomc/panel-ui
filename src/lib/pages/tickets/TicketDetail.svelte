@@ -54,9 +54,9 @@
               >{data.ticket.username}</a>
             tarafından,
             <Date time="{data.ticket.date}" />,
-            <a href="javascript:void(0);"
-              >{data.ticket.category === "-"
-                ? data.ticket.category
+            <a href="{base}/tickets/category/{data.ticket.category.url}"
+              >{data.ticket.category.title === "-"
+                ? "Kategorisiz"
                 : data.ticket.category.title}</a>
             kategorisine açıldı.</small>
         </div>
