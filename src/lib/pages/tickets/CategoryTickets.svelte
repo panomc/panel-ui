@@ -213,7 +213,7 @@
   $: {
     pageTitle.set(
       `"${
-        data.category.title === "" ? "Kategorisiz" : data.category.title
+        data.category.title === "-" ? "Kategorisiz" : data.category.title
       }" Talepler`
     );
   }
