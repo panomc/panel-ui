@@ -94,33 +94,24 @@
               {data.mode === Modes.CREATE ? "0" : data.post.views}
             </li>
             <li class="list-group-item">
-              <div class="row">
-                <div class="col-auto">Kategori:</div>
-                <div class="col">
-                  <form>
-                    {#if data.categoryCount === 0}
-                      <p class="text-muted small">
-                        Hiç kategori oluşturulmamış.
-                      </p>
-                    {:else}
-                      <select
-                        class="form-control form-control-sm"
-                        bind:value="{data.post.category}">
-                        <option class="text-primary" value="{-1}"
-                          >Kategorisiz</option>
+              <form>
+                {#if data.categoryCount === 0}
+                  <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
+                {:else}
+                  <select
+                    class="form-control form-control-sm"
+                    bind:value="{data.post.category}">
+                    <option class="text-primary" value="{-1}"
+                      >Kategorisiz</option>
 
-                        {#each data.categories as category, index (category)}
-                          <option value="{category.id}"
-                            >{category.title}</option>
-                        {/each}
-                      </select>
-                    {/if}
-                  </form>
-                </div>
-              </div>
+                    {#each data.categories as category, index (category)}
+                      <option value="{category.id}">{category.title}</option>
+                    {/each}
+                  </select>
+                {/if}
+              </form>
             </li>
             <li class="list-group-item">
-              Küçük Resim:
               <a
                 href="javascript:void(0);"
                 data-bs-target="#setPostThumbnailModal"
