@@ -94,10 +94,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.delete({
-        path: "/api/panel/tickets",
-        body: {
-          tickets: Object.values(get(selectedTickets)),
-        },
+        path: "/api/panel/tickets?ids=" + Object.values(get(selectedTickets)).map(id => parseInt(id)),
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
