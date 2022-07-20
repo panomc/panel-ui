@@ -30,7 +30,7 @@
       class="badge bg-light link-dark rounded-pill"
       use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
       href="{base}/tickets/category/{ticket.category.url}">
-      {ticket.category.title}
+      {ticket.category.title === "-" ? "Kategorisiz" : ticket.category.title}
     </a>
   </td>
   <td class="align-middle text-nowrap">
