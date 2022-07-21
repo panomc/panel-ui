@@ -245,7 +245,7 @@
             </tr>
             <tr>
               <th scope="row">Bağlı Sunucular:</th>
-              <td>?</td>
+              <td>{data.connectedServerCount}</td>
             </tr>
             <tr>
               <th scope="row">Eklentiler:</th>
