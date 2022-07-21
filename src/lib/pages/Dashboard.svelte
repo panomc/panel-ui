@@ -237,7 +237,7 @@
             </tr>
             <tr>
               <th scope="row">Yöneticiler:</th>
-              <td>?</td>
+              <td>{data.adminCount}</td>
             </tr>
             <tr>
               <th scope="row">Talepler:</th>
