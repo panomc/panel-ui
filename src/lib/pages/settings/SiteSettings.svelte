@@ -33,26 +33,28 @@
 
       <div class="row mb-3">
         <label class="col-md-4 col-form-label" for="ipAdress">
-          Gösterilen IP Adresi
+          Oyun Sunucu IP Adresi
         </label>
         <div class="col col-form-label">
           <div class="row">
             <div class="col-6">
-              <select class="form-select">
-                <option selected>Seçilmedi</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-              <input
-                class="form-control border-danger mb-3"
-                placeholder="play.server.com"
-                type="text"
-                name="ipAdress" />
+              {#if showSpecialIpAddressField}
+                <input
+                  class="form-control border-danger mb-3"
+                  placeholder="play.server.com"
+                  type="text"
+                  name="ipAdress" />
+              {:else}
+                <select class="form-select">
+                  <option selected>Seçilmedi</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              {/if}
             </div>
             <div class="col-6 align-items-center">
-              <a href="#">Özel Adres Kullan</a>
-              <a href="#">Sunucu Listesinden Seç</a>
+                <a href="javascript:void(0);" on:click={toggleIpAddressField}>{showSpecialIpAddressField ? "Sunucu Listesinden Seç" : "Özel Adres Kullan"}</a>
             </div>
           </div>
         </div>
@@ -109,7 +111,8 @@
         class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
         aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
         disabled="{saveButtonLoading || isSaveButtonDisabled}"
-        on:click="{save}">Kaydet</button>
+        on:click="{save}">Kaydet
+      </button>
     </div>
   </div>
 </div>
@@ -123,7 +126,7 @@
       ApiUtil.get({
         path: "/api/panel/settings?type=website",
         request,
-        CSRFToken,
+        CSRFToken
       }).then((body) => {
         if (body.result === "ok") {
           body.oldSettings = { ...body };
@@ -138,7 +141,7 @@
   }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import("@sveltejs/kit").Load}
    */
   export async function load(request) {
     let output = {
@@ -146,14 +149,16 @@
         data: {
           websiteName: "",
           websiteDescription: "",
+          ipAddress: "",
           keywords: [],
           oldSettings: {
             websiteName: "",
             websiteDescription: "",
-            keywords: [],
-          },
-        },
-      },
+            ipAddress: "",
+            keywords: []
+          }
+        }
+      }
     };
 
     if (request.stuff.NETWORK_ERROR) {
@@ -183,7 +188,10 @@
   $: isSaveButtonDisabled =
     data.oldSettings.websiteName === data.websiteName &&
     data.oldSettings.websiteDescription === data.websiteDescription &&
+    data.oldSettings.ipAddress === data.ipAddress &&
     data.oldSettings.keywords.join() === data.keywords.join();
+
+  let showSpecialIpAddressField = true;
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -207,9 +215,10 @@
         body: {
           websiteName: data.websiteName,
           websiteDescription: data.websiteDescription,
-          keywords: data.keywords,
+          ipAddress: data.ipAddress,
+          keywords: data.keywords
         },
-        CSRFToken: $session.CSRFToken,
+        CSRFToken: $session.CSRFToken
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -219,7 +228,7 @@
               return {
                 ...website,
                 name: data.websiteName,
-                description: data.websiteDescription,
+                description: data.websiteDescription
               };
             });
 
@@ -255,5 +264,9 @@
 
   function removeKeyWord(index) {
     data.keywords = data.keywords.remove(index);
+  }
+
+  function toggleIpAddressField() {
+    showSpecialIpAddressField = !showSpecialIpAddressField
   }
 </script>
