@@ -27,8 +27,20 @@
 
   const notifications = writable([]);
 
+  Array.prototype.insert = function (index, item) {
+    this.splice(index, 0, item);
+
+    return this;
+  };
+
+  Array.prototype.remove = function (index) {
+    this.splice(index, 1);
+
+    return this;
+  };
+
   function delay(time) {
-    return new Promise(resolve => setTimeout(resolve, time));
+    return new Promise((resolve) => setTimeout(resolve, time));
   }
 
   export async function show(id) {
@@ -46,6 +58,18 @@
       const toast = new window.bootstrap.Toast(notificationElement);
 
       toast.show();
+
+      notificationElement.addEventListener("hidden.bs.toast", () => {
+        notifications.update((notifications) => {
+          const foundNotification = notifications.find(
+            (notification) => notification.id === id
+          );
+
+          notifications.remove(notifications.indexOf(foundNotification));
+
+          return notifications;
+        });
+      });
     }
   }
 </script>
@@ -67,18 +91,6 @@
 
   let checkTime = 0;
   let interval;
-
-  Array.prototype.insert = function (index, item) {
-    this.splice(index, 0, item);
-
-    return this;
-  };
-
-  Array.prototype.remove = function (index) {
-    this.splice(index, 1);
-
-    return this;
-  };
 
   function getTime(check, time, locale) {
     return formatDistanceToNow(time, { addSuffix: true });
