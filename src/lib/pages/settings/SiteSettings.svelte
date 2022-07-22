@@ -32,7 +32,7 @@
       </div>
 
       <div class="row mb-3">
-        <label class="col-md-4 col-form-label" for="ipAdress">
+        <label class="col-md-4 col-form-label" for="ipAddress">
           Oyun Sunucu IP Adresi
         </label>
         <div class="col col-form-label">
@@ -43,7 +43,8 @@
                   class="form-control"
                   placeholder="play.server.com"
                   type="text"
-                  name="ipAdress" />
+                  name="ipAddress"
+                bind:value={data.serverIpAddress}/>
               {:else}
                 <select class="form-select">
                   <option selected>Seçilmedi</option>
@@ -153,16 +154,16 @@
         data: {
           websiteName: "",
           websiteDescription: "",
-          ipAddress: "",
+          serverIpAddress: "",
           keywords: [],
           oldSettings: {
             websiteName: "",
             websiteDescription: "",
-            ipAddress: "",
-            keywords: [],
-          },
-        },
-      },
+            serverIpAddress: "",
+            keywords: []
+          }
+        }
+      }
     };
 
     if (request.stuff.NETWORK_ERROR) {
@@ -192,7 +193,7 @@
   $: isSaveButtonDisabled =
     data.oldSettings.websiteName === data.websiteName &&
     data.oldSettings.websiteDescription === data.websiteDescription &&
-    data.oldSettings.ipAddress === data.ipAddress &&
+    data.oldSettings.serverIpAddress === data.serverIpAddress &&
     data.oldSettings.keywords.join() === data.keywords.join();
 
   let showSpecialIpAddressField = true;
@@ -219,8 +220,8 @@
         body: {
           websiteName: data.websiteName,
           websiteDescription: data.websiteDescription,
-          ipAddress: data.ipAddress,
-          keywords: data.keywords,
+          serverIpAddress: data.serverIpAddress,
+          keywords: data.keywords
         },
         CSRFToken: $session.CSRFToken,
       })
