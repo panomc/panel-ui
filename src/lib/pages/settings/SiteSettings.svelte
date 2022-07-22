@@ -36,11 +36,11 @@
           Oyun Sunucu IP Adresi
         </label>
         <div class="col col-form-label">
-          <div class="row">
+          <div class="row align-items-center">
             <div class="col-6">
               {#if showSpecialIpAddressField}
                 <input
-                  class="form-control border-danger mb-3"
+                  class="form-control"
                   placeholder="play.server.com"
                   type="text"
                   name="ipAdress" />
@@ -53,8 +53,11 @@
                 </select>
               {/if}
             </div>
-            <div class="col-6 align-items-center">
-                <a href="javascript:void(0);" on:click={toggleIpAddressField}>{showSpecialIpAddressField ? "Sunucu Listesinden Seç" : "Özel Adres Kullan"}</a>
+            <div class="col-6">
+              <a href="javascript:void(0);" on:click="{toggleIpAddressField}"
+                >{showSpecialIpAddressField
+                  ? "Sunucu Listesinden Seç"
+                  : "Özel Adres Kullan"}</a>
             </div>
           </div>
         </div>
@@ -111,7 +114,8 @@
         class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
         aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
         disabled="{saveButtonLoading || isSaveButtonDisabled}"
-        on:click="{save}">Kaydet
+        on:click="{save}"
+        >Kaydet
       </button>
     </div>
   </div>
@@ -126,7 +130,7 @@
       ApiUtil.get({
         path: "/api/panel/settings?type=website",
         request,
-        CSRFToken
+        CSRFToken,
       }).then((body) => {
         if (body.result === "ok") {
           body.oldSettings = { ...body };
@@ -155,10 +159,10 @@
             websiteName: "",
             websiteDescription: "",
             ipAddress: "",
-            keywords: []
-          }
-        }
-      }
+            keywords: [],
+          },
+        },
+      },
     };
 
     if (request.stuff.NETWORK_ERROR) {
@@ -216,9 +220,9 @@
           websiteName: data.websiteName,
           websiteDescription: data.websiteDescription,
           ipAddress: data.ipAddress,
-          keywords: data.keywords
+          keywords: data.keywords,
         },
-        CSRFToken: $session.CSRFToken
+        CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -228,7 +232,7 @@
               return {
                 ...website,
                 name: data.websiteName,
-                description: data.websiteDescription
+                description: data.websiteDescription,
               };
             });
 
@@ -267,6 +271,6 @@
   }
 
   function toggleIpAddressField() {
-    showSpecialIpAddressField = !showSpecialIpAddressField
+    showSpecialIpAddressField = !showSpecialIpAddressField;
   }
 </script>

@@ -22,7 +22,7 @@
         </div>
         <div class="row mb-0">
           <label class="col-sm-2 col-form-label" for="siteKeywords">
-            Web site
+            Web Site
           </label>
           <div class="col col-form-label">
             <a
