@@ -29,6 +29,7 @@ export const platformAddress = writable("");
 
 export const servers = writable([]);
 export const notificationsCount = writable(0);
+export const quickNotifications = writable([]);
 
 export const logoutLoading = writable(false);
 

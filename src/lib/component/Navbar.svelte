@@ -56,8 +56,14 @@
                   : "(" + $notificationsCount + " Okunmamış)"}
               </h6>
 
-              {#if !notificationsLoading}
-                {#each quickNotifications as notification, index (notification)}
+              {#if $quickNotifications.length === 0}
+                <div
+                  class="d-flex flex-column align-items-center justify-content-center mb-3">
+                  <i class="fas fa-2x fa-bell text-gray mx-5 my-3"></i>
+                  <small class="text-gray">Yeni bildirim yok.</small>
+                </div>
+              {:else}
+                {#each $quickNotifications as notification, index (notification)}
                   <a
                     href="javascript:void(0);"
                     class="list-group-item list-group-item-action  d-flex flex-row w-100"
@@ -75,24 +81,6 @@
                     </div>
                   </a>
                 {/each}
-              {/if}
-
-              {#if quickNotifications.length === 0 && !notificationsLoading}
-                <div
-                  class="d-flex flex-column align-items-center justify-content-center mb-3">
-                  <i class="fas fa-2x fa-bell text-gray mx-5 my-3"></i>
-                  <small class="text-gray">Yeni bildirim yok.</small>
-                </div>
-              {/if}
-
-              <!-- Loading Spinner -->
-              {#if notificationsLoading}
-                <div class="d-flex justify-content-center m-3">
-                  <div
-                    class="spinner-border spinner-border-sm text-primary"
-                    role="status">
-                  </div>
-                </div>
               {/if}
 
               <a
@@ -145,43 +133,29 @@
 </nav>
 
 <script>
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { formatDistanceToNow } from "date-fns";
 
   import { base } from "$app/paths";
-  import { browser } from "$app/env";
   import { session } from "$app/stores";
 
   import ApiUtil from "$lib/api.util";
   import {
-    toggleSidebar,
-    notificationsCount,
-    user,
-    logoutLoading,
-    showNetworkErrorOnCatch,
     isSidebarOpen,
-    pageTitle,
+    logoutLoading,
+    notificationsCount,
     options,
+    pageTitle,
+    quickNotifications,
+    showNetworkErrorOnCatch,
+    toggleSidebar,
+    user,
   } from "$lib/store";
 
-  let notificationsLoading = true;
-  let quickNotifications = [];
   let quickNotificationProcessID = 0;
 
   let checkTime = 0;
   let interval;
-
-  Array.prototype.insert = function (index, item) {
-    this.splice(index, 0, item);
-
-    return this;
-  };
-
-  Array.prototype.remove = function (index) {
-    this.splice(index, 1);
-
-    return this;
-  };
 
   function onSideBarCollapseClick() {
     toggleSidebar();
@@ -203,54 +177,21 @@
     });
   }
 
-  function setNotifications(newNotifications) {
-    if (quickNotifications.length === 0 || newNotifications.length === 0)
-      quickNotifications = newNotifications;
-    else {
-      const listOfFilterIsNotificationExists = [];
-
-      newNotifications.forEach((item, index) => {
-        listOfFilterIsNotificationExists[index] = quickNotifications.filter(
-          (filterItem) => filterItem.id === item.id
-        );
-      });
-
-      newNotifications.forEach((item, index) => {
-        if (listOfFilterIsNotificationExists[index].length === 0) {
-          quickNotifications = quickNotifications.insert(index, item);
-        }
-      });
-
-      quickNotifications.forEach((item, index) => {
-        const newArrayOfFilter = newNotifications.filter(
-          (filterItem) => filterItem.id === item.id
-        );
-
-        if (newArrayOfFilter.length === 0) {
-          quickNotifications = quickNotifications.remove(index);
-        }
-      });
-    }
-  }
-
-  function getQuickNotificationsAndRead(id) {
+  function markQuickNotificationsAsRead(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.get({
-        path: "/api/panel/quickNotificationsAndRead",
+      ApiUtil.post({
+        path: "/api/panel/markQuickNotificationsAsRead",
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
           if (quickNotificationProcessID === id) {
             if (body.result === "ok") {
-              setNotifications(body.notifications);
               notificationsCount.set(body.notificationCount);
-
-              notificationsLoading = false;
             }
 
             setTimeout(() => {
               if (quickNotificationProcessID === id) {
-                startQuickNotificationsAndReadCountDown();
+                startMarkQuickNotificationsAsReadCountDown();
               }
             }, 1000);
           }
@@ -263,47 +204,12 @@
     });
   }
 
-  function getQuickNotifications(id) {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.get({
-        path: "/api/panel/quickNotifications",
-        CSRFToken: $session.CSRFToken,
-      })
-        .then((body) => {
-          if (quickNotificationProcessID === id) {
-            if (body.result === "ok") {
-              notificationsCount.set(body.notificationCount);
-            }
-
-            setTimeout(() => {
-              if (quickNotificationProcessID === id) {
-                startQuickNotificationsCountDown();
-              }
-            }, 1000);
-          }
-
-          resolve();
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-
-  function startQuickNotificationsAndReadCountDown() {
+  function startMarkQuickNotificationsAsReadCountDown() {
     quickNotificationProcessID++;
 
     const id = quickNotificationProcessID;
 
-    getQuickNotificationsAndRead(id);
-  }
-
-  function startQuickNotificationsCountDown() {
-    quickNotificationProcessID++;
-
-    const id = quickNotificationProcessID;
-
-    getQuickNotifications(id);
+    markQuickNotificationsAsRead(id);
   }
 
   function getTime(check, time, locale) {
@@ -314,23 +220,17 @@
     const dropdown = document.getElementById("quickNotificationsDropdown");
 
     dropdown.addEventListener("show.bs.dropdown", function () {
-      notificationsLoading = true;
-      quickNotifications = [];
-      startQuickNotificationsAndReadCountDown();
+      startMarkQuickNotificationsAsReadCountDown();
     });
 
     dropdown.addEventListener("hide.bs.dropdown", function () {
-      startQuickNotificationsCountDown();
+      quickNotificationProcessID++;
     });
 
     interval = setInterval(() => {
       checkTime += 1;
     }, 1000);
   });
-
-  if (browser) {
-    startQuickNotificationsCountDown();
-  }
 
   onDestroy(() => {
     clearInterval(interval);
