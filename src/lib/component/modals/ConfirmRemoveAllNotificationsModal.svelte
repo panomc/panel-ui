@@ -13,9 +13,9 @@
         </div>
         Tüm bildirimleri kalıcı olarak silmek istediğinizden emin misiniz?
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer flex-nowrap">
         <button
-          class="btn btn-link text-muted"
+          class="btn btn-link col-6 m-0"
           type="button"
           class:disabled="{loading}"
           aria-disabled="{loading}"
@@ -25,7 +25,7 @@
           İptal
         </button>
         <button
-          class="btn btn-danger"
+          class="btn btn-danger col-6 m-0"
           type="button"
           class:disabled="{loading}"
           aria-disabled="{loading}"

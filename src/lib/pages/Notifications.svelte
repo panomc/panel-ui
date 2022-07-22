@@ -1,11 +1,12 @@
 <div class="container">
   <!-- Action Menu -->
-  <div class="row mb-3 animate__animated animate__slideInUp">
+  <div
+    class="row justify-content-end mb-3 animate__animated animate__slideInUp">
     {#if $notifications.length !== 0}
       <div class="col-auto">
         <button
           type="button"
-          class="btn btn-outline-danger"
+          class="btn btn-danger"
           on:click="{() => onDeleteAllClick()}"
           >Tümünü Sil
         </button>
@@ -22,8 +23,7 @@
           <a
             href="javascript:void(0);"
             class="list-group-item list-group-item-action  d-flex flex-row w-100"
-            class:notification-unread="{notification.status === 'NOT_READ'}"
-          >
+            class:notification-unread="{notification.status === 'NOT_READ'}">
             <div class="col-auto">
               <i class="fa fa-bell mx-3 text-primary"></i>
             </div>
@@ -37,16 +37,14 @@
           <button
             class="btn-close text-danger btn-sm mx-2"
             use:tooltip="{['Bildirimi Sil', { placement: 'right' }]}"
-            on:click="{deleteNotification(notification.id)}"
-          >
+            on:click="{deleteNotification(notification.id)}">
           </button>
         </div>
       {/each}
 
       {#if $notifications.length === 0}
         <div
-          class="d-flex flex-column align-items-center justify-content-center"
-        >
+          class="d-flex flex-column align-items-center justify-content-center">
           <i class="fas fa-bell fa-3x text-dark text-opacity-25 m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -224,7 +222,9 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get({
-        path: `/api/panel/notifications/${get(notifications)[get(notifications).length - 1].id}/more`,
+        path: `/api/panel/notifications/${
+          get(notifications)[get(notifications).length - 1].id
+        }/more`,
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
