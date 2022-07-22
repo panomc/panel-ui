@@ -238,11 +238,13 @@
             });
 
             data.oldSettings = Object.keys(data)
-              .filter((key) => key !== "oldSettings")
+              .filter((key) => key !== "oldSettings" && key !== "keywords")
               .reduce((obj, key) => {
                 obj[key] = data[key];
                 return obj;
               }, {});
+
+            data.oldSettings.keywords = [...data.keywords];
 
             //TODO TOAST
 
