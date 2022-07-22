@@ -30,6 +30,33 @@
             rows="2"></textarea>
         </div>
       </div>
+
+      <div class="row mb-3">
+        <label class="col-md-4 col-form-label" for="ipAdress">
+          Gösterilen IP Adresi
+        </label>
+        <div class="col col-form-label">
+          <div class="row">
+            <div class="col-6">
+              <select class="form-select">
+                <option selected>Seçilmedi</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              <input
+                class="form-control border-danger mb-3"
+                placeholder="play.server.com"
+                type="text"
+                name="ipAdress" />
+            </div>
+            <div class="col-6 align-items-center">
+              <a href="#">Özel Adres Kullan</a>
+              <a href="#">Sunucu Listesinden Seç</a>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row mb-3">
         <label class="col-md-4 col-form-label" for="siteKeywords">
           Anahtar Kelimeler
