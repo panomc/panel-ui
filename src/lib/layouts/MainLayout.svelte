@@ -91,9 +91,7 @@
   import { onDestroy, onMount } from "svelte";
   import { get } from "svelte/store";
 
-  import { pageTitle, options } from "$lib/store.js";
-
-  import { logoutLoading } from "$lib/store.js";
+  import { pageTitle, options, logoutLoading } from "$lib/store";
 
   import Splash from "$lib/component/Splash.svelte";
   import Navbar from "$lib/component/Navbar.svelte";
