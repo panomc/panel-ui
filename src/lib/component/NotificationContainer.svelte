@@ -9,14 +9,14 @@
       <div class="toast-header">
         <img src="..." class="rounded me-2" alt="..." />
         <strong class="me-auto">Bootstrap</strong>
-        <small>11 mins ago</small>
+        <small>{getTime(checkTime, parseInt(notification.date), "")}</small>
         <button
           type="button"
           class="btn-close"
           data-bs-dismiss="toast"
           aria-label="Close"></button>
       </div>
-      <div class="toast-body">Hello, world! This is a toast message.</div>
+      <div class="toast-body">{notification.typeId}</div>
     </div>
   {/each}
 </div>
@@ -51,6 +51,8 @@
 </script>
 
 <script>
+  import { onDestroy, onMount } from "svelte";
+
   import { session } from "$app/stores";
 
   import {
@@ -59,9 +61,12 @@
     quickNotifications,
   } from "$lib/store";
   import ApiUtil from "$lib/api.util";
-  import { onMount } from "svelte";
+  import { formatDistanceToNow } from "date-fns";
 
   let quickNotificationProcessID = 0;
+
+  let checkTime = 0;
+  let interval;
 
   Array.prototype.insert = function (index, item) {
     this.splice(index, 0, item);
@@ -74,6 +79,10 @@
 
     return this;
   };
+
+  function getTime(check, time, locale) {
+    return formatDistanceToNow(time, { addSuffix: true });
+  }
 
   function addNotification(notification) {
     notifications.update((notifications) => {
@@ -168,5 +177,13 @@
 
   onMount(() => {
     startQuickNotificationsCountDown();
+
+    interval = setInterval(() => {
+      checkTime += 1;
+    }, 1000);
+  });
+
+  onDestroy(() => {
+    clearInterval(interval);
   });
 </script>
