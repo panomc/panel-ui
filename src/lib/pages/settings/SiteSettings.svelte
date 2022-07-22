@@ -44,7 +44,7 @@
                   placeholder="play.server.com"
                   type="text"
                   name="ipAddress"
-                bind:value={data.serverIpAddress}/>
+                  bind:value="{data.serverIpAddress}" />
               {:else}
                 <select class="form-select">
                   <option selected>Seçilmedi</option>
@@ -71,6 +71,7 @@
           <form on:submit|preventDefault="{addKeyWord}">
             <input
               class="form-control mb-3"
+              class:border-danger="{keywordInputError}"
               placeholder="Eklemek için Enter'a basın"
               type="text"
               name="keyword"
@@ -160,10 +161,10 @@
             websiteName: "",
             websiteDescription: "",
             serverIpAddress: "",
-            keywords: []
-          }
-        }
-      }
+            keywords: [],
+          },
+        },
+      },
     };
 
     if (request.stuff.NETWORK_ERROR) {
@@ -197,6 +198,7 @@
     JSON.stringify(data.oldSettings.keywords) === JSON.stringify(data.keywords);
 
   let showSpecialIpAddressField = true;
+  let keywordInputError = false;
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -221,7 +223,7 @@
           websiteName: data.websiteName,
           websiteDescription: data.websiteDescription,
           serverIpAddress: data.serverIpAddress,
-          keywords: data.keywords
+          keywords: data.keywords,
         },
         CSRFToken: $session.CSRFToken,
       })
@@ -262,6 +264,14 @@
       return;
     }
 
+    if (data.keywords.indexOf(keyword) !== -1) {
+      keywordInputError = true;
+
+      return;
+    }
+
+    keywordInputError = false;
+
     data.keywords.push(keyword);
 
     data.keywords = data.keywords;
@@ -279,27 +289,23 @@
 
   Array.prototype.equals = function (array) {
     // if the other array is a falsy value, return
-    if (!array)
-      return false;
+    if (!array) return false;
 
     // compare lengths - can save a lot of time
-    if (this.length != array.length)
-      return false;
+    if (this.length != array.length) return false;
 
-    for (let i = 0, l=this.length; i < l; i++) {
+    for (let i = 0, l = this.length; i < l; i++) {
       // Check if we have nested arrays
       if (this[i] instanceof Array && array[i] instanceof Array) {
         // recurse into the nested arrays
-        if (!this[i].equals(array[i]))
-          return false;
-      }
-      else if (this[i] != array[i]) {
+        if (!this[i].equals(array[i])) return false;
+      } else if (this[i] != array[i]) {
         // Warning - two different object instances will never be equal: {x:20} != {x:20}
         return false;
       }
     }
     return true;
-  }
+  };
   // Hide method from for-in loops
-  Object.defineProperty(Array.prototype, "equals", {enumerable: false});
+  Object.defineProperty(Array.prototype, "equals", { enumerable: false });
 </script>
