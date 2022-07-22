@@ -25,7 +25,7 @@
             class="list-group-item list-group-item-action  d-flex flex-row w-100"
             class:notification-unread="{notification.status === 'NOT_READ'}">
             <div class="col-auto">
-              <i class="fa fa-bell mx-3 text-primary"></i>
+              <i class="fa fa-bell mx-3 my-3 text-primary"></i>
             </div>
             <div class="col">
               <span class="text-wrap text-dark">{notification.typeId}</span>
@@ -51,9 +51,9 @@
       {/if}
 
       {#if $notifications.length < $count && $count > 10 + 10 * page}
-        <div class="mt-4">
+        <div class="mt-3">
           <button
-            class="btn text-primary bg-lightprimary d-block m-auto"
+            class="btn btn-link bg-light d-block m-auto"
             class:disabled="{loadMoreLoading}"
             on:click="{loadMore}"
             >Daha Fazla Göster ({$count - $notifications.length})

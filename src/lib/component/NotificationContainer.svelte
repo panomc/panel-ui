@@ -6,15 +6,13 @@
       role="alert"
       aria-live="assertive"
       aria-atomic="true">
-      <div class="toast-header">
-        <img src="..." class="rounded me-2" alt="..." />
-        <strong class="me-auto">Bootstrap</strong>
+      <div class="toast-header bg-primary text-white">
+        <strong class="me-auto">Pano</strong>
         <small>{getTime(checkTime, parseInt(notification.date), "")}</small>
         <button
           type="button"
-          class="btn-close"
-          data-bs-dismiss="toast"
-          aria-label="Close"></button>
+          class="btn-close btn-close-white"
+          data-bs-dismiss="toast"></button>
       </div>
       <div class="toast-body">{notification.typeId}</div>
     </div>

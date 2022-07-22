@@ -1,9 +1,9 @@
 <div
-  class="toast-container position-fixed bottom-0 start-50 translate-middle-x mb-4">
+  class="toast-container position-fixed bottom-0 start-50 translate-middle-x mb-3">
   {#each $toasts as toast, index (toast)}
     <div
       id="appToast{toast.id}"
-      class="toast align-items-center text-bg-primary border-0"
+      class="toast align-items-center text-bg-dark border-0"
       role="alert"
       aria-live="assertive"
       aria-atomic="true">
@@ -12,8 +12,7 @@
         <button
           type="button"
           class="btn-close btn-close-white me-2 m-auto"
-          data-bs-dismiss="toast"
-          aria-label="Close"></button>
+          data-bs-dismiss="toast"></button>
       </div>
     </div>
   {/each}
@@ -68,9 +67,7 @@
 
       toastElement.addEventListener("hidden.bs.toast", () => {
         toasts.update((toasts) => {
-          const foundToast = toasts.find(
-            (toast) => toast.id === id
-          );
+          const foundToast = toasts.find((toast) => toast.id === id);
 
           toasts.remove(toasts.indexOf(foundToast));
 
@@ -86,7 +83,7 @@
 
   onMount(() => {
     setTimeout(() => {
-      show({text: "omggg", type: "SUCCESSFUL"})
-    }, 3000)
-  })
+      show({ text: "omggg", type: "SUCCESSFUL" });
+    }, 3000);
+  });
 </script>

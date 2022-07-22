@@ -53,7 +53,7 @@
               <h6 class="dropdown-header">
                 Bildirimler {$notificationsCount === 0
                   ? ""
-                  : "(" + $notificationsCount + " Okunmamış)"}
+                  : "(" + $notificationsCount + ")"}
               </h6>
 
               {#if $quickNotifications.length === 0}
@@ -70,7 +70,7 @@
                     class:notification-unread="{notification.status ===
                       'NOT_READ'}">
                     <div class="col-auto">
-                      <i class="fa fa-bell mx-3 text-primary"></i>
+                      <i class="fa fa-bell mx-3 my-3 text-primary"></i>
                     </div>
                     <div class="col">
                       <span class="text-wrap text-dark"
