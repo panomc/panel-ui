@@ -121,7 +121,7 @@
                 <tbody>
                   <tr>
                     <td class="align-middle text-nowrap">
-                      <a href="/ticket/{ticket.id}" title="Talebi Görüntüle"
+                      <a href="{base}/tickets/ticket/{ticket.id}" title="Talebi Görüntüle"
                         >#{ticket.id} {ticket.title}</a>
                     </td>
                     <td class="align-middle text-nowrap">
