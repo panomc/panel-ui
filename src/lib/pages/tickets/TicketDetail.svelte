@@ -33,8 +33,7 @@
           role="button"
           on:click="{() => showCloseTicketModal([data.ticket.id])}"
           href="javascript:void(0);">
-          <i class="fas fa-check me-2"></i>
-          Kapat
+          <i class="fas fa-check me-2"></i> Talebi Kapat
         </a>
       {/if}
     </div>
@@ -75,7 +74,8 @@
           class="btn btn-link bg-light d-block m-auto"
           class:disabled="{loadMoreLoading}"
           on:click="{loadMore}"
-          ><i class="fas fa-arrow-up me-2"></i> Önceki Mesajlar ({data.ticket.count -
+          ><i class="fas fa-arrow-up me-2"></i> Önceki Mesajlar ({data.ticket
+            .count -
             (data.ticket.messages.length - sentMessageCount)})
         </button>
       {/if}
@@ -283,7 +283,6 @@
 
   import Date from "$lib/component/Date.svelte";
   import TicketStatus from "$lib/component/TicketStatus.svelte";
-  
 
   export let data;
 
