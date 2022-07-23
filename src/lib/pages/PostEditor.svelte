@@ -339,8 +339,6 @@
             data.post.status = 1;
           }
 
-          //TODO: TOAST
-
           resolve();
         } else if (body.result === "error") {
           loading = false;
