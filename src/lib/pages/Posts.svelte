@@ -292,6 +292,15 @@
 
             goto(base + "/posts");
 
+            showToast({
+              text:
+                '"<a href="' +
+                base +
+                '/posts">' +
+                limitTitle(data.posts.find((post) => post.id === id).title) +
+                '</a>" yayınlandı.',
+            });
+
             resolve();
           } else refreshBrowserPage();
         })
