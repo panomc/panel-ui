@@ -107,9 +107,8 @@
             const count = get(selectedTickets).length;
 
             showToast({
-              text: `${
-                count > 1 ?  count : `"${get(selectedTickets)[0].title}" adlı`
-              } talep kalıcı olarak silindi.`,
+              text:
+                count > 1 ?  `${count} talep kalıcı olarak silindi.` : `Talep kalıcı olarak silindi.`,
             });
 
             callback(get(selectedTickets));

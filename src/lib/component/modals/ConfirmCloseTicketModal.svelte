@@ -114,7 +114,7 @@
             const count = get(selectedTickets).length
 
             showToast({
-              text: `${count > 1 ?  `<a href="${base}/tickets/closed">${count}</a>` : `"${get(selectedTickets)[0].title}" adlı`} talep kapatıldı.`,
+              text: count > 1 ?  `<a href="${base}/tickets/closed">${count}</a> talep kapatıldı.` : `Talep kapatıldı.`,
             });
 
             callback(get(selectedTickets));
