@@ -111,8 +111,10 @@
 
             hide();
 
+            const count = get(selectedTickets).length
+
             showToast({
-              text: `<a href="${base}/tickets/closed">${get(selectedTickets).length}</a> talep kapatıldı.`,
+              text: `${count > 1 ?  `<a href="${base}/tickets/closed">${count}</a>` : `"${get(selectedTickets)[0].title}" adlı`} talep kapatıldı.`,
             });
 
             callback(get(selectedTickets));
