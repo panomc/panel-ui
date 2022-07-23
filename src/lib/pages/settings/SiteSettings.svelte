@@ -185,6 +185,8 @@
   import { pageTitle, showNetworkErrorOnCatch, website } from "$lib/store.js";
   import { session } from "$app/stores";
 
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
+
   pageTitle.set("Website Ayarları");
 
   export let data;
@@ -248,7 +250,9 @@
 
             data.oldSettings.keywords = [...data.keywords];
 
-            //TODO TOAST
+            showToast({
+              text: "Ayarlar kaydedildi.",
+            });
 
             resolve();
           } else reject();
