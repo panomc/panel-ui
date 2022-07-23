@@ -10,10 +10,10 @@
       <div class="d-flex">
         {#if toast.url}
           <a href="{base + toast.url}">
-            <div class="toast-body">{toast.text}</div>
+            <div class="toast-body">{@html toast.text}</div>
           </a>
         {:else}
-          <div class="toast-body">{toast.text}</div>
+          <div class="toast-body">{@html toast.text}</div>
         {/if}
         <button
           type="button"
