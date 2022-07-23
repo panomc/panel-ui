@@ -293,12 +293,9 @@
             goto(base + "/posts");
 
             showToast({
-              text:
-                '"<a href="' +
-                base +
-                '/posts">' +
-                limitTitle(data.posts.find((post) => post.id === id).title) +
-                '</a>" yayınlandı.',
+              text: `"<a href="/posts/post/${id}" target="_blank">${limitTitle(
+                data.posts.find((post) => post.id === id).title
+              )}</a>" yayınlandı.`,
             });
 
             resolve();
