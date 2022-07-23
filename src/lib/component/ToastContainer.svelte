@@ -82,6 +82,16 @@
       });
     }
   }
+
+  export function limitTitle(text) {
+    const limit = 32;
+
+    if (text.length > limit) {
+      text = text.substring(0, limit) + "...";
+    }
+
+    return text;
+  }
 </script>
 
 <script>
