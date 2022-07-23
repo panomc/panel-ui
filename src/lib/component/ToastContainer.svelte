@@ -8,7 +8,13 @@
       aria-live="assertive"
       aria-atomic="true">
       <div class="d-flex">
-        <div class="toast-body">{toast.text}</div>
+        {#if toast.url}
+          <a href="{base + toast.url}">
+            <div class="toast-body">{toast.text}</div>
+          </a>
+        {:else}
+          <div class="toast-body">{toast.text}</div>
+        {/if}
         <button
           type="button"
           class="btn-close btn-close-white me-2 m-auto"
@@ -76,4 +82,8 @@
       });
     }
   }
+</script>
+
+<script>
+  import { base } from "$app/paths";
 </script>
