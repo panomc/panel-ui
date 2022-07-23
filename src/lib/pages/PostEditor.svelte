@@ -327,10 +327,16 @@
 
           if (data.mode === Modes.CREATE) {
             goto(base + "/posts/post/" + body.id);
+
+            showToast({
+              text: `"<a href="/posts/post/${body.id}" target="_blank">${limitTitle(
+                data.post.title
+              )}</a>" yayınlandı.`,
+            });
           }
 
           if (data.mode === Modes.EDIT) {
-            data.post.status = 1
+            data.post.status = 1;
           }
 
           //TODO: TOAST
