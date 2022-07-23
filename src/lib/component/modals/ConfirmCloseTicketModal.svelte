@@ -81,6 +81,12 @@
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
+  import {
+    show as showToast,
+  } from "$lib/component/ToastContainer.svelte";
+
+  import { base } from "$app/paths";
+
   let loading;
 
   function refreshBrowserPage() {
@@ -105,7 +111,9 @@
 
             hide();
 
-            //TODO TOAST
+            showToast({
+              text: `<a href="${base}/tickets/closed">${get(selectedTickets).length}</a> talep kapatıldı.`,
+            });
 
             callback(get(selectedTickets));
 
