@@ -329,6 +329,10 @@
             goto(base + "/posts/post/" + body.id);
           }
 
+          if (data.mode === Modes.EDIT) {
+            data.post.status = 1
+          }
+
           //TODO: TOAST
 
           resolve();
