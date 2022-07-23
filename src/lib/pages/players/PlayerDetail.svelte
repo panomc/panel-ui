@@ -12,9 +12,8 @@
     <div class="col-auto">
       <a
         class="btn btn-link link-danger"
-        data-target="#conformBanPlayer"
-        data-toggle="modal"
-        href="javascript:void(0);">
+        href="javascript:void(0);"
+        on:click="{() => showConfirmBanPlayerModal()}">
         <i class="fas fa-gavel"></i>
         <span class="ms-2 d-lg-inline d-none">Yasakla</span>
       </a>
@@ -121,8 +120,9 @@
                 <tbody>
                   <tr>
                     <td class="align-middle text-nowrap">
-                      <a href="{base}/tickets/ticket/{ticket.id}" title="Talebi Görüntüle"
-                        >#{ticket.id} {ticket.title}</a>
+                      <a
+                        href="{base}/tickets/ticket/{ticket.id}"
+                        title="Talebi Görüntüle">#{ticket.id} {ticket.title}</a>
                     </td>
                     <td class="align-middle text-nowrap">
                       <a
@@ -243,6 +243,10 @@
     show as showAuthorizePlayerModal,
     setCallback as setAuthorizePlayerModalCallback,
   } from "$lib/component/modals/AuthorizePlayerModal.svelte";
+  import {
+    show as showConfirmBanPlayerModal,
+    setCallback as setConfirmBanPlayerModalCallback,
+  } from "$lib/component/modals/ConfirmBanPlayerModal.svelte";
 
   import TicketStatus from "$lib/component/TicketStatus.svelte";
   import Date from "$lib/component/Date.svelte";
@@ -315,4 +319,6 @@
 
     data.player = newPlayer;
   });
+
+  setConfirmBanPlayerModalCallback(() => {});
 </script>
