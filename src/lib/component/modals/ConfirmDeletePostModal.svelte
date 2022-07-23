@@ -78,6 +78,12 @@
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
+  import {
+    show as showToast,
+    limitTitle,
+  } from "$lib/component/ToastContainer.svelte";
+  import { base } from "$app/paths";
+
   let loading = false;
 
   function refreshBrowserPage() {
@@ -94,20 +100,31 @@
 
           hide();
 
-          // if (get(post).status === 0)
-
-          //TODO TOAST
+          if (get(post).status === 0) {
+            showToast({
+              text:
+                '"' + limitTitle(get(post).title) + '" kalıcı olarak silindi.',
+            });
+          } else {
+            showToast({
+              text:
+                '"<a href="' +
+                base +
+                '/posts/trash">' +
+                limitTitle(get(post).title) +
+                '</a>" çöpe taşındı.',
+            });
+          }
 
           callback(get(post));
 
           resolve();
         } else refreshBrowserPage();
-      }
+      };
 
       if (get(post).status === 0) {
         ApiUtil.delete({
-          path:
-            `/api/panel/posts/${get(post).id}`,
+          path: `/api/panel/posts/${get(post).id}`,
           CSRFToken: $session.CSRFToken,
         })
           .then(bodyHandler)
@@ -115,14 +132,13 @@
             reject();
           });
 
-        return
+        return;
       }
 
       ApiUtil.put({
-        path:
-          `/api/panel/posts/${get(post).id}/status`,
+        path: `/api/panel/posts/${get(post).id}/status`,
         body: {
-          to: "trash"
+          to: "trash",
         },
         CSRFToken: $session.CSRFToken,
       })
