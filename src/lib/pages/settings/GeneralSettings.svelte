@@ -102,8 +102,10 @@
 </script>
 
 <script>
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store.js";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
   import { session } from "$app/stores";
+
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
 
   pageTitle.set("Genel Ayarlar");
 
@@ -147,7 +149,9 @@
                 return obj;
               }, {});
 
-            //TODO TOAST
+            showToast({
+              text: "Ayarlar kaydedildi.",
+            });
 
             resolve();
           } else reject();
