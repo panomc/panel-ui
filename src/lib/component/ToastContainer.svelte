@@ -77,13 +77,3 @@
     }
   }
 </script>
-
-<script>
-  import { onMount } from "svelte";
-
-  onMount(() => {
-    setTimeout(() => {
-      show({ text: "omggg", type: "SUCCESSFUL" });
-    }, 3000);
-  });
-</script>
