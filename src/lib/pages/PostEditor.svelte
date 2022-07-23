@@ -257,6 +257,11 @@
 
   import Editor from "$lib/component/Editor.svelte";
 
+  import {
+    show as showToast,
+    limitTitle,
+  } from "$lib/component/ToastContainer.svelte";
+
   export let data;
 
   let isEditorEmpty = true;
@@ -378,6 +383,15 @@
             loading = false;
 
             goto(base + "/posts/draft");
+
+            showToast({
+              text:
+                '"<a href="' +
+                base +
+                '/posts/draft">' +
+                limitTitle(data.post.title) +
+                '</a>" taslaklara taşındı.',
+            });
 
             resolve();
           } else reject();
