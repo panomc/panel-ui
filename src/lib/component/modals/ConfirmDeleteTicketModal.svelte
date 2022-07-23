@@ -4,8 +4,7 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
@@ -23,8 +22,7 @@
           class:disabled="{loading}"
           aria-disabled="{loading}"
           disabled="{loading}"
-          on:click="{hide}"
-        >
+          on:click="{hide}">
           İptal
         </button>
         <button
@@ -33,8 +31,7 @@
           class:disabled="{loading}"
           aria-disabled="{loading}"
           disabled="{loading}"
-          on:click="{onYesClick}"
-        >
+          on:click="{onYesClick}">
           Evet
         </button>
       </div>
@@ -83,6 +80,8 @@
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
+
   let loading;
 
   function refreshBrowserPage() {
@@ -94,7 +93,9 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.delete({
-        path: "/api/panel/tickets?ids=" + Object.values(get(selectedTickets)).map(id => parseInt(id)),
+        path:
+          "/api/panel/tickets?ids=" +
+          Object.values(get(selectedTickets)).map((id) => parseInt(id)),
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
@@ -103,7 +104,13 @@
 
             hide();
 
-            //TODO TOAST
+            const count = get(selectedTickets).length;
+
+            showToast({
+              text: `${
+                count > 1 ?  count : `"${get(selectedTickets)[0].title}" adlı`
+              } talep kalıcı olarak silindi.`,
+            });
 
             callback(get(selectedTickets));
 
