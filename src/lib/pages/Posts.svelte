@@ -10,7 +10,10 @@
       </a>
     </div>
     <div class="col-auto">
-      <a href="{base}/posts/create-post" class="btn btn-secondary ml-auto" role="button">
+      <a
+        href="{base}/posts/create-post"
+        class="btn btn-secondary ml-auto"
+        role="button">
         <i class="fas fa-plus me-2"></i> Yazı Oluştur
       </a>
     </div>
@@ -190,6 +193,11 @@
   } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
   import PostRow from "$lib/component/PostRow.svelte";
 
+  import {
+    show as showToast,
+    limitTitle,
+  } from "$lib/component/ToastContainer.svelte";
+
   export let data;
 
   pageTitle.set(
@@ -248,6 +256,15 @@
             buttonsLoading = false;
 
             reloadData();
+
+            showToast({
+              text:
+                '"<a href="' +
+                base +
+                '/posts/draft">' +
+                limitTitle(data.posts.find((post) => post.id === id).title) +
+                '</a>" taslaklara taşındı.',
+            });
 
             resolve();
           } else refreshBrowserPage();
