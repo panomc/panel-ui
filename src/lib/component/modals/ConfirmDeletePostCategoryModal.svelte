@@ -98,6 +98,11 @@
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
+  import {
+    show as showToast,
+    limitTitle,
+  } from "$lib/component/ToastContainer.svelte";
+
   let loading = false;
 
   function refreshBrowserPage() {
@@ -118,7 +123,11 @@
 
             hide();
 
-            //TODO TOAST
+            showToast({
+              text: `"${limitTitle(
+                get(category).title
+              )}" kalıcı olarak silindi.`,
+            });
 
             callback(get(category));
 
