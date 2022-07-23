@@ -2,10 +2,9 @@
 <div
   aria-hidden="true"
   class="modal fade"
-  id="conformBanPlayer"
+  id="{dialogID}"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
@@ -15,11 +14,69 @@
         Bu oyuncuyu yasaklamak istediğinizden emin misiniz?
       </div>
       <div class="modal-footer">
-        <button class="btn btn-link text-muted" type="button"> İptal </button>
-        <button class="btn btn-danger" type="button"> Evet </button>
+        <button
+          class="btn btn-link text-muted"
+          type="button"
+          class:disabled="{loading}"
+          disabled="{loading}"
+          on:click="{hide}">
+          İptal
+        </button>
+        <button
+          class="btn btn-danger"
+          type="button"
+          class:disabled="{loading}"
+          disabled="{loading}"
+          on:click="{onSubmit}">
+          Evet
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Bu komponent düzenlenmeli -->
+<script context="module">
+  import { get, writable } from "svelte/store";
+
+  const dialogID = "banPlayerModal";
+  const player = writable({});
+
+  let callback = () => {};
+  let hideCallback = () => {};
+  let modal;
+
+  export function show() {
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
+
+    modal.show();
+  }
+
+  export function hide() {
+    hideCallback();
+
+    modal.hide();
+  }
+
+  export function setCallback(newCallback) {
+    callback = newCallback;
+  }
+
+  export function onHide(newCallback) {
+    hideCallback = newCallback;
+  }
+</script>
+
+<script>
+  // function refreshBrowserPage() {
+  //   location.reload();
+  // }
+
+  let loading = false;
+
+  function onSubmit() {
+    loading = true;
+  }
+</script>
