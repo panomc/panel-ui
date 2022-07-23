@@ -3,8 +3,7 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
@@ -20,8 +19,7 @@
           class:disabled="{loading}"
           aria-disabled="{loading}"
           disabled="{loading}"
-          on:click="{hide}"
-        >
+          on:click="{hide}">
           İptal
         </button>
         <button
@@ -30,8 +28,7 @@
           class:disabled="{loading}"
           aria-disabled="{loading}"
           disabled="{loading}"
-          on:click="{onYesClick}">Evet</button
-        >
+          on:click="{onYesClick}">Evet</button>
       </div>
     </div>
   </div>
@@ -72,6 +69,7 @@
 
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
 
   let loading;
 
@@ -93,7 +91,7 @@
 
             hide();
 
-            //TODO TOAST
+            showToast({text: "Tüm bildirimler silindi."});
 
             callback();
 
