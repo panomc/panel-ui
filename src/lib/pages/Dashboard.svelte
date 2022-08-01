@@ -115,7 +115,7 @@
         <div class="row align-items-center">
           <div class="col-auto">
             <h2 class="mb-0">
-              {data.registeredPlayerCount}
+              {data.newRegisterCount}
             </h2>
           </div>
           <div class="col-auto">Yeni Kayıt</div>
@@ -144,10 +144,10 @@
         </div>
         <div class="col-auto">
           <div class="btn-group">
-            <button class="btn btn-sm btn-outline-light btn-link active">
+            <button class="btn btn-sm btn-outline-light btn-link" class:active={data.period === DashboardPeriod.WEEKLY} on:click={() => reloadDataByPeriod()} disabled="{reloading}">
               Haftalık
             </button>
-            <button class="btn btn-sm btn-outline-light btn-link">
+            <button class="btn btn-sm btn-outline-light btn-link" class:active={data.period === DashboardPeriod.MONTHLY} on:click={() => reloadDataByPeriod(DashboardPeriod.MONTHLY)} disabled="{reloading}">
               Aylık
             </button>
           </div>
@@ -266,10 +266,15 @@
   import { showNetworkErrorOnCatch } from "$lib/store.js";
   import ApiUtil from "$lib/api.util.js";
 
-  async function loadData({ request, CSRFToken }) {
+  export const DashboardPeriod = Object.freeze({
+    WEEKLY: "weekly",
+    MONTHLY: "monthly"
+  });
+
+  async function loadData({ period, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/dashboard",
+        path: `/api/panel/dashboard?period=${period}`,
         request,
         CSRFToken,
       }).then((body) => {
@@ -307,7 +312,7 @@
       return output;
     }
 
-    await loadData({ request }).then((body) => {
+    await loadData({ period: DashboardPeriod.WEEKLY, request }).then((body) => {
       output.props.data = { ...output.props.data, ...body };
     });
 
@@ -329,14 +334,16 @@
     TicketStatuses,
   } from "$lib/component/TicketStatus.svelte";
   import Date from "$lib/component/Date.svelte";
+  import { goto } from "$app/navigation";
 
   export let data;
+  let reloading = false;
 
   pageTitle.set("İstatistikler");
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ CSRFToken: $session.CSRFToken })
+      loadData({ period: DashboardPeriod.WEEKLY, CSRFToken: $session.CSRFToken })
         .then((body) => {
           data = { ...data, ...body };
           resolve();
@@ -358,6 +365,27 @@
         })
         .catch(() => {
           reject();
+        });
+    });
+  }
+
+  function reloadDataByPeriod(period = DashboardPeriod.WEEKLY) {
+    if (data.period === period) {
+      return
+    }
+
+    reloading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      loadData({ period, CSRFToken: $session.CSRFToken })
+        .then((loadedData) => {
+          resolve();
+
+          data = loadedData;
+          reloading = false;
+        })
+        .catch(() => {
+            reject();
         });
     });
   }
