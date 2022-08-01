@@ -56,7 +56,7 @@
                       <a href="{base}/players/player/{user}">
                         <img
                           class="animate__animated animate__zoomIn"
-                          src="https://minotar.net/avatar/{user}"
+                          src="https://crafthead.net/avatar/{user}"
                           width="28"
                           height="28"
                           alt="{user}" />

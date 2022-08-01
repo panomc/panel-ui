@@ -43,7 +43,7 @@
             <span class="badge rounded-pill bg-light link-primary text-center">
               <img
                 class="d-inline rounded-circle me-2"
-                src="https://minotar.net/avatar/Ahmo"
+                src="https://crafthead.net/avatar/Ahmo"
                 alt="Butlu"
                 width="28"
                 height="28" /> Ahmo
@@ -56,7 +56,7 @@
             <span class="badge rounded-pill bg-light link-primary text-center">
               <img
                 class="d-inline rounded-circle me-2"
-                src="https://minotar.net/avatar/Butlu"
+                src="https://crafthead.net/avatar/Butlu"
                 alt="Butlu"
                 width="28"
                 height="28" /> Butlu

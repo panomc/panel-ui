@@ -17,7 +17,7 @@
   <td class="align-middle">
     <a href="{base}/players/player/{ticket.writer.username}">
       <img
-        src="https://minotar.net/avatar/{ticket.writer.username}/32"
+        src="https://crafthead.net/avatar/{ticket.writer.username}/32"
         alt="Oyuncu Adı"
         class="rounded-circle animate__animated animate__zoomIn me-2"
         height="32"

@@ -99,7 +99,7 @@
             <div class="col-auto">
               <a href="{base}/players/player/{message.username}">
                 <img
-                  src="https://minotar.net/avatar/{message.username}/48"
+                  src="https://crafthead.net/avatar/{message.username}/48"
                   alt="{message.username}"
                   class="rounded-circle d-block mr-auto animate__animated animate__zoomIn"
                   use:tooltip="{[message.username, { placement: 'bottom' }]}"
@@ -113,7 +113,7 @@
             <div class="col-auto text-right">
               <a href="{base}/players/player/{message.username}">
                 <img
-                  src="https://minotar.net/avatar/{message.username}/48"
+                  src="https://crafthead.net/avatar/{message.username}/48"
                   alt="{message.username}"
                   class="rounded-circle animate__animated animate__zoomIn"
                   use:tooltip="{[message.username, { placement: 'bottom' }]}"

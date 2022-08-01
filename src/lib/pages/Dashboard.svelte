@@ -184,7 +184,7 @@
                     ]}"
                     href="{base}/players/player/{ticket.writer.username}">
                     <img
-                      src="https://minotar.net/avatar/{ticket.writer
+                      src="https://crafthead.net/avatar/{ticket.writer
                         .username}/32"
                       alt="Oyuncu Adı"
                       class="rounded-circle animate__animated animate__zoomIn"

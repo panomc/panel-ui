@@ -100,7 +100,7 @@
               role="button"
               title="Oturum">
               <img
-                src="https://minotar.net/avatar/{$user.username}"
+                src="https://crafthead.net/avatar/{$user.username}"
                 width="32"
                 height="32"
                 class="rounded-circle animate__animated animate__zoomIn"

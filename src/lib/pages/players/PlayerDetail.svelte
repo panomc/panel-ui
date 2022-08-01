@@ -58,7 +58,7 @@
             class="mb-3 rounded-circle animate__animated animate__zoomIn"
             width="128"
             height="128"
-            src="https://minotar.net/avatar/{data.player.username}" />
+            src="https://crafthead.net/avatar/{data.player.username}" />
 
           <h4 class="card-title">{data.player.username}</h4>
           <h6 class="text-muted">{data.player.email}</h6>
