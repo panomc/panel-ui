@@ -4,30 +4,32 @@
     <div class="card-body animate__animated animate__fadeIn">
       <h5 class="card-title">Platform Ayarları</h5>
       <div class="row mb-3">
-        <label class="col-md-4 col-form-label" for="platformLangueage">
+        <label class="col-md-4 col-form-label" for="platformLanguage">
           Görüntüleme Dili:
         </label>
         <div class="col">
-          <select class="form-control" id="platformLanguage">
-            <option id="setPlatformLangueageTR" selected>Türkçe</option>
-            <option id="setPlatformLangueageEN">İngilizce</option>
+          <select class="form-control" id="platformLanguage"
+                  bind:value="{data.locale}">
+            {#each Object.keys(Languages) as language, index (language)}
+              <option value="{Languages[language].locale}">{Languages[language].name}</option>
+            {/each}
           </select>
         </div>
       </div>
 
       <h5 class="card-title">Güncelleme Tercihleri</h5>
       <div class="row mb-3 justify-content-between">
-        <label class="col-md-4 col-form-label" for="platformLangueage">
+        <label class="col-md-4 col-form-label" for="updatePeriod">
           Otomatik güncellemeleri denetle:
         </label>
         <div class="col">
-          <select class="form-control" bind:value="{data.updatePeriod}">
+          <select class="form-control" bind:value="{data.updatePeriod}" id="updatePeriod">
             <option value="{UpdatePeriod.NEVER}">Asla</option>
             <option value="{UpdatePeriod.ONCE_PER_DAY}">Günde bir kez</option>
             <option value="{UpdatePeriod.ONCE_PER_WEEK}"
-              >Haftada bir kez
+            >Haftada bir kez
             </option>
-            <option value="{UpdatePeriod.ONCE_PER_MONTH}">Ayda bir kez </option>
+            <option value="{UpdatePeriod.ONCE_PER_MONTH}">Ayda bir kez</option>
           </select>
         </div>
       </div>
@@ -38,7 +40,7 @@
         aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
         disabled="{saveButtonLoading || isSaveButtonDisabled}"
         on:click="{save}"
-        >Kaydet
+      >Kaydet
       </button>
     </div>
   </div>
@@ -51,7 +53,7 @@
     NEVER: "never",
     ONCE_PER_DAY: "oncePerDay",
     ONCE_PER_WEEK: "oncePerWeek",
-    ONCE_PER_MONTH: "oncePerMonth",
+    ONCE_PER_MONTH: "oncePerMonth"
   });
 
   async function loadData({ request, CSRFToken }) {
@@ -59,7 +61,7 @@
       ApiUtil.get({
         path: "/api/panel/settings?type=general",
         request,
-        CSRFToken,
+        CSRFToken
       }).then((body) => {
         if (body.result === "ok") {
           body.oldSettings = body;
@@ -73,18 +75,20 @@
   }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import("@sveltejs/kit").Load}
    */
   export async function load(request) {
     let output = {
       props: {
         data: {
           updatePeriod: UpdatePeriod.ONCE_PER_DAY,
+          locale: "",
           oldSettings: {
             updatePeriod: UpdatePeriod.ONCE_PER_DAY,
-          },
-        },
-      },
+            locale: ""
+          }
+        }
+      }
     };
 
     if (request.stuff.NETWORK_ERROR) {
@@ -106,13 +110,14 @@
   import { session } from "$app/stores";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
+  import { changeLanguage, getLanguageByLocale, Languages } from "$lib/language.util";
 
   pageTitle.set("Genel Ayarlar");
 
   export let data;
 
   let saveButtonLoading = false;
-  $: isSaveButtonDisabled = data.oldSettings.updatePeriod === data.updatePeriod;
+  $: isSaveButtonDisabled = data.oldSettings.updatePeriod === data.updatePeriod && data.oldSettings.locale === data.locale;
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -135,8 +140,9 @@
         path: "/api/panel/settings",
         body: {
           updatePeriod: data.updatePeriod,
+          locale: data.locale
         },
-        CSRFToken: $session.CSRFToken,
+        CSRFToken: $session.CSRFToken
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -149,8 +155,10 @@
                 return obj;
               }, {});
 
+            changeLanguage(getLanguageByLocale(data.locale))
+
             showToast({
-              text: "Ayarlar kaydedildi.",
+              text: "Ayarlar kaydedildi."
             });
 
             resolve();
