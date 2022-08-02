@@ -28,6 +28,7 @@
     notLoggedIn,
     setDefaults,
   } from "$lib/store.js";
+  import { init as initLanguage } from "$lib/language.util";
 
   import ApiUtil, { NETWORK_ERROR } from "$lib/api.util.js";
 
@@ -53,16 +54,19 @@
    * @type {import('@sveltejs/kit').Load}
    */
   export async function load(request) {
+    const { basicData } = request.session;
+    await initLanguage(basicData.locale);
+
     setDefaults();
 
     const output = {
       stuff: {},
     };
 
-    if (request.session.basicData.result === "ok") {
-      initializeBasicData(request.session.basicData);
+    if (basicData.result === "ok") {
+      initializeBasicData(basicData);
     } else {
-      if (request.session.basicData.error === "NOT_LOGGED_IN") {
+      if (basicData.error === "NOT_LOGGED_IN") {
         notLoggedIn.set(true);
       }
 
