@@ -1,26 +1,10 @@
 <div
   class="toast-container position-fixed bottom-0 start-50 translate-middle-x mb-3">
   {#each $toasts as toast, index (toast)}
-    <div
-      id="appToast{toast.id}"
-      class="toast align-items-center text-bg-dark border-0"
-      role="alert"
-      aria-live="assertive"
-      aria-atomic="true">
-      <div class="d-flex">
-        {#if toast.url}
-          <a href="{base + toast.url}">
-            <div class="toast-body">{@html toast.text}</div>
-          </a>
-        {:else}
-          <div class="toast-body">{@html toast.text}</div>
-        {/if}
-        <button
-          type="button"
-          class="btn-close btn-close-white me-2 m-auto"
-          data-bs-dismiss="toast"></button>
-      </div>
-    </div>
+    <svelte:component
+      this="{toast.component}"
+      id="{toast.id}"
+      {...toast.params} />
   {/each}
 </div>
 
@@ -47,10 +31,12 @@
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
-  export async function show(toast = { text: "", type: "SUCCESSFUL" }) {
+  export async function show(toastComponent, params = {}) {
     while (!window.bootstrap) {
       await delay(50);
     }
+
+    const toast = { component: toastComponent, params };
 
     id = id + 1;
 
@@ -92,8 +78,4 @@
 
     return text;
   }
-</script>
-
-<script>
-  import { base } from "$app/paths";
 </script>
