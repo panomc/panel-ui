@@ -81,11 +81,8 @@
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
 
-  import {
-    show as showToast,
-  } from "$lib/component/ToastContainer.svelte";
-
-  import { base } from "$app/paths";
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
+  import TicketsClosedToast from "$lib/component/toasts/TicketsClosedToast.svelte";
 
   let loading;
 
@@ -100,8 +97,10 @@
       ApiUtil.put({
         path: "/api/panel/tickets",
         body: {
-          tickets: Object.values(get(selectedTickets).map(id => parseInt(id))),
-          status: "close"
+          tickets: Object.values(
+            get(selectedTickets).map((id) => parseInt(id))
+          ),
+          status: "close",
         },
         CSRFToken: $session.CSRFToken,
       })
@@ -111,11 +110,9 @@
 
             hide();
 
-            const count = get(selectedTickets).length
+            const count = get(selectedTickets).length;
 
-            showToast({
-              text: count > 1 ?  `<a href="${base}/tickets/closed">${count}</a> talep kapatıldı.` : `Talep kapatıldı.`,
-            });
+            showToast(TicketsClosedToast, { count });
 
             callback(get(selectedTickets));
 

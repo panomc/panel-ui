@@ -186,6 +186,7 @@
   import { session } from "$app/stores";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
+  import SettingsSavedToast from "$lib/component/toasts/SettingsSavedToast.svelte";
 
   pageTitle.set("Website Ayarları");
 
@@ -250,9 +251,7 @@
 
             data.oldSettings.keywords = [...data.keywords];
 
-            showToast({
-              text: "Ayarlar kaydedildi.",
-            });
+            showToast(SettingsSavedToast);
 
             resolve();
           } else reject();

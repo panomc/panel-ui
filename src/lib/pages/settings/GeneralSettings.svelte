@@ -111,6 +111,7 @@
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import { changeLanguage, getLanguageByLocale, Languages } from "$lib/language.util";
+  import SettingsSavedToast from "$lib/component/toasts/SettingsSavedToast.svelte";
 
   pageTitle.set("Genel Ayarlar");
 
@@ -157,9 +158,7 @@
 
             changeLanguage(getLanguageByLocale(data.locale))
 
-            showToast({
-              text: "Ayarlar kaydedildi."
-            });
+            showToast(SettingsSavedToast);
 
             resolve();
           } else reject();

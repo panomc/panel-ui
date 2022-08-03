@@ -83,6 +83,8 @@
     limitTitle,
   } from "$lib/component/ToastContainer.svelte";
   import { base } from "$app/paths";
+  import PostDeletedPermanetlyToast from "$lib/component/toasts/PostDeletedPermanetlyToast.svelte";
+  import PostMovedToTrashToast from "$lib/component/toasts/PostMovedToTrashToast.svelte";
 
   let loading = false;
 
@@ -101,19 +103,9 @@
           hide();
 
           if (get(post).status === 0) {
-            showToast({
-              text:
-                '"' + limitTitle(get(post).title) + '" kalıcı olarak silindi.',
-            });
+            showToast(PostDeletedPermanetlyToast, { title: get(post).title });
           } else {
-            showToast({
-              text:
-                '"<a href="' +
-                base +
-                '/posts/trash">' +
-                limitTitle(get(post).title) +
-                '</a>" çöpe taşındı.',
-            });
+            showToast(PostMovedToTrashToast, { title: get(post).title });
           }
 
           callback(get(post));

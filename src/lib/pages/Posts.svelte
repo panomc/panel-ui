@@ -197,6 +197,8 @@
     show as showToast,
     limitTitle,
   } from "$lib/component/ToastContainer.svelte";
+  import PostMovedToDraftToast from "$lib/component/toasts/PostMovedToDraftToast.svelte";
+  import PostPublishedToast from "$lib/component/toasts/PostPublishedToast.svelte";
 
   export let data;
 
@@ -257,13 +259,8 @@
 
             reloadData();
 
-            showToast({
-              text:
-                '"<a href="' +
-                base +
-                '/posts/draft">' +
-                limitTitle(data.posts.find((post) => post.id === id).title) +
-                '</a>" taslaklara taşındı.',
+            showToast(PostMovedToDraftToast, {
+              title: data.posts.find((post) => post.id === id).title,
             });
 
             resolve();
@@ -292,10 +289,9 @@
 
             goto(base + "/posts");
 
-            showToast({
-              text: `"<a href="/posts/post/${id}" target="_blank">${limitTitle(
-                data.posts.find((post) => post.id === id).title
-              )}</a>" yayınlandı.`,
+            showToast(PostPublishedToast, {
+              postId: id,
+              title: data.posts.find((post) => post.id === id).title,
             });
 
             resolve();

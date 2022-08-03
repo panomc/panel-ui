@@ -4,8 +4,7 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
@@ -40,8 +39,7 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{hide}"
-        >
+          on:click="{hide}">
           İptal
         </button>
         <button
@@ -49,8 +47,7 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{onYesClick}"
-        >
+          on:click="{onYesClick}">
           Evet
         </button>
       </div>
@@ -106,6 +103,7 @@
     show as showToast,
     limitTitle,
   } from "$lib/component/ToastContainer.svelte";
+  import TicketCategoryDeletedPermanetlyToast from "$lib/component/toasts/TicketCategoryDeletedPermanetlyToast.svelte";
 
   let loading = false;
 
@@ -127,10 +125,8 @@
 
             hide();
 
-            showToast({
-              text: `"${limitTitle(
-                get(category).title
-              )}" kalıcı olarak silindi.`,
+            showToast(TicketCategoryDeletedPermanetlyToast, {
+              title: get(category).title,
             });
 
             callback(get(category));

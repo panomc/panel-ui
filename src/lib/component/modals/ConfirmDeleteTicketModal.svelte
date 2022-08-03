@@ -81,6 +81,7 @@
   import ApiUtil from "$lib/api.util";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
+  import TicketsDeletedPermanetlyToast from "$lib/component/toasts/TicketsDeletedPermanetlyToast.svelte";
 
   let loading;
 
@@ -106,10 +107,7 @@
 
             const count = get(selectedTickets).length;
 
-            showToast({
-              text:
-                count > 1 ?  `${count} talep kalıcı olarak silindi.` : `Talep kalıcı olarak silindi.`,
-            });
+            showToast(TicketsDeletedPermanetlyToast, {count});
 
             callback(get(selectedTickets));
 

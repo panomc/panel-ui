@@ -70,6 +70,7 @@
   import { showNetworkErrorOnCatch } from "$lib/store";
   import ApiUtil from "$lib/api.util";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
+  import TicketsDeletedPermanentlyToast from "$lib/component/toasts/TicketsDeletedPermanetlyToast.svelte";
 
   let loading;
 
@@ -91,7 +92,7 @@
 
             hide();
 
-            showToast({text: "Tüm bildirimler silindi."});
+            showToast(TicketsDeletedPermanentlyToast);
 
             callback();
 

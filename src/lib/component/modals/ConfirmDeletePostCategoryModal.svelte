@@ -102,6 +102,7 @@
     show as showToast,
     limitTitle,
   } from "$lib/component/ToastContainer.svelte";
+  import PostCategoryDeletedPermanetlyToast from "$lib/component/toasts/PostCategoryDeletedPermanetlyToast.svelte";
 
   let loading = false;
 
@@ -123,10 +124,8 @@
 
             hide();
 
-            showToast({
-              text: `"${limitTitle(
-                get(category).title
-              )}" kalıcı olarak silindi.`,
+            showToast(PostCategoryDeletedPermanetlyToast, {
+              title: get(category).title,
             });
 
             callback(get(category));

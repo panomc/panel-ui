@@ -257,10 +257,10 @@
 
   import Editor from "$lib/component/Editor.svelte";
 
-  import {
-    show as showToast,
-    limitTitle,
-  } from "$lib/component/ToastContainer.svelte";
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
+
+  import PostPublishedToast from "$lib/component/toasts/PostPublishedToast.svelte";
+  import PostMovedToDraftToast from "$lib/component/toasts/PostMovedToDraftToast.svelte";
 
   export let data;
 
@@ -333,10 +333,9 @@
             data.post.status = 1;
           }
 
-          showToast({
-            text: `"<a href="/posts/post/${body.id}" target="_blank">${limitTitle(
-              data.post.title
-            )}</a>" yayınlandı.`,
+          showToast(PostPublishedToast, {
+            postId: body.id,
+            title: data.post.title,
           });
 
           resolve();
@@ -392,14 +391,7 @@
 
             goto(base + "/posts/draft");
 
-            showToast({
-              text:
-                '"<a href="' +
-                base +
-                '/posts/draft">' +
-                limitTitle(data.post.title) +
-                '</a>" taslaklara taşındı.',
-            });
+            showToast(PostMovedToDraftToast, { title: data.post.title });
 
             resolve();
           } else reject();
