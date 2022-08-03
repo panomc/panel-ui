@@ -10,7 +10,6 @@
 
 <div class="splash" role="status" in:fade out:fade>
   <img
-    class="animate__animated animate__pulse animate__infinite animate__slower"
     alt="Pano"
     src="{base + '/assets/img/loading_slime.gif'}"
     width="128"
