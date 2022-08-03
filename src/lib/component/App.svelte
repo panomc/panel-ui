@@ -4,13 +4,8 @@
 
 <slot />
 
-<NotificationContainer/>
-<ToastContainer/>
-
 <script>
   import { browser } from "$app/env";
-  import NotificationContainer from "$lib/component/NotificationContainer.svelte"
-  import ToastContainer from "$lib/component/ToastContainer.svelte";
 
   if (browser) {
     import("$lib/init.libs.js");

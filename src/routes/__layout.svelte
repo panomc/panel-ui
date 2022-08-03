@@ -1,8 +1,6 @@
-<App>
-  <Layout>
-    <slot />
-  </Layout>
-</App>
+<MainLayout>
+  <slot />
+</MainLayout>
 
 <script context="module">
   import { load as loadLayout } from "$lib/layouts/MainLayout.svelte";
@@ -25,6 +23,5 @@
 </script>
 
 <script>
-  import Layout from "$lib/layouts/MainLayout.svelte";
-  import App from "$lib/component/App.svelte";
+  import MainLayout from "$lib/layouts/MainLayout.svelte";
 </script>

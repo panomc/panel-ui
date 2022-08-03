@@ -2,23 +2,28 @@
   <title>{title}</title>
 </svelte:head>
 
-{#if showSplash}
-  <Splash />
-{/if}
+<App>
+  {#if showSplash}
+    <Splash />
+  {/if}
 
-<div class:d-flex="{!showSplash}" hidden="{showSplash}">
-  <Sidebar />
-  <!--  Main  -->
-  <main class="w-100 overflow-scroll" style="height: 100vh;">
-    <Navbar />
+  <div class:d-flex="{!showSplash}" hidden="{showSplash}">
+    <Sidebar />
+    <!--  Main  -->
+    <main class="w-100 overflow-scroll" style="height: 100vh;">
+      <Navbar />
 
-    <div hidden="{showLoading}">
-      <slot />
-    </div>
+      <div hidden="{showLoading}">
+        <slot />
+      </div>
 
-    <PageLoading show="{showLoading}" />
-  </main>
-</div>
+      <PageLoading show="{showLoading}" />
+    </main>
+  </div>
+
+  <NotificationContainer />
+  <ToastContainer />
+</App>
 
 <script context="module">
   import {
@@ -101,6 +106,9 @@
   import Navbar from "$lib/component/Navbar.svelte";
   import Sidebar from "$lib/component/Sidebar.svelte";
   import PageLoading from "$lib/component/PageLoading.svelte";
+  import App from "$lib/component/App.svelte";
+  import NotificationContainer from "$lib/component/NotificationContainer.svelte";
+  import ToastContainer from "$lib/component/ToastContainer.svelte";
 
   $: title = $pageTitle
     ? `${$pageTitle} \u2014 ${options.DEFAULT_PAGE_TITLE}`
