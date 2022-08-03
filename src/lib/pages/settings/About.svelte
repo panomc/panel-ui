@@ -9,7 +9,7 @@
             Versiyon
           </label>
           <div class="col col-form-label">
-            <span aria-describedby="panoVersion" id="panoVersion"> 1.0 </span>
+            <span aria-describedby="panoVersion" id="panoVersion">{data.platformVersion}</span>
           </div>
         </div>
         <div class="row">
@@ -17,7 +17,7 @@
             Sürüm
           </label>
           <div class="col col-form-label">
-            <span aria-describedby="panoRelease" id="panoRelease"> Beta </span>
+            <span aria-describedby="panoRelease" id="panoRelease">{data.platformStage}</span>
           </div>
         </div>
         <div class="row mb-0">
@@ -84,8 +84,56 @@
   </div>
 </div>
 
+<script context="module">
+  import ApiUtil from "$lib/api.util.js";
+
+  async function loadData({ request, CSRFToken }) {
+    return new Promise((resolve, reject) => {
+      ApiUtil.get({
+        path: "/api/panel/settings/about",
+        request,
+        CSRFToken,
+      }).then((body) => {
+        if (body.result === "ok") {
+          resolve(body);
+        } else {
+          reject(body);
+        }
+      });
+    });
+  }
+
+  /**
+   * @type {import("@sveltejs/kit").Load}
+   */
+  export async function load(request) {
+    let output = {
+      props: {
+        data: {
+          platformVersion: "",
+          platformStage: ""
+        },
+      },
+    };
+
+    if (request.stuff.NETWORK_ERROR) {
+      output.props.data.NETWORK_ERROR = true;
+
+      return output;
+    }
+
+    await loadData({ request }).then((body) => {
+      output.props.data = { ...output.props.data, ...body };
+    });
+
+    return output;
+  }
+</script>
+
 <script>
   import { pageTitle } from "$lib/store.js";
 
   pageTitle.set("Hakkında");
+
+  export let data;
 </script>
