@@ -1,6 +1,4 @@
-<Toast id="{id}">
-  Ayarlar kaydedildi.
-</Toast>
+<Toast id="{id}">Ayarlar kaydedildi.</Toast>
 
 <script>
   import Toast from "$lib/component/Toast.svelte";

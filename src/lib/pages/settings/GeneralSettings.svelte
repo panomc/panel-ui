@@ -8,10 +8,13 @@
           Görüntüleme Dili:
         </label>
         <div class="col">
-          <select class="form-control" id="platformLanguage"
-                  bind:value="{data.locale}">
+          <select
+            class="form-control"
+            id="platformLanguage"
+            bind:value="{data.locale}">
             {#each Object.keys(Languages) as language, index (language)}
-              <option value="{Languages[language].locale}">{Languages[language].name}</option>
+              <option value="{Languages[language].locale}"
+                >{Languages[language].name}</option>
             {/each}
           </select>
         </div>
@@ -23,11 +26,14 @@
           Otomatik güncellemeleri denetle:
         </label>
         <div class="col">
-          <select class="form-control" bind:value="{data.updatePeriod}" id="updatePeriod">
+          <select
+            class="form-control"
+            bind:value="{data.updatePeriod}"
+            id="updatePeriod">
             <option value="{UpdatePeriod.NEVER}">Asla</option>
             <option value="{UpdatePeriod.ONCE_PER_DAY}">Günde bir kez</option>
             <option value="{UpdatePeriod.ONCE_PER_WEEK}"
-            >Haftada bir kez
+              >Haftada bir kez
             </option>
             <option value="{UpdatePeriod.ONCE_PER_MONTH}">Ayda bir kez</option>
           </select>
@@ -40,7 +46,7 @@
         aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
         disabled="{saveButtonLoading || isSaveButtonDisabled}"
         on:click="{save}"
-      >Kaydet
+        >Kaydet
       </button>
     </div>
   </div>
@@ -53,7 +59,7 @@
     NEVER: "never",
     ONCE_PER_DAY: "oncePerDay",
     ONCE_PER_WEEK: "oncePerWeek",
-    ONCE_PER_MONTH: "oncePerMonth"
+    ONCE_PER_MONTH: "oncePerMonth",
   });
 
   async function loadData({ request, CSRFToken }) {
@@ -61,7 +67,7 @@
       ApiUtil.get({
         path: "/api/panel/settings?type=general",
         request,
-        CSRFToken
+        CSRFToken,
       }).then((body) => {
         if (body.result === "ok") {
           body.oldSettings = body;
@@ -85,10 +91,10 @@
           locale: "",
           oldSettings: {
             updatePeriod: UpdatePeriod.ONCE_PER_DAY,
-            locale: ""
-          }
-        }
-      }
+            locale: "",
+          },
+        },
+      },
     };
 
     if (request.stuff.NETWORK_ERROR) {
@@ -110,7 +116,11 @@
   import { session } from "$app/stores";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
-  import { changeLanguage, getLanguageByLocale, Languages } from "$lib/language.util";
+  import {
+    changeLanguage,
+    getLanguageByLocale,
+    Languages,
+  } from "$lib/language.util";
   import SettingsSavedToast from "$lib/component/toasts/SettingsSavedToast.svelte";
 
   pageTitle.set("Genel Ayarlar");
@@ -118,7 +128,9 @@
   export let data;
 
   let saveButtonLoading = false;
-  $: isSaveButtonDisabled = data.oldSettings.updatePeriod === data.updatePeriod && data.oldSettings.locale === data.locale;
+  $: isSaveButtonDisabled =
+    data.oldSettings.updatePeriod === data.updatePeriod &&
+    data.oldSettings.locale === data.locale;
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -141,9 +153,9 @@
         path: "/api/panel/settings",
         body: {
           updatePeriod: data.updatePeriod,
-          locale: data.locale
+          locale: data.locale,
         },
-        CSRFToken: $session.CSRFToken
+        CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -156,7 +168,7 @@
                 return obj;
               }, {});
 
-            changeLanguage(getLanguageByLocale(data.locale))
+            changeLanguage(getLanguageByLocale(data.locale));
 
             showToast(SettingsSavedToast);
 

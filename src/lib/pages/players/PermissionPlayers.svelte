@@ -37,8 +37,7 @@
                 <th class="align-middle text-nowrap" scope="col"></th>
                 <th class="align-middle text-nowrap" scope="col">İsim</th>
                 <th class="align-middle text-nowrap table-primary" scope="col"
-                  >Yetki</th
-                >
+                  >Yetki</th>
                 <th class="align-middle text-nowrap" scope="col">Durum</th>
                 <th class="align-middle text-nowrap" scope="col">Son Oturum</th>
                 <th class="align-middle text-nowrap" scope="col">Kayıt</th>
@@ -51,8 +50,7 @@
                   on:showAuthorizePlayerModalClick="{(event) =>
                     onShowAuthorizePlayerModalClick(event.detail.player)}"
                   on:showEditPlayerModalClick="{(event) =>
-                    onShowEditPlayerModalClick(event.detail.player)}"
-                />
+                    onShowEditPlayerModalClick(event.detail.player)}" />
               {/each}
             </tbody>
           </table>
@@ -65,8 +63,7 @@
         totalPage="{data.totalPage}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.totalPage)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
     </div>
   </div>
 </div>
@@ -78,7 +75,9 @@
   async function loadData({ page, permissionGroup, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
-        path: `/api/panel/players?permissionGroup=${permissionGroup}&page=${parseInt(page)}`,
+        path: `/api/panel/players?permissionGroup=${permissionGroup}&page=${parseInt(
+          page
+        )}`,
         request,
         CSRFToken,
       }).then((body) => {

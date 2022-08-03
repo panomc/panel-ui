@@ -30,24 +30,21 @@
               class:active="{data.pageType === PageTypes.ALL}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/players/all"
-            >
+              href="{base}/players/all">
               Tümü
             </a>
             <a
               class:active="{data.pageType === PageTypes.HAS_PERM}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
-              href="{base}/players/hasPerm"
-            >
+              href="{base}/players/hasPerm">
               Yetkililer
             </a>
             <a
               class:active="{data.pageType === PageTypes.BANNED}"
               class="btn btn-sm btn-outline-light btn-link text-danger"
               role="button"
-              href="{base}/players/banned"
-            >
+              href="{base}/players/banned">
               Yasaklı
             </a>
           </div>
@@ -81,8 +78,7 @@
                   on:showAuthorizePlayerModalClick="{(event) =>
                     onShowAuthorizePlayerModalClick(event.detail.player)}"
                   on:showEditPlayerModalClick="{(event) =>
-                    onShowEditPlayerModalClick(event.detail.player)}"
-                />
+                    onShowEditPlayerModalClick(event.detail.player)}" />
               {/each}
             </tbody>
           </table>
@@ -95,8 +91,7 @@
         totalPage="{data.totalPage}"
         on:firstPageClick="{() => reloadData(1)}"
         on:lastPageClick="{() => reloadData(data.totalPage)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}"
-      />
+        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
     </div>
   </div>
 </div>

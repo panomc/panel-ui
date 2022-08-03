@@ -4,8 +4,7 @@
   class="modal fade"
   id="{dialogID}"
   role="dialog"
-  tabindex="-1"
->
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-body text-center">
@@ -23,8 +22,7 @@
               {$permissionGroup.name}
             </span>
             <div
-              class="d-flex flex-row flex-row-reverse justify-content-center align-items-center mt-3 mr-3"
-            >
+              class="d-flex flex-row flex-row-reverse justify-content-center align-items-center mt-3 mr-3">
               {#if $permissionGroup.userCount > 3}
                 <small class="pl-1">+{$permissionGroup.userCount - 3}</small>
               {/if}
@@ -32,15 +30,13 @@
               {#each $permissionGroup.users as user, index (user)}
                 <span
                   class="overlapping-avatar"
-                  use:tooltip="{[user, { placement: 'bottom' }]}"
-                >
+                  use:tooltip="{[user, { placement: 'bottom' }]}">
                   <a href="{base}/players/player/{user}">
                     <img
                       src="https://crafthead.net/avatar/{user}"
                       width="32"
                       height="32"
-                      alt="{user}"
-                    />
+                      alt="{user}" />
                   </a>
                 </span>
               {/each}
@@ -54,8 +50,7 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{hide}"
-        >
+          on:click="{hide}">
           İptal
         </button>
         <button
@@ -63,8 +58,7 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{onYesClick}"
-        >
+          on:click="{onYesClick}">
           Evet
         </button>
       </div>

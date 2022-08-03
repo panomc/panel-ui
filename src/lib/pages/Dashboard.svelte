@@ -144,10 +144,18 @@
         </div>
         <div class="col-auto">
           <div class="btn-group">
-            <button class="btn btn-sm btn-outline-light btn-link" class:active={data.period === DashboardPeriod.WEEKLY} on:click={() => reloadDataByPeriod()} disabled="{reloading}">
+            <button
+              class="btn btn-sm btn-outline-light btn-link"
+              class:active="{data.period === DashboardPeriod.WEEKLY}"
+              on:click="{() => reloadDataByPeriod()}"
+              disabled="{reloading}">
               Haftalık
             </button>
-            <button class="btn btn-sm btn-outline-light btn-link" class:active={data.period === DashboardPeriod.MONTHLY} on:click={() => reloadDataByPeriod(DashboardPeriod.MONTHLY)} disabled="{reloading}">
+            <button
+              class="btn btn-sm btn-outline-light btn-link"
+              class:active="{data.period === DashboardPeriod.MONTHLY}"
+              on:click="{() => reloadDataByPeriod(DashboardPeriod.MONTHLY)}"
+              disabled="{reloading}">
               Aylık
             </button>
           </div>
@@ -193,8 +201,9 @@
                   </a>
                 </td>
                 <td class="align-middle text-nowrap">
-                  <a href="{base}/tickets/ticket/{ticket.id}" title="Talebi Görüntüle"
-                    >#{ticket.id} {ticket.title}</a>
+                  <a
+                    href="{base}/tickets/ticket/{ticket.id}"
+                    title="Talebi Görüntüle">#{ticket.id} {ticket.title}</a>
                 </td>
                 <td class="align-middle text-nowrap">
                   <a
@@ -268,7 +277,7 @@
 
   export const DashboardPeriod = Object.freeze({
     WEEKLY: "weekly",
-    MONTHLY: "monthly"
+    MONTHLY: "monthly",
   });
 
   async function loadData({ period, request, CSRFToken }) {
@@ -343,7 +352,10 @@
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ period: DashboardPeriod.WEEKLY, CSRFToken: $session.CSRFToken })
+      loadData({
+        period: DashboardPeriod.WEEKLY,
+        CSRFToken: $session.CSRFToken,
+      })
         .then((body) => {
           data = { ...data, ...body };
           resolve();
@@ -371,7 +383,7 @@
 
   function reloadDataByPeriod(period = DashboardPeriod.WEEKLY) {
     if (data.period === period) {
-      return
+      return;
     }
 
     reloading = true;
@@ -385,7 +397,7 @@
           reloading = false;
         })
         .catch(() => {
-            reject();
+          reject();
         });
     });
   }

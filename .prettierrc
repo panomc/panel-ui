@@ -3,5 +3,6 @@
   "svelteStrictMode": true,
   "svelteBracketNewLine": false,
   "svelteAllowShorthand": false,
-  "quoteProps": "preserve"
+  "quoteProps": "preserve",
+  "bracketSameLine": true
 }

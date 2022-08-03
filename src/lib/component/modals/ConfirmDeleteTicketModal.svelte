@@ -107,7 +107,7 @@
 
             const count = get(selectedTickets).length;
 
-            showToast(TicketsDeletedPermanetlyToast, {count});
+            showToast(TicketsDeletedPermanetlyToast, { count });
 
             callback(get(selectedTickets));
 

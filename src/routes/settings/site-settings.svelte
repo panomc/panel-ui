@@ -1,4 +1,4 @@
-<SiteSettings {data} />
+<SiteSettings data="{data}" />
 
 <script context="module">
   import { load as loadSiteSettings } from "$lib/pages/settings/SiteSettings.svelte";

@@ -24,15 +24,12 @@
       <table class="table table-borderless" style="width: auto !important;">
         <thead>
           <tr class="align-top">
-
             <!-- Blank Cell -->
-            <th scope="col" ></th>
+            <th scope="col"></th>
 
             <!-- Perm Group Name & User Pictures Cell -->
             {#each data.permissionGroups as permissionGroup, index (permissionGroup)}
-              <th
-                scope="col"
-                class="text-center">
+              <th scope="col" class="text-center">
                 <a
                   class="text-capitalize"
                   href="javascript:(void);"
@@ -287,9 +284,7 @@
                 typeof data.permissionGroupPerms[permissionGroup.id] ===
                 "undefined"
               )
-                data.permissionGroupPerms[permissionGroup.id] = [
-                  permission.id,
-                ];
+                data.permissionGroupPerms[permissionGroup.id] = [permission.id];
               else
                 data.permissionGroupPerms[permissionGroup.id].push(
                   permission.id

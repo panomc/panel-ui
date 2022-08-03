@@ -8,8 +8,7 @@
       <a
         class="nav-item nav-link"
         href="{base}/view"
-        class:active="{matching($page.url.pathname, base + '/view')}"
-      >
+        class:active="{matching($page.url.pathname, base + '/view')}">
         Temalar
       </a>
       <a
@@ -18,8 +17,7 @@
         class:active="{matching(
           $page.url.pathname,
           base + '/view/theme-options'
-        )}"
-      >
+        )}">
         Tema Seçenekleri
       </a>
     </div>

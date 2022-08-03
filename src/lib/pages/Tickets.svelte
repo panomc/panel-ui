@@ -12,7 +12,8 @@
     <div class="col-auto">
       <div
         class:d-none="{firstLoad}"
-        class="animate__animated animate__faster {getListOfChecked($checkedList).length > 0
+        class="animate__animated animate__faster {getListOfChecked($checkedList)
+          .length > 0
           ? 'animate__slideInUp'
           : 'animate__slideOutDown'}
       faster">

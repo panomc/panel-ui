@@ -140,7 +140,7 @@
       ApiUtil.put({
         path: `/api/panel/players/${get(player).username}/permissionGroup`,
         body: {
-          permissionGroup: get(player).permissionGroup
+          permissionGroup: get(player).permissionGroup,
         },
         CSRFToken: $session.CSRFToken,
       })

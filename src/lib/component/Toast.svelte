@@ -5,7 +5,7 @@
   aria-live="assertive"
   aria-atomic="true">
   <div class="d-flex">
-    <div class="toast-body"><slot/></div>
+    <div class="toast-body"><slot /></div>
     <button
       type="button"
       class="btn-close btn-close-white me-2 m-auto"

@@ -1,11 +1,6 @@
 import { get, writable } from "svelte/store";
 
-import {
-  register,
-  init as initI18n,
-  locale,
-  waitLocale,
-} from "svelte-i18n";
+import { register, init as initI18n, locale, waitLocale } from "svelte-i18n";
 
 export const Languages = Object.freeze({
   EN_US: {
@@ -24,11 +19,11 @@ export const Languages = Object.freeze({
 export const loadedLanguages = writable([]);
 export const languageLoading = writable(false);
 export const currentLanguage = writable({});
-export const defaultLanguage = Languages.EN_US
+export const defaultLanguage = Languages.EN_US;
 
 export async function init(locale) {
-  const initialLocale = getLanguageByLocale(locale)
-  const languageToLoad = getLocaleOrDefaultByLocale(initialLocale)
+  const initialLocale = getLanguageByLocale(locale);
+  const languageToLoad = getLocaleOrDefaultByLocale(initialLocale);
 
   await loadLanguage(languageToLoad);
   currentLanguage.set(languageToLoad);
@@ -104,11 +99,11 @@ export function getLocaleOrDefaultByLocale(locale) {
     return defaultLanguage.locale;
   }
 
-  const language = getLanguageByLocale(locale)
+  const language = getLanguageByLocale(locale);
 
   if (!language) {
     return defaultLanguage.locale;
   }
 
-  return language.locale
+  return language.locale;
 }

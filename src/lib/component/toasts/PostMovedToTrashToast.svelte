@@ -1,6 +1,6 @@
 <Toast id="{id}">
-  "<a href="{base}/posts/trash" target="_blank">{limitTitle(title)}</a>"
-  çöpe taşındı.
+  "<a href="{base}/posts/trash" target="_blank">{limitTitle(title)}</a>" çöpe
+  taşındı.
 </Toast>
 
 <script>
