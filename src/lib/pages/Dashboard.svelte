@@ -161,7 +161,11 @@
           </div>
         </div>
       </div>
-      <VisitorsChart />
+      <WebsiteActivityChart
+        newRegisterData="{data.websiteActivityDataList.newRegisterData}"
+        ticketsData="{data.websiteActivityDataList.ticketsData}"
+        visitorData="{data.websiteActivityDataList.visitorData}"
+        viewData="{data.websiteActivityDataList.viewData}" />
     </div>
   </div>
 
@@ -288,6 +292,7 @@
         CSRFToken,
       }).then((body) => {
         if (body.result === "ok") {
+          console.log(body);
           resolve(body);
         } else {
           reject(body);
@@ -336,7 +341,7 @@
 
   import tooltip from "$lib/tooltip.util";
 
-  import VisitorsChart from "$lib/component/charts/Dashboard/VisitorsChart.svelte";
+  import WebsiteActivityChart from "$lib/component/charts/Dashboard/WebsiteActivityChart.svelte";
   // import PlayersChart from "$lib/component/charts/Dashboard/PlayersChart.svelte";
   // import TrafficChart from "$lib/component/charts/Dashboard/TrafficChart.svelte";
   import TicketStatus, {
