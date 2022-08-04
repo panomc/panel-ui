@@ -15,9 +15,11 @@
   function convertDataForChartJS(data) {
     const newData = [];
 
-    Object.keys(data).forEach((key) => {
-      newData.push({ x: Number(key), y: data[key] });
-    });
+    if (data) {
+      Object.keys(data).forEach((key) => {
+        newData.push({ x: Number(key), y: data[key] });
+      });
+    }
 
     return newData;
   }
