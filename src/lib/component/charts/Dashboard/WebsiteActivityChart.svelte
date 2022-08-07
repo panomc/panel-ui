@@ -11,6 +11,7 @@
   let chart;
   let minDate;
   let maxDate;
+  let displayFormats;
   export let newRegisterData;
   export let ticketsData;
   export let visitorData;
@@ -25,9 +26,13 @@
     if (period === DashboardPeriod.WEEKLY) {
       minDate = startOfWeek(currentDate, weekConfiguration).getTime();
       maxDate = endOfWeek(currentDate, weekConfiguration).getTime();
+
+      displayFormats = { "day": "eee" }
     } else {
       minDate = startOfMonth(currentDate).getTime();
       maxDate = endOfMonth(currentDate).getTime();
+
+      displayFormats = { "day": "dd, eee" }
     }
 
     if (chart) {
@@ -130,6 +135,7 @@
 
     chart.options.scales.x.min = minDate;
     chart.options.scales.x.max = maxDate;
+    chart.options.scales.x.time.displayFormats = displayFormats;
 
     chart.options.scales.y.suggestedMax = getSuggestedMax(convertedDatasets);
 
@@ -152,7 +158,7 @@
             type: "time",
             time: {
               unit: "day",
-              displayFormats: { "day": "eee" },
+              displayFormats,
               isoWeekday: true,
               padding: 5,
             },
