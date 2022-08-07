@@ -293,7 +293,6 @@
         CSRFToken,
       }).then((body) => {
         if (body.result === "ok") {
-          console.log(body);
           resolve(body);
         } else {
           reject(body);
