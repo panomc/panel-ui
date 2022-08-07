@@ -146,17 +146,17 @@
           <div class="btn-group">
             <button
               class="btn btn-sm btn-outline-light btn-link"
-              class:active="{data.period === DashboardPeriod.WEEKLY}"
+              class:active="{data.period === DashboardPeriod.WEEK}"
               on:click="{() => reloadDataByPeriod()}"
               disabled="{reloading}">
-              Haftalık
+              Hafta
             </button>
             <button
               class="btn btn-sm btn-outline-light btn-link"
-              class:active="{data.period === DashboardPeriod.MONTHLY}"
-              on:click="{() => reloadDataByPeriod(DashboardPeriod.MONTHLY)}"
+              class:active="{data.period === DashboardPeriod.MONTH}"
+              on:click="{() => reloadDataByPeriod(DashboardPeriod.MONTH)}"
               disabled="{reloading}">
-              Aylık
+              Ay
             </button>
           </div>
         </div>
@@ -281,8 +281,8 @@
   import ApiUtil from "$lib/api.util.js";
 
   export const DashboardPeriod = Object.freeze({
-    WEEKLY: "weekly",
-    MONTHLY: "monthly",
+    WEEK: "week",
+    MONTH: "month",
   });
 
   async function loadData({ period, request, CSRFToken }) {
@@ -326,7 +326,7 @@
       return output;
     }
 
-    await loadData({ period: DashboardPeriod.WEEKLY, request }).then((body) => {
+    await loadData({ period: DashboardPeriod.WEEK, request }).then((body) => {
       output.props.data = { ...output.props.data, ...body };
     });
 
@@ -358,7 +358,7 @@
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
-        period: DashboardPeriod.WEEKLY,
+        period: DashboardPeriod.WEEK,
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
@@ -386,7 +386,7 @@
     });
   }
 
-  function reloadDataByPeriod(period = DashboardPeriod.WEEKLY) {
+  function reloadDataByPeriod(period = DashboardPeriod.WEEK) {
     if (data.period === period) {
       return;
     }

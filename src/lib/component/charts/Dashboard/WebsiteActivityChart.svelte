@@ -23,7 +23,7 @@
   $: {
     const currentDate = new Date();
 
-    if (period === DashboardPeriod.WEEKLY) {
+    if (period === DashboardPeriod.WEEK) {
       minDate = startOfWeek(currentDate, weekConfiguration).getTime();
       maxDate = endOfWeek(currentDate, weekConfiguration).getTime();
 
