@@ -141,8 +141,6 @@
 
     const suggestedMax = getSuggestedMax(convertedDatasets);
 
-    console.log(suggestedMax);
-
     chart = new Chart(element, {
       type: "line",
       data: {
