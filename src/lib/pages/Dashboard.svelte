@@ -165,7 +165,8 @@
         newRegisterData="{data.websiteActivityDataList.newRegisterData}"
         ticketsData="{data.websiteActivityDataList.ticketsData}"
         visitorData="{data.websiteActivityDataList.visitorData}"
-        viewData="{data.websiteActivityDataList.viewData}" />
+        viewData="{data.websiteActivityDataList.viewData}"
+        period="{data.period}" />
     </div>
   </div>
 

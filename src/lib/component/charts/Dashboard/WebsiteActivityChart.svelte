@@ -4,13 +4,36 @@
   import Chart from "chart.js/auto/auto.esm";
   import "chartjs-adapter-date-fns";
   import { onMount } from "svelte";
+  import { startOfWeek, endOfWeek, startOfMonth, endOfMonth } from "date-fns";
+  import { DashboardPeriod } from "$lib/pages/Dashboard.svelte";
 
   let element;
   let chart;
+  let minDate;
+  let maxDate;
   export let newRegisterData;
   export let ticketsData;
   export let visitorData;
   export let viewData;
+  export let period;
+
+  const weekConfiguration = { weekStartsOn: 1 };
+
+  $: {
+    const currentDate = new Date();
+
+    if (period === DashboardPeriod.WEEKLY) {
+      minDate = startOfWeek(currentDate, weekConfiguration).getTime();
+      maxDate = endOfWeek(currentDate, weekConfiguration).getTime();
+    } else {
+      minDate = startOfMonth(currentDate).getTime();
+      maxDate = endOfMonth(currentDate).getTime();
+    }
+
+    if (chart) {
+      reloadChart();
+    }
+  }
 
   function convertDataForChartJS(data) {
     const newData = [];
@@ -24,56 +47,108 @@
     return newData;
   }
 
-  onMount(() => {
-    const visitorsChart = new Chart(element, {
+  function getSuggestedMax(datasets) {
+    let highestValue = 0;
+
+    Object.values(datasets).forEach((dataset) => {
+      dataset.forEach((data) => {
+        if (data["y"] > highestValue) {
+          highestValue = data["y"];
+        }
+      })
+    });
+
+    return highestValue + 5;
+  }
+
+  function getConvertedDatasets() {
+    const convertedNewRegisterData = convertDataForChartJS(newRegisterData);
+    const convertedTicketsData = convertDataForChartJS(ticketsData);
+    const convertedVisitorData = convertDataForChartJS(visitorData);
+    const convertedViewData = convertDataForChartJS(viewData);
+
+    return {
+      convertedNewRegisterData,
+      convertedTicketsData,
+      convertedVisitorData,
+      convertedViewData,
+    };
+  }
+
+  function getDatasets(convertedDatasets) {
+    const {
+      convertedNewRegisterData,
+      convertedTicketsData,
+      convertedVisitorData,
+      convertedViewData,
+    } = convertedDatasets;
+
+    return [
+      {
+        label: "Yeni Kayıt",
+        data: convertedNewRegisterData,
+        borderColor: "orange",
+        backgroundColor: "rgba(25, 118, 210, .05)",
+        borderWidth: 2,
+        pointRadius: 5,
+        pointBackgroundColor: "#fff",
+      },
+      {
+        label: "Yeni Talep",
+        data: convertedTicketsData,
+        borderColor: "purple",
+        backgroundColor: "rgba(25, 118, 210, .05)",
+        borderWidth: 2,
+        pointRadius: 5,
+        pointBackgroundColor: "#fff",
+      },
+      {
+        label: "Ziyaretçi",
+        data: convertedVisitorData,
+        borderColor: "red",
+        backgroundColor: "rgba(25, 118, 210, .05)",
+        borderWidth: 2,
+        pointRadius: 5,
+        pointBackgroundColor: "#fff",
+      },
+      {
+        label: "Görüntülenme",
+        data: convertedViewData,
+        borderColor: "green",
+        backgroundColor: "rgba(25, 118, 210, .05)",
+        borderWidth: 2,
+        pointRadius: 5,
+        pointBackgroundColor: "#fff",
+      },
+    ];
+  }
+
+  function reloadChart() {
+    const convertedDatasets = getConvertedDatasets();
+
+    chart.data.datasets = getDatasets(convertedDatasets);
+
+    chart.options.scales.x.min = minDate;
+    chart.options.scales.x.max = maxDate;
+
+    chart.options.scales.y.suggestedMax = getSuggestedMax(convertedDatasets);
+
+    chart.update();
+  }
+
+  function renderChart() {
+    const convertedDatasets = getConvertedDatasets();
+
+    const suggestedMax = getSuggestedMax(convertedDatasets);
+
+    console.log(suggestedMax);
+
+    chart = new Chart(element, {
       type: "line",
       data: {
-        datasets: [
-          {
-            label: "Yeni Kayıt",
-            data: convertDataForChartJS(newRegisterData),
-            borderColor: "orange",
-            backgroundColor: "rgba(25, 118, 210, .05)",
-            borderWidth: 2,
-            pointRadius: 5,
-            pointBackgroundColor: "#fff",
-          },
-          {
-            label: "Yeni Talep",
-            data: convertDataForChartJS(ticketsData),
-            borderColor: "purple",
-            backgroundColor: "rgba(25, 118, 210, .05)",
-            borderWidth: 2,
-            pointRadius: 5,
-            pointBackgroundColor: "#fff",
-          },
-          {
-            label: "Ziyaretçi",
-            data: convertDataForChartJS(visitorData),
-            borderColor: "red",
-            backgroundColor: "rgba(25, 118, 210, .05)",
-            borderWidth: 2,
-            pointRadius: 5,
-            pointBackgroundColor: "#fff",
-          },
-          {
-            label: "Görüntülenme",
-            data: convertDataForChartJS(viewData),
-            borderColor: "green",
-            backgroundColor: "rgba(25, 118, 210, .05)",
-            borderWidth: 2,
-            pointRadius: 5,
-            pointBackgroundColor: "#fff",
-          },
-        ],
+        datasets: getDatasets(convertedDatasets),
       },
       options: {
-        layout: {
-          padding: {
-            left: 0,
-            right: 0
-          }
-        },
         scales: {
           x: {
             type: "time",
@@ -81,20 +156,24 @@
               unit: "day",
               displayFormats: { "day": "eee" },
               isoWeekday: true,
-              padding: 5
+              padding: 5,
             },
-            min: "2022-07-29 00:00:00",
-            max: "2022-08-04 00:00:00",
-            offset: true
+            min: minDate,
+            max: maxDate,
+            offset: true,
           },
           y: {
-            suggestedMax: 20,
+            suggestedMax: suggestedMax,
             ticks: {
-              precision: false
+              precision: false,
             },
           },
         },
       },
     });
+  }
+
+  onMount(() => {
+    renderChart();
   });
 </script>
