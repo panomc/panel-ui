@@ -1,7 +1,7 @@
 <canvas height="120" id="websiteActivityChart" bind:this="{element}"></canvas>
 
 <script>
-  import Chart from "chart.js/auto/auto.esm";
+  import Chart from "chart.js/auto";
   import "chartjs-adapter-date-fns";
   import { onMount } from "svelte";
   import { startOfWeek, endOfWeek, startOfMonth, endOfMonth } from "date-fns";
