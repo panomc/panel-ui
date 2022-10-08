@@ -98,7 +98,7 @@
 
 <script context="module">
   import ApiUtil from "$lib/api.util";
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
 
   export const PageTypes = Object.freeze({
     ALL: "all",
@@ -133,45 +133,44 @@
   }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import('@sveltejs/kit').PageLoad}
    */
-  export async function load(request, pageType = DefaultPageType) {
-    let output = {
-      props: {
-        data: {
-          playerCount: 0,
-          players: [],
-          totalPage: 1,
-          page: 1,
-          pageType,
-        },
-      },
+  export async function load(event, pageType = DefaultPageType) {
+    const { parent } = event;
+    await parent();
+
+    let data = {
+      playerCount: 0,
+      players: [],
+      totalPage: 1,
+      page: 1,
+      pageType,
     };
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
-      return output;
-    }
-
-    await loadData({ page: request.params.page || 1, pageType, request })
-      .then((data) => {
-        output.props.data = { ...output.props.data, ...data };
+    await loadData({ page: event.params.page || 1, pageType, request: event })
+      .then((body) => {
+        data = { ...data, ...body };
       })
       .catch((body) => {
-        if (body.error === "PAGE_NOT_FOUND") output = null;
+        if (body.error === "PAGE_NOT_FOUND") data = null;
       });
 
-    return output;
+    return data;
   }
 </script>
 
 <script>
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { page, session } from "$app/stores";
+  import { page } from "$app/stores";
 
-  import { pageTitle } from "$lib/store";
+  import { pageTitle, session } from "$lib/Store";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -187,10 +186,6 @@
   } from "$lib/component/modals/EditPlayerModal.svelte";
 
   import PlayerRow from "$lib/component/PlayerRow.svelte";
-  import {
-    onHide as onDeletePostModalHide,
-    setCallback as setDeletePostModalCallback,
-  } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
 
   export let data;
 

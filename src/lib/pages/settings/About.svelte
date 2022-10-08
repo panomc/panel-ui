@@ -9,7 +9,8 @@
             Versiyon
           </label>
           <div class="col col-form-label">
-            <span aria-describedby="panoVersion" id="panoVersion">{data.platformVersion}</span>
+            <span aria-describedby="panoVersion" id="panoVersion"
+              >{data.platformVersion}</span>
           </div>
         </div>
         <div class="row">
@@ -17,7 +18,8 @@
             Sürüm
           </label>
           <div class="col col-form-label">
-            <span aria-describedby="panoRelease" id="panoRelease">{data.platformStage}</span>
+            <span aria-describedby="panoRelease" id="panoRelease"
+              >{data.platformStage}</span>
           </div>
         </div>
         <div class="row mb-0">
@@ -106,32 +108,31 @@
   /**
    * @type {import("@sveltejs/kit").Load}
    */
-  export async function load(request) {
-    let output = {
-      props: {
-        data: {
-          platformVersion: "",
-          platformStage: ""
-        },
-      },
+  export async function load(event) {
+    const { parent } = event;
+    await parent();
+
+    let data = {
+      platformVersion: "",
+      platformStage: "",
     };
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
-      return output;
-    }
-
-    await loadData({ request }).then((body) => {
-      output.props.data = { ...output.props.data, ...body };
+    await loadData({ request: event }).then((body) => {
+      data = { ...data, ...body };
     });
 
-    return output;
+    return data;
   }
 </script>
 
 <script>
-  import { pageTitle } from "$lib/store.js";
+  import { pageTitle } from "$lib/Store.js";
 
   pageTitle.set("Hakkında");
 

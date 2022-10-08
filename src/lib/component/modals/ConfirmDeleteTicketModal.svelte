@@ -75,13 +75,11 @@
 </script>
 
 <script>
-  import { session } from "$app/stores";
-
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import { session, showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
-  import TicketsDeletedPermanetlyToast from "$lib/component/toasts/TicketsDeletedPermanetlyToast.svelte";
+  import TicketsDeletedPermanentlyToast from "$lib/component/toasts/TicketsDeletedPermanentlyToast.svelte";
 
   let loading;
 
@@ -107,7 +105,7 @@
 
             const count = get(selectedTickets).length;
 
-            showToast(TicketsDeletedPermanetlyToast, { count });
+            showToast(TicketsDeletedPermanentlyToast, { count });
 
             callback(get(selectedTickets));
 

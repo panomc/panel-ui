@@ -149,41 +149,44 @@
   /**
    * @type {import("@sveltejs/kit").Load}
    */
-  export async function load(request) {
-    let output = {
-      props: {
-        data: {
-          websiteName: "",
-          websiteDescription: "",
-          serverIpAddress: "",
-          keywords: [],
-          oldSettings: {
-            websiteName: "",
-            websiteDescription: "",
-            serverIpAddress: "",
-            keywords: [],
-          },
-        },
+  export async function load(event) {
+    const { parent } = event;
+    await parent();
+
+    let data = {
+      websiteName: "",
+      websiteDescription: "",
+      serverIpAddress: "",
+      keywords: [],
+      oldSettings: {
+        websiteName: "",
+        websiteDescription: "",
+        serverIpAddress: "",
+        keywords: [],
       },
     };
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
-      return output;
-    }
-
-    await loadData({ request }).then((body) => {
-      output.props.data = { ...output.props.data, ...body };
+    await loadData({ request: event }).then((body) => {
+      data = { ...data, ...body };
     });
 
-    return output;
+    return data;
   }
 </script>
 
 <script>
-  import { pageTitle, showNetworkErrorOnCatch, website } from "$lib/store.js";
-  import { session } from "$app/stores";
+  import {
+    pageTitle,
+    session,
+    showNetworkErrorOnCatch,
+    website,
+  } from "$lib/Store.js";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import SettingsSavedToast from "$lib/component/toasts/SettingsSavedToast.svelte";

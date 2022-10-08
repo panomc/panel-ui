@@ -74,8 +74,7 @@
   import copy from "copy-to-clipboard";
   import { differenceInSeconds } from "date-fns";
 
-  import { browser } from "$app/env";
-  import { session } from "$app/stores";
+  import { browser } from "$app/environment";
 
   import ApiUtil from "$lib/api.util";
   import tooltip from "$lib/tooltip.util";
@@ -85,7 +84,8 @@
     platformKeyRefreshedTime,
     platformAddress,
     showNetworkErrorOnCatch,
-  } from "$lib/store";
+    session,
+  } from "$lib/Store";
 
   let timeToRefreshKey = "...";
   let commandText;

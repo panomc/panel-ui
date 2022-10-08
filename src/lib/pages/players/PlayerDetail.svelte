@@ -160,7 +160,7 @@
 
 <script context="module">
   import ApiUtil from "$lib/api.util";
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/Store";
 
   async function loadData({ username, page, request, CSRFToken }) {
     return new Promise((resolve, reject) => {
@@ -186,52 +186,51 @@
   }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import('@sveltejs/kit').PageLoad}
    */
-  export async function load(request) {
-    let output = {
-      props: {
-        data: {
-          player: {
-            username: "",
-            isBanned: false,
-            registerDate: 0,
-            permissionGroup: "",
-          },
-          tickets: [],
-          ticketCount: 0,
-          ticketTotalPage: 1,
-        },
+  export async function load(event) {
+    const { parent } = event;
+    await parent();
+
+    let data = {
+      player: {
+        username: "",
+        isBanned: false,
+        registerDate: 0,
+        permissionGroup: "",
       },
+      tickets: [],
+      ticketCount: 0,
+      ticketTotalPage: 1,
     };
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
-
-      return output;
-    }
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
     await loadData({
-      username: request.params.username,
-      page: request.params.page || 1,
-      request,
+      username: event.params.username,
+      page: event.params.page || 1,
+      request: event,
     })
-      .then((data) => {
-        output.props.data = { ...output.props.data, ...data };
+      .then((body) => {
+        data = { ...data, ...body };
       })
       .catch((body) => {
         if (body.error === "NOT_EXISTS" || body.error === "PAGE_NOT_FOUND")
-          output = null;
+          data = null;
       });
 
-    return output;
+    return data;
   }
 </script>
 
 <script>
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { session, page } from "$app/stores";
+  import { page } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -251,6 +250,7 @@
   import TicketStatus from "$lib/component/TicketStatus.svelte";
   import Date from "$lib/component/Date.svelte";
   import Pagination from "$lib/component/Pagination.svelte";
+  import { session } from "$lib/Store.js";
 
   export let data;
 

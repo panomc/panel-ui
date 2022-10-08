@@ -81,39 +81,37 @@
   }
 
   /**
-   * @type {import("@sveltejs/kit").Load}
+   * @type {import('@sveltejs/kit').PageLoad}
    */
-  export async function load(request) {
-    let output = {
-      props: {
-        data: {
-          updatePeriod: UpdatePeriod.ONCE_PER_DAY,
-          locale: "",
-          oldSettings: {
-            updatePeriod: UpdatePeriod.ONCE_PER_DAY,
-            locale: "",
-          },
-        },
+  export async function load(event) {
+    const { parent } = event;
+    await parent();
+
+    let data = {
+      updatePeriod: UpdatePeriod.ONCE_PER_DAY,
+      locale: "",
+      oldSettings: {
+        updatePeriod: UpdatePeriod.ONCE_PER_DAY,
+        locale: "",
       },
     };
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
-      return output;
-    }
-
-    await loadData({ request }).then((body) => {
-      output.props.data = { ...output.props.data, ...body };
+    await loadData({ request: event }).then((body) => {
+      data = { ...data, ...body };
     });
 
-    return output;
+    return data;
   }
 </script>
 
 <script>
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
-  import { session } from "$app/stores";
+  import { pageTitle, session, showNetworkErrorOnCatch } from "$lib/Store";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import {

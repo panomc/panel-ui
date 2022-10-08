@@ -114,7 +114,7 @@
   import { writable, get } from "svelte/store";
 
   import ApiUtil from "$lib/api.util";
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
 
   let checkedList = writable([]);
 
@@ -140,56 +140,55 @@
   }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import('@sveltejs/kit').PageLoad}
    */
-  export async function load(request) {
-    let output = {
-      props: {
-        data: {
-          ticketCount: 0,
-          tickets: [],
-          totalPage: 1,
-          page: 1,
-          url: request.params.url,
-          category: {
-            id: -1,
-            title: "-",
-            description: "",
-            url: "-",
-          },
-        },
+  export async function load(event) {
+    const { parent } = event;
+    await parent();
+
+    let data = {
+      ticketCount: 0,
+      tickets: [],
+      totalPage: 1,
+      page: 1,
+      url: event.params.url,
+      category: {
+        id: -1,
+        title: "-",
+        description: "",
+        url: "-",
       },
     };
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
-
-      return output;
-    }
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
     await loadData({
-      page: request.params.page || 1,
-      url: request.params.url,
-      request,
+      page: event.params.page || 1,
+      url: event.params.url,
+      request: event,
     })
-      .then((data) => {
-        output.props.data = { ...output.props.data, ...data };
+      .then((body) => {
+        data = { ...data, ...body };
       })
       .catch((body) => {
         if (body.error === "PAGE_NOT_FOUND" || body.error === "NOT_EXISTS")
-          output = null;
+          data = null;
       });
 
-    return output;
+    return data;
   }
 </script>
 
 <script>
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { page, session } from "$app/stores";
+  import { page } from "$app/stores";
 
-  import { pageTitle } from "$lib/store";
+  import { pageTitle, session } from "$lib/Store";
 
   import Pagination from "$lib/component/Pagination.svelte";
 

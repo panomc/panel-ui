@@ -32,7 +32,8 @@
     showNetworkErrorOnCatch,
     notLoggedIn,
     setDefaults,
-  } from "$lib/store.js";
+    session,
+  } from "$lib/Store.js";
   import { init as initLanguage } from "$lib/language.util";
 
   import ApiUtil, { NETWORK_ERROR } from "$lib/api.util.js";
@@ -56,10 +57,22 @@
   }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import('@sveltejs/kit').LayoutServerLoad}
    */
-  export async function load(request) {
-    const { basicData } = request.session;
+  export async function loadServer({ locals: { basicData, CSRFToken } }) {
+    return { basicData, CSRFToken };
+  }
+
+  /**
+   * @type {import('@sveltejs/kit').LayoutLoad}
+   */
+  export async function load(event) {
+    const {
+      data: { basicData, CSRFToken },
+    } = event;
+
+    session.set({ basicData, CSRFToken });
+
     await initLanguage(basicData.locale);
 
     setDefaults();
@@ -78,7 +91,7 @@
       output.stuff.NETWORK_ERROR = true;
 
       showNetworkErrorOnCatch((resolve, reject) => {
-        getBasicData({ request })
+        getBasicData({ request: event })
           .then(() => {
             resolve();
           })
@@ -100,7 +113,7 @@
   import { onDestroy, onMount } from "svelte";
   import { get } from "svelte/store";
 
-  import { pageTitle, options, logoutLoading } from "$lib/store";
+  import { pageTitle, options, logoutLoading } from "$lib/Store";
 
   import Splash from "$lib/component/Splash.svelte";
   import Navbar from "$lib/component/Navbar.svelte";

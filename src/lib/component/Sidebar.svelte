@@ -101,7 +101,7 @@
     setSidebarTabsState,
     sidebarTabsState,
     website,
-  } from "$lib/store";
+  } from "$lib/Store";
 
   import Bottom from "./sidebar/Bottom.svelte";
 

@@ -69,7 +69,7 @@
 <script context="module">
   import { writable, get } from "svelte/store";
 
-  import { browser } from "$app/env";
+  import { browser } from "$app/environment";
 
   import ApiUtil from "$lib/api.util.js";
 
@@ -125,28 +125,27 @@
   }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import('@sveltejs/kit').PageLoad}
    */
-  export async function load(request) {
-    let output = {
-      props: {
-        data: {},
-      },
-    };
+  export async function load(event) {
+    const { parent } = event;
+    await parent();
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
+    let data = {};
 
-      return output;
-    }
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
-    await loadData({ request }).then((body) => {
+    await loadData({ request: event }).then((body) => {
       setNotifications(body.notifications);
 
       count.set(parseInt(body.notificationCount));
     });
 
-    return output;
+    return data;
   }
 </script>
 
@@ -154,10 +153,8 @@
   import { onDestroy, onMount } from "svelte";
   import { formatDistanceToNow } from "date-fns";
 
-  import { session } from "$app/stores";
-
   import tooltip from "$lib/tooltip.util.js";
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store.js";
+  import { pageTitle, session, showNetworkErrorOnCatch } from "$lib/Store.js";
 
   import ConfirmRemoveAllNotificationsModal, {
     show as showDeleteAllNotificationsModal,

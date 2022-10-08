@@ -277,7 +277,7 @@
 </div>
 
 <script context="module">
-  import { showNetworkErrorOnCatch } from "$lib/store.js";
+  import { showNetworkErrorOnCatch } from "$lib/Store.js";
   import ApiUtil from "$lib/api.util.js";
 
   export const DashboardPeriod = Object.freeze({
@@ -302,53 +302,50 @@
   }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import('@sveltejs/kit').PageLoad}
    */
-  export async function load(request) {
-    let output = {
-      props: {
-        data: {
-          gettingStartedBlocks: {
-            welcomeBoard: false,
-          },
-          registeredPlayerCount: 0,
-          postCount: 0,
-          ticketCount: 0,
-          openTicketCount: 0,
-          tickets: [],
-        },
+  export async function load(event) {
+    const { parent } = event;
+    await parent();
+
+    let data = {
+      gettingStartedBlocks: {
+        welcomeBoard: false,
       },
+      registeredPlayerCount: 0,
+      postCount: 0,
+      ticketCount: 0,
+      openTicketCount: 0,
+      tickets: [],
     };
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
-      return output;
-    }
+    await loadData({ period: DashboardPeriod.WEEK, request: event }).then(
+      (body) => {
+        data = { ...data, ...body };
+      }
+    );
 
-    await loadData({ period: DashboardPeriod.WEEK, request }).then((body) => {
-      output.props.data = { ...output.props.data, ...body };
-    });
-
-    return output;
+    return data;
   }
 </script>
 
 <script>
   import { base } from "$app/paths";
-  import { session } from "$app/stores";
-  import { pageTitle } from "$lib/store.js";
+  import { pageTitle, session } from "$lib/Store.js";
 
   import tooltip from "$lib/tooltip.util";
 
   import WebsiteActivityChart from "$lib/component/charts/Dashboard/WebsiteActivityChart.svelte";
   // import PlayersChart from "$lib/component/charts/Dashboard/PlayersChart.svelte";
   // import TrafficChart from "$lib/component/charts/Dashboard/TrafficChart.svelte";
-  import TicketStatus, {
-    TicketStatuses,
-  } from "$lib/component/TicketStatus.svelte";
+  import TicketStatus from "$lib/component/TicketStatus.svelte";
   import Date from "$lib/component/Date.svelte";
-  import { goto } from "$app/navigation";
 
   export let data;
   let reloading = false;

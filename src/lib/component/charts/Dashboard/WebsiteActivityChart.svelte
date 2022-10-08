@@ -27,12 +27,12 @@
       minDate = startOfWeek(currentDate, weekConfiguration).getTime();
       maxDate = endOfWeek(currentDate, weekConfiguration).getTime();
 
-      displayFormats = { "day": "eee" }
+      displayFormats = { "day": "eee" };
     } else {
       minDate = startOfMonth(currentDate).getTime();
       maxDate = endOfMonth(currentDate).getTime();
 
-      displayFormats = { "day": "dd, eee" }
+      displayFormats = { "day": "dd, eee" };
     }
 
     if (chart) {
@@ -60,7 +60,7 @@
         if (data["y"] > highestValue) {
           highestValue = data["y"];
         }
-      })
+      });
     });
 
     return highestValue + 5;

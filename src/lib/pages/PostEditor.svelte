@@ -187,60 +187,59 @@
   }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import('@sveltejs/kit').PageLoad}
    */
-  export async function load(request, mode = DefaultMode) {
-    let output = {
-      props: {
-        data: {
-          post: {
-            id: -1,
-            title: "",
-            text: "",
-            category: -1,
-            status: -1,
-            date: 0,
-            imageCode: "",
-          },
-          categoryCount: 0,
-          categories: [],
-          mode,
-          error: {},
-        },
+  export async function load(event, mode = DefaultMode) {
+    const { parent } = event;
+    await parent();
+
+    let data = {
+      post: {
+        id: -1,
+        title: "",
+        text: "",
+        category: -1,
+        status: -1,
+        date: 0,
+        imageCode: "",
       },
+      categoryCount: 0,
+      categories: [],
+      mode,
+      error: {},
     };
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
-
-      return output;
-    }
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
     if (mode === Modes.EDIT) {
-      await loadPost({ id: request.params.id || -1, request })
-        .then(async (body) => {
-          output.props.data.post = body.post;
+      await loadPost({ id: event.params.id || -1, request: event })
+        .then((body) => {
+          data.post = body.post;
         })
         .catch((body) => {
-          if (body.error === "POST_NOT_FOUND") output = null;
+          if (body.error === "POST_NOT_FOUND") data = null;
         });
     }
 
-    if (output !== null)
-      await loadCategories({ request }).then((body) => {
-        output.props.data = { ...output.props.data, ...body };
+    if (data !== null)
+      await loadCategories({ request: event }).then((body) => {
+        data = { ...data, ...body };
       });
 
-    return output;
+    return data;
   }
 </script>
 
 <script>
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
-  import { session, page } from "$app/stores";
+  import { page } from "$app/stores";
 
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/store";
+  import { pageTitle, session, showNetworkErrorOnCatch } from "$lib/Store";
   import { UI_URL } from "$lib/variables";
 
   import SetPostThumbnailModal from "$lib/component/modals/SetPostThumbnailModal.svelte";

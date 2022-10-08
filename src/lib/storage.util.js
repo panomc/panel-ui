@@ -1,4 +1,4 @@
-import { browser } from "$app/env";
+import { browser } from "$app/environment";
 
 const SIDEBAR_STORAGE_STATUS = "sidebar_storage_status";
 const SIDEBAR_TABS_STORAGE_STATE = "sidebar_tabs_storage_state";

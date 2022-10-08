@@ -123,9 +123,7 @@
 </script>
 
 <script>
-  import { session } from "$app/stores";
-
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import { session, showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   let loading = false;

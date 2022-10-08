@@ -108,9 +108,8 @@
 
 <script>
   import { base } from "$app/paths";
-  import { session } from "$app/stores";
 
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import { session, showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
   import tooltip from "$lib/tooltip.util";
 

@@ -73,17 +73,11 @@
 </script>
 
 <script>
-  import { session } from "$app/stores";
-
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import { session, showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
-  import {
-    show as showToast,
-    limitTitle,
-  } from "$lib/component/ToastContainer.svelte";
-  import { base } from "$app/paths";
-  import PostDeletedPermanetlyToast from "$lib/component/toasts/PostDeletedPermanetlyToast.svelte";
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
+  import PostDeletedPermanentlyToast from "$lib/component/toasts/PostDeletedPermanentlyToast.svelte";
   import PostMovedToTrashToast from "$lib/component/toasts/PostMovedToTrashToast.svelte";
 
   let loading = false;
@@ -103,7 +97,7 @@
           hide();
 
           if (get(post).status === 0) {
-            showToast(PostDeletedPermanetlyToast, { title: get(post).title });
+            showToast(PostDeletedPermanentlyToast, { title: get(post).title });
           } else {
             showToast(PostMovedToTrashToast, { title: get(post).title });
           }

@@ -94,16 +94,15 @@
 
 <script>
   import { base } from "$app/paths";
-  import { session } from "$app/stores";
 
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import { session, showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   import {
     show as showToast,
     limitTitle,
   } from "$lib/component/ToastContainer.svelte";
-  import TicketCategoryDeletedPermanetlyToast from "$lib/component/toasts/TicketCategoryDeletedPermanetlyToast.svelte";
+  import TicketCategoryDeletedPermanentlyToast from "$lib/component/toasts/TicketCategoryDeletedPermanentlyToast.svelte";
 
   let loading = false;
 
@@ -125,7 +124,7 @@
 
             hide();
 
-            showToast(TicketCategoryDeletedPermanetlyToast, {
+            showToast(TicketCategoryDeletedPermanentlyToast, {
               title: get(category).title,
             });
 

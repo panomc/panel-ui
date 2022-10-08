@@ -17,7 +17,7 @@
 </div>
 
 <script>
-  import { pageTitle } from "$lib/store.js";
+  import { pageTitle } from "$lib/Store.js";
 
   pageTitle.set("Error 404");
 </script>

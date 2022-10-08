@@ -56,9 +56,7 @@
 <script context="module">
   import { writable, get } from "svelte/store";
 
-  import { session } from "$app/stores";
-
-  import { showNetworkErrorOnCatch } from "$lib/store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   const dialogID = "authorizePlayerModal";
@@ -129,6 +127,8 @@
 </script>
 
 <script>
+  import { session } from "$lib/Store.js";
+
   function refreshBrowserPage() {
     location.reload();
   }

@@ -119,7 +119,7 @@
 
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
-  import { showNetworkErrorOnCatch } from "$lib/store.js";
+  import { showNetworkErrorOnCatch } from "$lib/Store.js";
 
   async function loadData({ request, CSRFToken }) {
     return new Promise((resolve, reject) => {
@@ -138,39 +138,37 @@
   }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import('@sveltejs/kit').PageLoad}
    */
-  export async function load(request) {
-    let output = {
-      props: {
-        data: {
-          permissions: [],
-          permissionGroups: [],
-          permissionGroupPerms: {},
-        },
-      },
+  export async function load(event) {
+    const { parent } = event;
+    await parent();
+
+    let data = {
+      permissions: [],
+      permissionGroups: [],
+      permissionGroupPerms: {},
     };
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
-      return output;
-    }
-
-    await loadData({ request }).then((data) => {
-      output.props.data = { ...output.props.data, ...data };
+    await loadData({ request: event }).then((body) => {
+      data = { ...data, ...body };
     });
 
-    return output;
+    return data;
   }
 </script>
 
 <script>
   import { base } from "$app/paths";
-  import { session } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util.js";
-  import { pageTitle } from "$lib/store.js";
+  import { pageTitle, session } from "$lib/Store.js";
 
   import AddEditPermGroupModal, {
     show as showPermissionGroupAddEditModal,

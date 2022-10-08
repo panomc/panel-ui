@@ -178,7 +178,7 @@
   import { writable } from "svelte/store";
 
   import ApiUtil from "$lib/api.util.js";
-  import { showNetworkErrorOnCatch } from "$lib/store.js";
+  import { showNetworkErrorOnCatch } from "$lib/Store.js";
 
   import { TicketStatuses } from "$lib/component/TicketStatus.svelte";
   import Editor from "$lib/component/Editor.svelte";
@@ -224,43 +224,42 @@
   // }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import('@sveltejs/kit').PageLoad}
    */
-  export async function load(request) {
-    let output = {
-      props: {
-        data: {
-          ticket: {
-            id: -1,
-            title: "",
-            category: "-",
-            username: "",
-            status: TicketStatuses.NEW,
-            count: 0,
-            messages: [],
-            date: 0,
-          },
-        },
+  export async function load(event) {
+    const { parent } = event;
+    await parent();
+
+    let data = {
+      ticket: {
+        id: -1,
+        title: "",
+        category: "-",
+        username: "",
+        status: TicketStatuses.NEW,
+        count: 0,
+        messages: [],
+        date: 0,
       },
     };
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
-      return output;
-    }
-
-    await loadTicket({ id: request.params.id, request })
+    await loadTicket({ id: event.params.id, request: event })
       .then((body) => {
-        output.props.data.ticket = body;
+        data.ticket = body;
       })
       .catch((body) => {
         if (body.error === "NOT_EXISTS") {
-          output = null;
+          data = null;
         }
       });
 
-    return output;
+    return data;
   }
 </script>
 
@@ -268,7 +267,7 @@
   import { afterUpdate, onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { session, page } from "$app/stores";
+  import { page } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util.js";
 
@@ -283,6 +282,7 @@
 
   import Date from "$lib/component/Date.svelte";
   import TicketStatus from "$lib/component/TicketStatus.svelte";
+  import { session } from "$lib/Store.js";
 
   export let data;
 

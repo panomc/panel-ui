@@ -95,6 +95,7 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
+                  aria-checked="true"
                   role="switch"
                   id="flexSwitchCheckChecked"
                   checked />
@@ -108,6 +109,7 @@
                   class="form-check-input"
                   type="checkbox"
                   role="switch"
+                  aria-checked="true"
                   id="flexSwitchCheckChecked2"
                   checked />
                 <label class="form-check-label" for="flexSwitchCheckChecked2"
@@ -183,9 +185,7 @@
 </script>
 
 <script>
-  import { session } from "$app/stores";
-
-  import { showNetworkErrorOnCatch, user } from "$lib/store";
+  import { session, showNetworkErrorOnCatch, user } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   function refreshBrowserPage() {

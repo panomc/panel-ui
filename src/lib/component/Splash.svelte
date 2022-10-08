@@ -51,7 +51,7 @@
     resumeAfterNetworkError,
     retryingNetworkErrors,
     notLoggedIn,
-  } from "$lib/store";
+  } from "$lib/Store";
 
   let networkErrors = false;
 

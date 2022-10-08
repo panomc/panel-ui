@@ -29,8 +29,7 @@
 </div>
 
 <script>
-  import { servers } from "$lib/store";
-  import { session } from "$app/stores";
+  import { servers, session } from "$lib/Store";
 
   import ApiUtil, { NETWORK_ERROR } from "$lib/api.util";
 

@@ -137,7 +137,6 @@
   import { formatDistanceToNow } from "date-fns";
 
   import { base } from "$app/paths";
-  import { session } from "$app/stores";
 
   import ApiUtil from "$lib/api.util";
   import {
@@ -147,10 +146,11 @@
     options,
     pageTitle,
     quickNotifications,
+    session,
     showNetworkErrorOnCatch,
     toggleSidebar,
     user,
-  } from "$lib/store";
+  } from "$lib/Store";
 
   let quickNotificationProcessID = 0;
 

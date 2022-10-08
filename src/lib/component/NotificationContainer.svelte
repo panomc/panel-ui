@@ -75,13 +75,12 @@
 <script>
   import { onDestroy, onMount } from "svelte";
 
-  import { session } from "$app/stores";
-
   import {
     showNetworkErrorOnCatch,
     notificationsCount,
     quickNotifications,
-  } from "$lib/store";
+    session,
+  } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
   import { formatDistanceToNow } from "date-fns";
 

@@ -113,7 +113,7 @@
 
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
-  import { showNetworkErrorOnCatch } from "$lib/store.js";
+  import { showNetworkErrorOnCatch } from "$lib/Store.js";
 
   export const PageTypes = Object.freeze({
     PUBLISHED: "published",
@@ -145,44 +145,43 @@
   }
 
   /**
-   * @type {import('@sveltejs/kit').Load}
+   * @type {import('@sveltejs/kit').PageLoad}
    */
-  export async function load(request, pageType = DefaultPageType) {
-    let output = {
-      props: {
-        data: {
-          postCount: 0,
-          posts: [],
-          totalPage: 1,
-          page: 1,
-        },
-      },
+  export async function load(event, pageType = DefaultPageType) {
+    const { parent } = event;
+    await parent();
+
+    let data = {
+      postCount: 0,
+      posts: [],
+      totalPage: 1,
+      page: 1,
     };
 
-    if (request.stuff.NETWORK_ERROR) {
-      output.props.data.NETWORK_ERROR = true;
+    // if (event.stuff.NETWORK_ERROR) {
+    //   output.props.data.NETWORK_ERROR = true;
+    //
+    //   return output;
+    // }
 
-      return output;
-    }
-
-    await loadData({ page: request.params.page || 1, pageType, request })
-      .then((data) => {
-        output.props.data = { ...output.props.data, ...data };
+    await loadData({ page: event.params.page || 1, pageType, request: event })
+      .then((body) => {
+        data = { ...data, ...body };
       })
       .catch((body) => {
-        if (body.error === "PAGE_NOT_FOUND") output = null;
+        if (body.error === "PAGE_NOT_FOUND") data = null;
       });
 
-    return output;
+    return data;
   }
 </script>
 
 <script>
   import { goto } from "$app/navigation";
-  import { page, session } from "$app/stores";
+  import { page } from "$app/stores";
   import { base } from "$app/paths";
 
-  import { pageTitle } from "$lib/store.js";
+  import { pageTitle, session } from "$lib/Store.js";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
