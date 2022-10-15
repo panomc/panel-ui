@@ -38,7 +38,7 @@
       <h5 class="text-light">{$website.name}</h5>
 
       {#if $sidebarTabsState === "website"}
-        <a href="/" class="btn btn-sm btn-secondary" target="_blank">
+        <a href="{UI_URL}" class="btn btn-sm btn-secondary" target="_blank">
           Websiteyi Görüntüle
         </a>
       {/if}
@@ -111,6 +111,7 @@
   import ServersOffcanvas from "./offcanvas/ServersOffcanvas.svelte";
   import ConnectServerModal from "./modals/ConnectServerModal.svelte";
   import RemoveServerModal from "./modals/RemoveServerModal.svelte";
+  import { UI_URL } from "$lib/variables.js";
 
   let menuComponent = SiteNavigationMenu;
 
