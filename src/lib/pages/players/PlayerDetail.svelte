@@ -321,10 +321,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post({
-        path: "/api/panel/sendValidationEmail",
-        body: {
-          username: data.player.username,
-        },
+        path: `/api/panel/players/${data.player.username}/verificationMail`,
       })
         .then((body) => {
           sendingVerificationMail = false;
