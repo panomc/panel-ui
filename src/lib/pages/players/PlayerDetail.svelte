@@ -91,7 +91,7 @@
               {#if data.player.isEmailVerified}
                 <div class="badge bg-light text-black">Doğrulandı</div>
               {:else}
-                <div class="badge bg-light text-black">Doğrulannadı</div>
+                <div class="badge bg-light text-black">Doğrulanmadı</div>
               {/if}
             </li>
             <li class="list-inline-item mb-2">
