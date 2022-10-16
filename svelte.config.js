@@ -3,9 +3,6 @@ import NodeAdapter from "@sveltejs/adapter-node";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  compilerOptions: {
-    legacy: true,
-  },
   kit: {
     adapter: NodeAdapter(),
 
