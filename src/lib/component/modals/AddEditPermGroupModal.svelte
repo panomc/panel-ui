@@ -198,7 +198,11 @@
           if (body.error === "CANT_UPDATE_ADMIN_PERMISSION") {
             errors.set({ "error": body.error });
           } else {
-            errors.set(body.error);
+            errors.set(
+              typeof body.error === "string"
+                ? { error: body.error }
+                : body.error
+            );
           }
 
           resolve();
