@@ -77,7 +77,8 @@
                 class="form-control"
                 placeholder="support@{data.websiteName}.com"
                 type="email"
-                name="supportEmailAddress" />
+                name="supportEmailAddress"
+                bind:value="{data.supportEmail}" />
             </div>
           </div>
         </div>
@@ -195,11 +196,13 @@
     let data = {
       websiteName: "",
       websiteDescription: "",
+      supportEmail: "",
       serverIpAddress: "",
       keywords: [],
       oldSettings: {
         websiteName: "",
         websiteDescription: "",
+        supportEmail: "",
         serverIpAddress: "",
         keywords: [],
       },
@@ -239,6 +242,7 @@
   $: isSaveButtonDisabled =
     data.oldSettings.websiteName === data.websiteName &&
     data.oldSettings.websiteDescription === data.websiteDescription &&
+    data.oldSettings.supportEmail === data.supportEmail &&
     data.oldSettings.serverIpAddress === data.serverIpAddress &&
     JSON.stringify(data.oldSettings.keywords) === JSON.stringify(data.keywords);
 
@@ -267,6 +271,7 @@
         body: {
           websiteName: data.websiteName,
           websiteDescription: data.websiteDescription,
+          supportEmail: data.supportEmail,
           serverIpAddress: data.serverIpAddress,
           keywords: data.keywords,
         },
