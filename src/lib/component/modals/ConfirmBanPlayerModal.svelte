@@ -49,7 +49,7 @@
 </div>
 
 <script context="module">
-  import { writable } from "svelte/store";
+  import { get, writable } from "svelte/store";
 
   const dialogID = "banPlayerModal";
   const player = writable({});
@@ -70,7 +70,7 @@
   }
 
   export function hide() {
-    hideCallback();
+    hideCallback(get(player));
 
     modal.hide();
   }

@@ -189,6 +189,7 @@
   import {
     show as showConfirmBanPlayerModal,
     setCallback as setConfirmBanPlayerModalCallback,
+    onHide as onConfirmBanPlayerModalHide
   } from "$lib/component/modals/ConfirmBanPlayerModal.svelte";
 
   import PlayerRow from "$lib/component/PlayerRow.svelte";
@@ -322,4 +323,14 @@
 
     reloadData();
   });
+
+  onConfirmBanPlayerModalHide((newPlayer) => {
+    data.players.forEach((player) => {
+      if (player.id === newPlayer.id) {
+        player.selected = false;
+      }
+    });
+
+    data.players = data.players;
+  })
 </script>
