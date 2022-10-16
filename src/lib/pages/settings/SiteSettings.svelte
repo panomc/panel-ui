@@ -89,7 +89,7 @@
         <div class="col col-form-label">
           <form on:submit|preventDefault="{addKeyWord}">
             <input
-            id="siteKeywords"
+              id="siteKeywords"
               class="form-control mb-3"
               class:border-danger="{keywordInputError}"
               placeholder="Eklemek için Enter'a basın"
@@ -126,6 +126,25 @@
             <div class="col">
               <input class="form-control-file" id="siteFavicon" type="file" />
               <small> PNG, ICO ve minimum 16x16 boyutlarında olmalıdır. </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-md-4 col-form-label" for="siteLogo">
+          Website Logo
+        </label>
+        <div class="col col-form-label">
+          <div class="row">
+            <div class="col-auto">
+              <img
+                alt="Seç"
+                class="d-block ml-auto"
+                src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" />
+            </div>
+            <div class="col">
+              <input class="form-control-file" id="siteLogo" type="file" />
             </div>
           </div>
         </div>
