@@ -67,18 +67,19 @@
           <h4 class="card-title">{data.player.username}</h4>
           <h6 class="text-muted">{data.player.email}</h6>
 
-          <span
-            class="badge bg-secondary rounded-pill"
-            use:tooltip="{['Sitede', { placement: 'top' }]}">
-            Çevrimiçi
-          </span>
+          {#if data.player.isBanned}
+            <div class="badge bg-danger text-white">Yasaklı</div>
+          {:else}
+            <span
+              class="badge bg-secondary rounded-pill"
+              use:tooltip="{['Sitede', { placement: 'top' }]}">
+              Çevrimiçi
+            </span>
+          {/if}
           <hr />
 
           <ul class="list-inline mb-0">
             <li class="list-inline-item mb-2">
-              {#if data.player.isBanned}
-                <div class="badge bg-danger text-white">Yasaklı</div>
-              {/if}
               <div class="badge bg-light text-black">
                 <a
                   href="{base}/players/permission/{data.player
@@ -362,6 +363,6 @@
   });
 
   setConfirmBanPlayerModalCallback(() => {
-    data.player.isBanned = true
+    data.player.isBanned = true;
   });
 </script>
