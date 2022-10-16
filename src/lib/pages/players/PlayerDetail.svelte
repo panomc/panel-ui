@@ -10,6 +10,13 @@
       </a>
     </div>
     <div class="col-auto">
+      <a
+        class="btn btn-link link-danger"
+        href="javascript:void(0);"
+        on:click="{() => showConfirmBanPlayerModal(data.player)}">
+        <i class="fas fa-trash"></i>
+        <span class="ms-2 d-lg-inline d-none">Sil</span>
+      </a>
       {#if !data.player.isBanned}
         <a
           class="btn btn-link link-danger"
