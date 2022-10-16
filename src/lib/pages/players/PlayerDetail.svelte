@@ -10,13 +10,15 @@
       </a>
     </div>
     <div class="col-auto">
-      <a
-        class="btn btn-link link-danger"
-        href="javascript:void(0);"
-        on:click="{() => showConfirmBanPlayerModal()}">
-        <i class="fas fa-gavel"></i>
-        <span class="ms-2 d-lg-inline d-none">Yasakla</span>
-      </a>
+      {#if !data.player.isBanned}
+        <a
+          class="btn btn-link link-danger"
+          href="javascript:void(0);"
+          on:click="{() => showConfirmBanPlayerModal(data.player)}">
+          <i class="fas fa-gavel"></i>
+          <span class="ms-2 d-lg-inline d-none">Yasakla</span>
+        </a>
+      {/if}
       {#if !data.player.isEmailVerified}
         <a
           class="btn btn-link"
@@ -328,15 +330,15 @@
 
           if (body.result === "ok") {
             showToast(VerificationEmailSentSuccessfulToast, {
-              username: data.player.username
+              username: data.player.username,
             });
 
-            return
+            return;
           }
 
           showToast(VerificationEmailSentErrorToast, {
             username: data.player.username,
-            errorCode: body.error
+            errorCode: body.error,
           });
         })
         .catch(() => {
@@ -359,5 +361,7 @@
     data.player = newPlayer;
   });
 
-  setConfirmBanPlayerModalCallback(() => {});
+  setConfirmBanPlayerModalCallback(() => {
+    data.player.isBanned = true
+  });
 </script>

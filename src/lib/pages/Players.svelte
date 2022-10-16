@@ -78,7 +78,9 @@
                   on:showAuthorizePlayerModalClick="{(event) =>
                     onShowAuthorizePlayerModalClick(event.detail.player)}"
                   on:showEditPlayerModalClick="{(event) =>
-                    onShowEditPlayerModalClick(event.detail.player)}" />
+                    onShowEditPlayerModalClick(event.detail.player)}"
+                  on:showBanPlayerModalClick="{(event) =>
+                    showBanPlayerModalClick(event.detail.player)}" />
               {/each}
             </tbody>
           </table>
@@ -184,6 +186,10 @@
     setCallback as setEditPlayerModalCallback,
     onHide as onEditPlayerModalHide,
   } from "$lib/component/modals/EditPlayerModal.svelte";
+  import {
+    show as showConfirmBanPlayerModal,
+    setCallback as setConfirmBanPlayerModalCallback,
+  } from "$lib/component/modals/ConfirmBanPlayerModal.svelte";
 
   import PlayerRow from "$lib/component/PlayerRow.svelte";
 
@@ -256,6 +262,12 @@
     showEditPlayerModal(player);
   }
 
+  function showBanPlayerModalClick(player) {
+    data.players[data.players.indexOf(player)].selected = true;
+
+    showConfirmBanPlayerModal(player);
+  }
+
   setAuthorizePlayerModalCallback((newPlayer) => {
     data.players.forEach((player) => {
       if (player.id === newPlayer.id) {
@@ -297,5 +309,17 @@
     });
 
     data.players = data.players;
+  });
+
+  setConfirmBanPlayerModalCallback((newPlayer) => {
+    data.players.forEach((player) => {
+      if (player.id === newPlayer.id) {
+        player.selected = false;
+      }
+    });
+
+    data.players = data.players;
+
+    reloadData();
   });
 </script>

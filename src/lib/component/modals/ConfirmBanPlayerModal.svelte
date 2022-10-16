@@ -12,6 +12,19 @@
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
         Bu oyuncuyu yasaklamak istediğinizden emin misiniz?
+        <br />
+        <br />
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            aria-checked="false"
+            id="sendNotificationEmailForBan"
+            bind:checked="{sendNotification}"/>
+          <label class="form-check-label" for="sendNotificationEmailForBan"
+            >E-posta bildirimi gönder</label>
+        </div>
       </div>
       <div class="modal-footer">
         <button
@@ -36,7 +49,7 @@
 </div>
 
 <script context="module">
-  import { get, writable } from "svelte/store";
+  import { writable } from "svelte/store";
 
   const dialogID = "banPlayerModal";
   const player = writable({});
@@ -45,7 +58,9 @@
   let hideCallback = () => {};
   let modal;
 
-  export function show() {
+  export function show(newPlayer) {
+    player.set(newPlayer);
+
     modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
       backdrop: "static",
       keyboard: false,
@@ -70,13 +85,43 @@
 </script>
 
 <script>
-  // function refreshBrowserPage() {
-  //   location.reload();
-  // }
+  import { showNetworkErrorOnCatch } from "$lib/Store.js";
+  import ApiUtil from "$lib/api.util.js";
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
 
-  let loading = false;
+  import PlayerBanToast from "$lib/component/toasts/PlayerBanToast.svelte";
+
+  let loading;
+  let sendNotification = false;
 
   function onSubmit() {
     loading = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post({
+        path: `/api/panel/players/${$player.username}/ban`,
+        body: {
+          sendNotification
+        }
+      })
+        .then((body) => {
+          hide();
+
+          showToast(PlayerBanToast, {
+            username: $player.username,
+            error: body.error,
+          });
+
+          if (body.result === "ok") {
+            callback($player)
+          }
+
+          loading = false;
+        })
+        .catch(() => {
+          loading = false;
+          reject();
+        });
+    });
   }
 </script>

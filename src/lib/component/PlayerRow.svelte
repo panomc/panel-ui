@@ -27,14 +27,15 @@
           <i class="fa-solid fa-pencil-alt me-2"></i>
           Düzenle
         </a>
-        <a
-          class="dropdown-item link-danger"
-          data-target="#conformBanTickets"
-          data-toggle="modal"
-          href="javascript:void(0);">
-          <i class="fas fa-gavel me-2"></i>
-          Yasakla
-        </a>
+        {#if !player.isBanned}
+          <a
+            class="dropdown-item link-danger"
+            href="javascript:void(0);"
+            on:click="{showBanPlayerModal}">
+            <i class="fas fa-gavel me-2"></i>
+            Yasakla
+          </a>
+        {/if}
       </div>
     </div>
   </th>
@@ -58,11 +59,15 @@
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    <div
-      class="badge bg-secondary rounded-pill text-white"
-      use:tooltip="{['Sitede', { placement: 'bottom' }]}">
-      <span>Çevrimiçi</span>
-    </div>
+    {#if player.isBanned}
+      <div class="badge bg-danger text-white">Yasaklı</div>
+    {:else}
+      <div
+        class="badge bg-secondary rounded-pill text-white"
+        use:tooltip="{['Sitede', { placement: 'bottom' }]}">
+        <span>Çevrimiçi</span>
+      </div>
+    {/if}
   </td>
   <td class="align-middle text-nowrap">10 dakika önce</td>
   <td class="align-middle text-nowrap">
@@ -89,4 +94,10 @@
   function showEditPlayerModal() {
     dispatch("showEditPlayerModalClick", { player });
   }
+
+  function showBanPlayerModal() {
+    dispatch("showBanPlayerModalClick", { player });
+  }
+
+
 </script>
