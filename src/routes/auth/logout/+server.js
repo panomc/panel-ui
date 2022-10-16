@@ -4,9 +4,12 @@ import {
   JWT_COOKIE_NAME,
 } from "$lib/variables";
 import cookie from "cookie";
+import * as api from "$lib/api-server.util.js";
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function POST() {
+export async function POST({request}) {
+  await api.POST("auth/logout", await request.text());
+
   const headers = new Headers();
 
   headers.append(
