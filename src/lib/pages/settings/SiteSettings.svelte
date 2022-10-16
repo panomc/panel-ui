@@ -40,13 +40,14 @@
             <div class="col-6">
               {#if showSpecialIpAddressField}
                 <input
+                  id="ipAddress"
                   class="form-control"
                   placeholder="play.server.com"
                   type="text"
                   name="ipAddress"
                   bind:value="{data.serverIpAddress}" />
               {:else}
-                <select class="form-select">
+                <select id="ipAddress" class="form-select">
                   <option selected>Seçilmedi</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -63,6 +64,24 @@
           </div>
         </div>
       </div>
+
+      <div class="row mb-3">
+        <label class="col-md-4 col-form-label" for="supportEmailAddress">
+          Destek E-Posta Adresi
+        </label>
+        <div class="col col-form-label">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <input
+                id="supportEmailAddress"
+                class="form-control"
+                placeholder="support@{data.websiteName}.com"
+                type="email"
+                name="supportEmailAddress" />
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row mb-3">
         <label class="col-md-4 col-form-label" for="siteKeywords">
           Anahtar Kelimeler
@@ -70,6 +89,7 @@
         <div class="col col-form-label">
           <form on:submit|preventDefault="{addKeyWord}">
             <input
+            id="siteKeywords"
               class="form-control mb-3"
               class:border-danger="{keywordInputError}"
               placeholder="Eklemek için Enter'a basın"
