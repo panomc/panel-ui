@@ -17,7 +17,15 @@
         <i class="fas fa-trash"></i>
         <span class="ms-2 d-lg-inline d-none">Sil</span>
       </a>
-      {#if !data.player.isBanned}
+      {#if data.player.isBanned}
+        <a
+          class="btn btn-link link-danger"
+          href="javascript:void(0);"
+          on:click="{() => showUnbanPlayerModal(data.player)}">
+          <i class="fas fa-gavel"></i>
+          <span class="ms-2 d-lg-inline d-none">Yasağı Kaldır</span>
+        </a>
+      {:else}
         <a
           class="btn btn-link link-danger"
           href="javascript:void(0);"
@@ -258,6 +266,10 @@
     show as showConfirmBanPlayerModal,
     setCallback as setConfirmBanPlayerModalCallback,
   } from "$lib/component/modals/ConfirmBanPlayerModal.svelte";
+  import {
+    show as showUnbanPlayerModal,
+    setCallback as setUnbanPlayerModalCallback,
+  } from "$lib/component/modals/UnbanPlayerModal.svelte";
 
   import TicketStatus from "$lib/component/TicketStatus.svelte";
   import Date from "$lib/component/Date.svelte";
@@ -369,4 +381,8 @@
   setConfirmBanPlayerModalCallback(() => {
     data.player.isBanned = true;
   });
+
+  setUnbanPlayerModalCallback(() => {
+    data.player.isBanned = false;
+  })
 </script>

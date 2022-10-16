@@ -27,7 +27,15 @@
           <i class="fa-solid fa-pencil-alt me-2"></i>
           Düzenle
         </a>
-        {#if !player.isBanned}
+        {#if player.isBanned}
+          <a
+            class="dropdown-item link-danger"
+            href="javascript:void(0);"
+            on:click="{showUnbanPlayerModal}">
+            <i class="fas fa-gavel me-2"></i>
+            Yasağı Kaldır
+          </a>
+        {:else}
           <a
             class="dropdown-item link-danger"
             href="javascript:void(0);"
@@ -104,6 +112,10 @@
 
   function showBanPlayerModal() {
     dispatch("showBanPlayerModalClick", { player });
+  }
+
+  function showUnbanPlayerModal() {
+    dispatch("showUnbanPlayerModalClick", { player });
   }
 
 

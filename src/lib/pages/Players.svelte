@@ -80,7 +80,9 @@
                   on:showEditPlayerModalClick="{(event) =>
                     onShowEditPlayerModalClick(event.detail.player)}"
                   on:showBanPlayerModalClick="{(event) =>
-                    showBanPlayerModalClick(event.detail.player)}" />
+                    showBanPlayerModalClick(event.detail.player)}"
+                  on:showUnbanPlayerModalClick="{(event) =>
+                    showUnbanPlayerModalClick(event.detail.player)}" />
               {/each}
             </tbody>
           </table>
@@ -191,6 +193,11 @@
     setCallback as setConfirmBanPlayerModalCallback,
     onHide as onConfirmBanPlayerModalHide
   } from "$lib/component/modals/ConfirmBanPlayerModal.svelte";
+  import {
+    show as showUnbanPlayerModal,
+    setCallback as setUnbanPlayerModalCallback,
+    onHide as onUnbanPlayerModalHide
+  } from "$lib/component/modals/UnbanPlayerModal.svelte";
 
   import PlayerRow from "$lib/component/PlayerRow.svelte";
 
@@ -269,6 +276,12 @@
     showConfirmBanPlayerModal(player);
   }
 
+  function showUnbanPlayerModalClick(player) {
+    data.players[data.players.indexOf(player)].selected = true;
+
+    showUnbanPlayerModal(player);
+  }
+
   setAuthorizePlayerModalCallback((newPlayer) => {
     data.players.forEach((player) => {
       if (player.id === newPlayer.id) {
@@ -312,6 +325,26 @@
     data.players = data.players;
   });
 
+  onConfirmBanPlayerModalHide((newPlayer) => {
+    data.players.forEach((player) => {
+      if (player.id === newPlayer.id) {
+        player.selected = false;
+      }
+    });
+
+    data.players = data.players;
+  })
+
+  onUnbanPlayerModalHide((newPlayer) => {
+    data.players.forEach((player) => {
+      if (player.id === newPlayer.id) {
+        player.selected = false;
+      }
+    });
+
+    data.players = data.players;
+  })
+
   setConfirmBanPlayerModalCallback((newPlayer) => {
     data.players.forEach((player) => {
       if (player.id === newPlayer.id) {
@@ -324,7 +357,7 @@
     reloadData();
   });
 
-  onConfirmBanPlayerModalHide((newPlayer) => {
+  setUnbanPlayerModalCallback((newPlayer) => {
     data.players.forEach((player) => {
       if (player.id === newPlayer.id) {
         player.selected = false;
@@ -332,5 +365,7 @@
     });
 
     data.players = data.players;
-  })
+
+    reloadData();
+  });
 </script>
