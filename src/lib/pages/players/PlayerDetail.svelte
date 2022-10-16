@@ -24,7 +24,9 @@
             'Oyuncu e-postasına bir doğrulama bağlantısı gönder',
             { placement: 'bottom' },
           ]}"
-          href="javascript:void(0);">
+          href="javascript:void(0);"
+          on:click="{sendVerification}"
+          class:disabled="{sendingVerificationMail}">
           <i class="fas fa-envelope"></i>
           <span class="ms-2 d-lg-inline d-none">Doğrula</span>
         </a>
@@ -251,8 +253,13 @@
   import Date from "$lib/component/Date.svelte";
   import Pagination from "$lib/component/Pagination.svelte";
   import { session } from "$lib/Store.js";
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
+
+  import VerificationEmailSentSuccessfulToast from "$lib/component/toasts/VerificationEmailSentSuccessfulToast.svelte";
+  import VerificationEmailSentErrorToast from "$lib/component/toasts/VerificationEmailSentErrorToast.svelte";
 
   export let data;
+  let sendingVerificationMail;
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -302,6 +309,38 @@
           } else {
             reject();
           }
+        });
+    });
+  }
+
+  function sendVerification() {
+    sendingVerificationMail = true;
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post({
+        path: "/api/panel/sendValidationEmail",
+        body: {
+          username: data.player.username,
+        },
+      })
+        .then((body) => {
+          sendingVerificationMail = false;
+
+          if (body.result === "ok") {
+            showToast(VerificationEmailSentSuccessfulToast, {
+              username: data.player.username
+            });
+
+            return
+          }
+
+          showToast(VerificationEmailSentErrorToast, {
+            username: data.player.username,
+            errorCode: body.error
+          });
+        })
+        .catch(() => {
+          reject();
         });
     });
   }
