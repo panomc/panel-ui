@@ -22,12 +22,13 @@
         </div>
         <div class="modal-body">
           <input
+            class:text-danger="{$errors.name}"
+            class:text-black="{!$errors.name}"
             class="form-control form-control-lg border-0 text-black p-0 mb-3"
             placeholder="İsim"
             id="permName"
             type="text"
-            bind:value="{$permissionGroup.name}"
-            class:border-danger="{$errors.name}" />
+            bind:value="{$permissionGroup.name}" />
           {#if $errors.error}
             <small class="text-danger">
               {$errors.error}
