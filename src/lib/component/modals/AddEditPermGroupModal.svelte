@@ -2,18 +2,24 @@
 <div aria-hidden="true" class="modal fade" id="{dialogID}" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">
-          {$mode === "edit" ? "Yetki Grubu Düzenle" : "Yetki Grubu Ekle"}
-        </h5>
-        <button
-          title="Pencereyi Kapat"
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          on:click="{hide}"></button>
-      </div>
-      <form on:submit|preventDefault="{onSubmit}">
+      {#if $gettingData}
+        <div class="modal-body">
+          <div class="text-center">
+            <div class="spinner-border text-primary" role="status"></div>
+          </div>
+        </div>
+      {:else}
+        <div class="modal-header">
+          <h5 class="modal-title">
+            {$mode === "edit" ? "Yetki Grubu Düzenle" : "Yetki Grubu Ekle"}
+          </h5>
+          <button
+            title="Pencereyi Kapat"
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            on:click="{hide}"></button>
+        </div>
         <div class="modal-body">
           <input
             class="form-control form-control-lg border-0 text-black p-0 mb-3"
@@ -27,41 +33,34 @@
               {$errors.error}
             </small>
           {/if}
-          <label for="exampleDataList" class="form-label">Oyuncu Ekle</label>
-          <input
-            class="form-control mb-3"
-            list="datalistOptions"
-            id="exampleDataList"
-            placeholder="Eklemek için Enter'a basın" />
-          <datalist id="datalistOptions">
-            <option value="Ahmo"> </option>
-          </datalist>
+          <form on:submit|preventDefault="{addUser}">
+            <label for="addPlayerInput" class="form-label">Oyuncu Ekle</label>
+            <input
+              class="form-control mb-3"
+              id="addPlayerInput"
+              bind:value="{$username}"
+              class:border-danger="{$usernameInputError}"
+              class:disabled="{$checkingUsername}"
+              placeholder="Eklemek için Enter'a basın" />
+          </form>
 
-          <a
-            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
-            href="javascript:void(0);">
-            <span class="badge rounded-pill bg-light link-primary text-center">
-              <img
-                class="d-inline rounded-circle me-2"
-                src="https://crafthead.net/avatar/Ahmo"
-                alt="Butlu"
-                width="28"
-                height="28" /> Ahmo
-            </span>
-          </a>
-
-          <a
-            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
-            href="javascript:void(0);">
-            <span class="badge rounded-pill bg-light link-primary text-center">
-              <img
-                class="d-inline rounded-circle me-2"
-                src="https://crafthead.net/avatar/Butlu"
-                alt="Butlu"
-                width="28"
-                height="28" /> Butlu
-            </span>
-          </a>
+          {#each $permissionGroup.users as user, index (user)}
+            <a
+              use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
+              href="javascript:void(0);"
+              on:click="{() => removeUser(index)}">
+              <span
+                class="badge rounded-pill bg-light link-primary text-center">
+                <img
+                  class="d-inline rounded-circle me-2"
+                  src="https://crafthead.net/avatar/{user}"
+                  alt="{user}"
+                  width="28"
+                  height="28" />
+                {user}
+              </span>
+            </a>
+          {/each}
         </div>
         <div class="modal-footer">
           <button
@@ -70,11 +69,12 @@
             class:btn-primary="{$mode === 'edit'}"
             type="submit"
             class:disabled="{loading || !$permissionGroup.name}"
-            disabled="{loading || !$permissionGroup.name}">
+            disabled="{loading || !$permissionGroup.name}"
+            on:click="{onSubmit}">
             {$mode === "edit" ? "Kaydet" : "Oluştur"}
           </button>
         </div>
-      </form>
+      {/if}
     </div>
   </div>
 </div>
@@ -82,11 +82,20 @@
 <script context="module">
   import { writable, get } from "svelte/store";
   import tooltip from "$lib/tooltip.util";
+  import { showNetworkErrorOnCatch } from "$lib/Store.js";
+  import ApiUtil from "../../../pano-ui/js/api.util.js";
 
   const dialogID = "addEditPermissionGroup";
   const mode = writable("create");
   const permissionGroup = writable({});
   const errors = writable([]);
+  const gettingData = writable(true);
+  const checkingUsername = writable(false);
+  let originalUsers = [];
+  const username = writable("");
+  const usernameInputError = writable(false);
+  let addedUsers = [];
+  let removedUsers = [];
 
   let callback = (permissionGroup) => {};
   let hideCallback = (permissionGroup) => {};
@@ -97,6 +106,23 @@
 
     permissionGroup.set(newPermissionGroup);
     errors.set([]);
+    username.set("");
+    usernameInputError.set(false);
+    checkingUsername.set(false);
+    addedUsers = [];
+    removedUsers = [];
+    gettingData.set(false);
+    originalUsers = [];
+
+    if (get(mode) === "edit") {
+      initData();
+    } else {
+      permissionGroup.update((permissionGroup) => {
+        permissionGroup.users = [];
+
+        return permissionGroup;
+      });
+    }
 
     modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
       backdrop: "static",
@@ -118,11 +144,36 @@
   export function onHide(newCallback) {
     hideCallback = newCallback;
   }
+
+  function initData() {
+    gettingData.set(true);
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.get({
+        path: `/api/panel/permissionGroups/${get(permissionGroup).id}`,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
+            permissionGroup.set(body);
+            originalUsers = [...body.users];
+            gettingData.set(false);
+
+            resolve();
+
+            return;
+          }
+
+          reject();
+        })
+        .catch(() => {
+          reject();
+        });
+    });
+  }
 </script>
 
 <script>
-  import { session, showNetworkErrorOnCatch } from "$lib/Store";
-  import ApiUtil from "$lib/api.util";
+  import { session } from "$lib/Store";
 
   let loading = false;
 
@@ -156,7 +207,7 @@
       if (get(mode) == "edit") {
         ApiUtil.put({
           path: `/api/panel/permissionGroups/${get(permissionGroup).id}`,
-          body: get(permissionGroup),
+          body: { ...$permissionGroup, addedUsers, removedUsers },
           CSRFToken: $session.CSRFToken,
         })
           .then(bodyHandler)
@@ -169,7 +220,7 @@
 
       ApiUtil.post({
         path: `/api/panel/permissionGroups`,
-        body: get(permissionGroup),
+        body: { ...$permissionGroup, addedUsers },
         CSRFToken: $session.CSRFToken,
       })
         .then(bodyHandler)
@@ -177,5 +228,75 @@
           reject();
         });
     });
+  }
+
+  async function addUser() {
+    errors.set([]);
+
+    if (!$username) {
+      return;
+    }
+
+    if ($permissionGroup.users.indexOf($username) !== -1) {
+      usernameInputError.set(true);
+
+      return;
+    }
+
+    checkingUsername.set(true);
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.get({
+        path: `/api/panel/players/${$username}/exists`,
+      })
+        .then((body) => {
+          checkingUsername.set(false);
+          resolve();
+
+          if (body.result === "ok") {
+            usernameInputError.set(false);
+
+            permissionGroup.update((permissionGroup) => {
+              permissionGroup.users.push($username);
+
+              return permissionGroup;
+            });
+
+            if (removedUsers.indexOf($username) !== -1) {
+              removedUsers.remove(removedUsers.indexOf($username));
+            }
+
+            if (originalUsers.indexOf($username) === -1) {
+              addedUsers.push($username);
+            }
+
+            username.set("");
+
+            return;
+          }
+
+          errors.set({ error: body.error });
+          usernameInputError.set(true);
+        })
+        .catch(() => reject());
+    });
+  }
+
+  function removeUser(index) {
+    const username = $permissionGroup.users[index];
+
+    permissionGroup.update((permissionGroup) => {
+      permissionGroup.users = permissionGroup.users.remove(index);
+
+      return permissionGroup;
+    });
+
+    if (addedUsers.indexOf(username) !== -1) {
+      addedUsers.remove(addedUsers.indexOf(username));
+    }
+
+    if (originalUsers.indexOf(username) !== -1) {
+      removedUsers.push(username);
+    }
   }
 </script>

@@ -32,11 +32,11 @@
               <th scope="col" class="text-center">
                 <a
                   class="text-capitalize"
-                  href="javascript:(void);"
+                  href="javascript:void(0);"
                   title="Düzenle"
                   on:click="{() =>
                     onShowEditPermissionGroupButtonClick(permissionGroup)}"
-                  Z>
+                  >
                   {permissionGroup.name}
                 </a>
                 <div
