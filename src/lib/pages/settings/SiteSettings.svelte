@@ -331,6 +331,10 @@
         formData.append("favicon", faviconFiles[0]);
       }
 
+      if (websiteLogoFiles[0]) {
+        formData.append("websiteLogo", websiteLogoFiles[0]);
+      }
+
       ApiUtil.put({
         path: "/api/panel/settings",
         body: formData,
