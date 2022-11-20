@@ -121,7 +121,7 @@
                 alt="Seç"
                 class="d-block ml-auto"
                 height="48"
-                src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png"
+                src="{favicon}"
                 width="48" />
             </div>
             <div class="col">
@@ -129,7 +129,8 @@
                 class="form-control-file"
                 id="siteFavicon"
                 type="file"
-                bind:files="{faviconFiles}" />
+                bind:files="{faviconFiles}"
+                on:change="{onFaviconChange}" />
               <small>
                 PNG, ICO, SVG, GIF ve tavsiyen minimum 16x16 boyutlarında
                 olmalıdır.
@@ -146,17 +147,15 @@
         <div class="col col-form-label">
           <div class="row">
             <div class="col-auto">
-              <img
-                alt="Seç"
-                class="d-block ml-auto"
-                src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" />
+              <img alt="Seç" class="d-block ml-auto" height="128" width="128" src="{websiteLogo}" />
             </div>
             <div class="col">
               <input
                 class="form-control-file"
                 id="siteLogo"
                 type="file"
-                bind:files="{websiteLogoFiles}" />
+                bind:files="{websiteLogoFiles}"
+                on:change="{onWebsiteLogoChange}" />
             </div>
           </div>
         </div>
@@ -266,6 +265,9 @@
   let showSpecialIpAddressField = true;
   let keywordInputError = false;
 
+  let favicon = "/api/favicon";
+  let websiteLogo = "/api/websiteLogo";
+
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({ CSRFToken: $session.CSRFToken })
@@ -277,6 +279,28 @@
           reject();
         });
     }, true);
+  }
+
+  function onFaviconChange(event) {
+    const reader = new FileReader();
+    const image = event.target.files[0];
+
+    reader.readAsDataURL(image);
+
+    reader.onload = (e) => {
+      favicon = e.target.result;
+    };
+  }
+
+  function onWebsiteLogoChange(event) {
+    const reader = new FileReader();
+    const image = event.target.files[0];
+
+    reader.readAsDataURL(image);
+
+    reader.onload = (e) => {
+      websiteLogo = e.target.result;
+    };
   }
 
   function save() {
