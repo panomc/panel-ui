@@ -247,6 +247,7 @@
     session,
     showNetworkErrorOnCatch,
     website,
+    websiteLogoSrc,
   } from "$lib/Store.js";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
@@ -361,6 +362,17 @@
             data.oldSettings.keywords = [...data.keywords];
 
             showToast(SettingsSaveSuccessToast);
+
+            if (websiteLogoInput.value !== "") {
+              const reader = new FileReader();
+              const image = websiteLogoFiles[0];
+
+              reader.readAsDataURL(image);
+
+              reader.onload = (e) => {
+                websiteLogoSrc.set(e.target.result);
+              };
+            }
 
             faviconFiles = [];
             websiteLogoFiles = [];

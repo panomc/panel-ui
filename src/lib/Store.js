@@ -39,6 +39,8 @@ export const notLoggedIn = writable(false);
 
 export const pageTitle = writable(null);
 
+export const websiteLogoSrc = writable("/api/websiteLogo")
+
 export function setDefaults() {
   networkErrorCallbacks.set([]);
   retryingNetworkErrors.set(false);

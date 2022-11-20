@@ -31,7 +31,7 @@
           class="m-2 rounded-circle"
           width="64"
           height="64"
-          src="/api/websiteLogo"
+          src="{$websiteLogoSrc}"
           use:tooltip="{['Website Ayaları', { placement: 'right' }]}" />
       </a>
 
@@ -112,6 +112,8 @@
   import ConnectServerModal from "./modals/ConnectServerModal.svelte";
   import RemoveServerModal from "./modals/RemoveServerModal.svelte";
   import { UI_URL } from "$lib/variables.js";
+
+  import { websiteLogoSrc } from "$lib/Store.js";
 
   let menuComponent = SiteNavigationMenu;
 
