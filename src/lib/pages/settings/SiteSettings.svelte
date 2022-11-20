@@ -130,7 +130,9 @@
                 id="siteFavicon"
                 type="file"
                 bind:files="{faviconFiles}"
-                on:change="{onFaviconChange}" />
+                on:change="{onFaviconChange}"
+                bind:this="{faviconInput}"
+                value="" />
               <small>
                 PNG, ICO, SVG, GIF ve tavsiyen minimum 16x16 boyutlarında
                 olmalıdır.
@@ -147,7 +149,12 @@
         <div class="col col-form-label">
           <div class="row">
             <div class="col-auto">
-              <img alt="Seç" class="d-block ml-auto" height="128" width="128" src="{websiteLogo}" />
+              <img
+                alt="Seç"
+                class="d-block ml-auto"
+                height="128"
+                width="128"
+                src="{websiteLogo}" />
             </div>
             <div class="col">
               <input
@@ -155,7 +162,9 @@
                 id="siteLogo"
                 type="file"
                 bind:files="{websiteLogoFiles}"
-                on:change="{onWebsiteLogoChange}" />
+                on:change="{onWebsiteLogoChange}"
+                bind:this="{websiteLogoInput}"
+                value="" />
             </div>
           </div>
         </div>
@@ -248,6 +257,11 @@
 
   export let data;
 
+  let faviconFiles = [];
+  let websiteLogoFiles = [];
+  let faviconInput;
+  let websiteLogoInput;
+
   let keyword;
   let saveButtonLoading = false;
   $: isSaveButtonDisabled =
@@ -257,10 +271,8 @@
     data.oldSettings.serverIpAddress === data.serverIpAddress &&
     JSON.stringify(data.oldSettings.keywords) ===
       JSON.stringify(data.keywords) &&
-    false;
-
-  let faviconFiles = [];
-  let websiteLogoFiles = [];
+    faviconFiles.length === 0 &&
+    websiteLogoFiles.length === 0;
 
   let showSpecialIpAddressField = true;
   let keywordInputError = false;
@@ -345,6 +357,12 @@
             data.oldSettings.keywords = [...data.keywords];
 
             showToast(SettingsSaveSuccessToast);
+
+            faviconFiles = [];
+            websiteLogoFiles = [];
+
+            faviconInput.value = "";
+            websiteLogoInput.value = "";
 
             resolve();
           } else if (
