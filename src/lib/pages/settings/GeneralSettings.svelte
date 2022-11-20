@@ -119,7 +119,7 @@
     getLanguageByLocale,
     Languages,
   } from "$lib/language.util";
-  import SettingsSavedToast from "$lib/component/toasts/SettingsSavedToast.svelte";
+  import SettingsSaveSuccessToast from "$lib/component/toasts/SettingsSaveSuccessToast.svelte";
 
   pageTitle.set("Genel Ayarlar");
 
@@ -168,7 +168,7 @@
 
             changeLanguage(getLanguageByLocale(data.locale));
 
-            showToast(SettingsSavedToast);
+            showToast(SettingsSaveSuccessToast);
 
             resolve();
           } else reject();

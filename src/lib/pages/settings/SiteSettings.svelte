@@ -125,8 +125,15 @@
                 width="48" />
             </div>
             <div class="col">
-              <input class="form-control-file" id="siteFavicon" type="file" />
-              <small> PNG, ICO ve minimum 16x16 boyutlarında olmalıdır. </small>
+              <input
+                class="form-control-file"
+                id="siteFavicon"
+                type="file"
+                bind:files="{faviconFiles}" />
+              <small>
+                PNG, ICO, SVG, GIF ve tavsiyen minimum 16x16 boyutlarında
+                olmalıdır.
+              </small>
             </div>
           </div>
         </div>
@@ -145,7 +152,11 @@
                 src="http://icons.iconarchive.com/icons/ampeross/lamond/256/minecraft-icon.png" />
             </div>
             <div class="col">
-              <input class="form-control-file" id="siteLogo" type="file" />
+              <input
+                class="form-control-file"
+                id="siteLogo"
+                type="file"
+                bind:files="{websiteLogoFiles}" />
             </div>
           </div>
         </div>
@@ -231,7 +242,8 @@
   } from "$lib/Store.js";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
-  import SettingsSavedToast from "$lib/component/toasts/SettingsSavedToast.svelte";
+  import SettingsSaveSuccessToast from "$lib/component/toasts/SettingsSaveSuccessToast.svelte";
+  import SettingsSaveErrorToast from "$lib/component/toasts/SettingsSaveErrorToast.svelte";
 
   pageTitle.set("Website Ayarları");
 
@@ -244,7 +256,12 @@
     data.oldSettings.websiteDescription === data.websiteDescription &&
     data.oldSettings.supportEmail === data.supportEmail &&
     data.oldSettings.serverIpAddress === data.serverIpAddress &&
-    JSON.stringify(data.oldSettings.keywords) === JSON.stringify(data.keywords);
+    JSON.stringify(data.oldSettings.keywords) ===
+      JSON.stringify(data.keywords) &&
+    false;
+
+  let faviconFiles = [];
+  let websiteLogoFiles = [];
 
   let showSpecialIpAddressField = true;
   let keywordInputError = false;
@@ -266,21 +283,26 @@
     saveButtonLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
+      const formData = new FormData();
+
+      formData.append("websiteName", data.websiteName);
+      formData.append("websiteDescription", data.websiteDescription);
+      formData.append("supportEmail", data.supportEmail);
+      formData.append("serverIpAddress", data.serverIpAddress);
+      formData.append("keywords", data.keywords);
+
+      if (faviconFiles[0]) {
+        formData.append("favicon", faviconFiles[0]);
+      }
+
       ApiUtil.put({
         path: "/api/panel/settings",
-        body: {
-          websiteName: data.websiteName,
-          websiteDescription: data.websiteDescription,
-          supportEmail: data.supportEmail,
-          serverIpAddress: data.serverIpAddress,
-          keywords: data.keywords,
-        },
-        CSRFToken: $session.CSRFToken,
+        body: formData,
       })
         .then((body) => {
-          if (body.result === "ok") {
-            saveButtonLoading = false;
+          saveButtonLoading = false;
 
+          if (body.result === "ok") {
             website.update((website) => {
               return {
                 ...website,
@@ -298,12 +320,22 @@
 
             data.oldSettings.keywords = [...data.keywords];
 
-            showToast(SettingsSavedToast);
+            showToast(SettingsSaveSuccessToast);
 
             resolve();
+          } else if (
+            body.error === "FAVICON_WRONG_CONTENT_TYPE" ||
+            body.error === "FAVICON_EXCEEDS_SIZE" ||
+            body.error === "WEBSITE_LOGO_WRONG_CONTENT_TYPE" ||
+            body.error === "WEBSITE_LOGO_EXCEEDS_SIZE"
+          ) {
+            showToast(SettingsSaveErrorToast, {
+              errorCode: body.error,
+            });
           } else reject();
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err);
           reject();
         });
     });

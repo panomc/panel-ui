@@ -6,7 +6,7 @@ import {
 } from "$lib/variables";
 
 async function fetchBasicData(token) {
-  return api.GET("/api/panel/basicData", token);
+  return api.GET({path: "/api/panel/basicData", token});
 }
 
 /** @type {import('@sveltejs/kit').Handle} */
