@@ -147,13 +147,14 @@
     saveButtonLoading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
+      const formData = new FormData();
+
+      formData.append("updatePeriod", data.updatePeriod);
+      formData.append("locale", data.locale);
+
       ApiUtil.put({
         path: "/api/panel/settings",
-        body: {
-          updatePeriod: data.updatePeriod,
-          locale: data.locale,
-        },
-        CSRFToken: $session.CSRFToken,
+        body: formData,
       })
         .then((body) => {
           if (body.result === "ok") {
