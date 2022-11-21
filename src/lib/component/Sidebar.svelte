@@ -27,10 +27,10 @@
     <div class="sidebar-info">
       <a href="{base}/settings/site-settings">
         <img
-          alt="Server İkon"
-          class="m-2 rounded-circle"
-          width="64"
-          height="64"
+          alt="Sunucu İkonu"
+          class="m-2"
+          height="48"
+          width="auto"
           src="{$websiteLogoSrc}"
           use:tooltip="{['Website Ayaları', { placement: 'right' }]}" />
       </a>

@@ -124,6 +124,7 @@
                 src="{favicon}"
                 width="48" />
             </div>
+            <div class="w-100 my-2"></div>
             <div class="col">
               <input
                 class="form-control-file"
@@ -133,9 +134,8 @@
                 on:change="{onFaviconChange}"
                 bind:this="{faviconInput}"
                 value="" />
-              <small>
-                PNG, ICO, SVG, GIF ve tavsiyen minimum 16x16 boyutlarında
-                olmalıdır.
+              <small class="text-muted">
+                PNG, ICO ve minimum 16x16 boyutlarında olmalıdır.
               </small>
             </div>
           </div>
@@ -150,12 +150,13 @@
           <div class="row">
             <div class="col-auto">
               <img
-                alt="Seç"
                 class="d-block ml-auto"
-                height="128"
-                width="128"
+                alt="Sunucu İkonu"
+                height="48"
+                width="auto"
                 src="{websiteLogo}" />
             </div>
+            <div class="w-100 my-2"></div>
             <div class="col">
               <input
                 class="form-control-file"
@@ -165,6 +166,9 @@
                 on:change="{onWebsiteLogoChange}"
                 bind:this="{websiteLogoInput}"
                 value="" />
+              <small class="text-muted">
+                PNG, JPG, IMG, GIF ve minimum 16x16 boyutlarında olmalıdır.
+              </small>
             </div>
           </div>
         </div>
