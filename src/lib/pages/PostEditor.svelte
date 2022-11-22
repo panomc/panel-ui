@@ -114,14 +114,22 @@
             <li class="list-group-item">
               <a
                 href="javascript:void(0);"
-                data-bs-target="#setPostThumbnailModal"
-                data-bs-toggle="modal"
+                on:click="{showSetPostThumbnailModal(data.post, thumbnail)}"
                 class="form-group">
-                <img
-                  src="{base}/assets/img/vanilla.png"
-                  class="border rounded img-fluid"
-                  title="Küçük Resim"
-                  alt="Küçük Resim" />
+                {#if thumbnail || data.post.thumbnailUrl}
+                  <img
+                    src="{thumbnail || data.post.thumbnailUrl}"
+                    class="border rounded img-fluid"
+                    title="Küçük Resim"
+                    alt="Küçük Resim" />
+                {:else}
+                  <div
+                    class="container text-center animate__animated animate__zoomIn">
+                    <i class="fas fa-image fa-3x text-dark text-opacity-25 m-3"
+                    ></i>
+                    <p class="text-gray">Küçük resim belirlenmedi.</p>
+                  </div>
+                {/if}
               </a>
             </li>
           </ul>
@@ -201,7 +209,7 @@
         category: -1,
         status: -1,
         date: 0,
-        imageCode: "",
+        thumbnailUrl: "",
       },
       categoryCount: 0,
       categories: [],
@@ -242,7 +250,10 @@
   import { pageTitle, session, showNetworkErrorOnCatch } from "$lib/Store";
   import { UI_URL } from "$lib/variables";
 
-  import SetPostThumbnailModal from "$lib/component/modals/SetPostThumbnailModal.svelte";
+  import SetPostThumbnailModal, {
+    setCallback as setPostThumbnailModalCallback,
+    show as showSetPostThumbnailModal,
+  } from "$lib/component/modals/SetPostThumbnailModal.svelte";
 
   import {
     setCallback as setDeletePostModalCallback,
@@ -250,7 +261,7 @@
   } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
 
   import AddEditPostCategoryModal, {
-    show as showAddEditPostCategoryModal,
+    // show as showAddEditPostCategoryModal,
     setCallback as setCallbackForAddEditPostCategoryModal,
   } from "$lib/component/modals/AddEditPostCategoryModal.svelte";
 
@@ -265,6 +276,9 @@
 
   let isEditorEmpty = true;
   let loading = false;
+  let thumbnail;
+  let thumbnailFile;
+  let isThumbnailSaved;
 
   pageTitle.set(
     data.mode === Modes.EDIT ? "Yazıyı Düzenle" : "Yeni Yazı Oluştur"
@@ -337,6 +351,8 @@
             title: data.post.title,
           });
 
+          isThumbnailSaved = true;
+
           resolve();
         } else if (body.result === "error") {
           loading = false;
@@ -347,11 +363,24 @@
         } else reject();
       };
 
+      const body = new FormData();
+
+      body.append("title", data.post.title);
+      body.append("category", data.post.category);
+      body.append("text", data.post.text);
+
+      if (!isThumbnailSaved) {
+        if (thumbnailFile) {
+          body.append("thumbnail", thumbnailFile);
+        } else if (!data.post.thumbnailUrl && data.post.id !== -1) {
+          body.append("removeThumbnail", true);
+        }
+      }
+
       if (data.post.id === -1) {
         ApiUtil.post({
           path: "/api/panel/post",
-          body: data.post,
-          CSRFToken: $session.CSRFToken,
+          body,
         })
           .then(bodyHandler)
           .catch(() => {
@@ -363,8 +392,7 @@
 
       ApiUtil.put({
         path: `/api/panel/posts/${data.post.id}`,
-        body: data.post,
-        CSRFToken: $session.CSRFToken,
+        body,
       })
         .then(bodyHandler)
         .catch(() => {
@@ -401,9 +429,9 @@
     });
   }
 
-  function onCreateCategoryClick() {
-    showAddEditPostCategoryModal("create");
-  }
+  // function onCreateCategoryClick() {
+  //   showAddEditPostCategoryModal("create");
+  // }
 
   setCallbackForAddEditPostCategoryModal((routeFirstPage, category) => {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -425,5 +453,26 @@
     } else {
       goto(base + "/posts/trash");
     }
+  });
+
+  setPostThumbnailModalCallback((post, image) => {
+    isThumbnailSaved = false;
+
+    if (image) {
+      const reader = new FileReader();
+
+      reader.readAsDataURL(image);
+
+      reader.onload = (e) => {
+        thumbnail = e.target.result;
+      };
+
+      thumbnailFile = image;
+
+      return;
+    }
+
+    thumbnail = null;
+    thumbnailFile = null;
   });
 </script>

@@ -1,6 +1,6 @@
 <!-- SetPostThumbnailModal Modal -->
 <div
-  id="setPostThumbnailModal"
+  id="{dialogID}"
   aria-hidden="true"
   class="modal fade"
   role="dialog"
@@ -12,29 +12,104 @@
         <button
           aria-label="Kapat"
           class="btn-close"
-          data-bs-dismiss="modal"
           title="Pencereyi Kapat"
-          type="button">
+          type="button"
+          on:click="{hide}">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form>
-        <div class="modal-body">
-          <div class="container text-center animate__animated animate__zoomIn">
+      <div class="modal-body">
+        <div class="container text-center animate__animated animate__zoomIn">
+          {#if $image}
+            <img src="{$image}" alt="Küçük resim önizlemesi" />
+          {:else}
             <i class="fas fa-image fa-3x text-dark text-opacity-25 m-3"></i>
             <p class="text-gray">Küçük resim belirlenmedi.</p>
-          </div>
+          {/if}
+        </div>
 
-          <div class="input-group">
-            <input type="file" class="form-control" id="inputGroupFile02" />
-            <label class="input-group-text" for="inputGroupFile02"
-              >Upload</label>
-          </div>
+        <div class="input-group">
+          <input
+            type="file"
+            class="form-control"
+            id="uploadPostThumbnailInput"
+            bind:files="{$thumbnailFiles}"
+            on:change="{onThumbnailChange}"
+            bind:this="{$thumbnailInput}" />
+          <label class="input-group-text" for="uploadPostThumbnailInput"
+            >Upload</label>
         </div>
-        <div class="modal-footer">
-          <button class="btn w-100 btn-primary" type="submit">Kaydet</button>
-        </div>
-      </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn w-100 btn-primary"
+          class:disabled="{isSaveButtonDisabled}"
+          aria-disabled="{isSaveButtonDisabled}"
+          disabled="{isSaveButtonDisabled}"
+          on:click="{onSave}">Kaydet</button>
+      </div>
     </div>
   </div>
 </div>
+
+<script context="module">
+  import { writable, get } from "svelte/store";
+
+  const dialogID = "setPostThumbnailModal";
+  const post = writable({});
+  const image = writable(null);
+  const thumbnailInput = writable();
+  const thumbnailFiles = writable([]);
+
+  let callback = (post, image) => {};
+  let hideCallback = (post) => {};
+  let modal;
+
+  export function show(newPost, newImage) {
+    post.set(newPost);
+    image.set(newImage || newPost.thumbnailUrl);
+    thumbnailFiles.set([]);
+    get(thumbnailInput).value = "";
+
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
+
+    modal.show();
+  }
+
+  export function hide() {
+    hideCallback(get(post));
+
+    modal.hide();
+  }
+
+  export function setCallback(newCallback) {
+    callback = newCallback;
+  }
+
+  export function onHide(newCallback) {
+    hideCallback = newCallback;
+  }
+</script>
+
+<script>
+  $: isSaveButtonDisabled = $image === $post.thumbnailUrl;
+
+  function onThumbnailChange(event) {
+    const reader = new FileReader();
+    const newImage = event.target.files[0];
+
+    reader.readAsDataURL(newImage);
+
+    reader.onload = (e) => {
+      $image = e.target.result;
+    };
+  }
+
+  function onSave() {
+    callback($post, $thumbnailFiles[0]);
+    hide();
+  }
+</script>

@@ -1,5 +1,7 @@
 import { handle, throwError } from "../../../../pano-ui/js/api.proxy.js";
 
+export * from "../../../../pano-ui/js/api.proxy.js";
+
 const faviconSize = 1024 * 1024; // 1 MB
 const websiteLogoSize = 2 * 1024 * 1024; // 2 MB
 
@@ -21,19 +23,4 @@ export async function PUT(event) {
   }
 
   return handle(event, data);
-}
-
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function GET(event) {
-  return handle(event);
-}
-
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function POST(event) {
-  return handle(event);
-}
-
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function DELETE(event) {
-  return handle(event);
 }
