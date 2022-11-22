@@ -135,7 +135,8 @@
                 bind:this="{faviconInput}"
                 value="" />
               <small class="text-muted">
-                PNG, ICO ve minimum 16x16 boyutlarında olmalıdır.
+                PNG, ICO, GIF, JPG, SVG formatında, minimum 1 mb ve 16x16
+                boyutlarında olmalı.
               </small>
             </div>
           </div>
@@ -167,7 +168,7 @@
                 bind:this="{websiteLogoInput}"
                 value="" />
               <small class="text-muted">
-                PNG, JPG, IMG, GIF ve minimum 16x16 boyutlarında olmalıdır.
+                PNG, JPEG, GIF, SVG formatında ve minimum 2 mb olmalı.
               </small>
             </div>
           </div>

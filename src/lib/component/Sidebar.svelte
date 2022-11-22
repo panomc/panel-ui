@@ -24,13 +24,11 @@
 
   <div class="sidebar-inner">
     <!-- Sidebar Info Section -->
-    <div class="sidebar-info">
+    <div class="sidebar-info m-2">
       <a href="{base}/settings/site-settings">
         <img
           alt="Sunucu İkonu"
-          class="m-2"
-          height="48"
-          width="auto"
+          class="img-fluid"
           src="{$websiteLogoSrc}"
           use:tooltip="{['Website Ayaları', { placement: 'right' }]}" />
       </a>
