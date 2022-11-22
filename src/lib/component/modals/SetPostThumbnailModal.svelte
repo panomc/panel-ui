@@ -15,7 +15,6 @@
           title="Pencereyi Kapat"
           type="button"
           on:click="{hide}">
-          <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
@@ -60,15 +59,20 @@
   const image = writable(null);
   const thumbnailInput = writable();
   const thumbnailFiles = writable([]);
+  const isThumbnailRemoved = writable();
 
   let callback = (post, image) => {};
   let hideCallback = (post) => {};
   let modal;
 
-  export function show(newPost, newImage) {
+  export function show(newPost, newImage, newIsThumbnailRemoved) {
     post.set(newPost);
-    image.set(newImage || newPost.thumbnailUrl);
+    image.set(newIsThumbnailRemoved ? null : newImage || newPost.thumbnailUrl);
+
+    isThumbnailRemoved.set(newIsThumbnailRemoved);
+
     thumbnailFiles.set([]);
+
     get(thumbnailInput).value = "";
 
     modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
@@ -95,7 +99,8 @@
 </script>
 
 <script>
-  $: isSaveButtonDisabled = $image === $post.thumbnailUrl;
+  $: isSaveButtonDisabled =
+    ($isThumbnailRemoved ? null : $post.thumbnailUrl) === $image;
 
   function onThumbnailChange(event) {
     const reader = new FileReader();

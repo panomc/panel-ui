@@ -111,26 +111,31 @@
                 {/if}
               </form>
             </li>
-            <li class="list-group-item">
-              <a
-                href="javascript:void(0);"
-                on:click="{showSetPostThumbnailModal(data.post, thumbnail)}"
-                class="form-group">
-                {#if thumbnail || data.post.thumbnailUrl}
-                  <img
-                    src="{thumbnail || data.post.thumbnailUrl}"
-                    class="border rounded img-fluid"
-                    title="Küçük Resim"
-                    alt="Küçük Resim" />
-                {:else}
-                  <div
-                    class="container text-center animate__animated animate__zoomIn">
-                    <i class="fas fa-image fa-3x text-dark text-opacity-25 m-3"
-                    ></i>
-                    <p class="text-gray">Küçük resim belirlenmedi.</p>
-                  </div>
-                {/if}
-              </a>
+            <li class="list-group-item form-group">
+              {#if !isThumbnailRemoved && (thumbnail || data.post.thumbnailUrl)}
+                <img
+                  src="{thumbnail || data.post.thumbnailUrl}"
+                  class="border rounded img-fluid"
+                  title="Küçük Resim"
+                  alt="Küçük Resim" />
+
+                <button
+                  class="btn btn-outline-primary"
+                  on:click="{onChangeThumbnailButtonClick}">Değiştir</button>
+                <button
+                  class="btn btn-outline-danger"
+                  on:click="{onRemoveThumbnailClick}">Kaldır</button>
+              {:else}
+                <div
+                  class="container text-center animate__animated animate__zoomIn">
+                  <i class="fas fa-image fa-3x text-dark text-opacity-25 m-3"
+                  ></i>
+                  <p class="text-gray">Küçük resim belirlenmedi.</p>
+                  <button
+                    class="btn btn-outline-success"
+                    on:click="{onChangeThumbnailButtonClick}">Ekle</button>
+                </div>
+              {/if}
             </li>
           </ul>
         </div>
@@ -279,6 +284,7 @@
   let thumbnail;
   let thumbnailFile;
   let isThumbnailSaved;
+  let isThumbnailRemoved;
 
   pageTitle.set(
     data.mode === Modes.EDIT ? "Yazıyı Düzenle" : "Yeni Yazı Oluştur"
@@ -372,7 +378,10 @@
       if (!isThumbnailSaved) {
         if (thumbnailFile) {
           body.append("thumbnail", thumbnailFile);
-        } else if (!data.post.thumbnailUrl && data.post.id !== -1) {
+        } else if (
+          isThumbnailRemoved ||
+          (!data.post.thumbnailUrl && data.post.id !== -1)
+        ) {
           body.append("removeThumbnail", true);
         }
       }
@@ -429,6 +438,18 @@
     });
   }
 
+  function onChangeThumbnailButtonClick() {
+    showSetPostThumbnailModal(data.post, thumbnail, isThumbnailRemoved);
+  }
+
+  function onRemoveThumbnailClick() {
+    isThumbnailSaved = false;
+
+    thumbnailFile = null;
+    thumbnail = null;
+    isThumbnailRemoved = true;
+  }
+
   // function onCreateCategoryClick() {
   //   showAddEditPostCategoryModal("create");
   // }
@@ -457,6 +478,7 @@
 
   setPostThumbnailModalCallback((post, image) => {
     isThumbnailSaved = false;
+    isThumbnailRemoved = false;
 
     if (image) {
       const reader = new FileReader();
@@ -464,10 +486,12 @@
       reader.readAsDataURL(image);
 
       reader.onload = (e) => {
-        thumbnail = e.target.result;
+        thumbnail = e.target.result; // to preview image
+        data.post.thumbnailUrl = thumbnail
       };
 
-      thumbnailFile = image;
+      thumbnailFile = image; // to upload image file
+
 
       return;
     }
