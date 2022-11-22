@@ -4,8 +4,7 @@ export * from "../../../../../pano-ui/js/api.proxy.js";
 
 const postThumbnailSize = 5 * 1024 * 1024; // 5 MB
 
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function PUT(event) {
+async function handleUpload(event) {
   const { request } = event;
   const data = await request.formData();
 
@@ -16,4 +15,14 @@ export async function PUT(event) {
   }
 
   return handle(event, data);
+}
+
+/** @type {import('@sveltejs/kit').RequestHandler} */
+export async function PUT(event) {
+  return handleUpload(event);
+}
+
+/** @type {import('@sveltejs/kit').RequestHandler} */
+export async function POST(event) {
+  return handleUpload(event);
 }
