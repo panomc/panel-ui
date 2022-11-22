@@ -51,7 +51,11 @@
           href="javascript:void(0);"
           on:click="{onDeletePostClick}">
           <i class="fas fa-trash me-2"></i>
-          Sil
+          {#if pageType !== PageTypes.TRASH}
+            Çöp Kutusuna Taşı
+          {:else}
+            Sil
+          {/if}
         </a>
       </div>
     </div>
