@@ -31,7 +31,7 @@
           class:disabled="{loading}"
           disabled="{loading}"
           on:click="{onDraftClick}">
-          <i class="fa-solid fa-floppy-disk"></i>
+          <i class="fa-solid fa-box-archive"></i>
         </button>
       {/if}
       <a

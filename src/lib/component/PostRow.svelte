@@ -26,7 +26,7 @@
             class:disabled="{buttonsLoading}"
             disabled="{buttonsLoading}">
             <span>
-              <i class="fa-solid fa-floppy-disk me-2"></i>
+              <i class="fa-solid fa-box-archive me-2"></i>
               Taslaklara Taşı
             </span>
           </a>
