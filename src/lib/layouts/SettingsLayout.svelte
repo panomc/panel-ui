@@ -8,18 +8,17 @@
         <a
           class="nav-item nav-link"
           href="{base}/settings"
-          class:active="{matching($page.url.pathname, base + '/settings')}">
-          Platform
+          class:active="{matching(
+            $page.url.pathname,
+            base + '/settings'
+          )}">
+          Website
         </a>
         <a
           class="nav-item nav-link"
-          href="{base}/settings/site-settings"
-          class:active="{matching(
-            $page.url.pathname,
-            base + '/settings/site-settings',
-            true
-          )}">
-          Website
+          href="{base}/settings/platform"
+          class:active="{matching($page.url.pathname, base + '/settings/platform', true)}">
+          Platform
         </a>
         <a
           class="nav-item nav-link position-relative"

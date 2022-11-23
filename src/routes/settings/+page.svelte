@@ -1,7 +1,7 @@
-<GeneralSettings data="{data}" />
+<SiteSettings data="{data}" />
 
 <script>
-  import GeneralSettings from "$lib/pages/settings/GeneralSettings.svelte";
+  import SiteSettings from "$lib/pages/settings/SiteSettings.svelte";
 
   export let data;
 </script>
