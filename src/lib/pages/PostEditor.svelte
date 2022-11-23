@@ -120,25 +120,24 @@
                   src="{thumbnail || data.post.thumbnailUrl}"
                   class="border rounded img-fluid mb-3"
                   title="Küçük Resim"
-                  alt="Küçük Resim" />
-
-                <button
-                  class="btn btn-outline-primary"
-                  on:click="{onChangeThumbnailButtonClick}">Değiştir</button>
-                <button
-                  class="btn btn-outline-danger"
-                  on:click="{onRemoveThumbnailClick}">Kaldır</button>
+                  alt="Küçük Resim"
+                  on:click="{() => thumbnailInput.click()}" />
               {:else}
                 <div
-                  class="container text-center animate__animated animate__zoomIn">
+                  class="container text-center animate__animated animate__zoomIn"
+                  on:click="{() => thumbnailInput.click()}">
                   <i class="fas fa-image fa-3x text-dark text-opacity-25 m-3"
                   ></i>
                   <p class="text-gray">Küçük resim belirlenmedi.</p>
-                  <button
-                    class="btn btn-outline-success"
-                    on:click="{onChangeThumbnailButtonClick}">Ekle</button>
                 </div>
               {/if}
+              <input
+                class="d-none"
+                type="file"
+                id="uploadPostThumbnailInput"
+                bind:files="{thumbnailFiles}"
+                on:change="{onThumbnailChange}"
+                bind:this="{thumbnailInput}" />
             </li>
           </ul>
         </div>
@@ -147,7 +146,6 @@
   </section>
 </article>
 
-<SetPostThumbnailModal />
 <AddEditPostCategoryModal />
 
 <script context="module">
@@ -258,11 +256,6 @@
   import { pageTitle, session, showNetworkErrorOnCatch } from "$lib/Store";
   import { UI_URL } from "$lib/variables";
 
-  import SetPostThumbnailModal, {
-    setCallback as setPostThumbnailModalCallback,
-    show as showSetPostThumbnailModal,
-  } from "$lib/component/modals/SetPostThumbnailModal.svelte";
-
   import {
     setCallback as setDeletePostModalCallback,
     show as showDeletePostModal,
@@ -284,10 +277,14 @@
 
   let isEditorEmpty = true;
   let loading = false;
+
   let thumbnail;
-  let thumbnailFile;
+
   let isThumbnailSaved;
   let isThumbnailRemoved;
+
+  let thumbnailInput;
+  let thumbnailFiles = [];
 
   pageTitle.set(
     data.mode === Modes.EDIT ? "Yazıyı Düzenle" : "Yeni Yazı Oluştur"
@@ -329,6 +326,20 @@
     }, true);
   }
 
+  function onThumbnailChange(event) {
+    isThumbnailSaved = false;
+    isThumbnailRemoved = false;
+
+    const reader = new FileReader();
+    const newImage = event.target.files[0];
+
+    reader.readAsDataURL(newImage);
+
+    reader.onload = (e) => {
+      thumbnail = e.target.result;
+    };
+  }
+
   function getStatusByPostStatus(status) {
     return status === StatusTypes.TRASH
       ? "Çöp"
@@ -361,6 +372,8 @@
           });
 
           isThumbnailSaved = true;
+          isThumbnailRemoved = false;
+          thumbnailFiles = []
 
           resolve();
         } else if (body.result === "error") {
@@ -378,15 +391,10 @@
       body.append("category", data.post.category);
       body.append("text", data.post.text);
 
-      if (!isThumbnailSaved) {
-        if (thumbnailFile) {
-          body.append("thumbnail", thumbnailFile);
-        } else if (
-          isThumbnailRemoved ||
-          (!data.post.thumbnailUrl && data.post.id !== -1)
-        ) {
-          body.append("removeThumbnail", true);
-        }
+      if (isThumbnailRemoved) {
+        body.append("removeThumbnail", true);
+      }else if (thumbnailFiles[0]) {
+        body.append("thumbnail", thumbnailFiles[0]);
       }
 
       if (data.post.id === -1) {
@@ -441,14 +449,9 @@
     });
   }
 
-  function onChangeThumbnailButtonClick() {
-    showSetPostThumbnailModal(data.post, thumbnail, isThumbnailRemoved);
-  }
-
   function onRemoveThumbnailClick() {
     isThumbnailSaved = false;
-
-    thumbnailFile = null;
+    thumbnailFiles = [];
     thumbnail = null;
     isThumbnailRemoved = true;
   }
@@ -477,28 +480,5 @@
     } else {
       goto(base + "/posts/trash");
     }
-  });
-
-  setPostThumbnailModalCallback((post, image) => {
-    isThumbnailSaved = false;
-    isThumbnailRemoved = false;
-
-    if (image) {
-      const reader = new FileReader();
-
-      reader.readAsDataURL(image);
-
-      reader.onload = (e) => {
-        thumbnail = e.target.result; // to preview image
-        data.post.thumbnailUrl = thumbnail;
-      };
-
-      thumbnailFile = image; // to upload image file
-
-      return;
-    }
-
-    thumbnail = null;
-    thumbnailFile = null;
   });
 </script>
