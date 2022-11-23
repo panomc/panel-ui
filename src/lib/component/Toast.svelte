@@ -1,6 +1,6 @@
 <div
   id="appToast{id}"
-  class="toast align-items-center text-bg-dark border-0"
+  class="animate__animated animate__bounceInUp toast align-items-center text-bg-light border-0 bg-sunflower"
   role="alert"
   aria-live="assertive"
   aria-atomic="true">

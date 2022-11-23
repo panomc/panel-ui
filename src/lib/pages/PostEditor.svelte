@@ -96,7 +96,9 @@
             <li class="list-group-item">
               <form>
                 {#if data.categoryCount === 0}
-                  <p class="text-muted small">Hiç kategori oluşturulmamış.</p>
+                  <p class="text-muted small mb-0">
+                    Hiç kategori oluşturulmamış.
+                  </p>
                 {:else}
                   <select
                     class="form-control form-control-sm"
@@ -112,10 +114,11 @@
               </form>
             </li>
             <li class="list-group-item form-group">
+              Küçük Resim:
               {#if !isThumbnailRemoved && (thumbnail || data.post.thumbnailUrl)}
                 <img
                   src="{thumbnail || data.post.thumbnailUrl}"
-                  class="border rounded img-fluid"
+                  class="border rounded img-fluid mb-3"
                   title="Küçük Resim"
                   alt="Küçük Resim" />
 
@@ -487,11 +490,10 @@
 
       reader.onload = (e) => {
         thumbnail = e.target.result; // to preview image
-        data.post.thumbnailUrl = thumbnail
+        data.post.thumbnailUrl = thumbnail;
       };
 
       thumbnailFile = image; // to upload image file
-
 
       return;
     }
