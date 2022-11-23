@@ -479,6 +479,7 @@
     thumbnailFiles = [];
     thumbnail = null;
     isThumbnailRemoved = true;
+    data.post.thumbnailUrl = null
   }
 
   // function onCreateCategoryClick() {
