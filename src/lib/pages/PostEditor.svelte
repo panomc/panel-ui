@@ -86,45 +86,68 @@
         <div class="card-body">
           <ul class="list-group p-0 m-0">
             <li class="list-group-item">
-              Durum:
-              {getStatusByPostStatus(data.post.status)}
+              <div class="d-flex justify-content-between align-items-center">
+                Durum:
+                <div>
+                  {getStatusByPostStatus(data.post.status)}
+                </div>
+              </div>
             </li>
             <li class="list-group-item">
-              Görüntülenme:
-              {data.mode === Modes.CREATE ? "0" : data.post.views}
+              <div class="d-flex justify-content-between align-items-center">
+                Görüntülenme:
+                <div>{data.mode === Modes.CREATE ? "0" : data.post.views}</div>
+              </div>
             </li>
             <li class="list-group-item">
-              <form>
-                {#if data.categoryCount === 0}
-                  <p class="text-muted small mb-0">
-                    Hiç kategori oluşturulmamış.
-                  </p>
-                {:else}
-                  <select
-                    class="form-control form-control-sm"
-                    bind:value="{data.post.category}">
-                    <option class="text-primary" value="{-1}"
-                      >Kategorisiz</option>
+              <div class="d-flex justify-content-between align-items-center">
+                Kategori:
 
-                    {#each data.categories as category, index (category)}
-                      <option value="{category.id}">{category.title}</option>
-                    {/each}
-                  </select>
-                {/if}
-              </form>
+                <form>
+                  {#if data.categoryCount === 0}
+                    <p class="text-muted small mb-0">
+                      Hiç kategori oluşturulmamış.
+                    </p>
+                  {:else}
+                    <select
+                      class="form-control form-control-sm"
+                      bind:value="{data.post.category}">
+                      <option class="text-primary" value="{-1}"
+                        >Kategorisiz</option>
+
+                      {#each data.categories as category, index (category)}
+                        <option value="{category.id}">{category.title}</option>
+                      {/each}
+                    </select>
+                  {/if}
+                </form>
+              </div>
             </li>
             <li class="list-group-item form-group">
-              Küçük Resim:
+              <div class="d-flex justify-content-between align-items-center">
+                Küçük Resim:
+
+                {#if !isThumbnailRemoved && (thumbnail || data.post.thumbnailUrl)}
+                  <button
+                    class="btn btn-link link-danger"
+                    on:click="{onRemoveThumbnailClick}">Temizle</button>
+                {:else}
+                  <button
+                    class="btn btn-link"
+                    on:click="{() => thumbnailInput.click()}">Ekle</button>
+                {/if}
+              </div>
               {#if !isThumbnailRemoved && (thumbnail || data.post.thumbnailUrl)}
                 <img
                   src="{thumbnail || data.post.thumbnailUrl}"
-                  class="border rounded img-fluid mb-3"
+                  class="border rounded img-fluid"
                   title="Küçük Resim"
                   alt="Küçük Resim"
+                  use:tooltip="{['Değiştir', { placement: 'bottom' }]}"
                   on:click="{() => thumbnailInput.click()}" />
               {:else}
                 <div
-                  class="container text-center animate__animated animate__zoomIn"
+                  class="text-center animate__animated animate__zoomIn"
                   on:click="{() => thumbnailInput.click()}">
                   <i class="fas fa-image fa-3x text-dark text-opacity-25 m-3"
                   ></i>
@@ -253,6 +276,8 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
 
+  import tooltip from "$lib/tooltip.util";
+
   import { pageTitle, session, showNetworkErrorOnCatch } from "$lib/Store";
   import { UI_URL } from "$lib/variables";
 
@@ -373,7 +398,7 @@
 
           isThumbnailSaved = true;
           isThumbnailRemoved = false;
-          thumbnailFiles = []
+          thumbnailFiles = [];
 
           resolve();
         } else if (body.result === "error") {
@@ -393,7 +418,7 @@
 
       if (isThumbnailRemoved) {
         body.append("removeThumbnail", true);
-      }else if (thumbnailFiles[0]) {
+      } else if (thumbnailFiles[0]) {
         body.append("thumbnail", thumbnailFiles[0]);
       }
 
