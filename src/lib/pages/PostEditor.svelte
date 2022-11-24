@@ -42,6 +42,18 @@
         <i class="fas fa-eye me-2"></i>
         <span class="d-md-inline d-none">Görüntüle</span>
       </a>
+      {#if data.post.status !== StatusTypes.PUBLISHED}
+        <button
+          class="btn btn-primary"
+          type="button"
+          class:disabled="{loading ||
+            isEditorEmpty ||
+            data.post.title.length === 0}"
+          disabled="{loading || isEditorEmpty || data.post.title.length === 0}"
+          on:click="{() => submit(false)}">
+          <span> Kaydet </span>
+        </button>
+      {/if}
       <button
         class="btn btn-secondary"
         type="button"
@@ -49,7 +61,7 @@
           isEditorEmpty ||
           data.post.title.length === 0}"
         disabled="{loading || isEditorEmpty || data.post.title.length === 0}"
-        on:click="{onSubmit}">
+        on:click="{() => submit(true)}">
         <span>
           {data.post.status === StatusTypes.PUBLISHED ? "Güncelle" : "Yayınla"}
         </span>
@@ -297,6 +309,7 @@
 
   import PostPublishedToast from "$lib/component/toasts/PostPublishedToast.svelte";
   import PostMovedToDraftToast from "$lib/component/toasts/PostMovedToDraftToast.svelte";
+  import PostSavedToast from "$lib/component/toasts/PostSavedToast.svelte";
 
   export let data;
 
@@ -375,7 +388,7 @@
       : "Yeni";
   }
 
-  function onSubmit() {
+  function submit(publish) {
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -387,14 +400,21 @@
             goto(base + "/posts/post/" + body.id);
           }
 
-          if (data.mode === Modes.EDIT) {
+          if (data.mode === Modes.EDIT && publish) {
             data.post.status = 1;
           }
 
-          showToast(PostPublishedToast, {
-            postId: body.id,
-            title: data.post.title,
-          });
+          if (publish) {
+            showToast(PostPublishedToast, {
+              postId: body.id,
+              title: data.post.title,
+            });
+          } else {
+            showToast(PostSavedToast, {
+              postId: body.id,
+              title: data.post.title,
+            });
+          }
 
           isThumbnailSaved = true;
           isThumbnailRemoved = false;
@@ -412,6 +432,7 @@
 
       const body = new FormData();
 
+      body.append("publish", publish);
       body.append("title", data.post.title);
       body.append("category", data.post.category);
       body.append("text", data.post.text);
@@ -479,7 +500,7 @@
     thumbnailFiles = [];
     thumbnail = null;
     isThumbnailRemoved = true;
-    data.post.thumbnailUrl = null
+    data.post.thumbnailUrl = null;
   }
 
   // function onCreateCategoryClick() {
