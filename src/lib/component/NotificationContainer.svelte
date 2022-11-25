@@ -150,7 +150,7 @@
   function getQuickNotifications(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/quickNotifications",
+        path: "/api/panel/notifications/quick",
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {

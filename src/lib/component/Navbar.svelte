@@ -180,7 +180,7 @@
   function markQuickNotificationsAsRead(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post({
-        path: "/api/panel/markQuickNotificationsAsRead",
+        path: "/api/panel/notifications/quick/markAsRead",
         CSRFToken: $session.CSRFToken,
       })
         .then((body) => {
