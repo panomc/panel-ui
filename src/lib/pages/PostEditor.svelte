@@ -31,10 +31,9 @@
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
-          on:click="{onDraftClick}">
-          <i
-            class="fa-solid fa-box-archive"
-            use:tooltip="{['Arşivle', { placement: 'bottom' }]}"></i>
+          on:click="{onDraftClick}"
+          use:tooltip="{['Taslaklara Taşı', { placement: 'bottom' }]}">
+          <i class="fa-solid fa-box-archive"></i>
         </button>
       {/if}
       <a
