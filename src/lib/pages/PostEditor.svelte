@@ -20,7 +20,8 @@
         <button
           class="btn btn-link text-danger"
           type="button"
-          on:click="{showDeletePostModal(data.post)}">
+          on:click="{showDeletePostModal(data.post)}"
+          use:tooltip="{['Çöp', { placement: 'bottom' }]}">
           <i class="fas fa-trash"></i>
         </button>
       {/if}
@@ -31,16 +32,18 @@
           class:disabled="{loading}"
           disabled="{loading}"
           on:click="{onDraftClick}">
-          <i class="fa-solid fa-box-archive"></i>
+          <i
+            class="fa-solid fa-box-archive"
+            use:tooltip="{['Arşivle', { placement: 'bottom' }]}"></i>
         </button>
       {/if}
       <a
         class="btn btn-link"
         role="button"
         target="_blank"
-        href="{UI_URL}/preview/post/{data.post.id}">
-        <i class="fas fa-eye me-2"></i>
-        <span class="d-md-inline d-none">Görüntüle</span>
+        href="{UI_URL}/preview/post/{data.post.id}"
+        use:tooltip="{['Görüntüle', { placement: 'bottom' }]}">
+        <i class="fas fa-eye"></i>
       </a>
       {#if data.post.status !== StatusTypes.PUBLISHED}
         <button
