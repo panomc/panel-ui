@@ -1,4 +1,4 @@
-import * as api from "$lib/api-server.util";
+import * as api from "$lib/api-server.util.js";
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function GET({ url, locals: { jwt } }) {
