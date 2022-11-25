@@ -116,22 +116,16 @@
                 Kategori:
 
                 <form>
-                  {#if data.categoryCount === 0}
-                    <p class="text-muted small mb-0">
-                      Hiç kategori oluşturulmamış.
-                    </p>
-                  {:else}
-                    <select
-                      class="form-control form-control-sm"
-                      bind:value="{data.post.category}">
-                      <option class="text-primary" value="{-1}"
-                        >Kategorisiz</option>
+                  <select
+                    class="form-control form-control-sm"
+                    bind:value="{data.post.category}">
+                    <option class="text-primary" value="{-1}"
+                      >Kategorisiz</option>
 
-                      {#each data.categories as category, index (category)}
-                        <option value="{category.id}">{category.title}</option>
-                      {/each}
-                    </select>
-                  {/if}
+                    {#each data.categories as category, index (category)}
+                      <option value="{category.id}">{category.title}</option>
+                    {/each}
+                  </select>
                 </form>
               </div>
             </li>
