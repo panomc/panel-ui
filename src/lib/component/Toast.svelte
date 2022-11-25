@@ -1,16 +1,11 @@
 <div
   id="appToast{id}"
-  class="animate__animated animate__bounceInUp toast align-items-center text-bg-light border-0 bg-sunflower"
+  class="animate__animated animate__bounceInUp toast align-items-center text-bg-dark border-0 bg-dark"
   role="alert"
   aria-live="assertive"
-  aria-atomic="true">
-  <div class="d-flex">
-    <div class="toast-body"><slot /></div>
-    <button
-      type="button"
-      class="btn-close btn-close-white me-2 m-auto"
-      data-bs-dismiss="toast"></button>
-  </div>
+  aria-atomic="true"
+  data-bs-dismiss="toast">
+  <div class="toast-body"><slot /></div>
 </div>
 
 <script>
