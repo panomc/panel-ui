@@ -68,7 +68,7 @@
   import { session, showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
-  import TicketsDeletedPermanentlyToast from "$lib/component/toasts/TicketsDeletedPermanentlyToast.svelte";
+  import NotificationsDeletedPermanentlyToast from "$lib/component/toasts/NotificationsDeletedPermanentlyToast.svelte";
 
   let loading;
 
@@ -90,7 +90,7 @@
 
             hide();
 
-            showToast(TicketsDeletedPermanentlyToast);
+            showToast(NotificationsDeletedPermanentlyToast);
 
             callback();
 
