@@ -14,9 +14,9 @@
     "hooks": {}
   },
   "devDependencies": {
-    "@rollup/plugin-json": "^5.0.1",
+    "@rollup/plugin-json": "^5.0.2",
     "@sveltejs/adapter-node": "^1.0.0-next.101",
-    "@sveltejs/kit": "^1.0.0-next.560",
+    "@sveltejs/kit": "^1.0.0-next.567",
     "bootstrap": "^5.2.3",
     "chart.js": "^3.9.1",
     "chartjs-adapter-date-fns": "^2.0.1",
@@ -40,15 +40,15 @@
   "type": "module",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.1",
-    "@tiptap/core": "^2.0.0-beta.202",
-    "@tiptap/extension-color": "^2.0.0-beta.202",
-    "@tiptap/extension-image": "^2.0.0-beta.202",
-    "@tiptap/extension-link": "^2.0.0-beta.202",
-    "@tiptap/extension-text-style": "^2.0.0-beta.202",
-    "@tiptap/extension-underline": "^2.0.0-beta.202",
-    "@tiptap/starter-kit": "^2.0.0-beta.202",
+    "@tiptap/core": "^2.0.0-beta.204",
+    "@tiptap/extension-color": "^2.0.0-beta.204",
+    "@tiptap/extension-image": "^2.0.0-beta.204",
+    "@tiptap/extension-link": "^2.0.0-beta.204",
+    "@tiptap/extension-text-style": "^2.0.0-beta.204",
+    "@tiptap/extension-underline": "^2.0.0-beta.204",
+    "@tiptap/starter-kit": "^2.0.0-beta.204",
     "animate.css": "^4.1.1",
     "popper.js": "^1.16.1",
-    "svelte-i18n": "^3.5.2"
+    "svelte-i18n": "^3.6.0"
   }
 }
