@@ -3,9 +3,9 @@
   <!-- Action Menu -->
   <div class="row mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/players/permissions">
+      <a class="btn btn-link" role="button" href="{base}/players/perm-groups">
         <i class="fas fa-user-circle me-2"></i>
-        Yetkiler
+        Yetki Grupları
       </a>
     </div>
   </div>

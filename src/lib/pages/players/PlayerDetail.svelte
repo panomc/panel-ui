@@ -97,7 +97,7 @@
             <li class="list-inline-item mb-2">
               <div class="badge bg-light text-black">
                 <a
-                  href="{base}/players/permission/{data.player
+                  href="{base}/players/perm-group/{data.player
                     .permissionGroup}">
                   {data.player.permissionGroup === "-"
                     ? "Oyuncu"

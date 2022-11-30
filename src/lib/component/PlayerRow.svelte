@@ -69,7 +69,7 @@
     <a
       title="Filtrele"
       class="badge bg-light text-black rounded-pill"
-      href="{base}/players/permission/{player.permissionGroup}">
+      href="{base}/players/perm-group/{player.permissionGroup}">
       {player.permissionGroup === "-" ? "Oyuncu" : player.permissionGroup}
     </a>
   </td>
