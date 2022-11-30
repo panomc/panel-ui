@@ -20,96 +20,153 @@
   </div>
 
   <div class="card">
-    <div class="card-body table-responsive">
-      <table class="table table-borderless" style="width: auto !important;">
-        <thead>
-          <tr class="align-top">
-            <!-- Blank Cell -->
-            <th scope="col"></th>
+    <div class="card-body">
+      <!-- Permissions Table -->
 
-            <!-- Perm Group Name & User Pictures Cell -->
-            {#each data.permissionGroups as permissionGroup, index (permissionGroup)}
-              <th scope="col" class="text-center">
-                <a
-                  class="text-capitalize"
-                  href="javascript:void(0);"
-                  title="Düzenle"
-                  on:click="{() =>
-                    onShowEditPermissionGroupButtonClick(permissionGroup)}"
-                  >
-                  {permissionGroup.name}
-                </a>
-                <div
-                  class="d-flex flex-row flex-row-reverse justify-content-center align-items-center">
-                  {#if permissionGroup.userCount > 3}
-                    <small>
-                      +{permissionGroup.userCount - 3}
-                    </small>
-                  {/if}
-                  {#each permissionGroup.users as user, index (user)}
-                    <span
-                      class="overlapping-avatar"
-                      use:tooltip="{[user, { placement: 'bottom' }]}">
-                      <a href="{base}/players/player/{user}">
-                        <img
-                          class="animate__animated animate__zoomIn"
-                          src="https://crafthead.net/avatar/{user}"
-                          width="28"
-                          height="28"
-                          alt="{user}" />
-                      </a>
-                    </span>
-                  {/each}
+      <div class="table-responsive">
+        <table class="table table-borderless table-hover mb-0">
+          <thead>
+            <tr>
+              <th class="align-middle text-nowrap" scope="col"></th>
+              <th class="align-middle text-nowrap" scope="col">İsim</th>
+              <th class="align-middle text-nowrap" scope="col">Etiket </th>
+              <th class="align-middle text-nowrap" scope="col">Yetki Adeti</th>
+              <th class="align-middle text-nowrap" scope="col">Oyuncu Adeti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                <div class="dropdown position-static">
+                  <button
+                    type="button"
+                    class="btn btn-link btn-sm"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    data-bs-toggle="dropdown"
+                    href="javascript:void(0);"
+                    title="Eylemler">
+                    <span class="fas fa-ellipsis-v"></span>
+                  </button>
+                  <div
+                    class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      <i class="fas fa-user-plus me-2"></i>
+                      Oyuncu Ekle
+                    </a>
+                    <a
+                      class="dropdown-item link-danger"
+                      href="javascript:void(0);">
+                      <i class="fas fa-trash me-2"></i>
+                      Sil
+                    </a>
+                  </div>
                 </div>
               </th>
-            {/each}
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.permissions as permission, index (permission)}
-            <tr>
-              <th
-                scope="col"
-                use:tooltip="{[
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
-                  { placement: 'right' },
-                ]}">
-                <!--              TODO: Icon system-->
-                <!--              <Icon-->
-                <!--                data="{icon[convertIconName(permission.iconName)]}"-->
-                <!--                class="text-primary d-block m-auto" />-->
-                <small class="mb-0">
-                  {permission.name}
-                </small>
-              </th>
+              <td class="align-middle text-nowrap">
+                <a title="Görüntüle" href="javascript:void(0);">Yetki İsmi</a>
+              </td>
+              <td class="align-middle text-nowrap">
+                <div class="badge bg-light text-black rounded-pill">
+                  Etiket Adı
+                </div></td>
+              <td class="align-middle text-nowrap">1 </td>
+              <td class="align-middle text-nowrap">10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-              <!-- Checkboxes Section -->
+      <div class="table-responsive d-none">
+        <table class="table table-borderless" style="width: auto !important;">
+          <thead>
+            <tr class="align-top">
+              <!-- Blank Cell -->
+              <th scope="col"></th>
+
+              <!-- Perm Group Name & User Pictures Cell -->
               {#each data.permissionGroups as permissionGroup, index (permissionGroup)}
-                <td class="align-middle">
+                <th scope="col" class="text-center">
+                  <a
+                    class="text-capitalize"
+                    href="javascript:void(0);"
+                    title="Düzenle"
+                    on:click="{() =>
+                      onShowEditPermissionGroupButtonClick(permissionGroup)}">
+                    {permissionGroup.name}
+                  </a>
                   <div
-                    class="form-check form-switch d-flex justify-content-center align-content-center">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="{permission.name}_{permissionGroup.name}"
-                      checked="{isPermissionChecked(
-                        permissionGroup,
-                        permission
-                      )}"
-                      on:click="{() =>
-                        onPermissionClick(permissionGroup, permission)}"
-                      disabled="{isPermissionDisabled(
-                        permission,
-                        permissionGroup,
-                        loadingPermissionsList
-                      )}" />
+                    class="d-flex flex-row flex-row-reverse justify-content-center align-items-center">
+                    {#if permissionGroup.userCount > 3}
+                      <small>
+                        +{permissionGroup.userCount - 3}
+                      </small>
+                    {/if}
+                    {#each permissionGroup.users as user, index (user)}
+                      <span
+                        class="overlapping-avatar"
+                        use:tooltip="{[user, { placement: 'bottom' }]}">
+                        <a href="{base}/players/player/{user}">
+                          <img
+                            class="animate__animated animate__zoomIn"
+                            src="https://crafthead.net/avatar/{user}"
+                            width="28"
+                            height="28"
+                            alt="{user}" />
+                        </a>
+                      </span>
+                    {/each}
                   </div>
-                </td>
+                </th>
               {/each}
             </tr>
-          {/each}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {#each data.permissions as permission, index (permission)}
+              <tr>
+                <th
+                  scope="col"
+                  use:tooltip="{[
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
+                    { placement: 'right' },
+                  ]}">
+                  <!--              TODO: Icon system-->
+                  <!--              <Icon-->
+                  <!--                data="{icon[convertIconName(permission.iconName)]}"-->
+                  <!--                class="text-primary d-block m-auto" />-->
+                  <small class="mb-0">
+                    {permission.name}
+                  </small>
+                </th>
+
+                <!-- Checkboxes Section -->
+                {#each data.permissionGroups as permissionGroup, index (permissionGroup)}
+                  <td class="align-middle">
+                    <div
+                      class="form-check form-switch d-flex justify-content-center align-content-center">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="{permission.name}_{permissionGroup.name}"
+                        checked="{isPermissionChecked(
+                          permissionGroup,
+                          permission
+                        )}"
+                        on:click="{() =>
+                          onPermissionClick(permissionGroup, permission)}"
+                        disabled="{isPermissionDisabled(
+                          permission,
+                          permissionGroup,
+                          loadingPermissionsList
+                        )}" />
+                    </div>
+                  </td>
+                {/each}
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
