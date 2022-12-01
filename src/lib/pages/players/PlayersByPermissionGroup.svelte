@@ -204,7 +204,7 @@
 
           if (page !== data.page) {
             goto(
-              base + "/players/perm-group/" + permissionGroupName + "/" + page
+              base + "/players/by-perm-group/" + permissionGroupName + "/" + page
             );
           } else {
             data = loadedData;
