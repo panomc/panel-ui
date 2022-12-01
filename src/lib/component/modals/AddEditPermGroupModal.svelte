@@ -1,6 +1,7 @@
 <!-- Add / Edit Permission Group Modal -->
 <div aria-hidden="true" class="modal fade" id="{dialogID}" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
+  <div
+    class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       {#if $gettingData}
         <div class="modal-body">
@@ -208,7 +209,7 @@
         } else reject();
       };
 
-      if (get(mode) == "edit") {
+      if (get(mode) === "edit") {
         ApiUtil.put({
           path: `/api/panel/permissionGroups/${get(permissionGroup).id}`,
           body: { ...$permissionGroup, addedUsers, removedUsers },
