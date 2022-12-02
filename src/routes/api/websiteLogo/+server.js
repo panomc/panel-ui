@@ -1,1 +1,1 @@
-export * from "$lib/handler/website-logo-handler.js"
+export * from "$lib/handler/website-logo-handler.js";

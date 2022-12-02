@@ -1,1 +1,1 @@
-export * from "$lib/handler/post-thumbnail-handler.js"
+export * from "$lib/handler/post-thumbnail-handler.js";

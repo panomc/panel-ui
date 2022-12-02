@@ -1,4 +1,7 @@
-import { load as loadPermissionGroupDetail, Modes } from "$lib/pages/players/PermissionGroupDetail.svelte";
+import {
+  load as loadPermissionGroupDetail,
+  Modes,
+} from "$lib/pages/players/PermissionGroupDetail.svelte";
 
 /**
  * @type {import('@sveltejs/kit').PageLoad}

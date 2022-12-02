@@ -1,1 +1,1 @@
-export * from "$lib/handler/favicon-handler.js"
+export * from "$lib/handler/favicon-handler.js";

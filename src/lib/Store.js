@@ -41,7 +41,7 @@ export const notLoggedIn = writable(false);
 
 export const pageTitle = writable(null);
 
-export const websiteLogoSrc = writable("/api/websiteLogo")
+export const websiteLogoSrc = writable("/api/websiteLogo");
 
 export function setDefaults() {
   networkErrorCallbacks.set([]);
@@ -119,7 +119,7 @@ export async function resumeAfterNetworkError() {
       });
   });
 
-  await invalidateAll()
+  await invalidateAll();
 }
 
 export function initializeBasicData(data) {
