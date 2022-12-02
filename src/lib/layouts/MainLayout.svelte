@@ -23,6 +23,7 @@
 
   <NotificationContainer />
   <ToastContainer />
+  <ServerRequestModal/>
 </App>
 
 <script context="module">
@@ -150,6 +151,7 @@
   import App from "$lib/component/App.svelte";
   import NotificationContainer from "$lib/component/NotificationContainer.svelte";
   import ToastContainer from "$lib/component/ToastContainer.svelte";
+  import ServerRequestModal from "$lib/component/modals/ServerRequestModal.svelte";
 
   $: title = $pageTitle
     ? `${$pageTitle} \u2014 ${options.DEFAULT_PAGE_TITLE}`
