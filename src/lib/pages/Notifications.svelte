@@ -158,7 +158,7 @@
     show as showDeleteAllNotificationsModal,
     setCallback as setDeleteAllNotificationsModalCallback,
   } from "$lib/component/modals/ConfirmRemoveAllNotificationsModal.svelte";
-  import { onNotificationClick } from "../../pano-ui/js/NotificationManager.js";
+  import { onNotificationClick } from "$lib/NotificationManager.js";
 
   export let data;
 
