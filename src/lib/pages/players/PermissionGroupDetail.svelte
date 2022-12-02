@@ -233,10 +233,12 @@
   import { base } from "$app/paths";
 
   import tooltip from "$lib/tooltip.util";
-  import { showNetworkErrorOnCatch } from "$lib/Store.js";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/Store.js";
   import { goto } from "$app/navigation";
 
   export let data;
+
+  pageTitle.set(data.mode === Modes.EDIT ? "Yetki Grubunu Düzenle" : "Yetki Grubu Oluştur");
 
   let errors = [];
   let loading;
