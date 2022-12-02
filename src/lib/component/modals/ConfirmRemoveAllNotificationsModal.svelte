@@ -65,7 +65,7 @@
 </script>
 
 <script>
-  import { session, showNetworkErrorOnCatch } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import NotificationsDeletedPermanentlyToast from "$lib/component/toasts/NotificationsDeletedPermanentlyToast.svelte";
@@ -81,8 +81,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.delete({
-        path: "/api/panel/notifications",
-        CSRFToken: $session.CSRFToken,
+        path: "/api/panel/notifications"
       })
         .then((body) => {
           if (body.result === "ok") {

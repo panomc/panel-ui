@@ -79,7 +79,6 @@
     showNetworkErrorOnCatch,
     notificationsCount,
     quickNotifications,
-    session,
   } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
   import { formatDistanceToNow } from "date-fns";
@@ -150,8 +149,7 @@
   function getQuickNotifications(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/notifications/quick",
-        CSRFToken: $session.CSRFToken,
+        path: "/api/panel/notifications/quick"
       })
         .then((body) => {
           if (quickNotificationProcessID === id) {

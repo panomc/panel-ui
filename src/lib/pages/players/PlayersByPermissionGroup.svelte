@@ -72,14 +72,13 @@
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/Store";
 
-  async function loadData({ page, permissionGroup, request, CSRFToken }) {
+  async function loadData({ page, permissionGroup, request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/players?permissionGroup=${permissionGroup}&page=${parseInt(
           page
         )}`,
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -140,7 +139,7 @@
   import { base } from "$app/paths";
   import { page } from "$app/stores";
 
-  import { pageTitle, session } from "$lib/Store";
+  import { pageTitle } from "$lib/Store";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -169,8 +168,7 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         page: $page.params.page || 1,
-        permissionGroup: $page.params.permissionGroup,
-        CSRFToken: $session.CSRFToken,
+        permissionGroup: $page.params.permissionGroup
       })
         .then((loadedData) => {
           data = loadedData;
@@ -196,8 +194,7 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         page,
-        permissionGroup: permissionGroupName,
-        CSRFToken: $session.CSRFToken,
+        permissionGroup: permissionGroupName
       })
         .then((loadedData) => {
           resolve();

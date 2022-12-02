@@ -52,7 +52,7 @@
         class="btn btn-link"
         href="javascript:void(0);"
         on:click="{() =>
-          showAuthorizePlayerModal(data.player, $session.CSRFToken)}">
+          showAuthorizePlayerModal(data.player)}">
         <i class="fas fa-user-circle"></i>
         <span class="ms-2 d-lg-inline d-none">Yetkilendir</span>
       </a>
@@ -182,12 +182,11 @@
   import ApiUtil from "$lib/api.util";
   import { pageTitle, showNetworkErrorOnCatch } from "$lib/Store";
 
-  async function loadData({ username, page, request, CSRFToken }) {
+  async function loadData({ username, page, request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/players/${username}?page=${page}`,
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -274,7 +273,6 @@
   import TicketStatus from "$lib/component/TicketStatus.svelte";
   import Date from "$lib/component/Date.svelte";
   import Pagination from "$lib/component/Pagination.svelte";
-  import { session } from "$lib/Store.js";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
 
   import VerificationEmailSentSuccessfulToast from "$lib/component/toasts/VerificationEmailSentSuccessfulToast.svelte";
@@ -287,8 +285,7 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         username: $page.params.username,
-        page: $page.params.page || 1,
-        CSRFToken: $session.CSRFToken,
+        page: $page.params.page || 1
       })
         .then((loadedData) => {
           data = loadedData;
@@ -311,8 +308,7 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         username: data.player.username,
-        page,
-        CSRFToken: $session.CSRFToken,
+        page
       })
         .then((loadedData) => {
           resolve();

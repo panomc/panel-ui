@@ -93,7 +93,7 @@
 </script>
 
 <script>
-  import { session, showNetworkErrorOnCatch } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   let loading = false;
@@ -124,8 +124,7 @@
       if (get(mode) === "edit") {
         ApiUtil.put({
           path: `/api/panel/ticket/categories/${get(category).id}`,
-          body: get(category),
-          CSRFToken: $session.CSRFToken,
+          body: get(category)
         })
           .then(bodyHandler)
           .catch(() => {
@@ -137,8 +136,7 @@
 
       ApiUtil.post({
         path: "/api/panel/ticket/category",
-        body: get(category),
-        CSRFToken: $session.CSRFToken,
+        body: get(category)
       })
         .then(bodyHandler)
         .catch(() => {

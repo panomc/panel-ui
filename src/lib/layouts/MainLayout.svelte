@@ -38,9 +38,9 @@
 
   import ApiUtil, { NETWORK_ERROR } from "$lib/api.util.js";
 
-  function getBasicData({ request, CSRFToken }) {
+  function getBasicData({ request }) {
     return new Promise((resolve, reject) => {
-      ApiUtil.get({ path: "/api/panel/basicData", request, CSRFToken })
+      ApiUtil.get({ path: "/api/panel/basicData", request })
         .then((body) => {
           if (body.result === "ok") {
             initializeBasicData(body);

@@ -76,7 +76,7 @@
 </script>
 
 <script>
-  import { session, showNetworkErrorOnCatch } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
@@ -99,8 +99,7 @@
             get(selectedTickets).map((id) => parseInt(id))
           ),
           status: "close",
-        },
-        CSRFToken: $session.CSRFToken,
+        }
       })
         .then((body) => {
           if (body.result === "ok") {

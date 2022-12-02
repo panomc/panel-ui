@@ -95,7 +95,7 @@
 <script>
   import { base } from "$app/paths";
 
-  import { session, showNetworkErrorOnCatch } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   import {
@@ -115,8 +115,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.delete({
-        path: `/api/panel/ticket/categories/${get(category).id}`,
-        CSRFToken: $session.CSRFToken,
+        path: `/api/panel/ticket/categories/${get(category).id}`
       })
         .then((body) => {
           if (body.result === "ok") {

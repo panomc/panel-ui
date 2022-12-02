@@ -84,12 +84,11 @@
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/Store";
 
-  async function loadData({ page, url, request, CSRFToken }) {
+  async function loadData({ page, url, request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/posts?page=${page}&categoryUrl=${url}`,
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -152,7 +151,7 @@
   import { page } from "$app/stores";
   import { base } from "$app/paths";
 
-  import { pageTitle, session } from "$lib/Store";
+  import { pageTitle } from "$lib/Store";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -175,8 +174,7 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         page: $page.params.page || 1,
-        url: $page.params.url,
-        CSRFToken: $session.CSRFToken,
+        url: $page.params.url
       })
         .then((loadedData) => {
           data = loadedData;
@@ -209,8 +207,7 @@
         path: `/api/panel/posts/${id}/status`,
         body: {
           to: "draft",
-        },
-        CSRFToken: $session.CSRFToken,
+        }
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -235,8 +232,7 @@
         path: `/api/panel/posts/${id}/status`,
         body: {
           to: "publish",
-        },
-        CSRFToken: $session.CSRFToken,
+        }
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -255,7 +251,7 @@
 
   function reloadData(page = data.page, url = data.url) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ page, url, CSRFToken: $session.CSRFToken })
+      loadData({ page, url })
         .then((loadedData) => {
           resolve();
 

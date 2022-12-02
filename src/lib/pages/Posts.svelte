@@ -123,12 +123,11 @@
 
   export const DefaultPageType = PageTypes.PUBLISHED;
 
-  async function loadData({ page, pageType, request, CSRFToken }) {
+  async function loadData({ page, pageType, request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/posts?page=${page}&pageType=${pageType}`,
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -181,7 +180,7 @@
   import { page } from "$app/stores";
   import { base } from "$app/paths";
 
-  import { pageTitle, session } from "$lib/Store.js";
+  import { pageTitle } from "$lib/Store.js";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -215,8 +214,7 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         page: $page.params.page || 1,
-        pageType: data.pageType,
-        CSRFToken: $session.CSRFToken,
+        pageType: data.pageType
       })
         .then((loadedData) => {
           data = loadedData;
@@ -249,8 +247,7 @@
         path: `/api/panel/posts/${id}/status`,
         body: {
           to: "draft",
-        },
-        CSRFToken: $session.CSRFToken,
+        }
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -279,8 +276,7 @@
         path: `/api/panel/posts/${id}/status`,
         body: {
           to: "publish",
-        },
-        CSRFToken: $session.CSRFToken,
+        }
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -304,7 +300,7 @@
 
   function reloadData(page = data.page, pageType = data.pageType) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ page, pageType, CSRFToken: $session.CSRFToken })
+      loadData({ page, pageType })
         .then((loadedData) => {
           resolve();
 

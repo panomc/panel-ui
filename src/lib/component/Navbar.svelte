@@ -146,7 +146,6 @@
     options,
     pageTitle,
     quickNotifications,
-    session,
     showNetworkErrorOnCatch,
     toggleSidebar,
     user,
@@ -165,7 +164,7 @@
     logoutLoading.set(true);
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({ path: "/auth/logout", CSRFToken: $session.CSRFToken })
+      ApiUtil.post({ path: "/auth/logout" })
         .then(() => {
           window.location.href = "/";
 
@@ -180,8 +179,7 @@
   function markQuickNotificationsAsRead(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post({
-        path: "/api/panel/notifications/quick/markAsRead",
-        CSRFToken: $session.CSRFToken,
+        path: "/api/panel/notifications/quick/markAsRead"
       })
         .then((body) => {
           if (quickNotificationProcessID === id) {

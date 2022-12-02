@@ -89,12 +89,11 @@
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
 
-  async function loadData({ request, CSRFToken }) {
+  async function loadData({ request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: "/api/panel/settings/about",
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           resolve(body);

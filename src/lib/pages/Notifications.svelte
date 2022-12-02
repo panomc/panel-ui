@@ -108,12 +108,11 @@
     }
   }
 
-  async function loadData({ request, CSRFToken }) {
+  async function loadData({ request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: "/api/panel/notifications",
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           resolve(body);
@@ -154,7 +153,7 @@
   import { formatDistanceToNow } from "date-fns";
 
   import tooltip from "$lib/tooltip.util.js";
-  import { pageTitle, session, showNetworkErrorOnCatch } from "$lib/Store.js";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/Store.js";
 
   import ConfirmRemoveAllNotificationsModal, {
     show as showDeleteAllNotificationsModal,
@@ -167,7 +166,7 @@
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ CSRFToken: $session.CSRFToken })
+      loadData({})
         .then((body) => {
           setNotifications(body.notifications);
 
@@ -190,7 +189,7 @@
 
   function getNotifications(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ CSRFToken: $session.CSRFToken })
+      loadData({})
         .then((data) => {
           if (notificationProcessID === id) {
             if (data.result === "ok") {
@@ -221,8 +220,7 @@
       ApiUtil.get({
         path: `/api/panel/notifications/${
           get(notifications)[get(notifications).length - 1].id
-        }/more`,
-        CSRFToken: $session.CSRFToken,
+        }/more`
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -246,8 +244,7 @@
   function deleteNotification(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.delete({
-        path: `/api/panel/notifications/${id}`,
-        CSRFToken: $session.CSRFToken,
+        path: `/api/panel/notifications/${id}`
       })
         .then((body) => {
           if (body.result === "ok") {

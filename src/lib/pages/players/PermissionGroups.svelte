@@ -140,7 +140,7 @@
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
 
-  import { pageTitle, session } from "$lib/Store.js";
+  import { pageTitle } from "$lib/Store.js";
 
   import ConfirmDeletePermissionGroupModal, {
     setCallback as setDeletePermissionGroupModalCallback,
@@ -155,7 +155,7 @@
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ CSRFToken: $session.CSRFToken })
+      loadData({})
         .then((body) => {
           data = { ...data, ...body };
 

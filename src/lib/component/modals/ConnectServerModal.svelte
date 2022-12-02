@@ -83,8 +83,7 @@
     currentServerPlatformMatchKey,
     platformKeyRefreshedTime,
     platformAddress,
-    showNetworkErrorOnCatch,
-    session,
+    showNetworkErrorOnCatch
   } from "$lib/Store";
 
   let timeToRefreshKey = "...";
@@ -121,8 +120,7 @@
   function refreshKey() {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/platformAuth/refreshKey",
-        CSRFToken: $session.CSRFToken,
+        path: "/api/panel/platformAuth/refreshKey"
       })
         .then((body) => {
           if (body.result === "ok") {

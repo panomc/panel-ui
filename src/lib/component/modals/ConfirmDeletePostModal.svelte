@@ -73,7 +73,7 @@
 </script>
 
 <script>
-  import { session, showNetworkErrorOnCatch } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
@@ -110,8 +110,7 @@
 
       if (get(post).status === 0) {
         ApiUtil.delete({
-          path: `/api/panel/posts/${get(post).id}`,
-          CSRFToken: $session.CSRFToken,
+          path: `/api/panel/posts/${get(post).id}`
         })
           .then(bodyHandler)
           .catch(() => {
@@ -125,8 +124,7 @@
         path: `/api/panel/posts/${get(post).id}/status`,
         body: {
           to: "trash",
-        },
-        CSRFToken: $session.CSRFToken,
+        }
       })
         .then(bodyHandler)
         .catch(() => {

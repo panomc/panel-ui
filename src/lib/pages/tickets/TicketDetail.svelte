@@ -183,12 +183,11 @@
   import { TicketStatuses } from "$lib/component/TicketStatus.svelte";
   import Editor from "$lib/component/Editor.svelte";
 
-  async function loadTicket({ id, request, CSRFToken }) {
+  async function loadTicket({ id, request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/tickets/${id}`,
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           const ticket = body.ticket;
@@ -282,13 +281,12 @@
 
   import Date from "$lib/component/Date.svelte";
   import TicketStatus from "$lib/component/TicketStatus.svelte";
-  import { session } from "$lib/Store.js";
 
   export let data;
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadTicket({ id: $page.params.id, CSRFToken: $session.CSRFToken })
+      loadTicket({ id: $page.params.id })
         .then((loadedData) => {
           data.ticket = loadedData;
 
@@ -324,8 +322,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get({
-        path: `/api/panel/tickets/${data.ticket.id}/messages?lastMessageId=${data.ticket.messages[0].id}`,
-        CSRFToken: $session.CSRFToken,
+        path: `/api/panel/tickets/${data.ticket.id}/messages?lastMessageId=${data.ticket.messages[0].id}`
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -354,8 +351,7 @@
         path: `/api/panel/tickets/${data.ticket.id}/message`,
         body: {
           message: messageText,
-        },
-        CSRFToken: $session.CSRFToken,
+        }
       })
         .then((body) => {
           if (body.result === "ok") {

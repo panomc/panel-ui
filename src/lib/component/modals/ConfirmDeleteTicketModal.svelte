@@ -75,7 +75,7 @@
 </script>
 
 <script>
-  import { session, showNetworkErrorOnCatch } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
@@ -94,8 +94,7 @@
       ApiUtil.delete({
         path:
           "/api/panel/tickets?ids=" +
-          Object.values(get(selectedTickets)).map((id) => parseInt(id)),
-        CSRFToken: $session.CSRFToken,
+          Object.values(get(selectedTickets)).map((id) => parseInt(id))
       })
         .then((body) => {
           if (body.result === "ok") {

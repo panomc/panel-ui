@@ -62,12 +62,11 @@
     ONCE_PER_MONTH: "oncePerMonth",
   });
 
-  async function loadData({ request, CSRFToken }) {
+  async function loadData({ request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: "/api/panel/settings?type=general",
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           body.oldSettings = body;
@@ -111,7 +110,7 @@
 </script>
 
 <script>
-  import { pageTitle, session, showNetworkErrorOnCatch } from "$lib/Store";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/Store";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import {
@@ -132,7 +131,7 @@
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ CSRFToken: $session.CSRFToken })
+      loadData({})
         .then((body) => {
           data = { ...data, ...body };
           resolve();

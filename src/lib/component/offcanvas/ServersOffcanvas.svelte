@@ -29,7 +29,7 @@
 </div>
 
 <script>
-  import { servers, session } from "$lib/Store";
+  import { servers } from "$lib/Store";
 
   import ApiUtil, { NETWORK_ERROR } from "$lib/api.util";
 
@@ -38,8 +38,7 @@
   function getServerList() {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/server/list",
-        CSRFToken: $session.CSRFToken,
+        path: "/api/panel/server/list"
       })
         .then((body) => {
           if (body.result === "ok") {

@@ -195,12 +195,11 @@
 
   export const DefaultMode = Modes.CREATE;
 
-  async function loadPost({ id, request, CSRFToken }) {
+  async function loadPost({ id, request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/posts/${id}`,
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -215,12 +214,11 @@
     });
   }
 
-  async function loadCategories({ request, CSRFToken }) {
+  async function loadCategories({ request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: "/api/panel/post/categories",
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           resolve(body);
@@ -286,7 +284,7 @@
 
   import tooltip from "$lib/tooltip.util";
 
-  import { pageTitle, session, showNetworkErrorOnCatch } from "$lib/Store";
+  import { pageTitle, showNetworkErrorOnCatch } from "$lib/Store";
   import { UI_URL } from "$lib/variables";
 
   import {
@@ -328,8 +326,7 @@
     showNetworkErrorOnCatch(async (resolve, reject) => {
       if (data.mode === Modes.EDIT) {
         await loadPost({
-          id: $page.params.id || -1,
-          CSRFToken: $session.CSRFToken,
+          id: $page.params.id || -1
         })
           .then(async (body) => {
             data.post = body.post;
@@ -348,7 +345,7 @@
       }
 
       showNetworkErrorOnCatch((resolve, reject) => {
-        loadCategories({ CSRFToken: $session.CSRFToken })
+        loadCategories({})
           .then((body) => {
             data = { ...data, ...body };
             resolve();
@@ -471,8 +468,7 @@
         path: `/api/panel/posts/${data.post.id}/status`,
         body: {
           to: "draft",
-        },
-        CSRFToken: $session.CSRFToken,
+        }
       })
         .then((body) => {
           if (body.result === "ok") {

@@ -191,12 +191,11 @@
   import ApiUtil from "$lib/api.util.js";
   import tooltip from "$lib/tooltip.util";
 
-  async function loadData({ request, CSRFToken }) {
+  async function loadData({ request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: "/api/panel/settings?type=website",
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           body.oldSettings = { ...body };
@@ -249,7 +248,6 @@
 <script>
   import {
     pageTitle,
-    session,
     showNetworkErrorOnCatch,
     website,
     websiteLogoSrc,
@@ -288,7 +286,7 @@
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ CSRFToken: $session.CSRFToken })
+      loadData({})
         .then((body) => {
           data = { ...data, ...body };
           resolve();

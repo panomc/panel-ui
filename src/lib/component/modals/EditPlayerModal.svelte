@@ -185,7 +185,7 @@
 </script>
 
 <script>
-  import { session, showNetworkErrorOnCatch, user } from "$lib/Store";
+  import { showNetworkErrorOnCatch, user } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   function refreshBrowserPage() {
@@ -200,8 +200,7 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.put({
         path: `/api/panel/players/${get(player).id}`,
-        body: get(player),
-        CSRFToken: $session.CSRFToken,
+        body: get(player)
       })
         .then((body) => {
           if (body.result === "ok") {

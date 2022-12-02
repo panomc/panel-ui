@@ -101,12 +101,11 @@
   import ApiUtil from "$lib/api.util.js";
   import { showNetworkErrorOnCatch } from "$lib/Store.js";
 
-  async function loadData({ page, request, CSRFToken }) {
+  async function loadData({ page, request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/ticket/categories?page=${page}`,
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -158,7 +157,7 @@
   import { base } from "$app/paths";
   import { page } from "$app/stores";
 
-  import { pageTitle, session } from "$lib/Store.js";
+  import { pageTitle } from "$lib/Store.js";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -179,7 +178,7 @@
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ page: $page.params.page || 1, CSRFToken: $session.CSRFToken })
+      loadData({ page: $page.params.page || 1 })
         .then((loadedData) => {
           data = loadedData;
           resolve();
@@ -198,7 +197,7 @@
 
   function reloadData(page = data.page) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ page, CSRFToken: $session.CSRFToken })
+      loadData({ page })
         .then((loadedData) => {
           if (page !== data.page) {
             goto(base + "/tickets/categories/" + page);

@@ -112,15 +112,14 @@
 
   export const DefaultPageType = PageTypes.ALL;
 
-  async function loadData({ page, pageType, request, CSRFToken }) {
+  async function loadData({ page, pageType, request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/players?page=${page}&status=${pageType}`,
         body: {
           page: parseInt(page),
         },
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -174,7 +173,7 @@
   import { base } from "$app/paths";
   import { page } from "$app/stores";
 
-  import { pageTitle, session } from "$lib/Store";
+  import { pageTitle } from "$lib/Store";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -215,8 +214,7 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         page: $page.params.page || 1,
-        pageType: data.pageType,
-        CSRFToken: $session.CSRFToken,
+        pageType: data.pageType
       })
         .then((loadedData) => {
           data = loadedData;
@@ -236,7 +234,7 @@
 
   function reloadData(page = data.page, pageType = data.pageType) {
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ page, pageType, CSRFToken: $session.CSRFToken })
+      loadData({ page, pageType })
         .then((loadedData) => {
           resolve();
 
@@ -261,7 +259,7 @@
   function onShowAuthorizePlayerModalClick(player) {
     data.players[data.players.indexOf(player)].selected = true;
 
-    showAuthorizePlayerModal(player, $session.CSRFToken);
+    showAuthorizePlayerModal(player);
   }
 
   function onShowEditPlayerModalClick(player) {

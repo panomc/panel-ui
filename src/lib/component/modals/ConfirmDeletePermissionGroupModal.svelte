@@ -109,7 +109,7 @@
 <script>
   import { base } from "$app/paths";
 
-  import { session, showNetworkErrorOnCatch } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
   import tooltip from "$lib/tooltip.util";
 
@@ -124,8 +124,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.delete({
-        path: `/api/panel/permissions/${get(permissionGroup).id}`,
-        CSRFToken: $session.CSRFToken,
+        path: `/api/panel/permissions/${get(permissionGroup).id}`
       })
         .then((body) => {
           if (body.result === "ok") {

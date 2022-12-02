@@ -285,12 +285,11 @@
     MONTH: "month",
   });
 
-  async function loadData({ period, request, CSRFToken }) {
+  async function loadData({ period, request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/dashboard?period=${period}`,
-        request,
-        CSRFToken,
+        request
       }).then((body) => {
         if (body.result === "ok") {
           resolve(body);
@@ -337,7 +336,7 @@
 
 <script>
   import { base } from "$app/paths";
-  import { pageTitle, session } from "$lib/Store.js";
+  import { pageTitle } from "$lib/Store.js";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -355,8 +354,7 @@
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
-        period: DashboardPeriod.WEEK,
-        CSRFToken: $session.CSRFToken,
+        period: DashboardPeriod.WEEK
       })
         .then((body) => {
           data = { ...data, ...body };
@@ -371,8 +369,7 @@
   function onCloseGettingStartedCard() {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post({
-        path: "/api/panel/dashboard/closeGettingStartedCard",
-        CSRFToken: $session.CSRFToken,
+        path: "/api/panel/dashboard/closeGettingStartedCard"
       })
         .then(() => {
           resolve();
@@ -391,7 +388,7 @@
     reloading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ period, CSRFToken: $session.CSRFToken })
+      loadData({ period })
         .then((loadedData) => {
           resolve();
 
