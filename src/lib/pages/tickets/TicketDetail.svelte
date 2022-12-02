@@ -182,6 +182,7 @@
 
   import { TicketStatuses } from "$lib/component/TicketStatus.svelte";
   import Editor from "$lib/component/Editor.svelte";
+  import { error } from "@sveltejs/kit";
 
   async function loadTicket({ id, request }) {
     return new Promise((resolve, reject) => {
@@ -253,8 +254,12 @@
         data.ticket = body;
       })
       .catch((body) => {
-        if (body.error === "NOT_EXISTS") {
-          data = null;
+        if (body.error) {
+          if (body.error === "NOT_EXISTS" || body.error === "PAGE_NOT_FOUND") {
+            throw error(404, body.error);
+          }
+
+          throw error(500, body.error);
         }
       });
 

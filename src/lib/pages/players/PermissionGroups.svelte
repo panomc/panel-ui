@@ -84,6 +84,7 @@
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
   import { showNetworkErrorOnCatch } from "$lib/Store.js";
+  import { error } from "@sveltejs/kit";
 
   async function loadData({ request, page }) {
     return new Promise((resolve, reject) => {
@@ -129,7 +130,13 @@
         data = { ...data, ...body };
       })
       .catch((body) => {
-        if (body.error === "PAGE_NOT_FOUND") data = null;
+        if (body.error) {
+          if (body.error === "PAGE_NOT_FOUND") {
+            throw error(404, body.error);
+          }
+
+          throw error(500, body.error);
+        }
       });
 
     return data;

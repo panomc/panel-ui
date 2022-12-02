@@ -181,6 +181,7 @@
 
 <script context="module">
   import ApiUtil from "$lib/api.util";
+  import { error } from "@sveltejs/kit";
 
   export const Modes = Object.freeze({
     EDIT: "edit",
@@ -264,7 +265,13 @@
           data.post = body.post;
         })
         .catch((body) => {
-          if (body.error === "POST_NOT_FOUND") data = null;
+          if (body.error) {
+            if (body.error === "POST_NOT_FOUND") {
+              throw error(404, body.error);
+            }
+
+            throw error(500, body.error);
+          }
         });
     }
 

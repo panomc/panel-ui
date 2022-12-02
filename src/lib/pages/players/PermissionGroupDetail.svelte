@@ -124,6 +124,7 @@
 
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
+  import { error } from "@sveltejs/kit";
 
   export const Modes = Object.freeze({
     EDIT: "edit",
@@ -187,7 +188,13 @@
           data = { ...data, ...body };
         })
         .catch((body) => {
-          if (body.error === "NOT_EXISTS") data = null;
+          if (body.error) {
+            if (body.error === "NOT_EXISTS") {
+              throw error(404, body.error);
+            }
+
+            throw error(500, body.error);
+          }
         });
     }
 

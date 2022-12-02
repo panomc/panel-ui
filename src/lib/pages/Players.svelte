@@ -101,6 +101,8 @@
 </div>
 
 <script context="module">
+  import { error } from "@sveltejs/kit";
+
   import ApiUtil from "$lib/api.util";
   import { showNetworkErrorOnCatch } from "$lib/Store";
 
@@ -119,7 +121,7 @@
         body: {
           page: parseInt(page),
         },
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -161,7 +163,13 @@
         data = { ...data, ...body };
       })
       .catch((body) => {
-        if (body.error === "PAGE_NOT_FOUND") data = null;
+        if (body.error) {
+          if (body.error === "PAGE_NOT_FOUND") {
+            throw error(404, body.error);
+          }
+
+          throw error(500, body.error);
+        }
       });
 
     return data;
@@ -190,12 +198,12 @@
   import {
     show as showConfirmBanPlayerModal,
     setCallback as setConfirmBanPlayerModalCallback,
-    onHide as onConfirmBanPlayerModalHide
+    onHide as onConfirmBanPlayerModalHide,
   } from "$lib/component/modals/ConfirmBanPlayerModal.svelte";
   import {
     show as showUnbanPlayerModal,
     setCallback as setUnbanPlayerModalCallback,
-    onHide as onUnbanPlayerModalHide
+    onHide as onUnbanPlayerModalHide,
   } from "$lib/component/modals/UnbanPlayerModal.svelte";
 
   import PlayerRow from "$lib/component/PlayerRow.svelte";
@@ -214,7 +222,7 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         page: $page.params.page || 1,
-        pageType: data.pageType
+        pageType: data.pageType,
       })
         .then((loadedData) => {
           data = loadedData;
@@ -331,7 +339,7 @@
     });
 
     data.players = data.players;
-  })
+  });
 
   onUnbanPlayerModalHide((newPlayer) => {
     data.players.forEach((player) => {
@@ -341,7 +349,7 @@
     });
 
     data.players = data.players;
-  })
+  });
 
   setConfirmBanPlayerModalCallback((newPlayer) => {
     data.players.forEach((player) => {
