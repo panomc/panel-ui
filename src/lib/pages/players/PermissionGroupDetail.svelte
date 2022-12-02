@@ -243,6 +243,9 @@
   import { pageTitle, showNetworkErrorOnCatch } from "$lib/Store.js";
   import { goto } from "$app/navigation";
 
+  import PermissionGroupSavedOrCreatedToast from "$lib/component/toasts/PermissionGroupSavedOrCreatedToast.svelte";
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
+
   export let data;
 
   pageTitle.set(data.mode === Modes.EDIT ? "Yetki Grubunu Düzenle" : "Yetki Grubu Oluştur");
@@ -383,6 +386,10 @@
       const bodyHandler = (body) => {
         if (body.result === "ok") {
           loading = false;
+
+          showToast(PermissionGroupSavedOrCreatedToast, {
+            mode: data.mode
+          });
 
           if (data.mode === Modes.CREATE) {
             goto(base + "/players/perm-groups/detail/" + body.id);
