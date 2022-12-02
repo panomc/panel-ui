@@ -40,8 +40,9 @@
   import { addListener } from "$lib/NotificationManager.js";
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
+  import { browser } from "$app/environment";
 
-  function initListeners() {
+  function initNotificationListeners() {
     addListener("NEW_TICKET", (notification) => {
       const { properties: {id} } = notification;
 
@@ -98,7 +99,9 @@
 
     await initLanguage(basicData.locale);
 
-    initListeners()
+    if (browser) {
+      initNotificationListeners()
+    }
 
     setDefaults();
 
