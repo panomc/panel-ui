@@ -1,5 +1,7 @@
 import { get, writable } from "svelte/store";
 
+import { invalidateAll } from "$app/navigation";
+
 import { PanelSidebarStorageUtil } from "$lib/storage.util";
 
 export const session = writable({});
@@ -77,7 +79,7 @@ export function showNetworkErrorOnCatch(callback, isErrorAlready = false) {
   });
 }
 
-export function resumeAfterNetworkError() {
+export async function resumeAfterNetworkError() {
   retryingNetworkErrors.set(true);
 
   const currentList = get(networkErrorCallbacks).concat();
@@ -116,6 +118,8 @@ export function resumeAfterNetworkError() {
         check();
       });
   });
+
+  await invalidateAll()
 }
 
 export function initializeBasicData(data) {

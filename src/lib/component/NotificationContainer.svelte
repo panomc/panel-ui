@@ -152,6 +152,12 @@
         path: "/api/panel/notifications/quick"
       })
         .then((body) => {
+          if (body.error) {
+            reject();
+
+            return
+          }
+
           if (quickNotificationProcessID === id) {
             if (body.result === "ok") {
               setNotifications(body.notifications);

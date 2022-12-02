@@ -128,15 +128,13 @@
    */
   export async function load(event) {
     const { parent } = event;
-    await parent();
+    const parentData = await parent();
 
     let data = {};
 
-    // if (event.stuff.NETWORK_ERROR) {
-    //   output.props.data.NETWORK_ERROR = true;
-    //
-    //   return output;
-    // }
+    if (parentData.stuff.NETWORK_ERROR) {
+      return data;
+    }
 
     await loadData({ request: event }).then((body) => {
       setNotifications(body.notifications);
@@ -163,22 +161,6 @@
   export let data;
 
   pageTitle.set("Bildirimler");
-
-  if (data.NETWORK_ERROR) {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({})
-        .then((body) => {
-          setNotifications(body.notifications);
-
-          count.set(parseInt(body.notificationCount));
-
-          resolve();
-        })
-        .catch(() => {
-          reject();
-        });
-    }, true);
-  }
 
   let notificationProcessID = 0;
   let page = 0;

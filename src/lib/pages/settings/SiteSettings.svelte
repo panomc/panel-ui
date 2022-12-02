@@ -214,7 +214,7 @@
    */
   export async function load(event) {
     const { parent } = event;
-    await parent();
+    const parentData = await parent();
 
     let data = {
       websiteName: "",
@@ -231,11 +231,9 @@
       },
     };
 
-    // if (event.stuff.NETWORK_ERROR) {
-    //   output.props.data.NETWORK_ERROR = true;
-    //
-    //   return output;
-    // }
+    if (parentData.stuff.NETWORK_ERROR) {
+      return data;
+    }
 
     await loadData({ request: event }).then((body) => {
       data = { ...data, ...body };
@@ -283,19 +281,6 @@
 
   let favicon = "/api/favicon";
   let websiteLogo = "/api/websiteLogo";
-
-  if (data.NETWORK_ERROR) {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({})
-        .then((body) => {
-          data = { ...data, ...body };
-          resolve();
-        })
-        .catch(() => {
-          reject();
-        });
-    }, true);
-  }
 
   function onFaviconChange(event) {
     const reader = new FileReader();

@@ -1,4 +1,5 @@
 import * as api from "$lib/api-server.util";
+import { networkErrorBody } from "./pano-ui/js/api.proxy";
 import {
   COOKIE_PREFIX,
   JWT_COOKIE_NAME,
@@ -6,7 +7,7 @@ import {
 } from "$lib/variables";
 
 async function fetchBasicData(token) {
-  return api.GET({path: "/api/panel/basicData", token});
+  return api.GET({ path: "/api/panel/basicData", token }).catch(() => networkErrorBody);
 }
 
 /** @type {import('@sveltejs/kit').Handle} */

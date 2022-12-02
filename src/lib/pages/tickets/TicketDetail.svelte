@@ -228,7 +228,7 @@
    */
   export async function load(event) {
     const { parent } = event;
-    await parent();
+    const parentData = await parent();
 
     let data = {
       ticket: {
@@ -243,11 +243,9 @@
       },
     };
 
-    // if (event.stuff.NETWORK_ERROR) {
-    //   output.props.data.NETWORK_ERROR = true;
-    //
-    //   return output;
-    // }
+    if (parentData.stuff.NETWORK_ERROR) {
+      return data;
+    }
 
     await loadTicket({ id: event.params.id, request: event })
       .then((body) => {
@@ -271,7 +269,6 @@
   import { afterUpdate, onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { page } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util.js";
 
@@ -288,26 +285,6 @@
   import TicketStatus from "$lib/component/TicketStatus.svelte";
 
   export let data;
-
-  if (data.NETWORK_ERROR) {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      loadTicket({ id: $page.params.id })
-        .then((loadedData) => {
-          data.ticket = loadedData;
-
-          resolve();
-        })
-        .catch((body) => {
-          if (body.error === "NOT_EXISTS") {
-            goto(base + "/error-404");
-
-            resolve();
-          } else {
-            reject();
-          }
-        });
-    }, true);
-  }
 
   let messagesSectionDiv;
   let loadMoreLoading = false;

@@ -109,18 +109,16 @@
    */
   export async function load(event) {
     const { parent } = event;
-    await parent();
+    const parentData = await parent();
 
     let data = {
       platformVersion: "",
       platformStage: "",
     };
 
-    // if (event.stuff.NETWORK_ERROR) {
-    //   output.props.data.NETWORK_ERROR = true;
-    //
-    //   return output;
-    // }
+    if (parentData.stuff.NETWORK_ERROR) {
+      return data;
+    }
 
     await loadData({ request: event }).then((body) => {
       data = { ...data, ...body };

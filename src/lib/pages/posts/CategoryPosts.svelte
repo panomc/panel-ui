@@ -110,7 +110,7 @@
    */
   export async function load(event) {
     const { parent } = event;
-    await parent();
+    const parentData = await parent();
 
     let data = {
       postCount: 0,
@@ -124,11 +124,9 @@
       },
     };
 
-    // if (event.stuff.NETWORK_ERROR) {
-    //   output.props.data.NETWORK_ERROR = true;
-    //
-    //   return output;
-    // }
+    if (parentData.stuff.NETWORK_ERROR) {
+      return data;
+    }
 
     await loadData({
       page: event.params.page || 1,
@@ -154,7 +152,6 @@
 
 <script>
   import { goto } from "$app/navigation";
-  import { page } from "$app/stores";
   import { base } from "$app/paths";
 
   import { pageTitle } from "$lib/Store";
@@ -175,29 +172,6 @@
       data.category.title === "-" ? "Kategorisiz" : data.category.title
     }" Yazılar`
   );
-
-  if (data.NETWORK_ERROR) {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({
-        page: $page.params.page || 1,
-        url: $page.params.url
-      })
-        .then((loadedData) => {
-          data = loadedData;
-
-          resolve();
-        })
-        .catch((body) => {
-          if (body.error === "PAGE_NOT_FOUND" || body.error === "NOT_EXISTS") {
-            goto(base + "/error-404");
-
-            resolve();
-          } else {
-            reject();
-          }
-        });
-    }, true);
-  }
 
   let buttonsLoading = false;
 

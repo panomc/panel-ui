@@ -126,7 +126,7 @@
    */
   export async function load(event) {
     const { parent } = event;
-    await parent();
+    const parentData = await parent();
 
     let data = {
       categoryCount: 0,
@@ -135,11 +135,9 @@
       page: 1,
     };
 
-    // if (event.stuff.NETWORK_ERROR) {
-    //   output.props.data.NETWORK_ERROR = true;
-    //
-    //   return output;
-    // }
+    if (parentData.stuff.NETWORK_ERROR) {
+      return data;
+    }
 
     await loadData({ page: event.params.page || 1, request: event })
       .then((body) => {
@@ -162,7 +160,6 @@
 <script>
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { page } from "$app/stores";
 
   import { pageTitle } from "$lib/Store.js";
 
@@ -182,25 +179,6 @@
   export let data;
 
   pageTitle.set("Talep Kategorileri");
-
-  if (data.NETWORK_ERROR) {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({ page: $page.params.page || 1 })
-        .then((loadedData) => {
-          data = loadedData;
-          resolve();
-        })
-        .catch((body) => {
-          if (body.error === "PAGE_NOT_FOUND") {
-            goto(base + "/error-404");
-
-            resolve();
-          } else {
-            reject();
-          }
-        });
-    }, true);
-  }
 
   function reloadData(page = data.page) {
     showNetworkErrorOnCatch((resolve, reject) => {

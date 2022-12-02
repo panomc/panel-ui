@@ -235,7 +235,7 @@
    */
   export async function load(event, mode = DefaultMode) {
     const { parent } = event;
-    await parent();
+    const parentData = await parent();
 
     let data = {
       post: {
@@ -253,11 +253,9 @@
       error: {},
     };
 
-    // if (event.stuff.NETWORK_ERROR) {
-    //   output.props.data.NETWORK_ERROR = true;
-    //
-    //   return output;
-    // }
+    if (parentData.stuff.NETWORK_ERROR) {
+      return data;
+    }
 
     if (mode === Modes.EDIT) {
       await loadPost({ id: event.params.id || -1, request: event })
@@ -287,7 +285,6 @@
 <script>
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
-  import { page } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -328,41 +325,6 @@
   pageTitle.set(
     data.mode === Modes.EDIT ? "Yazıyı Düzenle" : "Yeni Yazı Oluştur"
   );
-
-  if (data.NETWORK_ERROR) {
-    showNetworkErrorOnCatch(async (resolve, reject) => {
-      if (data.mode === Modes.EDIT) {
-        await loadPost({
-          id: $page.params.id || -1
-        })
-          .then(async (body) => {
-            data.post = body.post;
-
-            resolve();
-          })
-          .catch((body) => {
-            if (body.error === "POST_NOT_FOUND") {
-              resolve();
-
-              goto(base + "/error-404");
-            } else reject();
-          });
-      } else {
-        resolve();
-      }
-
-      showNetworkErrorOnCatch((resolve, reject) => {
-        loadCategories({})
-          .then((body) => {
-            data = { ...data, ...body };
-            resolve();
-          })
-          .catch(() => {
-            reject();
-          });
-      });
-    }, true);
-  }
 
   function onThumbnailChange(event) {
     isThumbnailSaved = false;

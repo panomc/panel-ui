@@ -108,7 +108,7 @@
    */
   export async function load(event) {
     const { parent } = event;
-    await parent();
+    const parentData = await parent();
 
     let data = {
       permissions: [],
@@ -119,11 +119,9 @@
       page: 1,
     };
 
-    // if (event.stuff.NETWORK_ERROR) {
-    //   output.props.data.NETWORK_ERROR = true;
-    //
-    //   return output;
-    // }
+    if (parentData.stuff.NETWORK_ERROR) {
+      return data;
+    }
 
     await loadData({ request: event, page: event.params.page || 1 })
       .then((body) => {
@@ -159,20 +157,6 @@
   export let data;
 
   pageTitle.set("Yetki Grupları");
-
-  if (data.NETWORK_ERROR) {
-    showNetworkErrorOnCatch((resolve, reject) => {
-      loadData({})
-        .then((body) => {
-          data = { ...data, ...body };
-
-          resolve();
-        })
-        .catch(() => {
-          reject();
-        });
-    }, true);
-  }
 
   function reloadData(page = data.page) {
     showNetworkErrorOnCatch((resolve, reject) => {

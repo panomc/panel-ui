@@ -11,7 +11,7 @@
 <div class="splash" role="status" in:fade out:fade>
   <img
     alt="Pano"
-    src="{base + '/assets/img/loading_slime.gif'}"
+    src="{base + (networkErrors ? '' : '/assets/img/loading_slime.gif')}"
     width="128"
     height="auto" />
 
@@ -28,7 +28,11 @@
           >.
         </p>
       {:else}
-        <p class="text-danger">Bağlantı hatası!</p>
+        <p class="text-danger">
+          Bağlantı hatası!
+          <br />Lütfen internetinizi veya Pano'nun açık ve erişilebilir olmasını
+          kontrol edin!
+        </p>
       {/if}
       <button
         class="btn btn-outline-primary"
@@ -61,7 +65,7 @@
     })
   );
 
-  function onResumeClick() {
-    resumeAfterNetworkError();
+  async function onResumeClick() {
+    await resumeAfterNetworkError();
   }
 </script>
