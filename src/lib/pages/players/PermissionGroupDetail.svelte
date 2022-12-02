@@ -14,8 +14,8 @@
         class:btn-secondary="{data.mode === Modes.CREATE}"
         class:btn-primary="{data.mode === Modes.EDIT}"
         type="submit"
-        class:disabled="{loading || !data.name}"
-        disabled="{loading || !data.name}"
+        class:disabled="{saveButtonDisabled}"
+        disabled="{saveButtonDisabled}"
         on:click="{onSubmit}">
         {#if data.mode === Modes.EDIT}
           Kaydet
@@ -30,6 +30,12 @@
     <div class="col-lg-9 mb-lg-0 mb-3">
       <div class="card h-100">
         <div class="card-body">
+          {#if errors.error}
+            <small class="text-danger">
+              {errors.error}
+            </small>
+          {/if}
+
           <input
             class:text-danger="{errors.name}"
             class:text-black="{!errors.name}"
@@ -37,7 +43,9 @@
             placeholder="İsim"
             id="permissionGroupName"
             type="text"
-            bind:value="{data.name}" />
+            bind:value="{name}"
+            disabled="{data.name === 'admin'}"
+            class:disabled="{data.name === 'admin'}" />
 
           <form on:submit|preventDefault="{addUser}">
             <input
@@ -75,7 +83,7 @@
           <div class="table-responsive">
             <table class="table table-sm table-hover table-borderless mb-0">
               <tbody>
-                {#each data.permissions as permission, index (permission)}
+                {#each data.permissionList as permission, index (permission)}
                   <tr>
                     <th
                       scope="col"
@@ -100,10 +108,7 @@
                           id="{permission.name}"
                           checked="{isPermissionChecked(permission)}"
                           on:click="{() => onPermissionClick(permission)}"
-                          disabled="{isPermissionDisabled(
-                            permission,
-                            loadingPermissions
-                          )}" />
+                          disabled="{isPermissionDisabled()}" />
                       </div>
                     </td>
                   </tr>
@@ -191,7 +196,33 @@
         data = { ...data, ...body };
       });
 
-      data.originalUsers = [...data.users];
+      data.permissionList = data.permissions;
+      data.permissions = data.permissionList.map((permission) => {
+        return {
+          id: permission.id,
+          selected: data.name === "admin",
+        };
+      });
+
+      if (data.name !== "admin") {
+        data.permissionGroupPerms.forEach((permissionGroupPerm) => {
+          data.permissions.forEach((permission) => {
+            if (permission.id === permissionGroupPerm) {
+              permission.selected = true;
+            }
+          });
+        });
+      }
+
+      data.originalPermissions = [];
+      data.permissions.forEach((permission) => {
+        data.originalPermissions.push({ ...permission });
+      });
+
+      data.originalUsers = [];
+      data.users.forEach((user) => {
+        data.originalUsers.push(Object.freeze(user));
+      });
     }
 
     return data;
@@ -203,12 +234,13 @@
 
   import tooltip from "$lib/tooltip.util";
   import { showNetworkErrorOnCatch } from "$lib/Store.js";
+  import { goto } from "$app/navigation";
 
   export let data;
 
-  let loadingPermissions = [];
   let errors = [];
   let loading;
+  let name = data.name;
 
   let checkingUsername;
   let username = "";
@@ -217,57 +249,58 @@
   let addedUsers = [];
   let removedUsers = [];
 
+  $: saveButtonDisabled =
+    loading ||
+    !name ||
+    (data.name === name &&
+      !isPermissionListDifferent(data.originalPermissions, data.permissions) &&
+      addedUsers.length === 0 &&
+      removedUsers.length === 0);
+
   function isPermissionChecked(permission) {
     if (data.name === "admin") {
       return true;
     }
 
-    return data.permissionGroupPerms.includes(permission.id);
+    const permissionChecked = data.permissions.filter((filteredPermission) => {
+      return (
+        filteredPermission.selected && filteredPermission.id === permission.id
+      );
+    });
+
+    return permissionChecked.length !== 0;
   }
 
-  function isPermissionDisabled(permission, loadingPermissions) {
-    return data.name === "admin" || loadingPermissions[permission.name];
+  function isPermissionListDifferent(originalPermissions, permissions) {
+    let isDifferent = false;
+
+    permissions.forEach((permission) => {
+      const isSame = originalPermissions.filter(
+        (originalPermission) =>
+          originalPermission.id === permission.id &&
+          originalPermission.selected === permission.selected
+      );
+
+      if (isSame.length === 0) {
+        isDifferent = true;
+      }
+    });
+
+    return isDifferent;
   }
 
-  function refreshBrowserPage() {
-    location.reload();
+  function isPermissionDisabled() {
+    return data.name === "admin";
   }
 
   function onPermissionClick(permission) {
-    loadingPermissions[permission.name] = true;
-
-    const mode = isPermissionChecked(permission) ? "DELETE" : "ADD";
-
-    showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.put({
-        path: `/api/panel/permissionGroups/${data.id}/permissions/${permission.id}`,
-        body: {
-          mode: mode,
-        },
-      })
-        .then((body) => {
-          if (body.result === "ok") {
-            const includes = data.permissionGroupPerms.includes(permission.id);
-
-            if (body.mode === "ADD" && !includes) {
-              data.permissionGroupPerms.push(permission.id);
-            } else if (body.mode === "DELETE" && includes) {
-              data.permissionGroupPerms.splice(
-                data.permissionGroupPerms.indexOf(permission.id),
-                1
-              );
-            }
-
-            loadingPermissions[permission.name] = false;
-
-            resolve();
-          } else if (body.error === "NOT_EXISTS") refreshBrowserPage();
-          else reject();
-        })
-        .catch(() => {
-          reject();
-        });
+    data.permissions.forEach((eachPermission) => {
+      if (eachPermission.id === permission.id) {
+        eachPermission.selected = !isPermissionChecked(permission);
+      }
     });
+
+    data.permissions = data.permissions;
   }
 
   async function addUser() {
@@ -334,60 +367,65 @@
   }
 
   function onSubmit() {
-    // loading = true;
-    // errors.set([]);
-    //
-    // showNetworkErrorOnCatch((resolve, reject) => {
-    //   const bodyHandler = (body) => {
-    //     if (body.result === "ok") {
-    //       loading = false;
-    //
-    //       hide();
-    //
-    //       callback(true);
-    //
-    //       resolve();
-    //     } else if (body.result === "error") {
-    //       loading = false;
-    //
-    //       if (body.error === "CANT_UPDATE_ADMIN_PERMISSION") {
-    //         errors.set({ "error": body.error });
-    //       } else {
-    //         errors.set(
-    //           typeof body.error === "string"
-    //             ? { error: body.error }
-    //             : body.error
-    //         );
-    //       }
-    //
-    //       resolve();
-    //     } else reject();
-    //   };
-    //
-    //   if (get(mode) === "edit") {
-    //     ApiUtil.put({
-    //       path: `/api/panel/permissionGroups/${get(permissionGroup).id}`,
-    //       body: { ...$permissionGroup, addedUsers, removedUsers },
-    //       CSRFToken: $session.CSRFToken,
-    //     })
-    //       .then(bodyHandler)
-    //       .catch(() => {
-    //         reject();
-    //       });
-    //
-    //     return;
-    //   }
-    //
-    //   ApiUtil.post({
-    //     path: `/api/panel/permissionGroups`,
-    //     body: { ...$permissionGroup, addedUsers },
-    //     CSRFToken: $session.CSRFToken,
-    //   })
-    //     .then(bodyHandler)
-    //     .catch(() => {
-    //       reject();
-    //     });
-    // });
+    loading = true;
+    errors = [];
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      const bodyHandler = (body) => {
+        if (body.result === "ok") {
+          loading = false;
+
+          if (data.mode === Modes.CREATE) {
+            goto(base + "/players/perm-groups/detail/" + body.id);
+          } else {
+            data.originalPermissions = [];
+            data.permissions.forEach((permission) => {
+              data.originalPermissions.push({ ...permission });
+            });
+          }
+
+          resolve();
+        } else if (body.result === "error") {
+          loading = false;
+
+          errors =
+            typeof body.error === "string" ? { error: body.error } : body.error;
+
+          resolve();
+        } else reject();
+      };
+
+      if (data.mode === Modes.EDIT) {
+        ApiUtil.put({
+          path: `/api/panel/permissionGroups/${data.id}`,
+          body: {
+            name,
+            addedUsers,
+            removedUsers,
+            permissions: data.permissions,
+          },
+        })
+          .then(bodyHandler)
+          .catch(() => {
+            reject();
+          });
+
+        return;
+      }
+
+      ApiUtil.post({
+        path: `/api/panel/permissionGroups`,
+        body: {
+          name,
+          addedUsers,
+          permissions: data.permissions,
+        },
+      })
+        .then(bodyHandler)
+        .catch(() => {
+          reject();
+        });
+    });
   }
 
   // function convertIconName(iconName) {
