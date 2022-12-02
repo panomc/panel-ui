@@ -186,8 +186,14 @@
             data = loadedData;
           }
         })
-        .catch((e) => {
-          reject();
+        .catch((body) => {
+          if (body.error === "PAGE_NOT_FOUND") {
+            resolve();
+
+            reloadData(page - 1);
+          } else {
+            reject();
+          }
         });
     });
   }
