@@ -179,7 +179,7 @@
             data = loadedData;
           }
         })
-        .catch(() => {
+        .catch((e) => {
           reject();
         });
     });
@@ -190,22 +190,10 @@
   }
 
   setDeletePermissionGroupModalCallback((permissionGroup) => {
-    data.permissionGroups.forEach((permGroup, index) => {
-      if (permGroup.id === permissionGroup.id) {
-        data.permissionGroups.splice(index, 1);
-      }
-    });
+    if (data.permissionGroups.indexOf(permissionGroup) !== -1) {
+      data.permissionGroups[data.permissionGroups.indexOf(permissionGroup)].selected = false;
+    }
 
-    data.permissionGroups = data.permissionGroups;
-
-    Object.keys(data.permissionGroupPerms).forEach(
-      (permissionGroupPermsId, index) => {
-        if (permissionGroupPermsId === permissionGroup.id) {
-          data.permissionGroups.splice(index, 1);
-        }
-      }
-    );
-
-    data.permissionGroupPerms = data.permissionGroupPerms;
+    reloadData();
   });
 </script>
