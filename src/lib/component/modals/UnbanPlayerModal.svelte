@@ -97,7 +97,7 @@
           });
 
           if (body.result === "ok") {
-            callback($player)
+            callback($player);
           }
 
           loading = false;

@@ -248,7 +248,9 @@
 
   export let data;
 
-  pageTitle.set(data.mode === Modes.EDIT ? "Yetki Grubunu Düzenle" : "Yetki Grubu Oluştur");
+  pageTitle.set(
+    data.mode === Modes.EDIT ? "Yetki Grubunu Düzenle" : "Yetki Grubu Oluştur"
+  );
 
   let errors = [];
   let loading;
@@ -388,7 +390,7 @@
           loading = false;
 
           showToast(PermissionGroupSavedOrCreatedToast, {
-            mode: data.mode
+            mode: data.mode,
           });
 
           if (data.mode === Modes.CREATE) {

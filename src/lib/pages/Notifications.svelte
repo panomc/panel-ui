@@ -112,7 +112,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: "/api/panel/notifications",
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           resolve(body);
@@ -202,7 +202,7 @@
       ApiUtil.get({
         path: `/api/panel/notifications/${
           get(notifications)[get(notifications).length - 1].id
-        }/more`
+        }/more`,
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -226,7 +226,7 @@
   function deleteNotification(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.delete({
-        path: `/api/panel/notifications/${id}`
+        path: `/api/panel/notifications/${id}`,
       })
         .then((body) => {
           if (body.result === "ok") {

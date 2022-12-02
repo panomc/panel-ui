@@ -94,7 +94,7 @@
       ApiUtil.delete({
         path:
           "/api/panel/tickets?ids=" +
-          Object.values(get(selectedTickets)).map((id) => parseInt(id))
+          Object.values(get(selectedTickets)).map((id) => parseInt(id)),
       })
         .then((body) => {
           if (body.result === "ok") {

@@ -200,7 +200,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/posts/${id}`,
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -219,7 +219,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: "/api/panel/post/categories",
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           resolve(body);
@@ -437,7 +437,7 @@
         path: `/api/panel/posts/${data.post.id}/status`,
         body: {
           to: "draft",
-        }
+        },
       })
         .then((body) => {
           if (body.result === "ok") {

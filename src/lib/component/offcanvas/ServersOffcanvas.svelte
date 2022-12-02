@@ -38,7 +38,7 @@
   function getServerList() {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/server/list"
+        path: "/api/panel/server/list",
       })
         .then((body) => {
           if (body.result === "ok") {

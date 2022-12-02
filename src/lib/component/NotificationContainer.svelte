@@ -149,13 +149,13 @@
   function getQuickNotifications(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/notifications/quick"
+        path: "/api/panel/notifications/quick",
       })
         .then((body) => {
           if (body.error) {
             reject();
 
-            return
+            return;
           }
 
           if (quickNotificationProcessID === id) {

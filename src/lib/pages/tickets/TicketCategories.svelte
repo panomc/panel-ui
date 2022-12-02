@@ -106,7 +106,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/ticket/categories?page=${page}`,
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;

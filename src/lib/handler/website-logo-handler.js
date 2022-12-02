@@ -1,1 +1,1 @@
-export * from "../../pano-ui/js/handler/website-logo-handler.js"
+export * from "../../pano-ui/js/handler/website-logo-handler.js";

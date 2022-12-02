@@ -289,7 +289,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/dashboard?period=${period}`,
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           resolve(body);
@@ -316,7 +316,7 @@
       ticketCount: 0,
       openTicketCount: 0,
       tickets: [],
-      websiteActivityDataList: {}
+      websiteActivityDataList: {},
     };
 
     if (parentData.stuff.NETWORK_ERROR) {
@@ -353,7 +353,7 @@
   function onCloseGettingStartedCard() {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post({
-        path: "/api/panel/dashboard/closeGettingStartedCard"
+        path: "/api/panel/dashboard/closeGettingStartedCard",
       })
         .then(() => {
           resolve();

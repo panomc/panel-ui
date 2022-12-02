@@ -115,7 +115,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.delete({
-        path: `/api/panel/ticket/categories/${get(category).id}`
+        path: `/api/panel/ticket/categories/${get(category).id}`,
       })
         .then((body) => {
           if (body.result === "ok") {

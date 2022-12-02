@@ -93,7 +93,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: "/api/panel/settings/about",
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           resolve(body);

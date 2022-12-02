@@ -108,7 +108,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get({
-        path: "/api/panel/permissionGroups"
+        path: "/api/panel/permissionGroups",
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -138,7 +138,7 @@
         path: `/api/panel/players/${get(player).username}/permissionGroup`,
         body: {
           permissionGroup: get(player).permissionGroup,
-        }
+        },
       })
         .then((body) => {
           if (body.result === "ok") {

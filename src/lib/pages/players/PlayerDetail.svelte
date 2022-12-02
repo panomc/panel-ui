@@ -51,8 +51,7 @@
       <a
         class="btn btn-link"
         href="javascript:void(0);"
-        on:click="{() =>
-          showAuthorizePlayerModal(data.player)}">
+        on:click="{() => showAuthorizePlayerModal(data.player)}">
         <i class="fas fa-user-circle"></i>
         <span class="ms-2 d-lg-inline d-none">Yetkilendir</span>
       </a>
@@ -187,7 +186,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/players/${username}?page=${page}`,
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -289,7 +288,7 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         username: data.player.username,
-        page
+        page,
       })
         .then((loadedData) => {
           resolve();
@@ -361,5 +360,5 @@
 
   setUnbanPlayerModalCallback(() => {
     data.player.isBanned = false;
-  })
+  });
 </script>

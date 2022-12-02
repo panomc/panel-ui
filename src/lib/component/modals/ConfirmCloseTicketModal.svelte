@@ -99,7 +99,7 @@
             get(selectedTickets).map((id) => parseInt(id))
           ),
           status: "close",
-        }
+        },
       })
         .then((body) => {
           if (body.result === "ok") {

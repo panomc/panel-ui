@@ -79,7 +79,7 @@
         path: `/api/panel/players?permissionGroup=${permissionGroup}&page=${parseInt(
           page
         )}`,
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -174,14 +174,18 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       loadData({
         page,
-        permissionGroup: permissionGroupName
+        permissionGroup: permissionGroupName,
       })
         .then((loadedData) => {
           resolve();
 
           if (page !== data.page) {
             goto(
-              base + "/players/by-perm-group/" + permissionGroupName + "/" + page
+              base +
+                "/players/by-perm-group/" +
+                permissionGroupName +
+                "/" +
+                page
             );
           } else {
             data = loadedData;

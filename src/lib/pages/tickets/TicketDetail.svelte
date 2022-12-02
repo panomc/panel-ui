@@ -188,7 +188,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/tickets/${id}`,
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           const ticket = body.ticket;
@@ -304,7 +304,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get({
-        path: `/api/panel/tickets/${data.ticket.id}/messages?lastMessageId=${data.ticket.messages[0].id}`
+        path: `/api/panel/tickets/${data.ticket.id}/messages?lastMessageId=${data.ticket.messages[0].id}`,
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -333,7 +333,7 @@
         path: `/api/panel/tickets/${data.ticket.id}/message`,
         body: {
           message: messageText,
-        }
+        },
       })
         .then((body) => {
           if (body.result === "ok") {

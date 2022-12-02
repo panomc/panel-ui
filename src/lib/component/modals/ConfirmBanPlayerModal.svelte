@@ -21,7 +21,7 @@
             role="switch"
             aria-checked="false"
             id="sendNotificationEmailForBan"
-            bind:checked="{sendNotification}"/>
+            bind:checked="{sendNotification}" />
           <label class="form-check-label" for="sendNotificationEmailForBan"
             >E-posta bildirimi gönder</label>
         </div>
@@ -101,8 +101,8 @@
       ApiUtil.post({
         path: `/api/panel/players/${$player.username}/ban`,
         body: {
-          sendNotification
-        }
+          sendNotification,
+        },
       })
         .then((body) => {
           hide();
@@ -113,7 +113,7 @@
           });
 
           if (body.result === "ok") {
-            callback($player)
+            callback($player);
           }
 
           loading = false;

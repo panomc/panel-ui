@@ -81,7 +81,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.delete({
-        path: "/api/panel/notifications"
+        path: "/api/panel/notifications",
       })
         .then((body) => {
           if (body.result === "ok") {

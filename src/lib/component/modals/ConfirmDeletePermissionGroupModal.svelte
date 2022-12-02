@@ -124,7 +124,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.delete({
-        path: `/api/panel/permissions/${get(permissionGroup).id}`
+        path: `/api/panel/permissions/${get(permissionGroup).id}`,
       })
         .then((body) => {
           if (body.result === "ok") {

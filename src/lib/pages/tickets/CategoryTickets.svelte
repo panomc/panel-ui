@@ -123,7 +123,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/tickets?page=${page}&categoryUrl=${url}`,
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;

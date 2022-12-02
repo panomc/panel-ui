@@ -195,7 +195,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: "/api/panel/settings?type=website",
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           body.oldSettings = { ...body };

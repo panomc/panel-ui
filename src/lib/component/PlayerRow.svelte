@@ -44,13 +44,13 @@
             Yasakla
           </a>
         {/if}
-          <a
-            class="dropdown-item link-danger"
-            href="javascript:void(0);"
-            on:click="{showBanPlayerModal}">
-            <i class="fas fa-trash me-2"></i>
-            Sil
-          </a>
+        <a
+          class="dropdown-item link-danger"
+          href="javascript:void(0);"
+          on:click="{showBanPlayerModal}">
+          <i class="fas fa-trash me-2"></i>
+          Sil
+        </a>
       </div>
     </div>
   </th>
@@ -117,6 +117,4 @@
   function showUnbanPlayerModal() {
     dispatch("showUnbanPlayerModalClick", { player });
   }
-
-
 </script>

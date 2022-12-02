@@ -89,7 +89,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/posts?page=${page}&categoryUrl=${url}`,
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;
@@ -187,7 +187,7 @@
         path: `/api/panel/posts/${id}/status`,
         body: {
           to: "draft",
-        }
+        },
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -212,7 +212,7 @@
         path: `/api/panel/posts/${id}/status`,
         body: {
           to: "publish",
-        }
+        },
       })
         .then((body) => {
           if (body.result === "ok") {

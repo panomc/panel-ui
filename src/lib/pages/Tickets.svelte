@@ -159,7 +159,7 @@
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/tickets?pageType=${pageType}&page=${parseInt(page)}`,
-        request
+        request,
       }).then((body) => {
         if (body.result === "ok") {
           const data = body;

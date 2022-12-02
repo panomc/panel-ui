@@ -158,7 +158,7 @@
       if (get(mode) === "edit") {
         ApiUtil.put({
           path: `/api/panel/post/categories/${get(category).id}`,
-          body: get(category)
+          body: get(category),
         })
           .then(bodyHandler)
           .catch(() => {
@@ -170,7 +170,7 @@
 
       ApiUtil.post({
         path: "/api/panel/post/category",
-        body: get(category)
+        body: get(category),
       })
         .then(bodyHandler)
         .catch(() => {

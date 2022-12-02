@@ -200,7 +200,7 @@
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.put({
         path: `/api/panel/players/${get(player).id}`,
-        body: get(player)
+        body: get(player),
       })
         .then((body) => {
           if (body.result === "ok") {

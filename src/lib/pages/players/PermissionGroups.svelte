@@ -9,9 +9,7 @@
       </a>
     </div>
     <div class="col-auto">
-      <a
-        href="{base}/players/perm-groups/create"
-        class="btn btn-secondary">
+      <a href="{base}/players/perm-groups/create" class="btn btn-secondary">
         <i class="fas fa-plus me-2"></i>
         Yetki Grubu Oluştur
       </a>
@@ -188,7 +186,9 @@
 
   setDeletePermissionGroupModalCallback((permissionGroup) => {
     if (data.permissionGroups.indexOf(permissionGroup) !== -1) {
-      data.permissionGroups[data.permissionGroups.indexOf(permissionGroup)].selected = false;
+      data.permissionGroups[
+        data.permissionGroups.indexOf(permissionGroup)
+      ].selected = false;
     }
 
     reloadData();

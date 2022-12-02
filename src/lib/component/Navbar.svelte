@@ -179,7 +179,7 @@
   function markQuickNotificationsAsRead(id) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post({
-        path: "/api/panel/notifications/quick/markAsRead"
+        path: "/api/panel/notifications/quick/markAsRead",
       })
         .then((body) => {
           if (quickNotificationProcessID === id) {
