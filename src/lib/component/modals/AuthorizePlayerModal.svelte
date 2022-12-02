@@ -126,6 +126,9 @@
 </script>
 
 <script>
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
+  import PlayerAuthorizedSuccessToast from "$lib/component/toasts/PlayerAuthorizedSuccessToast.svelte";
+
   function refreshBrowserPage() {
     location.reload();
   }
@@ -145,6 +148,8 @@
             submitLoading.set(false);
 
             hide();
+
+            showToast(PlayerAuthorizedSuccessToast);
 
             callback(get(player));
 
