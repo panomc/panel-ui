@@ -151,7 +151,7 @@
 
   export let data;
 
-  pageTitle.set("Yetkiler");
+  pageTitle.set("Yetki Grupları");
 
   if (data.NETWORK_ERROR) {
     showNetworkErrorOnCatch((resolve, reject) => {
