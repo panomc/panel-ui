@@ -37,6 +37,29 @@
   import { init as initLanguage } from "$lib/language.util";
 
   import ApiUtil, { NETWORK_ERROR } from "$lib/api.util.js";
+  import { addListener } from "$lib/NotificationManager.js";
+  import { goto } from "$app/navigation";
+  import { base } from "$app/paths";
+
+  function initListeners() {
+    addListener("NEW_TICKET", (notification) => {
+      const { properties: {id} } = notification;
+
+      goto(base + "/tickets/ticket/" + id);
+    });
+
+    addListener("NEW_TICKET_MESSAGE", (notification) => {
+      const { properties: {id} } = notification;
+
+      goto(base + "/tickets/ticket/" + id);
+    });
+
+    addListener("TICKET_CLOSED_BY_USER", (notification) => {
+      const { properties: {id} } = notification;
+
+      goto(base + "/tickets/ticket/" + id);
+    });
+  }
 
   function getBasicData({ request }) {
     return new Promise((resolve, reject) => {
@@ -74,6 +97,8 @@
     session.set({ basicData, CSRFToken });
 
     await initLanguage(basicData.locale);
+
+    initListeners()
 
     setDefaults();
 

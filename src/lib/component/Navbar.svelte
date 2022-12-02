@@ -66,6 +66,7 @@
                 {#each $quickNotifications as notification, index (notification)}
                   <a
                     href="javascript:void(0);"
+                    on:click="{() => onNotificationClick(notification)}"
                     class="list-group-item list-group-item-action  d-flex flex-row w-100"
                     class:notification-unread="{notification.status ===
                       'NOT_READ'}">
@@ -150,6 +151,7 @@
     toggleSidebar,
     user,
   } from "$lib/Store";
+  import { onNotificationClick } from "$lib/NotificationManager.js";
 
   let quickNotificationProcessID = 0;
 

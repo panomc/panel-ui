@@ -5,7 +5,8 @@
       class="toast"
       role="alert"
       aria-live="assertive"
-      aria-atomic="true">
+      aria-atomic="true"
+      on:click="{() => onNotificationClick(notification)}">
       <div class="toast-header bg-primary text-white">
         <strong class="me-auto">Pano</strong>
         <small>{getTime(checkTime, parseInt(notification.date), "")}</small>
@@ -82,6 +83,7 @@
   } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
   import { formatDistanceToNow } from "date-fns";
+  import { onNotificationClick } from "$lib/NotificationManager.js";
 
   let quickNotificationProcessID = 0;
 
