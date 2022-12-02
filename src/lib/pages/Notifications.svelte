@@ -22,6 +22,7 @@
         <div class="list-group w-100 flex-row align-items-center">
           <a
             href="javascript:void(0);"
+            on:click={() => onNotificationClick(notification)}
             class="list-group-item list-group-item-action  d-flex flex-row w-100"
             class:notification-unread="{notification.status === 'NOT_READ'}">
             <div class="col-auto">
@@ -157,6 +158,7 @@
     show as showDeleteAllNotificationsModal,
     setCallback as setDeleteAllNotificationsModalCallback,
   } from "$lib/component/modals/ConfirmRemoveAllNotificationsModal.svelte";
+  import { onNotificationClick } from "../../pano-ui/js/NotificationManager.js";
 
   export let data;
 
