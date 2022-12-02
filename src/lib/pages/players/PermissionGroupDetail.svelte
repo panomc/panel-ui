@@ -26,98 +26,95 @@
     </div>
   </div>
 
-  <h1>
-    {#if data.mode === Modes.EDIT}
-      "{data.name}" Yetki Grubunu Düzenle
-    {:else}
-      Yetki Grubu Oluştur
-    {/if}
-  </h1>
+  <div class="row">
+    <div class="col-lg-9 mb-lg-0 mb-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <input
+            class:text-danger="{errors.name}"
+            class:text-black="{!errors.name}"
+            class="form-control form-control-lg border-0 text-black p-0 mb-2"
+            placeholder="İsim"
+            id="permissionGroupName"
+            type="text"
+            bind:value="{data.name}" />
 
-  <input
-    class:text-danger="{errors.name}"
-    class:text-black="{!errors.name}"
-    class="form-control form-control-lg border-0 text-black p-0 mb-3"
-    placeholder="İsim"
-    id="permissionGroupName"
-    type="text"
-    bind:value="{data.name}" />
+          <form on:submit|preventDefault="{addUser}">
+            <input
+              class="form-control mb-3"
+              id="addPlayerInput"
+              bind:value="{username}"
+              class:border-danger="{usernameInputError}"
+              class:disabled="{checkingUsername}"
+              placeholder="Oyuncu ekle..." />
+          </form>
 
-  {#if errors.error}
-    <small class="text-danger">
-      {errors.error}
-    </small>
-  {/if}
-
-  <form on:submit|preventDefault="{addUser}">
-    <label for="addPlayerInput" class="form-label">Oyuncu Ekle</label>
-    <input
-      class="form-control mb-3"
-      id="addPlayerInput"
-      bind:value="{username}"
-      class:border-danger="{usernameInputError}"
-      class:disabled="{checkingUsername}"
-      placeholder="Eklemek için Enter'a basın" />
-  </form>
-
-  {#each data.users as user, index (user)}
-    <a
-      use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
-      href="javascript:void(0);"
-      on:click="{() => removeUser(index)}">
-      <span class="badge rounded-pill bg-light link-primary text-center">
-        <img
-          class="d-inline rounded-circle me-2"
-          src="https://crafthead.net/avatar/{user}"
-          alt="{user}"
-          width="28"
-          height="28" />
-        {user}
-      </span>
-    </a>
-  {/each}
-
-  <br />
-  <br />
-  <br />
-
-  <table>
-    <tbody>
-      {#each data.permissions as permission, index (permission)}
-        <tr>
-          <th
-            scope="col"
-            use:tooltip="{[
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
-              { placement: 'right' },
-            ]}">
-            <!--              TODO: Icon system-->
-            <!--              <Icon-->
-            <!--                data="{icon[convertIconName(permission.iconName)]}"-->
-            <!--                class="text-primary d-block m-auto" />-->
-            <small class="mb-0">
-              {permission.name}
-            </small>
-          </th>
-          <td>
-            <div
-              class="form-check form-switch d-flex justify-content-center align-content-center">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="{permission.name}"
-                checked="{isPermissionChecked(permission)}"
-                on:click="{() => onPermissionClick(permission)}"
-                disabled="{isPermissionDisabled(
-                  permission,
-                  loadingPermissions
-                )}" />
-            </div>
-          </td>
-        </tr>
-      {/each}
-    </tbody>
-  </table>
+          {#each data.users as user, index (user)}
+            <a
+              use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
+              href="javascript:void(0);"
+              on:click="{() => removeUser(index)}">
+              <span
+                class="badge rounded-pill bg-light link-primary text-center">
+                <img
+                  class="d-inline rounded-circle me-2"
+                  src="https://crafthead.net/avatar/{user}"
+                  alt="{user}"
+                  width="28"
+                  height="28" />
+                {user}
+              </span>
+            </a>
+          {/each}
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-sm table-hover table-borderless mb-0">
+              <tbody>
+                {#each data.permissions as permission, index (permission)}
+                  <tr>
+                    <th
+                      scope="col"
+                      use:tooltip="{[
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
+                        { placement: 'right' },
+                      ]}">
+                      <!--              TODO: Icon system-->
+                      <!--              <Icon-->
+                      <!--                data="{icon[convertIconName(permission.iconName)]}"-->
+                      <!--                class="text-primary d-block m-auto" />-->
+                      <small class="mb-0">
+                        {permission.name}
+                      </small>
+                    </th>
+                    <td>
+                      <div
+                        class="form-check form-switch d-flex justify-content-center align-content-center">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          id="{permission.name}"
+                          checked="{isPermissionChecked(permission)}"
+                          on:click="{() => onPermissionClick(permission)}"
+                          disabled="{isPermissionDisabled(
+                            permission,
+                            loadingPermissions
+                          )}" />
+                      </div>
+                    </td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </article>
 
 <script context="module">
@@ -173,7 +170,7 @@
       users: [],
       permissions: [],
       permissionGroupPerms: [],
-      mode
+      mode,
     };
 
     if (mode === Modes.EDIT) {
