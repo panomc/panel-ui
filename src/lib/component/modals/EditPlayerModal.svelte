@@ -188,6 +188,9 @@
   import { showNetworkErrorOnCatch, user } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
+  import PlayerInfoSavedSuccessToast from "$lib/component/toasts/PlayerInfoSavedSuccessToast.svelte";
+
   function refreshBrowserPage() {
     location.reload();
   }
@@ -216,6 +219,8 @@
             loading = false;
 
             hide();
+
+            showToast(PlayerInfoSavedSuccessToast);
 
             player.update((player) => {
               player.newPassword = "";
