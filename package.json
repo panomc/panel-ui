@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "@rollup/plugin-json": "^5.0.2",
-    "@sveltejs/adapter-node": "^1.0.0-next.101",
-    "@sveltejs/kit": "^1.0.0-next.567",
+    "@sveltejs/adapter-node": "^1.0.0-next.102",
+    "@sveltejs/kit": "^1.0.0-next.571",
     "bootstrap": "^5.2.3",
     "chart.js": "^3.9.1",
     "chartjs-adapter-date-fns": "^2.0.1",
