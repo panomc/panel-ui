@@ -12,23 +12,10 @@
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
         Bu oyuncuyu yasaklamak istediğinizden emin misiniz?
-        <br />
-        <br />
-        <div class="form-check form-switch">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            role="switch"
-            aria-checked="false"
-            id="sendNotificationEmailForBan"
-            bind:checked="{sendNotification}" />
-          <label class="form-check-label" for="sendNotificationEmailForBan"
-            >E-posta bildirimi gönder</label>
-        </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer flex-nowrap">
         <button
-          class="btn btn-link text-muted"
+          class="btn btn-link col-6 m-0"
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
@@ -36,7 +23,7 @@
           İptal
         </button>
         <button
-          class="btn btn-danger"
+          class="btn btn-danger col-6 m-0"
           type="button"
           class:disabled="{loading}"
           disabled="{loading}"
