@@ -67,7 +67,7 @@
 
   <div class="row">
     <div class="col-lg-3">
-      <div class="card">
+      <div class="card mb-3">
         <div
           class="card-body d-flex flex-column justify-content-center
           align-items-center">
@@ -78,51 +78,33 @@
             height="128"
             src="https://crafthead.net/avatar/{data.player.username}" />
 
-          <h4 class="card-title">{data.player.username}</h4>
+          <h3 class="card-title">{data.player.username}</h3>
           <h6 class="text-muted">{data.player.email}</h6>
 
           {#if data.player.isBanned}
             <div class="badge bg-danger text-white">Yasaklı</div>
+            <a
+              class="badge bg-light text-black rounded-pill"
+              href="{base}/players/by-perm-group/{data.player.permissionGroup}">
+              {data.player.permissionGroup === "-"
+                ? "Oyuncu"
+                : data.player.permissionGroup}
+            </a>
           {:else}
-            <span
-              class="badge bg-secondary rounded-pill"
-              use:tooltip="{['Sitede', { placement: 'top' }]}">
-              Çevrimiçi
-            </span>
+            <a
+              class="badge bg-light text-black rounded-pill"
+              href="{base}/players/by-perm-group/{data.player.permissionGroup}">
+              {data.player.permissionGroup === "-"
+                ? "Oyuncu"
+                : data.player.permissionGroup}
+            </a>
           {/if}
-          <hr />
-
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item mb-2">
-              <div class="badge bg-light text-black">
-                <a
-                  href="{base}/players/by-perm-group/{data.player
-                    .permissionGroup}">
-                  {data.player.permissionGroup === "-"
-                    ? "Oyuncu"
-                    : data.player.permissionGroup}
-                </a>
-              </div>
-            </li>
-            <li class="list-inline-item mb-2">
-              {#if data.player.isEmailVerified}
-                <div class="badge bg-light text-black">Doğrulandı</div>
-              {:else}
-                <div class="badge bg-light text-black">Doğrulanmadı</div>
-              {/if}
-            </li>
-            <li class="list-inline-item mb-2">
-              <div class="badge bg-light text-black">
-                <Date time="{data.player.registerDate}" />
-              </div>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
     <div class="col-lg-9">
       <!-- User's Tickets -->
-      <div class="card">
+      <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">Son Talepler</h5>
 
@@ -171,6 +153,33 @@
             on:firstPageClick="{() => reloadData(1)}"
             on:lastPageClick="{() => reloadData(data.ticketTotalPage)}"
             on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">İstatistikler</h5>
+          <table class="table table-borderless mb-0">
+            <tbody>
+              <tr>
+                <td>E-posta</td>
+                <td>
+                  {#if data.player.isEmailVerified}
+                    Doğrulandı
+                  {:else}
+                    Doğrulanmadı
+                  {/if}
+                </td>
+              </tr>
+              <tr>
+                <td>Son Giriş</td>
+                <td> last login data </td>
+              </tr>
+              <tr>
+                <td>Kayıt</td>
+                <td><Date time="{data.player.registerDate}" /></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

@@ -67,7 +67,7 @@
                 <th class="align-middle text-nowrap" scope="col">İsim</th>
                 <th class="align-middle text-nowrap" scope="col">Yetki</th>
                 <th class="align-middle text-nowrap" scope="col">Durum</th>
-                <th class="align-middle text-nowrap" scope="col">Son Oturum</th>
+                <th class="align-middle text-nowrap" scope="col">Son Giriş</th>
                 <th class="align-middle text-nowrap" scope="col">Kayıt</th>
               </tr>
             </thead>
