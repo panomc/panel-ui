@@ -23,7 +23,10 @@
           </div>
 
           <h5 class="text-primary">1. Oyun Eklentisini Sunucunuza İndirin:</h5>
-          <button class="btn btn-outline-primary"> Dosyayı İndir </button>
+          <button class="btn btn-outline-primary">
+            <i class="fa-solid fa-download me-2"></i>
+            Dosyayı İndir
+          </button>
 
           <div class="my-4">
             <i class="fas fa-terminal fa-3x text-primary"></i>

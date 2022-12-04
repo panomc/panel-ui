@@ -1,7 +1,19 @@
 <!-- Servers Offcanvas -->
 <div class="offcanvas offcanvas-top" id="showServers" tabindex="-1">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title pr-2">Sunucular</h5>
+    <div class="row">
+      <div class="col-auto">
+        <h5 class="offcanvas-title pr-2">Sunucular</h5>
+      </div>
+      <div class="col-auto">
+        <button
+          class="btn btn-secondary btn-sm"
+          data-bs-target="#connectServer"
+          data-bs-toggle="modal">
+          <i class="fa-solid fa-plus me-2"></i> Sunucu Bağla
+        </button>
+      </div>
+    </div>
     <button
       aria-label="Kapat"
       class="btn-close"
@@ -22,7 +34,7 @@
     {#if $servers.length === 0}
       <div class="container text-center animate__animated animate__zoomIn">
         <i class="fas fa-cube fa-3x m-3 text-dark text-opacity-25"></i>
-        <p class="text-gray">Bağlı sunucu yok.</p>
+        <p class="text-gray">Burada içerik yok.</p>
       </div>
     {/if}
   </div>

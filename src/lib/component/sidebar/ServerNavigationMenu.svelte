@@ -7,10 +7,11 @@
     </p>
 
     <button
-      class="btn btn-white text-primary btn-sm"
+      class="btn btn-secondary btn-sm"
       data-bs-target="#connectServer"
       data-bs-toggle="modal"
       type="button">
+      <i class="fa-solid fa-plus me-2"></i>
       Sunucu Bağla
     </button>
   </div>
