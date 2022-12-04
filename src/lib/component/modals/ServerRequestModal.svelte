@@ -12,7 +12,7 @@
           <i class="fas fa-plug fa-3x d-block m-auto text-gray"></i>
         </div>
         X sunucusunu platforma bağlamak istediğinizden emin misiniz?
-        <div class="card bg-light mb-3 text-start">
+        <div class="card bg-light mt-3 text-start">
           <div class="row g-0">
             <div
               class="col-md-4 d-flex align-items-center justify-content-center">
