@@ -12,7 +12,7 @@
           <i class="fas fa-plug fa-3x d-block m-auto text-gray"></i>
         </div>
         X sunucusunu platforma bağlamak istediğinizden emin misiniz?
-        <div class="card mb-3 text-start">
+        <div class="card bg-light mb-3 text-start">
           <div class="row g-0">
             <div
               class="col-md-4 d-flex align-items-center justify-content-center">
@@ -23,18 +23,10 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <div class="row">
-                  <div class="col-6">
-                    <h5 class="card-title">SUNUCU ADI</h5>
-                  </div>
-                  <div class="col-6 justify-content-start align-items-start">
-                    <small>Spigot</small>
-                  </div>
-                </div>
-                <p class="card-text">MOTD</p>
-                <p class="card-text">
-                  <small class="text-muted">X/X</small>
-                </p>
+                <h6 class="card-title">SUNUCU IP</h6>
+                <p class="card-text text-muted">32/140</p>
+                <small class="badge bg-white text-black rounded-pill"
+                  >Spigot</small>
               </div>
             </div>
           </div>
