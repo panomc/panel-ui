@@ -1,6 +1,7 @@
 <!-- Dashboard Page -->
 <div class="container">
-  <button class="btn btn-primary" on:click={showServerRequestModal}>Show Server Request Modal</button>
+  <button class="btn btn-primary" on:click="{showServerRequestModal}"
+    >Show Server Request Modal</button>
   <!-- Welcome Alerts -->
   {#if data.gettingStartedBlocks.welcomeBoard}
     <div
@@ -207,19 +208,16 @@
                   </a>
                 </td>
                 <td class="align-middle text-nowrap">
-                  <a
-                    href="{base}/tickets/ticket/{ticket.id}"
-                    title="Talebi Görüntüle">#{ticket.id} {ticket.title}</a>
+                  <a href="{base}/tickets/ticket/{ticket.id}" title="Görüntüle"
+                    >#{ticket.id} {ticket.title}</a>
                 </td>
                 <td class="align-middle text-nowrap">
                   <a
-                    use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
+                    title="Filtrele"
                     href="{base}/tickets/category/{ticket.category.url}">
-                    <span class="badge rounded-pill bg-light text-black">
-                      {ticket.category.title === "-"
-                        ? "Kategorisiz"
-                        : ticket.category.title}
-                    </span>
+                    {ticket.category.title === "-"
+                      ? "Kategorisiz"
+                      : ticket.category.title}
                   </a>
                 </td>
                 <td class="align-middle text-nowrap">
@@ -345,9 +343,7 @@
   // import TrafficChart from "$lib/component/charts/Dashboard/TrafficChart.svelte";
   import TicketStatus from "$lib/component/TicketStatus.svelte";
   import Date from "$lib/component/Date.svelte";
-  import {
-    show as showServerRequestModal,
-  } from "$lib/component/modals/ServerRequestModal.svelte";
+  import { show as showServerRequestModal } from "$lib/component/modals/ServerRequestModal.svelte";
 
   export let data;
   let reloading = false;

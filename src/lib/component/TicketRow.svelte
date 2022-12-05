@@ -2,6 +2,7 @@
   <th scope="row" class="align-middle">
     <div class="form-check">
       <input
+        title="Seç"
         class="form-check-input"
         id="postCheck{ticket.id}"
         type="checkbox"
@@ -15,7 +16,7 @@
     </a>
   </td>
   <td class="align-middle">
-    <a href="{base}/players/player/{ticket.writer.username}">
+    <a href="{base}/players/player/{ticket.writer.username}" title="Görüntüle">
       <img
         src="https://crafthead.net/avatar/{ticket.writer.username}/32"
         alt="Oyuncu Adı"
@@ -26,10 +27,7 @@
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    <a
-      class="badge bg-light link-dark rounded-pill"
-      use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
-      href="{base}/tickets/category/{ticket.category.url}">
+    <a title="Filtrele" href="{base}/tickets/category/{ticket.category.url}">
       {ticket.category.title === "-" ? "Kategorisiz" : ticket.category.title}
     </a>
   </td>
@@ -48,8 +46,6 @@
 
   import Date from "$lib/component/Date.svelte";
   import TicketStatus from "$lib/component/TicketStatus.svelte";
-
-  import tooltip from "$lib/tooltip.util";
 
   export let ticket;
   export let checkedList;

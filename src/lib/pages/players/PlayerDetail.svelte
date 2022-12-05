@@ -13,25 +13,25 @@
       <a
         class="btn btn-link link-danger"
         href="javascript:void(0);"
+        use:tooltip="{['Sil', { placement: 'bottom' }]}"
         on:click="{() => showConfirmBanPlayerModal(data.player)}">
         <i class="fas fa-trash"></i>
-        <span class="ms-2 d-lg-inline d-none">Sil</span>
       </a>
       {#if data.player.isBanned}
         <a
           class="btn btn-link link-danger"
           href="javascript:void(0);"
+          use:tooltip="{['Yasağı Kaldır', { placement: 'bottom' }]}"
           on:click="{() => showUnbanPlayerModal(data.player)}">
           <i class="fas fa-gavel"></i>
-          <span class="ms-2 d-lg-inline d-none">Yasağı Kaldır</span>
         </a>
       {:else}
         <a
           class="btn btn-link link-danger"
           href="javascript:void(0);"
+          use:tooltip="{['Yasakla', { placement: 'bottom' }]}"
           on:click="{() => showConfirmBanPlayerModal(data.player)}">
           <i class="fas fa-gavel"></i>
-          <span class="ms-2 d-lg-inline d-none">Yasakla</span>
         </a>
       {/if}
       {#if !data.player.isEmailVerified}
@@ -45,22 +45,20 @@
           on:click="{sendVerification}"
           class:disabled="{sendingVerificationMail}">
           <i class="fas fa-envelope"></i>
-          <span class="ms-2 d-lg-inline d-none">Doğrula</span>
         </a>
       {/if}
       <a
         class="btn btn-link"
         href="javascript:void(0);"
+        use:tooltip="{['Yetkilendir', { placement: 'bottom' }]}"
         on:click="{() => showAuthorizePlayerModal(data.player)}">
         <i class="fas fa-user-circle"></i>
-        <span class="ms-2 d-lg-inline d-none">Yetkilendir</span>
       </a>
       <a
         class="btn btn-primary"
         href="javascript:void(0);"
         on:click="{() => showEditPlayerModal(data.player)}">
-        <i class="fas fa-pencil-alt"></i>
-        <span class="ms-2 d-lg-inline d-none">Düzenle</span>
+        <i class="fas fa-pencil-alt me-2"></i> Düzenle
       </a>
     </div>
   </div>
@@ -82,17 +80,10 @@
           <h6 class="text-muted">{data.player.email}</h6>
 
           {#if data.player.isBanned}
-            <div class="badge bg-danger text-white">Yasaklı</div>
-            <a
-              class="badge bg-light text-black rounded-pill"
-              href="{base}/players/by-perm-group/{data.player.permissionGroup}">
-              {data.player.permissionGroup === "-"
-                ? "Oyuncu"
-                : data.player.permissionGroup}
-            </a>
+            <div class="text-danger">Yasaklı</div>
           {:else}
             <a
-              class="badge bg-light text-black rounded-pill"
+              title="Filtrele"
               href="{base}/players/by-perm-group/{data.player.permissionGroup}">
               {data.player.permissionGroup === "-"
                 ? "Oyuncu"
@@ -123,16 +114,15 @@
                     <td class="align-middle text-nowrap">
                       <a
                         href="{base}/tickets/ticket/{ticket.id}"
-                        title="Talebi Görüntüle">#{ticket.id} {ticket.title}</a>
+                        title="Görüntüle">#{ticket.id} {ticket.title}</a>
                     </td>
                     <td class="align-middle text-nowrap">
                       <a
-                        use:tooltip="{['Filtrele', { placement: 'bottom' }]}"
+                        title="Filtrele"
                         href="/tickets/category/{ticket.category.url}">
-                        <span class="badge rounded-pill bg-light text-black">
-                          {ticket.category.title === "-"
-                            ? "Kategorisiz"
-                            : ticket.category.title}</span>
+                        {ticket.category.title === "-"
+                          ? "Kategorisiz"
+                          : ticket.category.title}
                       </a>
                     </td>
                     <td class="align-middle text-nowrap">

@@ -66,15 +66,10 @@
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    <a href="{base}/posts/category/{post.category.url}">
-      <span
-        class="badge bg-light text-black rounded-pill"
-        class:text-dark="{post.category.title === '-'}"
-        style="{post.category.title === '-'
-          ? ''
-          : 'background: #' + post.category.color}">
-        {post.category.title === "-" ? "Kategorisiz" : post.category.title}
-      </span>
+    <a
+      title="Filtrele"
+      href="{base}/posts/category/{post.category.url}">
+      {post.category.title === "-" ? "Kategorisiz" : post.category.title}
     </a>
   </td>
   <td class="align-middle text-nowrap">{post.views}</td>

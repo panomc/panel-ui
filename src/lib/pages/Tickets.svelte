@@ -96,6 +96,7 @@
                 <th class="align-middle" scope="col">
                   <div class="form-check">
                     <input
+                      title="Tümünü Seç"
                       class="form-check-input"
                       on:click="{onSelectAllClick}"
                       checked="{isAllTicketsSelected(

@@ -2,19 +2,19 @@
   <a href="{base}/tickets/waitingReply"
     ><span
       class="badge bg-mint text-white rounded-pill"
-      use:tooltip="{['Filtrele', { placement: 'bottom' }]}">Yeni</span
+      title="Filtrele">Yeni</span
     ></a>
 {:else if status === TicketStatuses.REPLIED}
   <a href="{base}/tickets"
     ><span
       class="badge bg-sunflower text-white rounded-pill"
-      use:tooltip="{['Filtrele', { placement: 'bottom' }]}">Yanıtlandı</span
+      title="Filtrele">Yanıtlandı</span
     ></a>
 {:else if status === TicketStatuses.CLOSED}
   <a href="{base}/tickets/closed"
     ><span
       class="badge bg-bittersweet text-white rounded-pill"
-      use:tooltip="{['Filtrele', { placement: 'bottom' }]}">Kapalı</span
+      title="Filtrele">Kapalı</span
     ></a>
 {/if}
 
@@ -28,8 +28,6 @@
 
 <script>
   import { base } from "$app/paths";
-
-  import tooltip from "$lib/tooltip.util";
 
   export let status = TicketStatuses.NEW;
 </script>

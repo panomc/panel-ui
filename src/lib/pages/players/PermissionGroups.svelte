@@ -50,7 +50,7 @@
                 </th>
                 <td class="align-middle text-nowrap">
                   <a
-                    title="Görüntüle"
+                    title="Düzenle"
                     href="{base}/players/perm-groups/detail/{permissionGroup.id}"
                     >{permissionGroup.name}</a>
                 </td>

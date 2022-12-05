@@ -68,12 +68,11 @@
   <td class="align-middle text-nowrap text-capitalize">
     <a
       title="Filtrele"
-      class="badge bg-light text-black rounded-pill"
       href="{base}/players/by-perm-group/{player.permissionGroup}">
       {player.permissionGroup === "-" ? "Oyuncu" : player.permissionGroup}
     </a>
   </td>
-  <td class="align-middle text-nowrap">
+  <!-- <td class="align-middle text-nowrap">
     {#if player.isBanned}
       <div class="badge bg-danger text-white">Yasaklı</div>
     {:else}
@@ -83,7 +82,7 @@
         <span>Çevrimiçi</span>
       </div>
     {/if}
-  </td>
+  </td> -->
   <td class="align-middle text-nowrap">10 dakika önce</td>
   <td class="align-middle text-nowrap">
     <Date time="{player.registerDate}" />
