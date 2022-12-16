@@ -1,7 +1,5 @@
 <!-- Dashboard Page -->
 <div class="container">
-  <button class="btn btn-primary" on:click="{showServerRequestModal}"
-    >Show Server Request Modal</button>
   <!-- Welcome Alerts -->
   {#if data.gettingStartedBlocks.welcomeBoard}
     <div
@@ -343,7 +341,6 @@
   // import TrafficChart from "$lib/component/charts/Dashboard/TrafficChart.svelte";
   import TicketStatus from "$lib/component/TicketStatus.svelte";
   import Date from "$lib/component/Date.svelte";
-  import { show as showServerRequestModal } from "$lib/component/modals/ServerRequestModal.svelte";
 
   export let data;
   let reloading = false;
