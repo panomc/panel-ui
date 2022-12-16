@@ -134,7 +134,7 @@
             if (body.server.permissionGranted) {
               setTimeout(() => {
                 hide();
-              }, 250);
+              }, 500);
               showToast(ExpiredServerConnectRequestToast);
 
               return;
@@ -145,7 +145,7 @@
           } else if (body.result === "error") {
             setTimeout(() => {
               hide();
-            }, 250);
+            }, 500);
             showToast(ExpiredServerConnectRequestToast);
           } else reject();
         })
