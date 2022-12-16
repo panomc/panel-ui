@@ -23,7 +23,7 @@
 
   <NotificationContainer />
   <ToastContainer />
-  <ServerRequestModal/>
+  <ServerRequestModal />
 </App>
 
 <script context="module">
@@ -43,23 +43,39 @@
   import { base } from "$app/paths";
   import { browser } from "$app/environment";
 
+  import { show as showServerRequestModal } from "$lib/component/modals/ServerRequestModal.svelte";
+
   function initNotificationListeners() {
     addListener("NEW_TICKET", (notification) => {
-      const { properties: {id} } = notification;
+      const {
+        properties: { id },
+      } = notification;
 
       goto(base + "/tickets/ticket/" + id);
     });
 
     addListener("NEW_TICKET_MESSAGE", (notification) => {
-      const { properties: {id} } = notification;
+      const {
+        properties: { id },
+      } = notification;
 
       goto(base + "/tickets/ticket/" + id);
     });
 
     addListener("TICKET_CLOSED_BY_USER", (notification) => {
-      const { properties: {id} } = notification;
+      const {
+        properties: { id },
+      } = notification;
 
       goto(base + "/tickets/ticket/" + id);
+    });
+
+    addListener("SERVER_CONNECT_REQUEST", (notification) => {
+      const {
+        properties: { id },
+      } = notification;
+
+      showServerRequestModal(id)
     });
   }
 
@@ -101,7 +117,7 @@
     await initLanguage(basicData.locale);
 
     if (browser) {
-      initNotificationListeners()
+      initNotificationListeners();
     }
 
     setDefaults();
