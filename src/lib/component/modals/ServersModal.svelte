@@ -88,7 +88,7 @@
       <!-- No Server -->
       {#if $servers.length === 0 && !$serverListLoading}
         <div
-          class="container text-center animate__animated animate__zoomIn d-none">
+          class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-cube fa-3x m-3 text-dark text-opacity-25"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
