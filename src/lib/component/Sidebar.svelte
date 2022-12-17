@@ -44,9 +44,8 @@
       {#if $sidebarTabsState === "game"}
         <button
           class="btn btn-sm btn-aqua"
-          data-bs-target="#showServers"
-          data-bs-toggle="modal"
-          type="button">
+          type="button"
+          on:click="{showServersModal}">
           Sunucuları Görüntüle
         </button>
       {/if}
@@ -106,7 +105,9 @@
   import SiteNavigationMenu from "./sidebar/SiteNavigationMenu.svelte";
   import ServerNavigationMenu from "./sidebar/ServerNavigationMenu.svelte";
 
-  import ServersModal from "./modals/ServersModal.svelte";
+  import ServersModal, {
+    show as showServersModal,
+  } from "./modals/ServersModal.svelte";
   import ConnectServerModal from "./modals/ConnectServerModal.svelte";
   import RemoveServerModal from "./modals/RemoveServerModal.svelte";
   import { UI_URL } from "$lib/variables.js";
