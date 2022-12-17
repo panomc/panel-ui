@@ -37,29 +37,14 @@
         </label>
         <div class="col col-form-label">
           <div class="row align-items-center">
-            <div class="col-6">
-              {#if showSpecialIpAddressField}
-                <input
-                  id="ipAddress"
-                  class="form-control"
-                  placeholder="play.server.com"
-                  type="text"
-                  name="ipAddress"
-                  bind:value="{data.serverIpAddress}" />
-              {:else}
-                <select id="ipAddress" class="form-select">
-                  <option selected>Seçilmedi</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
-              {/if}
-            </div>
-            <div class="col-6">
-              <a href="javascript:void(0);" on:click="{toggleIpAddressField}"
-                >{showSpecialIpAddressField
-                  ? "Sunucu Listesinden Seç"
-                  : "Özel Adres Kullan"}</a>
+            <div class="col">
+              <input
+                id="ipAddress"
+                class="form-control"
+                placeholder="play.server.com"
+                type="text"
+                name="ipAddress"
+                bind:value="{data.serverIpAddress}" />
             </div>
           </div>
         </div>
@@ -71,7 +56,7 @@
         </label>
         <div class="col col-form-label">
           <div class="row align-items-center">
-            <div class="col-6">
+            <div class="col">
               <input
                 id="supportEmailAddress"
                 class="form-control"
@@ -276,7 +261,6 @@
     faviconFiles.length === 0 &&
     websiteLogoFiles.length === 0;
 
-  let showSpecialIpAddressField = true;
   let keywordInputError = false;
 
   let favicon = "/api/favicon";
@@ -409,10 +393,6 @@
 
   function removeKeyWord(index) {
     data.keywords = data.keywords.remove(index);
-  }
-
-  function toggleIpAddressField() {
-    showSpecialIpAddressField = !showSpecialIpAddressField;
   }
 
   Array.prototype.equals = function (array) {
