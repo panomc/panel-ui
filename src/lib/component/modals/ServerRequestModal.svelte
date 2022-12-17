@@ -33,7 +33,7 @@
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h6 class="card-title">SUNUCU IP</h6>
+                  <h6 class="card-title">{$server.host}:{$server.port}</h6>
                   <p class="card-text text-muted">
                     {$server.playerCount}/{$server.maxPlayerCount}
                   </p>
