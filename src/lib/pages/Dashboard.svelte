@@ -313,6 +313,10 @@
       ticketCount: 0,
       openTicketCount: 0,
       tickets: [],
+      adminCount: 0,
+      connectedServerCount: 0,
+      newRegisterCount: 0,
+      period: "",
       websiteActivityDataList: {},
     };
 
