@@ -127,7 +127,7 @@
   function initData(serverId) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.get({
-        path: `/api/servers/${serverId}`,
+        path: `/api/panel/servers/${serverId}`,
       })
         .then((body) => {
           if (body.result === "ok") {
@@ -165,7 +165,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post({
-        path: `/api/servers/${$server.id}/accept`,
+        path: `/api/panel/servers/${$server.id}/accept`,
       })
         .then((body) => {
           $submitLoading = false;
@@ -190,7 +190,7 @@
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post({
-        path: `/api/servers/${$server.id}/reject`,
+        path: `/api/panel/servers/${$server.id}/reject`,
       })
         .then((body) => {
           $submitLoading = false;
