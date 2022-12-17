@@ -49,7 +49,7 @@
             </a>
 
             <div
-              class="notifications dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
+              class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
               <h6 class="dropdown-header">
                 Bildirimler {$notificationsCount === 0
                   ? ""
@@ -70,12 +70,12 @@
                     class="list-group-item list-group-item-action  d-flex flex-row w-100"
                     class:notification-unread="{notification.status ===
                       'NOT_READ'}">
-                    <div class="col-auto">
-                      <i class="fa fa-bell mx-3 my-3 text-primary"></i>
+                    <div
+                      class="col-auto p-3 d-flex align-items-center justify-content-center">
+                      <i class="fa fa-bell"></i>
                     </div>
-                    <div class="col">
-                      <span class="text-wrap text-dark"
-                        >{notification.typeId}</span>
+                    <div class="col text-wrap pe-3">
+                      {notification.typeId}
                       <small class="text-gray d-block">
                         {getTime(checkTime, parseInt(notification.date), "")}
                       </small>
