@@ -73,7 +73,7 @@
                       height="64"
                       width="64"
                       alt="{server.name}" />
-                    <h6 class="card-title">SUNUCU IP</h6>
+                    <h6 class="card-title">{server.host}:{server.port}</h6>
                     <p class="card-text text-muted">{server.playerCount}/{server.maxPlayerCount}</p>
                     <small class="badge bg-white text-black rounded-pill"
                       >{server.type}</small>
