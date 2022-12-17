@@ -14,6 +14,7 @@
             <button
               class="btn btn-secondary btn-sm"
               data-bs-target="#connectServer"
+              data-bs-toggle="modal"
               on:click="{hide}">
               <i class="fa-solid fa-plus"></i>
               <span class="d-lg-inline d-none ms-2"> Sunucu Bağla</span>
