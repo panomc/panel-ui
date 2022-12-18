@@ -6,7 +6,7 @@
       role="alert"
       aria-live="assertive"
       aria-atomic="true"
-      on:click="{() => onNotificationClick(notification)}">
+      on:click="{() => onClick(notification)}">
       <div class="toast-header bg-primary text-white">
         <strong class="me-auto">Pano</strong>
         <small>{getTime(checkTime, parseInt(notification.date), "")}</small>
@@ -25,6 +25,7 @@
   import { get, writable } from "svelte/store";
 
   const notifications = writable([]);
+  const notificationToasts = writable({});
 
   Array.prototype.insert = function (index, item) {
     this.splice(index, 0, item);
@@ -42,6 +43,19 @@
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
+  function deleteFromNotifications(id) {
+    notifications.update((notifications) => {
+      const foundNotification = notifications.find(
+        (notification) => notification.id === id
+      );
+
+      notifications.remove(notifications.indexOf(foundNotification));
+      delete notificationToasts[id];
+
+      return notifications;
+    });
+  }
+
   export async function show(id) {
     while (!window.bootstrap) {
       await delay(50);
@@ -56,20 +70,19 @@
     if (notificationElement) {
       const toast = new window.bootstrap.Toast(notificationElement);
 
+      notificationToasts[id] = toast;
+
       toast.show();
 
       notificationElement.addEventListener("hidden.bs.toast", () => {
-        notifications.update((notifications) => {
-          const foundNotification = notifications.find(
-            (notification) => notification.id === id
-          );
-
-          notifications.remove(notifications.indexOf(foundNotification));
-
-          return notifications;
-        });
+        deleteFromNotifications(id);
       });
     }
+  }
+
+  export async function hide(id) {
+    notificationToasts[id].hide();
+    deleteFromNotifications(id);
   }
 </script>
 
@@ -188,6 +201,22 @@
     const id = quickNotificationProcessID;
 
     getQuickNotifications(id);
+  }
+
+  function markRead(id) {
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post({
+        path: `/api/panel/notifications/${id}/read`,
+      }).catch(() => {
+        reject();
+      });
+    });
+  }
+
+  function onClick(notification) {
+    markRead(notification.id);
+    onNotificationClick(notification);
+    hide(notification.id)
   }
 
   onMount(() => {
