@@ -26,8 +26,7 @@
               class="form-control text-center mb-2"
               id="confirmRemoveServerPassword"
               placeholder="Pano Hesabı Şifreniz"
-              type="password"
-              v-model="removingServerForm.password" />
+              type="password" />
 
             <small
               class="form-text text-danger d-inline">
