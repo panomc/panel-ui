@@ -35,7 +35,7 @@
           </thead>
           <tbody>
             {#each data.permissionGroups as permissionGroup, index (permissionGroup)}
-              <tr>
+              <tr class:table-primary="{permissionGroup.selected}">
                 <th scope="row" class="align-middle">
                   {#if permissionGroup.name !== "admin"}
                     <a
@@ -148,6 +148,7 @@
   import ConfirmDeletePermissionGroupModal, {
     setCallback as setDeletePermissionGroupModalCallback,
     show as showDeletePermissionGroupModal,
+    onHide as onDeletePermissionGroupModalHide
   } from "$lib/component/modals/ConfirmDeletePermissionGroupModal.svelte";
 
   import Pagination from "$lib/component/Pagination.svelte";
@@ -180,16 +181,29 @@
     });
   }
 
+  onDeletePermissionGroupModalHide((newPermissionGroup) => {
+    data.permissionGroups.forEach((permissionGroup) => {
+      if (permissionGroup.id === newPermissionGroup.id) {
+        permissionGroup.selected = false;
+      }
+    });
+
+    data.permissionGroups = data.permissionGroups;
+  });
+
   function onShowDeletePermissionGroupModalClick(permissionGroup) {
+    data.permissionGroups[data.permissionGroups.indexOf(permissionGroup)].selected = true;
     showDeletePermissionGroupModal(permissionGroup);
   }
 
-  setDeletePermissionGroupModalCallback((permissionGroup) => {
-    if (data.permissionGroups.indexOf(permissionGroup) !== -1) {
-      data.permissionGroups[
-        data.permissionGroups.indexOf(permissionGroup)
-      ].selected = false;
-    }
+  setDeletePermissionGroupModalCallback((newPermissionGroup) => {
+    data.permissionGroups.forEach((permissionGroup) => {
+      if (permissionGroup.id === newPermissionGroup.id) {
+        permissionGroup.selected = false;
+      }
+    });
+
+    data.permissionGroups = data.permissionGroups;
 
     reloadData();
   });
