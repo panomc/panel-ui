@@ -79,7 +79,7 @@
     });
   }
 
-  function getBasicData() {
+  export function getBasicData() {
     return new Promise((resolve, reject) => {
       ApiUtil.get({ path: "/api/panel/basicData" })
         .then((body) => {

@@ -30,7 +30,8 @@ export const website = writable({});
 export const currentServerPlatformMatchKey = writable("");
 export const platformKeyRefreshedTime = writable(new Date().getTime());
 export const platformAddress = writable("");
-
+export const mainServer = writable(null);
+export const selectedServer = writable(null);
 export const notificationsCount = writable(0);
 export const quickNotifications = writable([]);
 
@@ -130,4 +131,11 @@ export function initializeBasicData(data) {
   platformKeyRefreshedTime.set(data.platformServerMatchKeyTimeStarted);
   platformAddress.set(data.platformHostAddress);
   notificationsCount.set(data.notificationCount);
+  mainServer.set(data.mainServer);
+
+  if (data.selectedServer) {
+    selectedServer.set(data.selectedServer);
+  } else {
+    selectedServer.set(data.mainServer);
+  }
 }

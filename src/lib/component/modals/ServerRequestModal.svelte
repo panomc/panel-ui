@@ -160,6 +160,8 @@
   import AcceptedServerConnectRequestToast from "$lib/component/toasts/AcceptedServerConnectRequestToast.svelte";
   import RejectedServerConnectRequestToast from "$lib/component/toasts/RejectedServerConnectRequestToast.svelte";
 
+  import { getBasicData } from "$lib/layouts/MainLayout.svelte";
+
   function acceptServer() {
     $submitLoading = true;
 
@@ -172,6 +174,7 @@
 
           if (body.result === "ok") {
             callback($server);
+            getBasicData();
             hide();
             showToast(AcceptedServerConnectRequestToast);
           } else if (body.result === "error") {
