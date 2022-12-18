@@ -36,60 +36,49 @@
       </div>
 
       <div class="modal-body">
-        {#if $serverListLoading}
+        {#if $loading}
           <div class="spinner-border text-primary" role="status"></div>
-        {:else}
-          <div class="row">
-            <!--            &lt;!&ndash; Server Card Selected &ndash;&gt;-->
-            <!--            <div class="col-xl-3 col-6 mb-2">-->
-            <!--              <a-->
-            <!--                href="#"-->
-            <!--                class="card bg-light text-bg-light border border-3 border-primary animate__animated animate__fadeIn">-->
-            <!--                <div class="card-body text-center">-->
-            <!--                  <img-->
-            <!--                    src="https://icons.iconarchive.com/icons/chrisl21/minecraft/64/Crafting-Table-icon.png"-->
-            <!--                    class="rounded mb-3"-->
-            <!--                    height="64"-->
-            <!--                    width="64"-->
-            <!--                    alt="SUNUCU ADI" />-->
-            <!--                  <h6 class="card-title">SUNUCU IP</h6>-->
-            <!--                  <p class="card-text text-muted">32/140</p>-->
-            <!--                  <small class="badge bg-white text-black rounded-pill"-->
-            <!--                    >Spigot</small>-->
-            <!--                </div>-->
-            <!--              </a>-->
-            <!--            </div>-->
-            {#each $servers as server, index (server)}
-              <!-- Server Card Unselected -->
-              <div class="col-xl-3 col-6 mb-2">
-                <a
-                  href="javascript:void(0);"
-                  class="card bg-light text-bg-light border-3 animate__animated animate__fadeIn">
-                  <div class="card-body text-center">
-                    <img
-                      src="{server.favicon
-                    ? server.favicon
-                    : 'https://icons.iconarchive.com/icons/chrisl21/minecraft/64/Crafting-Table-icon.png'}"
-                      class="rounded mb-3"
-                      height="64"
-                      width="64"
-                      alt="{server.name}" />
-                    <h6 class="card-title">{server.host}:{server.port}</h6>
-                    <p class="card-text text-muted">{server.playerCount}/{server.maxPlayerCount}</p>
-                    <small class="badge bg-white text-black rounded-pill"
-                      >{server.type}</small>
-                  </div>
-                </a>
-              </div>
-            {/each}
-          </div>
         {/if}
+
+        <div class="row" class:d-none="{$loading}">
+          {#each $servers as server, index (server)}
+            <!-- Server Card Unselected -->
+            <div class="col-xl-3 col-6 mb-2">
+              <a
+                href="javascript:void(0);"
+                on:click="{() => onSelect(server)}"
+                class="card bg-light text-bg-light animate__animated animate__fadeIn"
+                class:border="{$selectedServer &&
+                  $selectedServer.id === server.id}"
+                class:border-3="{$selectedServer &&
+                  $selectedServer.id === server.id}"
+                class:border-primary="{$selectedServer &&
+                  $selectedServer.id === server.id}">
+                <div class="card-body text-center">
+                  <img
+                    src="{server.favicon
+                      ? server.favicon
+                      : 'https://icons.iconarchive.com/icons/chrisl21/minecraft/64/Crafting-Table-icon.png'}"
+                    class="rounded mb-3"
+                    height="64"
+                    width="64"
+                    alt="{server.name}" />
+                  <h6 class="card-title">{server.host}:{server.port}</h6>
+                  <p class="card-text text-muted">
+                    {server.playerCount}/{server.maxPlayerCount}
+                  </p>
+                  <small class="badge bg-white text-black rounded-pill"
+                    >{server.type}</small>
+                </div>
+              </a>
+            </div>
+          {/each}
+        </div>
       </div>
 
       <!-- No Server -->
-      {#if $servers.length === 0 && !$serverListLoading}
-        <div
-          class="container text-center animate__animated animate__zoomIn">
+      {#if $servers.length === 0 && !$loading}
+        <div class="container text-center animate__animated animate__zoomIn">
           <i class="fas fa-cube fa-3x m-3 text-dark text-opacity-25"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
@@ -111,12 +100,12 @@
   let modal;
 
   const servers = writable([]);
-  const serverListLoading = writable(true);
+  const loading = writable(true);
 
   export function show() {
     modal = new window.bootstrap.Modal(document.getElementById(dialogID));
 
-    serverListLoading.set(true);
+    loading.set(true);
 
     modal.show();
 
@@ -145,10 +134,41 @@
         .then((body) => {
           if (body.result === "ok") {
             servers.set(body.servers);
-            serverListLoading.set(false);
+            loading.set(false);
           } else reject();
         })
         .catch(() => {
+          reject();
+        });
+    });
+  }
+</script>
+
+<script>
+  import { selectedServer } from "$lib/Store.js";
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
+  import ServerNotExistsToast from "$lib/component/toasts/ServerNotExistsToast.svelte";
+
+  function onSelect(server) {
+    loading.set(true);
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.post({
+        path: `/api/panel/servers/${server.id}/select`,
+      })
+        .then((body) => {
+          if (body.result === "ok") {
+            loading.set(false);
+            $selectedServer = server
+            hide()
+
+          } else if (body.error && body.error === "NOT_EXISTS") {
+            showToast(ServerNotExistsToast);
+            initData();
+          } else reject();
+        })
+        .catch((err) => {
+          console.log(err);
           reject();
         });
     });
