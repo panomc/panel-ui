@@ -1,4 +1,4 @@
-<nav class="sidebar-nav navbar-dark" v-if="sidebarTabsState === 'game'">
+<nav class="sidebar-nav navbar-dark">
   <div class="container text-center animate__animated animate__zoomIn">
     {#if $selectedServer}
       Seçilmiş olan sunucu: {$selectedServer.name}

@@ -30,8 +30,7 @@
               v-model="removingServerForm.password" />
 
             <small
-              class="form-text text-danger d-inline"
-              v-if="removingServerForm.error.code !== ''">
+              class="form-text text-danger d-inline">
               <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i>
               <!--              {{ removingServerForm.error.code }}-->
             </small>
@@ -57,10 +56,9 @@
             type="submit">
             <div
               class="spinner-border spinner-border-sm text-white"
-              role="status"
-              v-if="removingServerForm.removing">
+              role="status">
             </div>
-            <span v-if="!removingServerForm.removing">Evet</span>
+            <span>Evet</span>
           </button>
         </div>
       </form>
