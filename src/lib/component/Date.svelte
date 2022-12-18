@@ -6,7 +6,11 @@
     { placement: 'bottom' },
   ]}">
   <slot>
-    {formatRelative(new Date(parseInt(date)), new Date()).capitalize()}
+    {#if relativeFormat}
+      {formatRelative(new Date(parseInt(date)), new Date()).capitalize()}
+    {:else}
+      {format(new Date(parseInt(date)), "dd MMMM yyyy")}
+    {/if}
   </slot>
 </span>
 
@@ -20,6 +24,7 @@
   };
 
   export let time;
+  export let relativeFormat = true;
 
   $: date = time;
 </script>
