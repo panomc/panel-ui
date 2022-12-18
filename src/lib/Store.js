@@ -31,7 +31,6 @@ export const currentServerPlatformMatchKey = writable("");
 export const platformKeyRefreshedTime = writable(new Date().getTime());
 export const platformAddress = writable("");
 
-export const servers = writable([]);
 export const notificationsCount = writable(0);
 export const quickNotifications = writable([]);
 
@@ -130,6 +129,5 @@ export function initializeBasicData(data) {
   currentServerPlatformMatchKey.set(data.platformServerMatchKey);
   platformKeyRefreshedTime.set(data.platformServerMatchKeyTimeStarted);
   platformAddress.set(data.platformHostAddress);
-  servers.set(data.servers);
   notificationsCount.set(data.notificationCount);
 }

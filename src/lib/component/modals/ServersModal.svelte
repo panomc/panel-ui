@@ -101,7 +101,7 @@
 <script context="module">
   import { writable } from "svelte/store";
 
-  import { showNetworkErrorOnCatch, servers } from "$lib/Store.js";
+  import { showNetworkErrorOnCatch } from "$lib/Store.js";
   import ApiUtil from "$lib/api.util.js";
 
   const dialogID = "serversModal";
@@ -110,6 +110,7 @@
   let hideCallback = () => {};
   let modal;
 
+  const servers = writable([]);
   const serverListLoading = writable(true);
 
   export function show() {
