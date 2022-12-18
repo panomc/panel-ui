@@ -162,7 +162,7 @@
               </tr>
               <tr>
                 <td>Son Giriş</td>
-                <td> last login data </td>
+                <td><Date time="{data.player.lastLoginDate}" /></td>
               </tr>
               <tr>
                 <td>Kayıt</td>
@@ -215,6 +215,7 @@
         username: "",
         isBanned: false,
         registerDate: 0,
+        lastLoginDate: 0,
         permissionGroup: "",
       },
       tickets: [],
