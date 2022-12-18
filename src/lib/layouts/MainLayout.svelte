@@ -79,9 +79,9 @@
     });
   }
 
-  function getBasicData({ request }) {
+  function getBasicData() {
     return new Promise((resolve, reject) => {
-      ApiUtil.get({ path: "/api/panel/basicData", request })
+      ApiUtil.get({ path: "/api/panel/basicData" })
         .then((body) => {
           if (body.result === "ok") {
             initializeBasicData(body);
@@ -136,7 +136,7 @@
       output.stuff.NETWORK_ERROR = true;
 
       showNetworkErrorOnCatch((resolve, reject) => {
-        getBasicData({ request: event })
+        getBasicData()
           .then(() => {
             resolve();
           })
