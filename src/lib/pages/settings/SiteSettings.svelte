@@ -51,6 +51,25 @@
       </div>
 
       <div class="row mb-3">
+        <label class="col-md-4 col-form-label" for="serverGameVersion">
+          Oyun Sunucu Versiyonu
+        </label>
+        <div class="col col-form-label">
+          <div class="row align-items-center">
+            <div class="col">
+              <input
+                id="serverGameVersion"
+                class="form-control"
+                placeholder="1.8.x"
+                type="text"
+                name="serverGameVersion"
+                bind:value="{data.serverGameVersion}" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
         <label class="col-md-4 col-form-label" for="supportEmailAddress">
           Destek E-Posta Adresi
         </label>
@@ -212,6 +231,7 @@
         websiteDescription: "",
         supportEmail: "",
         serverIpAddress: "",
+        serverGameVersion: "",
         keywords: [],
       },
     };
@@ -256,6 +276,7 @@
     data.oldSettings.websiteDescription === data.websiteDescription &&
     data.oldSettings.supportEmail === data.supportEmail &&
     data.oldSettings.serverIpAddress === data.serverIpAddress &&
+    data.oldSettings.serverGameVersion === data.serverGameVersion &&
     JSON.stringify(data.oldSettings.keywords) ===
       JSON.stringify(data.keywords) &&
     faviconFiles.length === 0 &&
@@ -298,6 +319,7 @@
       formData.append("websiteDescription", data.websiteDescription);
       formData.append("supportEmail", data.supportEmail);
       formData.append("serverIpAddress", data.serverIpAddress);
+      formData.append("serverGameVersion", data.serverGameVersion);
       formData.append("keywords", data.keywords);
 
       if (faviconFiles[0]) {
