@@ -37,12 +37,12 @@
 
       <div class="modal-body">
         {#if $loading}
-          <div class="spinner-border text-primary" role="status"></div>
+          <div class="spinner-grow text-secondary" role="status"></div>
         {/if}
 
         <div class="row" class:d-none="{$loading}">
           {#each $servers as server, index (server)}
-            <!-- Server Card Unselected -->
+            <!-- Server Card -->
             <div class="col-xl-3 col-6 mb-2">
               <a
                 href="javascript:void(0);"
@@ -54,7 +54,12 @@
                   $selectedServer.id === server.id}"
                 class:border-primary="{$selectedServer &&
                   $selectedServer.id === server.id}">
-                <div class="card-body text-center">
+                <div class="card-body text-center position-relative">
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger p-2"
+                    use:tooltip="{['Ana Sunucu', { placement: 'bottom' }]}">
+                    <i class="fa-solid fa-house"></i>
+                  </span>
                   <img
                     src="{server.favicon
                       ? server.favicon
