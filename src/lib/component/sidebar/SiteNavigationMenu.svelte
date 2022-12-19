@@ -1,12 +1,11 @@
-<nav
-  class="sidebar-nav navbar-dark animate__animated animate__slideInLeft">
+<nav class="sidebar-nav navbar-dark animate__animated animate__slideInLeft">
   <ul class="navbar-nav px-3">
     <li class="nav-item p-2">
       <a
         class="nav-link"
         href="{base}/"
         class:active="{matching($page.url.pathname, base)}">
-        <i class="fas fa-chart-pie me-2"></i>
+        <i class="fas fa-chart-simple me-2"></i>
         İstatistikler
       </a>
     </li>

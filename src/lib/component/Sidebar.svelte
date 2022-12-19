@@ -33,7 +33,11 @@
           use:tooltip="{['Website Ayaları', { placement: 'right' }]}" />
       </a>
 
-      <h5 class="text-light">{$website.name}</h5>
+      {#if $sidebarTabsState === "game"}
+        <h5 class="text-light">{$selectedServer.name}</h5>
+      {:else}
+        <h5 class="text-light">{$website.name}</h5>
+      {/if}
 
       {#if $sidebarTabsState === "website"}
         <a href="{UI_URL}" class="btn btn-sm btn-secondary" target="_blank">
@@ -98,6 +102,7 @@
     setSidebarTabsState,
     sidebarTabsState,
     website,
+    selectedServer,
   } from "$lib/Store";
 
   import Bottom from "./sidebar/Bottom.svelte";
