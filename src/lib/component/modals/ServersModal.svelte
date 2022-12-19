@@ -59,16 +59,20 @@
                     src="{server.favicon
                       ? server.favicon
                       : 'https://icons.iconarchive.com/icons/chrisl21/minecraft/64/Crafting-Table-icon.png'}"
-                    class="rounded mb-3"
+                    class="rounded d-block m-auto mb-3"
                     height="64"
                     width="64"
                     alt="{server.name}" />
+                  <small class="badge bg-white text-bg-light rounded-pill"
+                    >{server.type}</small>
+                  <small
+                    class="badge bg-secondary text-bg-dark rounded-pill"
+                    use:tooltip="{['Çevrimiçi', { placement: 'bottom' }]}"
+                    >{server.type}</small>
                   <h6 class="card-title">{server.host}:{server.port}</h6>
                   <p class="card-text text-muted">
                     {server.playerCount}/{server.maxPlayerCount}
                   </p>
-                  <small class="badge bg-white text-black rounded-pill"
-                    >{server.type}</small>
                 </div>
               </a>
             </div>
@@ -92,6 +96,7 @@
 
   import { showNetworkErrorOnCatch } from "$lib/Store.js";
   import ApiUtil from "$lib/api.util.js";
+  import tooltip from "$lib/tooltip.util";
 
   const dialogID = "serversModal";
 
@@ -159,9 +164,8 @@
         .then((body) => {
           if (body.result === "ok") {
             loading.set(false);
-            $selectedServer = server
-            hide()
-
+            $selectedServer = server;
+            hide();
           } else if (body.error && body.error === "NOT_EXISTS") {
             showToast(ServerNotExistsToast);
             initData();
