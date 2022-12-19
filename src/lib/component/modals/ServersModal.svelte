@@ -54,12 +54,12 @@
                   $selectedServer.id === server.id}"
                 class:border-primary="{$selectedServer &&
                   $selectedServer.id === server.id}">
-                <div class="card-body text-center position-relative">
+                <div class="card-body text-center position-relative h-100">
                   {#if server.id === $mainServer.id}
                     <span
-                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger p-2"
+                      class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-primary p-1"
                       use:tooltip="{['Ana Sunucu', { placement: 'bottom' }]}">
-                      <i class="fa-solid fa-house"></i>
+                      <small class="fa-solid fa-house fa-fw fa-xs"></small>
                     </span>
                   {/if}
                   <img
@@ -77,7 +77,8 @@
                       use:tooltip="{['Çevrimiçi', { placement: 'bottom' }]}"
                       >{server.type}</small>
                   {:else}
-                    <small class="badge bg-white text-bg-light rounded-pill mb-3"
+                    <small
+                      class="badge bg-white text-bg-light rounded-pill mb-3"
                       >{server.type}</small>
                   {/if}
                   <h6 class="card-title">{server.host}:{server.port}</h6>
