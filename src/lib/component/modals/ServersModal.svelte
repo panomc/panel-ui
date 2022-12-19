@@ -55,11 +55,13 @@
                 class:border-primary="{$selectedServer &&
                   $selectedServer.id === server.id}">
                 <div class="card-body text-center position-relative">
-                  <span
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger p-2"
-                    use:tooltip="{['Ana Sunucu', { placement: 'bottom' }]}">
-                    <i class="fa-solid fa-house"></i>
-                  </span>
+                  {#if server.id === $mainServer.id}
+                    <span
+                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger p-2"
+                      use:tooltip="{['Ana Sunucu', { placement: 'bottom' }]}">
+                      <i class="fa-solid fa-house"></i>
+                    </span>
+                  {/if}
                   <img
                     src="{server.favicon
                       ? server.favicon
@@ -68,12 +70,16 @@
                     height="64"
                     width="64"
                     alt="{server.name}" />
-                  <small class="badge bg-white text-bg-light rounded-pill"
-                    >{server.type}</small>
-                  <small
-                    class="badge bg-secondary text-bg-dark rounded-pill"
-                    use:tooltip="{['Çevrimiçi', { placement: 'bottom' }]}"
-                    >{server.type}</small>
+
+                  {#if server.status === "ONLINE"}
+                    <small
+                      class="badge bg-secondary text-bg-dark rounded-pill mb-3"
+                      use:tooltip="{['Çevrimiçi', { placement: 'bottom' }]}"
+                      >{server.type}</small>
+                  {:else}
+                    <small class="badge bg-white text-bg-light rounded-pill mb-3"
+                      >{server.type}</small>
+                  {/if}
                   <h6 class="card-title">{server.host}:{server.port}</h6>
                   <p class="card-text text-muted">
                     {server.playerCount}/{server.maxPlayerCount}
@@ -155,7 +161,7 @@
 </script>
 
 <script>
-  import { selectedServer } from "$lib/Store.js";
+  import { mainServer, selectedServer } from "$lib/Store.js";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import ServerNotExistsToast from "$lib/component/toasts/ServerNotExistsToast.svelte";
 
