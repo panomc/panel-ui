@@ -2,7 +2,10 @@
   {#if $selectedServer}
     <ul class="navbar-nav px-3">
       <li class="nav-item p-2">
-        <a class="nav-link" href="/">
+        <a
+          class="nav-link"
+          href="{base}/server/dashboard"
+          class:active="{matching($page.url.pathname, base + '/server/dashboard')}">
           <i class="fas fa-chart-pie me-2"></i>
           İstatistikler
         </a>
@@ -36,4 +39,15 @@
 
 <script>
   import { selectedServer } from "$lib/Store.js";
+
+  import { base } from "$app/paths";
+  import { page } from "$app/stores";
+
+  function matching(path, pathName, startsWith = false) {
+    return (
+      path.toUpperCase() === pathName.toUpperCase() ||
+      path.toUpperCase() === (pathName + "/").toUpperCase() ||
+      (startsWith && path.startsWith(pathName))
+    );
+  }
 </script>
