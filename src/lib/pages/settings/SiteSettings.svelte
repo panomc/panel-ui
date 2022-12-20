@@ -2,7 +2,6 @@
 <div class="tab-pane">
   <div class="card">
     <div class="card-body animate__animated animate__fadeIn">
-      <h5 class="card-title">Website Ayarları</h5>
       <div class="row mb-3">
         <label class="col-md-4 col-form-label" for="siteTitle">
           Site İsmi
