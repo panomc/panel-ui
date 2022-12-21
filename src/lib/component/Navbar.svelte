@@ -63,25 +63,21 @@
                   <small class="text-gray">Yeni bildirim yok.</small>
                 </div>
               {:else}
-                <ul class="list-group">
-                  {#each $quickNotifications as notification, index (notification)}
-                    <a
-                      href="javascript:void(0);"
-                      on:click="{() => onNotificationClick(notification)}"
-                      class="list-group-item list-group-item-action text-wrap link-primary"
-                      class:notification-unread="{notification.status ===
-                        'NOT_READ'}">
-                      {notification.typeId}
-                      <small class="text-gray">
-                        {getTime(checkTime, parseInt(notification.date), "")}
-                      </small>
-                    </a>
-                  {/each}
-                </ul>
+
+              {#each $quickNotifications as notification, index (notification)}
+              <a href="#" class="dropdown-item" class:notification-unread="{notification.status ===
+                'NOT_READ'}">
+                <p class="mb-0">{notification.typeId}</p>
+                <small class="text-dark">
+                  {getTime(checkTime, parseInt(notification.date), "")}
+                </small>
+              </a>
+              {/each}
+              
               {/if}
 
               <a
-                class="dropdown-item text-primary text-center small"
+                class="dropdown-item text-center small"
                 href="{base}/notifications">
                 Tümünü Görüntüle
               </a>
