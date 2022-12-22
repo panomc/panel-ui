@@ -83,7 +83,7 @@
       </div>
     {/if}
   </td> -->
-  <td class="align-middle text-nowrap">10 dakika önce</td>
+  <td class="align-middle text-nowrap"><Date time="{player.lastLoginDate}" /></td>
   <td class="align-middle text-nowrap">
     <Date time="{player.registerDate}" />
   </td>
