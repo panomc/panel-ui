@@ -8,7 +8,7 @@
       aria-atomic="true"
       on:click="{() => onClick(notification)}">
       <div class="toast-header bg-primary text-white">
-        <strong class="me-auto">Pano</strong>
+        <strong class="me-auto">Bildirim</strong>
         <small>{getTime(checkTime, parseInt(notification.date), "")}</small>
         <button
           type="button"

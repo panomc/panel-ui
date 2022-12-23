@@ -20,26 +20,23 @@
     <div class="card-body">
       {#each $notifications as notification, index (notification)}
         <div class="list-group w-100 flex-row align-items-center">
+          <button
+            class="btn-close text-danger btn-sm me-3"
+            use:tooltip="{['Bildirimi Sil', { placement: 'right' }]}"
+            on:click="{deleteNotification(notification.id)}">
+          </button>
           <a
             href="javascript:void(0);"
             on:click={() => onNotificationClick(notification)}
             class="list-group-item list-group-item-action  d-flex flex-row w-100"
             class:notification-unread="{notification.status === 'NOT_READ'}">
-            <div class="col-auto">
-              <i class="fa fa-bell mx-3 my-3 text-primary"></i>
-            </div>
             <div class="col">
-              <span class="text-wrap text-dark">{notification.typeId}</span>
+              <span class="text-wrap">{notification.typeId}</span>
               <small class="text-gray d-block">
                 {getTime(checkTime, parseInt(notification.date), "")}
               </small>
             </div>
           </a>
-          <button
-            class="btn-close text-danger btn-sm mx-2"
-            use:tooltip="{['Bildirimi Sil', { placement: 'right' }]}"
-            on:click="{deleteNotification(notification.id)}">
-          </button>
         </div>
       {/each}
 

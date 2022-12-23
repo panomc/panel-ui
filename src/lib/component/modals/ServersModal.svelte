@@ -56,20 +56,20 @@
                   $selectedServer.id === server.id}">
                 <div class="card-body text-center position-relative h-100">
                   {#if server.id === $mainServer.id}
-                    <span
-                      class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-primary p-1"
+                    <div
+                      class="position-absolute top-0 start-50 translate-middle rounded bg-primary p-1 text-white"
                       use:tooltip="{['Ana Sunucu', { placement: 'bottom' }]}">
-                      <small class="fa-solid fa-house fa-fw fa-xs"></small>
-                    </span>
+                      <i class="fa-solid fa-house"></i>
+                    </div>
                   {/if}
                   <img
                     src="{server.favicon
                       ? server.favicon
                       : 'https://icons.iconarchive.com/icons/chrisl21/minecraft/64/Crafting-Table-icon.png'}"
-                    class="rounded d-block m-auto mb-3"
+                    class="rounded d-block m-auto mb-3 bg-white"
                     height="64"
                     width="64"
-                    alt="{server.name}" />
+                    alt="" />
 
                   {#if server.status === "ONLINE"}
                     <small
