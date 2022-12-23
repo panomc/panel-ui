@@ -37,17 +37,36 @@
 
       <div class="modal-body">
         {#if $loading}
-          <div class="spinner-grow text-secondary" role="status"></div>
+          <div class="col-xl-3 col-6 mb-2">
+            <a href="javascript:void(0);" class="card bg-light">
+              <div class="card-body text-center h-100">
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                  class="rounded d-block m-auto mb-3"
+                  height="64"
+                  width="64"
+                  alt="" />
+                <p class="badge bg-light text-light mb-3">.</p>
+                <h6 class="card-title placeholder-glow">
+                  <span class="placeholder col-7"></span>
+                </h6>
+                <p class="card-text placeholder-glow">
+                  <span class="placeholder col-3"></span>
+                </p>
+              </div>
+            </a>
+          </div>
         {/if}
 
-        <div class="row" class:d-none="{$loading}">
+        <div class="row">
           {#each $servers as server, index (server)}
             <!-- Server Card -->
+
             <div class="col-xl-3 col-6 mb-2">
               <a
                 href="javascript:void(0);"
                 on:click="{() => onSelect(server)}"
-                class="card bg-light text-bg-light animate__animated animate__fadeIn"
+                class="card bg-light animate__animated animate__fadeIn"
                 class:border="{$selectedServer &&
                   $selectedServer.id === server.id}"
                 class:border-3="{$selectedServer &&
@@ -72,14 +91,15 @@
                     alt="" />
 
                   {#if server.status === "ONLINE"}
-                    <small
-                      class="badge bg-secondary text-bg-dark rounded-pill mb-3"
-                      use:tooltip="{['Çevrimiçi', { placement: 'bottom' }]}"
-                      >{server.type}</small>
+                    <p
+                      class="badge bg-secondary text-white rounded-pill mb-3"
+                      use:tooltip="{['Çevrimiçi', { placement: 'bottom' }]}">
+                      {server.type}
+                    </p>
                   {:else}
-                    <small
-                      class="badge bg-white text-bg-light rounded-pill mb-3"
-                      >{server.type}</small>
+                    <p class="badge bg-white text-black rounded-pill mb-3">
+                      {server.type}
+                    </p>
                   {/if}
                   <h6 class="card-title">{server.host}:{server.port}</h6>
                   <p class="card-text text-muted">
