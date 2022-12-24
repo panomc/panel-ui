@@ -67,7 +67,7 @@
               {#each $quickNotifications as notification, index (notification)}
               <a href="#" class="dropdown-item" class:notification-unread="{notification.status ===
                 'NOT_READ'}">
-                <p class="mb-0">{notification.typeId}</p>
+                <p class="mb-0">{notification.type}</p>
                 <small class="text-dark">
                   {getTime(checkTime, parseInt(notification.date), "")}
                 </small>

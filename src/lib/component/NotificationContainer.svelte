@@ -15,7 +15,7 @@
           class="btn-close btn-close-white"
           data-bs-dismiss="toast"></button>
       </div>
-      <div class="toast-body">{notification.typeId}</div>
+      <div class="toast-body">{notification.type}</div>
     </div>
   {/each}
 </div>

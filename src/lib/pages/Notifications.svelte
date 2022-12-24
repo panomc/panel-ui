@@ -31,7 +31,7 @@
             class="list-group-item list-group-item-action  d-flex flex-row w-100"
             class:notification-unread="{notification.status === 'NOT_READ'}">
             <div class="col">
-              <span class="text-wrap">{notification.typeId}</span>
+              <span class="text-wrap">{notification.type}</span>
               <small class="text-gray d-block">
                 {getTime(checkTime, parseInt(notification.date), "")}
               </small>
