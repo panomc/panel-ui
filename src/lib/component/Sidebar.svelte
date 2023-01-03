@@ -33,7 +33,7 @@
           use:tooltip="{['Website Ayaları', { placement: 'right' }]}" />
       </a>
 
-      {#if $sidebarTabsState === "game"}
+      {#if $sidebarTabsState === "game" && $selectedServer}
         <h5 class="text-light">{$selectedServer.name}</h5>
       {:else}
         <h5 class="text-light">{$website.name}</h5>

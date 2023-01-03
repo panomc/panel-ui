@@ -32,7 +32,7 @@
     <div class="container text-center animate__animated animate__zoomIn">
       <i class="fas fa-cube mx-2 fa-3x m-3 text-light text-opacity-25"></i>
 
-      <p class="text-bg-dark">
+      <p class="text-light">
         Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın.
       </p>
 
