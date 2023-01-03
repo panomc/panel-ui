@@ -22,9 +22,9 @@
   <!-- Post categories -->
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between pb-3 align-items-center">
+      <div class="row justify-content-between mb-3 align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title">
+          <h5 class="card-title text-sm-left text-center">
             {data.categoryCount}
             Yazı Kategorisi
           </h5>

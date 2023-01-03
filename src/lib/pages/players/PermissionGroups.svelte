@@ -19,7 +19,7 @@
   <div class="card">
     <div class="card-body">
       <!-- Permissions Table -->
-      <h5 class="card-title mb-md-0">
+      <h5 class="card-title">
         {data.permissionGroupCount} Yetki Grubu
       </h5>
 

@@ -23,7 +23,7 @@
       </div>
       <div class="col-4 d-flex justify-content-center">
         <!-- Page Title -->
-        <h4 class="text-black">
+        <h4 class="text-black text-center">
           {$pageTitle ? $pageTitle : options.DEFAULT_PAGE_TITLE}
         </h4>
       </div>

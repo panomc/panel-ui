@@ -13,7 +13,7 @@
   <!-- All Players -->
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between">
+      <div class="row justify-content-between mb-3">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
             {data.playerCount}

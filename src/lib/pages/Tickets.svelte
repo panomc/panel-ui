@@ -41,9 +41,9 @@
   <!-- All Tickets -->
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between pb-3 align-items-center">
+      <div class="row justify-content-between align-items-center mb-3">
         <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title mb-md-0">
+          <h5 class="card-title">
             {data.ticketCount}
             {data.pageType === PageTypes.WAITING_REPLY
               ? "Yeni"

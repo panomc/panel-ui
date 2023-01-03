@@ -2,7 +2,7 @@
 <article class="container">
   <!-- Action Menu -->
   <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts/categories">
         <i class="fas fa-list-alt me-2"></i>
@@ -23,9 +23,9 @@
 
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between pb-3 align-items-center">
+      <div class="row justify-content-between align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title mb-md-0">
+          <h5 class="card-title">
             {data.postCount}
             {data.pageType === PageTypes.PUBLISHED
               ? "Yayınlanmış"

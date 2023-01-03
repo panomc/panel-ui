@@ -14,8 +14,7 @@
         class="btn btn-secondary"
         type="button"
         on:click="{onCreateCategoryClick}">
-        <i class="fas fa-plus"></i>
-        <span class="d-md-inline d-none ms-2">Kategori Oluştur</span>
+        <i class="fas fa-plus me-2"></i>Kategori Oluştur
       </button>
     </div>
   </div>
@@ -24,7 +23,7 @@
 
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between pb-3 align-items-center">
+      <div class="row justify-content-between mb-3 align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title text-sm-left text-center">
             {data.categoryCount}
