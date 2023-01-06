@@ -32,7 +32,7 @@
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    TicketStatusBadge status="{ticket.status}" />
+    <TicketStatusBadge status="{ticket.status}" />
   </td>
   <td class="align-middle text-nowrap">
     <Date time="{ticket.lastUpdate}" />
