@@ -32,7 +32,7 @@
       </div>
       <!-- No Category -->
       {#if data.categoryCount === 0}
-        <NoContent/>
+        <NoContent />
       {/if}
 
       <!-- Tickets Table -->
@@ -50,44 +50,13 @@
             </thead>
             <tbody>
               {#each data.categories as category, index (category)}
-                <tr class:table-primary="{category.selected}">
-                  <th scope="row" class="align-middle">
-                    <a
-                      title="Sil"
-                      class="btn btn-sm btn-link link-danger"
-                      href="javascript:void(0);"
-                      on:click="{onShowDeletePostCategoryModalClick(index)}">
-                      <i class="fas fa-trash"></i>
-                    </a>
-                  </th>
-                  <td class="align-middle text-nowrap">
-                    <a
-                      data-bs-target="#addEditCategory"
-                      data-bs-toggle="modal"
-                      href="javascript:void(0);"
-                      title="Düzenle"
-                      on:click="{onShowEditCategoryButtonClick(index)}">
-                      {category.title}
-                    </a>
-                  </td>
-                  <td class="align-middle text-nowrap"
-                    >{category.description}</td>
-                  <td class="align-middle">
-                    <a
-                      href="/category/{category.url}"
-                      target="_blank"
-                      title="Görüntüle">
-                      /category/{category.url}
-                    </a>
-                  </td>
-                  <td class="d-none">
-                    <input
-                      value="#{category.color}"
-                      class="form-control form-control-sm bg-transparent"
-                      disabled
-                      type="color" />
-                  </td>
-                </tr>
+                <PostCategoryRow
+                  category="{category}"
+                  index="{index}"
+                  on:editClick="{(event) =>
+                    onShowEditCategoryButtonClick(event.detail.index)}"
+                  on:deleteClick="{(event) =>
+                    onShowDeletePostCategoryModalClick(event.detail.index)}" />
               {/each}
             </tbody>
           </table>
@@ -190,6 +159,7 @@
   } from "$lib/component/modals/ConfirmDeletePostCategoryModal.svelte";
 
   import NoContent from "$lib/component/NoContent.svelte";
+  import PostCategoryRow from "$lib/component/rows/PostCategoryRow.svelte";
 
   export let data;
 
