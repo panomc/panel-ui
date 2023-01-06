@@ -60,7 +60,7 @@
             kategorisine açıldı.</small>
         </div>
         <div class="col-auto">
-          <TicketStatus status="{data.ticket.status}" />
+          <TicketStatusBadge status="{data.ticket.status}" />
         </div>
       </div>
     </div>
@@ -180,7 +180,7 @@
   import ApiUtil from "$lib/api.util.js";
   import { showNetworkErrorOnCatch } from "$lib/Store.js";
 
-  import { TicketStatuses } from "$lib/component/TicketStatus.svelte";
+  import { TicketStatuses } from "$lib/component/badges/TicketStatusBadge.svelte";
   import Editor from "$lib/component/Editor.svelte";
   import { error } from "@sveltejs/kit";
 
@@ -282,7 +282,7 @@
   } from "$lib/component/modals/ConfirmDeleteTicketModal.svelte";
 
   import Date from "$lib/component/Date.svelte";
-  import TicketStatus from "$lib/component/TicketStatus.svelte";
+  import TicketStatusBadge from "$lib/component/badges/TicketStatusBadge.svelte";
 
   export let data;
 

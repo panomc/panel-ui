@@ -32,7 +32,7 @@
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    <TicketStatus status="{ticket.status}" />
+    TicketStatusBadge status="{ticket.status}" />
   </td>
   <td class="align-middle text-nowrap">
     <Date time="{ticket.lastUpdate}" />
@@ -45,7 +45,7 @@
   import { base } from "$app/paths";
 
   import Date from "$lib/component/Date.svelte";
-  import TicketStatus from "$lib/component/TicketStatus.svelte";
+  import TicketStatusBadge from "$lib/component/badges/TicketStatusBadge.svelte";
 
   export let ticket;
   export let checkedList;

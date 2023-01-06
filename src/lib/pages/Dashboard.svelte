@@ -216,7 +216,7 @@
                   </a>
                 </td>
                 <td class="align-middle text-nowrap">
-                  <TicketStatus status="{ticket.status}" />
+                  <TicketStatusBadge status="{ticket.status}" />
                 </td>
                 <td class="align-middle text-nowrap"
                   ><span><Date time="{ticket.lastUpdate}" /></span></td>
@@ -340,7 +340,7 @@
   import WebsiteActivityChart from "$lib/component/charts/Dashboard/WebsiteActivityChart.svelte";
   // import PlayersChart from "$lib/component/charts/Dashboard/PlayersChart.svelte";
   // import TrafficChart from "$lib/component/charts/Dashboard/TrafficChart.svelte";
-  import TicketStatus from "$lib/component/TicketStatus.svelte";
+  import TicketStatusBadge from "$lib/component/badges/TicketStatusBadge.svelte";
   import Date from "$lib/component/Date.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
 

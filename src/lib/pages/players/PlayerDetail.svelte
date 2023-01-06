@@ -130,7 +130,7 @@
                       </a>
                     </td>
                     <td class="align-middle text-nowrap">
-                      <TicketStatus status="{ticket.status}" />
+                      <TicketStatusBadge status="{ticket.status}" />
                     </td>
                     <td class="align-middle text-nowrap"
                       ><span><DateComponent time="{ticket.lastUpdate}" /></span></td>
@@ -281,7 +281,7 @@
     setCallback as setUnbanPlayerModalCallback,
   } from "$lib/component/modals/UnbanPlayerModal.svelte";
 
-  import TicketStatus from "$lib/component/TicketStatus.svelte";
+  import TicketStatusBadge from "$lib/component/badges/TicketStatusBadge.svelte";
   import DateComponent from "$lib/component/Date.svelte";
   import Pagination from "$lib/component/Pagination.svelte";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
