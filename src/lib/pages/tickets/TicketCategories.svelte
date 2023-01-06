@@ -34,7 +34,7 @@
 
       <!-- No Category -->
       {#if data.categoryCount === 0}
-        <NoContent/>
+        <NoContent />
       {/if}
 
       <!-- Tickets Table -->
@@ -50,27 +50,15 @@
             </thead>
             <tbody>
               {#each data.categories as category, index (category)}
-                <tr class:table-primary="{category.selected}">
-                  <th scope="row" class="align-middle">
-                    <a
-                      title="Sil"
-                      class="btn btn-sm btn-link link-danger"
-                      href="javascript:void(0);"
-                      on:click="{onShowDeleteTicketCategoryModalClick(index)}">
-                      <i class="fas fa-trash"></i>
-                    </a>
-                  </th>
-                  <td class="text-nowrap align-middle">
-                    <a
-                      href="javascript:void(0);"
-                      title="Düzenle"
-                      on:click="{onShowEditCategoryButtonClick(index)}">
-                      {category.title}
-                    </a>
-                  </td>
-                  <td class="text-nowrap align-middle"
-                    >{category.description}</td>
-                </tr>
+                <TicketCategoryRow
+                  category="{category}"
+                  index="{index}"
+                  on:editClick="{(event) =>
+                    onShowEditCategoryButtonClick(event.detail.index)}"
+                  on:deleteClick="{(event) =>
+                    onShowDeleteTicketCategoryModalClick(
+                      event.detail.index
+                    )}" />
               {/each}
             </tbody>
           </table>
@@ -173,6 +161,7 @@
   } from "$lib/component/modals/ConfirmDeleteTicketCategoryModal.svelte";
 
   import NoContent from "$lib/component/NoContent.svelte";
+  import TicketCategoryRow from "$lib/component/rows/TicketCategoryRow.svelte";
 
   export let data;
 
