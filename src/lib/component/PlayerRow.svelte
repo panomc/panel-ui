@@ -75,29 +75,41 @@
   <td class="align-middle text-nowrap">
     {#if player.isBanned}
       <div class="badge bg-danger text-white">Yasaklı</div>
+    {:else if isOnline}
+      <div
+        class="badge bg-secondary rounded-pill text-white"
+        use:tooltip="{[(player.inGame ? 'Oyunda' : 'Sitede') + ' Çevrimiçi', { placement: 'bottom' }]}">
+        <span>Çevrimiçi</span>
+      </div>
     {:else}
       <div
         class="badge bg-secondary rounded-pill text-white"
-        use:tooltip="{['Sitede', { placement: 'bottom' }]}">
-        <span>Çevrimiçi</span>
+        use:tooltip="{[getOfflineRelativeDateText(checkTime), { placement: 'bottom' }]}">
+        <span>Çevrimdışı</span>
       </div>
     {/if}
   </td>
-  <td class="align-middle text-nowrap"><Date time="{player.lastLoginDate}" /></td>
+  <td class="align-middle text-nowrap"
+    ><DateComponent time="{player.lastLoginDate}" /></td>
   <td class="align-middle text-nowrap">
-    <Date time="{player.registerDate}" />
+    <DateComponent time="{player.registerDate}" />
   </td>
 </tr>
 
 <script>
   import { base } from "$app/paths";
 
-  import Date from "$lib/component/Date.svelte";
+  import DateComponent from "$lib/component/Date.svelte";
 
   import tooltip from "$lib/tooltip.util";
   import { createEventDispatcher } from "svelte";
+  import { formatRelative } from "date-fns";
 
   export let player;
+  export let checkTime;
+
+  $: isOnline =
+    player.lastActivityTime > Date.now() - 5 * 60 * 1000 || player.inGame;
 
   const dispatch = createEventDispatcher();
 
@@ -116,4 +128,15 @@
   function showUnbanPlayerModal() {
     dispatch("showUnbanPlayerModalClick", { player });
   }
+
+  function getOfflineRelativeDateText(checkTime) {
+    return formatRelative(
+      new Date(parseInt(player.lastActivityTime)),
+      new Date()
+    ).capitalize()
+  }
+
+  String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  };
 </script>

@@ -75,6 +75,7 @@
               {#each data.players as player, index (player)}
                 <PlayerRow
                   player="{player}"
+                  checkTime="{checkTime}"
                   on:showAuthorizePlayerModalClick="{(event) =>
                     onShowAuthorizePlayerModalClick(event.detail.player)}"
                   on:showEditPlayerModalClick="{(event) =>
@@ -204,8 +205,12 @@
   } from "$lib/component/modals/UnbanPlayerModal.svelte";
 
   import PlayerRow from "$lib/component/PlayerRow.svelte";
+  import { onDestroy, onMount } from "svelte";
 
   export let data;
+
+  let checkTime = 0;
+  let interval;
 
   pageTitle.set(
     (data.pageType === PageTypes.HAS_PERM
@@ -348,5 +353,15 @@
     data.players = data.players;
 
     reloadData();
+  });
+
+  onMount(() => {
+    interval = setInterval(() => {
+      checkTime += 1;
+    }, 1000);
+  });
+
+  onDestroy(() => {
+    clearInterval(interval);
   });
 </script>
