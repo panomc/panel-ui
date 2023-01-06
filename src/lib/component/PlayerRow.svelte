@@ -73,43 +73,29 @@
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    {#if player.isBanned}
-      <div class="badge bg-danger text-white">Yasaklı</div>
-    {:else if isOnline}
-      <div
-        class="badge bg-secondary rounded-pill text-white"
-        use:tooltip="{[(player.inGame ? 'Oyunda' : 'Sitede') + ' Çevrimiçi', { placement: 'bottom' }]}">
-        <span>Çevrimiçi</span>
-      </div>
-    {:else}
-      <div
-        class="badge bg-secondary rounded-pill text-white"
-        use:tooltip="{[getOfflineRelativeDateText(checkTime), { placement: 'bottom' }]}">
-        <span>Çevrimdışı</span>
-      </div>
-    {/if}
+    <PlayerStatusBadge
+      banned="{player.isBanned}"
+      lastActivityTime="{player.lastActivityTime}"
+      inGame="{player.inGame}"
+      checkTime="{checkTime}" />
   </td>
   <td class="align-middle text-nowrap"
-    ><DateComponent time="{player.lastLoginDate}" /></td>
+    ><Date time="{player.lastLoginDate}" /></td>
   <td class="align-middle text-nowrap">
-    <DateComponent time="{player.registerDate}" />
+    <Date time="{player.registerDate}" />
   </td>
 </tr>
 
 <script>
+  import { createEventDispatcher } from "svelte";
+
   import { base } from "$app/paths";
 
-  import DateComponent from "$lib/component/Date.svelte";
-
-  import tooltip from "$lib/tooltip.util";
-  import { createEventDispatcher } from "svelte";
-  import { formatRelative } from "date-fns";
+  import Date from "$lib/component/Date.svelte";
+  import PlayerStatusBadge from "$lib/component/badges/PlayerStatusBadge.svelte";
 
   export let player;
   export let checkTime;
-
-  $: isOnline =
-    player.lastActivityTime > Date.now() - 5 * 60 * 1000 || player.inGame;
 
   const dispatch = createEventDispatcher();
 
@@ -128,15 +114,4 @@
   function showUnbanPlayerModal() {
     dispatch("showUnbanPlayerModalClick", { player });
   }
-
-  function getOfflineRelativeDateText(checkTime) {
-    return formatRelative(
-      new Date(parseInt(player.lastActivityTime)),
-      new Date()
-    ).capitalize()
-  }
-
-  String.prototype.capitalize = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1);
-  };
 </script>
