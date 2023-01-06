@@ -72,7 +72,7 @@
       {player.permissionGroup === "-" ? "Oyuncu" : player.permissionGroup}
     </a>
   </td>
-  <!-- <td class="align-middle text-nowrap">
+  <td class="align-middle text-nowrap">
     {#if player.isBanned}
       <div class="badge bg-danger text-white">Yasaklı</div>
     {:else}
@@ -82,7 +82,7 @@
         <span>Çevrimiçi</span>
       </div>
     {/if}
-  </td> -->
+  </td>
   <td class="align-middle text-nowrap"><Date time="{player.lastLoginDate}" /></td>
   <td class="align-middle text-nowrap">
     <Date time="{player.registerDate}" />
