@@ -74,7 +74,16 @@
             class="mb-3 rounded-circle animate__animated animate__zoomIn"
             width="128"
             height="128"
-            src="https://crafthead.net/avatar/{data.player.username}" />
+            class:border="{isOnline}"
+            class:border-5="{isOnline}"
+            class:border-secondary="{isOnline}"
+            src="https://crafthead.net/avatar/{data.player.username}"
+            use:tooltip="{[
+              isOnline
+                ? (data.player.inGame ? 'Oyunda' : 'Sitede') + ' Çevrimiçi'
+                : getOfflineRelativeDateText(checkTime),
+              { placement: 'bottom' },
+            ]}" />
 
           <h3 class="card-title">{data.player.username}</h3>
           <h6 class="text-muted">{data.player.email}</h6>
@@ -129,7 +138,7 @@
                       <TicketStatus status="{ticket.status}" />
                     </td>
                     <td class="align-middle text-nowrap"
-                      ><span><Date time="{ticket.lastUpdate}" /></span></td>
+                      ><span><DateComponent time="{ticket.lastUpdate}" /></span></td>
                   </tr>
                 </tbody>
               {/each}
@@ -162,11 +171,11 @@
               </tr>
               <tr>
                 <td>Son Giriş</td>
-                <td><Date time="{data.player.lastLoginDate}" /></td>
+                <td><DateComponent time="{data.player.lastLoginDate}" /></td>
               </tr>
               <tr>
                 <td>Kayıt</td>
-                <td><Date time="{data.player.registerDate}" /></td>
+                <td><DateComponent time="{data.player.registerDate}" /></td>
               </tr>
             </tbody>
           </table>
@@ -217,6 +226,8 @@
         registerDate: 0,
         lastLoginDate: 0,
         permissionGroup: "",
+        lastActivityTime: 0,
+        inGame: false,
       },
       tickets: [],
       ticketCount: 0,
@@ -250,9 +261,11 @@
 </script>
 
 <script>
+  import { formatRelative } from "date-fns";
+  import { onDestroy, onMount } from "svelte";
+
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { page } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -274,7 +287,7 @@
   } from "$lib/component/modals/UnbanPlayerModal.svelte";
 
   import TicketStatus from "$lib/component/TicketStatus.svelte";
-  import Date from "$lib/component/Date.svelte";
+  import DateComponent from "$lib/component/Date.svelte";
   import Pagination from "$lib/component/Pagination.svelte";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
 
@@ -282,7 +295,15 @@
   import VerificationEmailSentErrorToast from "$lib/component/toasts/VerificationEmailSentErrorToast.svelte";
 
   export let data;
+
   let sendingVerificationMail;
+
+  let checkTime = 0;
+  let interval;
+
+  $: isOnline =
+    data.player.lastActivityTime > Date.now() - 5 * 60 * 1000 ||
+    data.player.inGame;
 
   function reloadData(page = data.page) {
     showNetworkErrorOnCatch((resolve, reject) => {
@@ -360,5 +381,22 @@
 
   setUnbanPlayerModalCallback(() => {
     data.player.isBanned = false;
+  });
+
+  function getOfflineRelativeDateText(checkTime) {
+    return formatRelative(
+      new Date(parseInt(data.player.lastActivityTime)),
+      new Date()
+    ).capitalize();
+  }
+
+  onMount(() => {
+    interval = setInterval(() => {
+      checkTime += 1;
+    }, 1000);
+  });
+
+  onDestroy(() => {
+    clearInterval(interval);
   });
 </script>
