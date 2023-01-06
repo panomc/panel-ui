@@ -35,32 +35,12 @@
           </thead>
           <tbody>
             {#each data.permissionGroups as permissionGroup, index (permissionGroup)}
-              <tr class:table-primary="{permissionGroup.selected}">
-                <th scope="row" class="align-middle">
-                  {#if permissionGroup.name !== "admin"}
-                    <a
-                      class="btn btn-sm btn-link link-danger"
-                      href="javascript:void(0);"
-                      on:click="{() =>
-                        onShowDeletePermissionGroupModalClick(permissionGroup)}"
-                      title="Sil">
-                      <i class="fas fa-trash"></i>
-                    </a>
-                  {/if}
-                </th>
-                <td class="align-middle text-nowrap">
-                  <a
-                    title="Düzenle"
-                    href="{base}/players/perm-groups/detail/{permissionGroup.id}"
-                    >{permissionGroup.name}</a>
-                </td>
-                <td class="align-middle text-nowrap"
-                  >{#if permissionGroup.name === "tayyib" || permissionGroup.name === "admin"}
-                    <i class="fas fa-infinity"></i>
-                  {:else}{permissionGroup.permissionCount}{/if}</td>
-                <td class="align-middle text-nowrap"
-                  >{permissionGroup.userCount}</td>
-              </tr>
+              <PermissionGroupRow
+                permissionGroup="{permissionGroup}"
+                on:deleteClick="{(event) =>
+                  onShowDeletePermissionGroupModalClick(
+                    event.detail.permissionGroup
+                  )}" />
             {/each}
           </tbody>
         </table>
@@ -148,10 +128,11 @@
   import ConfirmDeletePermissionGroupModal, {
     setCallback as setDeletePermissionGroupModalCallback,
     show as showDeletePermissionGroupModal,
-    onHide as onDeletePermissionGroupModalHide
+    onHide as onDeletePermissionGroupModalHide,
   } from "$lib/component/modals/ConfirmDeletePermissionGroupModal.svelte";
 
   import Pagination from "$lib/component/Pagination.svelte";
+  import PermissionGroupRow from "$lib/component/rows/PermissionGroupRow.svelte";
 
   export let data;
 
@@ -192,7 +173,9 @@
   });
 
   function onShowDeletePermissionGroupModalClick(permissionGroup) {
-    data.permissionGroups[data.permissionGroups.indexOf(permissionGroup)].selected = true;
+    data.permissionGroups[
+      data.permissionGroups.indexOf(permissionGroup)
+    ].selected = true;
     showDeletePermissionGroupModal(permissionGroup);
   }
 
