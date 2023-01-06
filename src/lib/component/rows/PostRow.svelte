@@ -97,8 +97,8 @@
 
   import Date from "$lib/component/Date.svelte";
 
-  import tooltip from "$lib/tooltip.util";
-  import { UI_URL } from "$lib/variables";
+  import tooltip from "$lib/tooltip.util.js";
+  import { UI_URL } from "$lib/variables.js";
 
   import { PageTypes } from "$lib/pages/Posts.svelte";
 

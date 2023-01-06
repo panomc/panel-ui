@@ -203,7 +203,7 @@
     onHide as onUnbanPlayerModalHide,
   } from "$lib/component/modals/UnbanPlayerModal.svelte";
 
-  import PlayerRow from "$lib/component/PlayerRow.svelte";
+  import PlayerRow from "$lib/component/rows/PlayerRow.svelte";
 
   import NoContent from "$lib/component/NoContent.svelte";
 

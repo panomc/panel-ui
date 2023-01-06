@@ -154,7 +154,7 @@
     onHide as onEditPlayerModalHide,
   } from "$lib/component/modals/EditPlayerModal.svelte";
 
-  import PlayerRow from "$lib/component/PlayerRow.svelte";
+  import PlayerRow from "$lib/component/rows/PlayerRow.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;

@@ -190,7 +190,7 @@
     show as showDeletePostModal,
     onHide as onDeletePostModalHide,
   } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
-  import PostRow from "$lib/component/PostRow.svelte";
+  import PostRow from "$lib/component/rows/PostRow.svelte";
 
   import {
     show as showToast,

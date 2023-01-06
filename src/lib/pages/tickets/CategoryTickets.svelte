@@ -202,7 +202,7 @@
     onHide as onConfirmDeleteTicketModalHide,
   } from "$lib/component/modals/ConfirmDeleteTicketModal.svelte";
 
-  import TicketRow from "$lib/component/TicketRow.svelte";
+  import TicketRow from "$lib/component/rows/TicketRow.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
