@@ -41,7 +41,7 @@
       {/each}
 
       {#if $notifications.length === 0}
-        <NoContent icon="fas fa-bell fa-3x" text="Yeni bildirim yok." />
+        <NoContent />
       {/if}
 
       {#if $notifications.length < $count && $count > 10 + 10 * page}

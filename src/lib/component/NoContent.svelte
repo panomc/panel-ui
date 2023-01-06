@@ -4,7 +4,7 @@
     <p class="text-light">{text}</p>
   {:else}
     <i class="{icon} text-dark text-opacity-25 m-3"></i>
-    <p class="text-gray">{text}</p>
+    <small class="text-gray d-block mb-3">{text}</small>
   {/if}
 
   <slot></slot>
@@ -13,5 +13,5 @@
 <script>
   export let dark = false;
   export let icon = "fa-solid fa-ghost fa-3x";
-  export let text = "Burada içerik yok.";
+  export let text = "Burası boş.";
 </script>

@@ -38,7 +38,7 @@
               class="nav-link position-relative"
               data-bs-toggle="dropdown"
               role="button"
-              title="Bildirimler">
+              title="Okunmamış Bildirimler">
               <i class="fas fa-bell fa-lg"></i>
               {#if $notificationsCount !== 0}
                 <span
@@ -51,29 +51,27 @@
             <div
               class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
               <h6 class="dropdown-header">
-                Bildirimler {$notificationsCount === 0
+                Yeni Bildirimler {$notificationsCount === 0
                   ? ""
                   : "(" + $notificationsCount + ")"}
               </h6>
 
               {#if $quickNotifications.length === 0}
-                <NoContent
-                  icon="fas fa-bell fa-2x"
-                  text="Yeni bildirim yok."
-                  />
+                <NoContent />
               {:else}
-
-              {#each $quickNotifications as notification, index (notification)}
-              <a href="javascript:void(0);"
-                 on:click="{() => onNotificationClick(notification)}" class="dropdown-item" class:notification-unread="{notification.status ===
-                'NOT_READ'}">
-                <p class="mb-0">{notification.type}</p>
-                <small class="text-dark">
-                  {getTime(checkTime, parseInt(notification.date), "")}
-                </small>
-              </a>
-              {/each}
-              
+                {#each $quickNotifications as notification, index (notification)}
+                  <a
+                    href="javascript:void(0);"
+                    on:click="{() => onNotificationClick(notification)}"
+                    class="dropdown-item"
+                    class:notification-unread="{notification.status ===
+                      'NOT_READ'}">
+                    <p class="mb-0">{notification.type}</p>
+                    <small class="text-dark">
+                      {getTime(checkTime, parseInt(notification.date), "")}
+                    </small>
+                  </a>
+                {/each}
               {/if}
 
               <a

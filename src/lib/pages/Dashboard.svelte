@@ -252,7 +252,7 @@
               <td>{data.ticketCount}</td>
             </tr>
             <tr>
-              <th scope="row">Bağlı Sunucular:</th>
+              <th scope="row">Sunucular:</th>
               <td>{data.connectedServerCount}</td>
             </tr>
             <tr>

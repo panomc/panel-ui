@@ -114,7 +114,7 @@
 
       <!-- No Server -->
       {#if $servers.length === 0 && !$loading}
-        <NoContent icon="fas fa-cube fa-3x" text="Bağlı sunucu yok."/>
+        <NoContent />
       {/if}
     </div>
   </div>
