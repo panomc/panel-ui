@@ -154,13 +154,10 @@
                   use:tooltip="{['Değiştir', { placement: 'bottom' }]}"
                   on:click="{() => thumbnailInput.click()}" />
               {:else}
-                <div
-                  class="text-center animate__animated animate__zoomIn"
-                  on:click="{() => thumbnailInput.click()}">
-                  <i class="fas fa-image fa-3x text-dark text-opacity-25 m-3"
-                  ></i>
-                  <p class="text-gray">Küçük resim belirlenmedi.</p>
-                </div>
+                <NoContent
+                icon="fas fa-image fa-3x"
+                text="Küçük resim belirlenmedi."
+                on:click="{() => thumbnailInput.click()}"/>
               {/if}
               <input
                 class="d-none"
@@ -308,6 +305,7 @@
   import PostPublishedToast from "$lib/component/toasts/PostPublishedToast.svelte";
   import PostMovedToDraftToast from "$lib/component/toasts/PostMovedToDraftToast.svelte";
   import PostSavedToast from "$lib/component/toasts/PostSavedToast.svelte";
+  import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
 
