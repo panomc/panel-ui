@@ -56,7 +56,7 @@
       <!-- No Tickets -->
       {#if data.ticketCount === 0}
         <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-ticket-alt fa-3x text-glass m-3"></i>
+          <i class="fa-solid fa-ticket-alt fa-3x text-dark text-opacity-25 m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {:else}

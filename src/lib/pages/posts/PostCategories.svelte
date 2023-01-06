@@ -33,7 +33,7 @@
       <!-- No Category -->
       {#if data.categoryCount === 0}
         <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fa-solid fa-pem fa-3x text-dark text-opacity-25 m-3"></i>
+          <i class="fa-solid fa-n fa-3x text-dark text-opacity-25 m-3"></i>
           <p class="text-gray">Burada içerik yok.</p>
         </div>
       {/if}
