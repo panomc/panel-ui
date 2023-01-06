@@ -114,10 +114,7 @@
 
       <!-- No Server -->
       {#if $servers.length === 0 && !$loading}
-        <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-cube fa-3x m-3 text-dark text-opacity-25"></i>
-          <p class="text-gray">Burada içerik yok.</p>
-        </div>
+        <NoContent icon="fas fa-cube fa-3x" text="Bağlı sunucu yok."/>
       {/if}
     </div>
   </div>
@@ -185,6 +182,7 @@
   import { mainServer, selectedServer } from "$lib/Store.js";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import ServerNotExistsToast from "$lib/component/toasts/ServerNotExistsToast.svelte";
+  import NoContent from "$lib/component/NoContent.svelte";
 
   function onSelect(server) {
     loading.set(true);

@@ -35,10 +35,7 @@
 
       <!-- No Posts -->
       {#if data.postCount === 0}
-        <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fa-solid fa-pen fa-3x text-dark text-opacity-25 m-3"></i>
-          <p class="text-gray">Burada içerik yok.</p>
-        </div>
+        <NoContent/>
       {:else}
         <!-- Posts Table -->
         <div class="table-responsive">
@@ -164,6 +161,8 @@
     onHide as onDeletePostModalHide,
   } from "$lib/component/modals/ConfirmDeletePostModal.svelte";
   import PostRow from "$lib/component/PostRow.svelte";
+
+  import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
 

@@ -24,10 +24,7 @@
 
       <!-- No Players -->
       {#if data.playerCount === 0}
-        <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fa-solid fa-users fa-3x text-dark text-opacity-25 m-3"></i>
-          <p class="text-gray">Burada içerik yok.</p>
-        </div>
+        <NoContent/>
       {:else}
         <!-- Players Table -->
         <div class="table-responsive">
@@ -158,6 +155,7 @@
   } from "$lib/component/modals/EditPlayerModal.svelte";
 
   import PlayerRow from "$lib/component/PlayerRow.svelte";
+  import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
 

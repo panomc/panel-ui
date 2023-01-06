@@ -57,15 +57,15 @@
               </h6>
 
               {#if $quickNotifications.length === 0}
-                <div
-                  class="d-flex flex-column align-items-center justify-content-center mb-3">
-                  <i class="fas fa-2x fa-bell text-gray mx-5 my-3"></i>
-                  <small class="text-gray">Yeni bildirim yok.</small>
-                </div>
+                <NoContent
+                  icon="fas fa-bell fa-2x"
+                  text="Yeni bildirim yok."
+                  />
               {:else}
 
               {#each $quickNotifications as notification, index (notification)}
-              <a href="#" class="dropdown-item" class:notification-unread="{notification.status ===
+              <a href="javascript:void(0);"
+                 on:click="{() => onNotificationClick(notification)}" class="dropdown-item" class:notification-unread="{notification.status ===
                 'NOT_READ'}">
                 <p class="mb-0">{notification.type}</p>
                 <small class="text-dark">
@@ -144,6 +144,7 @@
     user,
   } from "$lib/Store";
   import { onNotificationClick } from "$lib/NotificationManager.js";
+  import NoContent from "$lib/component/NoContent.svelte";
 
   let quickNotificationProcessID = 0;
 

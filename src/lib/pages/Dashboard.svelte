@@ -180,10 +180,7 @@
       </div>
 
       {#if data.tickets.length === 0}
-        <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-ticket-alt fa-3x m-3 text-dark text-opacity-25"></i>
-          <p class="text-gray">Burada içerik yok.</p>
-        </div>
+        <NoContent/>
       {:else}
         <table class="table table-borderless table-hover mb-0">
           {#each data.tickets as ticket, index (ticket)}
@@ -345,6 +342,7 @@
   // import TrafficChart from "$lib/component/charts/Dashboard/TrafficChart.svelte";
   import TicketStatus from "$lib/component/TicketStatus.svelte";
   import Date from "$lib/component/Date.svelte";
+  import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
   let reloading = false;

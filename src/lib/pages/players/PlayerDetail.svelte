@@ -109,12 +109,7 @@
           <h5 class="card-title">Son Talepler</h5>
 
           {#if data.ticketCount === 0}
-            <div
-              class="container text-center animate__animated animate__zoomIn">
-              <i class="fas fa-ticket-alt fa-3x text-dark text-opacity-25 m-3"
-              ></i>
-              <p class="text-gray">Burada içerik yok.</p>
-            </div>
+            <NoContent/>
           {:else}
             <table class="table table-borderless table-hover mb-0">
               {#each data.tickets as ticket, index (ticket)}
@@ -293,6 +288,8 @@
 
   import VerificationEmailSentSuccessfulToast from "$lib/component/toasts/VerificationEmailSentSuccessfulToast.svelte";
   import VerificationEmailSentErrorToast from "$lib/component/toasts/VerificationEmailSentErrorToast.svelte";
+
+  import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
 

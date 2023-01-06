@@ -53,10 +53,7 @@
 
       <!-- No Players -->
       {#if data.playerCount === 0}
-        <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-users fa-3x m-3 text-dark text-opacity-25"></i>
-          <p class="text-gray">Burada içerik yok.</p>
-        </div>
+        <NoContent />
       {:else}
         <!-- Players Table -->
         <div class="table-responsive">
@@ -176,6 +173,8 @@
 </script>
 
 <script>
+  import { onDestroy, onMount } from "svelte";
+
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
 
@@ -205,7 +204,8 @@
   } from "$lib/component/modals/UnbanPlayerModal.svelte";
 
   import PlayerRow from "$lib/component/PlayerRow.svelte";
-  import { onDestroy, onMount } from "svelte";
+
+  import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
 

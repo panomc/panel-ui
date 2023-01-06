@@ -27,7 +27,7 @@
           </button>
           <a
             href="javascript:void(0);"
-            on:click={() => onNotificationClick(notification)}
+            on:click="{() => onNotificationClick(notification)}"
             class="list-group-item list-group-item-action  d-flex flex-row w-100"
             class:notification-unread="{notification.status === 'NOT_READ'}">
             <div class="col">
@@ -41,11 +41,7 @@
       {/each}
 
       {#if $notifications.length === 0}
-        <div
-          class="d-flex flex-column align-items-center justify-content-center">
-          <i class="fas fa-bell fa-3x text-dark text-opacity-25 m-3"></i>
-          <p class="text-gray">Burada içerik yok.</p>
-        </div>
+        <NoContent icon="fas fa-bell fa-3x" text="Yeni bildirim yok." />
       {/if}
 
       {#if $notifications.length < $count && $count > 10 + 10 * page}
@@ -156,6 +152,8 @@
     setCallback as setDeleteAllNotificationsModalCallback,
   } from "$lib/component/modals/ConfirmRemoveAllNotificationsModal.svelte";
   import { onNotificationClick } from "$lib/NotificationManager.js";
+
+  import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
 

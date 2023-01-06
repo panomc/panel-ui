@@ -29,13 +29,10 @@
       </li>
     </ul>
   {:else}
-    <div class="container text-center animate__animated animate__zoomIn">
-      <i class="fas fa-cube mx-2 fa-3x m-3 text-light text-opacity-25"></i>
-
-      <p class="text-light">
-        Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın.
-      </p>
-
+    <NoContent
+    icon="fas fa-cube fa-3x"
+    text="Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın."
+    dark="{true}">
       <button
         class="btn btn-secondary btn-sm"
         data-bs-target="#connectServer"
@@ -44,7 +41,7 @@
         <i class="fa-solid fa-plus me-2"></i>
         Sunucu Bağla
       </button>
-    </div>
+    </NoContent>
   {/if}
 </nav>
 
@@ -53,6 +50,8 @@
 
   import { base } from "$app/paths";
   import { page } from "$app/stores";
+
+  import NoContent from "$lib/component/NoContent.svelte";
 
   function matching(path, pathName, startsWith = false) {
     return (

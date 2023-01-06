@@ -34,10 +34,7 @@
 
       <!-- No Category -->
       {#if data.categoryCount === 0}
-        <div class="container text-center animate__animated animate__zoomIn">
-          <i class="fas fa-ticket-alt fa-3x text-dark text-opacity-25 m-3"></i>
-          <p class="text-gray">Burada içerik yok.</p>
-        </div>
+        <NoContent/>
       {/if}
 
       <!-- Tickets Table -->
@@ -174,6 +171,8 @@
     show as showDeleteTicketCategoryModal,
     onHide as onConfirmDeleteTicketCategoryModalHide,
   } from "$lib/component/modals/ConfirmDeleteTicketCategoryModal.svelte";
+
+  import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
 
