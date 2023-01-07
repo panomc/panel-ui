@@ -17,7 +17,7 @@
       >{permissionGroup.name}</a>
   </td>
   <td class="align-middle text-nowrap"
-    >{#if permissionGroup.name === "tayyib" || permissionGroup.name === "admin"}
+    >{#if permissionGroup.name === "tayyip" || permissionGroup.name === "admin"}
       <i class="fas fa-infinity"></i>
     {:else}{permissionGroup.permissionCount}{/if}</td>
   <td class="align-middle text-nowrap">{permissionGroup.userCount}</td>
