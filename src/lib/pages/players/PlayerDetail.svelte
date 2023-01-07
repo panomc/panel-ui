@@ -3,88 +3,104 @@
   <!-- Action Menu -->
   <div class="row justify-content-between mb-3">
     <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/players">
-        <i class="fas fa-arrow-left me-2"></i>
-        Oyuncular
-      </a>
+      {#if hasPermission(Permissions.MANAGE_PLAYERS)}
+        <a class="btn btn-link" role="button" href="{base}/players">
+          <i class="fas fa-arrow-left me-2"></i>
+          Oyuncular
+        </a>
+      {/if}
     </div>
     <div class="col-auto">
-      <a
-        class="btn btn-link link-danger"
-        href="javascript:void(0);"
-        use:tooltip="{['Sil', { placement: 'bottom' }]}"
-        on:click="{() => showConfirmBanPlayerModal(data.player)}">
-        <i class="fas fa-trash"></i>
-      </a>
-      {#if data.player.isBanned}
+      {#if hasPermission(Permissions.MANAGE_PLAYERS)}
         <a
           class="btn btn-link link-danger"
           href="javascript:void(0);"
-          use:tooltip="{['Yasağı Kaldır', { placement: 'bottom' }]}"
-          on:click="{() => showUnbanPlayerModal(data.player)}">
-          <i class="fas fa-gavel"></i>
+          use:tooltip="{['Sil', { placement: 'bottom' }]}"
+          on:click="{() => showConfirmBanPlayerModal(data.player)}"
+          class:disabled="{$user.username === data.player.username}"
+          disabled="{$user.username === data.player.username}">
+          <i class="fas fa-trash"></i>
         </a>
-      {:else}
-        <a
-          class="btn btn-link link-danger"
-          href="javascript:void(0);"
-          use:tooltip="{['Yasakla', { placement: 'bottom' }]}"
-          on:click="{() => showConfirmBanPlayerModal(data.player)}">
-          <i class="fas fa-gavel"></i>
-        </a>
-      {/if}
-      {#if !data.player.isEmailVerified}
-        <a
-          class="btn btn-link"
-          use:tooltip="{[
-            'Oyuncu e-postasına bir doğrulama bağlantısı gönder',
-            { placement: 'bottom' },
-          ]}"
-          href="javascript:void(0);"
-          on:click="{sendVerification}"
-          class:disabled="{sendingVerificationMail}">
-          <i class="fas fa-envelope"></i>
-        </a>
-      {/if}
+        {#if data.player.isBanned}
+          <a
+            class="btn btn-link link-danger"
+            href="javascript:void(0);"
+            use:tooltip="{['Yasağı Kaldır', { placement: 'bottom' }]}"
+            on:click="{() => showUnbanPlayerModal(data.player)}"
+            class:disabled="{$user.username === data.player.username}"
+            disabled="{$user.username === data.player.username}">
+            <i class="fas fa-gavel"></i>
+          </a>
+        {:else}
+          <a
+            class="btn btn-link link-danger"
+            href="javascript:void(0);"
+            use:tooltip="{['Yasakla', { placement: 'bottom' }]}"
+            on:click="{() => showConfirmBanPlayerModal(data.player)}"
+            class:disabled="{$user.username === data.player.username}"
+            disabled="{$user.username === data.player.username}">
+            <i class="fas fa-gavel"></i>
+          </a>
+        {/if}
+        {#if !data.player.isEmailVerified}
+          <a
+            class="btn btn-link"
+            use:tooltip="{[
+              'Oyuncu e-postasına bir doğrulama bağlantısı gönder',
+              { placement: 'bottom' },
+            ]}"
+            href="javascript:void(0);"
+            on:click="{sendVerification}"
+            class:disabled="{sendingVerificationMail ||
+              $user.username === data.player.username}"
+            disabled="{sendingVerificationMail ||
+              $user.username === data.player.username}">
+            <i class="fas fa-envelope"></i>
+          </a>
+        {/if}
 
-      <!-- on:click="{() => showAuthorizePlayerModal(data.player)}" -->
-      <div class="dropdown d-inline-block">
-        <a
-          class="btn btn-link"
-          data-bs-toggle="dropdown"
-          href="javascript:void(0);"
-          use:tooltip="{['Yetkilendir', { placement: 'bottom' }]}">
-          <i class="fas fa-user-circle"></i>
-        </a>
+        <!-- on:click="{() => showAuthorizePlayerModal(data.player)}" -->
+        <div class="dropdown d-inline-block">
+          <a
+            class="btn btn-link"
+            data-bs-toggle="dropdown"
+            href="javascript:void(0);"
+            use:tooltip="{['Yetkilendir', { placement: 'bottom' }]}"
+            class:disabled="{$user.username === data.player.username}"
+            disabled="{$user.username === data.player.username}">
+            <i class="fas fa-user-circle"></i>
+          </a>
 
-        <div
-          class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
-          <h6 class="dropdown-header">Yetkilendir</h6>
-          <!-- Perm Group List -->
-          <a class="dropdown-item" href="javascript:void(0);"> Yetki </a>
+          <div
+            class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
+            <h6 class="dropdown-header">Yetkilendir</h6>
+            <!-- Perm Group List -->
+            <a class="dropdown-item" href="javascript:void(0);"> Yetki </a>
 
-          <!-- Placeholder -->
-          <div class="dropdown-item placeholder-glow">
-            <span class="placeholder col-12"></span>
-          </div>
-          <div class="dropdown-item placeholder-glow">
-            <span class="placeholder col-12"></span>
-          </div>
-          <div class="dropdown-item placeholder-glow">
-            <span class="placeholder col-12"></span>
-          </div>
-          <div class="dropdown-item placeholder-glow">
-            <span class="placeholder col-12"></span>
+            <!-- Placeholder -->
+            <div class="dropdown-item placeholder-glow">
+              <span class="placeholder col-12"></span>
+            </div>
+            <div class="dropdown-item placeholder-glow">
+              <span class="placeholder col-12"></span>
+            </div>
+            <div class="dropdown-item placeholder-glow">
+              <span class="placeholder col-12"></span>
+            </div>
+            <div class="dropdown-item placeholder-glow">
+              <span class="placeholder col-12"></span>
+            </div>
           </div>
         </div>
-      </div>
-
-      <a
-        class="btn btn-primary"
-        href="javascript:void(0);"
-        on:click="{() => showEditPlayerModal(data.player)}">
-        <i class="fas fa-pencil-alt me-2"></i> Düzenle
-      </a>
+      {/if}
+      {#if hasPermission(Permissions.MANAGE_PLAYERS) || $user.username === data.player.username}
+        <a
+          class="btn btn-primary"
+          href="javascript:void(0);"
+          on:click="{() => showEditPlayerModal(data.player)}">
+          <i class="fas fa-pencil-alt me-2"></i> Düzenle
+        </a>
+      {/if}
     </div>
   </div>
 
@@ -316,6 +332,7 @@
   import NoContent from "$lib/component/NoContent.svelte";
   import PlayerPermissionBadge from "$lib/component/badges/PlayerPermissionBadge.svelte";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
+  import { user } from "$lib/Store.js";
 
   export let data;
 
