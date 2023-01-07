@@ -1,8 +1,7 @@
 <!-- Player Detail Page -->
 <div class="container">
   <!-- Action Menu -->
-  <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+  <div class="row justify-content-between mb-3">
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/players">
         <i class="fas fa-arrow-left me-2"></i>
@@ -47,13 +46,38 @@
           <i class="fas fa-envelope"></i>
         </a>
       {/if}
-      <a
-        class="btn btn-link"
-        href="javascript:void(0);"
-        use:tooltip="{['Yetkilendir', { placement: 'bottom' }]}"
-        on:click="{() => showAuthorizePlayerModal(data.player)}">
-        <i class="fas fa-user-circle"></i>
-      </a>
+
+      <!-- on:click="{() => showAuthorizePlayerModal(data.player)}" -->
+      <div class="dropdown d-inline-block">
+        <a
+          class="btn btn-link"
+          data-bs-toggle="dropdown"
+          href="javascript:void(0);"
+          use:tooltip="{['Yetkilendir', { placement: 'bottom' }]}">
+          <i class="fas fa-user-circle"></i>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
+          <h6 class="dropdown-header">Yetkilendir</h6>
+          <!-- Perm Group List -->
+          <a class="dropdown-item" href="javascript:void(0);"> Yetki </a>
+
+          <!-- Placeholder -->
+          <div class="dropdown-item placeholder-glow">
+            <span class="placeholder col-12"></span>
+          </div>
+          <div class="dropdown-item placeholder-glow">
+            <span class="placeholder col-12"></span>
+          </div>
+          <div class="dropdown-item placeholder-glow">
+            <span class="placeholder col-12"></span>
+          </div>
+          <div class="dropdown-item placeholder-glow">
+            <span class="placeholder col-12"></span>
+          </div>
+        </div>
+      </div>
+
       <a
         class="btn btn-primary"
         href="javascript:void(0);"
@@ -109,7 +133,7 @@
           <h5 class="card-title">Son Talepler</h5>
 
           {#if data.ticketCount === 0}
-            <NoContent/>
+            <NoContent />
           {:else}
             <table class="table table-borderless table-hover mb-0">
               {#each data.tickets as ticket, index (ticket)}
@@ -133,7 +157,8 @@
                       <TicketStatusBadge status="{ticket.status}" />
                     </td>
                     <td class="align-middle text-nowrap"
-                      ><span><DateComponent time="{ticket.lastUpdate}" /></span></td>
+                      ><span><DateComponent time="{ticket.lastUpdate}" /></span
+                      ></td>
                   </tr>
                 </tbody>
               {/each}

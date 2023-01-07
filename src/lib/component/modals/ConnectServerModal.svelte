@@ -22,7 +22,7 @@
             <i class="fas fa-download fa-3x text-primary"></i>
           </div>
 
-          <h5 class="text-primary">1. Oyun Eklentisini Sunucunuza İndirin:</h5>
+          <h5 class="text-primary">1 - Pano Eklentisini Oyun Sunucuna Kur</h5>
           <button class="btn btn-outline-primary">
             <i class="fa-solid fa-download me-2"></i>
             Dosyayı İndir
@@ -32,7 +32,7 @@
             <i class="fas fa-terminal fa-3x text-primary"></i>
           </div>
 
-          <h5 class="text-primary">2. Bağlantı Komutunu Çalıştırın:</h5>
+          <h5 class="text-primary">2 - Bağlantı Komutunu Çalıştır</h5>
           <div class="input-group">
             <input
               bind:value="{commandText}"
@@ -41,7 +41,7 @@
               type="text" />
             <button
               on:click="{onCopyCommandTextClick}"
-              class="btn btn-outline-gray link-primary"
+              class="btn btn-outline-primary"
               id="copyPlatformToken"
               type="button"
               use:tooltip="{[
@@ -59,11 +59,9 @@
             <i class="fas fa-check-circle fa-3x text-primary"></i>
           </div>
 
-          <h5 class="text-primary">3. Bağlantı İsteğine Onay Verin:</h5>
+          <h5 class="text-primary">3 - Bağlantı İsteğini Onayla</h5>
           <p class="mb-0">
-            Bildirim panelinden
-            <i class="fas fa-bell"></i>
-            "Sunucu Bağlantısı İsteği" bildirimini açarak, onay verin.
+            Bağlantı isteği bildirim olarak gelecek.
           </p>
         </div>
       </div>

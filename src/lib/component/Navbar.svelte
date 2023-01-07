@@ -35,7 +35,7 @@
             id="quickNotificationsDropdown">
             <a
               href="javascript:void(0);"
-              class="nav-link position-relative"
+              class="nav-link"
               data-bs-toggle="dropdown"
               role="button"
               title="Okunmamış Bildirimler">
