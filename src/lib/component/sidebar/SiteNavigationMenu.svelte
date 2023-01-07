@@ -58,15 +58,17 @@
       </li>
     {/if}
 
-    <li class="nav-item p-2">
-      <a
-        class="nav-link"
-        href="{base}/addons"
-        class:active="{matching($page.url.pathname, base + '/addons', true)}">
-        <i class="fas fa-puzzle-piece me-2"></i>
-        Eklentiler
-      </a>
-    </li>
+    {#if hasPermission(Permissions.MANAGE_ADDON)}
+      <li class="nav-item p-2">
+        <a
+          class="nav-link"
+          href="{base}/addons"
+          class:active="{matching($page.url.pathname, base + '/addons', true)}">
+          <i class="fas fa-puzzle-piece me-2"></i>
+          Eklentiler
+        </a>
+      </li>
+    {/if}
 
     <li class="nav-item p-2">
       <a
