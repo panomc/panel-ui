@@ -1,6 +1,8 @@
-<ServersModal />
-<ConnectServerModal />
-<RemoveServerModal />
+{#if hasPermission(Permissions.MANAGE_SERVERS)}
+  <ServersModal />
+  <ConnectServerModal />
+  <RemoveServerModal />
+{/if}
 
 <div class="sidebar bg-primary" class:active="{$isSidebarOpen}">
   <!-- Sidebar Toggler & Logo -->

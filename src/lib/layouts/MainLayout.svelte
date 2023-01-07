@@ -23,7 +23,9 @@
 
   <NotificationContainer />
   <ToastContainer />
-  <ServerRequestModal />
+  {#if hasPermission(Permissions.MANAGE_SERVERS)}
+    <ServerRequestModal />
+  {/if}
 </App>
 
 <script context="module">
@@ -51,7 +53,7 @@
         properties: { id },
       } = notification;
 
-      goto(base + "/tickets/ticket/" + id, {invalidateAll: true});
+      goto(base + "/tickets/ticket/" + id, { invalidateAll: true });
     });
 
     addListener("NEW_TICKET_MESSAGE", (notification) => {
@@ -59,7 +61,7 @@
         properties: { id },
       } = notification;
 
-      goto(base + "/tickets/ticket/" + id, {invalidateAll: true});
+      goto(base + "/tickets/ticket/" + id, { invalidateAll: true });
     });
 
     addListener("TICKET_CLOSED_BY_USER", (notification) => {
@@ -67,7 +69,7 @@
         properties: { id },
       } = notification;
 
-      goto(base + "/tickets/ticket/" + id, {invalidateAll: true});
+      goto(base + "/tickets/ticket/" + id, { invalidateAll: true });
     });
 
     addListener("SERVER_CONNECT_REQUEST", (notification) => {
@@ -75,7 +77,7 @@
         properties: { id },
       } = notification;
 
-      showServerRequestModal(id)
+      showServerRequestModal(id);
     });
   }
 
@@ -168,6 +170,7 @@
   import NotificationContainer from "$lib/component/NotificationContainer.svelte";
   import ToastContainer from "$lib/component/ToastContainer.svelte";
   import ServerRequestModal from "$lib/component/modals/ServerRequestModal.svelte";
+  import { hasPermission, Permissions } from "$lib/auth.util.js";
 
   $: title = $pageTitle
     ? `${$pageTitle} \u2014 ${options.DEFAULT_PAGE_TITLE}`
