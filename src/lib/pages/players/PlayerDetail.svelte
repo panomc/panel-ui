@@ -17,8 +17,10 @@
           href="javascript:void(0);"
           use:tooltip="{['Sil', { placement: 'bottom' }]}"
           on:click="{() => showConfirmBanPlayerModal(data.player)}"
-          class:disabled="{$user.username === data.player.username}"
-          disabled="{$user.username === data.player.username}">
+          class:disabled="{$user.username === data.player.username ||
+            (data.player.permissionGroup === 'admin' && !$user.admin)}"
+          disabled="{$user.username === data.player.username ||
+            (data.player.permissionGroup === 'admin' && !$user.admin)}">
           <i class="fas fa-trash"></i>
         </a>
         {#if data.player.isBanned}
@@ -27,8 +29,10 @@
             href="javascript:void(0);"
             use:tooltip="{['Yasağı Kaldır', { placement: 'bottom' }]}"
             on:click="{() => showUnbanPlayerModal(data.player)}"
-            class:disabled="{$user.username === data.player.username}"
-            disabled="{$user.username === data.player.username}">
+            class:disabled="{$user.username === data.player.username ||
+              (data.player.permissionGroup === 'admin' && !$user.admin)}"
+            disabled="{$user.username === data.player.username ||
+              (data.player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-gavel"></i>
           </a>
         {:else}
@@ -37,8 +41,10 @@
             href="javascript:void(0);"
             use:tooltip="{['Yasakla', { placement: 'bottom' }]}"
             on:click="{() => showConfirmBanPlayerModal(data.player)}"
-            class:disabled="{$user.username === data.player.username}"
-            disabled="{$user.username === data.player.username}">
+            class:disabled="{$user.username === data.player.username ||
+              (data.player.permissionGroup === 'admin' && !$user.admin)}"
+            disabled="{$user.username === data.player.username ||
+              (data.player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-gavel"></i>
           </a>
         {/if}
@@ -52,9 +58,11 @@
             href="javascript:void(0);"
             on:click="{sendVerification}"
             class:disabled="{sendingVerificationMail ||
-              $user.username === data.player.username}"
+              $user.username === data.player.username ||
+              (data.player.permissionGroup === 'admin' && !$user.admin)}"
             disabled="{sendingVerificationMail ||
-              $user.username === data.player.username}">
+              $user.username === data.player.username ||
+              (data.player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-envelope"></i>
           </a>
         {/if}
@@ -66,8 +74,10 @@
             data-bs-toggle="dropdown"
             href="javascript:void(0);"
             use:tooltip="{['Yetkilendir', { placement: 'bottom' }]}"
-            class:disabled="{$user.username === data.player.username}"
-            disabled="{$user.username === data.player.username}">
+            class:disabled="{$user.username === data.player.username ||
+              (data.player.permissionGroup === 'admin' && !$user.admin)}"
+            disabled="{$user.username === data.player.username ||
+              (data.player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-user-circle"></i>
           </a>
 
@@ -97,7 +107,10 @@
         <a
           class="btn btn-primary"
           href="javascript:void(0);"
-          on:click="{() => showEditPlayerModal(data.player)}">
+          on:click="{() => showEditPlayerModal(data.player)}"
+          class:disabled="{data.player.permissionGroup === 'admin' &&
+            !$user.admin}"
+          disabled="{data.player.permissionGroup === 'admin' && !$user.admin}">
           <i class="fas fa-pencil-alt me-2"></i> Düzenle
         </a>
       {/if}
