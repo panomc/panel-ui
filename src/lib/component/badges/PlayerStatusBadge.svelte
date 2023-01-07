@@ -1,5 +1,5 @@
 {#if banned}
-  <div class="badge bg-danger text-white">Yasaklı</div>
+  <div class="badge bg-danger rounded-pill text-white">Yasaklı</div>
 {:else if isOnline}
   <div
     class="badge bg-secondary rounded-pill text-white"
@@ -8,7 +8,7 @@
   </div>
 {:else}
   <div
-    class="badge bg-secondary rounded-pill text-white"
+    class="badge bg-light rounded-pill text-dark"
     use:tooltip="{[getOfflineRelativeDateText(checkTime), { placement: 'bottom' }]}">
     <span>Çevrimdışı</span>
   </div>
