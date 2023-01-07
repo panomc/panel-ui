@@ -170,64 +170,66 @@
     </div>
   </div>
 
-  <!-- Latest Tickets -->
-  <div class="card mb-3">
-    <div class="card-body">
-      <div class="row justify-content-between mb-3">
-        <div class="col">
-          <h5 class="card-title">Son Talepler</h5>
+  {#if hasPermission(Permissions.MANAGE_TICKETS)}
+    <!-- Latest Tickets -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="row justify-content-between mb-3">
+          <div class="col">
+            <h5 class="card-title">Son Talepler</h5>
+          </div>
         </div>
+
+        {#if data.tickets.length === 0}
+          <NoContent />
+        {:else}
+          <table class="table table-borderless table-hover mb-0">
+            {#each data.tickets as ticket, index (ticket)}
+              <tbody>
+                <tr>
+                  <td class="align-middle">
+                    <a
+                      use:tooltip="{[
+                        ticket.writer.username,
+                        { placement: 'bottom' },
+                      ]}"
+                      href="{base}/players/player/{ticket.writer.username}">
+                      <img
+                        src="https://crafthead.net/avatar/{ticket.writer
+                          .username}/32"
+                        alt="Oyuncu Adı"
+                        class="rounded-circle animate__animated animate__zoomIn"
+                        height="32"
+                        width="32" />
+                    </a>
+                  </td>
+                  <td class="align-middle text-nowrap">
+                    <a
+                      href="{base}/tickets/ticket/{ticket.id}"
+                      title="Görüntüle">#{ticket.id} {ticket.title}</a>
+                  </td>
+                  <td class="align-middle text-nowrap">
+                    <a
+                      title="Filtrele"
+                      href="{base}/tickets/category/{ticket.category.url}">
+                      {ticket.category.title === "-"
+                        ? "Kategorisiz"
+                        : ticket.category.title}
+                    </a>
+                  </td>
+                  <td class="align-middle text-nowrap">
+                    <TicketStatusBadge status="{ticket.status}" />
+                  </td>
+                  <td class="align-middle text-nowrap"
+                    ><span><Date time="{ticket.lastUpdate}" /></span></td>
+                </tr>
+              </tbody>
+            {/each}
+          </table>
+        {/if}
       </div>
-
-      {#if data.tickets.length === 0}
-        <NoContent/>
-      {:else}
-        <table class="table table-borderless table-hover mb-0">
-          {#each data.tickets as ticket, index (ticket)}
-            <tbody>
-              <tr>
-                <td class="align-middle">
-                  <a
-                    use:tooltip="{[
-                      ticket.writer.username,
-                      { placement: 'bottom' },
-                    ]}"
-                    href="{base}/players/player/{ticket.writer.username}">
-                    <img
-                      src="https://crafthead.net/avatar/{ticket.writer
-                        .username}/32"
-                      alt="Oyuncu Adı"
-                      class="rounded-circle animate__animated animate__zoomIn"
-                      height="32"
-                      width="32" />
-                  </a>
-                </td>
-                <td class="align-middle text-nowrap">
-                  <a href="{base}/tickets/ticket/{ticket.id}" title="Görüntüle"
-                    >#{ticket.id} {ticket.title}</a>
-                </td>
-                <td class="align-middle text-nowrap">
-                  <a
-                    title="Filtrele"
-                    href="{base}/tickets/category/{ticket.category.url}">
-                    {ticket.category.title === "-"
-                      ? "Kategorisiz"
-                      : ticket.category.title}
-                  </a>
-                </td>
-                <td class="align-middle text-nowrap">
-                  <TicketStatusBadge status="{ticket.status}" />
-                </td>
-                <td class="align-middle text-nowrap"
-                  ><span><Date time="{ticket.lastUpdate}" /></span></td>
-              </tr>
-            </tbody>
-          {/each}
-        </table>
-      {/if}
     </div>
-  </div>
-
+  {/if}
   <!-- Statistic Table -->
   <div class="card">
     <div class="card-body">
@@ -247,10 +249,12 @@
               <th scope="row">Yöneticiler:</th>
               <td>{data.adminCount}</td>
             </tr>
-            <tr>
-              <th scope="row">Talepler:</th>
-              <td>{data.ticketCount}</td>
-            </tr>
+            {#if hasPermission(Permissions.MANAGE_TICKETS)}
+              <tr>
+                <th scope="row">Talepler:</th>
+                <td>{data.ticketCount}</td>
+              </tr>
+            {/if}
             <tr>
               <th scope="row">Sunucular:</th>
               <td>{data.connectedServerCount}</td>
@@ -343,6 +347,8 @@
   import TicketStatusBadge from "$lib/component/badges/TicketStatusBadge.svelte";
   import Date from "$lib/component/Date.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
+
+  import { hasPermission, Permissions } from "$lib/auth.util.js";
 
   export let data;
   let reloading = false;

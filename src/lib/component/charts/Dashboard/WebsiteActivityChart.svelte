@@ -6,6 +6,7 @@
   import { onMount } from "svelte";
   import { startOfWeek, endOfWeek, startOfMonth, endOfMonth } from "date-fns";
   import { DashboardPeriod } from "$lib/pages/Dashboard.svelte";
+  import { hasPermission, Permissions } from "$lib/auth.util.js";
 
   let element;
   let chart;
@@ -88,17 +89,20 @@
       convertedViewData,
     } = convertedDatasets;
 
-    return [
-      {
-        label: "Yeni Kayıt",
-        data: convertedNewRegisterData,
-        borderColor: "orange",
-        backgroundColor: "rgba(25, 118, 210, .05)",
-        borderWidth: 2,
-        pointRadius: 5,
-        pointBackgroundColor: "#fff",
-      },
-      {
+    const datasets = [];
+
+    datasets.push({
+      label: "Yeni Kayıt",
+      data: convertedNewRegisterData,
+      borderColor: "orange",
+      backgroundColor: "rgba(25, 118, 210, .05)",
+      borderWidth: 2,
+      pointRadius: 5,
+      pointBackgroundColor: "#fff",
+    });
+
+    if (hasPermission(Permissions.MANAGE_TICKETS)) {
+      datasets.push({
         label: "Yeni Talep",
         data: convertedTicketsData,
         borderColor: "purple",
@@ -106,26 +110,29 @@
         borderWidth: 2,
         pointRadius: 5,
         pointBackgroundColor: "#fff",
-      },
-      {
-        label: "Ziyaretçi",
-        data: convertedVisitorData,
-        borderColor: "red",
-        backgroundColor: "rgba(25, 118, 210, .05)",
-        borderWidth: 2,
-        pointRadius: 5,
-        pointBackgroundColor: "#fff",
-      },
-      {
-        label: "Görüntülenme",
-        data: convertedViewData,
-        borderColor: "green",
-        backgroundColor: "rgba(25, 118, 210, .05)",
-        borderWidth: 2,
-        pointRadius: 5,
-        pointBackgroundColor: "#fff",
-      },
-    ];
+      });
+    }
+
+    datasets.push({
+      label: "Ziyaretçi",
+      data: convertedVisitorData,
+      borderColor: "red",
+      backgroundColor: "rgba(25, 118, 210, .05)",
+      borderWidth: 2,
+      pointRadius: 5,
+      pointBackgroundColor: "#fff",
+    });
+    datasets.push({
+      label: "Görüntülenme",
+      data: convertedViewData,
+      borderColor: "green",
+      backgroundColor: "rgba(25, 118, 210, .05)",
+      borderWidth: 2,
+      pointRadius: 5,
+      pointBackgroundColor: "#fff",
+    });
+
+    return datasets;
   }
 
   function reloadChart() {
