@@ -17,7 +17,9 @@
           <a
             class="dropdown-item"
             href="javascript:void(0);"
-            on:click="{showAuthorizePlayerModal}">
+            on:click="{showAuthorizePlayerModal}"
+            class:disabled="{$user.username === player.username}"
+            disabled="{$user.username === player.username}">
             <i class="fas fa-user-circle me-2"></i>
             Yetkilendir
           </a>
@@ -29,23 +31,17 @@
           <i class="fa-solid fa-pencil-alt me-2"></i>
           Düzenle
         </a>
-        {#if player.isBanned}
-          <a
-            class="dropdown-item link-danger"
-            href="javascript:void(0);"
-            on:click="{showUnbanPlayerModal}">
-            <i class="fas fa-gavel me-2"></i>
-            Yasağı Kaldır
-          </a>
-        {:else}
-          <a
-            class="dropdown-item link-danger"
-            href="javascript:void(0);"
-            on:click="{showBanPlayerModal}">
-            <i class="fas fa-gavel me-2"></i>
-            Yasakla
-          </a>
-        {/if}
+        <a
+          class="dropdown-item"
+          href="javascript:void(0);"
+          on:click="{() =>
+            player.isBanned ? showUnbanPlayerModal() : showBanPlayerModal()}"
+          class:link-danger="{$user.username !== player.username}"
+          class:disabled="{$user.username === player.username}"
+          disabled="{$user.username === player.username}">
+          <i class="fas fa-gavel me-2"></i>
+          {#if player.isBanned} Yasağı Kaldır {:else} Yasakla {/if}
+        </a>
       </div>
     </div>
   </th>
@@ -86,6 +82,7 @@
   import PlayerStatusBadge from "$lib/component/badges/PlayerStatusBadge.svelte";
   import PlayerPermissionBadge from "$lib/component/badges/PlayerPermissionBadge.svelte";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
+  import { user } from "$lib/Store.js";
 
   export let player;
   export let checkTime;
