@@ -43,7 +43,7 @@
             id="permissionGroupName"
             type="text"
             bind:value="{name}"
-            class:disabled="{data.name === 'admin'}" />
+            disabled="{data.name === 'admin'}" />
 
           <form on:submit|preventDefault="{addUser}">
             <input
@@ -51,7 +51,7 @@
               id="addPlayerInput"
               bind:value="{username}"
               class:border-danger="{usernameInputError}"
-              class:disabled="{checkingUsername}"
+              disabled="{checkingUsername}"
               placeholder="Oyuncu ekle..." />
           </form>
 
@@ -105,7 +105,7 @@
                         id="{permission.name}"
                         checked="{isPermissionChecked(permission)}"
                         on:click="{() => onPermissionClick(permission)}"
-                        class:disabled="{isPermissionDisabled()}" />
+                        disabled="{isPermissionDisabled()}" />
                     </div>
                   </td>
                 </tr>

@@ -27,7 +27,7 @@
           class="dropdown-item"
           href="javascript:void(0);"
           on:click="{showEditPlayerModal}"
-          class:disabled="{$user.username === player.username || (player.permissionGroup === 'admin' && !$user.admin)}"
+          class:disabled="{(player.permissionGroup === 'admin' && !$user.admin)}"
         >
           <i class="fa-solid fa-pencil-alt me-2"></i>
           Düzenle

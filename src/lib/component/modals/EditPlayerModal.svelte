@@ -99,7 +99,7 @@
                   role="switch"
                   id="emailVerifiedCheckbox"
                   bind:checked={$player.canCreateTicket}
-                  class:disabled="{$user.username === $player.username}" />
+                  disabled="{$user.username === $player.username}" />
                 <label class="form-check-label" for="emailVerifiedCheckbox"
                   >Talep oluşturabilir</label>
               </div>
@@ -113,7 +113,7 @@
                   aria-checked="true"
                   id="canCreateTicketCheckbox"
                   bind:checked={$player.isEmailVerified}
-                  class:disabled="{$user.username === $player.username}" />
+                  disabled="{$user.username === $player.username}" />
                 <label class="form-check-label" for="canCreateTicketCheckbox"
                   >E-postası doğrulandı</label>
               </div>
