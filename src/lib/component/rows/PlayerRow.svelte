@@ -66,11 +66,7 @@
     </a>
   </td>
   <td class="align-middle text-nowrap text-capitalize">
-    <a
-      title="Filtrele"
-      href="{base}/players/by-perm-group/{player.permissionGroup}">
-      {player.permissionGroup === "-" ? "Oyuncu" : player.permissionGroup}
-    </a>
+    <PlayerPermissionBadge permissionGroup="{player.permissionGroup}"/>
   </td>
   <td class="align-middle text-nowrap">
     <PlayerStatusBadge
@@ -93,6 +89,7 @@
 
   import Date from "$lib/component/Date.svelte";
   import PlayerStatusBadge from "$lib/component/badges/PlayerStatusBadge.svelte";
+  import PlayerPermissionBadge from "$lib/component/badges/PlayerPermissionBadge.svelte";
 
   export let player;
   export let checkTime;

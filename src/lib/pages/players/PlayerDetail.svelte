@@ -115,13 +115,7 @@
           {#if data.player.isBanned}
             <div class="text-danger">Yasaklı</div>
           {:else}
-            <a
-              title="Filtrele"
-              href="{base}/players/by-perm-group/{data.player.permissionGroup}">
-              {data.player.permissionGroup === "-"
-                ? "Oyuncu"
-                : data.player.permissionGroup}
-            </a>
+            <PlayerPermissionBadge permissionGroup="{data.player.permissionGroup}"/>
           {/if}
         </div>
       </div>
@@ -315,6 +309,7 @@
   import VerificationEmailSentErrorToast from "$lib/component/toasts/VerificationEmailSentErrorToast.svelte";
 
   import NoContent from "$lib/component/NoContent.svelte";
+  import PlayerPermissionBadge from "$lib/component/badges/PlayerPermissionBadge.svelte";
 
   export let data;
 
