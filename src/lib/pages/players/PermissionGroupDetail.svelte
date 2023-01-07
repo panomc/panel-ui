@@ -27,7 +27,7 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-9 mb-lg-0 mb-3">
+    <div class="col mb-xl-0 mb-3">
       <div class="card h-100">
         <div class="card-body">
           {#if errors.error}
@@ -63,7 +63,7 @@
               href="javascript:void(0);"
               on:click="{() => removeUser(index)}">
               <span
-                class="badge rounded-pill bg-light link-primary text-center">
+                class="badge rounded-pill bg-light link-dark text-center">
                 <img
                   class="d-inline rounded-circle me-2"
                   src="https://crafthead.net/avatar/{user}"
@@ -77,45 +77,43 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-xl-4">
       <div class="card">
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-sm table-hover table-borderless mb-0">
-              <tbody>
-                {#each data.permissionList as permission, index (permission)}
-                  <tr>
-                    <th
-                      scope="col"
-                      use:tooltip="{[
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
-                        { placement: 'right' },
-                      ]}">
-                      <!--              TODO: Icon system-->
-                      <!--              <Icon-->
-                      <!--                data="{icon[convertIconName(permission.iconName)]}"-->
-                      <!--                class="text-primary d-block m-auto" />-->
-                      <small class="mb-0">
-                        {permission.name}
-                      </small>
-                    </th>
-                    <td>
-                      <div
-                        class="form-check form-switch d-flex justify-content-center align-content-center">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          id="{permission.name}"
-                          checked="{isPermissionChecked(permission)}"
-                          on:click="{() => onPermissionClick(permission)}"
-                          disabled="{isPermissionDisabled()}" />
-                      </div>
-                    </td>
-                  </tr>
-                {/each}
-              </tbody>
-            </table>
-          </div>
+          <table class="table table-sm table-hover table-borderless mb-0">
+            <tbody>
+              {#each data.permissionList as permission, index (permission)}
+                <tr>
+                  <th
+                    scope="col"
+                    use:tooltip="{[
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, enim in fermentum accumsan,',
+                      { placement: 'right' },
+                    ]}">
+                    <!--              TODO: Icon system-->
+                    <!--              <Icon-->
+                    <!--                data="{icon[convertIconName(permission.iconName)]}"-->
+                    <!--                class="text-primary d-block m-auto" />-->
+                    <small class="mb-0">
+                      {permission.name}
+                    </small>
+                  </th>
+                  <td>
+                    <div
+                      class="form-check form-switch d-flex justify-content-end align-content-center">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="{permission.name}"
+                        checked="{isPermissionChecked(permission)}"
+                        on:click="{() => onPermissionClick(permission)}"
+                        disabled="{isPermissionDisabled()}" />
+                    </div>
+                  </td>
+                </tr>
+              {/each}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
