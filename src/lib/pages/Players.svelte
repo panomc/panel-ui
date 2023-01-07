@@ -3,10 +3,12 @@
   <!-- Action Menu -->
   <div class="row mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/players/perm-groups">
-        <i class="fas fa-user-circle me-2"></i>
-        Yetki Grupları
-      </a>
+      {#if hasPermission(Permissions.MANAGE_PERMISSION_GROUPS)}
+        <a class="btn btn-link" role="button" href="{base}/players/perm-groups">
+          <i class="fas fa-user-circle me-2"></i>
+          Yetki Grupları
+        </a>
+      {/if}
     </div>
   </div>
 
@@ -206,6 +208,7 @@
   import PlayerRow from "$lib/component/rows/PlayerRow.svelte";
 
   import NoContent from "$lib/component/NoContent.svelte";
+  import { hasPermission, Permissions } from "$lib/auth.util.js";
 
   export let data;
 
