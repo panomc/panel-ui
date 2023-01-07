@@ -9,16 +9,17 @@
         İstatistikler
       </a>
     </li>
-
-    <li class="nav-item p-2">
-      <a
-        href="{base}/posts"
-        class="nav-link"
-        class:active="{matching($page.url.pathname, base + '/posts', true)}">
-        <i class="fas fa-pen me-2"></i>
-        Yazılar
-      </a>
-    </li>
+    {#if hasPermission(Permissions.MANAGE_POSTS)}
+      <li class="nav-item p-2">
+        <a
+          href="{base}/posts"
+          class="nav-link"
+          class:active="{matching($page.url.pathname, base + '/posts', true)}">
+          <i class="fas fa-pen me-2"></i>
+          Yazılar
+        </a>
+      </li>
+    {/if}
     {#if hasPermission(Permissions.MANAGE_TICKETS)}
       <li class="nav-item p-2">
         <a
