@@ -57,7 +57,8 @@
           <i class="fas fa-user-circle"></i>
         </a>
 
-        <div class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
+        <div
+          class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
           <h6 class="dropdown-header">Yetkilendir</h6>
           <!-- Perm Group List -->
           <a class="dropdown-item" href="javascript:void(0);"> Yetki </a>
@@ -115,59 +116,63 @@
           {#if data.player.isBanned}
             <div class="text-danger">Yasaklı</div>
           {:else}
-            <PlayerPermissionBadge permissionGroup="{data.player.permissionGroup}"/>
+            <PlayerPermissionBadge
+              permissionGroup="{data.player.permissionGroup}" />
           {/if}
         </div>
       </div>
     </div>
     <div class="col-lg-9">
-      <!-- User's Tickets -->
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Son Talepler</h5>
+      {#if hasPermission(Permissions.MANAGE_TICKETS)}
+        <!-- User's Tickets -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Son Talepler</h5>
 
-          {#if data.ticketCount === 0}
-            <NoContent />
-          {:else}
-            <table class="table table-borderless table-hover mb-0">
-              {#each data.tickets as ticket, index (ticket)}
-                <tbody>
-                  <tr>
-                    <td class="align-middle text-nowrap">
-                      <a
-                        href="{base}/tickets/ticket/{ticket.id}"
-                        title="Görüntüle">#{ticket.id} {ticket.title}</a>
-                    </td>
-                    <td class="align-middle text-nowrap">
-                      <a
-                        title="Filtrele"
-                        href="/tickets/category/{ticket.category.url}">
-                        {ticket.category.title === "-"
-                          ? "Kategorisiz"
-                          : ticket.category.title}
-                      </a>
-                    </td>
-                    <td class="align-middle text-nowrap">
-                      <TicketStatusBadge status="{ticket.status}" />
-                    </td>
-                    <td class="align-middle text-nowrap"
-                      ><span><DateComponent time="{ticket.lastUpdate}" /></span
-                      ></td>
-                  </tr>
-                </tbody>
-              {/each}
-            </table>
-          {/if}
+            {#if data.ticketCount === 0}
+              <NoContent />
+            {:else}
+              <table class="table table-borderless table-hover mb-0">
+                {#each data.tickets as ticket, index (ticket)}
+                  <tbody>
+                    <tr>
+                      <td class="align-middle text-nowrap">
+                        <a
+                          href="{base}/tickets/ticket/{ticket.id}"
+                          title="Görüntüle">#{ticket.id} {ticket.title}</a>
+                      </td>
+                      <td class="align-middle text-nowrap">
+                        <a
+                          title="Filtrele"
+                          href="/tickets/category/{ticket.category.url}">
+                          {ticket.category.title === "-"
+                            ? "Kategorisiz"
+                            : ticket.category.title}
+                        </a>
+                      </td>
+                      <td class="align-middle text-nowrap">
+                        <TicketStatusBadge status="{ticket.status}" />
+                      </td>
+                      <td class="align-middle text-nowrap"
+                        ><span
+                          ><DateComponent time="{ticket.lastUpdate}" /></span
+                        ></td>
+                    </tr>
+                  </tbody>
+                {/each}
+              </table>
+            {/if}
 
-          <!-- Pagination -->
-          <Pagination
-            page="{data.page}"
-            totalPage="{data.ticketTotalPage}"
-            on:firstPageClick="{() => reloadData(1)}"
-            on:lastPageClick="{() => reloadData(data.ticketTotalPage)}"
-            on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+            <!-- Pagination -->
+            <Pagination
+              page="{data.page}"
+              totalPage="{data.ticketTotalPage}"
+              on:firstPageClick="{() => reloadData(1)}"
+              on:lastPageClick="{() => reloadData(data.ticketTotalPage)}"
+              on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+          </div>
         </div>
-      </div>
+      {/if}
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">İstatistikler</h5>
@@ -310,6 +315,7 @@
 
   import NoContent from "$lib/component/NoContent.svelte";
   import PlayerPermissionBadge from "$lib/component/badges/PlayerPermissionBadge.svelte";
+  import { hasPermission, Permissions } from "$lib/auth.util.js";
 
   export let data;
 
