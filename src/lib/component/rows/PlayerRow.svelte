@@ -18,8 +18,8 @@
             class="dropdown-item"
             href="javascript:void(0);"
             on:click="{showAuthorizePlayerModal}"
-            class:disabled="{$user.username === player.username}"
-            disabled="{$user.username === player.username}">
+            class:disabled="{$user.username === player.username || (player.permissionGroup === 'admin' && !$user.admin)}"
+            disabled="{$user.username === player.username || (player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-user-circle me-2"></i>
             Yetkilendir
           </a>
