@@ -19,15 +19,21 @@
         Yazılar
       </a>
     </li>
-    <li class="nav-item p-2">
-      <a
-        class="nav-link"
-        href="{base}/tickets"
-        class:active="{matching($page.url.pathname, base + '/tickets', true)}">
-        <i class="fas fa-ticket me-2"></i>
-        Talepler
-      </a>
-    </li>
+    {#if hasPermission(Permissions.MANAGE_TICKETS)}
+      <li class="nav-item p-2">
+        <a
+          class="nav-link"
+          href="{base}/tickets"
+          class:active="{matching(
+            $page.url.pathname,
+            base + '/tickets',
+            true
+          )}">
+          <i class="fas fa-ticket me-2"></i>
+          Talepler
+        </a>
+      </li>
+    {/if}
 
     <li class="nav-item p-2">
       <a
@@ -74,6 +80,7 @@
 <script>
   import { base } from "$app/paths";
   import { page } from "$app/stores";
+  import { hasPermission, Permissions } from "$lib/auth.util.js";
 
   function matching(path, pathName, startsWith = false) {
     return (
