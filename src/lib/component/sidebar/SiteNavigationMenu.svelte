@@ -36,15 +36,21 @@
       </li>
     {/if}
 
-    <li class="nav-item p-2">
-      <a
-        class="nav-link"
-        href="{base}/players"
-        class:active="{matching($page.url.pathname, base + '/players', true)}">
-        <i class="fas fa-users me-2"></i>
-        Oyuncular
-      </a>
-    </li>
+    {#if hasPermission(Permissions.MANAGE_PLAYERS)}
+      <li class="nav-item p-2">
+        <a
+          class="nav-link"
+          href="{base}/players"
+          class:active="{matching(
+            $page.url.pathname,
+            base + '/players',
+            true
+          )}">
+          <i class="fas fa-users me-2"></i>
+          Oyuncular
+        </a>
+      </li>
+    {/if}
 
     {#if hasPermission(Permissions.MANAGE_VIEW)}
       <li class="nav-item p-2">
