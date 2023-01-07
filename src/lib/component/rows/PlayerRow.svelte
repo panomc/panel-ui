@@ -13,13 +13,15 @@
       </button>
       <div
         class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
-        <a
-          class="dropdown-item"
-          href="javascript:void(0);"
-          on:click="{showAuthorizePlayerModal}">
-          <i class="fas fa-user-circle me-2"></i>
-          Yetkilendir
-        </a>
+        {#if hasPermission(Permissions.MANAGE_PERMISSION_GROUPS)}
+          <a
+            class="dropdown-item"
+            href="javascript:void(0);"
+            on:click="{showAuthorizePlayerModal}">
+            <i class="fas fa-user-circle me-2"></i>
+            Yetkilendir
+          </a>
+        {/if}
         <a
           class="dropdown-item"
           href="javascript:void(0);"
@@ -66,7 +68,7 @@
     </a>
   </td>
   <td class="align-middle text-nowrap text-capitalize">
-    <PlayerPermissionBadge permissionGroup="{player.permissionGroup}"/>
+    <PlayerPermissionBadge permissionGroup="{player.permissionGroup}" />
   </td>
   <td class="align-middle text-nowrap">
     <PlayerStatusBadge
@@ -90,6 +92,7 @@
   import Date from "$lib/component/Date.svelte";
   import PlayerStatusBadge from "$lib/component/badges/PlayerStatusBadge.svelte";
   import PlayerPermissionBadge from "$lib/component/badges/PlayerPermissionBadge.svelte";
+  import { hasPermission, Permissions } from "$lib/auth.util.js";
 
   export let player;
   export let checkTime;
