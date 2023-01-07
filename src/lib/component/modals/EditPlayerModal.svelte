@@ -97,11 +97,11 @@
                   type="checkbox"
                   aria-checked="true"
                   role="switch"
-                  id="flexSwitchCheckChecked"
-                  checked
+                  id="emailVerifiedCheckbox"
+                  bind:checked={$player.canCreateTicket}
                   class:disabled="{$user.username === $player.username}"
                   disabled="{$user.username === $player.username}" />
-                <label class="form-check-label" for="flexSwitchCheckChecked"
+                <label class="form-check-label" for="emailVerifiedCheckbox"
                   >Talep oluşturabilir</label>
               </div>
             </div>
@@ -112,11 +112,11 @@
                   type="checkbox"
                   role="switch"
                   aria-checked="true"
-                  id="flexSwitchCheckChecked2"
-                  checked
+                  id="canCreateTicketCheckbox"
+                  bind:checked={$player.isEmailVerified}
                   class:disabled="{$user.username === $player.username}"
                   disabled="{$user.username === $player.username}" />
-                <label class="form-check-label" for="flexSwitchCheckChecked2"
+                <label class="form-check-label" for="canCreateTicketCheckbox"
                   >E-postası doğrulandı</label>
               </div>
             </div>
