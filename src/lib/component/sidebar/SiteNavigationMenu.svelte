@@ -64,7 +64,7 @@
       </li>
     {/if}
 
-    {#if hasPermission(Permissions.MANAGE_ADDON)}
+    {#if hasPermission(Permissions.MANAGE_ADDONS)}
       <li class="nav-item p-2">
         <a
           class="nav-link"

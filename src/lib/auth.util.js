@@ -8,7 +8,7 @@ export const Permissions = Object.freeze({
   MANAGE_TICKETS: "manage_tickets",
   MANAGE_PLAYERS: "manage_players",
   MANAGE_VIEW: "manage_view",
-  MANAGE_ADDON: "manage_addon",
+  MANAGE_ADDONS: "manage_addons",
   MANAGE_PLATFORM_SETTINGS: "manage_platform_settings",
   MANAGE_PERMISSION_GROUPS: "manage_permission_groups"
 });

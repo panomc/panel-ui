@@ -10,7 +10,7 @@
   export async function load({ parent }) {
     await parent();
 
-    if (!hasPermission(Permissions.MANAGE_ADDON)) {
+    if (!hasPermission(Permissions.MANAGE_ADDONS)) {
       throw redirect(302, "/");
     }
   }
