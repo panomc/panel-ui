@@ -46,15 +46,17 @@
       </a>
     </li>
 
-    <li class="nav-item p-2">
-      <a
-        class="nav-link"
-        href="{base}/view"
-        class:active="{matching($page.url.pathname, base + '/view', true)}">
-        <i class="fas fa-palette me-2"></i>
-        Görünüm
-      </a>
-    </li>
+    {#if hasPermission(Permissions.MANAGE_VIEW)}
+      <li class="nav-item p-2">
+        <a
+          class="nav-link"
+          href="{base}/view"
+          class:active="{matching($page.url.pathname, base + '/view', true)}">
+          <i class="fas fa-palette me-2"></i>
+          Görünüm
+        </a>
+      </li>
+    {/if}
 
     <li class="nav-item p-2">
       <a
