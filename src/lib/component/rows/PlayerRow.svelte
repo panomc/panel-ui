@@ -27,7 +27,10 @@
         <a
           class="dropdown-item"
           href="javascript:void(0);"
-          on:click="{showEditPlayerModal}">
+          on:click="{showEditPlayerModal}"
+          class:disabled="{$user.username === player.username || (player.permissionGroup === 'admin' && !$user.admin)}"
+          disabled="{$user.username === player.username || (player.permissionGroup === 'admin' && !$user.admin)}"
+        >
           <i class="fa-solid fa-pencil-alt me-2"></i>
           Düzenle
         </a>
@@ -36,9 +39,9 @@
           href="javascript:void(0);"
           on:click="{() =>
             player.isBanned ? showUnbanPlayerModal() : showBanPlayerModal()}"
-          class:link-danger="{$user.username !== player.username}"
-          class:disabled="{$user.username === player.username}"
-          disabled="{$user.username === player.username}">
+          class:link-danger="{$user.username !== player.username && ((player.permissionGroup === 'admin' && $user.admin) || player.permissionGroup !== 'admin')}"
+          class:disabled="{$user.username === player.username || (player.permissionGroup === 'admin' && !$user.admin)}"
+          disabled="{$user.username === player.username || (player.permissionGroup === 'admin' && !$user.admin)}">
           <i class="fas fa-gavel me-2"></i>
           {#if player.isBanned} Yasağı Kaldır {:else} Yasakla {/if}
         </a>
