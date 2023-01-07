@@ -49,7 +49,6 @@
           class="btn btn-link text-muted"
           type="button"
           class:disabled="{loading}"
-          disabled="{loading}"
           on:click="{hide}">
           İptal
         </button>
@@ -57,7 +56,6 @@
           class="btn btn-danger"
           type="button"
           class:disabled="{loading}"
-          disabled="{loading}"
           on:click="{onYesClick}">
           Evet
         </button>

@@ -45,7 +45,6 @@
             type="button"
             class="btn btn-primary w-100"
             class:disabled="{$submitLoading}"
-            disabled="{$submitLoading}"
             on:click="{onSubmit}">Kaydet</button>
         </div>
       {/if}

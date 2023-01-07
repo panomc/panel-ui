@@ -37,8 +37,7 @@
       <button
         class="btn btn-outline-primary"
         on:click="{onResumeClick}"
-        class:disabled="{$retryingNetworkErrors}"
-        disabled="{$retryingNetworkErrors}">
+        class:disabled="{$retryingNetworkErrors}">
         {$retryingNetworkErrors ? "Yenileniyor..." : "Yenile"}
       </button>
     </div>

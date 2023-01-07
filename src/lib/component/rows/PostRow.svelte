@@ -23,8 +23,7 @@
             class="dropdown-item"
             href="javascript:void(0);"
             on:click="{onMoveToDraft}"
-            class:disabled="{buttonsLoading}"
-            disabled="{buttonsLoading}">
+            class:disabled="{buttonsLoading}">
             <span>
               <i class="fa-solid fa-box-archive me-2"></i>
               Taslaklara Taşı
@@ -37,7 +36,6 @@
             class="dropdown-item"
             href="javascript:void(0);"
             class:disabled="{buttonsLoading}"
-            disabled="{buttonsLoading}"
             on:click="{onPublishClick}">
             <span>
               <i class="fas fa-globe-americas me-2"></i>

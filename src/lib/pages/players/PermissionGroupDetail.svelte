@@ -15,7 +15,6 @@
         class:btn-primary="{data.mode === Modes.EDIT}"
         type="submit"
         class:disabled="{saveButtonDisabled}"
-        disabled="{saveButtonDisabled}"
         on:click="{onSubmit}">
         {#if data.mode === Modes.EDIT}
           Kaydet
@@ -44,7 +43,6 @@
             id="permissionGroupName"
             type="text"
             bind:value="{name}"
-            disabled="{data.name === 'admin'}"
             class:disabled="{data.name === 'admin'}" />
 
           <form on:submit|preventDefault="{addUser}">
@@ -107,7 +105,7 @@
                         id="{permission.name}"
                         checked="{isPermissionChecked(permission)}"
                         on:click="{() => onPermissionClick(permission)}"
-                        disabled="{isPermissionDisabled()}" />
+                        class:disabled="{isPermissionDisabled()}" />
                     </div>
                   </td>
                 </tr>

@@ -30,7 +30,6 @@
           class="btn btn-link"
           type="button"
           class:disabled="{loading}"
-          disabled="{loading}"
           on:click="{onDraftClick}"
           use:tooltip="{['Taslaklara Taşı', { placement: 'bottom' }]}">
           <i class="fa-solid fa-box-archive"></i>
@@ -51,7 +50,6 @@
           class:disabled="{loading ||
             isEditorEmpty ||
             data.post.title.length === 0}"
-          disabled="{loading || isEditorEmpty || data.post.title.length === 0}"
           on:click="{() => submit(false)}">
           <span> Kaydet </span>
         </button>
@@ -62,7 +60,6 @@
         class:disabled="{loading ||
           isEditorEmpty ||
           data.post.title.length === 0}"
-        disabled="{loading || isEditorEmpty || data.post.title.length === 0}"
         on:click="{() => submit(true)}">
         <span>
           {data.post.status === StatusTypes.PUBLISHED ? "Güncelle" : "Yayınla"}

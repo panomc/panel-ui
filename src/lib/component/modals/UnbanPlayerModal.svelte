@@ -18,7 +18,6 @@
             class="btn btn-link col-6 m-0"
           type="button"
           class:disabled="{loading}"
-          disabled="{loading}"
           on:click="{hide}">
           İptal
         </button>
@@ -26,7 +25,6 @@
           class="btn btn-danger col-6 m-0"
           type="button"
           class:disabled="{loading}"
-          disabled="{loading}"
           on:click="{onSubmit}">
           Evet
         </button>

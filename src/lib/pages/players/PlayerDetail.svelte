@@ -1,10 +1,11 @@
 <!-- Player Detail Page -->
 <div class="container">
   <!-- Action Menu -->
-  <div class="row justify-content-between mb-3">
+  <div
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       {#if hasPermission(Permissions.MANAGE_PLAYERS)}
-        <a class="btn btn-link" role="button" href="{base}/players">
+        <a class="btn btn-link" role="button" href="{base}/players" >
           <i class="fas fa-arrow-left me-2"></i>
           Oyuncular
         </a>
@@ -18,8 +19,6 @@
           use:tooltip="{['Sil', { placement: 'bottom' }]}"
           on:click="{() => showConfirmBanPlayerModal(data.player)}"
           class:disabled="{$user.username === data.player.username ||
-            (data.player.permissionGroup === 'admin' && !$user.admin)}"
-          disabled="{$user.username === data.player.username ||
             (data.player.permissionGroup === 'admin' && !$user.admin)}">
           <i class="fas fa-trash"></i>
         </a>
@@ -30,8 +29,6 @@
             use:tooltip="{['Yasağı Kaldır', { placement: 'bottom' }]}"
             on:click="{() => showUnbanPlayerModal(data.player)}"
             class:disabled="{$user.username === data.player.username ||
-              (data.player.permissionGroup === 'admin' && !$user.admin)}"
-            disabled="{$user.username === data.player.username ||
               (data.player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-gavel"></i>
           </a>
@@ -42,8 +39,6 @@
             use:tooltip="{['Yasakla', { placement: 'bottom' }]}"
             on:click="{() => showConfirmBanPlayerModal(data.player)}"
             class:disabled="{$user.username === data.player.username ||
-              (data.player.permissionGroup === 'admin' && !$user.admin)}"
-            disabled="{$user.username === data.player.username ||
               (data.player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-gavel"></i>
           </a>
@@ -59,49 +54,20 @@
             on:click="{sendVerification}"
             class:disabled="{sendingVerificationMail ||
               $user.username === data.player.username ||
-              (data.player.permissionGroup === 'admin' && !$user.admin)}"
-            disabled="{sendingVerificationMail ||
-              $user.username === data.player.username ||
               (data.player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-envelope"></i>
           </a>
         {/if}
 
-        <!-- on:click="{() => showAuthorizePlayerModal(data.player)}" -->
-        <div class="dropdown d-inline-block">
-          <a
-            class="btn btn-link"
-            data-bs-toggle="dropdown"
-            href="javascript:void(0);"
-            use:tooltip="{['Yetkilendir', { placement: 'bottom' }]}"
-            class:disabled="{$user.username === data.player.username ||
-              (data.player.permissionGroup === 'admin' && !$user.admin)}"
-            disabled="{$user.username === data.player.username ||
-              (data.player.permissionGroup === 'admin' && !$user.admin)}">
-            <i class="fas fa-user-circle"></i>
-          </a>
-
-          <div
-            class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
-            <h6 class="dropdown-header">Yetkilendir</h6>
-            <!-- Perm Group List -->
-            <a class="dropdown-item" href="javascript:void(0);"> Yetki </a>
-
-            <!-- Placeholder -->
-            <div class="dropdown-item placeholder-glow">
-              <span class="placeholder col-12"></span>
-            </div>
-            <div class="dropdown-item placeholder-glow">
-              <span class="placeholder col-12"></span>
-            </div>
-            <div class="dropdown-item placeholder-glow">
-              <span class="placeholder col-12"></span>
-            </div>
-            <div class="dropdown-item placeholder-glow">
-              <span class="placeholder col-12"></span>
-            </div>
-          </div>
-        </div>
+        <a
+          class="btn btn-link"
+          href="javascript:void(0);"
+          use:tooltip="{['Yetkilendir', { placement: 'bottom' }]}"
+          on:click="{() => showAuthorizePlayerModal(data.player)}"
+          class:disabled="{$user.username === data.player.username ||
+            (data.player.permissionGroup === 'admin' && !$user.admin)}">
+          <i class="fas fa-user-circle"></i>
+        </a>
       {/if}
       {#if hasPermission(Permissions.MANAGE_PLAYERS) || $user.username === data.player.username}
         <a
@@ -109,8 +75,7 @@
           href="javascript:void(0);"
           on:click="{() => showEditPlayerModal(data.player)}"
           class:disabled="{data.player.permissionGroup === 'admin' &&
-            !$user.admin}"
-          disabled="{data.player.permissionGroup === 'admin' && !$user.admin}">
+            !$user.admin}">
           <i class="fas fa-pencil-alt me-2"></i> Düzenle
         </a>
       {/if}

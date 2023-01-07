@@ -43,7 +43,6 @@
         class="btn btn-secondary"
         class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
         aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
-        disabled="{saveButtonLoading || isSaveButtonDisabled}"
         on:click="{save}"
         >Kaydet
       </button>

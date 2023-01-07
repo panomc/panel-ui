@@ -148,14 +148,14 @@
               class="btn btn-sm btn-outline-light btn-link"
               class:active="{data.period === DashboardPeriod.WEEK}"
               on:click="{() => reloadDataByPeriod()}"
-              disabled="{reloading}">
+              class:disabled="{reloading}">
               Hafta
             </button>
             <button
               class="btn btn-sm btn-outline-light btn-link"
               class:active="{data.period === DashboardPeriod.MONTH}"
               on:click="{() => reloadDataByPeriod(DashboardPeriod.MONTH)}"
-              disabled="{reloading}">
+              class:disabled="{reloading}">
               Ay
             </button>
           </div>

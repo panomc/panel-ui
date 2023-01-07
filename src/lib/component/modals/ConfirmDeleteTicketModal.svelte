@@ -21,7 +21,6 @@
           type="button"
           class:disabled="{loading}"
           aria-disabled="{loading}"
-          disabled="{loading}"
           on:click="{hide}">
           İptal
         </button>
@@ -30,7 +29,6 @@
           type="button"
           class:disabled="{loading}"
           aria-disabled="{loading}"
-          disabled="{loading}"
           on:click="{onYesClick}">
           Evet
         </button>

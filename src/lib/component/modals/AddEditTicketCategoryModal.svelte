@@ -37,8 +37,7 @@
             type="submit"
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
-            class:disabled="{loading || buttonDisabled}"
-            disabled="{loading || buttonDisabled}">
+            class:disabled="{loading || buttonDisabled}">
             {$mode === "edit" ? "Kaydet" : "Oluştur"}
           </button>
         </div>

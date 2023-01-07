@@ -49,7 +49,6 @@
             class="btn btn-link link-danger col-6 m-0"
             type="button"
             class:disabled="{$submitLoading}"
-            disabled="{$submitLoading}"
             on:click="{rejectServer}">
             Reddet
           </button>
@@ -57,7 +56,6 @@
             class="btn btn-secondary col-6 m-0"
             type="button"
             class:disabled="{$submitLoading}"
-            disabled="{$submitLoading}"
             on:click="{acceptServer}">
             Bağla
           </button>
