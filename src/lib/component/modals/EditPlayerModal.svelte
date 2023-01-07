@@ -98,7 +98,9 @@
                   aria-checked="true"
                   role="switch"
                   id="flexSwitchCheckChecked"
-                  checked />
+                  checked
+                  class:disabled="{$user.username === $player.username}"
+                  disabled="{$user.username === $player.username}" />
                 <label class="form-check-label" for="flexSwitchCheckChecked"
                   >Talep oluşturabilir</label>
               </div>
@@ -111,7 +113,9 @@
                   role="switch"
                   aria-checked="true"
                   id="flexSwitchCheckChecked2"
-                  checked />
+                  checked
+                  class:disabled="{$user.username === $player.username}"
+                  disabled="{$user.username === $player.username}" />
                 <label class="form-check-label" for="flexSwitchCheckChecked2"
                   >E-postası doğrulandı</label>
               </div>
