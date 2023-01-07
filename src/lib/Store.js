@@ -3,6 +3,7 @@ import { get, writable } from "svelte/store";
 import { invalidateAll } from "$app/navigation";
 
 import { PanelSidebarStorageUtil } from "$lib/storage.util";
+import { hasPermission, Permissions } from "$lib/auth.util.js";
 
 export const session = writable({});
 
@@ -132,6 +133,10 @@ export function initializeBasicData(data) {
   platformAddress.set(data.platformHostAddress);
   notificationsCount.set(data.notificationCount);
   mainServer.set(data.mainServer);
+
+  if (!hasPermission(Permissions.MANAGE_SERVERS)) {
+    sidebarTabsState.set("website");
+  }
 
   if (data.selectedServer) {
     selectedServer.set(data.selectedServer);
