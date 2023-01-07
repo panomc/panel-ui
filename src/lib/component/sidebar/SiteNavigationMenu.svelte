@@ -70,15 +70,21 @@
       </li>
     {/if}
 
-    <li class="nav-item p-2">
-      <a
-        class="nav-link"
-        href="{base}/settings"
-        class:active="{matching($page.url.pathname, base + '/settings', true)}">
-        <i class="fas fa-cog me-2"></i>
-        Ayarlar
-      </a>
-    </li>
+    {#if hasPermission(Permissions.MANAGE_PLATFORM_SETTINGS)}
+      <li class="nav-item p-2">
+        <a
+          class="nav-link"
+          href="{base}/settings"
+          class:active="{matching(
+            $page.url.pathname,
+            base + '/settings',
+            true
+          )}">
+          <i class="fas fa-cog me-2"></i>
+          Ayarlar
+        </a>
+      </li>
+    {/if}
   </ul>
 </nav>
 
