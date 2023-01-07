@@ -68,17 +68,19 @@
           <i class="fas fa-globe fa-lg"></i>
         </a>
       </li>
-      <li class="nav-item">
-        <a
-          href="javascript:void(0);"
-          class="nav-link"
-          use:tooltip="{['Sunucu', { placement: 'bottom' }]}"
-          on:click="{onGameMenuClick}"
-          class:active="{$sidebarTabsState === 'game'}"
-          class:text-light="{$sidebarTabsState !== 'game'}">
-          <i class="fas fa-cube fa-lg"></i>
-        </a>
-      </li>
+      {#if hasPermission(Permissions.MANAGE_SERVERS)}
+        <li class="nav-item">
+          <a
+            href="javascript:void(0);"
+            class="nav-link"
+            use:tooltip="{['Sunucu', { placement: 'bottom' }]}"
+            on:click="{onGameMenuClick}"
+            class:active="{$sidebarTabsState === 'game'}"
+            class:text-light="{$sidebarTabsState !== 'game'}">
+            <i class="fas fa-cube fa-lg"></i>
+          </a>
+        </li>
+      {/if}
     </ul>
 
     <!-- Sidebar Site Navigation Menu || Sidebar Server Navigation Menu -->
@@ -118,6 +120,7 @@
   import { UI_URL } from "$lib/variables.js";
 
   import { websiteLogoSrc } from "$lib/Store.js";
+  import { hasPermission, Permissions } from "$lib/auth.util.js";
 
   let menuComponent = SiteNavigationMenu;
 
