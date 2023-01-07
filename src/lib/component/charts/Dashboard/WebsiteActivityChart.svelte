@@ -101,17 +101,15 @@
       pointBackgroundColor: "#fff",
     });
 
-    if (hasPermission(Permissions.MANAGE_TICKETS)) {
-      datasets.push({
-        label: "Yeni Talep",
-        data: convertedTicketsData,
-        borderColor: "purple",
-        backgroundColor: "rgba(25, 118, 210, .05)",
-        borderWidth: 2,
-        pointRadius: 5,
-        pointBackgroundColor: "#fff",
-      });
-    }
+    datasets.push({
+      label: "Yeni Talep",
+      data: convertedTicketsData,
+      borderColor: "purple",
+      backgroundColor: "rgba(25, 118, 210, .05)",
+      borderWidth: 2,
+      pointRadius: 5,
+      pointBackgroundColor: "#fff",
+    });
 
     datasets.push({
       label: "Ziyaretçi",

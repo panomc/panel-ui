@@ -249,12 +249,10 @@
               <th scope="row">Yöneticiler:</th>
               <td>{data.adminCount}</td>
             </tr>
-            {#if hasPermission(Permissions.MANAGE_TICKETS)}
-              <tr>
-                <th scope="row">Talepler:</th>
-                <td>{data.ticketCount}</td>
-              </tr>
-            {/if}
+            <tr>
+              <th scope="row">Talepler:</th>
+              <td>{data.ticketCount}</td>
+            </tr>
             <tr>
               <th scope="row">Sunucular:</th>
               <td>{data.connectedServerCount}</td>
