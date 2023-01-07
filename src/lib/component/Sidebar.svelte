@@ -125,7 +125,7 @@
   let menuComponent = SiteNavigationMenu;
 
   const unsubscribeSidebarTabsState = sidebarTabsState.subscribe((value) => {
-    if (value === "website") {
+    if (value === "website" || !hasPermission(Permissions.MANAGE_SERVERS)) {
       menuComponent = SiteNavigationMenu;
     } else {
       menuComponent = ServerNavigationMenu;
