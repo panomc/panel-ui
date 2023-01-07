@@ -132,7 +132,7 @@ export function initializeBasicData(data) {
   platformKeyRefreshedTime.set(data.platformServerMatchKeyTimeStarted);
   platformAddress.set(data.platformHostAddress);
   notificationsCount.set(data.notificationCount);
-  mainServer.set(data.mainServer);
+  mainServer.set(data.mainServer || {});
 
   if (!hasPermission(Permissions.MANAGE_SERVERS)) {
     sidebarTabsState.set("website");
