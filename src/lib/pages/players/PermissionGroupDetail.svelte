@@ -398,6 +398,17 @@
             });
           }
 
+          addedUsers.forEach(addedUser => {
+            data.originalUsers.push(addedUser)
+          })
+
+          removedUsers.forEach(addedUser => {
+            data.originalUsers.remove(data.originalUsers.indexOf(addedUser))
+          })
+
+          addedUsers = []
+          removedUsers = []
+
           resolve();
         } else if (body.result === "error") {
           loading = false;
