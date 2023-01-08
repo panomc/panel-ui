@@ -100,37 +100,28 @@
 
   <div
     class="row my-3 justify-content-between animate__animated animate__slideInUp">
-    <div class="col-auto">
-      <div class="text-secondary">
-        <div class="row align-items-center">
-          <div class="col-auto">
-            <h2 class="mb-0">12</h2>
-          </div>
-          <div class="col-auto">Çevrimiçi</div>
+    <div class="col-4">
+      <div class="card bg-transparent">
+        <div class="card-body">
+          <p class="mb-0 lead text-secondary text-center">12 Çevrimiçi</p>
         </div>
       </div>
     </div>
-    <div class="col-auto">
-      <div class="text-primary">
-        <div class="row align-items-center">
-          <div class="col-auto">
-            <h2 class="mb-0">
-              {data.newRegisterCount}
-            </h2>
-          </div>
-          <div class="col-auto">Yeni Kayıt</div>
+    <div class="col-4">
+      <div class="card bg-transparent">
+        <div class="card-body">
+          <p class="mb-0 lead text-primary text-center">
+              {data.newRegisterCount} Yeni Kayıt
+          </p>
         </div>
       </div>
     </div>
-    <div class="col-auto">
-      <div class="text-bittersweet">
-        <div class="row align-items-center">
-          <div class="col-auto">
-            <h2 class="mb-0">
-              {data.registeredPlayerCount}
-            </h2>
-          </div>
-          <div class="col-auto">Toplam Oyuncu</div>
+    <div class="col-4">
+      <div class="card bg-transparent">
+        <div class="card-body">
+          <p class="mb-0 lead text-danger text-center">
+              {data.registeredPlayerCount} Toplam Oyuncu
+            </p>
         </div>
       </div>
     </div>
