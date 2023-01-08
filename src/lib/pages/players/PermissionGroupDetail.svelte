@@ -29,12 +29,6 @@
     <div class="col mb-xl-0 mb-3">
       <div class="card h-100">
         <div class="card-body">
-          {#if errors.error}
-            <small class="text-danger">
-              {errors.error}
-            </small>
-          {/if}
-
           <input
             class:text-danger="{errors.name}"
             class:text-black="{!errors.name}"
@@ -240,6 +234,7 @@
 
   import PermissionGroupSavedOrCreatedToast from "$lib/component/toasts/PermissionGroupSavedOrCreatedToast.svelte";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
+  import PermissionGroupSaveErrorToast from "$lib/component/toasts/PermissionGroupSaveErrorToast.svelte";
 
   export let data;
 
@@ -412,8 +407,9 @@
         } else if (body.error) {
           loading = false;
 
-          errors =
-            typeof body.error === "string" ? { error: body.error } : body.error;
+          showToast(PermissionGroupSaveErrorToast, {
+            errorCode: body.error,
+          });
 
           resolve();
         } else if (body.errors) {
