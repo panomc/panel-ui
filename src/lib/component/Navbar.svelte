@@ -23,7 +23,7 @@
       </div>
       <div class="col-4 d-flex justify-content-center">
         <!-- Page Title -->
-        <h4 class="text-black text-center">
+        <h4 class="text-center">
           {$pageTitle ? $pageTitle : options.DEFAULT_PAGE_TITLE}
         </h4>
       </div>
@@ -99,7 +99,7 @@
             </a>
             <ul
               class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
-              <h6 class="dropdown-header text-black">{$user.username}</h6>
+              <h6 class="dropdown-header">{$user.username}</h6>
               <li>
                 <a
                   class="dropdown-item"
