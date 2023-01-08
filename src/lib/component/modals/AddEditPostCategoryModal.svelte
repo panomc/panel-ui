@@ -132,6 +132,7 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
+      console.log("geldi")
       const bodyHandler = (body) => {
         if (body.result === "ok") {
           loading = false;
@@ -145,13 +146,13 @@
           callback(true, newCategory);
 
           resolve();
-        } else if (body.result === "error") {
+        } else if (body.result === "errors") {
           loading = false;
 
-          errors.set(body.error);
+          errors.set(body.errors);
 
           resolve();
-        } else reject();
+        } else if (body.result === "error") reject();
       };
 
       if (get(mode) === "edit") {

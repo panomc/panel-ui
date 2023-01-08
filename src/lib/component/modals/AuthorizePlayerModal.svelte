@@ -155,11 +155,13 @@
             resolve();
           } else if (body.result === "NOT_EXISTS") {
             refreshBrowserPage();
-          } else if (body.error) {
-            errors.set(body.error);
+          } else if (body.errors) {
+            errors.set(body.errors);
 
             resolve();
-          } else reject();
+          } else if (body.error) {
+            location.reload()
+          }else reject();
         })
         .catch(() => {
           reject();

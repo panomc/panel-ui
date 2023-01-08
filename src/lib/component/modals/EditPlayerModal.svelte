@@ -98,7 +98,7 @@
                   aria-checked="true"
                   role="switch"
                   id="emailVerifiedCheckbox"
-                  bind:checked={$player.canCreateTicket}
+                  bind:checked="{$player.canCreateTicket}"
                   disabled="{$user.username === $player.username}" />
                 <label class="form-check-label" for="emailVerifiedCheckbox"
                   >Talep oluşturabilir</label>
@@ -112,7 +112,7 @@
                   role="switch"
                   aria-checked="true"
                   id="canCreateTicketCheckbox"
-                  bind:checked={$player.isEmailVerified}
+                  bind:checked="{$player.isEmailVerified}"
                   disabled="{$user.username === $player.username}" />
                 <label class="form-check-label" for="canCreateTicketCheckbox"
                   >E-postası doğrulandı</label>
@@ -235,11 +235,13 @@
             resolve();
           } else if (body.result === "NOT_EXISTS") {
             refreshBrowserPage();
-          } else if (body.error) {
+          } else if (body.errors) {
             loading = false;
-            errors.set(body.error);
+            errors.set(body.errors);
 
             resolve();
+          } else if (body.error) {
+            location.reload();
           } else reject();
         })
         .catch(() => {
