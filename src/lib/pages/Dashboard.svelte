@@ -103,7 +103,11 @@
     <div class="col-4">
       <div class="card bg-transparent">
         <div class="card-body">
-          <p class="mb-0 lead text-secondary text-center">12 Çevrimiçi</p>
+          <p
+            class="mb-0 lead text-secondary text-center"
+            use:tooltip="{['Website', { placement: 'bottom' }]}">
+            12 Çevrimiçi
+          </p>
         </div>
       </div>
     </div>
@@ -111,7 +115,7 @@
       <div class="card bg-transparent">
         <div class="card-body">
           <p class="mb-0 lead text-primary text-center">
-              {data.newRegisterCount} Yeni Kayıt
+            {data.newRegisterCount} Yeni Kayıt
           </p>
         </div>
       </div>
@@ -120,8 +124,8 @@
       <div class="card bg-transparent">
         <div class="card-body">
           <p class="mb-0 lead text-danger text-center">
-              {data.registeredPlayerCount} Toplam Oyuncu
-            </p>
+            {data.registeredPlayerCount} Toplam Oyuncu
+          </p>
         </div>
       </div>
     </div>
