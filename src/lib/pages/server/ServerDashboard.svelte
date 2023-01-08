@@ -10,7 +10,7 @@
       </a>
     </div>
     <div class="col-auto">
-      <a href="#" class="btn btn-secondary ml-auto" role="button">
+      <a href="#" class="btn btn-outline-primary ml-auto" role="button">
         <i class="fa-solid fa-house me-2"></i> Ana Sunucu Yap
       </a>
     </div>
@@ -18,23 +18,18 @@
   <div
     class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-4">
-      <div class="card bg-transparent">
+      <div class="card bg-secondary">
         <div class="card-body">
           <p
-            class="mb-0 lead text-secondary text-center"
+            class="mb-0 lead text-white"
             use:tooltip="{['Sunucu', { placement: 'bottom' }]}">
-            Çevrimiçi
-          </p>
-          <p
-            class="mb-0 lead text-danger text-center"
-            use:tooltip="{['Sunucu', { placement: 'bottom' }]}">
-            Çevrimdışı
+            Sunucu Çevrimiçi
           </p>
         </div>
       </div>
     </div>
     <div class="col-4">
-      <div class="card bg-transparent">
+      <div class="card">
         <div class="card-body">
           <p
             class="mb-0 lead text-primary text-center"
@@ -45,14 +40,48 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card bg-transparent">
+      <div class="card">
         <div class="card-body">
           <p
-            class="mb-0 lead text-mint text-center"
+            class="mb-0 lead text-dark text-center"
             use:tooltip="{['Sunucu', { placement: 'bottom' }]}">
             X Çalışma Süresi
           </p>
         </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Statistic Table -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">İstatistik</h5>
+      <div class="table-responsive">
+        <table class="table table-borderless table-hover m-0">
+          <tbody class="text-muted">
+            <tr>
+              <th scope="row">DATA:</th>
+              <td>DATA</td>
+            </tr>
+            <tr>
+              <th scope="row">DATA:</th>
+              <td>DATA</td>
+            </tr>
+            <tr>
+              <th scope="row">DATA:</th>
+              <td>DATA</td>
+            </tr>
+            <tr>
+              <th scope="row">DATA:</th>
+              <td>DATA</td>
+            </tr>
+            <tr>
+              <th scope="row">DATA:</th>
+              <td>DATA</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

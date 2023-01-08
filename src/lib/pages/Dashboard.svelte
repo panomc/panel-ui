@@ -101,7 +101,7 @@
   <div
     class="row my-3 justify-content-between animate__animated animate__slideInUp">
     <div class="col-4">
-      <div class="card bg-transparent">
+      <div class="card">
         <div class="card-body">
           <p
             class="mb-0 lead text-secondary text-center"
@@ -112,7 +112,7 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card bg-transparent">
+      <div class="card">
         <div class="card-body">
           <p class="mb-0 lead text-primary text-center">
             {data.newRegisterCount} Yeni Kayıt
@@ -121,7 +121,7 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card bg-transparent">
+      <div class="card">
         <div class="card-body">
           <p class="mb-0 lead text-danger text-center">
             {data.registeredPlayerCount} Toplam Oyuncu
