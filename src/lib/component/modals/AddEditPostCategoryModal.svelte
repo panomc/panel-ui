@@ -34,11 +34,11 @@
           <div class="mb-3 input-group">
             <span class="input-group-text">/category/</span>
             <input
-              class:border-danger="{$errors.url}"
               class="form-control"
               placeholder="URL"
               id="categoryURL"
               type="text"
+              class:is-invalid="{$errors.url}"
               bind:value="{$category.url}" />
           </div>
           <small class:text-danger="{$errors.url}">

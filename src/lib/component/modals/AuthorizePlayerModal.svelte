@@ -23,7 +23,6 @@
         <div class="modal-body">
           <select
             class="form-control"
-            class:border-danger="{$errors['LAST_ADMIN']}"
             id="selectPermGroup"
             bind:value="{$player.permissionGroup}">
             <option class="text-primary" value="-">Oyuncu</option>
@@ -33,12 +32,6 @@
                 >{permissionGroup.name}</option>
             {/each}
           </select>
-          {#if $errors["LAST_ADMIN"]}
-            <small class="text-danger">
-              <i aria-hidden="true" class="fa fa-exclamation-circle"></i>
-              Bu kullanıcının yetkisi son yönetici olduğu için değiştirilemez.
-            </small>
-          {/if}
         </div>
         <div class="modal-footer">
           <button
@@ -128,10 +121,6 @@
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import PlayerAuthorizedSuccessToast from "$lib/component/toasts/PlayerAuthorizedSuccessToast.svelte";
 
-  function refreshBrowserPage() {
-    location.reload();
-  }
-
   function onSubmit() {
     submitLoading.set(true);
 
@@ -154,14 +143,14 @@
 
             resolve();
           } else if (body.result === "NOT_EXISTS") {
-            refreshBrowserPage();
+            location.reload();
           } else if (body.errors) {
             errors.set(body.errors);
 
             resolve();
           } else if (body.error) {
-            location.reload()
-          }else reject();
+            location.reload();
+          } else reject();
         })
         .catch(() => {
           reject();

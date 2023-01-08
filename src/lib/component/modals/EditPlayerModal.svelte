@@ -26,17 +26,18 @@
                 placeholder="İsim"
                 type="text"
                 bind:value="{$player.username}"
-                class:border-danger="{!!$errors.username}" />
-              {#if !!$errors["username"]}
-                <small class="text-danger">
+                class:is-invalid="{!!$errors.username}"
+                aria-describedby="validationEditUsernameInModal" />
+              <div id="validationEditUsernameInModal" class="invalid-feedback">
+                {#if !!$errors["username"]}
                   {#if $errors["username"] === "INVALID"}
                     Kulanıcı adı geçerli değil
                   {/if}
                   {#if $errors["username"] === "EXISTS"}
                     Bu kullanıcı adı başka bir oyuncu tarafından kullanılıyor
                   {/if}
-                </small>
-              {/if}
+                {/if}
+              </div>
             </div>
             <div class="col-12 mb-3"></div>
             <div class="col-12 mb-3">
@@ -46,17 +47,18 @@
                 id="email"
                 type="text"
                 bind:value="{$player.email}"
-                class:border-danger="{!!$errors.email}" />
-              {#if !!$errors["email"]}
-                <small class="text-danger">
+                class:is-invalid="{!!$errors.email}"
+                aria-describedby="validationEditEmailInModal" />
+              <div id="validationEditEmailInModal" class="invalid-feedback">
+                {#if !!$errors["email"]}
                   {#if $errors["email"] === "INVALID"}
                     E-Posta geçerli değil
                   {/if}
                   {#if $errors["email"] === "EXISTS"}
                     Bu E-Posta adresi başka bir oyuncu tarafından kullanılıyor
                   {/if}
-                </small>
-              {/if}
+                {/if}
+              </div>
             </div>
             <div class="col-6 mb-3">
               <label for="newPassword">Yeni Şifre</label>
@@ -65,14 +67,15 @@
                 id="newPassword"
                 type="password"
                 bind:value="{$player.newPassword}"
-                class:border-danger="{!!$errors.newPassword}" />
-              {#if !!$errors["newPassword"]}
-                <small class="text-danger">
+                class:is-invalid="{!!$errors.newPassword}"
+                aria-describedby="validationEditPasswordInModal" />
+              <div id="validationEditPasswordInModal" class="invalid-feedback">
+                {#if !!$errors["newPassword"]}
                   {#if $errors["newPassword"] === "INVALID"}
                     Yeni şifre minimum 6 maksimum 128 karakterden oluşmalıdır
                   {/if}
-                </small>
-              {/if}
+                {/if}
+              </div>
             </div>
             <div class="col-6 mb-3">
               <label for="newPasswordRepeat">Yeni Şifre Tekrarı</label>
@@ -81,14 +84,17 @@
                 id="newPasswordRepeat"
                 type="password"
                 bind:value="{$player.newPasswordRepeat}"
-                class:border-danger="{!!$errors.newPasswordRepeat}" />
-              {#if !!$errors["newPasswordRepeat"]}
-                <small class="text-danger">
+                class:is-invalid="{!!$errors.newPasswordRepeat}"
+                aria-describedby="validationEditNewPasswordInModal" />
+              <div
+                id="validationEditNewPasswordInModal"
+                class="invalid-feedback">
+                {#if !!$errors["newPasswordRepeat"]}
                   {#if $errors["newPasswordRepeat"] === "NOT_MATCH"}
                     Şifreler aynı değil
                   {/if}
-                </small>
-              {/if}
+                {/if}
+              </div>
             </div>
             <div class="col-6">
               <div class="form-check form-switch">
