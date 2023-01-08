@@ -60,8 +60,7 @@
               use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
               href="javascript:void(0);"
               on:click="{() => removeUser(index)}">
-              <span
-                class="badge rounded-pill bg-light link-dark text-center">
+              <span class="badge rounded-pill bg-light link-dark text-center">
                 <img
                   class="d-inline rounded-circle me-2"
                   src="https://crafthead.net/avatar/{user}"
@@ -398,25 +397,29 @@
             });
           }
 
-          addedUsers.forEach(addedUser => {
-            data.originalUsers.push(addedUser)
-          })
+          addedUsers.forEach((addedUser) => {
+            data.originalUsers.push(addedUser);
+          });
 
-          removedUsers.forEach(addedUser => {
-            data.originalUsers.remove(data.originalUsers.indexOf(addedUser))
-          })
+          removedUsers.forEach((addedUser) => {
+            data.originalUsers.remove(data.originalUsers.indexOf(addedUser));
+          });
 
-          addedUsers = []
-          removedUsers = []
+          addedUsers = [];
+          removedUsers = [];
 
           resolve();
-        } else if (body.result === "error") {
+        } else if (body.error) {
           loading = false;
 
           errors =
             typeof body.error === "string" ? { error: body.error } : body.error;
 
           resolve();
+        } else if (body.errors) {
+          loading = false;
+
+          errors = body.errors;
         } else reject();
       };
 
