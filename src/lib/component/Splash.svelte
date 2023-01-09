@@ -27,7 +27,11 @@
             target="_blank">giriş yap</a
           >.
         </p>
-      {:else}
+      {:else if $noPermission}
+        <p class="text-danger">
+          Panele erişmek için yetkiniz yok.
+        </p>
+        {:else}
         <p class="text-danger">
           Bağlantı hatası!
           <br />Lütfen internetinizi veya Pano'nun açık ve erişilebilir olmasını
@@ -54,6 +58,7 @@
     resumeAfterNetworkError,
     retryingNetworkErrors,
     notLoggedIn,
+    noPermission
   } from "$lib/Store";
 
   let networkErrors = false;

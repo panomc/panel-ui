@@ -39,6 +39,7 @@ export const quickNotifications = writable([]);
 export const logoutLoading = writable(false);
 
 export const notLoggedIn = writable(false);
+export const noPermission = writable(false);
 
 export const pageTitle = writable(null);
 
@@ -48,6 +49,7 @@ export function setDefaults() {
   networkErrorCallbacks.set([]);
   retryingNetworkErrors.set(false);
   notLoggedIn.set(false);
+  noPermission.set(false);
   logoutLoading.set(false);
   pageTitle.set(null);
 }
@@ -125,6 +127,7 @@ export async function resumeAfterNetworkError() {
 
 export function initializeBasicData(data) {
   notLoggedIn.set(false);
+  noPermission.set(false);
 
   user.set(data.user);
   website.set(data.website);

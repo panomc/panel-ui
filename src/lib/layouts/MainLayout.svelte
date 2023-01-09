@@ -36,6 +36,7 @@
     notLoggedIn,
     setDefaults,
     session,
+    noPermission
   } from "$lib/Store.js";
   import { init as initLanguage } from "$lib/language.util";
 
@@ -134,6 +135,9 @@
       if (basicData.error === "NOT_LOGGED_IN") {
         notLoggedIn.set(true);
       }
+      if (basicData.error === "NO_PERMISSION") {
+        noPermission.set(true);
+      }
 
       output.stuff.NETWORK_ERROR = true;
 
@@ -145,6 +149,9 @@
           .catch((body) => {
             if (body.error === "NOT_LOGGED_IN") {
               notLoggedIn.set(true);
+            }
+            if (basicData.error === "NO_PERMISSION") {
+              noPermission.set(true);
             }
 
             reject();
