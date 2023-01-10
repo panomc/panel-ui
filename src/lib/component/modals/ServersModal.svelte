@@ -179,6 +179,8 @@
 </script>
 
 <script>
+  import { invalidateAll } from "$app/navigation";
+
   import { mainServer, selectedServer } from "$lib/Store.js";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import ServerNotExistsToast from "$lib/component/toasts/ServerNotExistsToast.svelte";
@@ -191,10 +193,11 @@
       ApiUtil.post({
         path: `/api/panel/servers/${server.id}/select`,
       })
-        .then((body) => {
+        .then(async (body) => {
           if (body.result === "ok") {
-            loading.set(false);
             $selectedServer = server;
+            await invalidateAll();
+            loading.set(false);
             hide();
           } else if (body.error && body.error === "NOT_EXISTS") {
             showToast(ServerNotExistsToast);
