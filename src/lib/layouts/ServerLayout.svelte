@@ -10,7 +10,7 @@
    * @type {import('@sveltejs/kit').LayoutLoad}
    */
   export async function load({ parent }) {
-    const parentData = await parent();
+    await parent();
 
     if (!hasPermission(Permissions.MANAGE_SERVERS)) {
       throw redirect(302, "/");
