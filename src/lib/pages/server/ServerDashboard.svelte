@@ -128,7 +128,7 @@
 
 <script>
   import { onDestroy, onMount } from "svelte";
-  import { intervalToDuration } from "date-fns";
+  import { differenceInCalendarDays, intervalToDuration } from "date-fns";
 
   import { pageTitle } from "$lib/Store.js";
 
@@ -149,7 +149,7 @@
       end: now,
     });
 
-    const days = duration["days"];
+    const days = differenceInCalendarDays(time, now);
     const hours = duration["hours"];
     const minutes = duration["minutes"];
     const seconds = duration["seconds"];
