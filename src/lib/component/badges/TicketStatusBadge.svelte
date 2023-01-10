@@ -1,19 +1,19 @@
 {#if status === TicketStatuses.NEW}
   <a href="{base}/tickets/waitingReply"
     ><span
-      class="badge bg-mint text-white rounded-pill"
+      class="badge bg-success text-white rounded-pill"
       title="Filtrele">Yeni</span
     ></a>
 {:else if status === TicketStatuses.REPLIED}
   <a href="{base}/tickets"
     ><span
-      class="badge bg-sunflower text-white rounded-pill"
+      class="badge bg-warning text-white rounded-pill"
       title="Filtrele">Yanıtlandı</span
     ></a>
 {:else if status === TicketStatuses.CLOSED}
   <a href="{base}/tickets/closed"
     ><span
-      class="badge bg-bittersweet text-white rounded-pill"
+      class="badge bg-danger text-white rounded-pill"
       title="Filtrele">Kapalı</span
     ></a>
 {/if}

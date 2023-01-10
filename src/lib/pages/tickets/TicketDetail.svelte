@@ -29,11 +29,11 @@
       </a>
       {#if data.ticket.status !== TicketStatuses.CLOSED}
         <a
-          class="btn btn-bittersweet"
+          class="btn btn-danger"
           role="button"
           on:click="{() => showCloseTicketModal([data.ticket.id])}"
           href="javascript:void(0);">
-          <i class="fas fa-check me-2"></i> Talebi Kapat
+          <i class="fas fa-times me-2"></i> Talebi Kapat
         </a>
       {/if}
     </div>
@@ -44,7 +44,7 @@
       class="card-header bg-opacity-25 pt-3"
       class:bg-secondary="{data.ticket.status === TicketStatuses.NEW}"
       class:bg-sunflower="{data.ticket.status === TicketStatuses.REPLIED}"
-      class:bg-bittersweet="{data.ticket.status === TicketStatuses.CLOSED}">
+      class:bg-danger="{data.ticket.status === TicketStatuses.CLOSED}">
       <div class="row">
         <div class="col">
           <h5 class="card-title">{data.ticket.title}</h5>

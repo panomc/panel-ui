@@ -27,13 +27,13 @@
           Sil
         </a>
         <a
-          class="btn btn-bittersweet"
+          class="btn btn-danger"
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
           on:click="{onShowCloseTicketsModalClick}">
-          <i class="fas fa-check me-2"></i>
-          Kapat
+          <i class="fas fa-times me-2"></i>
+          Talebi Kapat
         </a>
       </div>
     </div>

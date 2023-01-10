@@ -26,7 +26,7 @@
           İptal
         </button>
         <button
-          class="btn btn-bittersweet col-6 m-0"
+          class="btn btn-danger col-6 m-0"
           type="button"
           class:disabled="{loading}"
           aria-disabled="{loading}"

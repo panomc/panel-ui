@@ -26,13 +26,13 @@
           <i class="fas fa-trash"></i>
         </a>
         <a
-          class="btn btn-bittersweet"
+          class="btn btn-danger"
           class:disabled="{getListOfChecked($checkedList).length === 0}"
           role="button"
           href="javascript:void(0);"
           on:click="{onShowCloseTicketsModalClick}">
-          <i class="fas fa-check me-2"></i>
-          Kapat
+          <i class="fas fa-times me-2"></i>
+          Talebi Kapat
         </a>
       </div>
     </div>
@@ -71,7 +71,7 @@
               Yeni
             </a>
             <a
-              class="btn btn-sm btn-outline-light btn-link text-bittersweet"
+              class="btn btn-sm btn-outline-light btn-link text-danger"
               class:active="{data.pageType === PageTypes.CLOSED}"
               role="button"
               href="{base}/tickets/closed">

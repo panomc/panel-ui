@@ -3,7 +3,7 @@
   <div
     class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-4">
-      <div class="card bg-secondary">
+      <div class="card bg-mint">
         <div class="card-body">
           <p
             class="mb-0 lead text-white"
