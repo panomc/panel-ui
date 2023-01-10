@@ -148,9 +148,7 @@
 
     modal.show();
 
-    setTimeout(() => {
-      initData();
-    }, 3000);
+    initData();
   }
 
   export function hide() {
