@@ -36,79 +36,82 @@
       </div>
 
       <div class="modal-body">
-        {#if $loading}
-          <div class="col-xl-3 col-6 mb-2">
-            <a href="javascript:void(0);" class="card bg-light">
-              <div class="card-body text-center h-100">
-                <img
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                  class="rounded d-block m-auto mb-3"
-                  height="64"
-                  width="64"
-                  alt="" />
-                <p class="badge bg-light text-light mb-3">.</p>
-                <h6 class="card-title placeholder-glow">
-                  <span class="placeholder col-7"></span>
-                </h6>
-                <p class="card-text placeholder-glow">
-                  <span class="placeholder col-3"></span>
-                </p>
-              </div>
-            </a>
-          </div>
-        {/if}
-
         <div class="row">
-          {#each $servers as server, index (server)}
-            <!-- Server Card -->
-
-            <div class="col-xl-3 col-6 mb-2">
-              <a
-                href="javascript:void(0);"
-                on:click="{() => onSelect(server)}"
-                class="card bg-light animate__animated animate__fadeIn"
-                class:border="{$selectedServer &&
-                  $selectedServer.id === server.id}"
-                class:border-3="{$selectedServer &&
-                  $selectedServer.id === server.id}"
-                class:border-primary="{$selectedServer &&
-                  $selectedServer.id === server.id}">
-                <div class="card-body text-center position-relative h-100">
-                  {#if server.id === $mainServer.id}
-                    <div
-                      class="position-absolute top-0 start-50 translate-middle rounded bg-primary p-1 text-white"
-                      use:tooltip="{['Ana Sunucu', { placement: 'bottom' }]}">
-                      <i class="fa-solid fa-house"></i>
-                    </div>
-                  {/if}
-                  <img
-                    src="{server.favicon
-                      ? server.favicon
-                      : 'https://icons.iconarchive.com/icons/chrisl21/minecraft/64/Crafting-Table-icon.png'}"
-                    class="rounded d-block m-auto mb-3 bg-white"
-                    height="64"
-                    width="64"
-                    alt="" />
-
-                  {#if server.status === "ONLINE"}
-                    <p
-                      class="badge bg-secondary text-white rounded-pill mb-3"
-                      use:tooltip="{['Çevrimiçi', { placement: 'bottom' }]}">
-                      {server.type}
+          {#if $loading}
+            {#each Array(4) as _, i}
+              <div class="col-xl-3 col-6 mb-2">
+                <a href="javascript:void(0);" class="card bg-light">
+                  <div class="card-body text-center h-100">
+                    <img
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                      class="rounded d-block m-auto mb-3"
+                      height="64"
+                      width="64"
+                      alt="" />
+                    <p class="badge bg-light text-light mb-3">.</p>
+                    <h6 class="card-title placeholder-glow">
+                      <span class="placeholder col-7"></span>
+                    </h6>
+                    <p class="card-text placeholder-glow">
+                      <span class="placeholder col-3"></span>
                     </p>
-                  {:else}
-                    <p class="badge bg-white text-black rounded-pill mb-3">
-                      {server.type}
+                  </div>
+                </a>
+              </div>
+            {/each}
+          {:else}
+            {#each $servers as server, index (server)}
+              <!-- Server Card -->
+
+              <div class="col-xl-3 col-6 mb-2">
+                <a
+                  href="javascript:void(0);"
+                  on:click="{() => ($selectingServer ? {} : onSelect(server))}"
+                  class="card bg-light animate__animated animate__fadeIn"
+                  class:border="{$selectedServer &&
+                    $selectedServer.id === server.id}"
+                  class:border-3="{$selectedServer &&
+                    $selectedServer.id === server.id}"
+                  class:border-primary="{$selectedServer &&
+                    $selectedServer.id === server.id}"
+                  class:opacity-50="{$selectingServer}">
+                  <div class="card-body text-center position-relative h-100">
+                    {#if server.id === $mainServer.id}
+                      <div
+                        class="position-absolute top-0 start-50 translate-middle rounded bg-primary p-1 text-white"
+                        use:tooltip="{['Ana Sunucu', { placement: 'bottom' }]}">
+                        <i class="fa-solid fa-house"></i>
+                      </div>
+                    {/if}
+                    <img
+                      src="{server.favicon
+                        ? server.favicon
+                        : 'https://icons.iconarchive.com/icons/chrisl21/minecraft/64/Crafting-Table-icon.png'}"
+                      class="rounded d-block m-auto mb-3 bg-white"
+                      height="64"
+                      width="64"
+                      alt="" />
+
+                    {#if server.status === "ONLINE"}
+                      <p
+                        class="badge bg-secondary text-white rounded-pill mb-3"
+                        use:tooltip="{['Çevrimiçi', { placement: 'bottom' }]}">
+                        {server.type}
+                      </p>
+                    {:else}
+                      <p class="badge bg-white text-black rounded-pill mb-3">
+                        {server.type}
+                      </p>
+                    {/if}
+                    <h6 class="card-title">{server.host}:{server.port}</h6>
+                    <p class="card-text text-muted">
+                      {server.playerCount}/{server.maxPlayerCount}
                     </p>
-                  {/if}
-                  <h6 class="card-title">{server.host}:{server.port}</h6>
-                  <p class="card-text text-muted">
-                    {server.playerCount}/{server.maxPlayerCount}
-                  </p>
-                </div>
-              </a>
-            </div>
-          {/each}
+                  </div>
+                </a>
+              </div>
+            {/each}
+          {/if}
         </div>
       </div>
 
@@ -135,15 +138,19 @@
 
   const servers = writable([]);
   const loading = writable(true);
+  const selectingServer = writable(null);
 
   export function show() {
     modal = new window.bootstrap.Modal(document.getElementById(dialogID));
 
+    selectingServer.set(null);
     loading.set(true);
 
     modal.show();
 
-    initData();
+    setTimeout(() => {
+      initData();
+    }, 3000);
   }
 
   export function hide() {
@@ -185,9 +192,10 @@
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import ServerNotExistsToast from "$lib/component/toasts/ServerNotExistsToast.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
+  import ServerSelectedToast from "$lib/component/toasts/ServerSelectedToast.svelte";
 
   function onSelect(server) {
-    loading.set(true);
+    selectingServer.set(server.id);
 
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.post({
@@ -197,8 +205,8 @@
           if (body.result === "ok") {
             $selectedServer = server;
             await invalidateAll();
-            loading.set(false);
             hide();
+            showToast(ServerSelectedToast, { name: server.name });
           } else if (body.error && body.error === "NOT_EXISTS") {
             showToast(ServerNotExistsToast);
             initData();
