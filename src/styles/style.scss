@@ -43,11 +43,6 @@
   margin-left: -250px;
 }
 
-.sidebar.active {
-  @include media-breakpoint-down(md) {
-    box-shadow: 10px 0 0 0 $glass;
-  }
-}
 
 .sidebar-inner {
   display: flex;
@@ -57,21 +52,13 @@
   overflow-y: auto;
   width: 100%;
   height: calc(100vh - 130px);
-  scrollbar-color: $lightglass $primary;
+  scrollbar-color: $white $primary;
   scrollbar-width: thin;
 }
 
 .sidebar-info {
   padding: 0.5rem 0;
   text-align: center;
-}
-
-.sidebar-tab > li.nav-item {
-  a.nav-link.active {
-    background: $lightglass;
-    color: $sunflower;
-    font-weight: bolder;
-  }
 }
 
 .selected {
@@ -106,7 +93,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba($color: $glass, $alpha: 0.1);
+  background: rgba($color: $light, $alpha: 0.1);
   border-radius: 8px;
 }
 

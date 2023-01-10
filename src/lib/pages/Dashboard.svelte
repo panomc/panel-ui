@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-12 pb-3">
           <h3 class="card-title">Hoş Geldiniz</h3>
-          <p class="lead fw-bold">
+          <p class="lead">
             Pano, web sunucunuza başarıyla kuruldu ve kullanıma hazır! 🚀
             <br />
             İşte başlarken yapabilecekleriniz 👇:

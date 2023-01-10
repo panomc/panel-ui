@@ -26,7 +26,7 @@
 
   <div class="sidebar-inner">
     <!-- Sidebar Info Section -->
-    <div class="sidebar-info m-2">
+    <div class="sidebar-info m-3">
       <a href="{base}/settings/site-settings">
         <img
           alt="Sunucu İkonu"
@@ -36,9 +36,9 @@
       </a>
 
       {#if $sidebarTabsState === "game" && $selectedServer}
-        <h5 class="text-light">{$selectedServer.name}</h5>
+        <h5 class="text-white animate__animated animate__zoomIn">{$selectedServer.name}</h5>
       {:else}
-        <h5 class="text-light">{$website.name}</h5>
+        <h5 class="text-light animate__animated animate__zoomIn">{$website.name}</h5>
       {/if}
 
       {#if $sidebarTabsState === "website"}
@@ -49,7 +49,7 @@
 
       {#if $sidebarTabsState === "game"}
         <button
-          class="btn btn-sm btn-aqua"
+          class="btn btn-sm btn-secondary"
           type="button"
           on:click="{showServersModal}">
           Sunucuları Görüntüle
@@ -58,32 +58,32 @@
     </div>
 
     <!-- Sidebar Tabs -->
-    <ul class="sidebar-tab nav nav-pills nav-fill flex-row flex-nowrap p-2">
-      <li class="nav-item">
-        <a
-          href="javascript:void(0);"
-          class="nav-link"
-          use:tooltip="{['Website', { placement: 'bottom' }]}"
-          on:click="{onWebsiteMenuClick}"
-          class:active="{$sidebarTabsState === 'website'}"
-          class:text-light="{$sidebarTabsState !== 'website'}">
-          <i class="fas fa-globe fa-lg"></i>
-        </a>
-      </li>
-      {#if hasPermission(Permissions.MANAGE_SERVERS)}
+    <div class="navbar navbar-expand navbar-dark w-100">
+      <ul class="navbar-nav d-flex flex-row justify-content-evenly align-items-center w-100">
         <li class="nav-item">
           <a
             href="javascript:void(0);"
             class="nav-link"
-            use:tooltip="{['Sunucu', { placement: 'bottom' }]}"
-            on:click="{onGameMenuClick}"
-            class:active="{$sidebarTabsState === 'game'}"
-            class:text-light="{$sidebarTabsState !== 'game'}">
-            <i class="fas fa-cube fa-lg"></i>
+            use:tooltip="{['Website', { placement: 'bottom' }]}"
+            on:click="{onWebsiteMenuClick}"
+            class:active="{$sidebarTabsState === 'website'}">
+            <i class="fas fa-globe fa-lg"></i>
           </a>
         </li>
-      {/if}
-    </ul>
+        {#if hasPermission(Permissions.MANAGE_SERVERS)}
+          <li class="nav-item">
+            <a
+              href="javascript:void(0);"
+              class="nav-link"
+              use:tooltip="{['Sunucu', { placement: 'bottom' }]}"
+              on:click="{onGameMenuClick}"
+              class:active="{$sidebarTabsState === 'game'}">
+              <i class="fas fa-cube fa-lg"></i>
+            </a>
+          </li>
+        {/if}
+      </ul>
+    </div>
 
     <!-- Sidebar Site Navigation Menu || Sidebar Server Navigation Menu -->
     <svelte:component this="{menuComponent}" />

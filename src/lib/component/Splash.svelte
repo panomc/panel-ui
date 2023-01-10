@@ -20,18 +20,11 @@
       class="pt-4 d-flex flex-column
       justify-content-center align-items-center text-center">
       {#if $notLoggedIn}
-        <p class="text-danger">
-          Panele erişmek için lütfen <a
-            href="http://localhost:3000/"
-            class="font-weight-bolder text-danger"
-            target="_blank">giriş yap</a
-          >.
-        </p>
+      <a href="http://localhost:3000/" target="_blank"
+          >Panele erişmek için giriş yap.</a>
       {:else if $noPermission}
-        <p class="text-danger">
-          Panele erişmek için yetkiniz yok.
-        </p>
-        {:else}
+        <p class="text-danger">Panele erişmek için yetkiniz yok.</p>
+      {:else}
         <p class="text-danger">
           Bağlantı hatası!
           <br />Lütfen internetinizi veya Pano'nun açık ve erişilebilir olmasını
@@ -58,7 +51,7 @@
     resumeAfterNetworkError,
     retryingNetworkErrors,
     notLoggedIn,
-    noPermission
+    noPermission,
   } from "$lib/Store";
 
   let networkErrors = false;

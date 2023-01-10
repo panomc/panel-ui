@@ -1,4 +1,4 @@
-<nav class="sidebar-nav navbar-dark animate__animated animate__slideInLeft">
+<nav class="navbar-dark animate__animated animate__slideInLeft">
   <ul class="navbar-nav px-3">
     <li class="nav-item p-2">
       <a

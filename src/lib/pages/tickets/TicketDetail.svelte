@@ -43,7 +43,7 @@
     <div
       class="card-header bg-opacity-25 pt-3"
       class:bg-secondary="{data.ticket.status === TicketStatuses.NEW}"
-      class:bg-sunflower="{data.ticket.status === TicketStatuses.REPLIED}"
+      class:bg-warning="{data.ticket.status === TicketStatuses.REPLIED}"
       class:bg-danger="{data.ticket.status === TicketStatuses.CLOSED}">
       <div class="row">
         <div class="col">
