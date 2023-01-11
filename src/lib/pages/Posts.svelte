@@ -66,7 +66,7 @@
 
       <!-- No Posts -->
       {#if data.postCount === 0}
-        <NoContent/>
+        <NoContent />
       {:else}
         <!-- Posts Table -->
         <div class="table-responsive">
@@ -155,7 +155,7 @@
       page: 1,
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -180,8 +180,7 @@
 <script>
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-
-  import { pageTitle } from "$lib/Store.js";
+  import { page } from "$app/stores";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -201,6 +200,8 @@
   import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
+
+  const { pageTitle } = $page.data;
 
   pageTitle.set(
     (data.pageType === PageTypes.PUBLISHED

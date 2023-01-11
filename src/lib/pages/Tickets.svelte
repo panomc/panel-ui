@@ -83,7 +83,7 @@
 
       <!-- No Tickets -->
       {#if data.ticketCount === 0}
-        <NoContent/>
+        <NoContent />
       {:else}
         <!-- Tickets Table -->
         <div class="table-responsive">
@@ -188,7 +188,7 @@
       pageType,
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -213,8 +213,7 @@
 <script>
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-
-  import { pageTitle } from "$lib/Store";
+  import { page } from "$app/stores";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -233,6 +232,8 @@
   import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
+
+  const { pageTitle } = $page.data;
 
   pageTitle.set(
     (data.pageType === PageTypes.WAITING_REPLY

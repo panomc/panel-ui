@@ -97,7 +97,7 @@
       page: 1,
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -122,8 +122,7 @@
 <script>
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
-
-  import { pageTitle } from "$lib/Store.js";
+  import { page } from "$app/stores";
 
   import ConfirmDeletePermissionGroupModal, {
     setCallback as setDeletePermissionGroupModalCallback,
@@ -135,6 +134,8 @@
   import PermissionGroupRow from "$lib/component/rows/PermissionGroupRow.svelte";
 
   export let data;
+
+  const { pageTitle } = $page.data;
 
   pageTitle.set("Yetki Grupları");
 

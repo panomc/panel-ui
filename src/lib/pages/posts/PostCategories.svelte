@@ -117,7 +117,7 @@
       page: 1,
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -142,8 +142,7 @@
 <script>
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-
-  import { pageTitle } from "$lib/Store";
+  import { page } from "$app/stores";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -162,6 +161,8 @@
   import PostCategoryRow from "$lib/component/rows/PostCategoryRow.svelte";
 
   export let data;
+
+  const { pageTitle } = $page.data;
 
   pageTitle.set("Yazı Kategorileri");
 

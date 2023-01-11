@@ -60,9 +60,7 @@
           </div>
 
           <h5 class="text-primary">3 - Bağlantı İsteğini Onayla</h5>
-          <p class="mb-0">
-            Bağlantı isteği bildirim olarak gelecek.
-          </p>
+          <p class="mb-0">Bağlantı isteği bildirim olarak gelecek.</p>
         </div>
       </div>
     </div>
@@ -80,18 +78,20 @@
   import ApiUtil from "$lib/api.util";
   import tooltip from "$lib/tooltip.util";
 
-  import {
-    currentServerPlatformMatchKey,
-    platformKeyRefreshedTime,
-    platformAddress,
-    showNetworkErrorOnCatch,
-  } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
+  import { page } from "$app/stores";
 
   let timeToRefreshKey = "...";
   let commandText;
   let isCommandTextCopied = false;
   let copyClickIDForCommandText = 0;
   let firstStartCountDown = false;
+
+  const {
+    platformServerMatchKey,
+    platformKeyRefreshedTime,
+    platformHostAddress,
+  } = $page.data;
 
   function getTimeLeftInSeconds() {
     const now = new Date(); // current time
@@ -131,10 +131,10 @@
           }
 
           if (body.result === "ok") {
-            currentServerPlatformMatchKey.set(body.key);
+            platformServerMatchKey.set(body.key);
             platformKeyRefreshedTime.set(body.timeStarted);
           } else {
-            currentServerPlatformMatchKey.set("");
+            platformServerMatchKey.set("");
           }
 
           if (firstStartCountDown) startCountDown();
@@ -142,7 +142,7 @@
           resolve();
         })
         .catch(() => {
-          currentServerPlatformMatchKey.set("");
+          platformServerMatchKey.set("");
 
           reject();
         });
@@ -152,9 +152,9 @@
   function updateCommandText() {
     commandText =
       "/pano connect " +
-      get(platformAddress) +
+      get(platformHostAddress) +
       " " +
-      get(currentServerPlatformMatchKey);
+      get(platformServerMatchKey);
   }
 
   function onCopyCommandTextClick() {
@@ -185,13 +185,13 @@
     );
 
     onDestroy(
-      platformAddress.subscribe(() => {
+      platformHostAddress.subscribe(() => {
         updateCommandText();
       })
     );
 
     onDestroy(
-      currentServerPlatformMatchKey.subscribe(() => {
+      platformServerMatchKey.subscribe(() => {
         updateCommandText();
       })
     );

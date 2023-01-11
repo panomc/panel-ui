@@ -19,10 +19,10 @@
     <div
       class="pt-4 d-flex flex-column
       justify-content-center align-items-center text-center">
-      {#if $notLoggedIn}
-      <a href="http://localhost:3000/" target="_blank"
+      {#if notLoggedIn}
+        <a href="http://localhost:3000/" target="_blank"
           >Panele erişmek için giriş yap.</a>
-      {:else if $noPermission}
+      {:else if noPermission}
         <p class="text-danger">Panele erişmek için yetkiniz yok.</p>
       {:else}
         <p class="text-danger">
@@ -50,11 +50,17 @@
     networkErrorCallbacks,
     resumeAfterNetworkError,
     retryingNetworkErrors,
-    notLoggedIn,
-    noPermission,
   } from "$lib/Store";
+  import { page } from "$app/stores";
 
   let networkErrors = false;
+
+  const { session } = $page.data;
+
+  $: basicData = $session.basicData;
+
+  $: notLoggedIn = basicData.error === "NOT_LOGGED_IN";
+  $: noPermission = basicData.error === "NO_PERMISSION";
 
   onDestroy(
     networkErrorCallbacks.subscribe((value) => {

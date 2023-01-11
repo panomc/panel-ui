@@ -119,7 +119,7 @@
       page: 1,
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -145,8 +145,6 @@
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
 
-  import { pageTitle } from "$lib/Store.js";
-
   import Pagination from "$lib/component/Pagination.svelte";
 
   import AddEditTicketCategoryModal, {
@@ -162,8 +160,11 @@
 
   import NoContent from "$lib/component/NoContent.svelte";
   import TicketCategoryRow from "$lib/component/rows/TicketCategoryRow.svelte";
+  import { page } from "$app/stores";
 
   export let data;
+
+  const { pageTitle } = $page.data;
 
   pageTitle.set("Talep Kategorileri");
 

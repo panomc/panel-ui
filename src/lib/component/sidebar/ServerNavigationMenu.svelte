@@ -21,8 +21,7 @@
             $page.url.pathname,
             base + '/server/settings',
             true
-          )}"
-          >
+          )}">
           <i class="fas fa-cog me-2"></i>
           Ayarlar
         </a>
@@ -30,9 +29,9 @@
     </ul>
   {:else}
     <NoContent
-    icon="fas fa-cube fa-3x"
-    text="Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın."
-    dark="{true}">
+      icon="fas fa-cube fa-3x"
+      text="Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın."
+      dark="{true}">
       <button
         class="btn btn-secondary btn-sm"
         data-bs-target="#connectServer"
@@ -46,12 +45,12 @@
 </nav>
 
 <script>
-  import { selectedServer } from "$lib/Store.js";
-
   import { base } from "$app/paths";
   import { page } from "$app/stores";
 
   import NoContent from "$lib/component/NoContent.svelte";
+
+  const { selectedServer } = $page.data;
 
   function matching(path, pathName, startsWith = false) {
     return (

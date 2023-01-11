@@ -192,7 +192,8 @@
 </script>
 
 <script>
-  import { showNetworkErrorOnCatch, user } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
+  import { page } from "$app/stores";
   import ApiUtil from "$lib/api.util";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
@@ -203,6 +204,8 @@
   }
 
   let loading = false;
+
+  const { user } = $page.data;
 
   function onSubmit() {
     loading = true;

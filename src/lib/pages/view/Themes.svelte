@@ -35,10 +35,11 @@
 
 <script>
   import { base } from "$app/paths";
-
-  import { pageTitle } from "$lib/Store";
+  import { page } from "$app/stores";
 
   import ConfirmDeleteThemeModal from "$lib/component/modals/ConfirmDeleteThemeModal.svelte";
+
+  const { pageTitle } = $page.data;
 
   pageTitle.set("Temalar");
 </script>

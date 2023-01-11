@@ -64,9 +64,7 @@
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    <a
-      title="Filtrele"
-      href="{base}/posts/category/{post.category.url}">
+    <a title="Filtrele" href="{base}/posts/category/{post.category.url}">
       {post.category.title === "-" ? "Kategorisiz" : post.category.title}
     </a>
   </td>

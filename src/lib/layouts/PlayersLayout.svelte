@@ -12,15 +12,18 @@
 
   /** @type {import('./$types').LayoutLoad} */
   export async function load({ parent, url: { pathname } }) {
-    await parent();
+    const parentData = await parent();
+    const { user } = parentData;
 
     if (pathname.startsWith("/players/player/")) {
-      return;
+      return parentData;
     }
 
-    if (!hasPermission(Permissions.MANAGE_PLAYERS)) {
+    if (!hasPermission(Permissions.MANAGE_PLAYERS, user)) {
       throw redirect(302, "/");
     }
+
+    return parentData;
   }
 </script>
 

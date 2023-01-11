@@ -31,7 +31,7 @@
                 checkTime
               )}
             {:else}
-              Son Aktif Zamanı: <DateComponent time="{data.server.stopTime}"/>
+              Son Aktif Zamanı: <DateComponent time="{data.server.stopTime}" />
             {/if}
           </p>
         </div>
@@ -80,14 +80,13 @@
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
   import { get } from "svelte/store";
-  import { selectedServer } from "$lib/Store.js";
 
   export const ServerStatus = Object.freeze({
     ONLINE: "ONLINE",
     OFFLINE: "OFFLINE",
   });
 
-  async function loadData({ request }) {
+  async function loadData({ request, selectedServer }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
         path: `/api/panel/servers/${get(selectedServer).id}/dashboard`,
@@ -108,17 +107,18 @@
   export async function load(event) {
     const { parent } = event;
     const parentData = await parent();
+    const { selectedServer } = parentData;
 
     let data = {
       server: {},
       connectedServerCount: 0,
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
-    await loadData({ request: event }).then((body) => {
+    await loadData({ request: event, selectedServer }).then((body) => {
       data = { ...data, ...body };
     });
 
@@ -130,9 +130,11 @@
   import { onDestroy, onMount } from "svelte";
   import { differenceInCalendarDays, intervalToDuration } from "date-fns";
 
-  import { pageTitle } from "$lib/Store.js";
+  import { page } from "$app/stores";
 
   import DateComponent from "$lib/component/Date.svelte";
+
+  const { pageTitle } = $page.data;
 
   pageTitle.set("Sunucu İstatistikleri");
 

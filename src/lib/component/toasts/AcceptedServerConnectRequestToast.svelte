@@ -1,6 +1,4 @@
-<Toast id="{id}">
-  Sunucu bağlantı isteği kabul edildi.
-</Toast>
+<Toast id="{id}">Sunucu bağlantı isteği kabul edildi.</Toast>
 
 <script>
   import Toast from "$lib/component/Toast.svelte";

@@ -5,7 +5,7 @@
     class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-auto">
       {#if hasPermission(Permissions.MANAGE_PLAYERS)}
-        <a class="btn btn-link" role="button" href="{base}/players" >
+        <a class="btn btn-link" role="button" href="{base}/players">
           <i class="fas fa-arrow-left me-2"></i>
           Oyuncular
         </a>
@@ -200,7 +200,7 @@
 
 <script context="module">
   import ApiUtil from "$lib/api.util";
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
   import { error } from "@sveltejs/kit";
 
   async function loadData({ username, page, request }) {
@@ -214,8 +214,6 @@
 
           data.username = username;
           data.page = parseInt(page);
-
-          pageTitle.set(username);
 
           resolve(data);
         } else {
@@ -247,7 +245,7 @@
       ticketTotalPage: 1,
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -276,6 +274,7 @@
 <script>
   import { formatRelative } from "date-fns";
   import { onDestroy, onMount } from "svelte";
+  import { page } from "$app/stores";
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
@@ -310,9 +309,12 @@
   import NoContent from "$lib/component/NoContent.svelte";
   import PlayerPermissionBadge from "$lib/component/badges/PlayerPermissionBadge.svelte";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
-  import { user } from "$lib/Store.js";
 
   export let data;
+
+  const { pageTitle, user } = $page.data;
+
+  pageTitle.set(data.username);
 
   let sendingVerificationMail;
 

@@ -40,10 +40,10 @@
               role="button"
               title="Okunmamış Bildirimler">
               <i class="fas fa-bell fa-lg"></i>
-              {#if $notificationsCount !== 0}
+              {#if $notificationCount !== 0}
                 <span
                   class="position-absolute p-2 start-75 translate-middle badge rounded-pill bg-danger">
-                  {$notificationsCount}
+                  {$notificationCount}
                 </span>
               {/if}
             </a>
@@ -51,9 +51,9 @@
             <div
               class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
               <h6 class="dropdown-header">
-                Yeni Bildirimler {$notificationsCount === 0
+                Yeni Bildirimler {$notificationCount === 0
                   ? ""
-                  : "(" + $notificationsCount + ")"}
+                  : "(" + $notificationCount + ")"}
               </h6>
 
               {#if $quickNotifications.length === 0}
@@ -131,23 +131,22 @@
 
   import ApiUtil from "$lib/api.util";
   import {
-    isSidebarOpen,
     logoutLoading,
-    notificationsCount,
     options,
-    pageTitle,
     quickNotifications,
     showNetworkErrorOnCatch,
     toggleSidebar,
-    user,
   } from "$lib/Store";
   import { onNotificationClick } from "$lib/NotificationManager.js";
   import NoContent from "$lib/component/NoContent.svelte";
+  import { page } from "$app/stores";
 
   let quickNotificationProcessID = 0;
 
   let checkTime = 0;
   let interval;
+
+  const { pageTitle, user, notificationCount, isSidebarOpen } = $page.data;
 
   function onSideBarCollapseClick() {
     toggleSidebar();
@@ -177,7 +176,7 @@
         .then((body) => {
           if (quickNotificationProcessID === id) {
             if (body.result === "ok") {
-              notificationsCount.set(body.notificationCount);
+              notificationCount.set(body.notificationCount);
             }
 
             setTimeout(() => {

@@ -28,8 +28,7 @@
               placeholder="Pano Hesabı Şifreniz"
               type="password" />
 
-            <small
-              class="form-text text-danger d-inline">
+            <small class="form-text text-danger d-inline">
               <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i>
               <!--              {{ removingServerForm.error.code }}-->
             </small>

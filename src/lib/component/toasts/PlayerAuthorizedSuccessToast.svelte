@@ -1,6 +1,4 @@
-<Toast id="{id}">
-  Oyuncu yetkisi güncellendi.
-</Toast>
+<Toast id="{id}">Oyuncu yetkisi güncellendi.</Toast>
 
 <script>
   import Toast from "$lib/component/Toast.svelte";

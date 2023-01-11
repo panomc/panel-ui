@@ -234,7 +234,7 @@
       },
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -247,20 +247,19 @@
 </script>
 
 <script>
-  import {
-    pageTitle,
-    showNetworkErrorOnCatch,
-    website,
-    websiteLogoSrc,
-  } from "$lib/Store.js";
+  import { page } from "$app/stores";
+
+  import { showNetworkErrorOnCatch, websiteLogoSrc } from "$lib/Store.js";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import SettingsSaveSuccessToast from "$lib/component/toasts/SettingsSaveSuccessToast.svelte";
   import SettingsSaveErrorToast from "$lib/component/toasts/SettingsSaveErrorToast.svelte";
 
-  pageTitle.set("Website Ayarları");
-
   export let data;
+
+  const { pageTitle, website } = $page.data;
+
+  pageTitle.set("Website Ayarları");
 
   let faviconFiles = [];
   let websiteLogoFiles = [];

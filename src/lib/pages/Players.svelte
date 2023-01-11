@@ -152,7 +152,7 @@
       pageType,
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -179,8 +179,7 @@
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-
-  import { pageTitle } from "$lib/Store";
+  import { page } from "$app/stores";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -214,6 +213,8 @@
 
   let checkTime = 0;
   let interval;
+
+  const { pageTitle } = $page.data;
 
   pageTitle.set(
     (data.pageType === PageTypes.HAS_PERM

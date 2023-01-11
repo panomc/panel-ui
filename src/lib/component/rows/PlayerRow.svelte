@@ -18,7 +18,8 @@
             class="dropdown-item"
             href="javascript:void(0);"
             on:click="{showAuthorizePlayerModal}"
-            class:disabled="{$user.username === player.username || (player.permissionGroup === 'admin' && !$user.admin)}">
+            class:disabled="{$user.username === player.username ||
+              (player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-user-circle me-2"></i>
             Yetkilendir
           </a>
@@ -27,8 +28,7 @@
           class="dropdown-item"
           href="javascript:void(0);"
           on:click="{showEditPlayerModal}"
-          class:disabled="{(player.permissionGroup === 'admin' && !$user.admin)}"
-        >
+          class:disabled="{player.permissionGroup === 'admin' && !$user.admin}">
           <i class="fa-solid fa-pencil-alt me-2"></i>
           Düzenle
         </a>
@@ -37,8 +37,11 @@
           href="javascript:void(0);"
           on:click="{() =>
             player.isBanned ? showUnbanPlayerModal() : showBanPlayerModal()}"
-          class:link-danger="{$user.username !== player.username && ((player.permissionGroup === 'admin' && $user.admin) || player.permissionGroup !== 'admin')}"
-          class:disabled="{$user.username === player.username || (player.permissionGroup === 'admin' && !$user.admin)}">
+          class:link-danger="{$user.username !== player.username &&
+            ((player.permissionGroup === 'admin' && $user.admin) ||
+              player.permissionGroup !== 'admin')}"
+          class:disabled="{$user.username === player.username ||
+            (player.permissionGroup === 'admin' && !$user.admin)}">
           <i class="fas fa-gavel me-2"></i>
           {#if player.isBanned} Yasağı Kaldır {:else} Yasakla {/if}
         </a>
@@ -77,12 +80,14 @@
   import { createEventDispatcher } from "svelte";
 
   import { base } from "$app/paths";
+  import { page } from "$app/stores";
 
   import Date from "$lib/component/Date.svelte";
   import PlayerStatusBadge from "$lib/component/badges/PlayerStatusBadge.svelte";
   import PlayerPermissionBadge from "$lib/component/badges/PlayerPermissionBadge.svelte";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
-  import { user } from "$lib/Store.js";
+
+  const { user } = $page.data;
 
   export let player;
   export let checkTime;

@@ -126,7 +126,7 @@
 
     let data = {};
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -144,8 +144,10 @@
   import { onDestroy, onMount } from "svelte";
   import { formatDistanceToNow } from "date-fns";
 
+  import { page as pageStore } from "$app/stores";
+
   import tooltip from "$lib/tooltip.util.js";
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/Store.js";
+  import { showNetworkErrorOnCatch } from "$lib/Store.js";
 
   import ConfirmRemoveAllNotificationsModal, {
     show as showDeleteAllNotificationsModal,
@@ -156,6 +158,8 @@
   import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
+
+  const { pageTitle } = $pageStore.data;
 
   pageTitle.set("Bildirimler");
 
@@ -179,7 +183,7 @@
 
             setTimeout(() => {
               if (notificationProcessID === id) {
-                startNotificationsCountdown();
+                startnotificationCountdown();
               }
             }, 1000);
           }
@@ -246,7 +250,7 @@
     });
   }
 
-  function startNotificationsCountdown() {
+  function startnotificationCountdown() {
     notificationProcessID++;
 
     const id = notificationProcessID;
@@ -254,7 +258,7 @@
     getNotifications(id);
   }
 
-  function stopNotificationsCountdown() {
+  function stopnotificationCountdown() {
     notificationProcessID++;
 
     clearInterval(interval);
@@ -265,12 +269,12 @@
   }
 
   function onDeleteAllClick() {
-    stopNotificationsCountdown();
+    stopnotificationCountdown();
 
     showDeleteAllNotificationsModal();
   }
 
-  if (browser) startNotificationsCountdown();
+  if (browser) startnotificationCountdown();
 
   onMount(() => {
     interval = setInterval(() => {
@@ -279,10 +283,10 @@
   });
 
   onDestroy(() => {
-    stopNotificationsCountdown();
+    stopnotificationCountdown();
   });
 
   setDeleteAllNotificationsModalCallback(() => {
-    startNotificationsCountdown();
+    startnotificationCountdown();
   });
 </script>

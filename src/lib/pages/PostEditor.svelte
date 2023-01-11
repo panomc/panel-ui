@@ -152,9 +152,9 @@
                   on:click="{() => thumbnailInput.click()}" />
               {:else}
                 <NoContent
-                icon="fas fa-image fa-3x"
-                text="Küçük resim belirlenmedi."
-                on:click="{() => thumbnailInput.click()}"/>
+                  icon="fas fa-image fa-3x"
+                  text="Küçük resim belirlenmedi."
+                  on:click="{() => thumbnailInput.click()}" />
               {/if}
               <input
                 class="d-none"
@@ -247,7 +247,7 @@
       error: {},
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -279,10 +279,11 @@
 <script>
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
+  import { page } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
 
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
   import { UI_URL } from "$lib/variables";
 
   import {
@@ -316,6 +317,8 @@
 
   let thumbnailInput;
   let thumbnailFiles = [];
+
+  const { pageTitle } = $page.data;
 
   pageTitle.set(
     data.mode === Modes.EDIT ? "Yazıyı Düzenle" : "Yeni Yazı Oluştur"

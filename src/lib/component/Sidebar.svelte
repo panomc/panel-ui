@@ -36,9 +36,13 @@
       </a>
 
       {#if $sidebarTabsState === "game" && $selectedServer}
-        <h5 class="text-white animate__animated animate__zoomIn">{$selectedServer.name}</h5>
+        <h5 class="text-white animate__animated animate__zoomIn">
+          {$selectedServer.name}
+        </h5>
       {:else}
-        <h5 class="text-light animate__animated animate__zoomIn">{$website.name}</h5>
+        <h5 class="text-light animate__animated animate__zoomIn">
+          {$website.name}
+        </h5>
       {/if}
 
       {#if $sidebarTabsState === "website"}
@@ -59,7 +63,8 @@
 
     <!-- Sidebar Tabs -->
     <div class="navbar navbar-expand navbar-dark w-100">
-      <ul class="navbar-nav d-flex flex-row justify-content-evenly align-items-center w-100">
+      <ul
+        class="navbar-nav d-flex flex-row justify-content-evenly align-items-center w-100">
         <li class="nav-item">
           <a
             href="javascript:void(0);"
@@ -100,14 +105,7 @@
 
   import tooltip from "$lib/tooltip.util";
 
-  import {
-    toggleSidebar,
-    isSidebarOpen,
-    setSidebarTabsState,
-    sidebarTabsState,
-    website,
-    selectedServer,
-  } from "$lib/Store";
+  import { toggleSidebar, setSidebarTabsState } from "$lib/Store";
 
   import Bottom from "./sidebar/Bottom.svelte";
 
@@ -123,8 +121,12 @@
 
   import { websiteLogoSrc } from "$lib/Store.js";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
+  import { page } from "$app/stores";
 
   let menuComponent = SiteNavigationMenu;
+
+  const { website, sidebarTabsState, isSidebarOpen, selectedServer } =
+    $page.data;
 
   const unsubscribeSidebarTabsState = sidebarTabsState.subscribe((value) => {
     if (value === "website" || !hasPermission(Permissions.MANAGE_SERVERS)) {

@@ -122,7 +122,7 @@
 </script>
 
 <script>
-  import { session, showNetworkErrorOnCatch } from "$lib/Store";
+  import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
   let loading = false;
@@ -132,7 +132,7 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      console.log("geldi")
+      console.log("geldi");
       const bodyHandler = (body) => {
         if (body.result === "ok") {
           loading = false;

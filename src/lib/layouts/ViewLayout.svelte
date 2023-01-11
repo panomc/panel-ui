@@ -34,11 +34,14 @@
    * @type {import('@sveltejs/kit').LayoutLoad}
    */
   export async function load({ parent }) {
-    await parent();
+    const parentData = await parent();
+    const { user } = parentData;
 
-    if (!hasPermission(Permissions.MANAGE_VIEW)) {
+    if (!hasPermission(Permissions.MANAGE_VIEW, user)) {
       throw redirect(302, "/");
     }
+
+    return parentData;
   }
 </script>
 

@@ -1,6 +1,4 @@
-<Toast id="{id}">
-  Sunucu bulunamadı.
-</Toast>
+<Toast id="{id}">Sunucu bulunamadı.</Toast>
 
 <script>
   import Toast from "$lib/component/Toast.svelte";

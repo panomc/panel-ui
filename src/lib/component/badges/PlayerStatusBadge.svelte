@@ -3,13 +3,19 @@
 {:else if isOnline}
   <div
     class="badge bg-secondary rounded-pill text-white"
-    use:tooltip="{[(inGame ? 'Oyunda' : 'Sitede') + ' Çevrimiçi', { placement: 'bottom' }]}">
+    use:tooltip="{[
+      (inGame ? 'Oyunda' : 'Sitede') + ' Çevrimiçi',
+      { placement: 'bottom' },
+    ]}">
     <span>Çevrimiçi</span>
   </div>
 {:else}
   <div
     class="badge bg-light rounded-pill text-dark"
-    use:tooltip="{[getOfflineRelativeDateText(checkTime), { placement: 'bottom' }]}">
+    use:tooltip="{[
+      getOfflineRelativeDateText(checkTime),
+      { placement: 'bottom' },
+    ]}">
     <span>Çevrimdışı</span>
   </div>
 {/if}
@@ -36,6 +42,6 @@
     return formatRelative(
       new Date(parseInt(lastActivityTime)),
       new Date()
-    ).capitalize()
+    ).capitalize();
   }
 </script>

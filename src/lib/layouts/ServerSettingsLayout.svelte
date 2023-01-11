@@ -8,7 +8,10 @@
         <a
           class="nav-item nav-link"
           href="{base}/server/settings"
-          class:active="{matching($page.url.pathname, base + '/server/settings')}">
+          class:active="{matching(
+            $page.url.pathname,
+            base + '/server/settings'
+          )}">
           Sunucu
         </a>
         <a

@@ -11,11 +11,14 @@
    * @type {import('@sveltejs/kit').LayoutLoad}
    */
   export async function load({ parent }) {
-    await parent();
+    const parentData = await parent();
+    const { user } = parentData;
 
-    if (!hasPermission(Permissions.MANAGE_TICKETS)) {
+    if (!hasPermission(Permissions.MANAGE_TICKETS, user)) {
       throw redirect(302, "/");
     }
+
+    return parentData;
   }
 </script>
 

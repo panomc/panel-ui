@@ -314,7 +314,7 @@
       websiteActivityDataList: {},
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -330,7 +330,7 @@
 
 <script>
   import { base } from "$app/paths";
-  import { pageTitle } from "$lib/Store.js";
+  import { page } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -345,6 +345,8 @@
 
   export let data;
   let reloading = false;
+
+  const { pageTitle } = $page.data;
 
   pageTitle.set("İstatistikler");
 

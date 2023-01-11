@@ -89,19 +89,18 @@
 <script>
   import { onDestroy, onMount } from "svelte";
 
-  import {
-    showNetworkErrorOnCatch,
-    notificationsCount,
-    quickNotifications,
-  } from "$lib/Store";
+  import { showNetworkErrorOnCatch, quickNotifications } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
   import { formatDistanceToNow } from "date-fns";
   import { onNotificationClick } from "$lib/NotificationManager.js";
+  import { page } from "$app/stores";
 
   let quickNotificationProcessID = 0;
 
   let checkTime = 0;
   let interval;
+
+  const { notificationCount } = $page.data;
 
   function getTime(check, time, locale) {
     return formatDistanceToNow(time, { addSuffix: true });
@@ -177,12 +176,12 @@
             if (body.result === "ok") {
               setNotifications(body.notifications);
 
-              notificationsCount.set(body.notificationCount);
+              notificationCount.set(body.notificationCount);
             }
 
             setTimeout(() => {
               if (quickNotificationProcessID === id) {
-                startQuickNotificationsCountDown();
+                startQuicknotificationCountDown();
               }
             }, 1000);
           }
@@ -195,7 +194,7 @@
     });
   }
 
-  function startQuickNotificationsCountDown() {
+  function startQuicknotificationCountDown() {
     quickNotificationProcessID++;
 
     const id = quickNotificationProcessID;
@@ -216,11 +215,11 @@
   function onClick(notification) {
     markRead(notification.id);
     onNotificationClick(notification);
-    hide(notification.id)
+    hide(notification.id);
   }
 
   onMount(() => {
-    startQuickNotificationsCountDown();
+    startQuicknotificationCountDown();
 
     interval = setInterval(() => {
       checkTime += 1;

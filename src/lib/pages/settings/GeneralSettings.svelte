@@ -93,7 +93,7 @@
       },
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -106,7 +106,9 @@
 </script>
 
 <script>
-  import { pageTitle, showNetworkErrorOnCatch } from "$lib/Store";
+  import { page } from "$app/stores";
+
+  import { showNetworkErrorOnCatch } from "$lib/Store";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import {
@@ -115,6 +117,8 @@
     Languages,
   } from "$lib/language.util";
   import SettingsSaveSuccessToast from "$lib/component/toasts/SettingsSaveSuccessToast.svelte";
+
+  const { pageTitle } = $page.data;
 
   pageTitle.set("Genel Ayarlar");
 

@@ -116,7 +116,7 @@
       platformStage: "",
     };
 
-    if (parentData.stuff.NETWORK_ERROR) {
+    if (parentData.NETWORK_ERROR) {
       return data;
     }
 
@@ -129,9 +129,11 @@
 </script>
 
 <script>
-  import { pageTitle } from "$lib/Store.js";
-
-  pageTitle.set("Hakkında");
+  import { page } from "$app/stores";
 
   export let data;
+
+  const { pageTitle } = $page.data;
+
+  pageTitle.set("Hakkında");
 </script>

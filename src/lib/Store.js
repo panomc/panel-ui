@@ -1,11 +1,9 @@
 import { get, writable } from "svelte/store";
 
+import { page } from "$app/stores";
 import { invalidateAll } from "$app/navigation";
 
 import { PanelSidebarStorageUtil } from "$lib/storage.util";
-import { hasPermission, Permissions } from "$lib/auth.util.js";
-
-export const session = writable({});
 
 export const options = Object.freeze({
   DEFAULT_PAGE_TITLE: "Pano",
@@ -14,47 +12,15 @@ export const options = Object.freeze({
 export const networkErrorCallbacks = writable([]);
 export const retryingNetworkErrors = writable(false);
 
-export const isSidebarOpen = writable(
-  PanelSidebarStorageUtil.isThereSideBarOpenStatus()
-    ? PanelSidebarStorageUtil.getSidebarOpenStatus()
-    : true
-);
-export const sidebarTabsState = writable(
-  PanelSidebarStorageUtil.isThereSideBarTabsState()
-    ? PanelSidebarStorageUtil.getSidebarTabsState()
-    : "website"
-);
-
-export const user = writable({});
-export const website = writable({});
-
-export const currentServerPlatformMatchKey = writable("");
-export const platformKeyRefreshedTime = writable(new Date().getTime());
-export const platformAddress = writable("");
-export const mainServer = writable(null);
-export const selectedServer = writable(null);
-export const notificationsCount = writable(0);
 export const quickNotifications = writable([]);
 
 export const logoutLoading = writable(false);
 
-export const notLoggedIn = writable(false);
-export const noPermission = writable(false);
-
-export const pageTitle = writable(null);
-
 export const websiteLogoSrc = writable("/api/websiteLogo");
 
-export function setDefaults() {
-  networkErrorCallbacks.set([]);
-  retryingNetworkErrors.set(false);
-  notLoggedIn.set(false);
-  noPermission.set(false);
-  logoutLoading.set(false);
-  pageTitle.set(null);
-}
-
 export function toggleSidebar() {
+  const { isSidebarOpen } = get(page).data;
+
   isSidebarOpen.update((value) => {
     PanelSidebarStorageUtil.savePanelSidebarStorageUtil(!value);
 
@@ -63,6 +29,8 @@ export function toggleSidebar() {
 }
 
 export function setSidebarTabsState(state) {
+  const { sidebarTabsState } = get(page).data;
+
   sidebarTabsState.set(state);
 
   PanelSidebarStorageUtil.setSidebarTabsState(state);
@@ -123,27 +91,4 @@ export async function resumeAfterNetworkError() {
   });
 
   await invalidateAll();
-}
-
-export function initializeBasicData(data) {
-  notLoggedIn.set(false);
-  noPermission.set(false);
-
-  user.set(data.user);
-  website.set(data.website);
-  currentServerPlatformMatchKey.set(data.platformServerMatchKey);
-  platformKeyRefreshedTime.set(data.platformServerMatchKeyTimeStarted);
-  platformAddress.set(data.platformHostAddress);
-  notificationsCount.set(data.notificationCount);
-  mainServer.set(data.mainServer || {});
-
-  if (!hasPermission(Permissions.MANAGE_SERVERS)) {
-    sidebarTabsState.set("website");
-  }
-
-  if (data.selectedServer) {
-    selectedServer.set(data.selectedServer);
-  } else {
-    selectedServer.set(data.mainServer);
-  }
 }
