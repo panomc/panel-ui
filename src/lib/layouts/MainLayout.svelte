@@ -113,7 +113,9 @@
   export async function load(event) {
     const {
       data: { basicData, CSRFToken },
+      parent
     } = event;
+    await parent();
 
     session.set({ basicData, CSRFToken });
 
