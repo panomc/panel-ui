@@ -273,8 +273,7 @@
 
 <script>
   import { formatRelative } from "date-fns";
-  import { onDestroy, onMount } from "svelte";
-  import { page } from "$app/stores";
+  import { getContext, onDestroy, onMount } from "svelte";
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
@@ -312,7 +311,8 @@
 
   export let data;
 
-  const { pageTitle, user } = $page.data;
+  const pageTitle = getContext("pageTitle");
+  const user = getContext("user");
 
   pageTitle.set(data.username);
 

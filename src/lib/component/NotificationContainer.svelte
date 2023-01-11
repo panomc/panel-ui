@@ -87,20 +87,19 @@
 </script>
 
 <script>
-  import { onDestroy, onMount } from "svelte";
+  import { getContext, onDestroy, onMount } from "svelte";
 
   import { showNetworkErrorOnCatch, quickNotifications } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
   import { formatDistanceToNow } from "date-fns";
   import { onNotificationClick } from "$lib/NotificationManager.js";
-  import { page } from "$app/stores";
 
   let quickNotificationProcessID = 0;
 
   let checkTime = 0;
   let interval;
 
-  const { notificationCount } = $page.data;
+  const notificationCount = getContext("notificationCount");
 
   function getTime(check, time, locale) {
     return formatDistanceToNow(time, { addSuffix: true });

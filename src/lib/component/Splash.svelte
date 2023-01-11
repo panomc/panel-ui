@@ -42,20 +42,20 @@
 </div>
 
 <script>
-  import { base } from "$app/paths";
-  import { onDestroy } from "svelte";
+  import { getContext, onDestroy } from "svelte";
   import { fade } from "svelte/transition";
+
+  import { base } from "$app/paths";
 
   import {
     networkErrorCallbacks,
     resumeAfterNetworkError,
     retryingNetworkErrors,
   } from "$lib/Store";
-  import { page } from "$app/stores";
 
   let networkErrors = false;
 
-  const { session } = $page.data;
+  const session = getContext("session");
 
   $: basicData = $session.basicData;
 

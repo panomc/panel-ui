@@ -185,14 +185,15 @@
 
 <script>
   import { invalidateAll } from "$app/navigation";
-  import { page } from "$app/stores";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import ServerNotExistsToast from "$lib/component/toasts/ServerNotExistsToast.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
   import ServerSelectedToast from "$lib/component/toasts/ServerSelectedToast.svelte";
+  import { getContext } from "svelte";
 
-  const { mainServer, selectedServer } = $page.data;
+  const mainServer = getContext("mainServer");
+  const selectedServer = getContext("selectedServer");
 
   function onSelect(server) {
     selectingServer.set(server.id);

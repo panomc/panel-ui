@@ -35,8 +35,6 @@
   import { base } from "$app/paths";
   import { browser } from "$app/environment";
 
-  import { PanelSidebarStorageUtil } from "$lib/storage.util.js";
-  import { hasPermission, Permissions } from "$lib/auth.util.js";
   import { init as initLanguage } from "$lib/language.util";
 
   import { networkErrorCallbacks } from "$lib/Store.js";
@@ -103,54 +101,22 @@
     }
 
     const output = {
-      session: writable({ basicData, CSRFToken }),
-      pageTitle: writable(null),
-      user: writable({}),
-      website: writable({}),
-      platformServerMatchKey: writable(""),
-      platformKeyRefreshedTime: writable(Date.now()),
-      platformHostAddress: writable(""),
-      notificationCount: writable(0),
-      mainServer: writable({}),
-      selectedServer: writable(null),
-      sidebarTabsState: writable(
-        PanelSidebarStorageUtil.isThereSideBarTabsState()
-          ? PanelSidebarStorageUtil.getSidebarTabsState()
-          : "website"
-      ),
-      isSidebarOpen: writable(
-        PanelSidebarStorageUtil.isThereSideBarOpenStatus()
-          ? PanelSidebarStorageUtil.getSidebarOpenStatus()
-          : true
-      ),
+      session: {
+        basicData,
+        CSRFToken,
+      },
+      user: basicData.user || {},
+      website: basicData.website || {},
+      platformServerMatchKey: basicData.platformServerMatchKey || "",
+      platformKeyRefreshedTime:
+        basicData.platformServerMatchKeyTimeStarted || Date.now(),
+      platformHostAddress: basicData.platformHostAddress || "",
+      notificationCount: basicData.notificationCount || 0,
+      mainServer: basicData.mainServer || {},
+      selectedServer: basicData.selectedServer || basicData.mainServer,
     };
 
-    if (basicData.result === "ok") {
-      const {
-        user,
-        website,
-        platformServerMatchKey,
-        platformServerMatchKeyTimeStarted,
-        platformHostAddress,
-        notificationCount,
-        mainServer,
-        selectedServer,
-      } = basicData;
-
-      output.user.set(user);
-      output.website.set(website);
-      output.platformServerMatchKey.set(platformServerMatchKey);
-      output.platformKeyRefreshedTime.set(platformServerMatchKeyTimeStarted);
-      output.platformHostAddress.set(platformHostAddress);
-      output.notificationCount.set(notificationCount);
-      output.mainServer.set(mainServer || {});
-
-      if (!hasPermission(Permissions.MANAGE_SERVERS, output.user)) {
-        output.sidebarTabsState.set("website");
-      }
-
-      output.selectedServer.set(selectedServer ? selectedServer : mainServer);
-    } else {
+    if (basicData.result !== "ok") {
       output.NETWORK_ERROR = true;
     }
 
@@ -159,8 +125,10 @@
 </script>
 
 <script>
-  import { onDestroy, onMount } from "svelte";
+  import { onDestroy, onMount, setContext } from "svelte";
   import { get } from "svelte/store";
+
+  import { page } from "$app/stores";
 
   import { options, logoutLoading } from "$lib/Store";
 
@@ -172,10 +140,58 @@
   import NotificationContainer from "$lib/component/NotificationContainer.svelte";
   import ToastContainer from "$lib/component/ToastContainer.svelte";
   import ServerRequestModal from "$lib/component/modals/ServerRequestModal.svelte";
+  import { hasPermission, Permissions } from "$lib/auth.util.js";
+  import { PanelSidebarStorageUtil } from "$lib/storage.util.js";
 
   export let data;
 
-  const { pageTitle } = data;
+  const session = writable(data.session);
+  const user = writable(data.user);
+  const website = writable(data.website);
+  const platformServerMatchKey = writable(data.platformServerMatchKey);
+  const platformKeyRefreshedTime = writable(data.platformKeyRefreshedTime);
+  const platformHostAddress = writable(data.platformHostAddress);
+  const notificationCount = writable(data.notificationCount);
+  const mainServer = writable(data.mainServer);
+  const selectedServer = writable(data.selectedServer);
+
+  const pageTitle = writable(null);
+
+  const sidebarTabsState = writable(getCurrentSidebarState());
+  const isSidebarOpen = writable(
+    PanelSidebarStorageUtil.isThereSideBarOpenStatus()
+      ? PanelSidebarStorageUtil.getSidebarOpenStatus()
+      : true
+  );
+
+  const pageUnsubscribe = page.subscribe((page) => {
+    session.set(page.data.session);
+    user.set(page.data.user);
+    website.set(page.data.website);
+    platformServerMatchKey.set(page.data.platformServerMatchKey);
+    platformKeyRefreshedTime.set(page.data.platformKeyRefreshedTime);
+    platformHostAddress.set(page.data.platformHostAddress);
+    notificationCount.set(page.data.notificationCount);
+    mainServer.set(page.data.mainServer);
+    selectedServer.set(page.data.selectedServer);
+
+    sidebarTabsState.set(getCurrentSidebarState());
+  });
+
+  setContext("pageTitle", pageTitle);
+
+  setContext("session", session);
+  setContext("user", user);
+  setContext("website", website);
+  setContext("platformServerMatchKey", platformServerMatchKey);
+  setContext("platformKeyRefreshedTime", platformKeyRefreshedTime);
+  setContext("platformHostAddress", platformHostAddress);
+  setContext("notificationCount", notificationCount);
+  setContext("mainServer", mainServer);
+  setContext("selectedServer", selectedServer);
+
+  setContext("sidebarTabsState", sidebarTabsState);
+  setContext("isSidebarOpen", isSidebarOpen);
 
   $: title = $pageTitle
     ? `${$pageTitle} \u2014 ${options.DEFAULT_PAGE_TITLE}`
@@ -186,6 +202,18 @@
   let showLoading = false;
   let waitAnimation = true;
   let mounted = false;
+
+  function getCurrentSidebarState() {
+    if (!hasPermission(Permissions.MANAGE_SERVERS)) {
+      return "website";
+    }
+
+    if (PanelSidebarStorageUtil.isThereSideBarTabsState()) {
+      return PanelSidebarStorageUtil.getSidebarTabsState();
+    }
+
+    return "website";
+  }
 
   setTimeout(function () {
     waitAnimation = false;
@@ -229,4 +257,6 @@
       }
     })
   );
+
+  onDestroy(pageUnsubscribe);
 </script>

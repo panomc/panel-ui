@@ -99,7 +99,7 @@
 </div>
 
 <script>
-  import { onDestroy } from "svelte";
+  import { getContext, onDestroy } from "svelte";
 
   import { base } from "$app/paths";
 
@@ -121,12 +121,13 @@
 
   import { websiteLogoSrc } from "$lib/Store.js";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
-  import { page } from "$app/stores";
 
   let menuComponent = SiteNavigationMenu;
 
-  const { website, sidebarTabsState, isSidebarOpen, selectedServer } =
-    $page.data;
+  const website = getContext("website");
+  const sidebarTabsState = getContext("sidebarTabsState");
+  const isSidebarOpen = getContext("isSidebarOpen");
+  const selectedServer = getContext("selectedServer");
 
   const unsubscribeSidebarTabsState = sidebarTabsState.subscribe((value) => {
     if (value === "website" || !hasPermission(Permissions.MANAGE_SERVERS)) {
@@ -137,15 +138,15 @@
   });
 
   function onMobileSideBarCollapseClick() {
-    toggleSidebar();
+    toggleSidebar(isSidebarOpen);
   }
 
   function onWebsiteMenuClick() {
-    setSidebarTabsState("website");
+    setSidebarTabsState("website", sidebarTabsState);
   }
 
   function onGameMenuClick() {
-    setSidebarTabsState("game");
+    setSidebarTabsState("game", sidebarTabsState);
   }
 
   onDestroy(unsubscribeSidebarTabsState);

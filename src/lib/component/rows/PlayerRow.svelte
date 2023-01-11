@@ -77,17 +77,16 @@
 </tr>
 
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, getContext } from "svelte";
 
   import { base } from "$app/paths";
-  import { page } from "$app/stores";
 
   import Date from "$lib/component/Date.svelte";
   import PlayerStatusBadge from "$lib/component/badges/PlayerStatusBadge.svelte";
   import PlayerPermissionBadge from "$lib/component/badges/PlayerPermissionBadge.svelte";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
 
-  const { user } = $page.data;
+  const user = getContext("user");
 
   export let player;
   export let checkTime;

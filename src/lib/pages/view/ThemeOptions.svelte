@@ -39,9 +39,9 @@
 </section>
 
 <script>
-  import { page } from "$app/stores";
+  import { getContext } from "svelte";
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set("Tema Ayarları");
 </script>

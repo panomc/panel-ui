@@ -129,11 +129,11 @@
 </script>
 
 <script>
-  import { page } from "$app/stores";
+  import { getContext } from "svelte";
 
   export let data;
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set("Hakkında");
 </script>

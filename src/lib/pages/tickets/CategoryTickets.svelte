@@ -184,8 +184,9 @@
 </script>
 
 <script>
+  import { getContext } from "svelte";
+
   import { goto } from "$app/navigation";
-  import { page } from "$app/stores";
   import { base } from "$app/paths";
 
   import Pagination from "$lib/component/Pagination.svelte";
@@ -206,7 +207,7 @@
 
   export let data;
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   let firstLoad = true;
 

@@ -192,8 +192,9 @@
 </script>
 
 <script>
+  import { getContext } from "svelte";
+
   import { showNetworkErrorOnCatch } from "$lib/Store";
-  import { page } from "$app/stores";
   import ApiUtil from "$lib/api.util";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
@@ -205,7 +206,7 @@
 
   let loading = false;
 
-  const { user } = $page.data;
+  const user = getContext("user");
 
   function onSubmit() {
     loading = true;

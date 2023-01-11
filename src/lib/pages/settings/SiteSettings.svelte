@@ -247,7 +247,7 @@
 </script>
 
 <script>
-  import { page } from "$app/stores";
+  import { getContext } from "svelte";
 
   import { showNetworkErrorOnCatch, websiteLogoSrc } from "$lib/Store.js";
 
@@ -257,7 +257,8 @@
 
   export let data;
 
-  const { pageTitle, website } = $page.data;
+  const pageTitle = getContext("pageTitle");
+  const website = getContext("website");
 
   pageTitle.set("Website Ayarları");
 

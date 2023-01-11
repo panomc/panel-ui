@@ -34,12 +34,13 @@
 </div>
 
 <script>
+  import { getContext } from "svelte";
+
   import { base } from "$app/paths";
-  import { page } from "$app/stores";
 
   import ConfirmDeleteThemeModal from "$lib/component/modals/ConfirmDeleteThemeModal.svelte";
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set("Temalar");
 </script>

@@ -1,6 +1,5 @@
 import { get, writable } from "svelte/store";
 
-import { page } from "$app/stores";
 import { invalidateAll } from "$app/navigation";
 
 import { PanelSidebarStorageUtil } from "$lib/storage.util";
@@ -18,9 +17,7 @@ export const logoutLoading = writable(false);
 
 export const websiteLogoSrc = writable("/api/websiteLogo");
 
-export function toggleSidebar() {
-  const { isSidebarOpen } = get(page).data;
-
+export function toggleSidebar(isSidebarOpen) {
   isSidebarOpen.update((value) => {
     PanelSidebarStorageUtil.savePanelSidebarStorageUtil(!value);
 
@@ -28,9 +25,7 @@ export function toggleSidebar() {
   });
 }
 
-export function setSidebarTabsState(state) {
-  const { sidebarTabsState } = get(page).data;
-
+export function setSidebarTabsState(state, sidebarTabsState) {
   sidebarTabsState.set(state);
 
   PanelSidebarStorageUtil.setSidebarTabsState(state);

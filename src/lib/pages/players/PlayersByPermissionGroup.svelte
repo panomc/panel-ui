@@ -136,9 +136,10 @@
 </script>
 
 <script>
+  import { getContext } from "svelte";
+
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { page } from "$app/stores";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -158,7 +159,7 @@
 
   export let data;
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set(
     `"${

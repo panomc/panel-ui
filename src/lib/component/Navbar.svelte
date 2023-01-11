@@ -124,7 +124,7 @@
 </nav>
 
 <script>
-  import { onDestroy, onMount } from "svelte";
+  import { onDestroy, onMount, getContext } from "svelte";
   import { formatDistanceToNow } from "date-fns";
 
   import { base } from "$app/paths";
@@ -139,17 +139,19 @@
   } from "$lib/Store";
   import { onNotificationClick } from "$lib/NotificationManager.js";
   import NoContent from "$lib/component/NoContent.svelte";
-  import { page } from "$app/stores";
 
   let quickNotificationProcessID = 0;
 
   let checkTime = 0;
   let interval;
 
-  const { pageTitle, user, notificationCount, isSidebarOpen } = $page.data;
+  const pageTitle = getContext("pageTitle");
+  const user = getContext("user");
+  const notificationCount = getContext("notificationCount");
+  const isSidebarOpen = getContext("isSidebarOpen");
 
   function onSideBarCollapseClick() {
-    toggleSidebar();
+    toggleSidebar(isSidebarOpen);
   }
 
   function onLogout() {

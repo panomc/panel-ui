@@ -122,7 +122,6 @@
 <script>
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
-  import { page } from "$app/stores";
 
   import ConfirmDeletePermissionGroupModal, {
     setCallback as setDeletePermissionGroupModalCallback,
@@ -132,10 +131,11 @@
 
   import Pagination from "$lib/component/Pagination.svelte";
   import PermissionGroupRow from "$lib/component/rows/PermissionGroupRow.svelte";
+  import { getContext } from "svelte";
 
   export let data;
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set("Yetki Grupları");
 

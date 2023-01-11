@@ -175,7 +175,7 @@
 </script>
 
 <script>
-  import { onDestroy, onMount } from "svelte";
+  import { getContext, onDestroy, onMount } from "svelte";
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
@@ -214,7 +214,7 @@
   let checkTime = 0;
   let interval;
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set(
     (data.pageType === PageTypes.HAS_PERM

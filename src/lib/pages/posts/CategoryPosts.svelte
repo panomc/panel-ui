@@ -162,10 +162,11 @@
   import PostRow from "$lib/component/rows/PostRow.svelte";
 
   import NoContent from "$lib/component/NoContent.svelte";
+  import { getContext } from "svelte";
 
   export let data;
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set(
     `"${

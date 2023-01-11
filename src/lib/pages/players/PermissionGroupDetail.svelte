@@ -228,7 +228,6 @@
 <script>
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
-  import { page } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
   import { showNetworkErrorOnCatch } from "$lib/Store.js";
@@ -236,10 +235,11 @@
   import PermissionGroupSavedOrCreatedToast from "$lib/component/toasts/PermissionGroupSavedOrCreatedToast.svelte";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import PermissionGroupSaveErrorToast from "$lib/component/toasts/PermissionGroupSaveErrorToast.svelte";
+  import { getContext } from "svelte";
 
   export let data;
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set(
     data.mode === Modes.EDIT ? "Yetki Grubunu Düzenle" : "Yetki Grubu Oluştur"

@@ -277,9 +277,10 @@
 </script>
 
 <script>
+  import { getContext } from "svelte";
+
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
-  import { page } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -318,7 +319,7 @@
   let thumbnailInput;
   let thumbnailFiles = [];
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set(
     data.mode === Modes.EDIT ? "Yazıyı Düzenle" : "Yeni Yazı Oluştur"

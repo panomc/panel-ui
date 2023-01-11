@@ -3,7 +3,6 @@
 <script context="module">
   import { redirect } from "@sveltejs/kit";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
-  import { get } from "svelte/store";
 
   /**
    * @type {import('@sveltejs/kit').LayoutLoad}
@@ -16,7 +15,7 @@
       throw redirect(302, "/");
     }
 
-    if (!get(selectedServer)) {
+    if (!selectedServer) {
       throw redirect(302, "/");
     }
 

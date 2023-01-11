@@ -68,7 +68,7 @@
 </div>
 
 <script>
-  import { onDestroy } from "svelte";
+  import { getContext, onDestroy } from "svelte";
   import { get } from "svelte/store";
   import copy from "copy-to-clipboard";
   import { differenceInSeconds } from "date-fns";
@@ -79,7 +79,6 @@
   import tooltip from "$lib/tooltip.util";
 
   import { showNetworkErrorOnCatch } from "$lib/Store";
-  import { page } from "$app/stores";
 
   let timeToRefreshKey = "...";
   let commandText;
@@ -87,11 +86,9 @@
   let copyClickIDForCommandText = 0;
   let firstStartCountDown = false;
 
-  const {
-    platformServerMatchKey,
-    platformKeyRefreshedTime,
-    platformHostAddress,
-  } = $page.data;
+  const platformServerMatchKey = getContext("platformServerMatchKey");
+  const platformKeyRefreshedTime = getContext("platformKeyRefreshedTime");
+  const platformHostAddress = getContext("platformHostAddress");
 
   function getTimeLeftInSeconds() {
     const now = new Date(); // current time

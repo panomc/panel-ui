@@ -20,7 +20,7 @@ export function hasPermission(permission, user) {
     user = pageUser;
   }
 
-  const userObject = get(user);
+  const userObject = user;
 
   if (userObject.admin) {
     return true;

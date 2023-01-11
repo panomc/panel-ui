@@ -329,8 +329,9 @@
 </script>
 
 <script>
+  import { getContext } from "svelte";
+
   import { base } from "$app/paths";
-  import { page } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -346,7 +347,7 @@
   export let data;
   let reloading = false;
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set("İstatistikler");
 

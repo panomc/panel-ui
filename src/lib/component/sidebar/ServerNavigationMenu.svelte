@@ -49,8 +49,9 @@
   import { page } from "$app/stores";
 
   import NoContent from "$lib/component/NoContent.svelte";
+  import { getContext } from "svelte";
 
-  const { selectedServer } = $page.data;
+  const selectedServer = getContext("selectedServer");
 
   function matching(path, pathName, startsWith = false) {
     return (

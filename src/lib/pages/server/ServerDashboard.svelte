@@ -79,7 +79,6 @@
 
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
-  import { get } from "svelte/store";
 
   export const ServerStatus = Object.freeze({
     ONLINE: "ONLINE",
@@ -89,7 +88,7 @@
   async function loadData({ request, selectedServer }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
-        path: `/api/panel/servers/${get(selectedServer).id}/dashboard`,
+        path: `/api/panel/servers/${selectedServer.id}/dashboard`,
         request,
       }).then((body) => {
         if (body.result === "ok") {
@@ -127,14 +126,12 @@
 </script>
 
 <script>
-  import { onDestroy, onMount } from "svelte";
+  import { getContext, onDestroy, onMount } from "svelte";
   import { differenceInCalendarDays, intervalToDuration } from "date-fns";
-
-  import { page } from "$app/stores";
 
   import DateComponent from "$lib/component/Date.svelte";
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set("Sunucu İstatistikleri");
 

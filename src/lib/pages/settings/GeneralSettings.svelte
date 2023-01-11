@@ -106,7 +106,7 @@
 </script>
 
 <script>
-  import { page } from "$app/stores";
+  import { getContext } from "svelte";
 
   import { showNetworkErrorOnCatch } from "$lib/Store";
 
@@ -118,7 +118,7 @@
   } from "$lib/language.util";
   import SettingsSaveSuccessToast from "$lib/component/toasts/SettingsSaveSuccessToast.svelte";
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set("Genel Ayarlar");
 

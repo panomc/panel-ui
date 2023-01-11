@@ -142,6 +142,8 @@
 </script>
 
 <script>
+  import { getContext } from "svelte";
+
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
 
@@ -160,11 +162,10 @@
 
   import NoContent from "$lib/component/NoContent.svelte";
   import TicketCategoryRow from "$lib/component/rows/TicketCategoryRow.svelte";
-  import { page } from "$app/stores";
 
   export let data;
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set("Talep Kategorileri");
 

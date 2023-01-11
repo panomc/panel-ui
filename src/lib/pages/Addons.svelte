@@ -1,9 +1,9 @@
 <div class="container">Addons page!</div>
 
 <script>
-  import { page } from "$app/stores";
+  import { getContext } from "svelte";
 
-  const { pageTitle } = $page.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set("Eklentiler");
 </script>
