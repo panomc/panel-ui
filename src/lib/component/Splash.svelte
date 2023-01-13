@@ -11,7 +11,10 @@
 <div class="splash" role="status" in:fade out:fade>
   <img
     alt="Pano"
-    src="{base + (networkErrors ? '/assets/img/logo-blue.svg' : '/assets/img/loading_slime.gif')}"
+    src="{base +
+      (networkErrors
+        ? '/assets/img/logo-blue.svg'
+        : '/assets/img/loading_slime.gif')}"
     width="{base + (networkErrors ? '32' : '128')}"
     height="auto" />
 
@@ -20,8 +23,10 @@
       class="pt-4 d-flex flex-column
       justify-content-center align-items-center text-center">
       {#if notLoggedIn}
-        <a href="http://localhost:3000/" target="_blank"
-          >Panele erişmek için giriş yap.</a>
+        <p>
+          <a href="http://localhost:3000/" target="_blank"
+            >Panele erişmek için giriş yap.</a>
+        </p>
       {:else if noPermission}
         <p class="text-danger">Panele erişmek için yetkiniz yok.</p>
       {:else}
