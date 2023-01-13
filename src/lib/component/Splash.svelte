@@ -11,8 +11,8 @@
 <div class="splash" role="status" in:fade out:fade>
   <img
     alt="Pano"
-    src="{base + (networkErrors ? '' : '/assets/img/loading_slime.gif')}"
-    width="128"
+    src="{base + (networkErrors ? '/assets/img/logo-blue.svg' : '/assets/img/loading_slime.gif')}"
+    width="{base + (networkErrors ? '32' : '128')}"
     height="auto" />
 
   {#if networkErrors}
