@@ -141,10 +141,8 @@
 </script>
 
 <script>
-  import { onDestroy, onMount } from "svelte";
+  import { getContext, onDestroy, onMount } from "svelte";
   import { formatDistanceToNow } from "date-fns";
-
-  import { page as pageStore } from "$app/stores";
 
   import tooltip from "$lib/tooltip.util.js";
   import { showNetworkErrorOnCatch } from "$lib/Store.js";
@@ -159,7 +157,7 @@
 
   export let data;
 
-  const { pageTitle } = $pageStore.data;
+  const pageTitle = getContext("pageTitle");
 
   pageTitle.set("Bildirimler");
 
