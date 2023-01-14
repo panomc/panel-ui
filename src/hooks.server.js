@@ -1,14 +1,14 @@
-import * as api from "$lib/api-server.util";
-import { networkErrorBody } from "./pano-ui/js/api.proxy";
 import {
   COOKIE_PREFIX,
   JWT_COOKIE_NAME,
   CSRF_TOKEN_COOKIE_NAME,
 } from "$lib/variables";
 
-async function fetchBasicData(token) {
-  return api
-    .GET({ path: "/api/panel/basicData", token })
+import ApiUtil, { networkErrorBody } from "$lib/api.util.js";
+
+async function fetchBasicData(token, CSRFToken) {
+  return ApiUtil
+    .get({ path: "/api/panel/basicData", token, CSRFToken })
     .catch(() => networkErrorBody);
 }
 
@@ -16,8 +16,7 @@ async function fetchBasicData(token) {
 export async function handle({
   event,
   event: {
-    cookies,
-    url: { pathname },
+    cookies
   },
   resolve,
 }) {
@@ -26,10 +25,7 @@ export async function handle({
   const jwt = cookies.get([COOKIE_PREFIX + JWT_COOKIE_NAME]);
   const CSRFToken = cookies.get([COOKIE_PREFIX + CSRF_TOKEN_COOKIE_NAME]);
 
-  locals.basicData =
-    !pathname.startsWith("/api/") &&
-    !pathname.startsWith("/auth/") &&
-    (await fetchBasicData(jwt));
+  locals.basicData = await fetchBasicData(jwt, CSRFToken);
 
   locals.jwt = jwt;
   locals.CSRFToken = CSRFToken;

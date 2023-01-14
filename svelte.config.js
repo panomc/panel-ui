@@ -7,7 +7,7 @@ const config = {
     adapter: NodeAdapter(),
 
     paths: {
-      base: process.env.DEV ? "" : "/panel",
+      base: "/panel",
     },
   },
 

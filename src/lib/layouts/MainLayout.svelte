@@ -100,6 +100,7 @@
       initNotificationListeners();
     }
 
+
     const output = {
       session: {
         basicData,

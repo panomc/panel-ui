@@ -15,7 +15,7 @@
       (networkErrors
         ? '/assets/img/logo-blue.svg'
         : '/assets/img/loading_slime.gif')}"
-    width="{base + (networkErrors ? '32' : '128')}"
+    width="{networkErrors ? '32' : '128'}"
     height="auto" />
 
   {#if networkErrors}

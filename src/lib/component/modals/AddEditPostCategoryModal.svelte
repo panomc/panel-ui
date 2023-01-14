@@ -132,7 +132,6 @@
     loading = true;
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      console.log("geldi");
       const bodyHandler = (body) => {
         if (body.result === "ok") {
           loading = false;

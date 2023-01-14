@@ -158,7 +158,7 @@
     logoutLoading.set(true);
 
     showNetworkErrorOnCatch((resolve, reject) => {
-      ApiUtil.post({ path: "/auth/logout" })
+      ApiUtil.post({ path: "/api/auth/logout" })
         .then(() => {
           window.location.href = "/";
 
