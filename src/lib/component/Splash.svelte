@@ -74,6 +74,12 @@
   );
 
   async function onResumeClick() {
+    if (notLoggedIn || noPermission) {
+      location.reload();
+
+      return
+    }
+
     await resumeAfterNetworkError();
   }
 </script>
