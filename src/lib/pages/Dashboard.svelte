@@ -106,7 +106,7 @@
           <p
             class="mb-0 lead text-secondary text-center"
             use:tooltip="{['Website', { placement: 'bottom' }]}">
-            12 Çevrimiçi
+            {data.onlinePlayerCount} Çevrimiçi
           </p>
         </div>
       </div>
