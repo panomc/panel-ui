@@ -12,6 +12,17 @@
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
         Bu oyuncuyu yasaklamak istediğinizden emin misiniz?
+        <div class="form-check d-inline-block text-center my-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            checked
+            id="notifyBanEmail" />
+          <label class="form-check-label" for="notifyBanEmail">
+            E-posta ile bilgilendir
+          </label>
+        </div>
       </div>
       <div class="modal-footer flex-nowrap">
         <button
