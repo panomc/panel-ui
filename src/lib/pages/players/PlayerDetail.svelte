@@ -17,7 +17,7 @@
           class="btn btn-link link-danger"
           href="javascript:void(0);"
           use:tooltip="{['Sil', { placement: 'bottom' }]}"
-          on:click="{() => showConfirmBanPlayerModal(data.player)}"
+          on:click="{() => showConfirmDeletePlayerModal(data.player)}"
           class:disabled="{$user.username === data.player.username ||
             (data.player.permissionGroup === 'admin' && !$user.admin)}">
           <i class="fas fa-trash"></i>
@@ -296,6 +296,9 @@
     show as showUnbanPlayerModal,
     setCallback as setUnbanPlayerModalCallback,
   } from "$lib/component/modals/UnbanPlayerModal.svelte";
+  import {
+    show as showConfirmDeletePlayerModal,
+  } from "$lib/component/modals/ConfirmDeletePlayerModal.svelte";
 
   import TicketStatusBadge from "$lib/component/badges/TicketStatusBadge.svelte";
   import DateComponent from "$lib/component/Date.svelte";
