@@ -16,7 +16,7 @@
           Bu sunucuyu kaldırmak istediğinizden emin misiniz?
 
           <input
-            class="form-control my-3"
+            class="form-control d-inline-block text-center mt-3"
             placeholder="Hesap Şifresi"
             type="password"
             bind:value="{$currentPassword}"
