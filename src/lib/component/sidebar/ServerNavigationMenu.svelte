@@ -27,6 +27,11 @@
         </a>
       </li>
     </ul>
+  {:else if $connectedServerCount > 0}
+    <NoContent
+      icon="fas fa-cube fa-3x"
+      text="Seçili sunucu yok."
+      dark="{true}" />
   {:else}
     <NoContent
       icon="fas fa-cube fa-3x"
@@ -45,13 +50,17 @@
 </nav>
 
 <script>
+  import { getContext } from "svelte";
+
   import { base } from "$app/paths";
   import { page } from "$app/stores";
 
   import NoContent from "$lib/component/NoContent.svelte";
-  import { getContext } from "svelte";
+
+  import { show as showServersModal } from "$lib/component/modals/ServersModal.svelte";
 
   const selectedServer = getContext("selectedServer");
+  const connectedServerCount = getContext("connectedServerCount");
 
   function matching(path, pathName, startsWith = false) {
     return (
