@@ -12,12 +12,12 @@
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
         Bu oyuncuyu yasaklamak istediğinizden emin misiniz?
-        <div class="form-check d-inline-block text-center my-3">
+        <div class="form-check d-inline-block text-center mt-3">
           <input
             class="form-check-input"
             type="checkbox"
             value=""
-            checked
+            bind:checked="{$sendNotification}"
             id="notifyBanEmail" />
           <label class="form-check-label" for="notifyBanEmail">
             E-posta ile bilgilendir
@@ -54,8 +54,11 @@
   let hideCallback = () => {};
   let modal;
 
+  const sendNotification = writable(true);
+
   export function show(newPlayer) {
     player.set(newPlayer);
+    sendNotification.set(true)
 
     modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
       backdrop: "static",
@@ -88,7 +91,6 @@
   import PlayerBanToast from "$lib/component/toasts/PlayerBanToast.svelte";
 
   let loading;
-  let sendNotification = false;
 
   function onSubmit() {
     loading = true;
@@ -97,7 +99,7 @@
       ApiUtil.post({
         path: `/api/panel/players/${$player.username}/ban`,
         body: {
-          sendNotification,
+          sendNotification: $sendNotification,
         },
       })
         .then((body) => {
