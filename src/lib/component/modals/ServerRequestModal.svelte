@@ -167,12 +167,12 @@
       ApiUtil.post({
         path: `/api/panel/servers/${$server.id}/accept`,
       })
-        .then((body) => {
+        .then(async (body) => {
           $submitLoading = false;
 
           if (body.result === "ok") {
             callback($server);
-            invalidateAll();
+            await invalidateAll();
             hide();
             showToast(AcceptedServerConnectRequestToast);
           } else if (body.result === "error") {
