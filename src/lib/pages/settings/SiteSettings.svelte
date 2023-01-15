@@ -1,5 +1,4 @@
 <!-- Site Settings Sub Page -->
-<div class="tab-pane">
   <div class="card">
     <div class="card-body animate__animated animate__fadeIn">
       <div class="row mb-3">
@@ -187,7 +186,6 @@
       </button>
     </div>
   </div>
-</div>
 
 <script context="module">
   import ApiUtil from "$lib/api.util.js";

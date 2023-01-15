@@ -1,52 +1,50 @@
 <!-- General Settings Sub Page -->
-<div class="tab-pane">
-  <div class="card">
-    <div class="card-body animate__animated animate__fadeIn">
-      <div class="row mb-3">
-        <label class="col-md-4 col-form-label" for="platformLanguage">
-          Görüntüleme Dili:
-        </label>
-        <div class="col">
-          <select
-            class="form-control"
-            id="platformLanguage"
-            bind:value="{data.locale}">
-            {#each Object.keys(Languages) as language, index (language)}
-              <option value="{Languages[language].locale}"
-                >{Languages[language].name}</option>
-            {/each}
-          </select>
-        </div>
+<div class="card">
+  <div class="card-body animate__animated animate__fadeIn">
+    <div class="row mb-3">
+      <label class="col-md-4 col-form-label" for="platformLanguage">
+        Görüntüleme Dili:
+      </label>
+      <div class="col">
+        <select
+          class="form-control"
+          id="platformLanguage"
+          bind:value="{data.locale}">
+          {#each Object.keys(Languages) as language, index (language)}
+            <option value="{Languages[language].locale}"
+              >{Languages[language].name}</option>
+          {/each}
+        </select>
       </div>
-
-      <h5 class="card-title">Güncelleme Tercihleri</h5>
-      <div class="row mb-3 justify-content-between">
-        <label class="col-md-4 col-form-label" for="updatePeriod">
-          Otomatik güncellemeleri denetle:
-        </label>
-        <div class="col">
-          <select
-            class="form-control"
-            bind:value="{data.updatePeriod}"
-            id="updatePeriod">
-            <option value="{UpdatePeriod.NEVER}">Asla</option>
-            <option value="{UpdatePeriod.ONCE_PER_DAY}">Günde bir kez</option>
-            <option value="{UpdatePeriod.ONCE_PER_WEEK}"
-              >Haftada bir kez
-            </option>
-            <option value="{UpdatePeriod.ONCE_PER_MONTH}">Ayda bir kez</option>
-          </select>
-        </div>
-      </div>
-
-      <button
-        class="btn btn-secondary"
-        class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
-        aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
-        on:click="{save}"
-        >Kaydet
-      </button>
     </div>
+
+    <h5 class="card-title">Güncelleme Tercihleri</h5>
+    <div class="row mb-3 justify-content-between">
+      <label class="col-md-4 col-form-label" for="updatePeriod">
+        Otomatik güncellemeleri denetle:
+      </label>
+      <div class="col">
+        <select
+          class="form-control"
+          bind:value="{data.updatePeriod}"
+          id="updatePeriod">
+          <option value="{UpdatePeriod.NEVER}">Asla</option>
+          <option value="{UpdatePeriod.ONCE_PER_DAY}">Günde bir kez</option>
+          <option value="{UpdatePeriod.ONCE_PER_WEEK}"
+            >Haftada bir kez
+          </option>
+          <option value="{UpdatePeriod.ONCE_PER_MONTH}">Ayda bir kez</option>
+        </select>
+      </div>
+    </div>
+
+    <button
+      class="btn btn-secondary"
+      class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
+      aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
+      on:click="{save}"
+      >Kaydet
+    </button>
   </div>
 </div>
 

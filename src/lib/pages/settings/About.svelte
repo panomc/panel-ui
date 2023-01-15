@@ -1,5 +1,4 @@
 <!-- About Sup Page -->
-<div class="tab-pane">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">PanoCMS</h5>
@@ -84,7 +83,6 @@
       </details>
     </div>
   </div>
-</div>
 
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
