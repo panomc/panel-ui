@@ -7,57 +7,23 @@
   tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
-      <!--      @submit.prevent="submitRemoveServer"-->
       <form>
         <div class="modal-body text-center">
           <div class="pb-3">
-            <i
-              aria-hidden="true"
-              class="fa fa-question-circle fa-4x d-block m-auto text-gray"></i>
+            <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"
+            ></i>
           </div>
           Bu sunucuyu kaldırmak istediğinizden emin misiniz?
-          <div class="container d-block m-auto">
-            <label for="confirmRemoveServerPassword">
-              Onaylamak için lütfen şifrenizi girin:
-            </label>
-            <!--            :class="{ 'border-danger': removingServerForm.error.password }"-->
-            <input
-              aria-describedby="helpId"
-              class="form-control text-center mb-2"
-              id="confirmRemoveServerPassword"
-              placeholder="Pano Hesabı Şifreniz"
-              type="password" />
 
-            <small class="form-text text-danger d-inline">
-              <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i>
-              <!--              {{ removingServerForm.error.code }}-->
-            </small>
-          </div>
-          <span class="text-danger">
-            <i aria-hidden="true" class="fa fa-exclamation-circle fa-fw"></i>
-            Platform ile eşitlenmiş sunucu verileri ve bilgileri sıfırlanacak.
-          </span>
+          <input
+            class="form-control my-3"
+            placeholder="Hesap Şifresi"
+            type="password" />
         </div>
-        <div class="modal-footer">
-          <button
-            :disabled="removingServerForm.removing"
-            class="btn btn-outline-primary w-100"
-            data-dismiss="modal"
-            type="button">
-            İptal
-          </button>
 
-          <button
-            :disabled="removingServerForm.removing ||
-            removingServerForm.password === ''"
-            class="btn btn-danger w-100"
-            type="submit">
-            <div
-              class="spinner-border spinner-border-sm text-white"
-              role="status">
-            </div>
-            <span>Evet</span>
-          </button>
+        <div class="modal-footer flex-nowrap">
+          <button class="btn btn-link col-6 m-0" type="button"> İptal </button>
+          <button class="btn btn-danger col-6 m-0" type="button">Evet</button>
         </div>
       </form>
     </div>
@@ -102,4 +68,3 @@
     hideCallback = newCallback;
   }
 </script>
-
