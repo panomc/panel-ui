@@ -114,7 +114,8 @@
       platformHostAddress: basicData.platformHostAddress || "",
       notificationCount: basicData.notificationCount || 0,
       mainServer: basicData.mainServer || {},
-      selectedServer: basicData.selectedServer || basicData.mainServer,
+      selectedServer: basicData.selectedServer,
+      connectedServerCount: basicData.connectedServerCount
     };
 
     if (basicData.result !== "ok") {
@@ -155,6 +156,7 @@
   const notificationCount = writable(data.notificationCount);
   const mainServer = writable(data.mainServer);
   const selectedServer = writable(data.selectedServer);
+  const connectedServerCount = writable(data.connectedServerCount);
 
   const pageTitle = writable(null);
 
@@ -175,6 +177,7 @@
     notificationCount.set(page.data.notificationCount);
     mainServer.set(page.data.mainServer);
     selectedServer.set(page.data.selectedServer);
+    connectedServerCount.set(page.data.connectedServerCount);
 
     sidebarTabsState.set(getCurrentSidebarState());
   });
@@ -190,6 +193,7 @@
   setContext("notificationCount", notificationCount);
   setContext("mainServer", mainServer);
   setContext("selectedServer", selectedServer);
+  setContext("connectedServerCount", connectedServerCount);
 
   setContext("sidebarTabsState", sidebarTabsState);
   setContext("isSidebarOpen", isSidebarOpen);
