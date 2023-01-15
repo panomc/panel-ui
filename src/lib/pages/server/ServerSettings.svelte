@@ -31,7 +31,7 @@
           Sunucuyu Kaldır
         </label>
         <div class="col d-flex align-items-center">
-          <a href="#" class="btn btn-link link-danger ps-0"
+          <a href="javascript:void(0);" on:click={() => showRemoveServerModal($selectedServer)} class="btn btn-link link-danger ps-0"
             ><i class="fa-solid fa-plug me-2"></i> Bağlantıyı Kes</a>
         </div>
       </div>
@@ -40,11 +40,13 @@
 </div>
 
 <MakeMainServerModal/>
+<RemoveServerModal />
 
 <script>
   import { getContext } from "svelte";
 
   import MakeMainServerModal, { show as showMakeMainServerModal } from "$lib/component/modals/MakeMainServerModal.svelte";
+  import RemoveServerModal, { show as showRemoveServerModal } from "$lib/component/modals/RemoveServerModal.svelte";
 
   const mainServer = getContext("mainServer");
   const selectedServer = getContext("selectedServer");

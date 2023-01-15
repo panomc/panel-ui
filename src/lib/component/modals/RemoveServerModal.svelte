@@ -2,7 +2,7 @@
 <div
   aria-hidden="true"
   class="modal fade"
-  id="confirmRemoveServer"
+  id="{dialogID}"
   role="dialog"
   tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="dialog">
@@ -63,3 +63,43 @@
     </div>
   </div>
 </div>
+
+<script context="module">
+  import { writable } from "svelte/store";
+
+  const dialogID = "confirmRemoveServer";
+
+  let callback = () => {};
+  let hideCallback = () => {};
+  let modal;
+
+  const server = writable({});
+  const loading = writable(false);
+
+  export function show(newServer) {
+    modal = new window.bootstrap.Modal(document.getElementById(dialogID), {
+      backdrop: "static",
+      keyboard: false,
+    });
+
+    loading.set(false);
+    server.set(newServer);
+
+    modal.show();
+  }
+
+  export function hide() {
+    hideCallback();
+
+    modal.hide();
+  }
+
+  export function setCallback(newCallback) {
+    callback = newCallback;
+  }
+
+  export function onHide(newCallback) {
+    hideCallback = newCallback;
+  }
+</script>
+

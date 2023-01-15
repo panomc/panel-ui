@@ -1,7 +1,6 @@
 {#if hasPermission(Permissions.MANAGE_SERVERS)}
   <ServersModal />
   <ConnectServerModal />
-  <RemoveServerModal />
 {/if}
 
 <div class="sidebar bg-primary" class:active="{$isSidebarOpen}">
@@ -116,7 +115,6 @@
     show as showServersModal,
   } from "./modals/ServersModal.svelte";
   import ConnectServerModal from "./modals/ConnectServerModal.svelte";
-  import RemoveServerModal from "./modals/RemoveServerModal.svelte";
   import { UI_URL } from "$lib/variables.js";
 
   import { websiteLogoSrc } from "$lib/Store.js";
