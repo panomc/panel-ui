@@ -101,6 +101,10 @@
         },
       })
         .then((body) => {
+          if (body.error) {
+            location.reload()
+          }
+
           hide();
 
           showToast(PlayerBanToast, {
