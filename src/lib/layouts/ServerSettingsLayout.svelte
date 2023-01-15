@@ -16,13 +16,13 @@
         </a>
         <a
           class="nav-item nav-link"
-          href="{base}/server/settings/plugin"
+          href="{base}/server/settings/game-integration"
           class:active="{matching(
             $page.url.pathname,
-            base + '/server/settings/plugin',
+            base + '/server/settings/game-integration',
             true
           )}">
-          Eklenti
+          Oyun Entegrasyonu
         </a>
       </div>
     </div>
