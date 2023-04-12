@@ -29,6 +29,8 @@
           <button
             class="btn btn-danger col-6 m-0"
             type="button"
+            disabled="{confirmButtonDisabled}"
+            class:disabled="{confirmButtonDisabled}"
             on:click="{sendDeleteServer}">Evet</button>
         </div>
       </form>
@@ -87,6 +89,8 @@
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import ServerDeletedSuccessToast from "$lib/component/toasts/ServerDeletedSuccessToast.svelte";
+
+  $: confirmButtonDisabled = $currentPassword.length === 0;
 
   function sendDeleteServer() {
     $loading = true;
