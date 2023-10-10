@@ -1,34 +1,28 @@
-<style>
-  .notifications {
-    width: 250px;
-  }
-</style>
-
 <!-- Navbar -->
-<nav class="navbar navbar-expand navbar-light">
-  <div class="container">
+<nav class="navbar navbar-expand navbar-light bg-body-light">
+  <div class="container-fluid">
     <div class="row w-100 justify-content-between align-items-center">
       <div class="col-4 d-flex justify-content-start">
         <!-- Navbar Toggler -->
         <div class="navbar-nav">
-          <a
-            class="nav-link"
+          <button
+            class="navbar-toggler d-block"
             class:invisible="{$isSidebarOpen}"
-            href="javascript:void(0);"
+            type="button"
             title="Menüyü Aç/Kapa"
             on:click="{onSideBarCollapseClick}">
             <i class="fa-solid fa-bars"></i>
-          </a>
+          </button>
         </div>
       </div>
       <div class="col-4 d-flex justify-content-center">
         <!-- Page Title -->
-        <h4 class="text-center">
+        <h5 class="navbar-text mb-0">
           {$pageTitle ? $pageTitle : options.DEFAULT_PAGE_TITLE}
-        </h4>
+        </h5>
       </div>
       <div class="col-4 d-flex justify-content-end">
-        <div class="navbar-nav">
+        <div class="navbar-nav ml-auto">
           <!-- Notifications Dropdown -->
           <div
             class="nav-item dropdown d-flex align-items-center"
@@ -38,7 +32,7 @@
               class="nav-link"
               data-bs-toggle="dropdown"
               role="button"
-              title="Okunmamış Bildirimler">
+              title="Yeni Bildirimler">
               <i class="fas fa-bell fa-lg"></i>
               {#if $notificationCount !== 0}
                 <span
@@ -84,11 +78,10 @@
 
           <!-- Account Dropdown -->
           <div class="nav-item dropdown">
-            <a
-              href="javascript:void(0);"
+            <button
+              type="button"
               class="nav-link"
               data-bs-toggle="dropdown"
-              role="button"
               title="Oturum">
               <img
                 src="https://crafthead.net/avatar/{$user.username}"
@@ -96,7 +89,7 @@
                 height="32"
                 class="rounded-circle animate__animated animate__zoomIn"
                 alt="{$user.username}" />
-            </a>
+            </button>
             <ul
               class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
               <h6 class="dropdown-header">{$user.username}</h6>
@@ -108,12 +101,12 @@
                 </a>
               </li>
               <li>
-                <a
+                <button
+                  type="button"
                   class="dropdown-item text-danger"
-                  href="javascript:void(0);"
                   on:click="{onLogout}">
                   Çıkış Yap
-                </a>
+                </button>
               </li>
             </ul>
           </div>
