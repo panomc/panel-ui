@@ -72,10 +72,10 @@
   <section class="row animate__animated animate__fadeIn">
     <!-- Post -->
     <div class="col-lg-9 d-flex flex-fill">
-      <div class="card w-100">
+      <div class="card bg-white w-100">
         <div class="card-body">
           <input
-            class="form-control form-control-lg text-black border-0 p-0 mb-2"
+            class="form-control form-control-lg border rounded-0 rounded-top"
             type="text"
             placeholder="Yazı başlığını girin"
             bind:value="{data.post.title}" />
@@ -93,7 +93,7 @@
 
     <!-- Post Option Cards -->
     <div class="col-lg-3">
-      <div class="card">
+      <div class="card bg-white">
         <div class="card-body">
           <ul class="list-group p-0 m-0">
             <li class="list-group-item">
