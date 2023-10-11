@@ -13,7 +13,7 @@
   </div>
 
   <!-- All Players -->
-  <div class="card">
+  <div class="card bg-white">
     <div class="card-body">
       <div class="row justify-content-between mb-3">
         <div class="col-md-auto col-12 text-md-left text-center">
@@ -59,7 +59,7 @@
       {:else}
         <!-- Players Table -->
         <div class="table-responsive">
-          <table class="table table-borderless table-hover mb-0">
+          <table class="table table-hover mb-0">
             <thead>
               <tr>
                 <th class="align-middle text-nowrap" scope="col"></th>

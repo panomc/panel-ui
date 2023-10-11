@@ -84,7 +84,7 @@
 
   <div class="row">
     <div class="col-lg-3">
-      <div class="card mb-3">
+      <div class="card bg-white mb-3">
         <div
           class="card-body d-flex flex-column justify-content-center
           align-items-center">
@@ -119,14 +119,14 @@
     <div class="col-lg-9">
       {#if hasPermission(Permissions.MANAGE_TICKETS)}
         <!-- User's Tickets -->
-        <div class="card mb-3">
+        <div class="card bg-white mb-3">
           <div class="card-body">
             <h5 class="card-title">Son Talepler</h5>
 
             {#if data.ticketCount === 0}
               <NoContent />
             {:else}
-              <table class="table table-borderless table-hover mb-0">
+              <table class="table table-hover mb-0">
                 {#each data.tickets as ticket, index (ticket)}
                   <tbody>
                     <tr>
@@ -167,10 +167,10 @@
           </div>
         </div>
       {/if}
-      <div class="card">
+      <div class="card bg-white">
         <div class="card-body">
           <h5 class="card-title">İstatistikler</h5>
-          <table class="table table-borderless mb-0">
+          <table class="table mb-0">
             <tbody>
               <tr>
                 <td>E-posta</td>

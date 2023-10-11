@@ -3,67 +3,30 @@
   <ConnectServerModal />
 {/if}
 
-<div class="sidebar bg-primary" class:active="{$isSidebarOpen}">
-  <!-- Sidebar Toggler & Logo -->
-  <div class="navbar navbar-dark w-100 px-2">
-    <button
-      type="button"
-      class="btn btn-link link-white position-absolute"
-      title="Menüyü Aç/kapa"
-      on:click="{onMobileSideBarCollapseClick}"
-      ><i class="fa-solid fa-bars"></i>
-    </button>
+<div class="sidebar d-flex flex-column no-wrap vh-100 bg-primary" class:active="{$isSidebarOpen}">
+  <div class="container-fluid">
+    <!-- Sidebar Toggler & Logo -->
+    <div class="navbar navbar-expand navbar-dark bg-body-primary">
+      <button
+        type="button"
+        class="navbar-toggler d-block float-left position-absolute"
+        title="Menüyü Aç/kapa"
+        on:click="{onMobileSideBarCollapseClick}">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-    <a class="navbar-brand m-auto" href="{base}/">
-      <img
-        alt="Pano"
-        title="Pano"
-        src="{base + '/assets/img/logo.svg'}"
-        width="20" />
-    </a>
-  </div>
-
-  <div class="sidebar-inner">
-    <!-- Sidebar Info Section -->
-    <div class="sidebar-info m-3">
-      <a href="{base}/settings/site-settings">
+      <a class="navbar-brand m-auto" href="{base}/">
         <img
-          alt="Sunucu İkonu"
-          class="img-fluid"
-          src="{$websiteLogoSrc}"
-          use:tooltip="{['Website Ayaları', { placement: 'right' }]}" />
+          alt="Pano"
+          title="Pano"
+          src="{base + '/assets/img/logo.svg'}"
+          width="20" />
       </a>
-
-      {#if $sidebarTabsState === "game" && $selectedServer}
-        <h5 class="text-white animate__animated animate__zoomIn">
-          {$selectedServer.name}
-        </h5>
-      {:else}
-        <h5 class="text-light animate__animated animate__zoomIn">
-          {$website.name}
-        </h5>
-      {/if}
-
-      {#if $sidebarTabsState === "website"}
-        <a href="{UI_URL}" class="btn btn-sm btn-secondary" target="_blank">
-          Websiteyi Görüntüle
-        </a>
-      {/if}
-
-      {#if $sidebarTabsState === "game"}
-        <button
-          class="btn btn-sm btn-secondary"
-          type="button"
-          on:click="{showServersModal}">
-          Sunucuları Görüntüle
-        </button>
-      {/if}
     </div>
 
     <!-- Sidebar Tabs -->
     <div class="navbar navbar-expand navbar-dark w-100">
-      <ul
-        class="navbar-nav d-flex flex-row justify-content-evenly align-items-center w-100">
+      <ul class="navbar-nav d-flex flex-row justify-content-evenly w-100">
         <li class="nav-item">
           <a
             href="javascript:void(0);"
@@ -89,12 +52,32 @@
       </ul>
     </div>
 
+    <!-- Sidebar Info Section -->
+    {#if $sidebarTabsState === "website"}
+      <a
+        type="button"
+        href="{UI_URL}"
+        class="btn btn-sm btn-secondary w-100"
+        target="_blank">
+        Websiteyi Görüntüle
+      </a>
+    {/if}
+
+    {#if $sidebarTabsState === "game"}
+      <button
+        class="btn btn-sm btn-secondary w-100"
+        type="button"
+        on:click="{showServersModal}">
+        Sunucuları Görüntüle
+      </button>
+    {/if}
+
     <!-- Sidebar Site Navigation Menu || Sidebar Server Navigation Menu -->
     <svelte:component this="{menuComponent}" />
-  </div>
 
-  <!-- Sidebar Bottom -->
-  <Bottom />
+    <!-- Sidebar Bottom -->
+    <Bottom />
+  </div>
 </div>
 
 <script>

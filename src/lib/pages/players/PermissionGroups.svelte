@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card bg-white">
     <div class="card-body">
       <!-- Permissions Table -->
       <h5 class="card-title">
@@ -24,7 +24,7 @@
       </h5>
 
       <div class="table-responsive">
-        <table class="table table-borderless table-hover mb-0">
+        <table class="table table-hover mb-0">
           <thead>
             <tr>
               <th class="align-middle text-nowrap" scope="col"></th>

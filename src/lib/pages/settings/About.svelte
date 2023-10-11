@@ -1,5 +1,5 @@
 <!-- About Sup Page -->
-  <div class="card">
+  <div class="card bg-white">
     <div class="card-body">
       <h5 class="card-title">PanoCMS</h5>
       <form class="animate__animated animate__fadeIn">
@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card bg-white">
     <div class="card-body animate__animated animate__fadeIn">
       <h5
         class="card-title animate__animated animate__heartBeat animate__slower d-inline-block">

@@ -15,7 +15,7 @@
 </section>
 
 <!-- Available Updates -->
-<div class="card">
+<div class="card bg-white">
   <div class="card-body animate__animated animate__fadeIn">
     <h5 class="card-title">Update</h5>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>

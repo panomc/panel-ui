@@ -1,5 +1,5 @@
 {#if editor}
-  <div class="p-1 border rounded-top">
+  <div class="bg-light rounded-bottom">
     <!-- Headings -->
     <button
       class="btn btn-link link-dark btn-small small"
@@ -124,9 +124,7 @@
 {/if}
 
 <!-- Editor Content -->
-<div
-  class="border border-top-0 rounded-bottom p-1 h-100 "
-  bind:this="{element}">
+<div class="border border-top-0 rounded-bottom p-1 h-100" bind:this="{element}">
 </div>
 
 <script>

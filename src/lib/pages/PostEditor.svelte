@@ -75,7 +75,7 @@
       <div class="card bg-white w-100">
         <div class="card-body">
           <input
-            class="form-control form-control-lg border rounded-0 rounded-top"
+            class="form-control form-control-lg"
             type="text"
             placeholder="Yazı başlığını girin"
             bind:value="{data.post.title}" />

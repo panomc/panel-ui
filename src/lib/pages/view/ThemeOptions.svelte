@@ -1,6 +1,6 @@
 <!-- Theme Options Categories -->
 <section>
-  <div class="card">
+  <div class="card bg-white">
     <div class="card-body animate__animated animate__fadeIn">
       <div class="row justify-content-between pb-2">
         <div class="col-md-auto col-12 text-md-left text-center">

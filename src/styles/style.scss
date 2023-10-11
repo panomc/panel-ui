@@ -19,20 +19,13 @@
 }
 
 .sidebar {
-  height: 1vvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   min-width: 250px;
   max-width: 250px;
-  min-height: 100vh;
   position: relative;
   top: 0;
   left: 0;
   z-index: 1040;
   transition: 250ms all;
-  background: $white;
   @include media-breakpoint-down(md) {
     position: fixed;
     left: 0;
@@ -41,23 +34,6 @@
 
 .sidebar:not(.active) {
   margin-left: -250px;
-}
-
-.sidebar-inner {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: flex-start;
-  overflow-y: auto;
-  width: 100%;
-  height: calc(100vh - 130px);
-  scrollbar-color: $white $primary;
-  scrollbar-width: thin;
-}
-
-.sidebar-info {
-  padding: 0.5rem 0;
-  text-align: center;
 }
 
 .selected {

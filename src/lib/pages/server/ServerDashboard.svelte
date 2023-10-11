@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card">
+      <div class="card bg-white">
         <div class="card-body">
           <p class="mb-0 lead text-primary text-center">
             {data.server.playerCount}/{data.server.maxPlayerCount} Oyuncu
@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card">
+      <div class="card bg-white">
         <div class="card-body">
           <p class="mb-0 lead text-dark text-center">
             {#if data.server.status === ServerStatus.ONLINE}Çalışma Süresi: {getUptime(
@@ -40,11 +40,11 @@
   </div>
 
   <!-- Statistic Table -->
-  <div class="card">
+  <div class="card bg-white">
     <div class="card-body">
       <h5 class="card-title">İstatistik</h5>
       <div class="table-responsive">
-        <table class="table table-borderless table-hover m-0">
+        <table class="table table-hover m-0">
           <tbody class="text-muted">
             <tr>
               <th scope="row">Sunucu İsmi:</th>

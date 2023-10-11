@@ -40,7 +40,7 @@
   </div>
 
   <!-- All Tickets -->
-  <div class="card">
+  <div class="card bg-white">
     <div class="card-body">
       <div class="row justify-content-between pb-3 align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
@@ -59,7 +59,7 @@
       {:else}
         <!-- Tickets Table -->
         <div class="table-responsive">
-          <table class="table table-borderless table-hover mb-0">
+          <table class="table table-hover mb-0">
             <thead>
               <tr>
                 <th class="text-nowrap align-middle" scope="col">

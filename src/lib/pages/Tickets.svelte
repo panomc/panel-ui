@@ -1,45 +1,48 @@
 <!-- Tickets Page -->
 <article class="container">
-  <!-- Action Menu -->
-  <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
-    <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/tickets/categories">
-        <i class="fas fa-list-alt me-2"></i>
-        Talep Kategorileri
-      </a>
-    </div>
-    <div class="col-auto">
-      <div
-        class:d-none="{firstLoad}"
-        class="animate__animated animate__faster {getListOfChecked($checkedList)
-          .length > 0
-          ? 'animate__slideInUp'
-          : 'animate__slideOutDown'}
+  <div class="bg-primary bg-opacity-25 bg-gradient rounded">
+    <!-- Action Menu -->
+    <div
+      class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+      <div class="col-auto">
+        <a class="btn btn-link" role="button" href="{base}/tickets/categories">
+          <i class="fas fa-list-alt me-2"></i>
+          Talep Kategorileri
+        </a>
+      </div>
+      <div class="col-auto">
+        <div
+          class:d-none="{firstLoad}"
+          class="animate__animated animate__faster {getListOfChecked(
+            $checkedList
+          ).length > 0
+            ? 'animate__slideInUp'
+            : 'animate__slideOutDown'}
       faster">
-        <a
-          class="btn btn-link link-danger"
-          class:disabled="{getListOfChecked($checkedList).length === 0}"
-          role="button"
-          href="javascript:void(0);"
-          on:click="{onShowDeleteTicketsModalClick}">
-          <i class="fas fa-trash"></i>
-        </a>
-        <a
-          class="btn btn-danger"
-          class:disabled="{getListOfChecked($checkedList).length === 0}"
-          role="button"
-          href="javascript:void(0);"
-          on:click="{onShowCloseTicketsModalClick}">
-          <i class="fas fa-times me-2"></i>
-          Talebi Kapat
-        </a>
+          <a
+            class="btn btn-link link-danger"
+            class:disabled="{getListOfChecked($checkedList).length === 0}"
+            role="button"
+            href="javascript:void(0);"
+            on:click="{onShowDeleteTicketsModalClick}">
+            <i class="fas fa-trash"></i>
+          </a>
+          <a
+            class="btn btn-danger"
+            class:disabled="{getListOfChecked($checkedList).length === 0}"
+            role="button"
+            href="javascript:void(0);"
+            on:click="{onShowCloseTicketsModalClick}">
+            <i class="fas fa-times me-2"></i>
+            Talebi Kapat
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- All Tickets -->
-  <div class="card">
+  <div class="card bg-white">
     <div class="card-body">
       <div class="row justify-content-between align-items-center mb-3">
         <div class="col-md-auto col-12 text-md-left text-center">
@@ -87,7 +90,7 @@
       {:else}
         <!-- Tickets Table -->
         <div class="table-responsive">
-          <table class="table table-borderless table-hover mb-0">
+          <table class="table table-hover mb-0">
             <thead>
               <tr>
                 <th class="align-middle" scope="col">

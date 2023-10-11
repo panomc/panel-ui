@@ -101,7 +101,7 @@
   <div
     class="row my-3 justify-content-between animate__animated animate__slideInUp">
     <div class="col-4">
-      <div class="card">
+      <div class="card bg-secondary bg-opacity-25">
         <div class="card-body">
           <p
             class="mb-0 lead text-secondary text-center"
@@ -112,7 +112,7 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card">
+      <div class="card bg-primary bg-opacity-25">
         <div class="card-body">
           <p class="mb-0 lead text-primary text-center">
             {data.newRegisterCount} Yeni Kayıt
@@ -121,7 +121,7 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card">
+      <div class="card bg-danger bg-opacity-25">
         <div class="card-body">
           <p class="mb-0 lead text-danger text-center">
             {data.registeredPlayerCount} Toplam Oyuncu
@@ -131,7 +131,7 @@
     </div>
   </div>
 
-  <div class="card mb-3">
+  <div class="card bg-white mb-3">
     <div class="card-body">
       <div class="row justify-content-between mb-3">
         <div class="col">
@@ -167,7 +167,7 @@
 
   {#if hasPermission(Permissions.MANAGE_TICKETS)}
     <!-- Latest Tickets -->
-    <div class="card mb-3">
+    <div class="card bg-white mb-3">
       <div class="card-body">
         <div class="row justify-content-between mb-3">
           <div class="col">
@@ -178,7 +178,7 @@
         {#if data.tickets.length === 0}
           <NoContent />
         {:else}
-          <table class="table table-borderless table-hover mb-0">
+          <table class="table table-hover mb-0">
             {#each data.tickets as ticket, index (ticket)}
               <tbody>
                 <tr>
@@ -226,12 +226,12 @@
     </div>
   {/if}
   <!-- Statistic Table -->
-  <div class="card">
+  <div class="card bg-white">
     <div class="card-body">
       <h5 class="card-title">İstatistik</h5>
       <div class="table-responsive">
-        <table class="table table-borderless table-hover m-0">
-          <tbody class="text-muted">
+        <table class="table m-0">
+          <tbody>
             <tr>
               <th scope="row">Yazılar:</th>
               <td>{data.postCount}</td>

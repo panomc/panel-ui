@@ -16,7 +16,7 @@
 
   <!-- All Notifications -->
 
-  <div class="card">
+  <div class="card bg-white">
     <div class="card-body">
       {#each $notifications as notification, index (notification)}
         <div class="list-group w-100 flex-row align-items-center">

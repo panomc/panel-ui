@@ -69,9 +69,9 @@
       </div>
     </div>
     <div class="col-xl-4">
-      <div class="card">
+      <div class="card bg-white">
         <div class="card-body">
-          <table class="table table-sm table-hover table-borderless mb-0">
+          <table class="table table-sm table-hover mb-0">
             <tbody>
               {#each data.permissionList as permission, index (permission)}
                 <tr>
