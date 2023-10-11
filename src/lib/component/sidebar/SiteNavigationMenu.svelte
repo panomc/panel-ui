@@ -4,7 +4,7 @@
       <a
         class="nav-link"
         href="{base}/"
-        class:active="{matching($page.url.pathname, base + '', true)}">
+        class:active="{matching($page.url.pathname, base)}">
         <i class="fas fa-table-columns me-2"></i>
         Panel
       </a>
