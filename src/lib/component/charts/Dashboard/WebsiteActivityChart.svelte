@@ -5,7 +5,7 @@
   import "chartjs-adapter-date-fns";
   import { onMount } from "svelte";
   import { startOfWeek, endOfWeek, startOfMonth, endOfMonth } from "date-fns";
-  import { DashboardPeriod } from "$lib/pages/Dashboard.svelte";
+  import { DashboardPeriod } from "$lib/pages/Statistics.svelte";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
 
   let element;
