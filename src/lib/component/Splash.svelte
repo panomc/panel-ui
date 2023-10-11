@@ -24,17 +24,12 @@
       justify-content-center align-items-center text-center">
       {#if notLoggedIn}
         <p>
-          <a href="http://localhost:3000/" target="_blank"
-            >Panele erişmek için giriş yap.</a>
+          <a href="http://localhost:3000/" target="_blank">Oturum hatası</a>
         </p>
       {:else if noPermission}
-        <p class="text-danger">Panele erişmek için yetkiniz yok.</p>
+        <p class="text-danger">Yetki hatası</p>
       {:else}
-        <p class="text-danger">
-          Bağlantı hatası!
-          <br />Lütfen internetinizi veya Pano'nun açık ve erişilebilir olmasını
-          kontrol edin!
-        </p>
+        <p class="text-danger">Bağlantı hatası</p>
       {/if}
       <button
         class="btn btn-outline-primary"
@@ -77,7 +72,7 @@
     if (notLoggedIn || noPermission) {
       location.reload();
 
-      return
+      return;
     }
 
     await resumeAfterNetworkError();
