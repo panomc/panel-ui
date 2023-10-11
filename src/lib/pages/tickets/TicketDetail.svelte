@@ -1,12 +1,6 @@
 <style global>
-  .messages-section {
-    overflow-y: auto;
-    max-height: 450px;
-  }
-
-  .message-balloon > p {
-    margin: 0;
-    padding: 0;
+  .answer > p {
+    margin-bottom: 0;
   }
 </style>
 
@@ -20,21 +14,19 @@
       </a>
     </div>
     <div class="col-auto ml-auto">
-      <a
+      <button
         class="btn btn-link link-danger"
-        role="button"
-        href="javascript:void(0);"
+        type="button"
         on:click="{() => showDeleteTicketModal([data.ticket.id])}">
         <i class="fas fa-trash"></i>
-      </a>
+      </button>
       {#if data.ticket.status !== TicketStatuses.CLOSED}
-        <a
+        <button
           class="btn btn-danger"
-          role="button"
-          on:click="{() => showCloseTicketModal([data.ticket.id])}"
-          href="javascript:void(0);">
+          type="button"
+          on:click="{() => showCloseTicketModal([data.ticket.id])}">
           <i class="fas fa-times me-2"></i> Talebi Kapat
-        </a>
+        </button>
       {/if}
     </div>
   </div>
@@ -90,11 +82,15 @@
                   href="javascript:void(0);">
                   <i class="fas fa-ellipsis-v"></i>
                 </a> -->
-              <Date time="{message.date}">
-                <div class="message-balloon p-2 rounded bg-primary text-white">
+              <div class="card">
+                <div class="card-header small">
+                  <Date time="{message.date}" />
+                </div>
+                <div class="card-body answer">
                   {@html message.message}
                 </div>
-              </Date>
+              </div>
+              <div class="p-2 rounded bg-light text-white"></div>
             </div>
             <div class="col-auto">
               <a href="{base}/players/player/{message.username}">
@@ -122,18 +118,17 @@
               </a>
             </div>
             <div class="col-auto d-flex flex-nowrap align-items-center">
-              <Date time="{message.date}">
-                <div
-                  class="message-balloon p-2 rounded d-inline-block bg-light">
+              <div class="card text-bg-secondary">
+                <div class="card-header small">
+                  <Date time="{message.date}" />
+                </div>
+                <div class="card-body">
                   {message.message}
                 </div>
-              </Date>
-              <a
-                class="btn btn-link d-none me-2"
-                role="button"
-                href="javascript:void(0);">
+              </div>
+              <button class="btn btn-link d-none me-2" type="button">
                 <i class="fas fa-ellipsis-v"></i>
-              </a>
+              </button>
             </div>
           </div>
         {/if}
@@ -150,7 +145,7 @@
 
   <!-- Send Message Section -->
   <div
-    class="card animate__animated animate__fadeIn animate__slower"
+    class="card bg-white animate__animated animate__fadeIn animate__slower"
     class:d-none="{data.ticket.status === TicketStatuses.CLOSED}">
     <div class="card-body">
       <div class="row align-items-end">
