@@ -3,6 +3,15 @@
     <li class="nav-item p-2">
       <a
         class="nav-link"
+        href="{base}/"
+        class:active="{matching($page.url.pathname, base + '', true)}">
+        <i class="fas fa-table-columns me-2"></i>
+        Panel
+      </a>
+    </li>
+    <li class="nav-item p-2">
+      <a
+        class="nav-link"
         href="{base}/statistics"
         class:active="{matching($page.url.pathname, base + '/statistics', true)}">
         <i class="fas fa-chart-simple me-2"></i>
