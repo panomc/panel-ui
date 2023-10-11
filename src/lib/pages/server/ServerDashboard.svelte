@@ -3,7 +3,7 @@
     class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-4">
       <div
-        class="card"
+        class="card bg-white"
         class:bg-mint="{data.server.status === ServerStatus.ONLINE}"
         class:bg-danger="{data.server.status === ServerStatus.OFFLINE}">
         <div class="card-body">

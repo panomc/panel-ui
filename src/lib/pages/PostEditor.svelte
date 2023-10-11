@@ -71,8 +71,8 @@
   <!-- Post & Post Options -->
   <section class="row animate__animated animate__fadeIn">
     <!-- Post -->
-    <div class="col-lg-9 d-flex flex-fill">
-      <div class="card bg-white w-100">
+    <div class="col-lg-9">
+      <div class="card h-100 bg-white w-100">
         <div class="card-body">
           <input
             class="form-control form-control-lg"

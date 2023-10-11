@@ -1,5 +1,5 @@
 {#if editor}
-  <div class="bg-light rounded-bottom">
+  <div class="bg-light rounded mt-3">
     <!-- Headings -->
     <button
       class="btn btn-link link-dark btn-small small"
@@ -124,8 +124,7 @@
 {/if}
 
 <!-- Editor Content -->
-<div class="border border-top-0 rounded-bottom p-1 h-100" bind:this="{element}">
-</div>
+<div class="bg-light rounded" bind:this="{element}"></div>
 
 <script>
   import { onMount, onDestroy } from "svelte";
