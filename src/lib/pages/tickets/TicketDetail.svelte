@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div class="card mb-3">
+  <div class="card bg-white mb-3">
     <div
       class="card-header bg-opacity-25 pt-3"
       class:bg-secondary="{data.ticket.status === TicketStatuses.NEW}"

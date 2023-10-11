@@ -21,7 +21,7 @@
           <div class="row">
             <div class="col-12">
               <input
-                class="form-control form-control-lg text-black border-0 p-0"
+                class="form-control form-control-lg"
                 id="username"
                 placeholder="İsim"
                 type="text"

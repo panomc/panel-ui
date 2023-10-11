@@ -1,191 +1,187 @@
 <!-- Site Settings Sub Page -->
-  <div class="card bg-white">
-    <div class="card-body animate__animated animate__fadeIn">
-      <div class="row mb-3">
-        <label class="col-md-4 col-form-label" for="siteTitle">
-          Site İsmi
-        </label>
-        <div class="col col-form-label">
-          <input
-            bind:value="{data.websiteName}"
-            aria-describedby="siteTitle"
-            class="form-control form-control-lg border-0 text-black p-0"
-            placeholder="İsim"
-            id="siteTitle"
-            type="text" />
-        </div>
+<div class="card bg-white">
+  <div class="card-body animate__animated animate__fadeIn">
+    <div class="row mb-3">
+      <label class="col-md-4 col-form-label" for="siteTitle"> Site İsmi </label>
+      <div class="col col-form-label">
+        <input
+          bind:value="{data.websiteName}"
+          aria-describedby="siteTitle"
+          class="form-control form-control-lg"
+          placeholder="İsim"
+          id="siteTitle"
+          type="text" />
       </div>
-      <div class="row mb-3">
-        <label class="col-md-4 col-form-label" for="siteDesc">
-          Site Açıklaması
-        </label>
-        <div class="col">
-          <textarea
-            bind:value="{data.websiteDescription}"
-            aria-describedby="siteDesc"
-            class="form-control"
-            id="siteDesc"
-            rows="2"></textarea>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <label class="col-md-4 col-form-label" for="ipAddress">
-          Oyun Sunucu IP Adresi
-        </label>
-        <div class="col col-form-label">
-          <div class="row align-items-center">
-            <div class="col">
-              <input
-                id="ipAddress"
-                class="form-control"
-                placeholder="play.server.com"
-                type="text"
-                name="ipAddress"
-                bind:value="{data.serverIpAddress}" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <label class="col-md-4 col-form-label" for="serverGameVersion">
-          Oyun Sunucu Versiyonu
-        </label>
-        <div class="col col-form-label">
-          <div class="row align-items-center">
-            <div class="col">
-              <input
-                id="serverGameVersion"
-                class="form-control"
-                placeholder="1.8.x"
-                type="text"
-                name="serverGameVersion"
-                bind:value="{data.serverGameVersion}" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <label class="col-md-4 col-form-label" for="supportEmailAddress">
-          Destek E-Posta Adresi
-        </label>
-        <div class="col col-form-label">
-          <div class="row align-items-center">
-            <div class="col">
-              <input
-                id="supportEmailAddress"
-                class="form-control"
-                placeholder="support@{data.websiteName}.com"
-                type="email"
-                name="supportEmailAddress"
-                bind:value="{data.supportEmail}" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label class="col-md-4 col-form-label" for="siteKeywords">
-          Anahtar Kelimeler
-        </label>
-        <div class="col col-form-label">
-          <form on:submit|preventDefault="{addKeyWord}">
-            <input
-              id="siteKeywords"
-              class="form-control mb-3"
-              class:border-danger="{keywordInputError}"
-              placeholder="Eklemek için Enter'a basın"
-              type="text"
-              name="keyword"
-              bind:value="{keyword}" />
-          </form>
-          {#each data.keywords as keyword, index (keyword)}
-            <a
-              use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
-              href="javascript:void(0);"
-              on:click="{() => removeKeyWord(index)}">
-              <span class="badge rounded-pill bg-light link-primary">
-                {keyword}
-              </span>
-            </a>
-          {/each}
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label class="col-md-4 col-form-label" for="siteFavicon">
-          Favicon
-        </label>
-        <div class="col col-form-label">
-          <div class="row">
-            <div class="col-auto">
-              <img
-                alt="Seç"
-                class="d-block ml-auto"
-                height="48"
-                src="{favicon}"
-                width="48" />
-            </div>
-            <div class="w-100 my-2"></div>
-            <div class="col">
-              <input
-                class="form-control-file"
-                id="siteFavicon"
-                type="file"
-                bind:files="{faviconFiles}"
-                on:change="{onFaviconChange}"
-                bind:this="{faviconInput}"
-                value="" />
-              <small class="text-muted">
-                PNG, ICO, GIF, JPG, SVG formatında, minimum 1 mb ve 16x16
-                boyutlarında olmalı.
-              </small>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <label class="col-md-4 col-form-label" for="siteLogo">
-          Website Logo
-        </label>
-        <div class="col col-form-label">
-          <div class="row">
-            <div class="col-auto">
-              <img
-                class="d-block ml-auto"
-                alt="Sunucu İkonu"
-                height="48"
-                width="auto"
-                src="{websiteLogo}" />
-            </div>
-            <div class="w-100 my-2"></div>
-            <div class="col">
-              <input
-                class="form-control-file"
-                id="siteLogo"
-                type="file"
-                bind:files="{websiteLogoFiles}"
-                on:change="{onWebsiteLogoChange}"
-                bind:this="{websiteLogoInput}"
-                value="" />
-              <small class="text-muted">
-                PNG, JPEG, GIF, SVG formatında ve minimum 2 mb olmalı.
-              </small>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <button
-        class="btn btn-secondary"
-        class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
-        aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
-        on:click="{save}"
-        >Kaydet
-      </button>
     </div>
+    <div class="row mb-3">
+      <label class="col-md-4 col-form-label" for="siteDesc">
+        Site Açıklaması
+      </label>
+      <div class="col">
+        <textarea
+          bind:value="{data.websiteDescription}"
+          aria-describedby="siteDesc"
+          class="form-control"
+          id="siteDesc"
+          rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-md-4 col-form-label" for="ipAddress">
+        Oyun Sunucu IP Adresi
+      </label>
+      <div class="col col-form-label">
+        <div class="row align-items-center">
+          <div class="col">
+            <input
+              id="ipAddress"
+              class="form-control"
+              placeholder="play.server.com"
+              type="text"
+              name="ipAddress"
+              bind:value="{data.serverIpAddress}" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-md-4 col-form-label" for="serverGameVersion">
+        Oyun Sunucu Versiyonu
+      </label>
+      <div class="col col-form-label">
+        <div class="row align-items-center">
+          <div class="col">
+            <input
+              id="serverGameVersion"
+              class="form-control"
+              placeholder="1.8.x"
+              type="text"
+              name="serverGameVersion"
+              bind:value="{data.serverGameVersion}" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-md-4 col-form-label" for="supportEmailAddress">
+        Destek E-Posta Adresi
+      </label>
+      <div class="col col-form-label">
+        <div class="row align-items-center">
+          <div class="col">
+            <input
+              id="supportEmailAddress"
+              class="form-control"
+              placeholder="support@{data.websiteName}.com"
+              type="email"
+              name="supportEmailAddress"
+              bind:value="{data.supportEmail}" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-md-4 col-form-label" for="siteKeywords">
+        Anahtar Kelimeler
+      </label>
+      <div class="col col-form-label">
+        <form on:submit|preventDefault="{addKeyWord}">
+          <input
+            id="siteKeywords"
+            class="form-control mb-3"
+            class:border-danger="{keywordInputError}"
+            placeholder="Eklemek için Enter'a basın"
+            type="text"
+            name="keyword"
+            bind:value="{keyword}" />
+        </form>
+        {#each data.keywords as keyword, index (keyword)}
+          <a
+            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
+            href="javascript:void(0);"
+            on:click="{() => removeKeyWord(index)}">
+            <span class="badge rounded-pill bg-light link-primary">
+              {keyword}
+            </span>
+          </a>
+        {/each}
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-md-4 col-form-label" for="siteFavicon"> Favicon </label>
+      <div class="col col-form-label">
+        <div class="row">
+          <div class="col-auto">
+            <img
+              alt="Seç"
+              class="d-block ml-auto"
+              height="48"
+              src="{favicon}"
+              width="48" />
+          </div>
+          <div class="w-100 my-2"></div>
+          <div class="col">
+            <input
+              class="form-control-file"
+              id="siteFavicon"
+              type="file"
+              bind:files="{faviconFiles}"
+              on:change="{onFaviconChange}"
+              bind:this="{faviconInput}"
+              value="" />
+            <small class="text-muted">
+              PNG, ICO, GIF, JPG, SVG formatında, minimum 1 mb ve 16x16 piksel
+              olmalı.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-md-4 col-form-label" for="siteLogo">
+        Website Logo
+      </label>
+      <div class="col col-form-label">
+        <div class="row">
+          <div class="col-auto">
+            <img
+              class="d-block ml-auto"
+              alt="Sunucu İkonu"
+              height="48"
+              width="auto"
+              src="{websiteLogo}" />
+          </div>
+          <div class="w-100 my-2"></div>
+          <div class="col">
+            <input
+              class="form-control-file"
+              id="siteLogo"
+              type="file"
+              bind:files="{websiteLogoFiles}"
+              on:change="{onWebsiteLogoChange}"
+              bind:this="{websiteLogoInput}"
+              value="" />
+            <small class="text-muted">
+              PNG, JPEG, GIF, SVG formatında, minimum 2 mb olmalı.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="btn btn-secondary"
+      class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
+      aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
+      on:click="{save}"
+      >Kaydet
+    </button>
   </div>
+</div>
 
 <script context="module">
   import ApiUtil from "$lib/api.util.js";

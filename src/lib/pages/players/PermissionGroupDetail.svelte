@@ -27,12 +27,12 @@
 
   <div class="row">
     <div class="col mb-xl-0 mb-3">
-      <div class="card h-100">
+      <div class="card bg-white h-100">
         <div class="card-body">
           <input
             class:text-danger="{errors.name}"
             class:text-black="{!errors.name}"
-            class="form-control form-control-lg border-0 text-black p-0 mb-2"
+            class="form-control form-control-lg mb-3"
             placeholder="İsim"
             id="permissionGroupName"
             type="text"

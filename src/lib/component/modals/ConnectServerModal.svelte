@@ -23,7 +23,7 @@
           </div>
 
           <h5 class="text-primary">1 - Pano Eklentisini Oyun Sunucuna Kur</h5>
-          <button class="btn btn-outline-primary">
+          <button class="btn btn-secondary">
             <i class="fa-solid fa-download me-2"></i>
             Dosyayı İndir
           </button>
@@ -36,7 +36,7 @@
           <div class="input-group">
             <input
               bind:value="{commandText}"
-              class="form-control user-select-all"
+              class="form-control border-primary user-select-all"
               id="platformToken"
               type="text" />
             <button

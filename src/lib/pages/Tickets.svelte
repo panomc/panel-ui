@@ -1,42 +1,39 @@
 <!-- Tickets Page -->
 <article class="container">
-  <div class="bg-primary bg-opacity-25 bg-gradient rounded">
-    <!-- Action Menu -->
-    <div
-      class="row justify-content-between mb-3 animate__animated animate__slideInUp">
-      <div class="col-auto">
-        <a class="btn btn-link" role="button" href="{base}/tickets/categories">
-          <i class="fas fa-list-alt me-2"></i>
-          Talep Kategorileri
+  <!-- Action Menu -->
+  <div
+    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
+    <div class="col-auto">
+      <a class="btn btn-link" role="button" href="{base}/tickets/categories">
+        <i class="fas fa-list-alt me-2"></i>
+        Talep Kategorileri
+      </a>
+    </div>
+    <div class="col-auto">
+      <div
+        class:d-none="{firstLoad}"
+        class="animate__animated animate__faster {getListOfChecked($checkedList)
+          .length > 0
+          ? 'animate__slideInUp'
+          : 'animate__slideOutDown'}
+    faster">
+        <a
+          class="btn btn-link link-danger"
+          class:disabled="{getListOfChecked($checkedList).length === 0}"
+          role="button"
+          href="javascript:void(0);"
+          on:click="{onShowDeleteTicketsModalClick}">
+          <i class="fas fa-trash"></i>
         </a>
-      </div>
-      <div class="col-auto">
-        <div
-          class:d-none="{firstLoad}"
-          class="animate__animated animate__faster {getListOfChecked(
-            $checkedList
-          ).length > 0
-            ? 'animate__slideInUp'
-            : 'animate__slideOutDown'}
-      faster">
-          <a
-            class="btn btn-link link-danger"
-            class:disabled="{getListOfChecked($checkedList).length === 0}"
-            role="button"
-            href="javascript:void(0);"
-            on:click="{onShowDeleteTicketsModalClick}">
-            <i class="fas fa-trash"></i>
-          </a>
-          <a
-            class="btn btn-danger"
-            class:disabled="{getListOfChecked($checkedList).length === 0}"
-            role="button"
-            href="javascript:void(0);"
-            on:click="{onShowCloseTicketsModalClick}">
-            <i class="fas fa-times me-2"></i>
-            Talebi Kapat
-          </a>
-        </div>
+        <a
+          class="btn btn-danger"
+          class:disabled="{getListOfChecked($checkedList).length === 0}"
+          role="button"
+          href="javascript:void(0);"
+          on:click="{onShowCloseTicketsModalClick}">
+          <i class="fas fa-times me-2"></i>
+          Talebi Kapat
+        </a>
       </div>
     </div>
   </div>

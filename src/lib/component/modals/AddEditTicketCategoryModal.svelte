@@ -16,7 +16,7 @@
       <form on:submit|preventDefault="{onSubmit}">
         <div class="modal-body">
           <input
-            class="form-control form-control-lg border-0 text-black p-0 mb-3"
+            class="form-control form-control-lg mb-3"
             placeholder="Başlık"
             id="category"
             type="text"
