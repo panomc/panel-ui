@@ -33,14 +33,14 @@
 
   <div class="card bg-white mb-3">
     <div
-      class="card-header bg-opacity-25 pt-3"
+      class="card-header bg-opacity-25 py-3 rounded-top"
       class:bg-secondary="{data.ticket.status === TicketStatuses.NEW}"
       class:bg-warning="{data.ticket.status === TicketStatuses.REPLIED}"
       class:bg-danger="{data.ticket.status === TicketStatuses.CLOSED}">
       <div class="row">
         <div class="col">
           <h5 class="card-title">{data.ticket.title}</h5>
-          <small>
+          <small class="mb-0">
             <a href="{base}/players/player/{data.ticket.username}"
               >{data.ticket.username}</a>
             tarafından,
@@ -49,7 +49,8 @@
               >{data.ticket.category.title === "-"
                 ? "Kategorisiz"
                 : data.ticket.category.title}</a>
-            kategorisine açıldı.</small>
+            kategorisine açıldı.
+          </small>
         </div>
         <div class="col-auto">
           <TicketStatusBadge status="{data.ticket.status}" />
@@ -76,12 +77,6 @@
         {#if message.panel}
           <div class="row py-2 flex-nowrap justify-content-end">
             <div class="col-auto d-flex align-items-center">
-              <!-- <a
-                  class="btn btn-link btn-sm text-gray"
-                  role="button"
-                  href="javascript:void(0);">
-                  <i class="fas fa-ellipsis-v"></i>
-                </a> -->
               <div class="card">
                 <div class="card-header small">
                   <Date time="{message.date}" />
@@ -90,14 +85,13 @@
                   {@html message.message}
                 </div>
               </div>
-              <div class="p-2 rounded bg-light text-white"></div>
             </div>
             <div class="col-auto">
               <a href="{base}/players/player/{message.username}">
                 <img
                   src="https://crafthead.net/avatar/{message.username}/48"
                   alt="{message.username}"
-                  class="rounded-circle d-block mr-auto animate__animated animate__zoomIn"
+                  class="rounded animate__animated animate__zoomIn"
                   use:tooltip="{[message.username, { placement: 'bottom' }]}"
                   width="48"
                   height="48" />
@@ -106,12 +100,12 @@
           </div>
         {:else}
           <div class="row py-2 flex-nowrap justify-content-start">
-            <div class="col-auto text-right">
+            <div class="col-auto">
               <a href="{base}/players/player/{message.username}">
                 <img
                   src="https://crafthead.net/avatar/{message.username}/48"
                   alt="{message.username}"
-                  class="rounded-circle animate__animated animate__zoomIn"
+                  class="rounded animate__animated animate__zoomIn"
                   use:tooltip="{[message.username, { placement: 'bottom' }]}"
                   width="48"
                   height="48" />
@@ -126,29 +120,15 @@
                   {message.message}
                 </div>
               </div>
-              <button class="btn btn-link d-none me-2" type="button">
-                <i class="fas fa-ellipsis-v"></i>
-              </button>
             </div>
           </div>
         {/if}
       {/each}
-    </div>
-  </div>
 
-  {#if data.ticket.status === TicketStatuses.CLOSED}
-    <div class="container text-center">
-      <i class="fas fa-times fa-3x text-dark text-opacity-25 m-3"></i>
-      <p class="text-gray">Bu talep kapalı.</p>
-    </div>
-  {/if}
-
-  <!-- Send Message Section -->
-  <div
-    class="card bg-white animate__animated animate__fadeIn animate__slower"
-    class:d-none="{data.ticket.status === TicketStatuses.CLOSED}">
-    <div class="card-body">
-      <div class="row align-items-end">
+      <!-- Send Message Section -->
+      <div
+        class="row align-items-end mt-3"
+        class:d-none="{data.ticket.status === TicketStatuses.CLOSED}">
         <div class="col d-flex flex-column">
           <!-- Editor -->
           <Editor bind:content="{messageText}" bind:isEmpty="{isEditorEmpty}" />
