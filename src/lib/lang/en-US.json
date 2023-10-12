@@ -299,6 +299,27 @@
       "platform": "Platform",
       "updates": "Updates",
       "about": "About"
+    },
+    "modals": {
+      "add-edit-post-category": {
+        "create-category": "Create Category",
+        "edit-category": "Edit Category",
+        "close": "Close",
+        "inputs": {
+          "title": {
+            "placeholder": "Title"
+          },
+          "description": {
+            "placeholder": "Description"
+          },
+          "url": {
+            "placeholder": "URL",
+            "helper": "It can only contain [A-Z/a-z/0-9/-] and can have a minimum of 3 and a maximum of 32 characters."
+          }
+        },
+        "save": "Save",
+        "create": "Create"
+      }
     }
   }
 }

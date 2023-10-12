@@ -299,6 +299,27 @@
       "platform": "Platform",
       "updates": "Güncellemeler",
       "about": "Hakkında"
+    },
+    "modals": {
+      "add-edit-post-category": {
+        "create-category": "Kategori Oluştur",
+        "edit-category": "Kategoriyi Düzenle",
+        "close": "Kapat",
+        "inputs": {
+          "title": {
+            "placeholder": "Başlık"
+          },
+          "description": {
+            "placeholder": "Açıklama"
+          },
+          "url": {
+            "placeholder": "URL",
+            "helper": "Yanlızca [A-Z/a-z/0-9/-] içerebilir ve minimum 3, maksimum 32 karkater olabilir."
+          }
+        },
+        "save": "Kaydet",
+        "create": "Oluştur"
+      }
     }
   }
 }
