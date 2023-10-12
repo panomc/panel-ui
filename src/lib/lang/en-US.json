@@ -183,6 +183,14 @@
       "description": "Description",
       "url": "URL",
       "color": "Color"
+    },
+    "ticket-categories": {
+      "title": "Ticket Categories",
+      "tickets": "Tickets",
+      "create-category-button": "Create Category",
+      "card-title": "{count} Ticket Category",
+      "category": "Category",
+      "description": "Description"
     }
   },
   "components": {

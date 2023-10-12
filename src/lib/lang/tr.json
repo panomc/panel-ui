@@ -183,6 +183,14 @@
       "description": "Açıklama",
       "url": "URL",
       "color": "Renk"
+    },
+    "ticket-categories": {
+      "title": "Talep Kategorileri",
+      "tickets": "Talepler",
+      "create-category-button": "Kategori Oluştur",
+      "card-title": "{count} Talep Kategorisi",
+      "category": "Kategori",
+      "description": "Açıklama"
     }
   },
   "components": {
