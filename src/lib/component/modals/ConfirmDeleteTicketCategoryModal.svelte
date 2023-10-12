@@ -12,8 +12,7 @@
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
         {#if $category.ticketCount !== 0}
-          Not: Eğer bu kategoriyi silerseniz, şu talepler kategorisiz olarak
-          kalacaklardır:
+          {$_('components.modals.confirm-delete-ticket-category.title-permanent')}
           <br />
           <br />
 
@@ -25,13 +24,12 @@
           {/each}
 
           {#if $category.ticketCount > 5}
-            +{$category.ticketCount - 5}
-            talep daha
+            {$_('components.modals.confirm-delete-ticket-category.more-tickets', {values: {count: $category.ticketCount - 5}})}
           {/if}
 
           <br />
         {/if}
-        Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?
+        {$_('components.modals.confirm-delete-ticket-category.title')}
       </div>
       <div class="modal-footer flex-nowrap">
         <button
@@ -39,14 +37,14 @@
           type="button"
           class:disabled="{loading}"
           on:click="{hide}">
-          İptal
+          {$_('components.modals.confirm-delete-ticket-category.cancel')}
         </button>
         <button
           class="btn btn-danger col-6 m-0"
           type="button"
           class:disabled="{loading}"
           on:click="{onYesClick}">
-          Evet
+          {$_('components.modals.confirm-delete-ticket-category.yes')}
         </button>
       </div>
     </div>
@@ -101,6 +99,7 @@
     limitTitle,
   } from "$lib/component/ToastContainer.svelte";
   import TicketCategoryDeletedPermanentlyToast from "$lib/component/toasts/TicketCategoryDeletedPermanentlyToast.svelte";
+  import { _ } from "svelte-i18n";
 
   let loading = false;
 

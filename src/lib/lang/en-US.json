@@ -381,6 +381,13 @@
         "title-trash": "Are you sure you want to move this post to the trash?",
         "cancel": "Cancel",
         "yes": "Yes"
+      },
+      "confirm-delete-ticket-category": {
+        "title-permanent": "Note: If you delete this category, the following requests will remain Uncategorized:",
+        "title": "Are you sure you want to permanently delete this category?",
+        "more-posts": "+{count} more tickets",
+        "cancel": "Cancel",
+        "yes": "Yes"
       }
     }
   }

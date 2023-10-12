@@ -381,6 +381,13 @@
         "title-trash": "Bu yazıyı çöp kutusuna taşımak istediğinizden emin misiniz?",
         "cancel": "İptal",
         "yes": "Evet"
+      },
+      "confirm-delete-ticket-category": {
+        "title-permanent": "Not: Eğer bu kategoriyi silerseniz, şu talepler Kategorisiz olarak kalacaklardır:",
+        "title": "Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?",
+        "more-tickets": "+{count} talep daha",
+        "cancel": "İptal",
+        "yes": "Evet"
       }
     }
   }
