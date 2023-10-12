@@ -170,6 +170,13 @@
       "remove-ban": "Remove Ban",
       "ban": "Ban",
       "view": "View"
+    },
+    "player-status-badge": {
+      "banned": "Banned",
+      "in-game": "In Game",
+      "in-website": "In Website",
+      "online": "Online",
+      "offline": "Offline"
     }
   }
 }

@@ -1,13 +1,13 @@
 {#if banned}
-  <div class="badge bg-danger rounded-pill text-white">Yasaklı</div>
+  <div class="badge bg-danger rounded-pill text-white">{$_('components.player-status-badge.banned')}</div>
 {:else if isOnline}
   <div
     class="badge bg-secondary rounded-pill text-white"
     use:tooltip="{[
-      (inGame ? 'Oyunda' : 'Sitede') + ' Çevrimiçi',
+      (inGame ? $_('components.player-status-badge.in-game') : $_('components.player-status-badge.in-website')) + ' ' + $_('components.player-status-badge.online'),
       { placement: 'bottom' },
     ]}">
-    <span>Çevrimiçi</span>
+    <span>{$_('components.player-status-badge.online')}</span>
   </div>
 {:else}
   <div
@@ -16,7 +16,7 @@
       getOfflineRelativeDateText(checkTime),
       { placement: 'bottom' },
     ]}">
-    <span>Çevrimdışı</span>
+    <span>{$_('components.player-status-badge.offline')}</span>
   </div>
 {/if}
 
@@ -30,6 +30,7 @@
   import { formatRelative } from "date-fns";
 
   import tooltip from "$lib/tooltip.util";
+  import { _ } from "svelte-i18n";
 
   export let banned = false;
   export let lastActivityTime = 0;

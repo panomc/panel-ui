@@ -170,6 +170,13 @@
       "remove-ban": "Yasağı Kaldır",
       "ban": "Yasakla",
       "view": "Görüntüle"
+    },
+    "player-status-badge": {
+      "banned": "Yasaklı",
+      "in-game": "Oyunda",
+      "in-website": "Sitede",
+      "online": "Çevrimiçi",
+      "offline": "Çevrimdışı"
     }
   }
 }
