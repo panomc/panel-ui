@@ -164,6 +164,15 @@
         },
         "save-button": "Save"
       }
+    },
+    "ticket-detail": {
+      "tickets": "Tickets",
+      "close-ticket": "Close Ticket",
+      "by-who": "By {username},",
+      "opened-in-category": "opened in {category} category.",
+      "no-category": "No Category",
+      "previous-messages": "Previous Messages ({count})",
+      "send-button": "Send"
     }
   },
   "components": {

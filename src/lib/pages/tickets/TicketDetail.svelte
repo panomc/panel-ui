@@ -10,7 +10,7 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
         <i class="fas fa-arrow-left me-2"></i>
-        Talepler
+        {$_('pages.ticket-detail.tickets')}
       </a>
     </div>
     <div class="col-auto ml-auto">
@@ -25,7 +25,7 @@
           class="btn btn-danger"
           type="button"
           on:click="{() => showCloseTicketModal([data.ticket.id])}">
-          <i class="fas fa-times me-2"></i> Talebi Kapat
+          <i class="fas fa-times me-2"></i> {$_('pages.ticket-detail.close-ticket')}
         </button>
       {/if}
     </div>
@@ -41,15 +41,13 @@
         <div class="col">
           <h5 class="card-title">{data.ticket.title}</h5>
           <small class="mb-0">
-            <a href="{base}/players/player/{data.ticket.username}"
-              >{data.ticket.username}</a>
-            tarafından,
+            {@html $_('pages.ticket-detail.by-who', {values: {username: `<a href="${base}/players/player/${data.ticket.username}"
+              >${data.ticket.username}</a>`}})}
             <Date time="{data.ticket.date}" />,
-            <a href="{base}/tickets/category/{data.ticket.category.url}"
-              >{data.ticket.category.title === "-"
-                ? "Kategorisiz"
-                : data.ticket.category.title}</a>
-            kategorisine açıldı.
+            {@html $_('pages.ticket-detail.opened-in-category', {values:{category: `<a href="${base}/tickets/category/${data.ticket.category.url}"
+              >${data.ticket.category.title === "-"
+                ? $_('pages.ticket-detail.no-category')
+                : data.ticket.category.title}</a>`}})}
           </small>
         </div>
         <div class="col-auto">
@@ -67,9 +65,9 @@
           class="btn btn-link bg-light d-block m-auto"
           class:disabled="{loadMoreLoading}"
           on:click="{loadMore}"
-          ><i class="fas fa-arrow-up me-2"></i> Önceki Mesajlar ({data.ticket
-            .count -
-            (data.ticket.messages.length - sentMessageCount)})
+          ><i class="fas fa-arrow-up me-2"></i> {$_('pages.ticket-detail.previous-messages', {values:{count: data.ticket
+                .count -
+              (data.ticket.messages.length - sentMessageCount)}})}
         </button>
       {/if}
 
@@ -141,7 +139,7 @@
             class:disabled="{messageSendLoading || isEditorEmpty}"
             :disabled="{messageSendLoading || isEditorEmpty}">
             <i class="fas fa-paper-plane"></i>
-            <span class="d-lg-inline d-none ms-2">Gönder</span>
+            <span class="d-lg-inline d-none ms-2">{$_('pages.ticket-detail.send-button')}</span>
           </button>
         </div>
       </div>
@@ -242,6 +240,8 @@
 
 <script>
   import { afterUpdate, getContext, onMount } from "svelte";
+  import { _ } from "svelte-i18n";
+
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
 

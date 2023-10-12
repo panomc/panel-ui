@@ -164,6 +164,15 @@
         },
         "save-button": "Kaydet"
       }
+    },
+    "ticket-detail": {
+      "tickets": "Talepler",
+      "close-ticket": "Talebi Kapat",
+      "by-who": "{username} tarafından,",
+      "opened-in-category": "{category} kategorisinde açıldı.",
+      "no-category": "Kategorisiz",
+      "previous-messages": "Önceki Mesajlar ({count})",
+      "send-button": "Gönder"
     }
   },
   "components": {
