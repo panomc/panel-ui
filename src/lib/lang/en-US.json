@@ -17,6 +17,13 @@
         "discover-documentations": "Review Documentations",
         "join-discord": "Join Our Discord",
         "close-button": "Close"
+      },
+      "last-tickets": {
+        "title": "Last Tickets",
+        "player-name": "Player Name",
+        "view": "View",
+        "filter": "Filter",
+        "no-category": "No Category"
       }
     }
   }

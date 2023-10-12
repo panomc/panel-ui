@@ -101,7 +101,7 @@
       <div class="card-body">
         <div class="row justify-content-between mb-3">
           <div class="col">
-            <h5 class="card-title">Son Talepler</h5>
+            <h5 class="card-title">{$_("pages.dashboard.last-tickets.title")}</h5>
           </div>
         </div>
 
@@ -122,7 +122,7 @@
                       <img
                         src="https://crafthead.net/avatar/{ticket.writer
                           .username}/32"
-                        alt="Oyuncu Adı"
+                        alt="{$_('pages.dashboard.last-tickets.player-name')}"
                         class="rounded-circle animate__animated animate__zoomIn"
                         height="32"
                         width="32" />
@@ -131,14 +131,14 @@
                   <td class="align-middle text-nowrap">
                     <a
                       href="{base}/tickets/ticket/{ticket.id}"
-                      title="Görüntüle">#{ticket.id} {ticket.title}</a>
+                      title="{$_('pages.dashboard.last-tickets.view')}">#{ticket.id} {ticket.title}</a>
                   </td>
                   <td class="align-middle text-nowrap">
                     <a
-                      title="Filtrele"
+                      title="{$_('pages.dashboard.last-tickets.filter')}"
                       href="{base}/tickets/category/{ticket.category.url}">
                       {ticket.category.title === "-"
-                        ? "Kategorisiz"
+                        ? $_('pages.dashboard.last-tickets.no-category')
                         : ticket.category.title}
                     </a>
                   </td>

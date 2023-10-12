@@ -17,6 +17,13 @@
         "discover-documentations": "Dokümantasyonları İnceleyin",
         "join-discord": "Discord Topluluğumuza Katılın",
         "close-button": "Kapat"
+      },
+      "last-tickets": {
+        "title": "Son Talepler",
+        "player-name": "Oyuncu Adı",
+        "view": "Görüntüle",
+        "filter": "Filtrele",
+        "no-category": "Kategorisiz"
       }
     }
   }
