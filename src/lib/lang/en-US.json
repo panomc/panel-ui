@@ -375,6 +375,12 @@
         "more-posts": "+{count} more posts",
         "cancel": "Cancel",
         "yes": "Yes"
+      },
+      "confirm-delete-post": {
+        "title-permanent": "Are you sure you want to permanently delete this post?",
+        "title-trash": "Are you sure you want to move this post to the trash?",
+        "cancel": "Cancel",
+        "yes": "Yes"
       }
     }
   }

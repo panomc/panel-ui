@@ -375,6 +375,12 @@
         "more-posts": "+{count} yazı daha",
         "cancel": "İptal",
         "yes": "Evet"
+      },
+      "confirm-delete-post": {
+        "title-permanent": "Bu yazıyı kalıcı olarak silmek istediğinizden emin misiniz?",
+        "title-trash": "Bu yazıyı çöp kutusuna taşımak istediğinizden emin misiniz?",
+        "cancel": "İptal",
+        "yes": "Evet"
       }
     }
   }
