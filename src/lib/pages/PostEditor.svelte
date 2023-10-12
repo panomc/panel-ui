@@ -39,7 +39,7 @@
         class="btn btn-link"
         role="button"
         target="_blank"
-        href="{UI_URL}/preview/post/{data.post.id}"
+        href="{UI_URL === '/' ? '': UI_URL}/preview/post/{data.post.id}"
         use:tooltip="{['Görüntüle', { placement: 'bottom' }]}">
         <i class="fas fa-eye"></i>
       </a>

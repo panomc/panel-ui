@@ -14,7 +14,7 @@
         <a
           class="dropdown-item"
           target="_blank"
-          href="{UI_URL}/preview/post/{post.id}">
+          href="{UI_URL === '/' ? '': UI_URL}/preview/post/{post.id}">
           <i class="fas fa-eye me-2"></i>
           Görüntüle
         </a>
