@@ -96,6 +96,12 @@
         "status": "Status",
         "last-reply": "Last Reply"
       }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "delete-all": "Delete All",
+      "delete-notification": "Delete Notification",
+      "show-more": "Show More ({count})"
     }
   },
   "components": {

@@ -96,6 +96,12 @@
         "status": "Durum",
         "last-reply": "Son Yanıt"
       }
+    },
+    "notifications": {
+      "title": "Bildirimler",
+      "delete-all": "Tümünü Sil",
+      "delete-notification": "Bildirimi Sil",
+      "show-more": "Daha Fazla Göster ({count})"
     }
   },
   "components": {

@@ -8,7 +8,7 @@
           type="button"
           class="btn btn-danger"
           on:click="{() => onDeleteAllClick()}"
-          >Tümünü Sil
+          >{$_('pages.notifications.delete-all')}
         </button>
       </div>
     {/if}
@@ -22,7 +22,7 @@
         <div class="list-group w-100 flex-row align-items-center">
           <button
             class="btn-close text-danger btn-sm me-3"
-            use:tooltip="{['Bildirimi Sil', { placement: 'right' }]}"
+            use:tooltip="{[$_('pages.notifications.delete-notification'), { placement: 'right' }]}"
             on:click="{deleteNotification(notification.id)}">
           </button>
           <a
@@ -33,7 +33,7 @@
             <div class="col">
               <span class="text-wrap">{notification.type}</span>
               <small class="text-gray d-block">
-                {getTime(checkTime, parseInt(notification.date), "")}
+                {getTime(checkTime, parseInt(notification.date), locales[$currentLanguage['date-fns-code']])}
               </small>
             </div>
           </a>
@@ -50,7 +50,7 @@
             class="btn btn-link bg-light d-block m-auto"
             class:disabled="{loadMoreLoading}"
             on:click="{loadMore}"
-            >Daha Fazla Göster ({$count - $notifications.length})
+            >{$_('pages.notifications.show-more', {values: {count: $count - $notifications.length}})}
           </button>
         </div>
       {/if}
@@ -143,6 +143,8 @@
 <script>
   import { getContext, onDestroy, onMount } from "svelte";
   import { formatDistanceToNow } from "date-fns";
+  import { _ } from "svelte-i18n";
+  import * as locales from "date-fns/locale";
 
   import tooltip from "$lib/tooltip.util.js";
   import { showNetworkErrorOnCatch } from "$lib/Store.js";
@@ -154,12 +156,13 @@
   import { onNotificationClick } from "$lib/NotificationManager.js";
 
   import NoContent from "$lib/component/NoContent.svelte";
+  import { currentLanguage } from "$lib/language.util.js";
 
   export let data;
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set("Bildirimler");
+  pageTitle.set("pages.notifications.title");
 
   let notificationProcessID = 0;
   let page = 0;
