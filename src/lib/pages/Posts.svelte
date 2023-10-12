@@ -6,7 +6,7 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts/categories">
         <i class="fas fa-list-alt me-2"></i>
-        Yazı Kategorileri
+        {$_('pages.posts.post-categories-button')}
       </a>
     </div>
     <div class="col-auto">
@@ -14,7 +14,7 @@
         href="{base}/posts/create-post"
         class="btn btn-secondary ml-auto"
         role="button">
-        <i class="fas fa-plus me-2"></i> Yazı Oluştur
+        <i class="fas fa-plus me-2"></i> {$_('pages.posts.create-post-button')}
       </a>
     </div>
   </div>
@@ -26,14 +26,13 @@
       <div class="row justify-content-between align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
-            {data.postCount}
-            {data.pageType === PageTypes.PUBLISHED
-              ? "Yayınlanmış"
-              : data.pageType === PageTypes.DRAFT
-              ? "Taslak"
-              : data.pageType === PageTypes.TRASH
-              ? "Çöp"
-              : ""} Yazı
+            {$_('pages.posts.table-title', {values: {postCount: data.postCount, pageType: (data.pageType === PageTypes.PUBLISHED
+                  ? $_('pages.posts.published') + " "
+                  : data.pageType === PageTypes.DRAFT
+                    ? $_('pages.posts.draft') + " "
+                    : data.pageType === PageTypes.BANNED
+                      ? $_('pages.posts.banned') + " "
+                    : "")}})}
           </h5>
         </div>
         <div class="col-md-auto col-12 text-md-right text-center">
@@ -43,14 +42,14 @@
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
               href="{base}/posts/published">
-              Yayınlanmış
+              {$_('pages.posts.published')}
             </a>
             <a
               class:active="{data.pageType === PageTypes.DRAFT}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
               href="{base}/posts/draft">
-              Taslak
+              {$_('pages.posts.draft')}
             </a>
 
             <a
@@ -58,7 +57,7 @@
               class="btn btn-sm btn-outline-light btn-link text-danger"
               role="button"
               href="{base}/posts/trash">
-              Çöp
+              {$_('pages.posts.trash')}
             </a>
           </div>
         </div>
@@ -74,11 +73,11 @@
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th class="align-middle" scope="col">Başlık</th>
-                <th scope="col" class="align-middle">Kategori</th>
-                <th scope="col" class="align-middle">Görüntülenme</th>
-                <th scope="col" class="align-middle">Yazar</th>
-                <th scope="col" class="align-middle">Son Güncelleme</th>
+                <th class="align-middle" scope="col">{$_('pages.posts.table.title')}</th>
+                <th scope="col" class="align-middle">{$_('pages.posts.table.category')}</th>
+                <th scope="col" class="align-middle">{$_('pages.posts.table.views')}</th>
+                <th scope="col" class="align-middle">{$_('pages.posts.table.author')}</th>
+                <th scope="col" class="align-middle">{$_('pages.posts.table.last-update')}</th>
               </tr>
             </thead>
             <tbody>
@@ -179,6 +178,7 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
@@ -204,15 +204,20 @@
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set(
-    (data.pageType === PageTypes.PUBLISHED
-      ? "Yayınlanmış" + " "
-      : data.pageType === PageTypes.DRAFT
-      ? "Taslak" + " "
-      : data.pageType === PageTypes.TRASH
-      ? "Çöp" + " "
-      : "") + "Yazılar"
-  );
+  $: {
+    pageTitle.set($_("pages.posts.title", {
+      values: {
+        pageType: (data.pageType === PageTypes.PUBLISHED
+          ? $_('pages.posts.published') + " "
+          : data.pageType === PageTypes.DRAFT
+            ? $_('pages.posts.draft') + " "
+            : data.pageType === PageTypes.TRASH
+              ? $_('pages.posts.trash') + " "
+              : "")
+        }
+      })
+    )
+  }
 
   let buttonsLoading = false;
 

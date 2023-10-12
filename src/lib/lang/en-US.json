@@ -62,6 +62,22 @@
         "last-entrance": "Last Entrance",
         "register-date": "Register Date"
       }
+    },
+    "posts": {
+      "title": "{pageType}Posts",
+      "published": "Published",
+      "draft": "Draft",
+      "trash": "Trash",
+      "table-title": "{postCount} {pageType} Post",
+      "post-categories-button": "Post Categories",
+      "create-post-button": "Create Post",
+      "table": {
+        "title": "Title",
+        "category": "Category",
+        "views": "Views",
+        "author": "Author",
+        "last-update": "Last Update"
+      }
     }
   },
   "components": {

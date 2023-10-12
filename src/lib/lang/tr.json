@@ -62,6 +62,22 @@
         "last-entrance": "Son Giriş",
         "register-date": "Kayıt"
       }
+    },
+    "posts": {
+      "title": "{pageType}Yazılar",
+      "published": "Yayınlanmış",
+      "draft": "Taslak",
+      "trash": "Çöp",
+      "table-title": "{postCount} {pageType} Yazı",
+      "post-categories-button": "Yazı Kategorileri",
+      "create-post-button": "Yazı Oluştur",
+      "table": {
+        "title": "Başlık",
+        "category": "Kategori",
+        "views": "Görüntülenme",
+        "author": "Yazar",
+        "last-update": "Son Güncellenme"
+      }
     }
   },
   "components": {
