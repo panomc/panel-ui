@@ -78,6 +78,24 @@
         "author": "Author",
         "last-update": "Last Update"
       }
+    },
+    "tickets": {
+      "title": "{pageType}Tickets",
+      "waiting-reply": "Waiting Reply",
+      "closed": "Closed",
+      "ticket-categories": "Ticket Categories",
+      "close-ticket-button": "Close Ticket",
+      "table-title": "{ticketCount} {pageType} Ticket",
+      "amount-selected": "{amount} amount selected.",
+      "all": "All",
+      "select-all": "Select All",
+      "table": {
+        "title": "Title",
+        "player": "Player",
+        "category": "Category",
+        "status": "Status",
+        "last-reply": "Last Reply"
+      }
     }
   },
   "components": {

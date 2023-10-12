@@ -78,6 +78,24 @@
         "author": "Yazar",
         "last-update": "Son Güncellenme"
       }
+    },
+    "tickets": {
+      "title": "{pageType}Talepler",
+      "waiting-reply": "Yanıt Bekleyen",
+      "closed": "Kapalı",
+      "ticket-categories": "Talep Kategorileri",
+      "close-ticket-button": "Talebi Kapat",
+      "table-title": "{ticketCount} {pageType} Talep",
+      "amount-selected": "{amount} adet seçildi.",
+      "all": "Tümü",
+      "select-all": "Tümünü Seç",
+      "table": {
+        "title": "Başlık",
+        "player": "Oyuncu",
+        "category": "Kategori",
+        "status": "Durum",
+        "last-reply": "Son Yanıt"
+      }
     }
   },
   "components": {
