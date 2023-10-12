@@ -10,7 +10,7 @@
             base + '/server/dashboard'
           )}">
           <i class="fas fa-chart-pie me-2"></i>
-          İstatistikler
+          {$_('components.server-navigation-menu.statistics')}
         </a>
       </li>
       <li class="nav-item p-2">
@@ -23,19 +23,19 @@
             true
           )}">
           <i class="fas fa-cog me-2"></i>
-          Ayarlar
+          {$_('components.server-navigation-menu.settings')}
         </a>
       </li>
     </ul>
   {:else if $connectedServerCount > 0}
     <NoContent
       icon="fas fa-cube fa-3x"
-      text="Seçili sunucu yok."
+      text="{$_('components.server-navigation-menu.no-selected-server')}"
       dark="{true}" />
   {:else}
     <NoContent
       icon="fas fa-cube fa-3x"
-      text="Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın."
+      text="{$_('components.server-navigation-menu.no-server-text')}"
       dark="{true}">
       <button
         class="btn btn-secondary btn-sm"
@@ -43,7 +43,7 @@
         data-bs-toggle="modal"
         type="button">
         <i class="fa-solid fa-plus me-2"></i>
-        Sunucu Bağla
+        {$_('components.server-navigation-menu.connect-server')}
       </button>
     </NoContent>
   {/if}
@@ -51,6 +51,7 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { base } from "$app/paths";
   import { page } from "$app/stores";

@@ -88,6 +88,13 @@
       "server": "Sunucu",
       "show-website": "Websiteyi Görüntüle",
       "show-servers": "Sunucuları Görüntüle"
+    },
+    "server-navigation-menu": {
+      "statistics": "İstatistikler",
+      "settings": "Ayarlar",
+      "no-selected-server": "Seçili sunucu yok.",
+      "no-server-text": "Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın.",
+      "connect-server": "Sunucu Bağla"
     }
   }
 }

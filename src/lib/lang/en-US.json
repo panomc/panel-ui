@@ -88,6 +88,13 @@
       "server": "Server",
       "show-website": "Show Website",
       "show-servers": "Show Servers"
+    },
+    "server-navigation-menu": {
+      "statistics": "Statistics",
+      "settings": "Settings",
+      "no-selected-server": "No selected server.",
+      "no-server-text": "No server connected. Connect a server to see the server menu.",
+      "connect-server": "Connect Server"
     }
   }
 }
