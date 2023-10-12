@@ -173,6 +173,16 @@
       "no-category": "Kategorisiz",
       "previous-messages": "Önceki Mesajlar ({count})",
       "send-button": "Gönder"
+    },
+    "post-categories": {
+      "title": "Yazı Kategorileri",
+      "posts": "Yazılar",
+      "create-category-button": "Kategori Oluştur",
+      "card-title": "{count} Yazı Kategorisi",
+      "category": "Kategori",
+      "description": "Açıklama",
+      "url": "URL",
+      "color": "Renk"
     }
   },
   "components": {

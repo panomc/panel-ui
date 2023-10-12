@@ -173,6 +173,16 @@
       "no-category": "No Category",
       "previous-messages": "Previous Messages ({count})",
       "send-button": "Send"
+    },
+    "post-categories": {
+      "title": "Post Categories",
+      "posts": "Posts",
+      "create-category-button": "Create Category",
+      "card-title": "{count} Post Category",
+      "category": "Category",
+      "description": "Description",
+      "url": "URL",
+      "color": "Color"
     }
   },
   "components": {
