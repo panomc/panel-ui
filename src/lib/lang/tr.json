@@ -26,5 +26,13 @@
         "no-category": "Kategorisiz"
       }
     }
+  },
+  "components": {
+    "ticket-status-badge": {
+      "filter": "Filtrele",
+      "new": "Yeni",
+      "replied": "Yanıtlandı",
+      "closed": "Kapalı"
+    }
   }
 }

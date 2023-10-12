@@ -26,5 +26,13 @@
         "no-category": "No Category"
       }
     }
+  },
+  "components": {
+    "ticket-status-badge": {
+      "filter": "Filter",
+      "new": "New",
+      "replied": "Replied",
+      "closed": "Closed"
+    }
   }
 }
