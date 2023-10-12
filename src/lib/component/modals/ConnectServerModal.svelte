@@ -8,11 +8,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Sunucu Bağla</h5>
+        <h5 class="modal-title">{$_('components.modals.connect-server.title')}</h5>
         <button
           class="btn-close"
           data-bs-dismiss="modal"
-          title="Pencereyi Kapat"
+          title="{$_('components.modals.connect-server.close')}"
           type="button">
         </button>
       </div>
@@ -22,17 +22,17 @@
             <i class="fas fa-download fa-3x text-primary"></i>
           </div>
 
-          <h5 class="text-primary">1 - Pano Eklentisini Oyun Sunucuna Kur</h5>
+          <h5 class="text-primary">{$_('components.modals.connect-server.steps.1')}</h5>
           <button class="btn btn-secondary">
             <i class="fa-solid fa-download me-2"></i>
-            Dosyayı İndir
+            {$_('components.modals.connect-server.download')}
           </button>
 
           <div class="my-4">
             <i class="fas fa-terminal fa-3x text-primary"></i>
           </div>
 
-          <h5 class="text-primary">2 - Bağlantı Komutunu Çalıştır</h5>
+          <h5 class="text-primary">{$_('components.modals.connect-server.steps.2')}</h5>
           <div class="input-group">
             <input
               bind:value="{commandText}"
@@ -45,22 +45,22 @@
               id="copyPlatformToken"
               type="button"
               use:tooltip="{[
-                isCommandTextCopied ? 'Kopyalandı!' : 'Kopyala',
+                isCommandTextCopied ? $_('components.modals.connect-server.copied') : $_('components.modals.connect-server.copy'),
                 { placement: 'top', hideOnClick: false },
               ]}">
               <i class="fas fa-clipboard"></i>
             </button>
           </div>
           <small class="text-muted">
-            Kod {timeToRefreshKey} saniye sonra yenilenecek.
+            {$_('components.modals.connect-server.code-refresh', {values:{timeToRefreshKey}})}
           </small>
 
           <div class="my-4">
             <i class="fas fa-check-circle fa-3x text-primary"></i>
           </div>
 
-          <h5 class="text-primary">3 - Bağlantı İsteğini Onayla</h5>
-          <p class="mb-0">Bağlantı isteği bildirim olarak gelecek.</p>
+          <h5 class="text-primary">{$_('components.modals.connect-server.steps.3')}</h5>
+          <p class="mb-0">{$_('components.modals.connect-server.notification-will-come')}</p>
         </div>
       </div>
     </div>
@@ -79,6 +79,7 @@
   import tooltip from "$lib/tooltip.util";
 
   import { showNetworkErrorOnCatch } from "$lib/Store";
+  import { _ } from "svelte-i18n";
 
   let timeToRefreshKey = "...";
   let commandText;

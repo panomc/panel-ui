@@ -399,6 +399,20 @@
         "title": "Are you sure you want to permanently delete all notifications?",
         "cancel": "Cancel",
         "yes": "Yes"
+      },
+      "connect-server": {
+        "title": "Connect Server",
+        "close": "Close",
+        "steps": {
+          "1": "1 - Install Pano Plugin on Game Server",
+          "2": "2 - Run Connection Command",
+          "3": "3 - Confirm Connection Request"
+        },
+        "download": "Download File",
+        "copy": "Copy",
+        "copied": "Copied!",
+        "code-refresh": "Code will refresh after {timeToRefreshKey} seconds.",
+        "notification-will-come": "The connection request will come as a notification."
       }
     }
   }

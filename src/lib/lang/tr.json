@@ -399,6 +399,20 @@
         "title": "Tüm bildirimleri kalıcı olarak silmek istediğinizden emin misiniz?",
         "cancel": "İptal",
         "yes": "Evet"
+      },
+      "connect-server": {
+        "title": "Sunucu Bağla",
+        "close": "Kapat",
+        "steps": {
+          "1": "1 - Pano Eklentisini Oyun Sunucuna Kur",
+          "2": "2 - Bağlantı Komutunu Çalıştır",
+          "3": "3 - Bağlantı İsteğini Onayla"
+        },
+        "download": "Dosyayı İndir",
+        "copy": "Kopyala",
+        "copied": "Kopyalandı!",
+        "code-refresh": "Kod {timeToRefreshKey} saniye sonra yenilenecek.",
+        "notification-will-come": "Bağlantı isteği bildirim olarak gelecek."
       }
     }
   }
