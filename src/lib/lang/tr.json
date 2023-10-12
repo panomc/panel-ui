@@ -334,6 +334,12 @@
         },
         "save": "Kaydet",
         "create": "Oluştur"
+      },
+      "authorize-player": {
+        "title": "Oyuncuyu Yetkilendir",
+        "close": "Kapat",
+        "player": "Oyuncu",
+        "save": "Kaydet"
       }
     }
   }

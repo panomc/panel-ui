@@ -334,6 +334,12 @@
         },
         "save": "Save",
         "create": "Create"
+      },
+      "authorize-player": {
+        "title": "Authorize Player",
+        "close": "Close",
+        "player": "Player",
+        "save": "Save"
       }
     }
   }
