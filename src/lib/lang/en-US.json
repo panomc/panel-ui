@@ -181,6 +181,11 @@
     "player-permission-badge": {
       "filter": "Filter",
       "player": "Player"
+    },
+    "bottom": {
+      "help": "Help",
+      "pano-market": "Pano Market",
+      "discord": "Discord"
     }
   }
 }

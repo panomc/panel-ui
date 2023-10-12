@@ -181,6 +181,11 @@
     "player-permission-badge": {
       "filter": "Filtrele",
       "player": "Oyuncu"
+    },
+    "bottom": {
+      "help": "Yardım",
+      "pano-market": "Pano Market",
+      "discord": "Discord"
     }
   }
 }
