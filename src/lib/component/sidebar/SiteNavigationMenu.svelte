@@ -6,7 +6,7 @@
         href="{base}/"
         class:active="{matching($page.url.pathname, base)}">
         <i class="fas fa-table-columns me-2"></i>
-        Panel
+        {$_("components.site-navigation-menu.panel")}
       </a>
     </li>
     <li class="nav-item p-2">
@@ -15,7 +15,7 @@
         href="{base}/statistics"
         class:active="{matching($page.url.pathname, base + '/statistics', true)}">
         <i class="fas fa-chart-simple me-2"></i>
-        İstatistikler
+        {$_("components.site-navigation-menu.statistics")}
       </a>
     </li>
     {#if hasPermission(Permissions.MANAGE_POSTS)}
@@ -25,7 +25,7 @@
           class="nav-link"
           class:active="{matching($page.url.pathname, base + '/posts', true)}">
           <i class="fas fa-pen me-2"></i>
-          Yazılar
+          {$_("components.site-navigation-menu.posts")}
         </a>
       </li>
     {/if}
@@ -40,7 +40,7 @@
             true
           )}">
           <i class="fas fa-ticket me-2"></i>
-          Talepler
+          {$_("components.site-navigation-menu.tickets")}
         </a>
       </li>
     {/if}
@@ -56,7 +56,7 @@
             true
           )}">
           <i class="fas fa-users me-2"></i>
-          Oyuncular
+          {$_("components.site-navigation-menu.players")}
         </a>
       </li>
     {/if}
@@ -68,7 +68,7 @@
           href="{base}/view"
           class:active="{matching($page.url.pathname, base + '/view', true)}">
           <i class="fas fa-palette me-2"></i>
-          Görünüm
+          {$_("components.site-navigation-menu.view")}
         </a>
       </li>
     {/if}
@@ -80,7 +80,7 @@
           href="{base}/addons"
           class:active="{matching($page.url.pathname, base + '/addons', true)}">
           <i class="fas fa-puzzle-piece me-2"></i>
-          Eklentiler
+          {$_("components.site-navigation-menu.addons")}
         </a>
       </li>
     {/if}
@@ -96,7 +96,7 @@
             true
           )}">
           <i class="fas fa-cog me-2"></i>
-          Ayarlar
+          {$_("components.site-navigation-menu.settings")}
         </a>
       </li>
     {/if}
@@ -104,8 +104,11 @@
 </nav>
 
 <script>
+  import { _ } from "svelte-i18n";
+
   import { base } from "$app/paths";
   import { page } from "$app/stores";
+
   import { hasPermission, Permissions } from "$lib/auth.util.js";
 
   function matching(path, pathName, startsWith = false) {

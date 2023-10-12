@@ -61,6 +61,16 @@
       "new-ticket": "Yeni Talep",
       "visitor": "Ziyaretçi",
       "view": "Görüntülenme"
+    },
+    "site-navigation-menu": {
+      "panel": "Panel",
+      "statistics": "İstatistikler",
+      "posts": "Yazılar",
+      "tickets": "Talepler",
+      "players": "Oyuncular",
+      "view": "Görünüm",
+      "addons": "Eklentiler",
+      "settings": "Ayarlar"
     }
   }
 }

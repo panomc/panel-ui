@@ -61,6 +61,16 @@
       "new-ticket": "New Ticket",
       "visitor": "Visitor",
       "view": "View"
+    },
+    "site-navigation-menu": {
+      "panel": "Panel",
+      "statistics": "Statistics",
+      "posts": "Posts",
+      "tickets": "Tickets",
+      "players": "Players",
+      "view": "View",
+      "addons": "Addons",
+      "settings": "Settings"
     }
   }
 }
