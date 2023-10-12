@@ -205,6 +205,12 @@
     },
     "notification-container": {
       "notification": "Notification"
+    },
+    "settings-layout": {
+      "website": "Website",
+      "platform": "Platform",
+      "updates": "Updates",
+      "about": "About"
     }
   }
 }

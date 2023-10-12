@@ -9,7 +9,7 @@
           class="nav-item nav-link"
           href="{base}/settings"
           class:active="{matching($page.url.pathname, base + '/settings')}">
-          Website
+          {$_('components.settings-layout.website')}
         </a>
         <a
           class="nav-item nav-link"
@@ -19,7 +19,7 @@
             base + '/settings/platform',
             true
           )}">
-          Platform
+          {$_('components.settings-layout.platform')}
         </a>
         <a
           class="nav-item nav-link position-relative"
@@ -29,7 +29,7 @@
             base + '/settings/updates',
             true
           )}">
-          Güncellemeler
+          {$_('components.settings-layout.updates')}
           <span
             class="position-absolute top-0 start-100 translate-middle p-2 bg-danger rounded-circle">
           </span>
@@ -42,7 +42,7 @@
             base + '/settings/about',
             true
           )}">
-          Hakkında
+          {$_('components.settings-layout.about')}
         </a>
       </div>
     </div>
@@ -71,6 +71,8 @@
 </script>
 
 <script>
+  import { _ } from "svelte-i18n";
+
   import { base } from "$app/paths";
   import { page } from "$app/stores";
 

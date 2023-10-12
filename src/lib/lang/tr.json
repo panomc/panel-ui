@@ -205,6 +205,12 @@
     },
     "notification-container": {
       "notification": "Bildirim"
+    },
+    "settings-layout": {
+      "website": "Website",
+      "platform": "Platform",
+      "updates": "Güncellemeler",
+      "about": "Hakkında"
     }
   }
 }
