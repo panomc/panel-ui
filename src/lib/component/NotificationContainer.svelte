@@ -8,8 +8,8 @@
       aria-atomic="true"
       on:click="{() => onClick(notification)}">
       <div class="toast-header bg-primary text-white">
-        <strong class="me-auto">Bildirim</strong>
-        <small>{getTime(checkTime, parseInt(notification.date), "")}</small>
+        <strong class="me-auto">{$_('components.notification-container.notification')}</strong>
+        <small>{getTime(checkTime, parseInt(notification.date), locales[$currentLanguage['date-fns-code']])}</small>
         <button
           type="button"
           class="btn-close btn-close-white"
@@ -88,11 +88,14 @@
 
 <script>
   import { getContext, onDestroy, onMount } from "svelte";
+  import { _ } from "svelte-i18n";
+  import * as locales from "date-fns/locale";
 
   import { showNetworkErrorOnCatch, quickNotifications } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
   import { formatDistanceToNow } from "date-fns";
   import { onNotificationClick } from "$lib/NotificationManager.js";
+  import { currentLanguage } from "$lib/language.util.js";
 
   let quickNotificationProcessID = 0;
 
@@ -102,7 +105,7 @@
   const notificationCount = getContext("notificationCount");
 
   function getTime(check, time, locale) {
-    return formatDistanceToNow(time, { addSuffix: true });
+    return formatDistanceToNow(time, { addSuffix: true, locale });
   }
 
   function addNotification(notification) {

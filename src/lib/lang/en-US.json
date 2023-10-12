@@ -186,6 +186,9 @@
       "help": "Help",
       "pano-market": "Pano Market",
       "discord": "Discord"
+    },
+    "notification-container": {
+      "notification": "Notification"
     }
   }
 }

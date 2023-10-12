@@ -186,6 +186,9 @@
       "help": "Yardım",
       "pano-market": "Pano Market",
       "discord": "Discord"
+    },
+    "notification-container": {
+      "notification": "Bildirim"
     }
   }
 }
