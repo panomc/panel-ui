@@ -3,17 +3,17 @@
   <!-- Welcome Alerts -->
   {#if data.gettingStartedBlocks.welcomeBoard}
     <div
-      class="alert alert-primary bg-minecraft alert-dismissible animate__animated animate__zoomIn mb-3">
+      class="alert alert-secondary alert-dismissible animate__animated animate__zoomIn mb-3">
       <div class="row">
-        <div class="col-12 pb-3">
-          <h3 class="card-title">Hoş Geldiniz</h3>
+        <div class="col">
           <p class="lead">
-            Pano, web sunucunuza başarıyla kuruldu ve kullanıma hazır! 🚀
+            Pano başarıyla kuruldu ve kullanıma hazır.
             <br />
-            İşte başlarken yapabilecekleriniz 👇:
+            İşte başlarken yapabilecekleriniz 👇
           </p>
         </div>
-        <div class="col-lg-4 mb-lg-0 mb-3">
+        <div class="w-100"></div>
+        <div class="col-lg-3 mb-lg-0 mb-3">
           <h5>Sunucu Bağlayın</h5>
           <p>
             Pano'yu oyun sunucunuza bağlayın ve daha fazla yönetim özelliklerine
@@ -27,9 +27,9 @@
             Sunucu Bağla
           </button>
         </div>
-        <div class="col-lg-4 mb-lg-0 mb-3">
+        <div class="col-lg-3 mb-lg-0 mb-3">
           <ul class="list-unstyled">
-            <h5>Menüden Öneriler</h5>
+            <h5>Menüyü Keşfedin</h5>
             <li>
               <a class="alert-link" href="{base}/posts/create-post">
                 <i class="fas fa-pen me-2"></i>
@@ -56,7 +56,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-lg-4 mb-lg-0 mb-3">
+        <div class="col-lg-3 mb-lg-0 mb-3">
           <ul class="list-unstyled">
             <h5>Daha Fazlası</h5>
             <li>
@@ -92,6 +92,7 @@
 
       <button
         type="button"
+        title="Kapat"
         class="btn-close"
         data-bs-dismiss="alert"
         on:click="{onCloseGettingStartedCard}"></button>
@@ -114,43 +115,43 @@
           <table class="table table-hover mb-0">
             {#each data.tickets as ticket, index (ticket)}
               <tbody>
-              <tr>
-                <td class="align-middle">
-                  <a
-                    use:tooltip="{[
+                <tr>
+                  <td class="align-middle">
+                    <a
+                      use:tooltip="{[
                         ticket.writer.username,
                         { placement: 'bottom' },
                       ]}"
-                    href="{base}/players/player/{ticket.writer.username}">
-                    <img
-                      src="https://crafthead.net/avatar/{ticket.writer
+                      href="{base}/players/player/{ticket.writer.username}">
+                      <img
+                        src="https://crafthead.net/avatar/{ticket.writer
                           .username}/32"
-                      alt="Oyuncu Adı"
-                      class="rounded-circle animate__animated animate__zoomIn"
-                      height="32"
-                      width="32" />
-                  </a>
-                </td>
-                <td class="align-middle text-nowrap">
-                  <a
-                    href="{base}/tickets/ticket/{ticket.id}"
-                    title="Görüntüle">#{ticket.id} {ticket.title}</a>
-                </td>
-                <td class="align-middle text-nowrap">
-                  <a
-                    title="Filtrele"
-                    href="{base}/tickets/category/{ticket.category.url}">
-                    {ticket.category.title === "-"
-                      ? "Kategorisiz"
-                      : ticket.category.title}
-                  </a>
-                </td>
-                <td class="align-middle text-nowrap">
-                  <TicketStatusBadge status="{ticket.status}" />
-                </td>
-                <td class="align-middle text-nowrap"
-                ><span><Date time="{ticket.lastUpdate}" /></span></td>
-              </tr>
+                        alt="Oyuncu Adı"
+                        class="rounded-circle animate__animated animate__zoomIn"
+                        height="32"
+                        width="32" />
+                    </a>
+                  </td>
+                  <td class="align-middle text-nowrap">
+                    <a
+                      href="{base}/tickets/ticket/{ticket.id}"
+                      title="Görüntüle">#{ticket.id} {ticket.title}</a>
+                  </td>
+                  <td class="align-middle text-nowrap">
+                    <a
+                      title="Filtrele"
+                      href="{base}/tickets/category/{ticket.category.url}">
+                      {ticket.category.title === "-"
+                        ? "Kategorisiz"
+                        : ticket.category.title}
+                    </a>
+                  </td>
+                  <td class="align-middle text-nowrap">
+                    <TicketStatusBadge status="{ticket.status}" />
+                  </td>
+                  <td class="align-middle text-nowrap"
+                    ><span><Date time="{ticket.lastUpdate}" /></span></td>
+                </tr>
               </tbody>
             {/each}
           </table>
@@ -158,7 +159,6 @@
       </div>
     </div>
   {/if}
-
 </div>
 
 <script context="module">
@@ -196,11 +196,9 @@
       return data;
     }
 
-    await loadData({ request: event }).then(
-      (body) => {
-        data = { ...data, ...body };
-      }
-    );
+    await loadData({ request: event }).then((body) => {
+      data = { ...data, ...body };
+    });
 
     return data;
   }
@@ -217,7 +215,6 @@
   import NoContent from "$lib/component/NoContent.svelte";
   import TicketStatusBadge from "$lib/component/badges/TicketStatusBadge.svelte";
   import Date from "$lib/component/Date.svelte";
-
 
   export let data;
 
