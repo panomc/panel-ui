@@ -191,6 +191,15 @@
       "card-title": "{count} Ticket Category",
       "category": "Category",
       "description": "Description"
+    },
+    "permission-groups": {
+      "title": "Permission Groups",
+      "players": "Players",
+      "create-permission-group-button": "Create Permission Group",
+      "card-title": "{count} Permission Group",
+      "name": "Name",
+      "permission-amount": "Permission Amount",
+      "player-amount": "Player Amount"
     }
   },
   "components": {
