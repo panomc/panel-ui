@@ -1,12 +1,16 @@
 <canvas height="120" id="websiteActivityChart" bind:this="{element}"></canvas>
 
 <script>
+  import { _, locale } from "svelte-i18n";
   import Chart from "chart.js/auto";
   import "chartjs-adapter-date-fns";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { startOfWeek, endOfWeek, startOfMonth, endOfMonth } from "date-fns";
+
   import { DashboardPeriod } from "$lib/pages/Statistics.svelte";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
+  import { currentLanguage } from "$lib/language.util.js";
+  import { get } from "svelte/store";
 
   let element;
   let chart;
@@ -40,6 +44,12 @@
       reloadChart();
     }
   }
+
+  const unsubscribeCurrentLanguage = currentLanguage.subscribe(() => {
+    if (chart) {
+      reloadChart()
+    }
+  })
 
   function convertDataForChartJS(data) {
     const newData = [];
@@ -92,7 +102,7 @@
     const datasets = [];
 
     datasets.push({
-      label: "Yeni Kayıt",
+      label: $_("components.website-activity-chart.new-registration"),
       data: convertedNewRegisterData,
       borderColor: "orange",
       backgroundColor: "rgba(25, 118, 210, .05)",
@@ -102,7 +112,7 @@
     });
 
     datasets.push({
-      label: "Yeni Talep",
+      label: $_("components.website-activity-chart.new-ticket"),
       data: convertedTicketsData,
       borderColor: "purple",
       backgroundColor: "rgba(25, 118, 210, .05)",
@@ -112,7 +122,7 @@
     });
 
     datasets.push({
-      label: "Ziyaretçi",
+      label: $_("components.website-activity-chart.visitor"),
       data: convertedVisitorData,
       borderColor: "red",
       backgroundColor: "rgba(25, 118, 210, .05)",
@@ -121,7 +131,7 @@
       pointBackgroundColor: "#fff",
     });
     datasets.push({
-      label: "Görüntülenme",
+      label: $_("components.website-activity-chart.view"),
       data: convertedViewData,
       borderColor: "green",
       backgroundColor: "rgba(25, 118, 210, .05)",
@@ -185,4 +195,6 @@
   onMount(() => {
     renderChart();
   });
+
+  onDestroy(unsubscribeCurrentLanguage)
 </script>

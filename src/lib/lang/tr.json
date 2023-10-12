@@ -25,6 +25,28 @@
         "filter": "Filtrele",
         "no-category": "Kategorisiz"
       }
+    },
+    "statistics": {
+      "title": "İstatistikler",
+      "website-tooltip": "Website",
+      "online-player-text": "{onlinePlayerCount} Çevrimiçi",
+      "new-register-text": "{newRegisterCount} Yeni Kayıt",
+      "total-player-text": "{totalPlayerCount} Toplam Oyuncu",
+      "website-graph": {
+        "title": "Website Aktivitesi",
+        "week": "Hafta",
+        "month": "Ay"
+      },
+      "total-statistics": {
+        "title": "İstatistik",
+        "posts": "Yazılar:",
+        "players": "Oyuncular:",
+        "admins": "Yöneticiler:",
+        "tickets": "Talepler:",
+        "connected-servers": "Sunucular:",
+        "addons": "Eklentiler:",
+        "themes": "Temalar:"
+      }
     }
   },
   "components": {
@@ -33,6 +55,12 @@
       "new": "Yeni",
       "replied": "Yanıtlandı",
       "closed": "Kapalı"
+    },
+    "website-activity-chart": {
+      "new-registration": "Yeni Kayıt",
+      "new-ticket": "Yeni Talep",
+      "visitor": "Ziyaretçi",
+      "view": "Görüntülenme"
     }
   }
 }

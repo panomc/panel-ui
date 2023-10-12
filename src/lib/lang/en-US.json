@@ -25,6 +25,28 @@
         "filter": "Filter",
         "no-category": "No Category"
       }
+    },
+    "statistics": {
+      "title": "Statistics",
+      "website-tooltip": "Website",
+      "online-player-text": "{onlinePlayerCount} Online",
+      "new-register-text": "{newRegisterCount} New Registration",
+      "total-player-text": "{totalPlayerCount} Total Players",
+      "website-graph": {
+        "title": "Website Activity",
+        "week": "Week",
+        "month": "Month"
+      },
+      "total-statistics": {
+        "title": "Statistics",
+        "posts": "Posts:",
+        "players": "Players:",
+        "admins": "Admins:",
+        "tickets": "Tickets:",
+        "connected-servers": "Servers:",
+        "addons": "Addons:",
+        "themes": "Themes:"
+      }
     }
   },
   "components": {
@@ -33,6 +55,12 @@
       "new": "New",
       "replied": "Replied",
       "closed": "Closed"
+    },
+    "website-activity-chart": {
+      "new-registration": "New Registration",
+      "new-ticket": "New Ticket",
+      "visitor": "Visitor",
+      "view": "View"
     }
   }
 }
