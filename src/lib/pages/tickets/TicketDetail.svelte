@@ -241,7 +241,7 @@
 </script>
 
 <script>
-  import { afterUpdate, onMount } from "svelte";
+  import { afterUpdate, getContext, onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
 
@@ -260,6 +260,10 @@
   import TicketStatusBadge from "$lib/component/badges/TicketStatusBadge.svelte";
 
   export let data;
+
+  const pageTitle = getContext("pageTitle");
+
+  pageTitle.set("#" + data.ticket.id + " " + limitTitle(data.ticket.title))
 
   let messagesSectionDiv;
   let loadMoreLoading = false;
@@ -332,6 +336,16 @@
           reject();
         });
     });
+  }
+
+  function limitTitle(text) {
+    const limit = 32;
+
+    if (text.length > limit) {
+      text = text.substring(0, limit) + "...";
+    }
+
+    return text;
   }
 
   setCloseTicketModalCallback(() => {
