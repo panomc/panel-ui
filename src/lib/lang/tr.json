@@ -346,6 +346,12 @@
         "notify-with-email": "E-posta ile bilgilendir",
         "cancel": "İptal",
         "yes": "Evet"
+      },
+      "confirm-close-ticket": {
+        "title-single": "Bu talebi kapatmak istediğinizden emin misiniz?",
+        "title-multi": "Bu talepleri kapatmak istediğinizden emin misiniz?",
+        "cancel": "İptal",
+        "yes": "Evet"
       }
     }
   }

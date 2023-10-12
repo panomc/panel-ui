@@ -346,6 +346,12 @@
         "notify-with-email": "Notify by email",
         "cancel": "Cancel",
         "yes": "Yes"
+      },
+      "confirm-close-ticket": {
+        "title-single": "Are you sure you want to close this ticket?",
+        "title-multi": "Are you sure you want to close these tickets?",
+        "cancel": "Cancel",
+        "yes": "Yes"
       }
     }
   }
