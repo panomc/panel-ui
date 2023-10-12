@@ -1,3 +1,22 @@
 {
-  "title": ""
+  "pages": {
+    "dashboard": {
+      "title": "Panel",
+      "welcome-card": {
+        "description": "The Pano is successfully installed and ready for use. \uD83D\uDE80 <br /> Here's what you can do to get started \uD83D\uDC47:",
+        "connect-server": "Connect Server",
+        "connect-server-description": "Connect Pano to your game server and access more management features.",
+        "discover-title": "Discover The Menu",
+        "more-title": "More",
+        "publish-your-first-post": "Publish Your First Post",
+        "change-theme": "Change The Appearance",
+        "manage-tools": "Manage Tools",
+        "review-players": "Review Your Players",
+        "discover-extensions": "Discover The Pano Extensions",
+        "discover-themes": "Discover The Pano Themes",
+        "discover-documentations": "Review Documentations",
+        "join-discord": "Join Our Discord"
+      }
+    }
+  }
 }

@@ -1,3 +1,22 @@
 {
-  "title": ""
+  "pages": {
+    "dashboard": {
+      "title": "Panel",
+      "welcome-card": {
+        "description": "Pano başarıyla kuruldu ve kullanıma hazır. \uD83D\uDE80 <br /> İşte başlarken yapabilecekleriniz \uD83D\uDC47:",
+        "connect-server": "Sunucu Bağlayın",
+        "connect-server-description": "Pano'yu oyun sunucunuza bağlayın ve daha fazla yönetim özelliklerine erişin.",
+        "discover-title": "Menüyü Keşfedin",
+        "more-title": "Daha Fazlası",
+        "publish-your-first-post": "İlk Yazınızı Yayınlayın",
+        "change-theme": "Sitenizin Görünümünü Belirleyin",
+        "manage-tools": "Araçları Yönetin",
+        "review-players": "Oyuncularınızı İnceleyin",
+        "discover-extensions": "Pano Eklentilerini Keşfedin",
+        "discover-themes": "Pano Temalarını Keşfedin",
+        "discover-documentations": "Dokümantasyonları İnceleyin",
+        "join-discord": "Discord Topluluğumuza Katılın"
+      }
+    }
+  }
 }
