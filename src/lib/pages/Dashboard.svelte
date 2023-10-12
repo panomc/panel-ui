@@ -88,7 +88,7 @@
 
       <button
         type="button"
-        title="Kapat"
+        title="{$_('pages.dashboard.welcome-card.close-button')}"
         class="btn-close"
         data-bs-dismiss="alert"
         on:click="{onCloseGettingStartedCard}"></button>
