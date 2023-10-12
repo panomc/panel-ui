@@ -340,6 +340,12 @@
         "close": "Close",
         "player": "Player",
         "save": "Save"
+      },
+      "confirm-ban-player": {
+        "title": "Are you sure you want to ban this player?",
+        "notify-with-email": "Notify by email",
+        "cancel": "Cancel",
+        "yes": "Yes"
       }
     }
   }

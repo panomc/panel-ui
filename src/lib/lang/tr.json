@@ -340,6 +340,12 @@
         "close": "Kapat",
         "player": "Oyuncu",
         "save": "Kaydet"
+      },
+      "confirm-ban-player": {
+        "title": "Bu oyuncuyu yasaklamak istediğinizden emin misiniz?",
+        "notify-with-email": "E-posta ile bilgilendir",
+        "cancel": "İptal",
+        "yes": "Evet"
       }
     }
   }
