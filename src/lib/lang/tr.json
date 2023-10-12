@@ -352,6 +352,12 @@
         "title-multi": "Bu talepleri kapatmak istediğinizden emin misiniz?",
         "cancel": "İptal",
         "yes": "Evet"
+      },
+      "confirm-delete-permission-group": {
+        "title": "Bu yetki grubunu kalıcı olarak silmek istediğinizden emin misiniz?",
+        "description": "Yetki grubu içerisindeki şu kullanıcılar Oyuncu olarak değişecek:",
+        "cancel": "İptal",
+        "yes": "Evet"
       }
     }
   }

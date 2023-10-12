@@ -352,6 +352,12 @@
         "title-multi": "Are you sure you want to close these tickets?",
         "cancel": "Cancel",
         "yes": "Yes"
+      },
+      "confirm-delete-permission-group": {
+        "title": "Are you sure you want to permanently delete this authorization group?",
+        "description": "The following users in the authorization group will be changed to Player:",
+        "cancel": "Cancel",
+        "yes": "Yes"
       }
     }
   }
