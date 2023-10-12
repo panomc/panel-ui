@@ -146,7 +146,8 @@
             "server-icon": "Server Icon",
             "helper": "PNG, JPEG, GIF, SVG format, maximum 2 mb."
           }
-        }
+        },
+        "save-button": "Save"
       },
       "platform": {
         "title": "General Settings",

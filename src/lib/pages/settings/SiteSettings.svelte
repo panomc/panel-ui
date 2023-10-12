@@ -177,7 +177,7 @@
       class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
       aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
       on:click="{save}"
-      >Kaydet
+      >{$_('pages.settings.site-settings.save-button')}
     </button>
   </div>
 </div>

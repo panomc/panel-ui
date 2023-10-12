@@ -146,7 +146,8 @@
             "server-icon": "Sunucu İkonu",
             "helper": "PNG, JPEG, GIF, SVG formatında, maksimum 2 mb olmalı."
           }
-        }
+        },
+        "save-button": "Kaydet"
       },
       "platform": {
         "title": "Genel Ayarlar",
