@@ -162,6 +162,14 @@
       "filter": "Filtrele",
       "no-category": "Kategorisiz",
       "player-name": "Oyuncu Adı"
+    },
+    "player-row": {
+      "actions": "Eylemler",
+      "authorize": "Yetkilendir",
+      "edit": "Düzenle",
+      "remove-ban": "Yasağı Kaldır",
+      "ban": "Yasakla",
+      "view": "Görüntüle"
     }
   }
 }

@@ -162,6 +162,14 @@
       "filter": "Filter",
       "no-category": "No Category",
       "player-name": "Player Name"
+    },
+    "player-row": {
+      "actions": "Actions",
+      "authorize": "Authorize",
+      "edit": "Edit",
+      "remove-ban": "Remove Ban",
+      "ban": "Ban",
+      "view": "View"
     }
   }
 }

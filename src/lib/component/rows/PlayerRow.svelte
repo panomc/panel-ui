@@ -8,7 +8,7 @@
         aria-haspopup="true"
         data-bs-toggle="dropdown"
         href="javascript:void(0);"
-        title="Eylemler">
+        title="{$_('components.player-row.actions')}">
         <span class="fas fa-ellipsis-v"></span>
       </button>
       <div
@@ -21,7 +21,7 @@
             class:disabled="{$user.username === player.username ||
               (player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-user-circle me-2"></i>
-            Yetkilendir
+            {$_('components.player-row.authorize')}
           </a>
         {/if}
         <a
@@ -30,7 +30,7 @@
           on:click="{showEditPlayerModal}"
           class:disabled="{player.permissionGroup === 'admin' && !$user.admin}">
           <i class="fa-solid fa-pencil-alt me-2"></i>
-          Düzenle
+          {$_('components.player-row.edit')}
         </a>
         <a
           class="dropdown-item"
@@ -43,13 +43,13 @@
           class:disabled="{$user.username === player.username ||
             (player.permissionGroup === 'admin' && !$user.admin)}">
           <i class="fas fa-gavel me-2"></i>
-          {#if player.isBanned} Yasağı Kaldır {:else} Yasakla {/if}
+          {#if player.isBanned} {$_('components.player-row.remove-ban')} {:else} {$_('components.player-row.ban')} {/if}
         </a>
       </div>
     </div>
   </th>
   <td class="min-w-200px align-middle text-nowrap">
-    <a title="Görüntüle" href="{base}/players/player/{player.username}">
+    <a title="{$_('components.player-row.view')}" href="{base}/players/player/{player.username}">
       <img
         alt="{player.username}"
         class="rounded-circle mr-3 animate__animated animate__zoomIn me-2"
@@ -78,6 +78,7 @@
 
 <script>
   import { createEventDispatcher, getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { base } from "$app/paths";
 
