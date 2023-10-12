@@ -71,6 +71,16 @@
       "view": "Görünüm",
       "addons": "Eklentiler",
       "settings": "Ayarlar"
+    },
+    "navbar": {
+      "navbar-toggle-tooltip": "Menüyü Aç/Kapa",
+      "new-notifications": "Yeni Bildirimler",
+      "show-all": "Tümünü Görüntüle",
+      "account-dropdown": {
+        "session": "Oturum",
+        "profile": "Profil",
+        "logout": "Çıkış Yap"
+      }
     }
   }
 }

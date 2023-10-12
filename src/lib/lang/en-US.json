@@ -71,6 +71,16 @@
       "view": "View",
       "addons": "Addons",
       "settings": "Settings"
+    },
+    "navbar": {
+      "navbar-toggle-tooltip": "Open/Close Menu",
+      "new-notifications": "New Notifications",
+      "show-all": "Show All",
+      "account-dropdown": {
+        "session": "Session",
+        "profile": "Profile",
+        "logout": "Logout"
+      }
     }
   }
 }

@@ -9,7 +9,7 @@
             class="navbar-toggler d-block"
             class:invisible="{$isSidebarOpen}"
             type="button"
-            title="Menüyü Aç/Kapa"
+            title="{$_('components.navbar.navbar-toggle-tooltip')}"
             on:click="{onSideBarCollapseClick}">
             <i class="fa-solid fa-bars"></i>
           </button>
@@ -32,7 +32,7 @@
               class="nav-link"
               data-bs-toggle="dropdown"
               role="button"
-              title="Yeni Bildirimler">
+              title="{$_('components.navbar.new-notifications')}">
               <i class="fas fa-bell fa-lg"></i>
               {#if $notificationCount !== 0}
                 <span
@@ -45,7 +45,7 @@
             <div
               class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
               <h6 class="dropdown-header">
-                Yeni Bildirimler {$notificationCount === 0
+                {$_('components.navbar.new-notifications')} {$notificationCount === 0
                   ? ""
                   : "(" + $notificationCount + ")"}
               </h6>
@@ -62,7 +62,7 @@
                       'NOT_READ'}">
                     <p class="mb-0">{notification.type}</p>
                     <small class="text-dark">
-                      {getTime(checkTime, parseInt(notification.date), "")}
+                      {getTime(checkTime, parseInt(notification.date), locales[$currentLanguage['date-fns-code']])}
                     </small>
                   </a>
                 {/each}
@@ -71,7 +71,7 @@
               <a
                 class="dropdown-item text-center small"
                 href="{base}/notifications">
-                Tümünü Görüntüle
+                {$_('components.navbar.show-all')}
               </a>
             </div>
           </div>
@@ -82,7 +82,7 @@
               type="button"
               class="nav-link"
               data-bs-toggle="dropdown"
-              title="Oturum">
+              title="{$_('components.navbar.account-dropdown.session')}">
               <img
                 src="https://crafthead.net/avatar/{$user.username}"
                 width="32"
@@ -97,7 +97,7 @@
                 <a
                   class="dropdown-item"
                   href="{base}/players/player/{$user.username}">
-                  Profil
+                  {$_('components.navbar.account-dropdown.profile')}
                 </a>
               </li>
               <li>
@@ -105,7 +105,7 @@
                   type="button"
                   class="dropdown-item text-danger"
                   on:click="{onLogout}">
-                  Çıkış Yap
+                  {$_('components.navbar.account-dropdown.logout')}
                 </button>
               </li>
             </ul>
@@ -120,6 +120,7 @@
   import { onDestroy, onMount, getContext } from "svelte";
   import { formatDistanceToNow } from "date-fns";
   import { _ } from "svelte-i18n";
+  import * as locales from "date-fns/locale";
 
   import { base } from "$app/paths";
 
@@ -133,6 +134,7 @@
   } from "$lib/Store";
   import { onNotificationClick } from "$lib/NotificationManager.js";
   import NoContent from "$lib/component/NoContent.svelte";
+  import { currentLanguage } from "$lib/language.util.js";
 
   let quickNotificationProcessID = 0;
 
@@ -199,7 +201,7 @@
   }
 
   function getTime(check, time, locale) {
-    return formatDistanceToNow(time, { addSuffix: true });
+    return formatDistanceToNow(time, { addSuffix: true, locale });
   }
 
   onMount(() => {
