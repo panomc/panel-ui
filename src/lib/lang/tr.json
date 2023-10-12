@@ -102,6 +102,16 @@
       "delete-all": "Tümünü Sil",
       "delete-notification": "Bildirimi Sil",
       "show-more": "Daha Fazla Göster ({count})"
+    },
+    "settings": {
+      "about": {
+        "title": "Hakkında",
+        "version": "Versiyon",
+        "release-type": "Sürüm Türü",
+        "website": "Website",
+        "discord": "Discord",
+        "open-source-licenses": "Açık Kaynak Lisanslar"
+      }
     }
   },
   "components": {

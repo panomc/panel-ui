@@ -102,6 +102,16 @@
       "delete-all": "Delete All",
       "delete-notification": "Delete Notification",
       "show-more": "Show More ({count})"
+    },
+    "settings": {
+      "about": {
+        "title": "About",
+        "version": "Version",
+        "release-type": "Release Type",
+        "website": "Website",
+        "discord": "Discord",
+        "open-source-licenses": "Open Source Licenses"
+      }
     }
   },
   "components": {
