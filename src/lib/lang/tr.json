@@ -368,6 +368,13 @@
         },
         "cancel": "İptal",
         "yes": "Evet"
+      },
+      "confirm-delete-post-category": {
+        "title": "Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?",
+        "description": "Kategori içerisindeki şu yazılar Kategorisiz olarak değişecek:",
+        "more-posts": "+{count} yazı daha",
+        "cancel": "İptal",
+        "yes": "Evet"
       }
     }
   }

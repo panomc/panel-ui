@@ -368,6 +368,13 @@
         },
         "cancel": "Cancel",
         "yes": "Yes"
+      },
+      "confirm-delete-post-category": {
+        "title": "Are you sure you want to permanently delete this category?",
+        "description": "The following posts in the category will be changed to Uncategorized:",
+        "more-posts": "+{count} more posts",
+        "cancel": "Cancel",
+        "yes": "Yes"
       }
     }
   }
