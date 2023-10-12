@@ -81,6 +81,13 @@
         "profile": "Profile",
         "logout": "Logout"
       }
+    },
+    "sidebar": {
+      "sidebar-toggle-tooltip": "Open/Close Menu",
+      "website": "Website",
+      "server": "Server",
+      "show-website": "Show Website",
+      "show-servers": "Show Servers"
     }
   }
 }

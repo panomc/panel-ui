@@ -10,7 +10,7 @@
       <button
         type="button"
         class="navbar-toggler d-block float-left position-absolute"
-        title="Menüyü Aç/kapa"
+        title="{$_('components.sidebar.sidebar-toggle-tooltip')}"
         on:click="{onMobileSideBarCollapseClick}">
         <i class="fa-solid fa-bars"></i>
       </button>
@@ -31,7 +31,7 @@
           <a
             href="javascript:void(0);"
             class="nav-link"
-            use:tooltip="{['Website', { placement: 'bottom' }]}"
+            use:tooltip="{[$_('components.sidebar.website'), { placement: 'bottom' }]}"
             on:click="{onWebsiteMenuClick}"
             class:active="{$sidebarTabsState === 'website'}">
             <i class="fas fa-globe fa-lg"></i>
@@ -42,7 +42,7 @@
             <a
               href="javascript:void(0);"
               class="nav-link"
-              use:tooltip="{['Sunucu', { placement: 'bottom' }]}"
+              use:tooltip="{[$_('components.sidebar.server'), { placement: 'bottom' }]}"
               on:click="{onGameMenuClick}"
               class:active="{$sidebarTabsState === 'game'}">
               <i class="fas fa-cube fa-lg"></i>
@@ -59,7 +59,7 @@
         href="{UI_URL}"
         class="btn btn-sm btn-secondary w-100"
         target="_blank">
-        Websiteyi Görüntüle
+        {$_('components.sidebar.show-website')}
       </a>
     {/if}
 
@@ -68,7 +68,7 @@
         class="btn btn-sm btn-secondary w-100"
         type="button"
         on:click="{showServersModal}">
-        Sunucuları Görüntüle
+        {$_('components.sidebar.show-servers')}
       </button>
     {/if}
 
@@ -82,6 +82,7 @@
 
 <script>
   import { getContext, onDestroy } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { base } from "$app/paths";
 

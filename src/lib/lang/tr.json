@@ -81,6 +81,13 @@
         "profile": "Profil",
         "logout": "Çıkış Yap"
       }
+    },
+    "sidebar": {
+      "sidebar-toggle-tooltip": "Menüyü Aç/Kapa",
+      "website": "Website",
+      "server": "Sunucu",
+      "show-website": "Websiteyi Görüntüle",
+      "show-servers": "Sunucuları Görüntüle"
     }
   }
 }
