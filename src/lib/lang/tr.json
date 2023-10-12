@@ -144,6 +144,17 @@
       "no-selected-server": "Seçili sunucu yok.",
       "no-server-text": "Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın.",
       "connect-server": "Sunucu Bağla"
+    },
+    "post-row": {
+      "actions": "Eylemler",
+      "view": "Görüntüle",
+      "move-to-draft": "Taslaklara Taşı",
+      "publish": "Yayınla",
+      "move-to-trash": "Çöp Kutusuna Taşı",
+      "delete": "Sil",
+      "edit": "Düzenle",
+      "no-category": "Kategorisiz",
+      "filter": "Filtrele"
     }
   }
 }

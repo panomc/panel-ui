@@ -6,7 +6,7 @@
         href="javascript:void(0);"
         class="btn btn-sm btn-link"
         data-bs-toggle="dropdown"
-        title="Eylemler">
+        title="{$_('components.post-row.actions')}">
         <span class="fas fa-ellipsis-v"></span>
       </a>
       <div
@@ -16,7 +16,7 @@
           target="_blank"
           href="{UI_URL === '/' ? '': UI_URL}/preview/post/{post.id}">
           <i class="fas fa-eye me-2"></i>
-          Görüntüle
+          {$_('components.post-row.view')}
         </a>
         {#if pageType !== PageTypes.DRAFT}
           <a
@@ -26,7 +26,7 @@
             class:disabled="{buttonsLoading}">
             <span>
               <i class="fa-solid fa-box-archive me-2"></i>
-              Taslaklara Taşı
+              {$_('components.post-row.move-to-draft')}
             </span>
           </a>
         {/if}
@@ -39,7 +39,7 @@
             on:click="{onPublishClick}">
             <span>
               <i class="fas fa-globe-americas me-2"></i>
-              Yayınla
+              {$_('components.post-row.publish')}
             </span>
           </a>
         {/if}
@@ -50,22 +50,22 @@
           on:click="{onDeletePostClick}">
           <i class="fas fa-trash me-2"></i>
           {#if pageType !== PageTypes.TRASH}
-            Çöp Kutusuna Taşı
+            {$_('components.post-row.move-to-trash')}
           {:else}
-            Sil
+            {$_('components.post-row.delete')}
           {/if}
         </a>
       </div>
     </div>
   </th>
   <td class="align-middle text-nowrap">
-    <a href="{base + '/posts/post/' + post.id}" title="Düzenle">
+    <a href="{base + '/posts/post/' + post.id}" title="{$_('components.post-row.edit')}">
       {post.title}
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    <a title="Filtrele" href="{base}/posts/category/{post.category.url}">
-      {post.category.title === "-" ? "Kategorisiz" : post.category.title}
+    <a title="{$_('components.post-row.filter')}" href="{base}/posts/category/{post.category.url}">
+      {post.category.title === "-" ? $_('components.post-row.no-category') : post.category.title}
     </a>
   </td>
   <td class="align-middle text-nowrap">{post.views}</td>
@@ -88,6 +88,7 @@
 
 <script>
   import { createEventDispatcher } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { base } from "$app/paths";
 

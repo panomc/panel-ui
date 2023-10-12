@@ -144,6 +144,17 @@
       "no-selected-server": "No selected server.",
       "no-server-text": "No server connected. Connect a server to see the server menu.",
       "connect-server": "Connect Server"
+    },
+    "post-row": {
+      "actions": "Actions",
+      "view": "View",
+      "move-to-draft": "Move To Draft",
+      "publish": "Publish",
+      "move-to-trash": "Move To Trash",
+      "delete": "Delete",
+      "edit": "Edit",
+      "no-category": "No Category",
+      "filter": "Filter"
     }
   }
 }
