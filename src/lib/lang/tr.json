@@ -155,6 +155,13 @@
       "edit": "Düzenle",
       "no-category": "Kategorisiz",
       "filter": "Filtrele"
+    },
+    "ticket-row": {
+      "select": "Seç",
+      "view": "Görüntüle",
+      "filter": "Filtrele",
+      "no-category": "Kategorisiz",
+      "player-name": "Oyuncu Adı"
     }
   }
 }

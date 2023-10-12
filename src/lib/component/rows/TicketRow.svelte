@@ -2,7 +2,7 @@
   <th scope="row" class="align-middle">
     <div class="form-check">
       <input
-        title="Seç"
+        title="{$_('components.ticket-row.select')}"
         class="form-check-input"
         id="postCheck{ticket.id}"
         type="checkbox"
@@ -10,16 +10,16 @@
     </div>
   </th>
   <td class="align-middle text-nowrap">
-    <a href="{base}/tickets/ticket/{ticket.id}" title="Görüntüle">
+    <a href="{base}/tickets/ticket/{ticket.id}" title="{$_('components.ticket-row.view')}">
       #{ticket.id}
       {ticket.title}
     </a>
   </td>
   <td class="align-middle">
-    <a href="{base}/players/player/{ticket.writer.username}" title="Görüntüle">
+    <a href="{base}/players/player/{ticket.writer.username}" title="{$_('components.ticket-row.view')}">
       <img
         src="https://crafthead.net/avatar/{ticket.writer.username}/32"
-        alt="Oyuncu Adı"
+        alt="{$_('components.ticket-row.player-name')}"
         class="rounded-circle animate__animated animate__zoomIn me-2"
         height="32"
         width="32" />
@@ -27,8 +27,8 @@
     </a>
   </td>
   <td class="align-middle text-nowrap">
-    <a title="Filtrele" href="{base}/tickets/category/{ticket.category.url}">
-      {ticket.category.title === "-" ? "Kategorisiz" : ticket.category.title}
+    <a title="{$_('components.ticket-row.filter')}" href="{base}/tickets/category/{ticket.category.url}">
+      {ticket.category.title === "-" ? $_('components.ticket-row.no-category') : ticket.category.title}
     </a>
   </td>
   <td class="align-middle text-nowrap">
@@ -41,6 +41,7 @@
 
 <script>
   import { createEventDispatcher } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { base } from "$app/paths";
 
