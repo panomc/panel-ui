@@ -177,6 +177,10 @@
       "in-website": "In Website",
       "online": "Online",
       "offline": "Offline"
+    },
+    "player-permission-badge": {
+      "filter": "Filter",
+      "player": "Player"
     }
   }
 }

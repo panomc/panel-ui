@@ -177,6 +177,10 @@
       "in-website": "Sitede",
       "online": "Çevrimiçi",
       "offline": "Çevrimdışı"
+    },
+    "player-permission-badge": {
+      "filter": "Filtrele",
+      "player": "Oyuncu"
     }
   }
 }
