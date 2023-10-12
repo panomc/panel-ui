@@ -388,6 +388,12 @@
         "more-tickets": "+{count} talep daha",
         "cancel": "İptal",
         "yes": "Evet"
+      },
+      "confirm-delete-ticket": {
+        "title-single": "Bu talebi kalıcı olarak silmek istediğinizden emin misiniz?",
+        "title-multi": "Bu talepleri kalıcı olarak silmek istediğinizden emin misiniz?",
+        "cancel": "İptal",
+        "yes": "Evet"
       }
     }
   }

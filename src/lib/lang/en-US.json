@@ -383,9 +383,15 @@
         "yes": "Yes"
       },
       "confirm-delete-ticket-category": {
-        "title-permanent": "Note: If you delete this category, the following requests will remain Uncategorized:",
+        "title-permanent": "Note: If you delete this category, the following tickets will remain Uncategorized:",
         "title": "Are you sure you want to permanently delete this category?",
         "more-posts": "+{count} more tickets",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
+      "confirm-delete-ticket": {
+        "title-single": "Are you sure you want to permanently delete this ticket?",
+        "title-multi": "Are you sure you want to permanently delete these tickets?",
         "cancel": "Cancel",
         "yes": "Yes"
       }
