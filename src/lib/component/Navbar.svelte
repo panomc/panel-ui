@@ -18,7 +18,7 @@
       <div class="col-4 d-flex justify-content-center">
         <!-- Page Title -->
         <h5 class="navbar-text mb-0">
-          {$pageTitle ? $pageTitle : options.DEFAULT_PAGE_TITLE}
+          {$pageTitle ? $_($pageTitle) : options.DEFAULT_PAGE_TITLE}
         </h5>
       </div>
       <div class="col-4 d-flex justify-content-end">
@@ -119,6 +119,7 @@
 <script>
   import { onDestroy, onMount, getContext } from "svelte";
   import { formatDistanceToNow } from "date-fns";
+  import { _ } from "svelte-i18n";
 
   import { base } from "$app/paths";
 
