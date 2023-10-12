@@ -319,6 +319,21 @@
         },
         "save": "Kaydet",
         "create": "Oluştur"
+      },
+      "add-edit-ticket-category": {
+        "create-category": "Kategori Oluştur",
+        "edit-category": "Kategoriyi Düzenle",
+        "close": "Kapat",
+        "inputs": {
+          "title": {
+            "placeholder": "Başlık"
+          },
+          "description": {
+            "placeholder": "Açıklama"
+          }
+        },
+        "save": "Kaydet",
+        "create": "Oluştur"
       }
     }
   }

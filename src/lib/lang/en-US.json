@@ -319,6 +319,21 @@
         },
         "save": "Save",
         "create": "Create"
+      },
+      "add-edit-ticket-category": {
+        "create-category": "Create Category",
+        "edit-category": "Edit Category",
+        "close": "Close",
+        "inputs": {
+          "title": {
+            "placeholder": "Title"
+          },
+          "description": {
+            "placeholder": "Description"
+          }
+        },
+        "save": "Save",
+        "create": "Create"
       }
     }
   }

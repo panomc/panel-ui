@@ -4,10 +4,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-          {$mode === "edit" ? "Kategoriyi Düzenle" : "Kategori Ekle"}
+          {$mode === "edit" ? $_('components.modals.add-edit-ticket-category.create-category') : $_('components.modals.add-edit-ticket-category.edit-category')}
         </h5>
         <button
-          title="Pencereyi Kapat"
+          title="{$_('components.modals.add-edit-ticket-category.close')}"
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
@@ -17,7 +17,7 @@
         <div class="modal-body">
           <input
             class="form-control form-control-lg mb-3"
-            placeholder="Başlık"
+            placeholder="{$_('components.modals.add-edit-ticket-category.inputs.title.placeholder')}"
             id="category"
             type="text"
             bind:value="{$category.title}"
@@ -25,7 +25,7 @@
           <textarea
             class="form-control"
             class:border-danger="{$errors.description}"
-            placeholder="Açıklama"
+            placeholder="{$_('components.modals.add-edit-ticket-category.inputs.description.placeholder')}"
             id="categoryDescription"
             type="text"
             rows="5"
@@ -38,7 +38,7 @@
             class:btn-secondary="{$mode === 'create'}"
             class:btn-primary="{$mode === 'edit'}"
             class:disabled="{loading || buttonDisabled}">
-            {$mode === "edit" ? "Kaydet" : "Oluştur"}
+            {$mode === "edit" ? $_('components.modals.add-edit-ticket-category.save') : $_('components.modals.add-edit-ticket-category.create')}
           </button>
         </div>
       </form>
@@ -92,6 +92,8 @@
 </script>
 
 <script>
+  import { _ } from "svelte-i18n";
+
   import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 
