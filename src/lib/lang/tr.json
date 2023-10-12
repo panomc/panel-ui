@@ -394,6 +394,11 @@
         "title-multi": "Bu talepleri kalıcı olarak silmek istediğinizden emin misiniz?",
         "cancel": "İptal",
         "yes": "Evet"
+      },
+      "confirm-remove-all-notifications": {
+        "title": "Tüm bildirimleri kalıcı olarak silmek istediğinizden emin misiniz?",
+        "cancel": "İptal",
+        "yes": "Evet"
       }
     }
   }

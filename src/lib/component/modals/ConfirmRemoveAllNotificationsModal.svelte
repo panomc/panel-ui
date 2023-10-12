@@ -10,7 +10,7 @@
         <div class="pb-3">
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
-        Tüm bildirimleri kalıcı olarak silmek istediğinizden emin misiniz?
+        {$_('components.modals.confirm-remove-all-notifications.title')}
       </div>
       <div class="modal-footer flex-nowrap">
         <button
@@ -19,14 +19,14 @@
           class:disabled="{loading}"
           aria-disabled="{loading}"
           on:click="{hide}">
-          İptal
+          {$_('components.modals.confirm-remove-all-notifications.cancel')}
         </button>
         <button
           class="btn btn-danger col-6 m-0"
           type="button"
           class:disabled="{loading}"
           aria-disabled="{loading}"
-          on:click="{onYesClick}">Evet</button>
+          on:click="{onYesClick}">{$_('components.modals.confirm-remove-all-notifications.yes')}</button>
       </div>
     </div>
   </div>
@@ -67,6 +67,7 @@
   import ApiUtil from "$lib/api.util";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import NotificationsDeletedPermanentlyToast from "$lib/component/toasts/NotificationsDeletedPermanentlyToast.svelte";
+  import { _ } from "svelte-i18n";
 
   let loading;
 
