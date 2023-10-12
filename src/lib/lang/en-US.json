@@ -111,6 +111,42 @@
         "website": "Website",
         "discord": "Discord",
         "open-source-licenses": "Open Source Licenses"
+      },
+      "site-settings": {
+        "title": "Website Settings",
+        "inputs": {
+          "website-name": {
+            "label": "Website Name",
+            "placeholder": "Name"
+          },
+          "website-description": {
+            "label": "Website Description"
+          },
+          "game-server-ip-address": {
+            "label": "Game Server IP Address"
+          },
+          "game-server-version": {
+            "label": "Game Server Version"
+          },
+          "support-email-address": {
+            "label": "Support E-Mail Address"
+          },
+          "keywords": {
+            "label": "Keywords",
+            "placeholder": "Press Enter to insert",
+            "remove": "Click To Remove"
+          },
+          "favicon": {
+            "label": "Favicon",
+            "select": "Select",
+            "helper": "PNG, ICO, GIF, JPG, SVG format, maximum 1 mb and 16x16 pixels It must be."
+          },
+          "website-logo": {
+            "label": "Website Logo",
+            "server-icon": "Server Icon",
+            "helper": "PNG, JPEG, GIF, SVG format, maximum 2 mb."
+          }
+        }
       }
     }
   },

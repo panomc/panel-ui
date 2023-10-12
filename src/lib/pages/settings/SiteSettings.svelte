@@ -2,20 +2,20 @@
 <div class="card bg-white">
   <div class="card-body animate__animated animate__fadeIn">
     <div class="row mb-3">
-      <label class="col-md-4 col-form-label" for="siteTitle"> Site İsmi </label>
+      <label class="col-md-4 col-form-label" for="siteTitle">{$_('pages.settings.site-settings.inputs.website-name.label')}</label>
       <div class="col col-form-label">
         <input
           bind:value="{data.websiteName}"
           aria-describedby="siteTitle"
           class="form-control form-control-lg"
-          placeholder="İsim"
+          placeholder="{$_('pages.settings.site-settings.inputs.website-name.placeholder')}"
           id="siteTitle"
           type="text" />
       </div>
     </div>
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="siteDesc">
-        Site Açıklaması
+        {$_('pages.settings.site-settings.inputs.website-description.label')}
       </label>
       <div class="col">
         <textarea
@@ -29,7 +29,7 @@
 
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="ipAddress">
-        Oyun Sunucu IP Adresi
+        {$_('pages.settings.site-settings.inputs.game-server-ip-address.label')}
       </label>
       <div class="col col-form-label">
         <div class="row align-items-center">
@@ -48,7 +48,7 @@
 
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="serverGameVersion">
-        Oyun Sunucu Versiyonu
+        {$_('pages.settings.site-settings.inputs.game-server-version.label')}
       </label>
       <div class="col col-form-label">
         <div class="row align-items-center">
@@ -67,7 +67,7 @@
 
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="supportEmailAddress">
-        Destek E-Posta Adresi
+        {$_('pages.settings.site-settings.inputs.support-email-address.label')}
       </label>
       <div class="col col-form-label">
         <div class="row align-items-center">
@@ -85,7 +85,7 @@
     </div>
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="siteKeywords">
-        Anahtar Kelimeler
+        {$_('pages.settings.site-settings.inputs.keywords.label')}
       </label>
       <div class="col col-form-label">
         <form on:submit|preventDefault="{addKeyWord}">
@@ -93,14 +93,14 @@
             id="siteKeywords"
             class="form-control mb-3"
             class:border-danger="{keywordInputError}"
-            placeholder="Eklemek için Enter'a basın"
+            placeholder="{$_('pages.settings.site-settings.inputs.keywords.placeholder')}"
             type="text"
             name="keyword"
             bind:value="{keyword}" />
         </form>
         {#each data.keywords as keyword, index (keyword)}
           <a
-            use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
+            use:tooltip="{[$_('pages.settings.site-settings.inputs.keywords.remove'), { placement: 'bottom' }]}"
             href="javascript:void(0);"
             on:click="{() => removeKeyWord(index)}">
             <span class="badge rounded-pill bg-light link-primary">
@@ -111,12 +111,12 @@
       </div>
     </div>
     <div class="row mb-3">
-      <label class="col-md-4 col-form-label" for="siteFavicon"> Favicon </label>
+      <label class="col-md-4 col-form-label" for="siteFavicon">{$_('pages.settings.site-settings.inputs.favicon.label')} </label>
       <div class="col col-form-label">
         <div class="row">
           <div class="col-auto">
             <img
-              alt="Seç"
+              alt="{$_('pages.settings.site-settings.inputs.favicon.select')}"
               class="d-block ml-auto"
               height="48"
               src="{favicon}"
@@ -133,8 +133,7 @@
               bind:this="{faviconInput}"
               value="" />
             <small class="text-muted">
-              PNG, ICO, GIF, JPG, SVG formatında, minimum 1 mb ve 16x16 piksel
-              olmalı.
+              {$_('pages.settings.site-settings.inputs.favicon.helper')}
             </small>
           </div>
         </div>
@@ -143,14 +142,14 @@
 
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="siteLogo">
-        Website Logo
+        {$_('pages.settings.site-settings.inputs.website-logo.label')}
       </label>
       <div class="col col-form-label">
         <div class="row">
           <div class="col-auto">
             <img
               class="d-block ml-auto"
-              alt="Sunucu İkonu"
+              alt="{$_('pages.settings.site-settings.inputs.website-logo.server-icon')}"
               height="48"
               width="auto"
               src="{websiteLogo}" />
@@ -166,7 +165,7 @@
               bind:this="{websiteLogoInput}"
               value="" />
             <small class="text-muted">
-              PNG, JPEG, GIF, SVG formatında, minimum 2 mb olmalı.
+              {$_('pages.settings.site-settings.inputs.website-logo.helper')}
             </small>
           </div>
         </div>
@@ -242,6 +241,7 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { showNetworkErrorOnCatch, websiteLogoSrc } from "$lib/Store.js";
 
@@ -254,7 +254,7 @@
   const pageTitle = getContext("pageTitle");
   const website = getContext("website");
 
-  pageTitle.set("Website Ayarları");
+  pageTitle.set("pages.settings.site-settings.title");
 
   let faviconFiles = [];
   let websiteLogoFiles = [];

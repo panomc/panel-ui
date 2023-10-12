@@ -111,6 +111,42 @@
         "website": "Website",
         "discord": "Discord",
         "open-source-licenses": "Açık Kaynak Lisanslar"
+      },
+      "site-settings": {
+        "title": "Website Ayarları",
+        "inputs": {
+          "website-name": {
+            "label": "Site İsmi",
+            "placeholder": "İsim"
+          },
+          "website-description": {
+            "label": "Site Açıklaması"
+          },
+          "game-server-ip-address": {
+            "label": "Oyun Sunucu IP Adresi"
+          },
+          "game-server-version": {
+            "label": "Oyun Sunucu Versiyonu"
+          },
+          "support-email-address": {
+            "label": "Destek E-Posta Adresi"
+          },
+          "keywords": {
+            "label": "Anahtar Kelimeler",
+            "placeholder": "Eklemek için Enter'a basın",
+            "remove": "Kaldırmak İçin Tıkla"
+          },
+          "favicon": {
+            "label": "Favicon",
+            "select": "Seç",
+            "helper": "PNG, ICO, GIF, JPG, SVG formatında, maksimum 1 mb ve 16x16 piksel olmalı."
+          },
+          "website-logo": {
+            "label": "Website Logo",
+            "server-icon": "Sunucu İkonu",
+            "helper": "PNG, JPEG, GIF, SVG formatında, maksimum 2 mb olmalı."
+          }
+        }
       }
     }
   },
