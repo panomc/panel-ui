@@ -147,6 +147,21 @@
             "helper": "PNG, JPEG, GIF, SVG formatında, maksimum 2 mb olmalı."
           }
         }
+      },
+      "platform": {
+        "title": "Genel Ayarlar",
+        "display-language": "Görüntüleme Dili:",
+        "update-preferences": "Güncelleme Tercihleri",
+        "check-auto-updates": "Otomatik güncellemeleri denetle:",
+        "inputs": {
+          "check-auto-updates": {
+            "never": "Asla",
+            "once-in-a-day": "Günde bir kez",
+            "once-in-a-week": "Haftada bir kez",
+            "once-in-a-month": "Ayda bir kez"
+          }
+        },
+        "save-button": "Kaydet"
       }
     }
   },

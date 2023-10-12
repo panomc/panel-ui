@@ -147,6 +147,21 @@
             "helper": "PNG, JPEG, GIF, SVG format, maximum 2 mb."
           }
         }
+      },
+      "platform": {
+        "title": "General Settings",
+        "display-language": "Display Language:",
+        "update-preferences": "Update Preferences",
+        "check-auto-updates": "Check for automatic updates:",
+        "inputs": {
+          "check-auto-updates": {
+            "never": "Never",
+            "once-in-a-day": "Once in a day",
+            "once-in-a-week": "Once in a week",
+            "once-in-a-month": "Once in a month"
+          }
+        },
+        "save-button": "Save"
       }
     }
   },

@@ -3,7 +3,7 @@
   <div class="card-body animate__animated animate__fadeIn">
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="platformLanguage">
-        Görüntüleme Dili:
+        {$_('pages.settings.platform.display-language')}
       </label>
       <div class="col">
         <select
@@ -18,22 +18,22 @@
       </div>
     </div>
 
-    <h5 class="card-title">Güncelleme Tercihleri</h5>
+    <h5 class="card-title">{$_('pages.settings.platform.update-preferences')}</h5>
     <div class="row mb-3 justify-content-between">
       <label class="col-md-4 col-form-label" for="updatePeriod">
-        Otomatik güncellemeleri denetle:
+        {$_('pages.settings.platform.check-auto-updates')}
       </label>
       <div class="col">
         <select
           class="form-control"
           bind:value="{data.updatePeriod}"
           id="updatePeriod">
-          <option value="{UpdatePeriod.NEVER}">Asla</option>
-          <option value="{UpdatePeriod.ONCE_PER_DAY}">Günde bir kez</option>
+          <option value="{UpdatePeriod.NEVER}">{$_('pages.settings.platform.inputs.check-auto-updates.never')}</option>
+          <option value="{UpdatePeriod.ONCE_PER_DAY}">{$_('pages.settings.platform.inputs.check-auto-updates.once-in-a-day')}</option>
           <option value="{UpdatePeriod.ONCE_PER_WEEK}"
-            >Haftada bir kez
+            >{$_('pages.settings.platform.inputs.check-auto-updates.once-in-a-week')}
           </option>
-          <option value="{UpdatePeriod.ONCE_PER_MONTH}">Ayda bir kez</option>
+          <option value="{UpdatePeriod.ONCE_PER_MONTH}">{$_('pages.settings.platform.inputs.check-auto-updates.once-in-a-month')}</option>
         </select>
       </div>
     </div>
@@ -43,7 +43,7 @@
       class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
       aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
       on:click="{save}"
-      >Kaydet
+      >{$_('pages.settings.platform.save-button')}
     </button>
   </div>
 </div>
@@ -105,6 +105,7 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { showNetworkErrorOnCatch } from "$lib/Store";
 
@@ -118,7 +119,7 @@
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set("Genel Ayarlar");
+  pageTitle.set("pages.settings.platform.title");
 
   export let data;
 
