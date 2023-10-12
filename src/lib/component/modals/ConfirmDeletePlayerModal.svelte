@@ -13,11 +13,11 @@
             <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"
             ></i>
           </div>
-          Bu oyuncuyu gerçekten silmek istediğinizden emin misiniz?
+          {$_('components.modals.confirm-delete-player.title')}
 
           <input
             class="form-control d-inline-block text-center mt-3"
-            placeholder="Şifre"
+            placeholder="{$_('components.modals.confirm-delete-player.inputs.password.placeholder')}"
             type="password"
             bind:value="{$currentPassword}"
             class:border-danger="{$passwordError}" />
@@ -28,12 +28,12 @@
             class="btn btn-link col-6 m-0"
             type="button"
             on:click="{hide}"
-            class:disabled="{$loading}">İptal</button>
+            class:disabled="{$loading}">{$_('components.modals.confirm-delete-player.cancel')}</button>
           <button
             class="btn btn-danger col-6 m-0"
             type="button"
             on:click="{deletePlayer}"
-            class:disabled="{yesButtonDisabled}">Evet</button>
+            class:disabled="{yesButtonDisabled}">{$_('components.modals.confirm-delete-player.yes')}</button>
         </div>
       </form>
     </div>
@@ -92,6 +92,7 @@
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import PlayerDeletedSuccessToast from "$lib/component/toasts/PlayerDeletedSuccessToast.svelte";
+  import { _ } from "svelte-i18n";
 
   $: yesButtonDisabled = $loading || !$currentPassword;
 

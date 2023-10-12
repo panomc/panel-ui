@@ -358,6 +358,16 @@
         "description": "Yetki grubu içerisindeki şu kullanıcılar Oyuncu olarak değişecek:",
         "cancel": "İptal",
         "yes": "Evet"
+      },
+      "confirm-delete-player": {
+        "title": "Bu oyuncuyu gerçekten silmek istediğinizden emin misiniz?",
+        "inputs": {
+          "password": {
+            "placeholder": "Şifre"
+          }
+        },
+        "cancel": "İptal",
+        "yes": "Evet"
       }
     }
   }

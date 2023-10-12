@@ -358,6 +358,16 @@
         "description": "The following users in the authorization group will be changed to Player:",
         "cancel": "Cancel",
         "yes": "Yes"
+      },
+      "confirm-delete-player": {
+        "title": "Are you sure you really want to delete this player?",
+        "inputs": {
+          "password": {
+            "placeholder": "Password"
+          }
+        },
+        "cancel": "Cancel",
+        "yes": "Yes"
       }
     }
   }
