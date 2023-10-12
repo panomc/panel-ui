@@ -47,6 +47,21 @@
         "addons": "Eklentiler:",
         "themes": "Temalar:"
       }
+    },
+    "players": {
+      "title": "{pageType}Oyuncular",
+      "authorized": "Yetkili",
+      "banned": "Yasaklı",
+      "perm-groups": "Yetki Grupları",
+      "table-title": "{playerCount} {pageType} Oyuncu",
+      "all": "Tümü",
+      "table": {
+        "name": "Kullanıcı Adı",
+        "permission": "Yetki",
+        "status": "Durum",
+        "last-entrance": "Son Giriş",
+        "register-date": "Kayıt"
+      }
     }
   },
   "components": {

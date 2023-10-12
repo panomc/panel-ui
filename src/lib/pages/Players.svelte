@@ -6,7 +6,7 @@
       {#if hasPermission(Permissions.MANAGE_PERMISSION_GROUPS)}
         <a class="btn btn-link" role="button" href="{base}/players/perm-groups">
           <i class="fas fa-user-circle me-2"></i>
-          Yetki Grupları
+          {$_('pages.players.perm-groups')}
         </a>
       {/if}
     </div>
@@ -18,12 +18,11 @@
       <div class="row justify-content-between mb-3">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
-            {data.playerCount}
-            {data.pageType === PageTypes.HAS_PERM
-              ? "Yetkili"
-              : data.pageType === PageTypes.BANNED
-              ? "Yasaklı"
-              : ""} Oyuncu
+            {$_('pages.players.table-title', {values: {playerCount: data.playerCount, pageType: (data.pageType === PageTypes.HAS_PERM
+                  ? $_('pages.players.authorized') + " "
+                  : data.pageType === PageTypes.BANNED
+                    ? $_('pages.players.banned') + " "
+                    : "")}})}
           </h5>
         </div>
         <div class="col-md-auto col-12 text-md-right text-center">
@@ -33,21 +32,21 @@
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
               href="{base}/players/all">
-              Tümü
+              {$_('pages.players.all')}
             </a>
             <a
               class:active="{data.pageType === PageTypes.HAS_PERM}"
               class="btn btn-sm btn-outline-light btn-link"
               role="button"
               href="{base}/players/hasPerm">
-              Yetkililer
+              {$_('pages.players.authorized')}
             </a>
             <a
               class:active="{data.pageType === PageTypes.BANNED}"
               class="btn btn-sm btn-outline-light btn-link text-danger"
               role="button"
               href="{base}/players/banned">
-              Yasaklı
+              {$_('pages.players.banned')}
             </a>
           </div>
         </div>
@@ -63,11 +62,11 @@
             <thead>
               <tr>
                 <th class="align-middle text-nowrap" scope="col"></th>
-                <th class="align-middle text-nowrap" scope="col">İsim</th>
-                <th class="align-middle text-nowrap" scope="col">Yetki</th>
-                <th class="align-middle text-nowrap" scope="col">Durum</th>
-                <th class="align-middle text-nowrap" scope="col">Son Giriş</th>
-                <th class="align-middle text-nowrap" scope="col">Kayıt</th>
+                <th class="align-middle text-nowrap" scope="col">{$_('pages.players.table.name')}</th>
+                <th class="align-middle text-nowrap" scope="col">{$_('pages.players.table.permission')}</th>
+                <th class="align-middle text-nowrap" scope="col">{$_('pages.players.table.status')}</th>
+                <th class="align-middle text-nowrap" scope="col">{$_('pages.players.table.last-entrance')}</th>
+                <th class="align-middle text-nowrap" scope="col">{$_('pages.players.table.register-date')}</th>
               </tr>
             </thead>
             <tbody>
@@ -176,10 +175,10 @@
 
 <script>
   import { getContext, onDestroy, onMount } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { page } from "$app/stores";
 
   import Pagination from "$lib/component/Pagination.svelte";
 
@@ -216,13 +215,18 @@
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set(
-    (data.pageType === PageTypes.HAS_PERM
-      ? "Yetkili" + " "
-      : data.pageType === PageTypes.BANNED
-      ? "Yasaklı" + " "
-      : "") + "Oyuncular"
-  );
+  $: {
+    pageTitle.set($_("pages.players.title", {
+        values: {
+          pageType: (data.pageType === PageTypes.HAS_PERM
+            ? $_('pages.players.authorized') + " "
+            : data.pageType === PageTypes.BANNED
+              ? $_('pages.players.banned') + " "
+              : "")
+        }
+      })
+    )
+  }
 
   function reloadData(page = data.page, pageType = data.pageType) {
     showNetworkErrorOnCatch((resolve, reject) => {

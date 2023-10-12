@@ -47,6 +47,21 @@
         "addons": "Addons:",
         "themes": "Themes:"
       }
+    },
+    "players": {
+      "title": "{pageType}Players",
+      "authorized": "Authorized",
+      "banned": "Banned",
+      "perm-groups": "Permission Groups",
+      "table-title": "{playerCount} {pageType} Player",
+      "all": "All",
+      "table": {
+        "name": "Username",
+        "permission": "Permission",
+        "status": "Status",
+        "last-entrance": "Last Entrance",
+        "register-date": "Register Date"
+      }
     }
   },
   "components": {
