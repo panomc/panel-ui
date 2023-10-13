@@ -440,6 +440,41 @@
         "title": "Are you sure you want to unban this player?",
         "cancel": "Cancel",
         "yes": "Yes"
+      },
+      "edit-player": {
+        "title": "Edit Player Information",
+        "close": "Close",
+        "inputs": {
+          "username": {
+            "placeholder": "Username",
+            "errors": {
+              "invalid": "Username is not valid",
+              "exists": "This username is used by another player"
+            }
+          },
+          "email": {
+            "title": "E-Mail",
+            "errors": {
+              "invalid": "E-Mail is not valid",
+              "exists": "This E-Mail address is used by another player"
+            }
+          },
+          "new-password": {
+            "title": "New Password",
+            "errors": {
+              "invalid": "The new password must have a minimum of 6 and a maximum of 128 characters"
+            }
+          },
+          "new-password-repeat": {
+            "title": "New Password Repeat",
+            "errors": {
+              "not-match": "The passwords do not match"
+            }
+          },
+          "can-open-ticket": "Can create ticket",
+          "email-verified": "E-Mail is verified"
+        },
+        "save": "Save"
       }
     }
   }

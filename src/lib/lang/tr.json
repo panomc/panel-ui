@@ -440,6 +440,41 @@
         "title": "Bu oyuncunun yasağını kaldırmak istediğinizden emin misiniz?",
         "cancel": "İptal",
         "yes": "Evet"
+      },
+      "edit-player": {
+        "title": "Oyuncu Bilgilerini Düzenle",
+        "close": "Kapat",
+        "inputs": {
+          "username": {
+            "placeholder": "Kullanıcı Adı",
+            "errors": {
+              "invalid": "Kullanıcı Adı geçerli değil.",
+              "exists": "Bu kullanıcı adı başka bir oyuncu tarafından kullanılıyor."
+            }
+          },
+          "email": {
+            "title": "E-Posta",
+            "errors": {
+              "invalid": "E-Posta geçerli değil",
+              "exists": "Bu E-Posta adresi başka bir oyuncu tarafından kullanılıyor"
+            }
+          },
+          "new-password": {
+            "title": "Yeni Şifre",
+            "errors": {
+              "invalid": "Yeni şifre minimum 6 maksimum 128 karakterden oluşmalıdır"
+            }
+          },
+          "new-password-repeat": {
+            "title": "Yeni Şifre Tekrarı",
+            "errors": {
+              "not-match": "Şifreler aynı değil"
+            }
+          },
+          "can-open-ticket": "Talep oluşturabilir",
+          "email-verified": "E-Postası doğrulandı"
+        },
+        "save": "Kaydet"
       }
     }
   }

@@ -8,9 +8,9 @@
   <div class="modal-dialog modal-dialog-centered" role="dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Oyuncu Bilgilerini Düzenle</h5>
+        <h5 class="modal-title">{$_('components.modals.edit-player.title')}</h5>
         <button
-          title="Pencereyi Kapat"
+          title="{$_('components.modals.edit-player.close')}"
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
@@ -23,7 +23,7 @@
               <input
                 class="form-control form-control-lg"
                 id="username"
-                placeholder="İsim"
+                placeholder="{$_('components.modals.edit-player.inputs.username.placeholder')}"
                 type="text"
                 bind:value="{$player.username}"
                 class:is-invalid="{!!$errors.username}"
@@ -31,17 +31,17 @@
               <div id="validationEditUsernameInModal" class="invalid-feedback">
                 {#if !!$errors["username"]}
                   {#if $errors["username"] === "INVALID"}
-                    Kulanıcı adı geçerli değil
+                    {$_('components.modals.edit-player.inputs.username.errors.invalid')}
                   {/if}
                   {#if $errors["username"] === "EXISTS"}
-                    Bu kullanıcı adı başka bir oyuncu tarafından kullanılıyor
+                    {$_('components.modals.edit-player.inputs.username.errors.exists')}
                   {/if}
                 {/if}
               </div>
             </div>
             <div class="col-12 mb-3"></div>
             <div class="col-12 mb-3">
-              <label for="email">E-Posta</label>
+              <label for="email">{$_('components.modals.edit-player.inputs.email.title')}</label>
               <input
                 class="form-control"
                 id="email"
@@ -52,16 +52,16 @@
               <div id="validationEditEmailInModal" class="invalid-feedback">
                 {#if !!$errors["email"]}
                   {#if $errors["email"] === "INVALID"}
-                    E-Posta geçerli değil
+                    {$_('components.modals.edit-player.inputs.email.errors.invalid')}
                   {/if}
                   {#if $errors["email"] === "EXISTS"}
-                    Bu E-Posta adresi başka bir oyuncu tarafından kullanılıyor
+                    {$_('components.modals.edit-player.inputs.email.errors.exists')}
                   {/if}
                 {/if}
               </div>
             </div>
             <div class="col-6 mb-3">
-              <label for="newPassword">Yeni Şifre</label>
+              <label for="newPassword">{$_('components.modals.edit-player.inputs.new-password.title')}</label>
               <input
                 class="form-control"
                 id="newPassword"
@@ -72,13 +72,13 @@
               <div id="validationEditPasswordInModal" class="invalid-feedback">
                 {#if !!$errors["newPassword"]}
                   {#if $errors["newPassword"] === "INVALID"}
-                    Yeni şifre minimum 6 maksimum 128 karakterden oluşmalıdır
+                    {$_('components.modals.edit-player.inputs.new-password.errors.invalid')}
                   {/if}
                 {/if}
               </div>
             </div>
             <div class="col-6 mb-3">
-              <label for="newPasswordRepeat">Yeni Şifre Tekrarı</label>
+              <label for="newPasswordRepeat">{$_('components.modals.edit-player.inputs.new-password-repeat.title')}</label>
               <input
                 class="form-control"
                 id="newPasswordRepeat"
@@ -91,7 +91,7 @@
                 class="invalid-feedback">
                 {#if !!$errors["newPasswordRepeat"]}
                   {#if $errors["newPasswordRepeat"] === "NOT_MATCH"}
-                    Şifreler aynı değil
+                    {$_('components.modals.edit-player.inputs.new-password-repeat.errors.not-match')}
                   {/if}
                 {/if}
               </div>
@@ -103,11 +103,11 @@
                   type="checkbox"
                   aria-checked="true"
                   role="switch"
-                  id="emailVerifiedCheckbox"
+                  id="canCreateTicketCheckbox"
                   bind:checked="{$player.canCreateTicket}"
                   disabled="{$user.username === $player.username}" />
-                <label class="form-check-label" for="emailVerifiedCheckbox"
-                  >Talep oluşturabilir</label>
+                <label class="form-check-label" for="canCreateTicketCheckbox"
+                  >{$_('components.modals.edit-player.inputs.can-open-ticket')}</label>
               </div>
             </div>
             <div class="col-6">
@@ -117,11 +117,11 @@
                   type="checkbox"
                   role="switch"
                   aria-checked="true"
-                  id="canCreateTicketCheckbox"
+                  id="emailVerifiedCheckbox"
                   bind:checked="{$player.isEmailVerified}"
                   disabled="{$user.username === $player.username}" />
-                <label class="form-check-label" for="canCreateTicketCheckbox"
-                  >E-postası doğrulandı</label>
+                <label class="form-check-label" for="emailVerifiedCheckbox"
+                  >{$_('components.modals.edit-player.inputs.email-verified')}</label>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@
             class="btn btn-primary w-100"
             type="submit"
             class:disabled="{loading}">
-            Kaydet
+            {$_('components.modals.edit-player.save')}
           </button>
         </div>
       </form>
@@ -193,6 +193,7 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
