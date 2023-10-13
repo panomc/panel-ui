@@ -1,12 +1,14 @@
 <Toast id="{id}">
   {#if count > 1}
-    <a href="{base}/tickets/closed">{count}</a> talep kapatıldı.
+    {@html $_('components.toasts.ticket-closed.multi', {values: {count: `<a href="${base}/tickets/closed">${count}</a>`}})}
   {:else}
-    Talep kapatıldı.
+    {$_('components.toasts.ticket-closed.single')}
   {/if}
 </Toast>
 
 <script>
+  import { _ } from "svelte-i18n";
+
   import { base } from "$app/paths";
 
   import Toast from "$lib/component/Toast.svelte";

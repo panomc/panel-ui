@@ -1,9 +1,10 @@
 <Toast id="{id}">
-  "<a href="{base}/posts/draft" target="_blank">{limitTitle(title)}</a>"
-  taslaklara taşındı.
+  {@html $_('components.toasts.post-moved-to-draft', {values: {title: `<a href="${base}/posts/draft" target="_blank">${limitTitle(title)}</a>`}})}
 </Toast>
 
 <script>
+  import { _ } from "svelte-i18n";
+
   import { base } from "$app/paths";
 
   import Toast from "$lib/component/Toast.svelte";

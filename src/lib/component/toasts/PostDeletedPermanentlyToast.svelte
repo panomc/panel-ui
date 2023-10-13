@@ -1,8 +1,10 @@
 <Toast id="{id}">
-  "{limitTitle(title)}" kalıcı olarak silindi.
+  {$_('components.toasts.post-deleted-permanently', {values: {title: limitTitle(title)}})}
 </Toast>
 
 <script>
+  import { _ } from "svelte-i18n";
+
   import Toast from "$lib/component/Toast.svelte";
   import { limitTitle } from "$lib/component/ToastContainer.svelte";
 

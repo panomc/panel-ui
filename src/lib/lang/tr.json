@@ -518,6 +518,54 @@
     "ticket-category-row": {
       "delete": "Sil",
       "edit": "Düzenle"
+    },
+    "toasts": {
+      "accepted-server-connect-request": "Sunucu bağlantı isteği kabul edildi.",
+      "expired-server-connect-request": "Geçersiz sunucu bağlantı isteği.",
+      "notifications-deleted-permanently": "Tüm bildirimler silindi.",
+      "permission-group-saved-or-created": {
+        "permission-group": "Yetki grubu {event}",
+        "updated": "güncellendi.",
+        "saved": "kaydedildi."
+      },
+      "permission-group-save-error": "Yetki grubu kaydedilemedi! Hata: {errorCode}",
+      "player-authorized-success": "Oyuncu yetkisi güncellendi.",
+      "player-ban": {
+        "the-player": "\"{username}\" kullanıcısı {event}",
+        "banned": "yasaklandı.",
+        "could-not-ban": "yasaklanamadı, hata: {error}"
+      },
+      "player-deleted-success": "Oyuncu \"{username}\" silindi.",
+      "player-info-saved-success": "Oyuncu bilgileri güncellendi.",
+      "player-unban": {
+        "the-player": "\"{username}\" kullanıcısının {event}",
+        "removed-ban": "yasağı kaldırıldı.",
+        "could-not-remove-ban": "yasağı kaldırılamadı, hata: {error}"
+      },
+      "post-category-deleted-permanently": "\"{title}\" kalıcı olarak silindi.",
+      "post-deleted-permanently": "\"{title}\" kalıcı olarak silindi.",
+      "post-moved-to-draft": "\"{title}\" taslaklara taşındı.",
+      "post-moved-to-trash": "\"{title}\" çöpe taşındı.",
+      "post-published": "\"{title}\" yayınlandı.",
+      "post-saved": "\"{title}\" kaydedildi.",
+      "rejected-server-connect": "Sunucu bağlantı isteği reddedildi.",
+      "server-deleted-success": "\"{name}\" sunucu silindi.",
+      "server-made-main": "\"{name}\" ana sunucu olarak belirlendi.",
+      "server-not-exists": "Sunucu bulunamadı.",
+      "server-selected": "\"{name}\" seçildi.",
+      "settings-save-error": "Ayarlar kaydedilemedi! Hata: {errorCode}",
+      "settings-save-success": "Ayarlar kaydedildi.",
+      "ticket-category-deleted-permanently": "\"{title}\" kalıcı olarak silindi.",
+      "ticket-closed": {
+        "multi": "{count} talep kapatıldı.",
+        "single": "Talep kapatıldı."
+      },
+      "tickets-deleted-permanently": {
+        "multi": "{count} talep kalıcı olarak silindi.",
+        "single": "Talep kalıcı olarak silindi."
+      },
+      "verification-email-sent-error": "\"{username}\" kullanıcısına doğrulama e-mail gönderilemedi. Hata: {errorCode}",
+      "verification-email-sent-successful": "\"{username}\" kullanıcısına doğrulama e-mail'i gönderildi."
     }
   }
 }

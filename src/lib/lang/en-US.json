@@ -518,6 +518,54 @@
     "ticket-category-row": {
       "delete": "Delete",
       "edit": "Edit"
+    },
+    "toasts": {
+      "accepted-server-connect-request": "Server connection request accepted.",
+      "expired-server-connect-request": "Invalid server connection request.",
+      "notifications-deleted-permanently": "All notifications have been deleted.",
+      "permission-group-saved-or-created": {
+        "permission-group": "Permission group {event}",
+        "updated": "updated.",
+        "saved": "saved."
+      },
+      "permission-group-save-error": "Failed to save permission group! Error: {errorCode}",
+      "player-authorized-success": "Updated player permission group.",
+      "player-ban": {
+        "the-player": "\"{username}\" user {event}",
+        "banned": "banned.",
+        "could-not-ban": "couldn't ban, error: {error}"
+      },
+      "player-deleted-success": "Deleted player \"{username}\".",
+      "player-info-saved-success": "Updated player information.",
+      "player-unban": {
+        "the-player": "\"{username}\" user's {event}",
+        "removed-ban": "ban removed.",
+        "could-not-remove-ban": "couldn't remove ban, error: {error}"
+      },
+      "post-category-deleted-permanently": "\"{title}\" deleted permanently.",
+      "post-deleted-permanently": "\"{title}\" is permanently deleted.",
+      "post-moved-to-draft": "\"{title}\" is moved to drafts.",
+      "post-moved-to-trash": "\"{title}\" is moved to trash.",
+      "post-published": "\"{title}\" is published.",
+      "post-saved": "\"{title}\" is saved.",
+      "rejected-server-connect": "Server connection request denied.",
+      "server-deleted-success": "Deleted server \"{name}\".",
+      "server-made-main": "\"{name}\" is designated as the main server.",
+      "server-not-exists": "Server not found.",
+      "server-selected": "Selected \"{name}\".",
+      "settings-save-error": "Failed to save settings! Error: {errorCode}",
+      "settings-save-success": "Settings saved.",
+      "ticket-category-deleted-permanently": "\"{title}\" is permanently deleted.",
+      "ticket-closed": {
+        "multi": "{count} tickets closed.",
+        "single": "Ticket is closed."
+      },
+      "tickets-deleted-permanently": {
+        "multi": "{count} tickets permanently deleted.",
+        "single": "Ticket is permanently deleted."
+      },
+      "verification-email-sent-error": "Failed to send verification e-mail to user \"{username}\". Error: {errorCode}",
+      "verification-email-sent-successful": "A verification e-mail was sent to the user \"{username}\"."
     }
   }
 }
