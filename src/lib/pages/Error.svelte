@@ -4,24 +4,26 @@
     class="d-flex flex-column align-items-center justify-content-center mt-5
     container animated bounceInDown">
     <img
-      alt="Hata: 404"
+      alt="{$_('pages.error.title', {values: {status: $page.status}})}"
       class="img-fluid mb-3"
       src="{base}/assets/img/404.png"
       width="280" />
-    <h2>Hata: {$page.status}</h2>
+    <h2>{$_('pages.error.title', {values: {status: $page.status}})}</h2>
     <p class="text-muted">
-      Yaramaz Enderman, bu sayfanın yüklenmesini engelledi.
+      {$_('page-error.' + $page.status) || $page.error.message}
     </p>
-    <a class="btn btn-primary" role="button" href="../../..">Geri Git</a>
+    <a class="btn btn-primary" role="button" href="../../..">{$_('pages.error.go-back')}</a>
   </div>
 </div>
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
+
   import { page } from "$app/stores";
   import { base } from "$app/paths";
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set("Error 404");
+  pageTitle.set($_('pages.error.title', {values: {status: $page.status}}));
 </script>

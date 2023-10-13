@@ -200,6 +200,10 @@
       "name": "İsim",
       "permission-amount": "Yetki Adeti",
       "player-amount": "Oyuncu Adeti"
+    },
+    "error": {
+      "title": "Hata: {status}",
+      "go-back": "Geri Git"
     }
   },
   "components": {
@@ -567,5 +571,8 @@
       "verification-email-sent-error": "\"{username}\" kullanıcısına doğrulama e-mail gönderilemedi. Hata: {errorCode}",
       "verification-email-sent-successful": "\"{username}\" kullanıcısına doğrulama e-mail'i gönderildi."
     }
+  },
+  "page-error": {
+    "404": "Yaramaz Enderman, bu sayfanın yüklenmesini engelledi."
   }
 }

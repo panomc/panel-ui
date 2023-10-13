@@ -200,6 +200,10 @@
       "name": "Name",
       "permission-amount": "Permission Amount",
       "player-amount": "Player Amount"
+    },
+    "error": {
+      "title": "Error: {status}",
+      "go-back": "Go Back"
     }
   },
   "components": {
@@ -567,5 +571,8 @@
       "verification-email-sent-error": "Failed to send verification e-mail to user \"{username}\". Error: {errorCode}",
       "verification-email-sent-successful": "A verification e-mail was sent to the user \"{username}\"."
     }
+  },
+  "page-error": {
+    "404": "Bad Enderman blocked this page from loading."
   }
 }
