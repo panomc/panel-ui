@@ -100,7 +100,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 {$_('pages.post-editor.status')}
                 <div>
-                  {getStatusByPostStatus(data.post.status)}
+                  {$_(getStatusByPostStatus(data.post.status))}
                 </div>
               </div>
             </li>
@@ -342,12 +342,12 @@
 
   function getStatusByPostStatus(status) {
     return status === StatusTypes.TRASH
-      ? "Çöp"
+      ? "pages.post-editor.trash"
       : status === StatusTypes.PUBLISHED
-      ? "Yayınlanmış"
+      ? "pages.post-editor.published"
       : status === StatusTypes.DRAFT
-      ? "Taslak"
-      : "Yeni";
+      ? "pages.post-editor.draft"
+      : "pages.post-editor.new";
   }
 
   function submit(publish) {

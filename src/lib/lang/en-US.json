@@ -228,7 +228,10 @@
       "change": "Change",
       "thumbnail-not-determined": "The thumbnail has not been determined.",
       "title-create": "Create New Post",
-      "title-edit": "Edit Post"
+      "title-edit": "Edit Post",
+      "new": "New",
+      "draft": "Draft",
+      "published": "Published"
     }
   },
   "components": {

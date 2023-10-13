@@ -228,7 +228,10 @@
       "change": "Değiştir",
       "thumbnail-not-determined": "Küçük resim belirlenmedi.",
       "title-create": "Yeni Yazı Oluştur",
-      "title-edit": "Yazıyı Düzenle"
+      "title-edit": "Yazıyı Düzenle",
+      "new": "Yeni",
+      "draft": "Taslak",
+      "published": "Yayınlanmış"
     }
   },
   "components": {
