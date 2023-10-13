@@ -302,6 +302,22 @@
         "last-login": "Last Login",
         "register-date": "Register Date"
       }
+    },
+    "permission-group-detail": {
+      "title-edit": "Edit Permission Group",
+      "title-create": "Create Permission Group",
+      "permission-groups": "Permission Groups",
+      "save": "Edit",
+      "create": "Create",
+      "inputs": {
+        "name": {
+          "placeholder": "Name"
+        },
+        "player": {
+          "placeholder": "Add player..."
+        }
+      },
+      "remove": "Remove"
     }
   },
   "components": {

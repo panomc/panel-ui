@@ -302,6 +302,22 @@
         "last-login": "Son Oturum",
         "register-date": "Kayıt"
       }
+    },
+    "permission-group-detail": {
+      "title-edit": "Yetki Grubunu Düzenle",
+      "title-create": "Yetki Grubu Oluştur",
+      "permission-groups": "Yetkiler",
+      "save": "Kaydet",
+      "create": "Oluştur",
+      "inputs": {
+        "name": {
+          "placeholder": "İsim"
+        },
+        "player": {
+          "placeholder": "Oyuncu ekle..."
+        }
+      },
+      "remove": "Kaldır"
     }
   },
   "components": {

@@ -5,7 +5,7 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/players/perm-groups">
         <i class="fas fa-arrow-left me-2"></i>
-        Yetkiler
+        {$_('pages.permission-group-detail.permission-groups')}
       </a>
     </div>
     <div class="col-auto">
@@ -17,9 +17,9 @@
         class:disabled="{saveButtonDisabled}"
         on:click="{onSubmit}">
         {#if data.mode === Modes.EDIT}
-          Kaydet
+          {$_('pages.permission-group-detail.save')}
         {:else}
-          Oluştur
+          {$_('pages.permission-group-detail.create')}
         {/if}
       </button>
     </div>
@@ -33,7 +33,7 @@
             class:text-danger="{errors.name}"
             class:text-black="{!errors.name}"
             class="form-control form-control-lg mb-3"
-            placeholder="İsim"
+            placeholder="{$_('pages.permission-group-detail.inputs.name.placeholder')}"
             id="permissionGroupName"
             type="text"
             bind:value="{name}"
@@ -46,12 +46,12 @@
               bind:value="{username}"
               class:border-danger="{usernameInputError}"
               disabled="{checkingUsername}"
-              placeholder="Oyuncu ekle..." />
+              placeholder="{$_('pages.permission-group-detail.inputs.player.placeholder')}" />
           </form>
 
           {#each data.users as user, index (user)}
             <a
-              use:tooltip="{['Kaldır', { placement: 'bottom' }]}"
+              use:tooltip="{[$_('pages.permission-group-detail.remove'), { placement: 'bottom' }]}"
               href="javascript:void(0);"
               on:click="{() => removeUser(index)}">
               <span class="badge rounded-pill bg-light link-dark text-center">
@@ -226,6 +226,9 @@
 </script>
 
 <script>
+  import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
+
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
 
@@ -235,14 +238,13 @@
   import PermissionGroupSavedOrCreatedToast from "$lib/component/toasts/PermissionGroupSavedOrCreatedToast.svelte";
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import PermissionGroupSaveErrorToast from "$lib/component/toasts/PermissionGroupSaveErrorToast.svelte";
-  import { getContext } from "svelte";
 
   export let data;
 
   const pageTitle = getContext("pageTitle");
 
   pageTitle.set(
-    data.mode === Modes.EDIT ? "Yetki Grubunu Düzenle" : "Yetki Grubu Oluştur"
+    data.mode === Modes.EDIT ? "pages.permission-group-detail.title-edit" : "pages.permission-group-detail.title-create"
   );
 
   let errors = [];
