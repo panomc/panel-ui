@@ -418,6 +418,11 @@
         "title": "\"{serverName}\" sunucusunu ana sunucu yapmak istediğinizden emin misiniz?",
         "no": "Hayır",
         "yes": "Evet"
+      },
+      "remove-server": {
+        "title": "Bu sunucuyu kaldırmak istediğinizden emin misiniz?",
+        "cancel": "İptal",
+        "yes": "Evet"
       }
     }
   }

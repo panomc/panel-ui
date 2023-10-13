@@ -418,6 +418,11 @@
         "title": "Are you sure you want to make \"{serverName}\" the main server?",
         "no": "No",
         "yes": "Yes"
+      },
+      "remove-server": {
+        "title": "Are you sure you want to remove this server?",
+        "cancel": "Cancel",
+        "yes": "Yes"
       }
     }
   }

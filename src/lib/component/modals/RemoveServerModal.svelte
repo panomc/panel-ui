@@ -13,7 +13,7 @@
             <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"
             ></i>
           </div>
-          Bu sunucuyu kaldırmak istediğinizden emin misiniz?
+          {$_('components.modals.remove-server.title')}
 
           <input
             class="form-control d-inline-block text-center mt-3"
@@ -25,13 +25,13 @@
 
         <div class="modal-footer flex-nowrap">
           <button class="btn btn-link col-6 m-0" type="button" on:click="{hide}"
-            >İptal</button>
+            >{$_('components.modals.remove-server.cancel')}</button>
           <button
             class="btn btn-danger col-6 m-0"
             type="button"
             disabled="{confirmButtonDisabled}"
             class:disabled="{confirmButtonDisabled}"
-            on:click="{sendDeleteServer}">Evet</button>
+            on:click="{sendDeleteServer}">{$_('components.modals.remove-server.yes')}</button>
         </div>
       </form>
     </div>
@@ -82,6 +82,8 @@
 </script>
 
 <script>
+  import { _ } from "svelte-i18n";
+
   import { invalidateAll } from "$app/navigation";
 
   import { showNetworkErrorOnCatch } from "$lib/Store.js";
