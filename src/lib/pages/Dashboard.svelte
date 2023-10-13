@@ -64,7 +64,7 @@
             <li>
               <a class="alert-link" href="javascript:void(0);">
                 <i class="fas fa-palette me-2"></i>
-                {$_("pages.dashboard.welcome-card.discover-extensions")}
+                {$_("pages.dashboard.welcome-card.discover-themes")}
               </a>
             </li>
             <li>
