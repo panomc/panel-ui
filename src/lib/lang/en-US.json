@@ -318,6 +318,29 @@
         }
       },
       "remove": "Remove"
+    },
+    "player-detail": {
+      "players": "Players",
+      "delete": "Delete",
+      "un-ban": "Remove Ban",
+      "ban": "Ban",
+      "send-verification-mail": "Send a verification link to player email",
+      "authorize": "Authorize",
+      "edit": "Edit",
+      "in-game": "In Game",
+      "in-website": "In Website",
+      "online-text": "{whereOnline} Online",
+      "banned": "Banned",
+      "last-tickets": "Last Tickets",
+      "view": "View",
+      "filter": "Filter",
+      "no-category": "No Category",
+      "statistics": "Statistics",
+      "email": "E-Mail",
+      "email-verified": "Verified",
+      "email-not-verified": "Not Verified",
+      "last-entrance": "Last Entrance",
+      "register-date": "Register Date"
     }
   },
   "components": {

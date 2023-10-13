@@ -318,6 +318,29 @@
         }
       },
       "remove": "Kaldır"
+    },
+    "player-detail": {
+      "players": "Oyuncular",
+      "delete": "Sil",
+      "un-ban": "Yasağı Kaldır",
+      "ban": "Yasakla",
+      "send-verification-mail": "Oyuncu e-postasına bir doğrulama bağlantısı gönder",
+      "authorize": "Yetkilendir",
+      "edit": "Düzenle",
+      "in-game": "Oyunda",
+      "in-website": "Sitede",
+      "online-text": "{whereOnline} Çevrimiçi",
+      "banned": "Yasaklı",
+      "last-tickets": "Son Talepler",
+      "view": "Görüntüle",
+      "filter": "Filtrele",
+      "no-category": "Kategorisiz",
+      "statistics": "İstatistikler",
+      "email": "E-Posta",
+      "email-verified": "Doğrulandı",
+      "email-not-verified": "Doğrulanmadı",
+      "last-entrance": "Son Giriş",
+      "register-date": "Kayıt"
     }
   },
   "components": {
