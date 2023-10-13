@@ -423,6 +423,11 @@
         "title": "Bu sunucuyu kaldırmak istediğinizden emin misiniz?",
         "cancel": "İptal",
         "yes": "Evet"
+      },
+      "server-request": {
+        "title": "\"{serverName}\" sunucusunu platforma bağlamak istediğinizden emin misiniz?",
+        "reject": "Reddet",
+        "connect": "Bağla"
       }
     }
   }

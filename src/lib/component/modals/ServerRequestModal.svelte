@@ -18,8 +18,7 @@
           <div class="pb-3">
             <i class="fas fa-plug fa-3x d-block m-auto text-gray"></i>
           </div>
-          "{$server.name}" sunucusunu platforma bağlamak istediğinizden emin
-          misiniz?
+          {$_('components.modals.server-request.title', {values: {serverName: $server.name}})}
           <div class="card bg-light mt-3 text-start">
             <div class="row g-0">
               <div
@@ -29,7 +28,7 @@
                     ? $server.favicon
                     : 'https://icons.iconarchive.com/icons/chrisl21/minecraft/64/Crafting-Table-icon.png'}"
                   class="img-fluid"
-                  alt="SUNUCU ADI" />
+                  alt="{$server.name}" />
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -50,14 +49,14 @@
             type="button"
             class:disabled="{$submitLoading}"
             on:click="{rejectServer}">
-            Reddet
+            {$_('components.modals.server-request.reject')}
           </button>
           <button
             class="btn btn-secondary col-6 m-0"
             type="button"
             class:disabled="{$submitLoading}"
             on:click="{acceptServer}">
-            Bağla
+            {$_('components.modals.server-request.connect')}
           </button>
         </div>
       {/if}
@@ -159,6 +158,7 @@
   import RejectedServerConnectRequestToast from "$lib/component/toasts/RejectedServerConnectRequestToast.svelte";
 
   import { invalidateAll } from "$app/navigation";
+  import { _ } from "svelte-i18n";
 
   function acceptServer() {
     $submitLoading = true;

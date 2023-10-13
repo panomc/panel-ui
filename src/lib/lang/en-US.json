@@ -423,6 +423,11 @@
         "title": "Are you sure you want to remove this server?",
         "cancel": "Cancel",
         "yes": "Yes"
+      },
+      "server-request": {
+        "title": "Are you sure you want to connect the server \"{serverName}\" to the platform?",
+        "reject": "Reject",
+        "connect": "Connect"
       }
     }
   }
