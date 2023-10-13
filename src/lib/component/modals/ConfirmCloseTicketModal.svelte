@@ -11,7 +11,7 @@
         <div class="pb-3">
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
-        {$selectedTickets.length === 1 ? $_('components.modals.confirm-ban-player.title-single'): $_('components.modals.confirm-ban-player.title-multi')}
+        {$selectedTickets.length === 1 ? $_('components.modals.confirm-close-ticket.title-single'): $_('components.modals.confirm-close-ticket.title-multi')}
       </div>
       <div class="modal-footer flex-nowrap">
         <button
@@ -21,7 +21,7 @@
           class:disabled="{loading}"
           aria-disabled="{loading}"
           on:click="{hide}">
-          {$_('components.modals.confirm-ban-player.cancel')}
+          {$_('components.modals.confirm-close-ticket.cancel')}
         </button>
         <button
           class="btn btn-danger col-6 m-0"
@@ -29,7 +29,7 @@
           class:disabled="{loading}"
           aria-disabled="{loading}"
           on:click="{onYesClick}">
-          {$_('components.modals.confirm-ban-player.yes')}
+          {$_('components.modals.confirm-close-ticket.yes')}
         </button>
       </div>
     </div>
