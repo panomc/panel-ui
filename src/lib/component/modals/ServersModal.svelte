@@ -17,18 +17,18 @@
               data-bs-toggle="modal"
               on:click="{hide}">
               <i class="fa-solid fa-plus"></i>
-              <span class="d-lg-inline d-none ms-2"> Sunucu Bağla</span>
+              <span class="d-lg-inline d-none ms-2">{$_('components.modals.servers.connect-server-button')}</span>
             </button>
           </div>
           <div class="col-4 d-flex justify-content-center align-items-center">
-            <h5 class="modal-title pr-2">Sunucular</h5>
+            <h5 class="modal-title pr-2">{$_('components.modals.servers.servers')}</h5>
           </div>
           <div class="col-4 d-flex align-items-center">
             <button
-              aria-label="Kapat"
+              aria-label="{$_('components.modals.servers.close')}"
               class="btn-close"
               on:click="{hide}"
-              title="Pencereyi Kapat"
+              title="{$_('components.modals.servers.close')}"
               type="button">
             </button>
           </div>
@@ -79,7 +79,7 @@
                     {#if server.id === $mainServer.id}
                       <div
                         class="position-absolute top-0 start-50 translate-middle rounded bg-primary p-1 text-white"
-                        use:tooltip="{['Ana Sunucu', { placement: 'bottom' }]}">
+                        use:tooltip="{[$_('components.modals.servers.main-server'), { placement: 'bottom' }]}">
                         <i class="fa-solid fa-house"></i>
                       </div>
                     {/if}
@@ -95,7 +95,7 @@
                     {#if server.status === "ONLINE"}
                       <p
                         class="badge bg-secondary text-white rounded-pill mb-3"
-                        use:tooltip="{['Çevrimiçi', { placement: 'bottom' }]}">
+                        use:tooltip="{[$_('components.modals.servers.online'), { placement: 'bottom' }]}">
                         {server.type}
                       </p>
                     {:else}
@@ -184,13 +184,15 @@
 </script>
 
 <script>
+  import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
+
   import { invalidateAll } from "$app/navigation";
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import ServerNotExistsToast from "$lib/component/toasts/ServerNotExistsToast.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
   import ServerSelectedToast from "$lib/component/toasts/ServerSelectedToast.svelte";
-  import { getContext } from "svelte";
 
   const mainServer = getContext("mainServer");
   const selectedServer = getContext("selectedServer");

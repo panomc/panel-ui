@@ -428,6 +428,13 @@
         "title": "Are you sure you want to connect the server \"{serverName}\" to the platform?",
         "reject": "Reject",
         "connect": "Connect"
+      },
+      "servers": {
+        "connect-server-button": "Connect Server",
+        "servers": "Servers",
+        "close": "Close",
+        "main-server": "Main Server",
+        "online": "Online"
       }
     }
   }

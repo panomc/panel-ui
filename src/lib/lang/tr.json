@@ -428,6 +428,13 @@
         "title": "\"{serverName}\" sunucusunu platforma bağlamak istediğinizden emin misiniz?",
         "reject": "Reddet",
         "connect": "Bağla"
+      },
+      "servers": {
+        "connect-server-button": "Sunucu Bağla",
+        "servers": "Sunucular",
+        "close": "Kapat",
+        "main-server": "Ana Sunucu",
+        "online": "Çevrimiçi"
       }
     }
   }
