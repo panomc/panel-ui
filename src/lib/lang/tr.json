@@ -261,6 +261,24 @@
         "author": "Yazar",
         "views": "Görüntülenme",
         "date": "Tarih"
+      },
+      "server": {
+        "dashboard": {
+          "title": "Sunucu İstatistikleri",
+          "server-status": "Sunucu {status}",
+          "online": "Çevrimiçi",
+          "offline": "Çevrimdışı",
+          "player": "{playerCount}/{maxPlayerCount} Oyuncu",
+          "working-time": "Çalışma Süresi: {upTime}",
+          "last-online": "Son Aktif Zamanı: ",
+          "statistics": "İstatistik",
+          "server-name": "Sunucu İsmi:",
+          "server-type": "Sunucu Türü:",
+          "local-ip-address": "Yerel IP Adresi:",
+          "server-version": "Sunucu Sürümü:",
+          "total-connected-servers": "Toplam Bağlı Sunucular:",
+          "date-added": "Eklenme Zamanı:"
+        }
       }
     }
   },

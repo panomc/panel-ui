@@ -262,6 +262,24 @@
         "views": "Views",
         "date": "Date"
       }
+    },
+    "server": {
+      "dashboard": {
+        "title": "Server Statistics",
+        "server-status": "Server {status}",
+        "online": "Online",
+        "offline": "Offline",
+        "player": "{playerCount}/{maxPlayerCount} Player",
+        "working-time": "Uptime: {upTime}",
+        "last-online": "Last Online: ",
+        "statistics": "Statistics",
+        "server-name": "Server Name:",
+        "server-type": "Server Type:",
+        "local-ip-address": "Local IP Address:",
+        "server-version": "Server Version:",
+        "total-connected-servers": "Amount Of Connected Servers:",
+        "date-added": "Date Added:"
+      }
     }
   },
   "components": {
