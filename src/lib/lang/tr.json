@@ -413,6 +413,11 @@
         "copied": "Kopyalandı!",
         "code-refresh": "Kod {timeToRefreshKey} saniye sonra yenilenecek.",
         "notification-will-come": "Bağlantı isteği bildirim olarak gelecek."
+      },
+      "make-main-server": {
+        "title": "\"{serverName}\" sunucusunu ana sunucu yapmak istediğinizden emin misiniz?",
+        "no": "Hayır",
+        "yes": "Evet"
       }
     }
   }

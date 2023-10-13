@@ -10,8 +10,7 @@
         <div class="pb-3">
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
-        "{$server.name}" sunucusunu ana sunucu yapmak istediğinizden emin
-        misiniz?
+        {$_('components.modals.make-main-server.title', {values: {serverName: $server.name}})}
       </div>
       <div class="modal-footer flex-nowrap">
         <button
@@ -19,14 +18,14 @@
           type="button"
           class:disabled="{$loading}"
           on:click="{hide}">
-          Hayır
+          {$_('components.modals.make-main-server.no')}
         </button>
         <button
           class="btn btn-primary col-6 m-0"
           type="button"
           class:disabled="{$loading}"
           on:click="{acceptServer}">
-          Evet
+          {$_('components.modals.make-main-server.yes')}
         </button>
       </div>
     </div>
@@ -80,6 +79,7 @@
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import ServerMadeMainToast from "$lib/component/toasts/ServerMadeMainToast.svelte";
+  import { _ } from "svelte-i18n";
 
   function acceptServer() {
     $loading = true;
