@@ -514,6 +514,10 @@
       "delete": "Delete",
       "edit": "Edit",
       "view": "View"
+    },
+    "ticket-category-row": {
+      "delete": "Delete",
+      "edit": "Edit"
     }
   }
 }

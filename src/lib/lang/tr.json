@@ -514,6 +514,10 @@
       "delete": "Sil",
       "edit": "Düzenle",
       "view": "Görüntüle"
+    },
+    "ticket-category-row": {
+      "delete": "Sil",
+      "edit": "Düzenle"
     }
   }
 }
