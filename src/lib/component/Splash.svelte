@@ -21,17 +21,17 @@
 
   {#if networkErrors}
     {#if notLoggedIn}
-      Oturum hatası
+      {$_('components.splash.errors.session')}
     {:else if noPermission}
-      Yetki hatası
+      {$_('components.splash.errors.permission')}
     {:else}
-      Bağlantı hatası
+      {$_('components.splash.errors.connection')}
     {/if}
     <button
       class="btn btn-primary mt-3"
       on:click="{onResumeClick}"
       class:disabled="{$retryingNetworkErrors}">
-      {$retryingNetworkErrors ? "Yenileniyor..." : "Yenile"}
+      {$retryingNetworkErrors ? $_('components.splash.refreshing') : $_('components.splash.refresh')}
     </button>
   {/if}
 </div>
@@ -39,8 +39,7 @@
 <script>
   import { getContext, onDestroy } from "svelte";
   import { fade } from "svelte/transition";
-
-  import { base } from "$app/paths";
+  import { _ } from "svelte-i18n";
 
   import {
     networkErrorCallbacks,

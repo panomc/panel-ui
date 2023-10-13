@@ -496,6 +496,15 @@
     "pagination": {
       "previous-page": "Önceki Sayfa",
       "next-page": "Sonraki Sayfa"
+    },
+    "splash": {
+      "errors": {
+        "session": "Oturum hatası",
+        "permission": "Yetki hatası",
+        "connection": "Bağlantı hatası"
+      },
+      "refreshing": "Yenileniyor...",
+      "refresh": "Yenile"
     }
   }
 }

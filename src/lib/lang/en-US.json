@@ -496,6 +496,15 @@
     "pagination": {
       "previous-page": "Previous Page",
       "next-page": "Next Page"
+    },
+    "splash": {
+      "errors": {
+        "session": "Session error",
+        "permission": "Permission error",
+        "connection": "Connection error"
+      },
+      "refreshing": "Refreshing...",
+      "refresh": "Refresh"
     }
   }
 }
