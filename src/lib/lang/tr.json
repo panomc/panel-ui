@@ -234,6 +234,8 @@
       "published": "Yayınlanmış"
     },
     "category-tickets": {
+      "title": "\"{category}\" Talepler",
+      "no-category": "Kategorisiz",
       "tickets": "Talepler",
       "delete": "Sil",
       "close-ticket": "Talebi Kapat",

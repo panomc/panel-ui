@@ -213,11 +213,7 @@
   let firstLoad = true;
 
   $: {
-    pageTitle.set(
-      `"${
-        data.category.title === "-" ? "Kategorisiz" : data.category.title
-      }" Talepler`
-    );
+    pageTitle.set($_('pages.category-tickets.title', {values: {category: data.category.title === "-" ? $_('pages.category-tickets.no-category') : data.category.title}}));
   }
 
   function reloadData(page = data.page, url = data.url) {

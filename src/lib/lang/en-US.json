@@ -234,6 +234,8 @@
       "published": "Published"
     },
     "category-tickets": {
+      "title": "\"{category}\" Tickets",
+      "no-category": "No Category",
       "tickets": "Tickets",
       "delete": "Delete",
       "close-ticket": "Close Ticket",
