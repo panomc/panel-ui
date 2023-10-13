@@ -5,7 +5,7 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/players">
         <i class="fas fa-arrow-left me-2"></i>
-        Oyuncular
+        {$_('pages.players-by-permission-group.players')}
       </a>
     </div>
   </div>
@@ -16,8 +16,7 @@
       <div class="row justify-content-between">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
-            {data.playerCount}
-            Oyuncu
+            {$_('pages.players-by-permission-group.table-title', {values: {count: data.playerCount}})}
           </h5>
         </div>
       </div>
@@ -32,12 +31,12 @@
             <thead>
               <tr>
                 <th class="align-middle text-nowrap" scope="col"></th>
-                <th class="align-middle text-nowrap" scope="col">İsim</th>
+                <th class="align-middle text-nowrap" scope="col">{$_('pages.players-by-permission-group.table.player')}</th>
                 <th class="align-middle text-nowrap table-primary" scope="col"
-                  >Yetki</th>
-                <th class="align-middle text-nowrap" scope="col">Durum</th>
-                <th class="align-middle text-nowrap" scope="col">Son Oturum</th>
-                <th class="align-middle text-nowrap" scope="col">Kayıt</th>
+                  >{$_('pages.players-by-permission-group.table.permission-group')}</th>
+                <th class="align-middle text-nowrap" scope="col">{$_('pages.players-by-permission-group.table.status')}</th>
+                <th class="align-middle text-nowrap" scope="col">{$_('pages.players-by-permission-group.table.last-login')}</th>
+                <th class="align-middle text-nowrap" scope="col">{$_('pages.players-by-permission-group.table.register-date')}</th>
               </tr>
             </thead>
             <tbody>
@@ -137,6 +136,7 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
@@ -161,11 +161,7 @@
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set(
-    `"${
-      data.permissionGroup.name === "-" ? "Oyuncu" : data.permissionGroup.name
-    }" Yetkili Oyuncular`
-  );
+  pageTitle.set($_('pages.players-by-permission-group.title', {values: {permissionGroupName: data.permissionGroup.name === "-" ? $_('pages.players-by-permission-group.player') : data.permissionGroup.name}}));
 
   function reloadData(
     page = data.page,

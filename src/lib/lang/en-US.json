@@ -289,6 +289,19 @@
         "remove-server": "Remove Server",
         "disconnect": "Disconnect"
       }
+    },
+    "players-by-permission-group": {
+      "title": "\"{permissionGroupName}\" Authorized Players",
+      "player": "Player",
+      "players": "Players",
+      "table-title": "{count} Player",
+      "table": {
+        "player": "Player",
+        "permission-group": "Permission Group",
+        "status": "Status",
+        "last-login": "Last Login",
+        "register-date": "Register Date"
+      }
     }
   },
   "components": {

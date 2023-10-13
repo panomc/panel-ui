@@ -289,6 +289,19 @@
           "disconnect": "Bağlantıyı Kes"
         }
       }
+    },
+    "players-by-permission-group": {
+      "title": "\"{permissionGroupName}\" Yetkili Oyuncular",
+      "player": "Oyuncu",
+      "players": "Oyuncular",
+      "table-title": "{count} Oyuncu",
+      "table": {
+        "player": "Oyuncu",
+        "permission-group": "Yetki",
+        "status": "Durum",
+        "last-login": "Son Oturum",
+        "register-date": "Kayıt"
+      }
     }
   },
   "components": {
