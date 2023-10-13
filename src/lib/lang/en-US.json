@@ -510,6 +510,7 @@
       },
       "remove-server": {
         "title": "Are you sure you want to remove this server?",
+        "account-password": "Account Password",
         "cancel": "Cancel",
         "yes": "Yes"
       },

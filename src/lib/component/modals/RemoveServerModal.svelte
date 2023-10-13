@@ -17,7 +17,7 @@
 
           <input
             class="form-control d-inline-block text-center mt-3"
-            placeholder="Hesap Şifresi"
+            placeholder="{$_('components.modals.remove-server.account-password')}"
             type="password"
             bind:value="{$currentPassword}"
             class:border-danger="{$passwordError}" />

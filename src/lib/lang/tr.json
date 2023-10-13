@@ -510,6 +510,7 @@
       },
       "remove-server": {
         "title": "Bu sunucuyu kaldırmak istediğinizden emin misiniz?",
+        "account-password": "Hesap Şifresi",
         "cancel": "İptal",
         "yes": "Evet"
       },
