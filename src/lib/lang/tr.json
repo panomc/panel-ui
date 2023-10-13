@@ -204,6 +204,29 @@
     "error": {
       "title": "Hata: {status}",
       "go-back": "Geri Git"
+    },
+    "post-editor": {
+      "posts": "Yazılar",
+      "trash": "Çöp",
+      "move-to-drafts": "Taslaklara Taşı",
+      "view": "Görüntüle",
+      "save": "Kaydet",
+      "update": "Güncelle",
+      "publish": "Yayınla",
+      "inputs": {
+        "title": {
+          "placeholder": "Yazı başlığını girin"
+        }
+      },
+      "status": "Durum:",
+      "views": "Görüntülenme:",
+      "category": "Kategori:",
+      "no-category": "Kategorisiz",
+      "thumbnail": "Küçük Resim:",
+      "clear": "Temizle",
+      "add": "Ekle",
+      "change": "Değiştir",
+      "thumbnail-not-determined": "Küçük resim belirlenmedi."
     }
   },
   "components": {

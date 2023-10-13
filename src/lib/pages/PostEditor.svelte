@@ -12,7 +12,7 @@
         class="btn btn-link"
         role="button">
         <i class="fas fa-arrow-left me-2"></i>
-        Yazılar
+        {$_('pages.post-editor.posts')}
       </a>
     </div>
     <div class="col-auto">
@@ -21,7 +21,7 @@
           class="btn btn-link text-danger"
           type="button"
           on:click="{showDeletePostModal(data.post)}"
-          use:tooltip="{['Çöp', { placement: 'bottom' }]}">
+          use:tooltip="{[$_('pages.post-editor.trash'), { placement: 'bottom' }]}">
           <i class="fas fa-trash"></i>
         </button>
       {/if}
@@ -31,7 +31,7 @@
           type="button"
           class:disabled="{loading}"
           on:click="{onDraftClick}"
-          use:tooltip="{['Taslaklara Taşı', { placement: 'bottom' }]}">
+          use:tooltip="{[$_('pages.post-editor.move-to-drafts'), { placement: 'bottom' }]}">
           <i class="fa-solid fa-box-archive"></i>
         </button>
       {/if}
@@ -40,7 +40,7 @@
         role="button"
         target="_blank"
         href="{UI_URL === '/' ? '': UI_URL}/preview/post/{data.post.id}"
-        use:tooltip="{['Görüntüle', { placement: 'bottom' }]}">
+        use:tooltip="{[$_('pages.post-editor.view'), { placement: 'bottom' }]}">
         <i class="fas fa-eye"></i>
       </a>
       {#if data.post.status !== StatusTypes.PUBLISHED}
@@ -51,7 +51,7 @@
             isEditorEmpty ||
             data.post.title.length === 0}"
           on:click="{() => submit(false)}">
-          <span> Kaydet </span>
+          <span>{$_('pages.post-editor.save')}</span>
         </button>
       {/if}
       <button
@@ -62,7 +62,7 @@
           data.post.title.length === 0}"
         on:click="{() => submit(true)}">
         <span>
-          {data.post.status === StatusTypes.PUBLISHED ? "Güncelle" : "Yayınla"}
+          {data.post.status === StatusTypes.PUBLISHED ? $_('pages.post-editor.update') : $_('pages.post-editor.publish')}
         </span>
       </button>
     </div>
@@ -77,10 +77,10 @@
           <input
             class="form-control form-control-lg"
             type="text"
-            placeholder="Yazı başlığını girin"
+            placeholder="{$_('pages.post-editor.inputs.title.placeholder')}"
             bind:value="{data.post.title}" />
 
-          <div class="align-selft-center w-100 h-75">
+          <div class="align-self-center w-100 h-75">
             <!-- Editor -->
             <Editor
               bind:content="{data.post.text}"
@@ -98,7 +98,7 @@
           <ul class="list-group p-0 m-0">
             <li class="list-group-item">
               <div class="d-flex justify-content-between align-items-center">
-                Durum:
+                {$_('pages.post-editor.status')}
                 <div>
                   {getStatusByPostStatus(data.post.status)}
                 </div>
@@ -106,20 +106,20 @@
             </li>
             <li class="list-group-item">
               <div class="d-flex justify-content-between align-items-center">
-                Görüntülenme:
+                {$_('pages.post-editor.views')}
                 <div>{data.mode === Modes.CREATE ? "0" : data.post.views}</div>
               </div>
             </li>
             <li class="list-group-item">
               <div class="d-flex justify-content-between align-items-center">
-                Kategori:
+                {$_('pages.post-editor.category')}
 
                 <form>
                   <select
                     class="form-control form-control-sm"
                     bind:value="{data.post.category}">
                     <option class="text-primary" value="{-1}"
-                      >Kategorisiz</option>
+                      >{$_('pages.post-editor.no-category')}</option>
 
                     {#each data.categories as category, index (category)}
                       <option value="{category.id}">{category.title}</option>
@@ -130,30 +130,30 @@
             </li>
             <li class="list-group-item form-group">
               <div class="d-flex justify-content-between align-items-center">
-                Küçük Resim:
+                {$_('pages.post-editor.thumbnail')}
 
                 {#if !isThumbnailRemoved && (thumbnail || data.post.thumbnailUrl)}
                   <button
                     class="btn btn-link link-danger"
-                    on:click="{onRemoveThumbnailClick}">Temizle</button>
+                    on:click="{onRemoveThumbnailClick}">{$_('pages.post-editor.clear')}</button>
                 {:else}
                   <button
                     class="btn btn-link"
-                    on:click="{() => thumbnailInput.click()}">Ekle</button>
+                    on:click="{() => thumbnailInput.click()}">{$_('pages.post-editor.add')}</button>
                 {/if}
               </div>
               {#if !isThumbnailRemoved && (thumbnail || data.post.thumbnailUrl)}
                 <img
                   src="{thumbnail || data.post.thumbnailUrl}"
                   class="border rounded img-fluid"
-                  title="Küçük Resim"
-                  alt="Küçük Resim"
-                  use:tooltip="{['Değiştir', { placement: 'bottom' }]}"
+                  title="{$_('pages.post-editor.small-image')}"
+                  alt="{$_('pages.post-editor.small-image')}"
+                  use:tooltip="{[$_('pages.post-editor.change'), { placement: 'bottom' }]}"
                   on:click="{() => thumbnailInput.click()}" />
               {:else}
                 <NoContent
                   icon="fas fa-image fa-3x"
-                  text="Küçük resim belirlenmedi."
+                  text="{$_('pages.post-editor.thumbnail-not-determined')}"
                   on:click="{() => thumbnailInput.click()}" />
               {/if}
               <input
@@ -278,6 +278,7 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";

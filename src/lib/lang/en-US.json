@@ -204,6 +204,29 @@
     "error": {
       "title": "Error: {status}",
       "go-back": "Go Back"
+    },
+    "post-editor": {
+      "posts": "Posts",
+      "trash": "Trash",
+      "move-to-drafts": "Move to Drafts",
+      "view": "View",
+      "save": "Save",
+      "update": "Update",
+      "publish": "Publish",
+      "inputs": {
+        "title": {
+          "placeholder": "Enter post title"
+        }
+      },
+      "status": "Status:",
+      "views": "View:",
+      "category": "Category:",
+      "no-category": "No Category",
+      "thumbnail": "Thumbnail:",
+      "clear": "Clear",
+      "add": "Add",
+      "change": "Change",
+      "thumbnail-not-determined": "The thumbnail has not been determined."
     }
   },
   "components": {
