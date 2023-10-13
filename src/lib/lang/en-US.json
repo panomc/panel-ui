@@ -489,6 +489,9 @@
       "link": "Link",
       "text-color": "Text Color",
       "remove-text-color": "Remove Text Color"
+    },
+    "no-content": {
+      "here-is-empty": "Here is empty."
     }
   }
 }

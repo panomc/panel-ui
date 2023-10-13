@@ -489,6 +489,9 @@
       "link": "Bağlantı",
       "text-color": "Yazı Rengi",
       "remove-text-color": "Yazı Rengini Kaldır"
+    },
+    "no-content": {
+      "here-is-empty": "Burası boş."
     }
   }
 }
