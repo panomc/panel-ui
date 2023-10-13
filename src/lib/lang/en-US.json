@@ -248,6 +248,20 @@
         "player": "Player",
         "last-reply": "Last Reply"
       }
+    },
+    "category-posts": {
+      "title": "\"{category}\" Posts",
+      "no-category": "No Category",
+      "posts": "Posts",
+      "create-post": "Create Post",
+      "table-title": "{count} Post",
+      "table": {
+        "title": "Title",
+        "category": "Category",
+        "author": "Author",
+        "views": "Views",
+        "date": "Date"
+      }
     }
   },
   "components": {

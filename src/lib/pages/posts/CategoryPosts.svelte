@@ -6,7 +6,7 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts">
         <i class="fas fa-arrow-left ms-2"></i>
-        Yazılar
+        {$_('pages.category-posts.posts')}
       </a>
     </div>
     <div class="col-auto">
@@ -15,7 +15,7 @@
         role="button"
         href="{base}/posts/create-post">
         <i class="fas fa-plus"></i>
-        <span class="d-md-inline d-none ms-2">Yazı Oluştur</span>
+        <span class="d-md-inline d-none ms-2">{$_('pages.category-posts.create-post')}</span>
       </a>
     </div>
   </div>
@@ -27,8 +27,7 @@
       <div class="row justify-content-between pb-3 align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title mb-md-0">
-            {data.postCount}
-            Yazı
+            {$_('pages.category-posts.table-title', {values: {count: data.postCount}})}
           </h5>
         </div>
       </div>
@@ -43,11 +42,11 @@
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th class="align-middle" scope="col">Başlık</th>
-                <th scope="col" class="table-primary align-middle">Kategori</th>
-                <th scope="col" class="align-middle">Yazar</th>
-                <th scope="col" class="align-middle">Görüntülenme</th>
-                <th scope="col" class="align-middle">Tarih</th>
+                <th class="align-middle" scope="col">{$_('pages.category-posts.table.title')}</th>
+                <th scope="col" class="table-primary align-middle">{$_('pages.category-posts.table.category')}</th>
+                <th scope="col" class="align-middle">{$_('pages.category-posts.table.author')}</th>
+                <th scope="col" class="align-middle">{$_('pages.category-posts.table.views')}</th>
+                <th scope="col" class="align-middle">{$_('pages.category-posts.table.date')}</th>
               </tr>
             </thead>
             <tbody>
@@ -163,16 +162,13 @@
 
   import NoContent from "$lib/component/NoContent.svelte";
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   export let data;
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set(
-    `"${
-      data.category.title === "-" ? "Kategorisiz" : data.category.title
-    }" Yazılar`
-  );
+  pageTitle.set($_('pages.category-posts.title', {values: {category: data.category.title === "-" ? $_('pages.category-posts.no-category') : data.category.title}}));
 
   let buttonsLoading = false;
 

@@ -248,6 +248,20 @@
         "player": "Oyuncu",
         "last-reply": "Son Yanıt"
       }
+    },
+    "category-posts": {
+      "title": "\"{category}\" Yazılar",
+      "no-category": "Kategorisiz",
+      "posts": "Yazılar",
+      "create-post": "Yazı Oluştur",
+      "table-title": "{count} Yazı",
+      "table": {
+        "title": "Başlık",
+        "category": "Kategori",
+        "author": "Yazar",
+        "views": "Görüntülenme",
+        "date": "Tarih"
+      }
     }
   },
   "components": {
