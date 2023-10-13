@@ -278,6 +278,15 @@
           "server-version": "Sunucu Sürümü:",
           "total-connected-servers": "Toplam Bağlı Sunucular:",
           "date-added": "Eklenme Zamanı:"
+        },
+        "settings": {
+          "title": "Sunucu Ayarları",
+          "main-server": "Ana Sunucu",
+          "already-main-server": "{serverName} ana sunucu",
+          "make-main-server": "Ana Sunucu Olarak Belirle",
+          "main-server-info": "Websitede görüntülenecek sunucu bilgilerini ana sunucu belirler.",
+          "remove-server": "Sunucuyu Kaldır",
+          "disconnect": "Bağlantıyı Kes"
         }
       }
     }

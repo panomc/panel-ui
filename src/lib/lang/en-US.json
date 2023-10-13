@@ -279,6 +279,15 @@
         "server-version": "Server Version:",
         "total-connected-servers": "Amount Of Connected Servers:",
         "date-added": "Date Added:"
+      },
+      "settings": {
+        "title": "Server Settings",
+        "main-server": "Main Server",
+        "already-main-server": "{serverName} is main server",
+        "make-main-server": "Set as Main Server",
+        "main-server-info": "The host server determines the server information to be displayed on the website.",
+        "remove-server": "Remove Server",
+        "disconnect": "Disconnect"
       }
     }
   },
