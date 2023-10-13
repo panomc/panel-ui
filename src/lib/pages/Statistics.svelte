@@ -87,7 +87,7 @@
               <td>{data.adminCount}</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.statistics.total-statistics.tickets')}:</th>
+              <th scope="row">{$_('pages.statistics.total-statistics.tickets')}</th>
               <td>{data.ticketCount}</td>
             </tr>
             <tr>
@@ -99,7 +99,7 @@
               <td>?</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.statistics.total-statistics.themes')}:</th>
+              <th scope="row">{$_('pages.statistics.total-statistics.themes')}</th>
               <td>?</td>
             </tr>
           </tbody>
