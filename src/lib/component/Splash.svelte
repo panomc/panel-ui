@@ -15,7 +15,7 @@
   out:fade>
   <img
     alt="Pano"
-    src="/assets/img/loading_slime.gif"
+    src="{base}/assets/img/loading_slime.gif"
     width="128"
     height="auto" />
 
@@ -46,6 +46,7 @@
     resumeAfterNetworkError,
     retryingNetworkErrors,
   } from "$lib/Store";
+  import { base } from "$app/paths";
 
   let networkErrors = false;
 
