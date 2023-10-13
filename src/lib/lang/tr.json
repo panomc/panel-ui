@@ -389,6 +389,10 @@
       "updates": "Güncellemeler",
       "about": "Hakkında"
     },
+    "server-settings-layout": {
+      "server": "Sunucu",
+      "game-integration": "Oyun Entegrasyonu"
+    },
     "modals": {
       "add-edit-post-category": {
         "create-category": "Kategori Oluştur",

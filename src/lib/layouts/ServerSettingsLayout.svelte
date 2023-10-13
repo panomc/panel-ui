@@ -12,7 +12,7 @@
             $page.url.pathname,
             base + '/server/settings'
           )}">
-          Sunucu
+          {$_('components.server-settings-layout.server')}
         </a>
         <a
           class="nav-item nav-link"
@@ -22,7 +22,7 @@
             base + '/server/settings/game-integration',
             true
           )}">
-          Oyun Entegrasyonu
+          {$_('components.server-settings-layout.game-integration')}
         </a>
       </div>
     </div>
@@ -32,6 +32,8 @@
 </div>
 
 <script>
+  import { _ } from "svelte-i18n";
+
   import { base } from "$app/paths";
   import { page } from "$app/stores";
 

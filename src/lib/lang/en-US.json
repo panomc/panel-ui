@@ -389,6 +389,10 @@
       "updates": "Updates",
       "about": "About"
     },
+    "server-settings-layout": {
+      "server": "Server",
+      "game-integration": "Game Integration"
+    },
     "modals": {
       "add-edit-post-category": {
         "create-category": "Create Category",
