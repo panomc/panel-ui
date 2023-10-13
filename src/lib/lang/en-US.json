@@ -509,6 +509,11 @@
     "permission-group-row": {
       "delete": "Delete",
       "edit": "Edit"
+    },
+    "post-category-row": {
+      "delete": "Delete",
+      "edit": "Edit",
+      "view": "View"
     }
   }
 }

@@ -1,7 +1,7 @@
 <tr class:table-primary="{category.selected}">
   <th scope="row" class="align-middle">
     <a
-      title="Sil"
+      title="{$_('components.post-category-row.delete')}"
       class="btn btn-sm btn-link link-danger"
       href="javascript:void(0);"
       on:click="{onDeleteClick}">
@@ -9,13 +9,13 @@
     </a>
   </th>
   <td class="align-middle text-nowrap">
-    <a href="javascript:void(0);" title="Düzenle" on:click="{onEditClick}">
+    <a href="javascript:void(0);" title="{$_('components.post-category-row.edit')}" on:click="{onEditClick}">
       {category.title}
     </a>
   </td>
   <td class="align-middle text-nowrap">{category.description}</td>
   <td class="align-middle">
-    <a href="/category/{category.url}" target="_blank" title="Görüntüle">
+    <a href="/category/{category.url}" target="_blank" title="{$_('components.post-category-row.view')}">
       /category/{category.url}
     </a>
   </td>
@@ -30,6 +30,7 @@
 
 <script>
   import { createEventDispatcher } from "svelte";
+  import { _ } from "svelte-i18n";
 
   export let category;
   export let index;

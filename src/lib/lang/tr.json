@@ -509,6 +509,11 @@
     "permission-group-row": {
       "delete": "Sil",
       "edit": "Düzenle"
+    },
+    "post-category-row": {
+      "delete": "Sil",
+      "edit": "Düzenle",
+      "view": "Görüntüle"
     }
   }
 }
