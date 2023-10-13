@@ -323,7 +323,7 @@
   const pageTitle = getContext("pageTitle");
 
   pageTitle.set(
-    data.mode === Modes.EDIT ? "Yazıyı Düzenle" : "Yeni Yazı Oluştur"
+    data.mode === Modes.EDIT ? "pages.post-editor.title-edit" : "pages.post-editor.title-create"
   );
 
   function onThumbnailChange(event) {

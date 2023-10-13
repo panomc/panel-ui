@@ -226,7 +226,9 @@
       "clear": "Temizle",
       "add": "Ekle",
       "change": "Değiştir",
-      "thumbnail-not-determined": "Küçük resim belirlenmedi."
+      "thumbnail-not-determined": "Küçük resim belirlenmedi.",
+      "title-create": "Yeni Yazı Oluştur",
+      "title-edit": "Yazıyı Düzenle"
     }
   },
   "components": {

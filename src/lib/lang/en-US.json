@@ -226,7 +226,9 @@
       "clear": "Clear",
       "add": "Add",
       "change": "Change",
-      "thumbnail-not-determined": "The thumbnail has not been determined."
+      "thumbnail-not-determined": "The thumbnail has not been determined.",
+      "title-create": "Create New Post",
+      "title-edit": "Edit Post"
     }
   },
   "components": {
