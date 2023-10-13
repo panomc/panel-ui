@@ -476,6 +476,19 @@
         },
         "save": "Save"
       }
+    },
+    "editor": {
+      "title": "Title {number}",
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strike": "Strikethrough",
+      "bullet-list": "List",
+      "ordered-list": "Ordered List",
+      "image": "Image",
+      "link": "Link",
+      "text-color": "Text Color",
+      "remove-text-color": "Remove Text Color"
     }
   }
 }

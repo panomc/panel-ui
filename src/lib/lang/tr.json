@@ -476,6 +476,19 @@
         },
         "save": "Kaydet"
       }
+    },
+    "editor": {
+      "title": "Başlık {number}",
+      "bold": "Kalın",
+      "italic": "İtalik",
+      "underline": "Altı Çizili",
+      "strike": "Üstü Çizili",
+      "bullet-list": "Liste",
+      "ordered-list": "Sıralı Liste",
+      "image": "Resim",
+      "link": "Bağlantı",
+      "text-color": "Yazı Rengi",
+      "remove-text-color": "Yazı Rengini Kaldır"
     }
   }
 }
