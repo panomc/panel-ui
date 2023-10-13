@@ -227,7 +227,7 @@
     },
     "navbar": {
       "navbar-toggle-tooltip": "Menüyü Aç/Kapa",
-      "new-notifications": "Yeni Bildirimler",
+      "notifications": "Bildirimler",
       "show-all": "Tümünü Görüntüle",
       "account-dropdown": {
         "session": "Oturum",

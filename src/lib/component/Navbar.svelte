@@ -32,7 +32,7 @@
               class="nav-link"
               data-bs-toggle="dropdown"
               role="button"
-              title="{$_('components.navbar.new-notifications')}">
+              title="{$_('components.navbar.notifications')}">
               <i class="fas fa-bell fa-lg"></i>
               {#if $notificationCount !== 0}
                 <span
@@ -45,7 +45,7 @@
             <div
               class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
               <h6 class="dropdown-header">
-                {$_('components.navbar.new-notifications')} {$notificationCount === 0
+                {$_('components.navbar.notifications')} {$notificationCount === 0
                   ? ""
                   : "(" + $notificationCount + ")"}
               </h6>
