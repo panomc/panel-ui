@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-          {$mode === "edit" ? $_('components.modals.add-edit-ticket-category.create-category') : $_('components.modals.add-edit-ticket-category.edit-category')}
+          {$mode === "edit" ? $_('components.modals.add-edit-ticket-category.edit-category') : $_('components.modals.add-edit-ticket-category.create-category')}
         </h5>
         <button
           title="{$_('components.modals.add-edit-ticket-category.close')}"
