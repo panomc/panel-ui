@@ -232,6 +232,20 @@
       "new": "Yeni",
       "draft": "Taslak",
       "published": "Yayınlanmış"
+    },
+    "category-tickets": {
+      "tickets": "Talepler",
+      "delete": "Sil",
+      "close-ticket": "Talebi Kapat",
+      "table-title": "{ticketCount} Talep",
+      "amount-selected": "{amount} adet seçildi.",
+      "table": {
+        "title": "Başlık",
+        "status": "Durum",
+        "category": "Kategori",
+        "player": "Oyuncu",
+        "last-reply": "Son Yanıt"
+      }
     }
   },
   "components": {

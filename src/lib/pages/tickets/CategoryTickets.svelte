@@ -6,7 +6,7 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
         <i class="fas fa-arrow-left me-2"></i>
-        Talepler
+        {$_('pages.category-tickets.tickets')}
       </a>
     </div>
     <div class="col-auto">
@@ -24,7 +24,7 @@
           href="javascript:void(0);"
           on:click="{onShowDeleteTicketsModalClick}">
           <i class="fas fa-trash me-2"></i>
-          Sil
+          {$_('pages.category-tickets.delete')}
         </a>
         <a
           class="btn btn-danger"
@@ -33,7 +33,7 @@
           href="javascript:void(0);"
           on:click="{onShowCloseTicketsModalClick}">
           <i class="fas fa-times me-2"></i>
-          Talebi Kapat
+          {$_('pages.category-tickets.close-ticket')}
         </a>
       </div>
     </div>
@@ -45,10 +45,10 @@
       <div class="row justify-content-between pb-3 align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title mb-md-0">
-            {data.ticketCount}
-            Talep{getListOfChecked($checkedList).length > 0
-              ? ", " + getListOfChecked($checkedList).length + " adet seçildi"
-              : ""}
+            {$_('pages.category-tickets.table-title', {values: {ticketCount: data.ticketCount
+              }}) + (getListOfChecked($checkedList).length > 0
+              ? ", " + $_('pages.category-tickets.amount-selected', {values: {amount: getListOfChecked($checkedList).length}})
+              : "")}
           </h5>
         </div>
       </div>
@@ -75,11 +75,11 @@
                       type="checkbox" />
                   </div>
                 </th>
-                <th class="min-w-200px align-middle" scope="col">Başlık</th>
-                <th class="align-middle" scope="col">Durum</th>
-                <th class="align-middle table-primary" scope="col">Kategori</th>
-                <th class="align-middle" scope="col">Açan</th>
-                <th class="align-middle" scope="col">Son Yanıt</th>
+                <th class="min-w-200px align-middle" scope="col">{$_('pages.category-tickets.table.title')}</th>
+                <th class="align-middle" scope="col">{$_('pages.category-tickets.table.status')}</th>
+                <th class="align-middle table-primary" scope="col">{$_('pages.category-tickets.table.category')}</th>
+                <th class="align-middle" scope="col">{$_('pages.category-tickets.table.player')}</th>
+                <th class="align-middle" scope="col">{$_('pages.category-tickets.table.last-reply')}</th>
               </tr>
             </thead>
             <tbody>
@@ -185,6 +185,7 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";

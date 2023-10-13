@@ -232,6 +232,20 @@
       "new": "New",
       "draft": "Draft",
       "published": "Published"
+    },
+    "category-tickets": {
+      "tickets": "Tickets",
+      "delete": "Delete",
+      "close-ticket": "Close Ticket",
+      "table-title": "{ticketCount} Ticket",
+      "amount-selected": "{amount} amount selected.",
+      "table": {
+        "title": "Title",
+        "status": "Status",
+        "category": "Category",
+        "player": "Player",
+        "last-reply": "Last Reply"
+      }
     }
   },
   "components": {
