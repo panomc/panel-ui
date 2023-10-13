@@ -30,25 +30,6 @@
   margin-left: -250px;
 }
 
-.selected {
-  box-shadow: 0 0 0 4px inset $primary !important;
-  position: relative;
-  transition: 250ms;
-
-  &:after {
-    position: absolute;
-    content: "";
-    top: 3px;
-    right: 3px;
-    width: 30px;
-    height: 30px;
-    background: url("/assets/img/check-solid.svg") no-repeat top 3px right 3px;
-    background-size: 16px;
-    background-color: $primary;
-    border-bottom-left-radius: 75px;
-  }
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }
