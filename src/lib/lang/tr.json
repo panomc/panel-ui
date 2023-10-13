@@ -492,6 +492,10 @@
     },
     "no-content": {
       "here-is-empty": "Burası boş."
+    },
+    "pagination": {
+      "previous-page": "Önceki Sayfa",
+      "next-page": "Sonraki Sayfa"
     }
   }
 }

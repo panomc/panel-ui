@@ -4,7 +4,7 @@
       <a
         class="page-link"
         href="javascript:void(0);"
-        title="Önceki Sayfa"
+        title="{$_('components.pagination.previous-page')}"
         on:click="{onFirstPageClick}"
         aria-hidden="{parseInt(page) === 1}">
         <i class="fa-solid fa-caret-left"></i>
@@ -30,7 +30,7 @@
       <a
         class="page-link"
         href="javascript:void(0);"
-        title="Sonraki Sayfa"
+        title="{$_('components.pagination.next-page')}"
         on:click="{onLastPageClick}"
         aria-hidden="{parseInt(page) === totalPage}">
         <i class="fa-solid fa-caret-right"></i>
@@ -41,6 +41,7 @@
 
 <script>
   import { createEventDispatcher } from "svelte";
+  import { _ } from "svelte-i18n";
 
   const dispatch = createEventDispatcher();
   let pages;

@@ -492,6 +492,10 @@
     },
     "no-content": {
       "here-is-empty": "Here is empty."
+    },
+    "pagination": {
+      "previous-page": "Previous Page",
+      "next-page": "Next Page"
     }
   }
 }
