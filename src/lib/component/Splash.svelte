@@ -8,36 +8,31 @@
   {/if}
 </svelte:head>
 
-<div class="splash" role="status" in:fade out:fade>
+<div
+  class="d-flex align-items-center justify-content-center vh-100 w-100 flex-column text-danger"
+  role="status"
+  in:fade
+  out:fade>
   <img
     alt="Pano"
-    src="{base +
-      (networkErrors
-        ? '/assets/img/logo-blue.svg'
-        : '/assets/img/loading_slime.gif')}"
-    width="{networkErrors ? '32' : '128'}"
+    src="/assets/img/loading_slime.gif"
+    width="128"
     height="auto" />
 
   {#if networkErrors}
-    <div
-      class="pt-4 d-flex flex-column
-      justify-content-center align-items-center text-center">
-      {#if notLoggedIn}
-        <p>
-          <a href="http://localhost:3000/" target="_blank">Oturum hatası</a>
-        </p>
-      {:else if noPermission}
-        <p class="text-danger">Yetki hatası</p>
-      {:else}
-        <p class="text-danger">Bağlantı hatası</p>
-      {/if}
-      <button
-        class="btn btn-outline-primary"
-        on:click="{onResumeClick}"
-        class:disabled="{$retryingNetworkErrors}">
-        {$retryingNetworkErrors ? "Yenileniyor..." : "Yenile"}
-      </button>
-    </div>
+    {#if notLoggedIn}
+      Oturum hatası
+    {:else if noPermission}
+      Yetki hatası
+    {:else}
+      Bağlantı hatası
+    {/if}
+    <button
+      class="btn btn-primary mt-3"
+      on:click="{onResumeClick}"
+      class:disabled="{$retryingNetworkErrors}">
+      {$retryingNetworkErrors ? "Yenileniyor..." : "Yenile"}
+    </button>
   {/if}
 </div>
 

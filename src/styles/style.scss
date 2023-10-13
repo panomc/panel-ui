@@ -66,17 +66,6 @@
   border-radius: 8px;
 }
 
-.splash {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-width: 100%;
-  min-height: 100vh;
-  position: absolute;
-  z-index: 1050;
-}
-
 .notification-unread {
   animation: readNotification 3s ease-in-out;
 }
