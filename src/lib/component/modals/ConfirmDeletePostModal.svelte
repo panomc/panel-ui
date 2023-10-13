@@ -12,8 +12,8 @@
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
         {$post.status === 0
-          ? "Bu yazıyı kalıcı olarak silmek istediğinizden emin misiniz?"
-          : "Bu yazıyı çöp kutusuna taşımak istediğinizden emin misiniz?"}
+          ? $_('components.modals.confirm-delete-post.title-permanent')
+          : $_('components.modals.confirm-delete-post.title-trash')}
       </div>
       <div class="modal-footer flex-nowrap">
         <button
@@ -21,14 +21,14 @@
           type="button"
           class:disabled="{loading}"
           on:click="{hide}">
-          İptal
+          {$_('components.modals.confirm-delete-post.cancel')}
         </button>
         <button
           class="btn btn-danger col-6 m-0"
           type="button"
           class:disabled="{loading}"
           on:click="{onYesClick}">
-          Evet
+          {$_('components.modals.confirm-delete-post.yes')}
         </button>
       </div>
     </div>
@@ -71,6 +71,8 @@
 </script>
 
 <script>
+  import { _ } from "svelte-i18n";
+
   import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 

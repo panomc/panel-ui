@@ -7,8 +7,8 @@
         <div class="card-body">
           <p
             class="mb-0 lead text-secondary text-center"
-            use:tooltip="{['Website', { placement: 'bottom' }]}">
-            {data.onlinePlayerCount} Çevrimiçi
+            use:tooltip="{[$_('pages.statistics.website-tooltip'), { placement: 'bottom' }]}">
+            {$_("pages.statistics.online-player-text", {values: {onlinePlayerCount: data.onlinePlayerCount}})}
           </p>
         </div>
       </div>
@@ -17,7 +17,7 @@
       <div class="card bg-primary bg-opacity-25">
         <div class="card-body">
           <p class="mb-0 lead text-primary text-center">
-            {data.newRegisterCount} Yeni Kayıt
+            {$_('pages.statistics.new-register-text', {values: {newRegisterCount: data.newRegisterCount}})}
           </p>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <div class="card bg-danger bg-opacity-25">
         <div class="card-body">
           <p class="mb-0 lead text-danger text-center">
-            {data.registeredPlayerCount} Toplam Oyuncu
+            {$_('pages.statistics.total-player-text', {values: {totalPlayerCount: data.registeredPlayerCount}})}
           </p>
         </div>
       </div>
@@ -37,7 +37,7 @@
     <div class="card-body">
       <div class="row justify-content-between mb-3">
         <div class="col">
-          <h5 class="card-title">Website Aktivitesi</h5>
+          <h5 class="card-title">{$_('pages.statistics.website-graph.title')}</h5>
         </div>
         <div class="col-auto">
           <div class="btn-group">
@@ -46,14 +46,14 @@
               class:active="{data.period === DashboardPeriod.WEEK}"
               on:click="{() => reloadDataByPeriod()}"
               class:disabled="{reloading}">
-              Hafta
+              {$_('pages.statistics.website-graph.week')}
             </button>
             <button
               class="btn btn-sm btn-outline-light btn-link"
               class:active="{data.period === DashboardPeriod.MONTH}"
               on:click="{() => reloadDataByPeriod(DashboardPeriod.MONTH)}"
               class:disabled="{reloading}">
-              Ay
+              {$_('pages.statistics.website-graph.month')}
             </button>
           </div>
         </div>
@@ -70,36 +70,36 @@
   <!-- Statistic Table -->
   <div class="card bg-white">
     <div class="card-body">
-      <h5 class="card-title">İstatistik</h5>
+      <h5 class="card-title">{$_('pages.statistics.total-statistics.title')}</h5>
       <div class="table-responsive">
         <table class="table m-0">
           <tbody>
             <tr>
-              <th scope="row">Yazılar:</th>
+              <th scope="row">{$_('pages.statistics.total-statistics.posts')}</th>
               <td>{data.postCount}</td>
             </tr>
             <tr>
-              <th scope="row">Oyuncular:</th>
+              <th scope="row">{$_('pages.statistics.total-statistics.players')}</th>
               <td>{data.registeredPlayerCount}</td>
             </tr>
             <tr>
-              <th scope="row">Yöneticiler:</th>
+              <th scope="row">{$_('pages.statistics.total-statistics.admins')}</th>
               <td>{data.adminCount}</td>
             </tr>
             <tr>
-              <th scope="row">Talepler:</th>
+              <th scope="row">{$_('pages.statistics.total-statistics.tickets')}:</th>
               <td>{data.ticketCount}</td>
             </tr>
             <tr>
-              <th scope="row">Sunucular:</th>
+              <th scope="row">{$_('pages.statistics.total-statistics.connected-servers')}</th>
               <td>{data.connectedServerCount}</td>
             </tr>
             <tr>
-              <th scope="row">Eklentiler:</th>
+              <th scope="row">{$_('pages.statistics.total-statistics.addons')}</th>
               <td>?</td>
             </tr>
             <tr>
-              <th scope="row">Temalar:</th>
+              <th scope="row">{$_('pages.statistics.total-statistics.themes')}:</th>
               <td>?</td>
             </tr>
           </tbody>
@@ -168,6 +168,7 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import tooltip from "$lib/tooltip.util";
 
@@ -178,7 +179,7 @@
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set("İstatistikler");
+  pageTitle.set("pages.statistics.title");
 
   function reloadDataByPeriod(period = DashboardPeriod.WEEK) {
     if (data.period === period) {

@@ -11,10 +11,10 @@
         <div class="pb-3">
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
-        Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?
+        {$_('components.modals.confirm-delete-post-category.title')}
         {#if $category.postCount !== 0}
           <div class="mt-3 alert alert-warning text-left">
-            Kategori içerisindeki şu yazılar Kategorisiz olarak değişecek:
+            {$_('components.modals.confirm-delete-post-category.description')}
             <br />
             <br />
             {#each $category.posts as post, index (post)}
@@ -27,8 +27,7 @@
             {/each}
           </div>
           {#if $category.postCount > 5}
-            +{$category.postCount - 5}
-            yazı daha
+            {$_('components.modals.confirm-delete-post-category.more-posts', {values: {count:$category.postCount - 5}})}
           {/if}
         {/if}
       </div>
@@ -38,14 +37,14 @@
           type="button"
           class:disabled="{loading}"
           on:click="{hide}">
-          İptal
+          {$_('components.modals.confirm-delete-post-category.cancel')}
         </button>
         <button
           class="btn btn-danger col-6 m-0"
           type="button"
           class:disabled="{loading}"
           on:click="{onYesClick}">
-          Evet
+          {$_('components.modals.confirm-delete-post-category.yes')}
         </button>
       </div>
     </div>
@@ -100,6 +99,7 @@
     limitTitle,
   } from "$lib/component/ToastContainer.svelte";
   import PostCategoryDeletedPermanentlyToast from "$lib/component/toasts/PostCategoryDeletedPermanentlyToast.svelte";
+  import { _ } from "svelte-i18n";
 
   let loading = false;
 

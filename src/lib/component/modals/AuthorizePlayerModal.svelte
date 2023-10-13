@@ -11,13 +11,13 @@
       {:else}
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Oyuncuyu Yetkilendir
+            {$_('components.modals.authorize-player.title')}
           </h5>
           <button
             type="button"
             class="btn-close"
             data-bs-dismiss="modal"
-            aria-label="Kapat"
+            aria-label="{$_('components.modals.authorize-player.close')}"
             on:click="{hide}"></button>
         </div>
         <div class="modal-body">
@@ -25,7 +25,7 @@
             class="form-control"
             id="selectPermGroup"
             bind:value="{$player.permissionGroup}">
-            <option class="text-primary" value="-">Oyuncu</option>
+            <option class="text-primary" value="-">{$_('components.modals.authorize-player.player')}</option>
 
             {#each $permissionGroups as permissionGroup, index (permissionGroup)}
               <option value="{permissionGroup.name}"
@@ -38,7 +38,7 @@
             type="button"
             class="btn btn-primary w-100"
             class:disabled="{$submitLoading}"
-            on:click="{onSubmit}">Kaydet</button>
+            on:click="{onSubmit}">{$_('components.modals.authorize-player.save')}</button>
         </div>
       {/if}
     </div>
@@ -118,6 +118,8 @@
 </script>
 
 <script>
+  import { _ } from "svelte-i18n";
+
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import PlayerAuthorizedSuccessToast from "$lib/component/toasts/PlayerAuthorizedSuccessToast.svelte";
 

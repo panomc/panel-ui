@@ -11,7 +11,7 @@
         <div class="pb-3">
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
-        Bu oyuncuyu yasaklamak istediğinizden emin misiniz?
+        {$_('components.modals.confirm-ban-player.title')}
         <div class="form-check d-inline-block text-center mt-3">
           <input
             class="form-check-input"
@@ -20,7 +20,7 @@
             bind:checked="{$sendNotification}"
             id="notifyBanEmail" />
           <label class="form-check-label" for="notifyBanEmail">
-            E-posta ile bilgilendir
+            {$_('components.modals.confirm-ban-player.notify-with-email')}
           </label>
         </div>
       </div>
@@ -30,14 +30,14 @@
           type="button"
           class:disabled="{loading}"
           on:click="{hide}">
-          İptal
+          {$_('components.modals.confirm-ban-player.cancel')}
         </button>
         <button
           class="btn btn-danger col-6 m-0"
           type="button"
           class:disabled="{loading}"
           on:click="{onSubmit}">
-          Evet
+          {$_('components.modals.confirm-ban-player.yes')}
         </button>
       </div>
     </div>
@@ -89,6 +89,7 @@
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
 
   import PlayerBanToast from "$lib/component/toasts/PlayerBanToast.svelte";
+  import { _ } from "svelte-i18n";
 
   let loading;
 

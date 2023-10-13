@@ -6,7 +6,7 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets/categories">
         <i class="fas fa-list-alt me-2"></i>
-        Talep Kategorileri
+        {$_('pages.tickets.ticket-categories')}
       </a>
     </div>
     <div class="col-auto">
@@ -32,7 +32,7 @@
           href="javascript:void(0);"
           on:click="{onShowCloseTicketsModalClick}">
           <i class="fas fa-times me-2"></i>
-          Talebi Kapat
+          {$_('pages.tickets.close-ticket-button')}
         </a>
       </div>
     </div>
@@ -44,14 +44,14 @@
       <div class="row justify-content-between align-items-center mb-3">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
-            {data.ticketCount}
-            {data.pageType === PageTypes.WAITING_REPLY
-              ? "Yeni"
-              : data.pageType === PageTypes.CLOSED
-              ? "Kapalı"
-              : ""} Talep{getListOfChecked($checkedList).length > 0
-              ? ", " + getListOfChecked($checkedList).length + " adet seçildi"
-              : ""}
+            {$_('pages.tickets.table-title', {values: {ticketCount: data.ticketCount, pageType: data.pageType === PageTypes.WAITING_REPLY
+                  ? $_('pages.tickets.waiting-reply')
+                  : data.pageType === PageTypes.CLOSED
+                    ? $_('pages.tickets.closed')
+                    : ""
+            }}) + (getListOfChecked($checkedList).length > 0
+            ? ", " + $_('pages.tickets.amount-selected', {values: {amount: getListOfChecked($checkedList).length}})
+            : "")}
           </h5>
         </div>
         <div class="col-md-auto col-12 text-md-right text-center">
@@ -61,21 +61,21 @@
               class:active="{data.pageType === PageTypes.ALL}"
               role="button"
               href="{base}/tickets/all">
-              Tümü
+              {$_('pages.tickets.all')}
             </a>
             <a
               class="btn btn-sm btn-outline-light btn-link text-mint"
               class:active="{data.pageType === PageTypes.WAITING_REPLY}"
               role="button"
               href="{base}/tickets/waitingReply">
-              Yeni
+              {$_('pages.tickets.waiting-reply')}
             </a>
             <a
               class="btn btn-sm btn-outline-light btn-link text-danger"
               class:active="{data.pageType === PageTypes.CLOSED}"
               role="button"
               href="{base}/tickets/closed">
-              Kapalı
+              {$_('pages.tickets.closed')}
             </a>
           </div>
         </div>
@@ -93,7 +93,7 @@
                 <th class="align-middle" scope="col">
                   <div class="form-check">
                     <input
-                      title="Tümünü Seç"
+                      title="{$_('pages.tickets.select-all')}"
                       class="form-check-input"
                       on:click="{onSelectAllClick}"
                       checked="{isAllTicketsSelected(
@@ -104,11 +104,11 @@
                       type="checkbox" />
                   </div>
                 </th>
-                <th class="align-middle" scope="col">Başlık</th>
-                <th class="align-middle" scope="col">Oyuncu</th>
-                <th class="align-middle" scope="col">Kategori</th>
-                <th class="align-middle" scope="col">Durum</th>
-                <th class="align-middle" scope="col">Son Yanıt</th>
+                <th class="align-middle" scope="col">{$_('pages.tickets.table.title')}</th>
+                <th class="align-middle" scope="col">{$_('pages.tickets.table.player')}</th>
+                <th class="align-middle" scope="col">{$_('pages.tickets.table.category')}</th>
+                <th class="align-middle" scope="col">{$_('pages.tickets.table.status')}</th>
+                <th class="align-middle" scope="col">{$_('pages.tickets.table.last-reply')}</th>
               </tr>
             </thead>
             <tbody>
@@ -212,6 +212,7 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
@@ -236,13 +237,17 @@
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set(
-    (data.pageType === PageTypes.WAITING_REPLY
-      ? "Yeni" + " "
-      : data.pageType === PageTypes.CLOSED
-      ? "Kapalı" + " "
-      : "") + "Talepler"
-  );
+  $: {
+    pageTitle.set($_("pages.tickets.title", {
+      values: {
+        pageType: (data.pageType === PageTypes.WAITING_REPLY
+          ? $_('pages.tickets.waiting-reply') + " "
+          : data.pageType === PageTypes.CLOSED
+            ? $_('pages.tickets.closed') + " "
+            : "")
+      }
+    }));
+  }
 
   let firstLoad = true;
 

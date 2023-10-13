@@ -5,13 +5,13 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/players">
         <i class="fas fa-arrow-left me-2"></i>
-        Oyuncular
+        {$_('pages.permission-groups.players')}
       </a>
     </div>
     <div class="col-auto">
       <a href="{base}/players/perm-groups/create" class="btn btn-secondary">
         <i class="fas fa-plus me-2"></i>
-        Yetki Grubu Oluştur
+        {$_('pages.permission-groups.create-permission-group-button')}
       </a>
     </div>
   </div>
@@ -20,7 +20,7 @@
     <div class="card-body">
       <!-- Permissions Table -->
       <h5 class="card-title">
-        {data.permissionGroupCount} Yetki Grubu
+        {$_('pages.permission-groups.card-title', {values:{count: data.permissionGroupCount}})}
       </h5>
 
       <div class="table-responsive">
@@ -28,9 +28,9 @@
           <thead>
             <tr>
               <th class="align-middle text-nowrap" scope="col"></th>
-              <th class="align-middle text-nowrap" scope="col">İsim</th>
-              <th class="align-middle text-nowrap" scope="col">Yetki Adeti</th>
-              <th class="align-middle text-nowrap" scope="col">Oyuncu Adeti</th>
+              <th class="align-middle text-nowrap" scope="col">{$_('pages.permission-groups.name')}</th>
+              <th class="align-middle text-nowrap" scope="col">{$_('pages.permission-groups.permission-amount')}</th>
+              <th class="align-middle text-nowrap" scope="col">{$_('pages.permission-groups.player-amount')}</th>
             </tr>
           </thead>
           <tbody>
@@ -120,6 +120,9 @@
 </script>
 
 <script>
+  import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
+
   import { base } from "$app/paths";
   import { goto } from "$app/navigation";
 
@@ -131,13 +134,12 @@
 
   import Pagination from "$lib/component/Pagination.svelte";
   import PermissionGroupRow from "$lib/component/rows/PermissionGroupRow.svelte";
-  import { getContext } from "svelte";
 
   export let data;
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set("Yetki Grupları");
+  pageTitle.set("pages.permission-groups.title");
 
   function reloadData(page = data.page) {
     showNetworkErrorOnCatch((resolve, reject) => {

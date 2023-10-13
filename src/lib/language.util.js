@@ -1,36 +1,52 @@
+import { browser } from "$app/environment";
 import { get, writable } from "svelte/store";
 
-import { register, init as initI18n, locale, waitLocale } from "svelte-i18n";
+import {
+  register,
+  getLocaleFromNavigator,
+  init as initI18n,
+  locale,
+  waitLocale,
+} from "svelte-i18n";
 
 export const Languages = Object.freeze({
   EN_US: {
     locale: "en-US",
     file: () => import("$lib/lang/en-US.json"),
     name: "English (US)",
+    "date-fns-code": "en-US"
   },
   TR: {
     locale: "tr",
     file: () => import("$lib/lang/tr.json"),
     derivatives: ["tr-tr"],
     name: "Türkçe (TR)",
+    "date-fns-code": "tr"
   },
 });
 
 export const loadedLanguages = writable([]);
 export const languageLoading = writable(false);
-export const currentLanguage = writable({});
-export const defaultLanguage = Languages.EN_US;
+export const currentLanguage = writable(null);
 
-export async function init(locale) {
-  const initialLocale = getLanguageByLocale(locale);
-  const languageToLoad = getLocaleOrDefaultByLocale(initialLocale);
+export async function init(initialLocale) {
+  if (browser && !initialLocale) {
+    initialLocale = get(locale);
+
+    if (get(locale) === null) {
+      initialLocale = getLocaleFromNavigator();
+    }
+  }
+
+  const language = getLanguageByLocale(initialLocale);
+  const languageToLoad = language || Languages.EN_US;
 
   await loadLanguage(languageToLoad);
   currentLanguage.set(languageToLoad);
 
   initI18n({
-    fallbackLocale: defaultLanguage.locale,
-    initialLocale,
+    fallbackLocale: "en-US",
+    initialLocale: languageToLoad.locale,
   });
 }
 
@@ -85,25 +101,13 @@ export async function changeLanguage(language) {
 export function getLanguageByLocale(locale) {
   let foundLanguage = null;
 
-  Object.keys(Languages).forEach((language) => {
-    if (Languages[language].locale === locale) {
+  Object.keys(Languages).forEach((key) => {
+    const language = Languages[key]
+
+    if (language.locale === locale) {
       foundLanguage = language;
     }
   });
 
   return foundLanguage;
-}
-
-export function getLocaleOrDefaultByLocale(locale) {
-  if (!locale) {
-    return defaultLanguage.locale;
-  }
-
-  const language = getLanguageByLocale(locale);
-
-  if (!language) {
-    return defaultLanguage.locale;
-  }
-
-  return language.locale;
 }

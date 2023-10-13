@@ -1,3 +1,419 @@
 {
-  "title": ""
+  "pages": {
+    "dashboard": {
+      "title": "Panel",
+      "welcome-card": {
+        "description": "The Pano is successfully installed and ready for use. \uD83D\uDE80 <br /> Here's what you can do to get started \uD83D\uDC47:",
+        "connect-server": "Connect Server",
+        "connect-server-description": "Connect Pano to your game server and access more management features.",
+        "discover-title": "Discover The Menu",
+        "more-title": "More",
+        "publish-your-first-post": "Publish Your First Post",
+        "change-theme": "Change The Appearance",
+        "manage-tools": "Manage Tools",
+        "review-players": "Review Your Players",
+        "discover-extensions": "Discover The Pano Extensions",
+        "discover-themes": "Discover The Pano Themes",
+        "discover-documentations": "Review Documentations",
+        "join-discord": "Join Our Discord",
+        "close-button": "Close"
+      },
+      "last-tickets": {
+        "title": "Last Tickets",
+        "player-name": "Player Name",
+        "view": "View",
+        "filter": "Filter",
+        "no-category": "No Category"
+      }
+    },
+    "statistics": {
+      "title": "Statistics",
+      "website-tooltip": "Website",
+      "online-player-text": "{onlinePlayerCount} Online",
+      "new-register-text": "{newRegisterCount} New Registration",
+      "total-player-text": "{totalPlayerCount} Total Players",
+      "website-graph": {
+        "title": "Website Activity",
+        "week": "Week",
+        "month": "Month"
+      },
+      "total-statistics": {
+        "title": "Statistics",
+        "posts": "Posts:",
+        "players": "Players:",
+        "admins": "Admins:",
+        "tickets": "Tickets:",
+        "connected-servers": "Servers:",
+        "addons": "Addons:",
+        "themes": "Themes:"
+      }
+    },
+    "players": {
+      "title": "{pageType}Players",
+      "authorized": "Authorized",
+      "banned": "Banned",
+      "perm-groups": "Permission Groups",
+      "table-title": "{playerCount} {pageType} Player",
+      "all": "All",
+      "table": {
+        "name": "Username",
+        "permission": "Permission",
+        "status": "Status",
+        "last-entrance": "Last Entrance",
+        "register-date": "Register Date"
+      }
+    },
+    "posts": {
+      "title": "{pageType}Posts",
+      "published": "Published",
+      "draft": "Draft",
+      "trash": "Trash",
+      "table-title": "{postCount} {pageType} Post",
+      "post-categories-button": "Post Categories",
+      "create-post-button": "Create Post",
+      "table": {
+        "title": "Title",
+        "category": "Category",
+        "views": "Views",
+        "author": "Author",
+        "last-update": "Last Update"
+      }
+    },
+    "tickets": {
+      "title": "{pageType}Tickets",
+      "waiting-reply": "Waiting Reply",
+      "closed": "Closed",
+      "ticket-categories": "Ticket Categories",
+      "close-ticket-button": "Close Ticket",
+      "table-title": "{ticketCount} {pageType} Ticket",
+      "amount-selected": "{amount} amount selected.",
+      "all": "All",
+      "select-all": "Select All",
+      "table": {
+        "title": "Title",
+        "player": "Player",
+        "category": "Category",
+        "status": "Status",
+        "last-reply": "Last Reply"
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "delete-all": "Delete All",
+      "delete-notification": "Delete Notification",
+      "show-more": "Show More ({count})"
+    },
+    "settings": {
+      "about": {
+        "title": "About",
+        "version": "Version",
+        "release-type": "Release Type",
+        "website": "Website",
+        "discord": "Discord",
+        "open-source-licenses": "Open Source Licenses"
+      },
+      "site-settings": {
+        "title": "Website Settings",
+        "inputs": {
+          "website-name": {
+            "label": "Website Name",
+            "placeholder": "Name"
+          },
+          "website-description": {
+            "label": "Website Description"
+          },
+          "game-server-ip-address": {
+            "label": "Game Server IP Address"
+          },
+          "game-server-version": {
+            "label": "Game Server Version"
+          },
+          "support-email-address": {
+            "label": "Support E-Mail Address"
+          },
+          "keywords": {
+            "label": "Keywords",
+            "placeholder": "Press Enter to insert",
+            "remove": "Click To Remove"
+          },
+          "favicon": {
+            "label": "Favicon",
+            "select": "Select",
+            "helper": "PNG, ICO, GIF, JPG, SVG format, maximum 1 mb and 16x16 pixels It must be."
+          },
+          "website-logo": {
+            "label": "Website Logo",
+            "server-icon": "Server Icon",
+            "helper": "PNG, JPEG, GIF, SVG format, maximum 2 mb."
+          }
+        },
+        "save-button": "Save"
+      },
+      "platform": {
+        "title": "General Settings",
+        "display-language": "Display Language:",
+        "update-preferences": "Update Preferences",
+        "check-auto-updates": "Check for automatic updates:",
+        "inputs": {
+          "check-auto-updates": {
+            "never": "Never",
+            "once-in-a-day": "Once in a day",
+            "once-in-a-week": "Once in a week",
+            "once-in-a-month": "Once in a month"
+          }
+        },
+        "save-button": "Save"
+      }
+    },
+    "ticket-detail": {
+      "tickets": "Tickets",
+      "close-ticket": "Close Ticket",
+      "by-who": "By {username},",
+      "opened-in-category": "opened in {category} category.",
+      "no-category": "No Category",
+      "previous-messages": "Previous Messages ({count})",
+      "send-button": "Send"
+    },
+    "post-categories": {
+      "title": "Post Categories",
+      "posts": "Posts",
+      "create-category-button": "Create Category",
+      "card-title": "{count} Post Category",
+      "category": "Category",
+      "description": "Description",
+      "url": "URL",
+      "color": "Color"
+    },
+    "ticket-categories": {
+      "title": "Ticket Categories",
+      "tickets": "Tickets",
+      "create-category-button": "Create Category",
+      "card-title": "{count} Ticket Category",
+      "category": "Category",
+      "description": "Description"
+    },
+    "permission-groups": {
+      "title": "Permission Groups",
+      "players": "Players",
+      "create-permission-group-button": "Create Permission Group",
+      "card-title": "{count} Permission Group",
+      "name": "Name",
+      "permission-amount": "Permission Amount",
+      "player-amount": "Player Amount"
+    }
+  },
+  "components": {
+    "ticket-status-badge": {
+      "filter": "Filter",
+      "new": "New",
+      "replied": "Replied",
+      "closed": "Closed"
+    },
+    "website-activity-chart": {
+      "new-registration": "New Registration",
+      "new-ticket": "New Ticket",
+      "visitor": "Visitor",
+      "view": "View"
+    },
+    "site-navigation-menu": {
+      "panel": "Panel",
+      "statistics": "Statistics",
+      "posts": "Posts",
+      "tickets": "Tickets",
+      "players": "Players",
+      "view": "View",
+      "addons": "Addons",
+      "settings": "Settings"
+    },
+    "navbar": {
+      "navbar-toggle-tooltip": "Open/Close Menu",
+      "new-notifications": "New Notifications",
+      "show-all": "Show All",
+      "account-dropdown": {
+        "session": "Session",
+        "profile": "Profile",
+        "logout": "Logout"
+      }
+    },
+    "sidebar": {
+      "sidebar-toggle-tooltip": "Open/Close Menu",
+      "website": "Website",
+      "server": "Server",
+      "show-website": "Show Website",
+      "show-servers": "Show Servers"
+    },
+    "server-navigation-menu": {
+      "statistics": "Statistics",
+      "settings": "Settings",
+      "no-selected-server": "No selected server.",
+      "no-server-text": "No server connected. Connect a server to see the server menu.",
+      "connect-server": "Connect Server"
+    },
+    "post-row": {
+      "actions": "Actions",
+      "view": "View",
+      "move-to-draft": "Move To Draft",
+      "publish": "Publish",
+      "move-to-trash": "Move To Trash",
+      "delete": "Delete",
+      "edit": "Edit",
+      "no-category": "No Category",
+      "filter": "Filter"
+    },
+    "ticket-row": {
+      "select": "Select",
+      "view": "View",
+      "filter": "Filter",
+      "no-category": "No Category",
+      "player-name": "Player Name"
+    },
+    "player-row": {
+      "actions": "Actions",
+      "authorize": "Authorize",
+      "edit": "Edit",
+      "remove-ban": "Remove Ban",
+      "ban": "Ban",
+      "view": "View"
+    },
+    "player-status-badge": {
+      "banned": "Banned",
+      "in-game": "In Game",
+      "in-website": "In Website",
+      "online": "Online",
+      "offline": "Offline"
+    },
+    "player-permission-badge": {
+      "filter": "Filter",
+      "player": "Player"
+    },
+    "bottom": {
+      "help": "Help",
+      "pano-market": "Pano Market",
+      "discord": "Discord"
+    },
+    "notification-container": {
+      "notification": "Notification"
+    },
+    "settings-layout": {
+      "website": "Website",
+      "platform": "Platform",
+      "updates": "Updates",
+      "about": "About"
+    },
+    "modals": {
+      "add-edit-post-category": {
+        "create-category": "Create Category",
+        "edit-category": "Edit Category",
+        "close": "Close",
+        "inputs": {
+          "title": {
+            "placeholder": "Title"
+          },
+          "description": {
+            "placeholder": "Description"
+          },
+          "url": {
+            "placeholder": "URL",
+            "helper": "It can only contain [A-Z/a-z/0-9/-] and can have a minimum of 3 and a maximum of 32 characters."
+          }
+        },
+        "save": "Save",
+        "create": "Create"
+      },
+      "add-edit-ticket-category": {
+        "create-category": "Create Category",
+        "edit-category": "Edit Category",
+        "close": "Close",
+        "inputs": {
+          "title": {
+            "placeholder": "Title"
+          },
+          "description": {
+            "placeholder": "Description"
+          }
+        },
+        "save": "Save",
+        "create": "Create"
+      },
+      "authorize-player": {
+        "title": "Authorize Player",
+        "close": "Close",
+        "player": "Player",
+        "save": "Save"
+      },
+      "confirm-ban-player": {
+        "title": "Are you sure you want to ban this player?",
+        "notify-with-email": "Notify by email",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
+      "confirm-close-ticket": {
+        "title-single": "Are you sure you want to close this ticket?",
+        "title-multi": "Are you sure you want to close these tickets?",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
+      "confirm-delete-permission-group": {
+        "title": "Are you sure you want to permanently delete this authorization group?",
+        "description": "The following users in the authorization group will be changed to Player:",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
+      "confirm-delete-player": {
+        "title": "Are you sure you really want to delete this player?",
+        "inputs": {
+          "password": {
+            "placeholder": "Password"
+          }
+        },
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
+      "confirm-delete-post-category": {
+        "title": "Are you sure you want to permanently delete this category?",
+        "description": "The following posts in the category will be changed to Uncategorized:",
+        "more-posts": "+{count} more posts",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
+      "confirm-delete-post": {
+        "title-permanent": "Are you sure you want to permanently delete this post?",
+        "title-trash": "Are you sure you want to move this post to the trash?",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
+      "confirm-delete-ticket-category": {
+        "title-permanent": "Note: If you delete this category, the following tickets will remain Uncategorized:",
+        "title": "Are you sure you want to permanently delete this category?",
+        "more-posts": "+{count} more tickets",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
+      "confirm-delete-ticket": {
+        "title-single": "Are you sure you want to permanently delete this ticket?",
+        "title-multi": "Are you sure you want to permanently delete these tickets?",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
+      "confirm-remove-all-notifications": {
+        "title": "Are you sure you want to permanently delete all notifications?",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
+      "connect-server": {
+        "title": "Connect Server",
+        "close": "Close",
+        "steps": {
+          "1": "1 - Install Pano Plugin on Game Server",
+          "2": "2 - Run Connection Command",
+          "3": "3 - Confirm Connection Request"
+        },
+        "download": "Download File",
+        "copy": "Copy",
+        "copied": "Copied!",
+        "code-refresh": "Code will refresh after {timeToRefreshKey} seconds.",
+        "notification-will-come": "The connection request will come as a notification."
+      }
+    }
+  }
 }

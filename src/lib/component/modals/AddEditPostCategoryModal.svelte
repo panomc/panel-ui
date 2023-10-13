@@ -4,10 +4,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-          {$mode === "create" ? "Kategori Oluştur" : "Kategoriyi Düzenle"}
+          {$mode === "create" ? $_('components.modals.add-edit-post-category.create-category') : $_('components.modals.add-edit-post-category.edit-category')}
         </h5>
         <button
-          title="Pencereyi Kapat"
+          title="{$_('components.modals.add-edit-post-category.close')}"
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
@@ -18,7 +18,7 @@
           <input
             class:border-danger="{$errors.title}"
             class="form-control form-control-lg mb-3"
-            placeholder="Başlık"
+            placeholder="{$_('components.modals.add-edit-post-category.inputs.title.placeholder')}"
             id="category"
             type="text"
             bind:value="{$category.title}"
@@ -26,7 +26,7 @@
           <textarea
             class:border-danger="{$errors.description}"
             class="form-control mb-3"
-            placeholder="Açıklama"
+            placeholder="{$_('components.modals.add-edit-post-category.inputs.description.placeholder')}"
             id="categoryDescription"
             type="text"
             rows="5"
@@ -35,15 +35,14 @@
             <span class="input-group-text">/category/</span>
             <input
               class="form-control"
-              placeholder="URL"
+              placeholder="{$_('components.modals.add-edit-post-category.inputs.url.placeholder')}"
               id="categoryURL"
               type="text"
               class:is-invalid="{$errors.url}"
               bind:value="{$category.url}" />
           </div>
           <small class:text-danger="{$errors.url}">
-            Yanlızca [A-Z/a-z/0-9/-] içerebilir ve minimum 3, maksimum 32
-            karkater olabilir.
+            {$_('components.modals.add-edit-post-category.inputs.url.helper')}
           </small>
         </div>
         <div class="modal-footer">
@@ -55,9 +54,9 @@
             class:disabled="{loading || buttonDisabled}">
             <span>
               {#if $mode === "edit"}
-                Kaydet
+                {$_('components.modals.add-edit-post-category.save')}
               {:else}
-                Oluştur
+                {$_('components.modals.add-edit-post-category.create')}
               {/if}
             </span>
           </button>
@@ -122,6 +121,8 @@
 </script>
 
 <script>
+  import { _ } from "svelte-i18n";
+
   import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
 

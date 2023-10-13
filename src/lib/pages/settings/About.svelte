@@ -5,7 +5,7 @@
       <form class="animate__animated animate__fadeIn">
         <div class="row">
           <label class="col-sm-2 col-form-label" for="panoVersion">
-            Versiyon
+            {$_('pages.settings.about.version')}
           </label>
           <div class="col col-form-label">
             <span aria-describedby="panoVersion" id="panoVersion"
@@ -14,7 +14,7 @@
         </div>
         <div class="row">
           <label class="col-sm-2 col-form-label" for="siteKeywords">
-            Sürüm
+            {$_('pages.settings.about.release-type')}
           </label>
           <div class="col col-form-label">
             <span aria-describedby="panoRelease" id="panoRelease"
@@ -23,7 +23,7 @@
         </div>
         <div class="row mb-0">
           <label class="col-sm-2 col-form-label" for="siteKeywords">
-            Web Site
+            {$_('pages.settings.about.website')}
           </label>
           <div class="col col-form-label">
             <a
@@ -37,7 +37,7 @@
         </div>
         <div class="row mb-0">
           <label class="col-sm-2 col-form-label" for="siteKeywords">
-            Discord
+            {$_('pages.settings.about.discord')}
           </label>
           <div class="col col-form-label">
             <a
@@ -57,7 +57,7 @@
     <div class="card-body animate__animated animate__fadeIn">
       <h5
         class="card-title animate__animated animate__heartBeat animate__slower d-inline-block">
-        Açık Kaynak Lisanslar ❤️
+        {$_('pages.settings.about.open-source-licenses')} ❤️
       </h5>
 
       <!-- Bootstrap 4.3 License -->
@@ -128,10 +128,11 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
 
   export let data;
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set("Hakkında");
+  pageTitle.set("pages.settings.about.title");
 </script>

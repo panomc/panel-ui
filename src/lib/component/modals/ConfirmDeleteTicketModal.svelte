@@ -11,9 +11,9 @@
         <div class="pb-3">
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
-        Bu
-        {$selectedTickets.length === 1 ? "talebi" : "talepleri"}
-        kalıcı olarak silmek istediğinizden emin misiniz?
+        {$selectedTickets.length === 1
+          ? $_('components.modals.confirm-delete-ticket.title-single')
+          : $_('components.modals.confirm-delete-ticket.title-multi')}
       </div>
       <div class="modal-footer flex-nowrap">
         <button
@@ -22,7 +22,7 @@
           class:disabled="{loading}"
           aria-disabled="{loading}"
           on:click="{hide}">
-          İptal
+          {$_('components.modals.confirm-delete-ticket.cancel')}
         </button>
         <button
           class="btn btn-danger col-6 m-0"
@@ -30,7 +30,7 @@
           class:disabled="{loading}"
           aria-disabled="{loading}"
           on:click="{onYesClick}">
-          Evet
+          {$_('components.modals.confirm-delete-ticket.yes')}
         </button>
       </div>
     </div>
@@ -78,6 +78,7 @@
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import TicketsDeletedPermanentlyToast from "$lib/component/toasts/TicketsDeletedPermanentlyToast.svelte";
+  import { _ } from "svelte-i18n";
 
   let loading;
 

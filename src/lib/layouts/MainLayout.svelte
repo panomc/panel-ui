@@ -129,6 +129,7 @@
 <script>
   import { onDestroy, onMount, setContext } from "svelte";
   import { get } from "svelte/store";
+  import { _ } from "svelte-i18n";
 
   import { page } from "$app/stores";
 
@@ -199,10 +200,10 @@
   setContext("isSidebarOpen", isSidebarOpen);
 
   $: title = $pageTitle
-    ? `${$pageTitle} \u2014 ${options.DEFAULT_PAGE_TITLE}`
+    ? `${$_($pageTitle)} \u2014 ${options.DEFAULT_PAGE_TITLE}`
     : options.DEFAULT_PAGE_TITLE;
 
-  let showSplash = true;
+  let showSplash = false;
   let showSplashAlways = false;
   let showLoading = false;
   let waitAnimation = true;

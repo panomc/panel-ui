@@ -11,11 +11,11 @@
         <div class="pb-3">
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
-        Bu yetki grubunu kalıcı olarak silmek istediğinizden emin misiniz?
+        {$_('components.modals.confirm-delete-permission-group.title')}
 
         {#if $permissionGroup.userCount > 0}
           <div class="mt-3 alert alert-warning">
-            Yetki grubu içerisindeki şu kullanıcılar Oyuncu olarak değişecek:
+            {$_('components.modals.confirm-delete-permission-group.description')}
             <br />
             <br />
             <span class="badge bg-warning rounded-pill mr-1">
@@ -50,14 +50,14 @@
           type="button"
           class:disabled="{loading}"
           on:click="{hide}">
-          İptal
+          {$_('components.modals.confirm-delete-permission-group.cancel')}
         </button>
         <button
           class="btn btn-danger"
           type="button"
           class:disabled="{loading}"
           on:click="{onYesClick}">
-          Evet
+          {$_('components.modals.confirm-delete-permission-group.yes')}
         </button>
       </div>
     </div>
@@ -110,6 +110,7 @@
   import { showNetworkErrorOnCatch } from "$lib/Store";
   import ApiUtil from "$lib/api.util";
   import tooltip from "$lib/tooltip.util";
+  import { _ } from "svelte-i18n";
 
   let loading = false;
 

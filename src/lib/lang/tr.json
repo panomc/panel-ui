@@ -1,3 +1,419 @@
 {
-  "title": ""
+  "pages": {
+    "dashboard": {
+      "title": "Panel",
+      "welcome-card": {
+        "description": "Pano başarıyla kuruldu ve kullanıma hazır. \uD83D\uDE80 <br /> İşte başlarken yapabilecekleriniz \uD83D\uDC47:",
+        "connect-server": "Sunucu Bağlayın",
+        "connect-server-description": "Pano'yu oyun sunucunuza bağlayın ve daha fazla yönetim özelliklerine erişin.",
+        "discover-title": "Menüyü Keşfedin",
+        "more-title": "Daha Fazlası",
+        "publish-your-first-post": "İlk Yazınızı Yayınlayın",
+        "change-theme": "Sitenizin Görünümünü Belirleyin",
+        "manage-tools": "Araçları Yönetin",
+        "review-players": "Oyuncularınızı İnceleyin",
+        "discover-extensions": "Pano Eklentilerini Keşfedin",
+        "discover-themes": "Pano Temalarını Keşfedin",
+        "discover-documentations": "Dokümantasyonları İnceleyin",
+        "join-discord": "Discord Topluluğumuza Katılın",
+        "close-button": "Kapat"
+      },
+      "last-tickets": {
+        "title": "Son Talepler",
+        "player-name": "Oyuncu Adı",
+        "view": "Görüntüle",
+        "filter": "Filtrele",
+        "no-category": "Kategorisiz"
+      }
+    },
+    "statistics": {
+      "title": "İstatistikler",
+      "website-tooltip": "Website",
+      "online-player-text": "{onlinePlayerCount} Çevrimiçi",
+      "new-register-text": "{newRegisterCount} Yeni Kayıt",
+      "total-player-text": "{totalPlayerCount} Toplam Oyuncu",
+      "website-graph": {
+        "title": "Website Aktivitesi",
+        "week": "Hafta",
+        "month": "Ay"
+      },
+      "total-statistics": {
+        "title": "İstatistik",
+        "posts": "Yazılar:",
+        "players": "Oyuncular:",
+        "admins": "Yöneticiler:",
+        "tickets": "Talepler:",
+        "connected-servers": "Sunucular:",
+        "addons": "Eklentiler:",
+        "themes": "Temalar:"
+      }
+    },
+    "players": {
+      "title": "{pageType}Oyuncular",
+      "authorized": "Yetkili",
+      "banned": "Yasaklı",
+      "perm-groups": "Yetki Grupları",
+      "table-title": "{playerCount} {pageType} Oyuncu",
+      "all": "Tümü",
+      "table": {
+        "name": "Kullanıcı Adı",
+        "permission": "Yetki",
+        "status": "Durum",
+        "last-entrance": "Son Giriş",
+        "register-date": "Kayıt"
+      }
+    },
+    "posts": {
+      "title": "{pageType}Yazılar",
+      "published": "Yayınlanmış",
+      "draft": "Taslak",
+      "trash": "Çöp",
+      "table-title": "{postCount} {pageType} Yazı",
+      "post-categories-button": "Yazı Kategorileri",
+      "create-post-button": "Yazı Oluştur",
+      "table": {
+        "title": "Başlık",
+        "category": "Kategori",
+        "views": "Görüntülenme",
+        "author": "Yazar",
+        "last-update": "Son Güncellenme"
+      }
+    },
+    "tickets": {
+      "title": "{pageType}Talepler",
+      "waiting-reply": "Yanıt Bekleyen",
+      "closed": "Kapalı",
+      "ticket-categories": "Talep Kategorileri",
+      "close-ticket-button": "Talebi Kapat",
+      "table-title": "{ticketCount} {pageType} Talep",
+      "amount-selected": "{amount} adet seçildi.",
+      "all": "Tümü",
+      "select-all": "Tümünü Seç",
+      "table": {
+        "title": "Başlık",
+        "player": "Oyuncu",
+        "category": "Kategori",
+        "status": "Durum",
+        "last-reply": "Son Yanıt"
+      }
+    },
+    "notifications": {
+      "title": "Bildirimler",
+      "delete-all": "Tümünü Sil",
+      "delete-notification": "Bildirimi Sil",
+      "show-more": "Daha Fazla Göster ({count})"
+    },
+    "settings": {
+      "about": {
+        "title": "Hakkında",
+        "version": "Versiyon",
+        "release-type": "Sürüm Türü",
+        "website": "Website",
+        "discord": "Discord",
+        "open-source-licenses": "Açık Kaynak Lisanslar"
+      },
+      "site-settings": {
+        "title": "Website Ayarları",
+        "inputs": {
+          "website-name": {
+            "label": "Site İsmi",
+            "placeholder": "İsim"
+          },
+          "website-description": {
+            "label": "Site Açıklaması"
+          },
+          "game-server-ip-address": {
+            "label": "Oyun Sunucu IP Adresi"
+          },
+          "game-server-version": {
+            "label": "Oyun Sunucu Versiyonu"
+          },
+          "support-email-address": {
+            "label": "Destek E-Posta Adresi"
+          },
+          "keywords": {
+            "label": "Anahtar Kelimeler",
+            "placeholder": "Eklemek için Enter'a basın",
+            "remove": "Kaldırmak İçin Tıkla"
+          },
+          "favicon": {
+            "label": "Favicon",
+            "select": "Seç",
+            "helper": "PNG, ICO, GIF, JPG, SVG formatında, maksimum 1 mb ve 16x16 piksel olmalı."
+          },
+          "website-logo": {
+            "label": "Website Logo",
+            "server-icon": "Sunucu İkonu",
+            "helper": "PNG, JPEG, GIF, SVG formatında, maksimum 2 mb olmalı."
+          }
+        },
+        "save-button": "Kaydet"
+      },
+      "platform": {
+        "title": "Genel Ayarlar",
+        "display-language": "Görüntüleme Dili:",
+        "update-preferences": "Güncelleme Tercihleri",
+        "check-auto-updates": "Otomatik güncellemeleri denetle:",
+        "inputs": {
+          "check-auto-updates": {
+            "never": "Asla",
+            "once-in-a-day": "Günde bir kez",
+            "once-in-a-week": "Haftada bir kez",
+            "once-in-a-month": "Ayda bir kez"
+          }
+        },
+        "save-button": "Kaydet"
+      }
+    },
+    "ticket-detail": {
+      "tickets": "Talepler",
+      "close-ticket": "Talebi Kapat",
+      "by-who": "{username} tarafından,",
+      "opened-in-category": "{category} kategorisinde açıldı.",
+      "no-category": "Kategorisiz",
+      "previous-messages": "Önceki Mesajlar ({count})",
+      "send-button": "Gönder"
+    },
+    "post-categories": {
+      "title": "Yazı Kategorileri",
+      "posts": "Yazılar",
+      "create-category-button": "Kategori Oluştur",
+      "card-title": "{count} Yazı Kategorisi",
+      "category": "Kategori",
+      "description": "Açıklama",
+      "url": "URL",
+      "color": "Renk"
+    },
+    "ticket-categories": {
+      "title": "Talep Kategorileri",
+      "tickets": "Talepler",
+      "create-category-button": "Kategori Oluştur",
+      "card-title": "{count} Talep Kategorisi",
+      "category": "Kategori",
+      "description": "Açıklama"
+    },
+    "permission-groups": {
+      "title": "Yetki Grupları",
+      "players": "Oyuncular",
+      "create-permission-group-button": "Yetki Grubu Oluştur",
+      "card-title": "{count} Yetki Grubu",
+      "name": "İsim",
+      "permission-amount": "Yetki Adeti",
+      "player-amount": "Oyuncu Adeti"
+    }
+  },
+  "components": {
+    "ticket-status-badge": {
+      "filter": "Filtrele",
+      "new": "Yeni",
+      "replied": "Yanıtlandı",
+      "closed": "Kapalı"
+    },
+    "website-activity-chart": {
+      "new-registration": "Yeni Kayıt",
+      "new-ticket": "Yeni Talep",
+      "visitor": "Ziyaretçi",
+      "view": "Görüntülenme"
+    },
+    "site-navigation-menu": {
+      "panel": "Panel",
+      "statistics": "İstatistikler",
+      "posts": "Yazılar",
+      "tickets": "Talepler",
+      "players": "Oyuncular",
+      "view": "Görünüm",
+      "addons": "Eklentiler",
+      "settings": "Ayarlar"
+    },
+    "navbar": {
+      "navbar-toggle-tooltip": "Menüyü Aç/Kapa",
+      "new-notifications": "Yeni Bildirimler",
+      "show-all": "Tümünü Görüntüle",
+      "account-dropdown": {
+        "session": "Oturum",
+        "profile": "Profil",
+        "logout": "Çıkış Yap"
+      }
+    },
+    "sidebar": {
+      "sidebar-toggle-tooltip": "Menüyü Aç/Kapa",
+      "website": "Website",
+      "server": "Sunucu",
+      "show-website": "Websiteyi Görüntüle",
+      "show-servers": "Sunucuları Görüntüle"
+    },
+    "server-navigation-menu": {
+      "statistics": "İstatistikler",
+      "settings": "Ayarlar",
+      "no-selected-server": "Seçili sunucu yok.",
+      "no-server-text": "Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın.",
+      "connect-server": "Sunucu Bağla"
+    },
+    "post-row": {
+      "actions": "Eylemler",
+      "view": "Görüntüle",
+      "move-to-draft": "Taslaklara Taşı",
+      "publish": "Yayınla",
+      "move-to-trash": "Çöp Kutusuna Taşı",
+      "delete": "Sil",
+      "edit": "Düzenle",
+      "no-category": "Kategorisiz",
+      "filter": "Filtrele"
+    },
+    "ticket-row": {
+      "select": "Seç",
+      "view": "Görüntüle",
+      "filter": "Filtrele",
+      "no-category": "Kategorisiz",
+      "player-name": "Oyuncu Adı"
+    },
+    "player-row": {
+      "actions": "Eylemler",
+      "authorize": "Yetkilendir",
+      "edit": "Düzenle",
+      "remove-ban": "Yasağı Kaldır",
+      "ban": "Yasakla",
+      "view": "Görüntüle"
+    },
+    "player-status-badge": {
+      "banned": "Yasaklı",
+      "in-game": "Oyunda",
+      "in-website": "Sitede",
+      "online": "Çevrimiçi",
+      "offline": "Çevrimdışı"
+    },
+    "player-permission-badge": {
+      "filter": "Filtrele",
+      "player": "Oyuncu"
+    },
+    "bottom": {
+      "help": "Yardım",
+      "pano-market": "Pano Market",
+      "discord": "Discord"
+    },
+    "notification-container": {
+      "notification": "Bildirim"
+    },
+    "settings-layout": {
+      "website": "Website",
+      "platform": "Platform",
+      "updates": "Güncellemeler",
+      "about": "Hakkında"
+    },
+    "modals": {
+      "add-edit-post-category": {
+        "create-category": "Kategori Oluştur",
+        "edit-category": "Kategoriyi Düzenle",
+        "close": "Kapat",
+        "inputs": {
+          "title": {
+            "placeholder": "Başlık"
+          },
+          "description": {
+            "placeholder": "Açıklama"
+          },
+          "url": {
+            "placeholder": "URL",
+            "helper": "Yanlızca [A-Z/a-z/0-9/-] içerebilir ve minimum 3, maksimum 32 karkater olabilir."
+          }
+        },
+        "save": "Kaydet",
+        "create": "Oluştur"
+      },
+      "add-edit-ticket-category": {
+        "create-category": "Kategori Oluştur",
+        "edit-category": "Kategoriyi Düzenle",
+        "close": "Kapat",
+        "inputs": {
+          "title": {
+            "placeholder": "Başlık"
+          },
+          "description": {
+            "placeholder": "Açıklama"
+          }
+        },
+        "save": "Kaydet",
+        "create": "Oluştur"
+      },
+      "authorize-player": {
+        "title": "Oyuncuyu Yetkilendir",
+        "close": "Kapat",
+        "player": "Oyuncu",
+        "save": "Kaydet"
+      },
+      "confirm-ban-player": {
+        "title": "Bu oyuncuyu yasaklamak istediğinizden emin misiniz?",
+        "notify-with-email": "E-posta ile bilgilendir",
+        "cancel": "İptal",
+        "yes": "Evet"
+      },
+      "confirm-close-ticket": {
+        "title-single": "Bu talebi kapatmak istediğinizden emin misiniz?",
+        "title-multi": "Bu talepleri kapatmak istediğinizden emin misiniz?",
+        "cancel": "İptal",
+        "yes": "Evet"
+      },
+      "confirm-delete-permission-group": {
+        "title": "Bu yetki grubunu kalıcı olarak silmek istediğinizden emin misiniz?",
+        "description": "Yetki grubu içerisindeki şu kullanıcılar Oyuncu olarak değişecek:",
+        "cancel": "İptal",
+        "yes": "Evet"
+      },
+      "confirm-delete-player": {
+        "title": "Bu oyuncuyu gerçekten silmek istediğinizden emin misiniz?",
+        "inputs": {
+          "password": {
+            "placeholder": "Şifre"
+          }
+        },
+        "cancel": "İptal",
+        "yes": "Evet"
+      },
+      "confirm-delete-post-category": {
+        "title": "Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?",
+        "description": "Kategori içerisindeki şu yazılar Kategorisiz olarak değişecek:",
+        "more-posts": "+{count} yazı daha",
+        "cancel": "İptal",
+        "yes": "Evet"
+      },
+      "confirm-delete-post": {
+        "title-permanent": "Bu yazıyı kalıcı olarak silmek istediğinizden emin misiniz?",
+        "title-trash": "Bu yazıyı çöp kutusuna taşımak istediğinizden emin misiniz?",
+        "cancel": "İptal",
+        "yes": "Evet"
+      },
+      "confirm-delete-ticket-category": {
+        "title-permanent": "Not: Eğer bu kategoriyi silerseniz, şu talepler Kategorisiz olarak kalacaklardır:",
+        "title": "Bu kategoriyi kalıcı olarak silmek istediğinizden emin misiniz?",
+        "more-tickets": "+{count} talep daha",
+        "cancel": "İptal",
+        "yes": "Evet"
+      },
+      "confirm-delete-ticket": {
+        "title-single": "Bu talebi kalıcı olarak silmek istediğinizden emin misiniz?",
+        "title-multi": "Bu talepleri kalıcı olarak silmek istediğinizden emin misiniz?",
+        "cancel": "İptal",
+        "yes": "Evet"
+      },
+      "confirm-remove-all-notifications": {
+        "title": "Tüm bildirimleri kalıcı olarak silmek istediğinizden emin misiniz?",
+        "cancel": "İptal",
+        "yes": "Evet"
+      },
+      "connect-server": {
+        "title": "Sunucu Bağla",
+        "close": "Kapat",
+        "steps": {
+          "1": "1 - Pano Eklentisini Oyun Sunucuna Kur",
+          "2": "2 - Bağlantı Komutunu Çalıştır",
+          "3": "3 - Bağlantı İsteğini Onayla"
+        },
+        "download": "Dosyayı İndir",
+        "copy": "Kopyala",
+        "copied": "Kopyalandı!",
+        "code-refresh": "Kod {timeToRefreshKey} saniye sonra yenilenecek.",
+        "notification-will-come": "Bağlantı isteği bildirim olarak gelecek."
+      }
+    }
+  }
 }

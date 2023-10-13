@@ -7,74 +7,70 @@
       <div class="row">
         <div class="col">
           <p class="lead">
-            Pano başarıyla kuruldu ve kullanıma hazır.
-            <br />
-            İşte başlarken yapabilecekleriniz 👇
+            {@html $_("pages.dashboard.welcome-card.description")}
           </p>
         </div>
         <div class="w-100"></div>
         <div class="col-lg-3 mb-lg-0 mb-3">
-          <h5>Sunucu Bağlayın</h5>
+          <h5>{$_("pages.dashboard.welcome-card.connect-server")}</h5>
           <p>
-            Pano'yu oyun sunucunuza bağlayın ve daha fazla yönetim özelliklerine
-            erişin.
+            {$_("pages.dashboard.welcome-card.connect-server-description")}
           </p>
           <button
             class="btn btn-sm btn-primary"
             data-bs-target="#connectServer"
             data-bs-toggle="modal">
             <i class="fas fa-plus me-2"></i>
-            Sunucu Bağla
+            {$_("pages.dashboard.welcome-card.connect-server")}
           </button>
         </div>
         <div class="col-lg-3 mb-lg-0 mb-3">
           <ul class="list-unstyled">
-            <h5>Menüyü Keşfedin</h5>
+            <h5>{$_("pages.dashboard.welcome-card.discover-title")}</h5>
             <li>
               <a class="alert-link" href="{base}/posts/create-post">
                 <i class="fas fa-pen me-2"></i>
-                İlk Yazınızı Yayınlayın
+                {$_("pages.dashboard.welcome-card.publish-your-first-post")}
               </a>
             </li>
             <li>
               <a class="alert-link" href="{base}/view">
                 <i class="fas fa-brush me-2"></i>
-                Sitenizin Görünümünü Belirleyin
+                {$_("pages.dashboard.welcome-card.change-theme")}
               </a>
             </li>
             <li>
               <a class="alert-link" href="{base}/tools">
                 <i class="fas fa-tools me-2"></i>
-                Araçları Yönetin
+                {$_("pages.dashboard.welcome-card.manage-tools")}
               </a>
             </li>
             <li>
               <a class="alert-link" href="{base}/players">
-                <i class="fas fa-user-cog me-2"></i>
-                Oyuncularınızı İnceleyin
+                <i class="fas fa-user-cog me-2"></i>{$_("pages.dashboard.welcome-card.review-players")}
               </a>
             </li>
           </ul>
         </div>
         <div class="col-lg-3 mb-lg-0 mb-3">
           <ul class="list-unstyled">
-            <h5>Daha Fazlası</h5>
+            <h5>{$_("pages.dashboard.welcome-card.more-title")}</h5>
             <li>
               <a class="alert-link" href="javascript:void(0);">
                 <i class="fas fa-puzzle-piece me-2"></i>
-                Pano Eklentilerini Keşfedin
+                {$_("pages.dashboard.welcome-card.discover-extensions")}
               </a>
             </li>
             <li>
               <a class="alert-link" href="javascript:void(0);">
                 <i class="fas fa-palette me-2"></i>
-                Pano Temalarını Keşfedin
+                {$_("pages.dashboard.welcome-card.discover-extensions")}
               </a>
             </li>
             <li>
               <a class="alert-link" href="javascript:void(0);" target="_blank">
                 <i class="fas fa-book-open me-2"></i>
-                Dökümantasyonları İnceleyin
+                {$_("pages.dashboard.welcome-card.discover-documentations")}
               </a>
             </li>
             <li>
@@ -83,7 +79,7 @@
                 href="https://panomc.com/discord"
                 target="_blank">
                 <i class="fab fa-discord me-2"></i>
-                Discord Topluluğumuza Katılın
+                {$_("pages.dashboard.welcome-card.join-discord")}
               </a>
             </li>
           </ul>
@@ -92,7 +88,7 @@
 
       <button
         type="button"
-        title="Kapat"
+        title="{$_('pages.dashboard.welcome-card.close-button')}"
         class="btn-close"
         data-bs-dismiss="alert"
         on:click="{onCloseGettingStartedCard}"></button>
@@ -105,7 +101,7 @@
       <div class="card-body">
         <div class="row justify-content-between mb-3">
           <div class="col">
-            <h5 class="card-title">Son Talepler</h5>
+            <h5 class="card-title">{$_("pages.dashboard.last-tickets.title")}</h5>
           </div>
         </div>
 
@@ -126,7 +122,7 @@
                       <img
                         src="https://crafthead.net/avatar/{ticket.writer
                           .username}/32"
-                        alt="Oyuncu Adı"
+                        alt="{$_('pages.dashboard.last-tickets.player-name')}"
                         class="rounded-circle animate__animated animate__zoomIn"
                         height="32"
                         width="32" />
@@ -135,14 +131,14 @@
                   <td class="align-middle text-nowrap">
                     <a
                       href="{base}/tickets/ticket/{ticket.id}"
-                      title="Görüntüle">#{ticket.id} {ticket.title}</a>
+                      title="{$_('pages.dashboard.last-tickets.view')}">#{ticket.id} {ticket.title}</a>
                   </td>
                   <td class="align-middle text-nowrap">
                     <a
-                      title="Filtrele"
+                      title="{$_('pages.dashboard.last-tickets.filter')}"
                       href="{base}/tickets/category/{ticket.category.url}">
                       {ticket.category.title === "-"
-                        ? "Kategorisiz"
+                        ? $_('pages.dashboard.last-tickets.no-category')
                         : ticket.category.title}
                     </a>
                   </td>
@@ -206,6 +202,8 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
+
   import { base } from "$app/paths";
 
   import { showNetworkErrorOnCatch } from "$lib/Store";
@@ -220,7 +218,7 @@
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set("Panel");
+  pageTitle.set("pages.dashboard.title");
 
   function onCloseGettingStartedCard() {
     showNetworkErrorOnCatch((resolve, reject) => {
