@@ -505,6 +505,10 @@
       },
       "refreshing": "Refreshing...",
       "refresh": "Refresh"
+    },
+    "permission-group-row": {
+      "delete": "Delete",
+      "edit": "Edit"
     }
   }
 }

@@ -505,6 +505,10 @@
       },
       "refreshing": "Yenileniyor...",
       "refresh": "Yenile"
+    },
+    "permission-group-row": {
+      "delete": "Sil",
+      "edit": "Düzenle"
     }
   }
 }
