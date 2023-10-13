@@ -11,7 +11,7 @@
         <div class="pb-3">
           <i class="fas fa-question-circle fa-3x d-block m-auto text-gray"></i>
         </div>
-        Bu oyuncunun yasağını kaldırmak istediğinizden emin misiniz?
+        {$_('components.modals.unban-player.title')}
       </div>
       <div class="modal-footer flex-nowrap">
         <button
@@ -19,14 +19,14 @@
           type="button"
           class:disabled="{loading}"
           on:click="{hide}">
-          İptal
+          {$_('components.modals.unban-player.camcel')}
         </button>
         <button
           class="btn btn-danger col-6 m-0"
           type="button"
           class:disabled="{loading}"
           on:click="{onSubmit}">
-          Evet
+          {$_('components.modals.unban-player.yes')}
         </button>
       </div>
     </div>
@@ -75,6 +75,7 @@
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
 
   import PlayerUnbanToast from "$lib/component/toasts/PlayerUnbanToast.svelte";
+  import { _ } from "svelte-i18n";
 
   let loading;
   // let sendNotification = false;

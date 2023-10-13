@@ -435,6 +435,11 @@
         "close": "Close",
         "main-server": "Main Server",
         "online": "Online"
+      },
+      "unban-player": {
+        "title": "Are you sure you want to unban this player?",
+        "cancel": "Cancel",
+        "yes": "Yes"
       }
     }
   }
