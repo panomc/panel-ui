@@ -3,7 +3,7 @@
   <!-- Welcome Alerts -->
   {#if data.gettingStartedBlocks.welcomeBoard}
     <div
-      class="alert alert-secondary alert-dismissible animate__animated animate__zoomIn mb-3">
+      class="alert alert-success alert-dismissible animate__animated animate__zoomIn mb-3">
       <div class="row">
         <div class="col">
           <p class="lead">
@@ -17,7 +17,7 @@
             {$_("pages.dashboard.welcome-card.connect-server-description")}
           </p>
           <button
-            class="btn btn-sm btn-primary"
+            class="btn btn-sm btn-outline-dark w-100"
             data-bs-target="#connectServer"
             data-bs-toggle="modal">
             <i class="fas fa-plus me-2"></i>
@@ -47,7 +47,9 @@
             </li>
             <li>
               <a class="alert-link" href="{base}/players">
-                <i class="fas fa-user-cog me-2"></i>{$_("pages.dashboard.welcome-card.review-players")}
+                <i class="fas fa-user-cog me-2"></i>{$_(
+                  "pages.dashboard.welcome-card.review-players"
+                )}
               </a>
             </li>
           </ul>
@@ -95,66 +97,75 @@
     </div>
   {/if}
 
-  {#if hasPermission(Permissions.MANAGE_TICKETS)}
-    <!-- Latest Tickets -->
-    <div class="card bg-white mb-3">
-      <div class="card-body">
-        <div class="row justify-content-between mb-3">
-          <div class="col">
-            <h5 class="card-title">{$_("pages.dashboard.last-tickets.title")}</h5>
+  <div class="row">
+    <div class="col-6">
+      <!-- Latest Tickets -->
+      {#if hasPermission(Permissions.MANAGE_TICKETS)}
+        <div class="card bg-white mb-3">
+          <div class="card-body">
+            <div class="row justify-content-between mb-3">
+              <div class="col">
+                <h5 class="card-title">
+                  {$_("pages.dashboard.last-tickets.title")}
+                </h5>
+              </div>
+            </div>
+
+            {#if data.tickets.length === 0}
+              <NoContent />
+            {:else}
+              <table class="table table-hover mb-0">
+                {#each data.tickets as ticket, index (ticket)}
+                  <tbody>
+                    <tr>
+                      <td class="align-middle">
+                        <a
+                          use:tooltip="{[
+                            ticket.writer.username,
+                            { placement: 'bottom' },
+                          ]}"
+                          href="{base}/players/player/{ticket.writer.username}">
+                          <img
+                            src="https://crafthead.net/avatar/{ticket.writer
+                              .username}/32"
+                            alt="{$_(
+                              'pages.dashboard.last-tickets.player-name'
+                            )}"
+                            class="rounded-circle animate__animated animate__zoomIn"
+                            height="32"
+                            width="32" />
+                        </a>
+                      </td>
+                      <td class="align-middle text-nowrap">
+                        <a
+                          href="{base}/tickets/ticket/{ticket.id}"
+                          title="{$_('pages.dashboard.last-tickets.view')}"
+                          >#{ticket.id} {ticket.title}</a>
+                      </td>
+                      <td class="align-middle text-nowrap">
+                        <a
+                          title="{$_('pages.dashboard.last-tickets.filter')}"
+                          href="{base}/tickets/category/{ticket.category.url}">
+                          {ticket.category.title === "-"
+                            ? $_("pages.dashboard.last-tickets.no-category")
+                            : ticket.category.title}
+                        </a>
+                      </td>
+                      <td class="align-middle text-nowrap">
+                        <TicketStatusBadge status="{ticket.status}" />
+                      </td>
+                      <td class="align-middle text-nowrap"
+                        ><span><Date time="{ticket.lastUpdate}" /></span></td>
+                    </tr>
+                  </tbody>
+                {/each}
+              </table>
+            {/if}
           </div>
         </div>
-
-        {#if data.tickets.length === 0}
-          <NoContent />
-        {:else}
-          <table class="table table-hover mb-0">
-            {#each data.tickets as ticket, index (ticket)}
-              <tbody>
-                <tr>
-                  <td class="align-middle">
-                    <a
-                      use:tooltip="{[
-                        ticket.writer.username,
-                        { placement: 'bottom' },
-                      ]}"
-                      href="{base}/players/player/{ticket.writer.username}">
-                      <img
-                        src="https://crafthead.net/avatar/{ticket.writer
-                          .username}/32"
-                        alt="{$_('pages.dashboard.last-tickets.player-name')}"
-                        class="rounded-circle animate__animated animate__zoomIn"
-                        height="32"
-                        width="32" />
-                    </a>
-                  </td>
-                  <td class="align-middle text-nowrap">
-                    <a
-                      href="{base}/tickets/ticket/{ticket.id}"
-                      title="{$_('pages.dashboard.last-tickets.view')}">#{ticket.id} {ticket.title}</a>
-                  </td>
-                  <td class="align-middle text-nowrap">
-                    <a
-                      title="{$_('pages.dashboard.last-tickets.filter')}"
-                      href="{base}/tickets/category/{ticket.category.url}">
-                      {ticket.category.title === "-"
-                        ? $_('pages.dashboard.last-tickets.no-category')
-                        : ticket.category.title}
-                    </a>
-                  </td>
-                  <td class="align-middle text-nowrap">
-                    <TicketStatusBadge status="{ticket.status}" />
-                  </td>
-                  <td class="align-middle text-nowrap"
-                    ><span><Date time="{ticket.lastUpdate}" /></span></td>
-                </tr>
-              </tbody>
-            {/each}
-          </table>
-        {/if}
-      </div>
+      {/if}
     </div>
-  {/if}
+  </div>
 </div>
 
 <script context="module">

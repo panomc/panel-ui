@@ -3,9 +3,9 @@
     "dashboard": {
       "title": "Panel",
       "welcome-card": {
-        "description": "Pano başarıyla kuruldu ve kullanıma hazır. \uD83D\uDE80 <br /> İşte başlarken yapabilecekleriniz \uD83D\uDC47:",
+        "description": "Pano başarıyla kuruldu ve kullanıma hazır. \uD83D\uDE80 <br /> İşte başlarken yapabilecekleriniz:",
         "connect-server": "Sunucu Bağlayın",
-        "connect-server-description": "Pano'yu oyun sunucunuza bağlayın ve daha fazla yönetim özelliklerine erişin.",
+        "connect-server-description": "Oyun sunucunuzu bağlayın ve daha fazla yönetim özelliklerine erişin.",
         "discover-title": "Menüyü Keşfedin",
         "more-title": "Daha Fazlası",
         "publish-your-first-post": "İlk Yazınızı Yayınlayın",

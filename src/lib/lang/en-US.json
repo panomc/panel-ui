@@ -3,9 +3,9 @@
     "dashboard": {
       "title": "Panel",
       "welcome-card": {
-        "description": "The Pano is successfully installed and ready for use. \uD83D\uDE80 <br /> Here's what you can do to get started \uD83D\uDC47:",
+        "description": "The Pano is successfully installed and ready for use. \uD83D\uDE80 <br /> Here's what you can do to get started:",
         "connect-server": "Connect Server",
-        "connect-server-description": "Connect Pano to your game server and access more management features.",
+        "connect-server-description": "Connect your game server and access more management features.",
         "discover-title": "Discover The Menu",
         "more-title": "More",
         "publish-your-first-post": "Publish Your First Post",
