@@ -549,9 +549,9 @@
         "title": "Sunucu Bağla",
         "close": "Kapat",
         "steps": {
-          "1": "1 - Pano Eklentisini Oyun Sunucuna Kur",
-          "2": "2 - Bağlantı Komutunu Çalıştır",
-          "3": "3 - Bağlantı İsteğini Onayla"
+          "1": "Pano Eklentisini Oyun Sunucuna Kur",
+          "2": "Bağlantı Komutunu Çalıştır",
+          "3": "Bağlantı İsteğini Onayla"
         },
         "download": "Dosyayı İndir",
         "copy": "Kopyala",

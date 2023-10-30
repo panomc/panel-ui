@@ -8,7 +8,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{$_('components.modals.connect-server.title')}</h5>
+        <h5 class="modal-title">
+          {$_("components.modals.connect-server.title")}
+        </h5>
         <button
           class="btn-close"
           data-bs-dismiss="modal"
@@ -17,51 +19,40 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="card-body text-center">
-          <div class="mb-3">
-            <i class="fas fa-download fa-3x text-primary"></i>
-          </div>
+        <ol class="list-group list-group-numbered">
+          <a href="#" class="list-group-item list-group-item-action"  
+          use:tooltip="{[$_('components.modals.connect-server.download'), { placement: 'bottom' }]}">
+            <i class="fas fa-download me-2"></i>
+            {$_("components.modals.connect-server.steps.1")}
+          </a>
 
-          <h5 class="text-primary">{$_('components.modals.connect-server.steps.1')}</h5>
-          <button class="btn btn-secondary">
-            <i class="fa-solid fa-download me-2"></i>
-            {$_('components.modals.connect-server.download')}
+          <button
+            type="button"
+            class="list-group-item list-group-item-action fw-normal"
+            on:click="{onCopyCommandTextClick}"
+            id="copyPlatformToken"
+            use:tooltip="{[
+              isCommandTextCopied
+                ? $_('components.modals.connect-server.copied')
+                : $_('components.modals.connect-server.copy'),
+              { placement: 'bottom', hideOnClick: false },
+            ]}">
+            <i class="fas fa-terminal me-2"></i>
+            {$_("components.modals.connect-server.steps.2")}
+            <span class="d-block user-select-all font-monospace"
+              >{commandText}</span>
+            <small class="text-muted">
+              {$_("components.modals.connect-server.code-refresh", {
+                values: { timeToRefreshKey },
+              })}
+            </small>
           </button>
 
-          <div class="my-4">
-            <i class="fas fa-terminal fa-3x text-primary"></i>
-          </div>
-
-          <h5 class="text-primary">{$_('components.modals.connect-server.steps.2')}</h5>
-          <div class="input-group">
-            <input
-              bind:value="{commandText}"
-              class="form-control border-primary user-select-all"
-              id="platformToken"
-              type="text" />
-            <button
-              on:click="{onCopyCommandTextClick}"
-              class="btn btn-outline-primary"
-              id="copyPlatformToken"
-              type="button"
-              use:tooltip="{[
-                isCommandTextCopied ? $_('components.modals.connect-server.copied') : $_('components.modals.connect-server.copy'),
-                { placement: 'top', hideOnClick: false },
-              ]}">
-              <i class="fas fa-clipboard"></i>
-            </button>
-          </div>
-          <small class="text-muted">
-            {$_('components.modals.connect-server.code-refresh', {values:{timeToRefreshKey}})}
-          </small>
-
-          <div class="my-4">
-            <i class="fas fa-check-circle fa-3x text-primary"></i>
-          </div>
-
-          <h5 class="text-primary">{$_('components.modals.connect-server.steps.3')}</h5>
-          <p class="mb-0">{$_('components.modals.connect-server.notification-will-come')}</p>
-        </div>
+          <a href="#" class="list-group-item list-group-item-action">
+            <i class="fas fa-check-circle me-2"></i>
+            {$_("components.modals.connect-server.steps.3")}
+          </a>
+        </ol>
       </div>
     </div>
   </div>
