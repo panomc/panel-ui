@@ -64,7 +64,7 @@
               {$_('pages.tickets.all')}
             </a>
             <a
-              class="btn btn-sm btn-outline-light btn-link text-mint"
+              class="btn btn-sm btn-outline-light btn-link text-success"
               class:active="{data.pageType === PageTypes.WAITING_REPLY}"
               role="button"
               href="{base}/tickets/waitingReply">
