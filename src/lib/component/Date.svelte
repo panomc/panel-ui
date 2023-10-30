@@ -2,20 +2,23 @@
   use:tooltip="{[
     format(new Date(parseInt(date)), 'dd/MM/yyyy, HH:mm'),
     { placement: 'bottom', locale: locales[$currentLanguage['date-fns-code']] },
-  ]}"
-  class="text-muted">
+  ]}">
   <slot>
     {#if relativeFormat}
-      {formatRelative(new Date(parseInt(date)), new Date(), {locale: locales[$currentLanguage['date-fns-code']]}).capitalize()}
+      {formatRelative(new Date(parseInt(date)), new Date(), {
+        locale: locales[$currentLanguage["date-fns-code"]],
+      }).capitalize()}
     {:else}
-      {format(new Date(parseInt(date)), "dd MMMM yyyy", {locale: locales[$currentLanguage['date-fns-code']]})}
+      {format(new Date(parseInt(date)), "dd MMMM yyyy", {
+        locale: locales[$currentLanguage["date-fns-code"]],
+      })}
     {/if}
   </slot>
 </span>
 
 <script>
   import { format, formatRelative } from "date-fns";
-  import * as locales from 'date-fns/locale'
+  import * as locales from "date-fns/locale";
 
   import tooltip from "$lib/tooltip.util";
   import { currentLanguage } from "$lib/language.util.js";
