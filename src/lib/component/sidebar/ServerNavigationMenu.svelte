@@ -16,6 +16,18 @@
       <li class="nav-item p-2">
         <a
           class="nav-link"
+          href="{base}/server/monitoring"
+          class:active="{matching(
+            $page.url.pathname,
+            base + '/server/monitoring'
+          )}">
+          <i class="fas fa-desktop me-2"></i>
+          {$_('components.server-navigation-menu.monitoring')}
+        </a>
+      </li>
+      <li class="nav-item p-2">
+        <a
+          class="nav-link"
           href="{base}/server/settings"
           class:active="{matching(
             $page.url.pathname,

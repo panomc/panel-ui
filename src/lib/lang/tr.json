@@ -315,6 +315,9 @@
         "main-server-info": "Websitede görüntülenecek sunucu bilgilerini ana sunucu belirler.",
         "remove-server": "Sunucuyu Kaldır",
         "disconnect": "Bağlantıyı Kes"
+      },
+      "monitoring": {
+        "title": "Sunucu İzleme"
       }
     },
     "players-by-permission-group": {
@@ -412,6 +415,7 @@
     },
     "server-navigation-menu": {
       "statistics": "İstatistikler",
+      "monitoring": "İzleme",
       "settings": "Ayarlar",
       "no-selected-server": "Seçili sunucu yok.",
       "no-server-text": "Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın.",

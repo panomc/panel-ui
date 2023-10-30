@@ -288,6 +288,9 @@
         "main-server-info": "The host server determines the server information to be displayed on the website.",
         "remove-server": "Remove Server",
         "disconnect": "Disconnect"
+      },
+      "monitoring": {
+        "title": "Server Monitoring"
       }
     },
     "players-by-permission-group": {
@@ -385,6 +388,7 @@
     },
     "server-navigation-menu": {
       "statistics": "Statistics",
+      "monitoring": "Monitoring",
       "settings": "Settings",
       "no-selected-server": "No selected server.",
       "no-server-text": "No server connected. Connect a server to see the server menu.",
