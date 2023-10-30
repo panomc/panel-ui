@@ -2,8 +2,22 @@
 <div class="card bg-white">
   <div class="card-body animate__animated animate__fadeIn">
     <div class="row mb-3">
+      <label class="col-md-4 col-form-label" for="platformDevMode">
+        Geliştirici Modu:
+      </label>
+      <div class="col d-flex align-items-center">
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="platformDevMode" />
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="platformLanguage">
-        {$_('pages.settings.platform.display-language')}
+        {$_("pages.settings.platform.display-language")}
       </label>
       <div class="col">
         <select
@@ -18,22 +32,35 @@
       </div>
     </div>
 
-    <h5 class="card-title">{$_('pages.settings.platform.update-preferences')}</h5>
+    <h5 class="card-title">
+      {$_("pages.settings.platform.update-preferences")}
+    </h5>
     <div class="row mb-3 justify-content-between">
       <label class="col-md-4 col-form-label" for="updatePeriod">
-        {$_('pages.settings.platform.check-auto-updates')}
+        {$_("pages.settings.platform.check-auto-updates")}
       </label>
       <div class="col">
         <select
           class="form-control"
           bind:value="{data.updatePeriod}"
           id="updatePeriod">
-          <option value="{UpdatePeriod.NEVER}">{$_('pages.settings.platform.inputs.check-auto-updates.never')}</option>
-          <option value="{UpdatePeriod.ONCE_PER_DAY}">{$_('pages.settings.platform.inputs.check-auto-updates.once-in-a-day')}</option>
+          <option value="{UpdatePeriod.NEVER}"
+            >{$_(
+              "pages.settings.platform.inputs.check-auto-updates.never"
+            )}</option>
+          <option value="{UpdatePeriod.ONCE_PER_DAY}"
+            >{$_(
+              "pages.settings.platform.inputs.check-auto-updates.once-in-a-day"
+            )}</option>
           <option value="{UpdatePeriod.ONCE_PER_WEEK}"
-            >{$_('pages.settings.platform.inputs.check-auto-updates.once-in-a-week')}
+            >{$_(
+              "pages.settings.platform.inputs.check-auto-updates.once-in-a-week"
+            )}
           </option>
-          <option value="{UpdatePeriod.ONCE_PER_MONTH}">{$_('pages.settings.platform.inputs.check-auto-updates.once-in-a-month')}</option>
+          <option value="{UpdatePeriod.ONCE_PER_MONTH}"
+            >{$_(
+              "pages.settings.platform.inputs.check-auto-updates.once-in-a-month"
+            )}</option>
         </select>
       </div>
     </div>
@@ -43,7 +70,7 @@
       class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
       aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
       on:click="{save}"
-      >{$_('pages.settings.platform.save-button')}
+      >{$_("pages.settings.platform.save-button")}
     </button>
   </div>
 </div>
