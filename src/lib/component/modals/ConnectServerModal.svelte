@@ -20,10 +20,17 @@
       </div>
       <div class="modal-body">
         <ol class="list-group list-group-numbered">
-          <a href="#" class="list-group-item list-group-item-action"  
-          use:tooltip="{[$_('components.modals.connect-server.download'), { placement: 'bottom' }]}">
-            <i class="fas fa-download me-2"></i>
+          <a
+            href="#"
+            class="list-group-item list-group-item-action"
+            use:tooltip="{[
+              $_('components.modals.connect-server.download'),
+              { placement: 'bottom' },
+            ]}">
             {$_("components.modals.connect-server.steps.1")}
+
+            <small class="text-muted d-block"
+              >Paper 1.20, Spigot 1.20, Velocity, 1.2, Bungeecord 1.2</small>
           </a>
 
           <button
@@ -37,7 +44,6 @@
                 : $_('components.modals.connect-server.copy'),
               { placement: 'bottom', hideOnClick: false },
             ]}">
-            <i class="fas fa-terminal me-2"></i>
             {$_("components.modals.connect-server.steps.2")}
             <span class="d-block user-select-all font-monospace"
               >{commandText}</span>
@@ -49,7 +55,6 @@
           </button>
 
           <a href="#" class="list-group-item list-group-item-action">
-            <i class="fas fa-check-circle me-2"></i>
             {$_("components.modals.connect-server.steps.3")}
           </a>
         </ol>
