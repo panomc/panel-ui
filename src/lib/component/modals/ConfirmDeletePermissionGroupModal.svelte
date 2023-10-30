@@ -33,7 +33,7 @@
                   use:tooltip="{[user, { placement: 'bottom' }]}">
                   <a href="{base}/players/player/{user}">
                     <img
-                      src="https://crafthead.net/avatar/{user}"
+                      src="https://minotar.net/avatar/{user}"
                       width="32"
                       height="32"
                       alt="{user}" />

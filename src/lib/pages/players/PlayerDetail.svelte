@@ -96,7 +96,7 @@
             class:border="{isOnline}"
             class:border-5="{isOnline}"
             class:border-secondary="{isOnline}"
-            src="https://crafthead.net/avatar/{data.player.username}"
+            src="https://minotar.net/avatar/{data.player.username}"
             use:tooltip="{[
               isOnline
                 ? $_('pages.player-detail.online-text',{values:{whereOnline:data.player.inGame ? $_('pages.player-detail.in-game') : $_('pages.player-detail.in-website')}})

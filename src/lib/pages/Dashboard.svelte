@@ -126,7 +126,7 @@
                           ]}"
                           href="{base}/players/player/{ticket.writer.username}">
                           <img
-                            src="https://crafthead.net/avatar/{ticket.writer
+                            src="https://minotar.net/avatar/{ticket.writer
                               .username}/32"
                             alt="{$_(
                               'pages.dashboard.last-tickets.player-name'

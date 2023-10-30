@@ -57,7 +57,7 @@
               <span class="badge rounded-pill bg-light link-dark text-center">
                 <img
                   class="d-inline rounded-circle me-2"
-                  src="https://crafthead.net/avatar/{user}"
+                  src="https://minotar.net/avatar/{user}"
                   alt="{user}"
                   width="28"
                   height="28" />

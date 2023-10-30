@@ -84,7 +84,7 @@
               data-bs-toggle="dropdown"
               title="{$_('components.navbar.account-dropdown.session')}">
               <img
-                src="https://crafthead.net/avatar/{$user.username}"
+                src="https://minotar.net/avatar/{$user.username}"
                 width="32"
                 height="32"
                 class="rounded-circle animate__animated animate__zoomIn"

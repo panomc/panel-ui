@@ -18,7 +18,7 @@
   <td class="align-middle">
     <a href="{base}/players/player/{ticket.writer.username}" title="{$_('components.ticket-row.view')}">
       <img
-        src="https://crafthead.net/avatar/{ticket.writer.username}/32"
+        src="https://minotar.net/avatar/{ticket.writer.username}/32"
         alt="{$_('components.ticket-row.player-name')}"
         class="rounded-circle animate__animated animate__zoomIn me-2"
         height="32"

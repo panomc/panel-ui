@@ -54,7 +54,7 @@
         alt="{player.username}"
         class="rounded-circle mr-3 animate__animated animate__zoomIn me-2"
         height="32"
-        src="https://crafthead.net/avatar/{player.username}"
+        src="https://minotar.net/avatar/{player.username}"
         width="32" />
       {player.username}
     </a>

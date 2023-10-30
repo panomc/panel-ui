@@ -77,7 +77,7 @@
         alt="{post.writer.username}"
         class="rounded-circle"
         height="32"
-        src="https://crafthead.net/avatar/{post.writer.username}"
+        src="https://minotar.net/avatar/{post.writer.username}"
         width="32" />
     </a>
   </td>

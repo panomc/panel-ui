@@ -87,7 +87,7 @@
             <div class="col-auto">
               <a href="{base}/players/player/{message.username}">
                 <img
-                  src="https://crafthead.net/avatar/{message.username}/48"
+                  src="https://minotar.net/avatar/{message.username}/48"
                   alt="{message.username}"
                   class="rounded animate__animated animate__zoomIn"
                   use:tooltip="{[message.username, { placement: 'bottom' }]}"
@@ -101,7 +101,7 @@
             <div class="col-auto">
               <a href="{base}/players/player/{message.username}">
                 <img
-                  src="https://crafthead.net/avatar/{message.username}/48"
+                  src="https://minotar.net/avatar/{message.username}/48"
                   alt="{message.username}"
                   class="rounded animate__animated animate__zoomIn"
                   use:tooltip="{[message.username, { placement: 'bottom' }]}"
