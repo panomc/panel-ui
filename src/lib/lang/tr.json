@@ -28,8 +28,7 @@
     },
     "statistics": {
       "title": "İstatistikler",
-      "website-tooltip": "Website",
-      "online-player-text": "{onlinePlayerCount} Çevrimiçi",
+      "online-player-text": "{onlinePlayerCount} Sitede Çevrimiçi",
       "new-register-text": "{newRegisterCount} Yeni Kayıt",
       "total-player-text": "{totalPlayerCount} Toplam Oyuncu",
       "website-graph": {

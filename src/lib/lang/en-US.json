@@ -28,8 +28,7 @@
     },
     "statistics": {
       "title": "Statistics",
-      "website-tooltip": "Website",
-      "online-player-text": "{onlinePlayerCount} Online",
+      "online-player-text": "{onlinePlayerCount} Online on Site",
       "new-register-text": "{newRegisterCount} New Registration",
       "total-player-text": "{totalPlayerCount} Total Players",
       "website-graph": {

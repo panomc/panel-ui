@@ -103,13 +103,9 @@
       {#if hasPermission(Permissions.MANAGE_TICKETS)}
         <div class="card bg-white mb-3">
           <div class="card-body">
-            <div class="row justify-content-between mb-3">
-              <div class="col">
-                <h5 class="card-title">
-                  {$_("pages.dashboard.last-tickets.title")}
-                </h5>
-              </div>
-            </div>
+            <h5 class="card-title">
+              {$_("pages.dashboard.last-tickets.title")}
+            </h5>
 
             {#if data.tickets.length === 0}
               <NoContent />
@@ -164,6 +160,11 @@
           </div>
         </div>
       {/if}
+    </div>
+    <div class="col-6">
+      <div class="card bg-white mb-3">
+        <div class="card-body"></div>
+      </div>
     </div>
   </div>
 </div>

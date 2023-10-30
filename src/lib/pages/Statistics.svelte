@@ -1,14 +1,14 @@
 <!-- Statistics Page -->
 <div class="container">
   <div
-    class="row my-3 justify-content-between animate__animated animate__slideInUp">
+    class="row pb-3 justify-content-between animate__animated animate__slideInUp">
     <div class="col-4">
-      <div class="card bg-secondary bg-opacity-25">
+      <div class="card bg-success bg-opacity-25">
         <div class="card-body">
-          <p
-            class="mb-0 lead text-secondary text-center"
-            use:tooltip="{[$_('pages.statistics.website-tooltip'), { placement: 'bottom' }]}">
-            {$_("pages.statistics.online-player-text", {values: {onlinePlayerCount: data.onlinePlayerCount}})}
+          <p class="mb-0 lead text-success">
+            {$_("pages.statistics.online-player-text", {
+              values: { onlinePlayerCount: data.onlinePlayerCount },
+            })}
           </p>
         </div>
       </div>
@@ -16,8 +16,10 @@
     <div class="col-4">
       <div class="card bg-primary bg-opacity-25">
         <div class="card-body">
-          <p class="mb-0 lead text-primary text-center">
-            {$_('pages.statistics.new-register-text', {values: {newRegisterCount: data.newRegisterCount}})}
+          <p class="mb-0 lead text-primary">
+            {$_("pages.statistics.new-register-text", {
+              values: { newRegisterCount: data.newRegisterCount },
+            })}
           </p>
         </div>
       </div>
@@ -25,8 +27,10 @@
     <div class="col-4">
       <div class="card bg-danger bg-opacity-25">
         <div class="card-body">
-          <p class="mb-0 lead text-danger text-center">
-            {$_('pages.statistics.total-player-text', {values: {totalPlayerCount: data.registeredPlayerCount}})}
+          <p class="mb-0 lead text-danger">
+            {$_("pages.statistics.total-player-text", {
+              values: { totalPlayerCount: data.registeredPlayerCount },
+            })}
           </p>
         </div>
       </div>
@@ -37,7 +41,9 @@
     <div class="card-body">
       <div class="row justify-content-between mb-3">
         <div class="col">
-          <h5 class="card-title">{$_('pages.statistics.website-graph.title')}</h5>
+          <h5 class="card-title">
+            {$_("pages.statistics.website-graph.title")}
+          </h5>
         </div>
         <div class="col-auto">
           <div class="btn-group">
@@ -46,14 +52,14 @@
               class:active="{data.period === DashboardPeriod.WEEK}"
               on:click="{() => reloadDataByPeriod()}"
               class:disabled="{reloading}">
-              {$_('pages.statistics.website-graph.week')}
+              {$_("pages.statistics.website-graph.week")}
             </button>
             <button
               class="btn btn-sm btn-outline-light btn-link"
               class:active="{data.period === DashboardPeriod.MONTH}"
               on:click="{() => reloadDataByPeriod(DashboardPeriod.MONTH)}"
               class:disabled="{reloading}">
-              {$_('pages.statistics.website-graph.month')}
+              {$_("pages.statistics.website-graph.month")}
             </button>
           </div>
         </div>
@@ -70,36 +76,47 @@
   <!-- Statistic Table -->
   <div class="card bg-white">
     <div class="card-body">
-      <h5 class="card-title">{$_('pages.statistics.total-statistics.title')}</h5>
+      <h5 class="card-title">
+        {$_("pages.statistics.total-statistics.title")}
+      </h5>
       <div class="table-responsive">
         <table class="table m-0">
           <tbody>
             <tr>
-              <th scope="row">{$_('pages.statistics.total-statistics.posts')}</th>
+              <th scope="row"
+                >{$_("pages.statistics.total-statistics.posts")}</th>
               <td>{data.postCount}</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.statistics.total-statistics.players')}</th>
+              <th scope="row"
+                >{$_("pages.statistics.total-statistics.players")}</th>
               <td>{data.registeredPlayerCount}</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.statistics.total-statistics.admins')}</th>
+              <th scope="row"
+                >{$_("pages.statistics.total-statistics.admins")}</th>
               <td>{data.adminCount}</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.statistics.total-statistics.tickets')}</th>
+              <th scope="row"
+                >{$_("pages.statistics.total-statistics.tickets")}</th>
               <td>{data.ticketCount}</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.statistics.total-statistics.connected-servers')}</th>
+              <th scope="row"
+                >{$_(
+                  "pages.statistics.total-statistics.connected-servers"
+                )}</th>
               <td>{data.connectedServerCount}</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.statistics.total-statistics.addons')}</th>
+              <th scope="row"
+                >{$_("pages.statistics.total-statistics.addons")}</th>
               <td>?</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.statistics.total-statistics.themes')}</th>
+              <th scope="row"
+                >{$_("pages.statistics.total-statistics.themes")}</th>
               <td>?</td>
             </tr>
           </tbody>

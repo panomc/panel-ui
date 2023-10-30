@@ -26,7 +26,7 @@
     <div class="col-4">
       <div class="card bg-primary bg-opacity-25">
         <div class="card-body">
-          <p class="mb-0 lead text-primary text-center">
+          <p class="mb-0 lead text-primary">
             {$_("pages.server.dashboard.player", {
               values: {
                 playerCount: data.server.playerCount,
@@ -40,7 +40,7 @@
     <div class="col-4">
       <div class="card bg-white">
         <div class="card-body">
-          <p class="mb-0 lead text-dark text-center">
+          <p class="mb-0 lead text-dark">
             {#if data.server.status === ServerStatus.ONLINE}
               {$_("pages.server.dashboard.player", {
                 values: { upTime: getUptime(data.server.startTime, checkTime) },
