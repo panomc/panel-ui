@@ -3,21 +3,36 @@
     class="row justify-content-between mb-3 animate__animated animate__slideInUp">
     <div class="col-4">
       <div
-        class="card bg-white"
-        class:bg-mint="{data.server.status === ServerStatus.ONLINE}"
+        class="card bg-opacity-25"
+        class:bg-success="{data.server.status === ServerStatus.ONLINE}"
         class:bg-danger="{data.server.status === ServerStatus.OFFLINE}">
         <div class="card-body">
-          <p class="mb-0 lead text-white">
-            {$_('pages.server.dashboard.server-status', {values: {status: data.server.status === ServerStatus.ONLINE ? $_('pages.server.dashboard.online'): $_('pages.server.dashboard.offline')}})}
+          <p
+            class="mb-0 lead"
+            class:text-success="{data.server.status === ServerStatus.ONLINE}"
+            class:text-danger="{data.server.status === ServerStatus.OFFLINE}">
+            {$_("pages.server.dashboard.server-status", {
+              values: {
+                status:
+                  data.server.status === ServerStatus.ONLINE
+                    ? $_("pages.server.dashboard.online")
+                    : $_("pages.server.dashboard.offline"),
+              },
+            })}
           </p>
         </div>
       </div>
     </div>
     <div class="col-4">
-      <div class="card bg-white">
+      <div class="card bg-primary bg-opacity-25">
         <div class="card-body">
           <p class="mb-0 lead text-primary text-center">
-            {$_('pages.server.dashboard.player', {values: {playerCount: data.server.playerCount, maxPlayerCount: data.server.maxPlayerCount}})}
+            {$_("pages.server.dashboard.player", {
+              values: {
+                playerCount: data.server.playerCount,
+                maxPlayerCount: data.server.maxPlayerCount,
+              },
+            })}
           </p>
         </div>
       </div>
@@ -27,12 +42,12 @@
         <div class="card-body">
           <p class="mb-0 lead text-dark text-center">
             {#if data.server.status === ServerStatus.ONLINE}
-              {$_('pages.server.dashboard.player', {values: {upTime: getUptime(
-                    data.server.startTime,
-                    checkTime
-                  )}})}
+              {$_("pages.server.dashboard.player", {
+                values: { upTime: getUptime(data.server.startTime, checkTime) },
+              })}
             {:else}
-              {$_('pages.server.dashboard.last-online')} <DateComponent time="{data.server.stopTime}" />
+              {$_("pages.server.dashboard.last-online")}
+              <DateComponent time="{data.server.stopTime}" />
             {/if}
           </p>
         </div>
@@ -43,32 +58,34 @@
   <!-- Statistic Table -->
   <div class="card bg-white">
     <div class="card-body">
-      <h5 class="card-title">{$_('pages.server.dashboard.statistics')}</h5>
+      <h5 class="card-title">{$_("pages.server.dashboard.statistics")}</h5>
       <div class="table-responsive">
         <table class="table table-hover m-0">
           <tbody class="text-muted">
             <tr>
-              <th scope="row">{$_('pages.server.dashboard.server-name')}</th>
+              <th scope="row">{$_("pages.server.dashboard.server-name")}</th>
               <td>{data.server.name}</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.server.dashboard.server-type')}</th>
+              <th scope="row">{$_("pages.server.dashboard.server-type")}</th>
               <td>{data.server.type}</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.server.dashboard.local-ip-address')}</th>
+              <th scope="row"
+                >{$_("pages.server.dashboard.local-ip-address")}</th>
               <td>{data.server.host}:{data.server.port}</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.server.dashboard.server-version')}</th>
+              <th scope="row">{$_("pages.server.dashboard.server-version")}</th>
               <td>{data.server.version}</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.server.dashboard.total-connected-servers')}</th>
+              <th scope="row"
+                >{$_("pages.server.dashboard.total-connected-servers")}</th>
               <td>{data.connectedServerCount}</td>
             </tr>
             <tr>
-              <th scope="row">{$_('pages.server.dashboard.date-added')}</th>
+              <th scope="row">{$_("pages.server.dashboard.date-added")}</th>
               <td><DateComponent time="{data.server.acceptedTime}" /></td>
             </tr>
           </tbody>
