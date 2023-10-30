@@ -290,6 +290,33 @@
         }
       }
     },
+    "server": {
+      "dashboard": {
+        "title": "Sunucu İstatistikleri",
+        "server-status": "Sunucu {status}",
+        "online": "Çevrimiçi",
+        "offline": "Çevrimdışı",
+        "player": "{playerCount}/{maxPlayerCount} Oyuncu",
+        "working-time": "Çalışma Süresi: {upTime}",
+        "last-online": "Son Aktif Zamanı: ",
+        "statistics": "İstatistik",
+        "server-name": "Sunucu İsmi:",
+        "server-type": "Sunucu Türü:",
+        "local-ip-address": "Yerel IP Adresi:",
+        "server-version": "Sunucu Sürümü:",
+        "total-connected-servers": "Toplam Bağlı Sunucular:",
+        "date-added": "Eklenme Zamanı:"
+      },
+      "settings": {
+        "title": "Sunucu Ayarları",
+        "main-server": "Ana Sunucu",
+        "already-main-server": "{serverName} ana sunucu",
+        "make-main-server": "Ana Sunucu Belirle",
+        "main-server-info": "Websitede görüntülenecek sunucu bilgilerini ana sunucu belirler.",
+        "remove-server": "Sunucuyu Kaldır",
+        "disconnect": "Bağlantıyı Kes"
+      }
+    },
     "players-by-permission-group": {
       "title": "\"{permissionGroupName}\" Yetkili Oyuncular",
       "player": "Oyuncu",
