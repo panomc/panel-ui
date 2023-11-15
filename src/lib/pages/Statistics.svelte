@@ -5,7 +5,7 @@
     <div class="col-4">
       <div class="card bg-success bg-opacity-25">
         <div class="card-body">
-          <p class="mb-0 lead text-success">
+          <p class="mb-0 text-success">
             {$_("pages.statistics.online-player-text", {
               values: { onlinePlayerCount: data.onlinePlayerCount },
             })}
@@ -16,7 +16,7 @@
     <div class="col-4">
       <div class="card bg-primary bg-opacity-25">
         <div class="card-body">
-          <p class="mb-0 lead text-primary">
+          <p class="mb-0 text-primary">
             {$_("pages.statistics.new-register-text", {
               values: { newRegisterCount: data.newRegisterCount },
             })}
@@ -27,7 +27,7 @@
     <div class="col-4">
       <div class="card bg-danger bg-opacity-25">
         <div class="card-body">
-          <p class="mb-0 lead text-danger">
+          <p class="mb-0 text-danger">
             {$_("pages.statistics.total-player-text", {
               values: { totalPlayerCount: data.registeredPlayerCount },
             })}

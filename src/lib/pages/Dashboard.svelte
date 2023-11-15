@@ -6,13 +6,13 @@
       class="alert alert-success alert-dismissible animate__animated animate__zoomIn mb-3">
       <div class="row">
         <div class="col">
-          <p class="lead">
+          <p>
             {@html $_("pages.dashboard.welcome-card.description")}
           </p>
         </div>
         <div class="w-100"></div>
         <div class="col-lg-3 mb-lg-0 mb-3">
-          <h5>{$_("pages.dashboard.welcome-card.connect-server")}</h5>
+          <p>{$_("pages.dashboard.welcome-card.connect-server")}</p>
           <p>
             {$_("pages.dashboard.welcome-card.connect-server-description")}
           </p>
@@ -26,7 +26,7 @@
         </div>
         <div class="col-lg-3 mb-lg-0 mb-3">
           <ul class="list-unstyled">
-            <h5>{$_("pages.dashboard.welcome-card.discover-title")}</h5>
+            <p>{$_("pages.dashboard.welcome-card.discover-title")}</p>
             <li>
               <a class="alert-link" href="{base}/posts/create-post">
                 <i class="fas fa-pen me-2"></i>
@@ -163,7 +163,9 @@
     </div>
     <div class="col-6">
       <div class="card bg-white mb-3">
-        <div class="card-body"></div>
+        <div class="card-body">
+          <h5 class="card-title">Yetkili Kayıtları</h5>
+        </div>
       </div>
     </div>
   </div>
