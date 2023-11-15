@@ -2,10 +2,8 @@
 <div class="card bg-white">
   <div class="card-body animate__animated animate__fadeIn">
     <div class="row mb-3">
-      <label class="col-md-4 col-form-label" for="platformDevMode">
-        Geliştirici Modu:
-      </label>
-      <div class="col d-flex align-items-center">
+      <label class="col-md-4" for="platformDevMode"> Geliştirici Modu: </label>
+      <div class="col">
         <div class="form-check form-switch">
           <input
             class="form-check-input"
@@ -19,7 +17,7 @@
       <label class="col-md-4 col-form-label" for="platformLanguage">
         {$_("pages.settings.platform.display-language")}
       </label>
-      <div class="col">
+      <div class="col-md-4">
         <select
           class="form-control"
           id="platformLanguage"
@@ -35,11 +33,11 @@
     <h5 class="card-title">
       {$_("pages.settings.platform.update-preferences")}
     </h5>
-    <div class="row mb-3 justify-content-between">
+    <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="updatePeriod">
         {$_("pages.settings.platform.check-auto-updates")}
       </label>
-      <div class="col">
+      <div class="col-md-4">
         <select
           class="form-control"
           bind:value="{data.updatePeriod}"

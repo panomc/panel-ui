@@ -2,20 +2,23 @@
 <div class="card bg-white">
   <div class="card-body animate__animated animate__fadeIn">
     <div class="row mb-3">
-      <label class="col-md-4 col-form-label" for="siteTitle">{$_('pages.settings.site-settings.inputs.website-name.label')}</label>
-      <div class="col col-form-label">
+      <label class="col-md-4 col-form-label col-form-label-lg" for="siteTitle"
+        >{$_("pages.settings.site-settings.inputs.website-name.label")}</label>
+      <div class="col">
         <input
           bind:value="{data.websiteName}"
           aria-describedby="siteTitle"
           class="form-control form-control-lg"
-          placeholder="{$_('pages.settings.site-settings.inputs.website-name.placeholder')}"
+          placeholder="{$_(
+            'pages.settings.site-settings.inputs.website-name.placeholder'
+          )}"
           id="siteTitle"
           type="text" />
       </div>
     </div>
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="siteDesc">
-        {$_('pages.settings.site-settings.inputs.website-description.label')}
+        {$_("pages.settings.site-settings.inputs.website-description.label")}
       </label>
       <div class="col">
         <textarea
@@ -23,15 +26,15 @@
           aria-describedby="siteDesc"
           class="form-control"
           id="siteDesc"
-          rows="2"></textarea>
+          rows="1"></textarea>
       </div>
     </div>
 
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="ipAddress">
-        {$_('pages.settings.site-settings.inputs.game-server-ip-address.label')}
+        {$_("pages.settings.site-settings.inputs.game-server-ip-address.label")}
       </label>
-      <div class="col col-form-label">
+      <div class="col">
         <div class="row align-items-center">
           <div class="col">
             <input
@@ -48,9 +51,9 @@
 
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="serverGameVersion">
-        {$_('pages.settings.site-settings.inputs.game-server-version.label')}
+        {$_("pages.settings.site-settings.inputs.game-server-version.label")}
       </label>
-      <div class="col col-form-label">
+      <div class="col">
         <div class="row align-items-center">
           <div class="col">
             <input
@@ -67,9 +70,9 @@
 
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="supportEmailAddress">
-        {$_('pages.settings.site-settings.inputs.support-email-address.label')}
+        {$_("pages.settings.site-settings.inputs.support-email-address.label")}
       </label>
-      <div class="col col-form-label">
+      <div class="col">
         <div class="row align-items-center">
           <div class="col">
             <input
@@ -85,22 +88,27 @@
     </div>
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="siteKeywords">
-        {$_('pages.settings.site-settings.inputs.keywords.label')}
+        {$_("pages.settings.site-settings.inputs.keywords.label")}
       </label>
-      <div class="col col-form-label">
+      <div class="col">
         <form on:submit|preventDefault="{addKeyWord}">
           <input
             id="siteKeywords"
             class="form-control mb-3"
             class:border-danger="{keywordInputError}"
-            placeholder="{$_('pages.settings.site-settings.inputs.keywords.placeholder')}"
+            placeholder="{$_(
+              'pages.settings.site-settings.inputs.keywords.placeholder'
+            )}"
             type="text"
             name="keyword"
             bind:value="{keyword}" />
         </form>
         {#each data.keywords as keyword, index (keyword)}
           <a
-            use:tooltip="{[$_('pages.settings.site-settings.inputs.keywords.remove'), { placement: 'bottom' }]}"
+            use:tooltip="{[
+              $_('pages.settings.site-settings.inputs.keywords.remove'),
+              { placement: 'bottom' },
+            ]}"
             href="javascript:void(0);"
             on:click="{() => removeKeyWord(index)}">
             <span class="badge rounded-pill bg-light link-primary">
@@ -111,8 +119,10 @@
       </div>
     </div>
     <div class="row mb-3">
-      <label class="col-md-4 col-form-label" for="siteFavicon">{$_('pages.settings.site-settings.inputs.favicon.label')} </label>
-      <div class="col col-form-label">
+      <label class="col-md-4 col-form-label" for="siteFavicon"
+        >{$_("pages.settings.site-settings.inputs.favicon.label")}
+      </label>
+      <div class="col">
         <div class="row">
           <div class="col-auto">
             <img
@@ -122,7 +132,6 @@
               src="{favicon}"
               width="48" />
           </div>
-          <div class="w-100 my-2"></div>
           <div class="col">
             <input
               class="form-control-file"
@@ -133,7 +142,7 @@
               bind:this="{faviconInput}"
               value="" />
             <small class="text-muted">
-              {$_('pages.settings.site-settings.inputs.favicon.helper')}
+              {$_("pages.settings.site-settings.inputs.favicon.helper")}
             </small>
           </div>
         </div>
@@ -142,19 +151,20 @@
 
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="siteLogo">
-        {$_('pages.settings.site-settings.inputs.website-logo.label')}
+        {$_("pages.settings.site-settings.inputs.website-logo.label")}
       </label>
-      <div class="col col-form-label">
+      <div class="col">
         <div class="row">
           <div class="col-auto">
             <img
               class="d-block ml-auto"
-              alt="{$_('pages.settings.site-settings.inputs.website-logo.server-icon')}"
+              alt="{$_(
+                'pages.settings.site-settings.inputs.website-logo.server-icon'
+              )}"
               height="48"
               width="auto"
               src="{websiteLogo}" />
           </div>
-          <div class="w-100 my-2"></div>
           <div class="col">
             <input
               class="form-control-file"
@@ -165,7 +175,7 @@
               bind:this="{websiteLogoInput}"
               value="" />
             <small class="text-muted">
-              {$_('pages.settings.site-settings.inputs.website-logo.helper')}
+              {$_("pages.settings.site-settings.inputs.website-logo.helper")}
             </small>
           </div>
         </div>
@@ -177,7 +187,7 @@
       class:disabled="{saveButtonLoading || isSaveButtonDisabled}"
       aria-disabled="{saveButtonLoading || isSaveButtonDisabled}"
       on:click="{save}"
-      >{$_('pages.settings.site-settings.save-button')}
+      >{$_("pages.settings.site-settings.save-button")}
     </button>
   </div>
 </div>
