@@ -79,6 +79,7 @@
 
   import { show as showToast } from "$lib/component/ToastContainer.svelte";
   import TicketsClosedToast from "$lib/component/toasts/TicketsClosedToast.svelte";
+  import { TicketStatuses } from "$lib/component/badges/TicketStatusBadge.svelte";
 
   let loading;
 
@@ -96,7 +97,7 @@
           tickets: Object.values(
             get(selectedTickets).map((id) => parseInt(id))
           ),
-          status: "close",
+          status: TicketStatuses.CLOSED,
         },
       })
         .then((body) => {

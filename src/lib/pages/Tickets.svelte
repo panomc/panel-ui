@@ -146,9 +146,9 @@
   let checkedList = writable([]);
 
   export const PageTypes = Object.freeze({
-    ALL: "all",
-    WAITING_REPLY: "waitingReply",
-    CLOSED: "closed",
+    ALL: "ALL",
+    WAITING_REPLY: "WAITING_REPLY",
+    CLOSED: "CLOSED",
   });
 
   export const DefaultPageType = PageTypes.ALL;
@@ -156,7 +156,7 @@
   async function loadData({ page, pageType, request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
-        path: `/api/panel/tickets?pageType=${pageType}&page=${parseInt(page)}`,
+        path: `/api/panel/tickets?pageType=${pageType.toUpperCase()}&page=${parseInt(page)}`,
         request,
       }).then((body) => {
         if (body.result === "ok") {
@@ -179,6 +179,8 @@
   export async function load(event, pageType = DefaultPageType) {
     const { parent } = event;
     const parentData = await parent();
+
+    pageType = pageType.toUpperCase()
 
     let data = {
       ticketCount: 0,

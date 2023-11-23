@@ -183,9 +183,9 @@
   });
 
   export const StatusTypes = Object.freeze({
-    PUBLISHED: 1,
-    DRAFT: 2,
-    TRASH: 0,
+    PUBLISHED: "PUBLISHED",
+    DRAFT: "DRAFT",
+    TRASH: "TRASH",
   });
 
   export const DefaultMode = Modes.CREATE;

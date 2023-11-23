@@ -113,9 +113,9 @@
   import { error } from "@sveltejs/kit";
 
   export const PageTypes = Object.freeze({
-    PUBLISHED: "published",
-    DRAFT: "draft",
-    TRASH: "trash",
+    PUBLISHED: "PUBLISHED",
+    DRAFT: "DRAFT",
+    TRASH: "TRASH",
   });
 
   export const DefaultPageType = PageTypes.PUBLISHED;
@@ -123,7 +123,7 @@
   async function loadData({ page, pageType, request }) {
     return new Promise((resolve, reject) => {
       ApiUtil.get({
-        path: `/api/panel/posts?page=${page}&pageType=${pageType}`,
+        path: `/api/panel/posts?page=${page}&pageType=${pageType.toUpperCase()}`,
         request,
       }).then((body) => {
         if (body.result === "ok") {
@@ -146,6 +146,8 @@
   export async function load(event, pageType = DefaultPageType) {
     const { parent } = event;
     const parentData = await parent();
+
+    pageType = pageType.toUpperCase()
 
     let data = {
       postCount: 0,
@@ -232,7 +234,7 @@
       ApiUtil.put({
         path: `/api/panel/posts/${id}/status`,
         body: {
-          to: "draft",
+          to: "DRAFT",
         },
       })
         .then((body) => {
@@ -261,7 +263,7 @@
       ApiUtil.put({
         path: `/api/panel/posts/${id}/status`,
         body: {
-          to: "publish",
+          to: "PUBLISH",
         },
       })
         .then((body) => {
