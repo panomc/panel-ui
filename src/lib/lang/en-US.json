@@ -718,6 +718,6 @@
     }
   },
   "page-error": {
-    "404": "Bad Enderman blocked this page from loading."
+    "404": "Enderman blocked this page from loading."
   }
 }

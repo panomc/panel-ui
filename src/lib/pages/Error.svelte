@@ -4,15 +4,15 @@
     class="d-flex flex-column align-items-center justify-content-center mt-5
     container animated bounceInDown">
     <img
-      alt="{$_('pages.error.title', {values: {status: $page.status}})}"
+      alt="{$_('pages.error.title', { values: { status: $page.status } })}"
       class="img-fluid mb-3"
       src="{base}/assets/img/404.png"
       width="280" />
-    <h2>{$_('pages.error.title', {values: {status: $page.status}})}</h2>
-    <p class="text-muted">
-      {$_('page-error.' + $page.status) || $page.error.message}
+    <p>
+      {$_("page-error." + $page.status) || $page.error.message}
     </p>
-    <a class="btn btn-primary" role="button" href="../../..">{$_('pages.error.go-back')}</a>
+    <a class="btn btn-primary" role="button" href="../../.."
+      >{$_("pages.error.go-back")}</a>
   </div>
 </div>
 
@@ -25,5 +25,5 @@
 
   const pageTitle = getContext("pageTitle");
 
-  pageTitle.set($_('pages.error.title', {values: {status: $page.status}}));
+  pageTitle.set($_("pages.error.title", { values: { status: $page.status } }));
 </script>
