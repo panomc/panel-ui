@@ -33,7 +33,7 @@
               data-bs-toggle="dropdown"
               role="button"
               title="{$_('components.navbar.notifications')}">
-              <i class="fas fa-bell fa-lg"></i>
+              <i class="fa-regular fa-bell fa-lg"></i>
               {#if $notificationCount !== 0}
                 <span
                   class="position-absolute p-2 start-75 translate-middle badge rounded-pill bg-danger">
@@ -45,9 +45,8 @@
             <div
               class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
               <h6 class="dropdown-header">
-                {$_('components.navbar.notifications')} {$notificationCount === 0
-                  ? ""
-                  : "(" + $notificationCount + ")"}
+                {$_("components.navbar.notifications")}
+                {$notificationCount === 0 ? "" : "(" + $notificationCount + ")"}
               </h6>
 
               {#if $quickNotifications.length === 0}
@@ -62,7 +61,11 @@
                       'NOT_READ'}">
                     <p class="mb-0">{notification.type}</p>
                     <small class="text-dark">
-                      {getTime(checkTime, parseInt(notification.date), locales[$currentLanguage['date-fns-code']])}
+                      {getTime(
+                        checkTime,
+                        parseInt(notification.date),
+                        locales[$currentLanguage["date-fns-code"]]
+                      )}
                     </small>
                   </a>
                 {/each}
@@ -71,7 +74,7 @@
               <a
                 class="dropdown-item text-center small"
                 href="{base}/notifications">
-                {$_('components.navbar.show-all')}
+                {$_("components.navbar.show-all")}
               </a>
             </div>
           </div>
@@ -97,7 +100,7 @@
                 <a
                   class="dropdown-item"
                   href="{base}/players/player/{$user.username}">
-                  {$_('components.navbar.account-dropdown.profile')}
+                  {$_("components.navbar.account-dropdown.profile")}
                 </a>
               </li>
               <li>
@@ -105,7 +108,7 @@
                   type="button"
                   class="dropdown-item text-danger"
                   on:click="{onLogout}">
-                  {$_('components.navbar.account-dropdown.logout')}
+                  {$_("components.navbar.account-dropdown.logout")}
                 </button>
               </li>
             </ul>

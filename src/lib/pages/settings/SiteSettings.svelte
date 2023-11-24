@@ -10,7 +10,7 @@
           aria-describedby="siteTitle"
           class="form-control form-control-lg"
           placeholder="{$_(
-            'pages.settings.site-settings.inputs.website-name.placeholder'
+            'pages.settings.site-settings.inputs.website-name.placeholder',
           )}"
           id="siteTitle"
           type="text" />
@@ -26,7 +26,7 @@
           aria-describedby="siteDesc"
           class="form-control"
           id="siteDesc"
-          rows="1"></textarea>
+          rows="2"></textarea>
       </div>
     </div>
 
@@ -97,7 +97,7 @@
             class="form-control mb-3"
             class:border-danger="{keywordInputError}"
             placeholder="{$_(
-              'pages.settings.site-settings.inputs.keywords.placeholder'
+              'pages.settings.site-settings.inputs.keywords.placeholder',
             )}"
             type="text"
             name="keyword"
@@ -159,7 +159,7 @@
             <img
               class="d-block ml-auto"
               alt="{$_(
-                'pages.settings.site-settings.inputs.website-logo.server-icon'
+                'pages.settings.site-settings.inputs.website-logo.server-icon',
               )}"
               height="48"
               width="auto"
