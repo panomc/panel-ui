@@ -1,4 +1,4 @@
-<!-- Statistics Page -->
+<!-- Player Statistics Page -->
 <div class="container">
   <div
     class="row pb-3 justify-content-between animate__animated animate__slideInUp">
@@ -105,7 +105,7 @@
             <tr>
               <th scope="row"
                 >{$_(
-                  "pages.statistics.total-statistics.connected-servers"
+                  "pages.statistics.total-statistics.connected-servers",
                 )}</th>
               <td>{data.connectedServerCount}</td>
             </tr>
@@ -125,6 +125,7 @@
     </div>
   </div>
 </div>
+<!-- Player Statistics Page End -->
 
 <script context="module">
   import { showNetworkErrorOnCatch } from "$lib/Store.js";
@@ -176,7 +177,7 @@
     await loadData({ period: DashboardPeriod.WEEK, request: event }).then(
       (body) => {
         data = { ...data, ...body };
-      }
+      },
     );
 
     return data;
@@ -186,8 +187,6 @@
 <script>
   import { getContext } from "svelte";
   import { _ } from "svelte-i18n";
-
-  import tooltip from "$lib/tooltip.util";
 
   import WebsiteActivityChart from "$lib/component/charts/Dashboard/WebsiteActivityChart.svelte";
 

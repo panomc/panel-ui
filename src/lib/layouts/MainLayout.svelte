@@ -10,7 +10,7 @@
   <div class:d-flex="{!showSplash}" hidden="{showSplash}">
     <Sidebar />
     <!--  Main  -->
-    <main class="w-100 overflow-scroll" style="height: 100vh;">
+    <main class="w-100 vh-100 bg-light overflow-scroll">
       <Navbar />
 
       <div hidden="{showLoading}">
@@ -100,7 +100,6 @@
       initNotificationListeners();
     }
 
-
     const output = {
       session: {
         basicData,
@@ -115,7 +114,7 @@
       notificationCount: basicData.notificationCount || 0,
       mainServer: basicData.mainServer || {},
       selectedServer: basicData.selectedServer,
-      connectedServerCount: basicData.connectedServerCount
+      connectedServerCount: basicData.connectedServerCount,
     };
 
     if (basicData.result !== "ok") {
@@ -165,7 +164,7 @@
   const isSidebarOpen = writable(
     PanelSidebarStorageUtil.isThereSideBarOpenStatus()
       ? PanelSidebarStorageUtil.getSidebarOpenStatus()
-      : true
+      : true,
   );
 
   const pageUnsubscribe = page.subscribe((page) => {
@@ -261,7 +260,7 @@
       ) {
         showSplash = false;
       }
-    })
+    }),
   );
 
   onDestroy(pageUnsubscribe);
