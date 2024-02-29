@@ -48,7 +48,7 @@
             <li>
               <a class="alert-link" href="{base}/players">
                 <i class="fas fa-user-cog me-2"></i>{$_(
-                  "pages.dashboard.welcome-card.review-players"
+                  "pages.dashboard.welcome-card.review-players",
                 )}
               </a>
             </li>
@@ -110,7 +110,7 @@
             {#if data.tickets.length === 0}
               <NoContent />
             {:else}
-              <table class="table table-hover mb-0">
+              <table class="table table-sm mb-0">
                 {#each data.tickets as ticket, index (ticket)}
                   <tbody>
                     <tr>
@@ -125,7 +125,7 @@
                             src="https://minotar.net/avatar/{ticket.writer
                               .username}/32"
                             alt="{$_(
-                              'pages.dashboard.last-tickets.player-name'
+                              'pages.dashboard.last-tickets.player-name',
                             )}"
                             class="rounded-circle animate__animated animate__zoomIn"
                             height="32"
@@ -137,15 +137,6 @@
                           href="{base}/tickets/ticket/{ticket.id}"
                           title="{$_('pages.dashboard.last-tickets.view')}"
                           >#{ticket.id} {ticket.title}</a>
-                      </td>
-                      <td class="align-middle text-nowrap">
-                        <a
-                          title="{$_('pages.dashboard.last-tickets.filter')}"
-                          href="{base}/tickets/category/{ticket.category.url}">
-                          {ticket.category.title === "-"
-                            ? $_("pages.dashboard.last-tickets.no-category")
-                            : ticket.category.title}
-                        </a>
                       </td>
                       <td class="align-middle text-nowrap">
                         <TicketStatusBadge status="{ticket.status}" />
@@ -164,7 +155,7 @@
     <div class="col-6">
       <div class="card bg-white mb-3">
         <div class="card-body">
-          <h5 class="card-title">Yetkili Kayıtları</h5>
+          <h5 class="card-title">Logs</h5>
         </div>
       </div>
     </div>
