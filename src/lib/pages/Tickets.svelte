@@ -6,7 +6,7 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets/categories">
         <i class="fas fa-list-alt me-2"></i>
-        {$_('pages.tickets.ticket-categories')}
+        {$_("pages.tickets.ticket-categories")}
       </a>
     </div>
     <div class="col-auto">
@@ -32,7 +32,7 @@
           href="javascript:void(0);"
           on:click="{onShowCloseTicketsModalClick}">
           <i class="fas fa-times me-2"></i>
-          {$_('pages.tickets.close-ticket-button')}
+          {$_("pages.tickets.close-ticket-button")}
         </a>
       </div>
     </div>
@@ -44,38 +44,47 @@
       <div class="row justify-content-between align-items-center mb-3">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
-            {$_('pages.tickets.table-title', {values: {ticketCount: data.ticketCount, pageType: data.pageType === PageTypes.WAITING_REPLY
-                  ? $_('pages.tickets.waiting-reply')
-                  : data.pageType === PageTypes.CLOSED
-                    ? $_('pages.tickets.closed')
-                    : ""
-            }}) + (getListOfChecked($checkedList).length > 0
-            ? ", " + $_('pages.tickets.amount-selected', {values: {amount: getListOfChecked($checkedList).length}})
-            : "")}
+            {$_("pages.tickets.table-title", {
+              values: {
+                ticketCount: data.ticketCount,
+                pageType:
+                  data.pageType === PageTypes.WAITING_REPLY
+                    ? $_("pages.tickets.waiting-reply")
+                    : data.pageType === PageTypes.CLOSED
+                      ? $_("pages.tickets.closed")
+                      : "",
+              },
+            }) +
+              (getListOfChecked($checkedList).length > 0
+                ? ", " +
+                  $_("pages.tickets.amount-selected", {
+                    values: { amount: getListOfChecked($checkedList).length },
+                  })
+                : "")}
           </h5>
         </div>
         <div class="col-md-auto col-12 text-md-right text-center">
           <div class="btn-group">
             <a
-              class="btn btn-sm btn-outline-light btn-link"
+              class="btn btn-sm btn-outline-primary"
               class:active="{data.pageType === PageTypes.ALL}"
               role="button"
               href="{base}/tickets/all">
-              {$_('pages.tickets.all')}
+              {$_("pages.tickets.all")}
             </a>
             <a
-              class="btn btn-sm btn-outline-light btn-link text-success"
+              class="btn btn-sm btn-outline-primary"
               class:active="{data.pageType === PageTypes.WAITING_REPLY}"
               role="button"
               href="{base}/tickets/waitingReply">
-              {$_('pages.tickets.waiting-reply')}
+              {$_("pages.tickets.waiting-reply")}
             </a>
             <a
-              class="btn btn-sm btn-outline-light btn-link text-danger"
+              class="btn btn-sm btn-outline-primary"
               class:active="{data.pageType === PageTypes.CLOSED}"
               role="button"
               href="{base}/tickets/closed">
-              {$_('pages.tickets.closed')}
+              {$_("pages.tickets.closed")}
             </a>
           </div>
         </div>
@@ -98,17 +107,22 @@
                       on:click="{onSelectAllClick}"
                       checked="{isAllTicketsSelected(
                         data.tickets,
-                        $checkedList
+                        $checkedList,
                       )}"
                       id="selectAll"
                       type="checkbox" />
                   </div>
                 </th>
-                <th class="align-middle" scope="col">{$_('pages.tickets.table.title')}</th>
-                <th class="align-middle" scope="col">{$_('pages.tickets.table.player')}</th>
-                <th class="align-middle" scope="col">{$_('pages.tickets.table.category')}</th>
-                <th class="align-middle" scope="col">{$_('pages.tickets.table.status')}</th>
-                <th class="align-middle" scope="col">{$_('pages.tickets.table.last-reply')}</th>
+                <th class="align-middle" scope="col"
+                  >{$_("pages.tickets.table.title")}</th>
+                <th class="align-middle" scope="col"
+                  >{$_("pages.tickets.table.player")}</th>
+                <th class="align-middle" scope="col"
+                  >{$_("pages.tickets.table.category")}</th>
+                <th class="align-middle" scope="col"
+                  >{$_("pages.tickets.table.status")}</th>
+                <th class="align-middle" scope="col"
+                  >{$_("pages.tickets.table.last-reply")}</th>
               </tr>
             </thead>
             <tbody>
@@ -180,7 +194,7 @@
     const { parent } = event;
     const parentData = await parent();
 
-    pageType = pageType.toUpperCase()
+    pageType = pageType.toUpperCase();
 
     let data = {
       ticketCount: 0,
@@ -240,15 +254,18 @@
   const pageTitle = getContext("pageTitle");
 
   $: {
-    pageTitle.set($_("pages.tickets.title", {
-      values: {
-        pageType: (data.pageType === PageTypes.WAITING_REPLY
-          ? $_('pages.tickets.waiting-reply') + " "
-          : data.pageType === PageTypes.CLOSED
-            ? $_('pages.tickets.closed') + " "
-            : "")
-      }
-    }));
+    pageTitle.set(
+      $_("pages.tickets.title", {
+        values: {
+          pageType:
+            data.pageType === PageTypes.WAITING_REPLY
+              ? $_("pages.tickets.waiting-reply") + " "
+              : data.pageType === PageTypes.CLOSED
+                ? $_("pages.tickets.closed") + " "
+                : "",
+        },
+      }),
+    );
   }
 
   let firstLoad = true;
@@ -317,10 +334,10 @@
         (data.tickets[
           data.tickets.indexOf(
             data.tickets.find(
-              (ticketInTickets) => ticketInTickets.id === parseInt(id)
-            )
+              (ticketInTickets) => ticketInTickets.id === parseInt(id),
+            ),
           )
-        ].selected = true)
+        ].selected = true),
     );
 
     showDeleteTicketModal(getListOfChecked(get(checkedList)));
@@ -329,7 +346,7 @@
   function onShowDeleteTicketModalClick(id) {
     data.tickets[
       data.tickets.indexOf(
-        data.tickets.find((ticketInTickets) => ticketInTickets.id === id)
+        data.tickets.find((ticketInTickets) => ticketInTickets.id === id),
       )
     ].selected = true;
 
@@ -342,10 +359,10 @@
         (data.tickets[
           data.tickets.indexOf(
             data.tickets.find(
-              (ticketInTickets) => ticketInTickets.id === parseInt(id)
-            )
+              (ticketInTickets) => ticketInTickets.id === parseInt(id),
+            ),
           )
-        ].selected = true)
+        ].selected = true),
     );
 
     showCloseTicketModal(getListOfChecked(get(checkedList)));
@@ -354,7 +371,7 @@
   function onShowCloseTicketModalClick(id) {
     data.tickets[
       data.tickets.indexOf(
-        data.tickets.find((ticketInTickets) => ticketInTickets.id === id)
+        data.tickets.find((ticketInTickets) => ticketInTickets.id === id),
       )
     ].selected = true;
 
@@ -374,8 +391,8 @@
       data.tickets[
         data.tickets.indexOf(
           data.tickets.find(
-            (ticketInTickets) => ticketInTickets.id === parseInt(id)
-          )
+            (ticketInTickets) => ticketInTickets.id === parseInt(id),
+          ),
         )
       ].selected = false;
     });
@@ -394,8 +411,8 @@
       data.tickets[
         data.tickets.indexOf(
           data.tickets.find(
-            (ticketInTickets) => ticketInTickets.id === parseInt(id)
-          )
+            (ticketInTickets) => ticketInTickets.id === parseInt(id),
+          ),
         )
       ].selected = false;
     });

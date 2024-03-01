@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <div class="card bg-white">
+  <div class="card">
     <div class="card-body">
       <!-- Permissions Table -->
       <h5 class="card-title">

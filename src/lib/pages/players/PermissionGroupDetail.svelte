@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="col-xl-4">
-      <div class="card bg-white">
+      <div class="card">
         <div class="card-body">
           <table class="table table-sm table-hover mb-0">
             <tbody>

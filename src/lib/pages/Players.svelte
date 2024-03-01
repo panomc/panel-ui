@@ -6,7 +6,7 @@
       {#if hasPermission(Permissions.MANAGE_PERMISSION_GROUPS)}
         <a class="btn btn-link" role="button" href="{base}/players/perm-groups">
           <i class="fas fa-user-circle me-2"></i>
-          {$_('pages.players.perm-groups')}
+          {$_("pages.players.perm-groups")}
         </a>
       {/if}
     </div>
@@ -18,35 +18,41 @@
       <div class="row justify-content-between mb-3">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
-            {$_('pages.players.table-title', {values: {playerCount: data.playerCount, pageType: (data.pageType === PageTypes.HAS_PERM
-                  ? $_('pages.players.authorized') + " "
-                  : data.pageType === PageTypes.BANNED
-                    ? $_('pages.players.banned') + " "
-                    : "")}})}
+            {$_("pages.players.table-title", {
+              values: {
+                playerCount: data.playerCount,
+                pageType:
+                  data.pageType === PageTypes.HAS_PERM
+                    ? $_("pages.players.authorized") + " "
+                    : data.pageType === PageTypes.BANNED
+                      ? $_("pages.players.banned") + " "
+                      : "",
+              },
+            })}
           </h5>
         </div>
         <div class="col-md-auto col-12 text-md-right text-center">
           <div class="btn-group">
             <a
               class:active="{data.pageType === PageTypes.ALL}"
-              class="btn btn-sm btn-outline-light btn-link"
+              class="btn btn-sm btn-outline-primary"
               role="button"
               href="{base}/players/all">
-              {$_('pages.players.all')}
+              {$_("pages.players.all")}
             </a>
             <a
               class:active="{data.pageType === PageTypes.HAS_PERM}"
-              class="btn btn-sm btn-outline-light btn-link"
+              class="btn btn-sm btn-outline-primary"
               role="button"
               href="{base}/players/hasPerm">
-              {$_('pages.players.authorized')}
+              {$_("pages.players.authorized")}
             </a>
             <a
               class:active="{data.pageType === PageTypes.BANNED}"
-              class="btn btn-sm btn-outline-light btn-link text-danger"
+              class="btn btn-sm btn-outline-primary"
               role="button"
               href="{base}/players/banned">
-              {$_('pages.players.banned')}
+              {$_("pages.players.banned")}
             </a>
           </div>
         </div>
@@ -62,11 +68,16 @@
             <thead>
               <tr>
                 <th class="align-middle text-nowrap" scope="col"></th>
-                <th class="align-middle text-nowrap" scope="col">{$_('pages.players.table.name')}</th>
-                <th class="align-middle text-nowrap" scope="col">{$_('pages.players.table.permission')}</th>
-                <th class="align-middle text-nowrap" scope="col">{$_('pages.players.table.status')}</th>
-                <th class="align-middle text-nowrap" scope="col">{$_('pages.players.table.last-entrance')}</th>
-                <th class="align-middle text-nowrap" scope="col">{$_('pages.players.table.register-date')}</th>
+                <th class="align-middle text-nowrap" scope="col"
+                  >{$_("pages.players.table.name")}</th>
+                <th class="align-middle text-nowrap" scope="col"
+                  >{$_("pages.players.table.permission")}</th>
+                <th class="align-middle text-nowrap" scope="col"
+                  >{$_("pages.players.table.status")}</th>
+                <th class="align-middle text-nowrap" scope="col"
+                  >{$_("pages.players.table.last-entrance")}</th>
+                <th class="align-middle text-nowrap" scope="col"
+                  >{$_("pages.players.table.register-date")}</th>
               </tr>
             </thead>
             <tbody>
@@ -216,16 +227,18 @@
   const pageTitle = getContext("pageTitle");
 
   $: {
-    pageTitle.set($_("pages.players.title", {
+    pageTitle.set(
+      $_("pages.players.title", {
         values: {
-          pageType: (data.pageType === PageTypes.HAS_PERM
-            ? $_('pages.players.authorized') + " "
-            : data.pageType === PageTypes.BANNED
-              ? $_('pages.players.banned') + " "
-              : "")
-        }
-      })
-    )
+          pageType:
+            data.pageType === PageTypes.HAS_PERM
+              ? $_("pages.players.authorized") + " "
+              : data.pageType === PageTypes.BANNED
+                ? $_("pages.players.banned") + " "
+                : "",
+        },
+      }),
+    );
   }
 
   function reloadData(page = data.page, pageType = data.pageType) {

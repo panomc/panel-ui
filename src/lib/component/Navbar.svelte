@@ -34,7 +34,7 @@
           <i class="fa-regular fa-bolt fa-lg"></i>
           {#if $notificationCount !== 0}
             <span
-              class="position-absolute p-2 start-75 translate-middle badge rounded-pill bg-danger">
+              class="position-absolute px-2 py-1 translate-middle badge rounded-pill bg-danger">
               {$notificationCount}
             </span>
           {/if}
@@ -69,10 +69,9 @@
             {/each}
           {/if}
 
-          <a
-            class="dropdown-item text-center small"
-            href="{base}/notifications">
-            {$_("components.navbar.show-all")}
+          <a class="dropdown-item bg-transparent" href="{base}/notifications">
+            <button class="btn btn-sm btn-primary w-100">
+              {$_("components.navbar.show-all")}</button>
           </a>
         </div>
       </div>
@@ -101,13 +100,9 @@
               {$_("components.navbar.account-dropdown.profile")}
             </a>
           </li>
-          <li>
-            <button
-              type="button"
-              class="dropdown-item text-danger"
-              on:click="{onLogout}">
-              {$_("components.navbar.account-dropdown.logout")}
-            </button>
+          <li class="dropdown-item bg-transparent">
+            <button class="btn btn-sm btn-danger w-100" on:click="{onLogout}">
+              {$_("components.navbar.account-dropdown.logout")}</button>
           </li>
         </ul>
       </div>

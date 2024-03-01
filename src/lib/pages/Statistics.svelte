@@ -48,14 +48,14 @@
         <div class="col-auto">
           <div class="btn-group">
             <button
-              class="btn btn-sm btn-outline-light btn-link"
+              class="btn btn-sm btn-outline-primary"
               class:active="{data.period === DashboardPeriod.WEEK}"
               on:click="{() => reloadDataByPeriod()}"
               class:disabled="{reloading}">
               {$_("pages.statistics.website-graph.week")}
             </button>
             <button
-              class="btn btn-sm btn-outline-light btn-link"
+              class="btn btn-sm btn-outline-primary"
               class:active="{data.period === DashboardPeriod.MONTH}"
               on:click="{() => reloadDataByPeriod(DashboardPeriod.MONTH)}"
               class:disabled="{reloading}">
@@ -125,6 +125,7 @@
     </div>
   </div>
 </div>
+
 <!-- Player Statistics Page End -->
 
 <script context="module">

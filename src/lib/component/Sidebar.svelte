@@ -3,8 +3,8 @@
   <ConnectServerModal />
 {/if}
 
-<div class="sidebar d-flex flex-column no-wrap vh-100 bg-primary" class:active="{$isSidebarOpen}">
-  <div class="container-fluid">
+<div class="sidebar vh-100 bg-primary" class:active="{$isSidebarOpen}">
+  <div class="container">
     <!-- Sidebar Toggler & Logo -->
     <div class="navbar navbar-expand navbar-dark bg-body-primary">
       <button
@@ -31,7 +31,10 @@
           <a
             href="javascript:void(0);"
             class="nav-link"
-            use:tooltip="{[$_('components.sidebar.website'), { placement: 'bottom' }]}"
+            use:tooltip="{[
+              $_('components.sidebar.website'),
+              { placement: 'bottom' },
+            ]}"
             on:click="{onWebsiteMenuClick}"
             class:active="{$sidebarTabsState === 'website'}">
             <i class="fas fa-globe fa-lg"></i>
@@ -42,7 +45,10 @@
             <a
               href="javascript:void(0);"
               class="nav-link"
-              use:tooltip="{[$_('components.sidebar.server'), { placement: 'bottom' }]}"
+              use:tooltip="{[
+                $_('components.sidebar.server'),
+                { placement: 'bottom' },
+              ]}"
               on:click="{onGameMenuClick}"
               class:active="{$sidebarTabsState === 'game'}">
               <i class="fas fa-cube fa-lg"></i>
@@ -59,7 +65,7 @@
         href="{UI_URL}"
         class="btn btn-sm btn-secondary w-100"
         target="_blank">
-        {$_('components.sidebar.show-website')}
+        {$_("components.sidebar.show-website")}
       </a>
     {/if}
 
@@ -68,7 +74,7 @@
         class="btn btn-sm btn-secondary w-100"
         type="button"
         on:click="{showServersModal}">
-        {$_('components.sidebar.show-servers')}
+        {$_("components.sidebar.show-servers")}
       </button>
     {/if}
 

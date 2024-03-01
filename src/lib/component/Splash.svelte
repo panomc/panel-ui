@@ -18,6 +18,7 @@
     src="{base}/assets/img/loading_slime.gif"
     width="128"
     height="auto" />
+    
 
   {#if networkErrors}
     {#if notLoggedIn}

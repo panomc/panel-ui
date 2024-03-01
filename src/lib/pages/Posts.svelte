@@ -6,7 +6,7 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/posts/categories">
         <i class="fas fa-list-alt me-2"></i>
-        {$_('pages.posts.post-categories-button')}
+        {$_("pages.posts.post-categories-button")}
       </a>
     </div>
     <div class="col-auto">
@@ -14,7 +14,8 @@
         href="{base}/posts/create-post"
         class="btn btn-secondary ml-auto"
         role="button">
-        <i class="fas fa-plus me-2"></i> {$_('pages.posts.create-post-button')}
+        <i class="fas fa-plus me-2"></i>
+        {$_("pages.posts.create-post-button")}
       </a>
     </div>
   </div>
@@ -26,38 +27,44 @@
       <div class="row justify-content-between align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title">
-            {$_('pages.posts.table-title', {values: {postCount: data.postCount, pageType: (data.pageType === PageTypes.PUBLISHED
-                  ? $_('pages.posts.published') + " "
-                  : data.pageType === PageTypes.DRAFT
-                    ? $_('pages.posts.draft') + " "
-                    : data.pageType === PageTypes.BANNED
-                      ? $_('pages.posts.banned') + " "
-                    : "")}})}
+            {$_("pages.posts.table-title", {
+              values: {
+                postCount: data.postCount,
+                pageType:
+                  data.pageType === PageTypes.PUBLISHED
+                    ? $_("pages.posts.published") + " "
+                    : data.pageType === PageTypes.DRAFT
+                      ? $_("pages.posts.draft") + " "
+                      : data.pageType === PageTypes.BANNED
+                        ? $_("pages.posts.banned") + " "
+                        : "",
+              },
+            })}
           </h5>
         </div>
         <div class="col-md-auto col-12 text-md-right text-center">
           <div class="btn-group">
             <a
               class:active="{data.pageType === PageTypes.PUBLISHED}"
-              class="btn btn-sm btn-outline-light btn-link"
+              class="btn btn-sm btn-outline-primary"
               role="button"
               href="{base}/posts/published">
-              {$_('pages.posts.published')}
+              {$_("pages.posts.published")}
             </a>
             <a
               class:active="{data.pageType === PageTypes.DRAFT}"
-              class="btn btn-sm btn-outline-light btn-link"
+              class="btn btn-sm btn-outline-primary"
               role="button"
               href="{base}/posts/draft">
-              {$_('pages.posts.draft')}
+              {$_("pages.posts.draft")}
             </a>
 
             <a
               class:active="{data.pageType === PageTypes.TRASH}"
-              class="btn btn-sm btn-outline-light btn-link text-danger"
+              class="btn btn-sm btn-outline-primary"
               role="button"
               href="{base}/posts/trash">
-              {$_('pages.posts.trash')}
+              {$_("pages.posts.trash")}
             </a>
           </div>
         </div>
@@ -73,11 +80,16 @@
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th class="align-middle" scope="col">{$_('pages.posts.table.title')}</th>
-                <th scope="col" class="align-middle">{$_('pages.posts.table.category')}</th>
-                <th scope="col" class="align-middle">{$_('pages.posts.table.views')}</th>
-                <th scope="col" class="align-middle">{$_('pages.posts.table.author')}</th>
-                <th scope="col" class="align-middle">{$_('pages.posts.table.last-update')}</th>
+                <th class="align-middle" scope="col"
+                  >{$_("pages.posts.table.title")}</th>
+                <th scope="col" class="align-middle"
+                  >{$_("pages.posts.table.category")}</th>
+                <th scope="col" class="align-middle"
+                  >{$_("pages.posts.table.views")}</th>
+                <th scope="col" class="align-middle"
+                  >{$_("pages.posts.table.author")}</th>
+                <th scope="col" class="align-middle"
+                  >{$_("pages.posts.table.last-update")}</th>
               </tr>
             </thead>
             <tbody>
@@ -147,7 +159,7 @@
     const { parent } = event;
     const parentData = await parent();
 
-    pageType = pageType.toUpperCase()
+    pageType = pageType.toUpperCase();
 
     let data = {
       postCount: 0,
@@ -207,18 +219,20 @@
   const pageTitle = getContext("pageTitle");
 
   $: {
-    pageTitle.set($_("pages.posts.title", {
-      values: {
-        pageType: (data.pageType === PageTypes.PUBLISHED
-          ? $_('pages.posts.published') + " "
-          : data.pageType === PageTypes.DRAFT
-            ? $_('pages.posts.draft') + " "
-            : data.pageType === PageTypes.TRASH
-              ? $_('pages.posts.trash') + " "
-              : "")
-        }
-      })
-    )
+    pageTitle.set(
+      $_("pages.posts.title", {
+        values: {
+          pageType:
+            data.pageType === PageTypes.PUBLISHED
+              ? $_("pages.posts.published") + " "
+              : data.pageType === PageTypes.DRAFT
+                ? $_("pages.posts.draft") + " "
+                : data.pageType === PageTypes.TRASH
+                  ? $_("pages.posts.trash") + " "
+                  : "",
+        },
+      }),
+    );
   }
 
   let buttonsLoading = false;
