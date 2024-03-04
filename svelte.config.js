@@ -14,8 +14,15 @@ const config = {
   preprocess: SveltePreprocess(),
 
   onwarn: (warning, handler) => {
-    if (warning.code === "a11y-invalid-attribute") return;
-    if (warning.code === "a11y-missing-attribute") return;
+    if (warning.code.startsWith('a11y-')) {
+      return;
+    }
+
+    if (warning.code === "vite-plugin-svelte-preprocess-many-dependencies") {
+      return;
+    }
+
+    console.log(warning.code)
 
     handler(warning);
   },
