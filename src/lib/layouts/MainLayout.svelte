@@ -36,12 +36,15 @@
   import { browser } from "$app/environment";
 
   import { init as initLanguage } from "$lib/language.util";
+  import ApiUtil from "$lib/api.util.js";
 
   import { networkErrorCallbacks } from "$lib/Store.js";
 
   import { addListener } from "$lib/NotificationManager.js";
 
   import { show as showServerRequestModal } from "$lib/component/modals/ServerRequestModal.svelte";
+  import { initializePlugins } from "$lib/PluginManager.js";
+  import { PLUGIN_DEV_MODE } from "../../pano-ui/js/variables.js";
 
   function initNotificationListeners() {
     addListener("NEW_TICKET", (notification) => {
@@ -80,8 +83,18 @@
   /**
    * @type {import('@sveltejs/kit').LayoutServerLoad}
    */
-  export async function loadServer({ locals: { basicData, CSRFToken } }) {
-    return { basicData, CSRFToken };
+  export async function loadServer(event) {
+    const {
+      locals: { basicData, CSRFToken },
+    } = event;
+
+    const siteInfo = await ApiUtil.get({
+      path: "/api/siteInfo",
+      request: event,
+      CSRFToken,
+    });
+
+    return { basicData, CSRFToken, siteInfo };
   }
 
   /**
@@ -89,10 +102,12 @@
    */
   export async function load(event) {
     const {
-      data: { basicData, CSRFToken },
+      data: { basicData, CSRFToken, siteInfo },
       parent,
     } = event;
     await parent();
+
+    await initializePlugins(siteInfo)
 
     await initLanguage(basicData.locale);
 
