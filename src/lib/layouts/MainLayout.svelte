@@ -43,7 +43,7 @@
   import { addListener } from "$lib/NotificationManager.js";
 
   import { show as showServerRequestModal } from "$lib/component/modals/ServerRequestModal.svelte";
-  import { initializePlugins } from "$lib/PluginManager.js";
+  import { initializePlugins, prepareSiteInfo } from "$lib/PluginManager.js";
 
   function initNotificationListeners() {
     addListener("NEW_TICKET", (notification) => {
@@ -87,11 +87,13 @@
       locals: { basicData, CSRFToken },
     } = event;
 
-    const siteInfo = await ApiUtil.get({
+    let siteInfo = await ApiUtil.get({
       path: "/api/siteInfo",
       request: event,
       CSRFToken,
     });
+
+    siteInfo = await prepareSiteInfo(siteInfo)
 
     return { basicData, CSRFToken, siteInfo };
   }
