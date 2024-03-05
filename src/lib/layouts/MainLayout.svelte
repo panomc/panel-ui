@@ -44,7 +44,6 @@
 
   import { show as showServerRequestModal } from "$lib/component/modals/ServerRequestModal.svelte";
   import { initializePlugins } from "$lib/PluginManager.js";
-  import { PLUGIN_DEV_MODE } from "../../pano-ui/js/variables.js";
 
   function initNotificationListeners() {
     addListener("NEW_TICKET", (notification) => {
