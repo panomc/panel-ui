@@ -1,22 +1,28 @@
 {#if banned}
-  <div class="badge bg-danger rounded-pill text-white">{$_('components.player-status-badge.banned')}</div>
+  <div class="badge rounded-pill text-bg-danger">
+    {$_("components.player-status-badge.banned")}
+  </div>
 {:else if isOnline}
   <div
-    class="badge bg-secondary rounded-pill text-white"
+    class="badge rounded-pill text-bg-success"
     use:tooltip="{[
-      (inGame ? $_('components.player-status-badge.in-game') : $_('components.player-status-badge.in-website')) + ' ' + $_('components.player-status-badge.online'),
+      (inGame
+        ? $_('components.player-status-badge.in-game')
+        : $_('components.player-status-badge.in-website')) +
+        ' ' +
+        $_('components.player-status-badge.online'),
       { placement: 'bottom' },
     ]}">
-    <span>{$_('components.player-status-badge.online')}</span>
+    <span>{$_("components.player-status-badge.online")}</span>
   </div>
 {:else}
   <div
-    class="badge bg-light rounded-pill text-dark"
+    class="badge rounded-pill text-bg-light"
     use:tooltip="{[
       getOfflineRelativeDateText(checkTime),
       { placement: 'bottom' },
     ]}">
-    <span>{$_('components.player-status-badge.offline')}</span>
+    <span>{$_("components.player-status-badge.offline")}</span>
   </div>
 {/if}
 
@@ -42,7 +48,7 @@
   function getOfflineRelativeDateText(checkTime) {
     return formatRelative(
       new Date(parseInt(lastActivityTime)),
-      new Date()
+      new Date(),
     ).capitalize();
   }
 </script>

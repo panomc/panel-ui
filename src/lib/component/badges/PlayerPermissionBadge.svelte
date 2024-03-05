@@ -1,11 +1,10 @@
 <a
+  class="badge rounded-pill text-bg-light"
   title="{$_('components.player-permission-badge.filter')}"
-  href="{base}/players/by-perm-group/{permissionGroup}"
-  class:badge="{permissionGroup !== '-'}"
-  class:bg-light="{permissionGroup !== '-'}"
-  class:text-dark="{permissionGroup !== '-'}"
-  class:rounded-pill="{permissionGroup !== '-'}">
-  {permissionGroup === "-" ? $_('components.player-permission-badge.player') : permissionGroup.capitalize()}
+  href="{base}/players/by-perm-group/{permissionGroup}">
+  {permissionGroup === "-"
+    ? $_("components.player-permission-badge.player")
+    : permissionGroup.capitalize()}
 </a>
 
 <script context="module">

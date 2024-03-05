@@ -409,8 +409,8 @@
       "sidebar-toggle-tooltip": "Menüyü Aç/Kapa",
       "website": "Website",
       "server": "Sunucu",
-      "show-website": "Websiteyi Görüntüle",
-      "show-servers": "Sunucuları Görüntüle"
+      "show-website": "Website",
+      "show-servers": "Sunucular"
     },
     "server-navigation-menu": {
       "statistics": "İstatistikler",

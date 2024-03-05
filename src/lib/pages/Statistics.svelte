@@ -3,9 +3,9 @@
   <div
     class="row pb-3 justify-content-between animate__animated animate__slideInUp">
     <div class="col-4">
-      <div class="card bg-success bg-opacity-25">
+      <div class="card bg-success">
         <div class="card-body">
-          <p class="mb-0 text-success">
+          <p class="mb-0 text-white">
             {$_("pages.statistics.online-player-text", {
               values: { onlinePlayerCount: data.onlinePlayerCount },
             })}
@@ -14,9 +14,9 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card bg-primary bg-opacity-25">
+      <div class="card bg-primary">
         <div class="card-body">
-          <p class="mb-0 text-primary">
+          <p class="mb-0 text-white">
             {$_("pages.statistics.new-register-text", {
               values: { newRegisterCount: data.newRegisterCount },
             })}
@@ -25,9 +25,9 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card bg-danger bg-opacity-25">
+      <div class="card bg-warning">
         <div class="card-body">
-          <p class="mb-0 text-danger">
+          <p class="mb-0 text-white">
             {$_("pages.statistics.total-player-text", {
               values: { totalPlayerCount: data.registeredPlayerCount },
             })}

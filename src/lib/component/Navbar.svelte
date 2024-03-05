@@ -15,7 +15,7 @@
   </div>
   <div class="col-4 d-flex justify-content-center">
     <!-- Page Title -->
-    <h5 class="navbar-text mb-1">
+    <h5 class="text-black mb-1">
       {$pageTitle ? $_($pageTitle) : options.DEFAULT_PAGE_TITLE}
     </h5>
   </div>
@@ -58,13 +58,6 @@
                 class:notification-unread="{notification.status ===
                   'NOT_READ'}">
                 <p class="mb-0">{notification.type}</p>
-                <small class="text-dark">
-                  {getTime(
-                    checkTime,
-                    parseInt(notification.date),
-                    locales[$currentLanguage["date-fns-code"]],
-                  )}
-                </small>
               </a>
             {/each}
           {/if}

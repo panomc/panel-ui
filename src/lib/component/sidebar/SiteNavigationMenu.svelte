@@ -1,5 +1,5 @@
 <nav class="navbar-dark animate__animated animate__slideInLeft">
-  <ul class="navbar-nav px-3">
+  <ul class="navbar-nav flex-column">
     <li class="nav-item p-2">
       <a
         class="nav-link"
@@ -13,7 +13,11 @@
       <a
         class="nav-link"
         href="{base}/statistics"
-        class:active="{matching($page.url.pathname, base + '/statistics', true)}">
+        class:active="{matching(
+          $page.url.pathname,
+          base + '/statistics',
+          true,
+        )}">
         <i class="fas fa-chart-simple me-2"></i>
         {$_("components.site-navigation-menu.statistics")}
       </a>
@@ -37,7 +41,7 @@
           class:active="{matching(
             $page.url.pathname,
             base + '/tickets',
-            true
+            true,
           )}">
           <i class="fas fa-ticket me-2"></i>
           {$_("components.site-navigation-menu.tickets")}
@@ -53,7 +57,7 @@
           class:active="{matching(
             $page.url.pathname,
             base + '/players',
-            true
+            true,
           )}">
           <i class="fas fa-users me-2"></i>
           {$_("components.site-navigation-menu.players")}
@@ -93,7 +97,7 @@
           class:active="{matching(
             $page.url.pathname,
             base + '/settings',
-            true
+            true,
           )}">
           <i class="fas fa-cog me-2"></i>
           {$_("components.site-navigation-menu.settings")}

@@ -7,77 +7,84 @@
       {#if hasPermission(Permissions.MANAGE_PLAYERS)}
         <a class="btn btn-link" role="button" href="{base}/players">
           <i class="fas fa-arrow-left me-2"></i>
-          {$_('pages.player-detail.players')}
+          {$_("pages.player-detail.players")}
         </a>
       {/if}
     </div>
     <div class="col-auto">
       {#if hasPermission(Permissions.MANAGE_PLAYERS)}
-        <a
+        <button
           class="btn btn-link link-danger"
-          href="javascript:void(0);"
-          use:tooltip="{[$_('pages.player-detail.delete'), { placement: 'bottom' }]}"
+          use:tooltip="{[
+            $_('pages.player-detail.delete'),
+            { placement: 'bottom' },
+          ]}"
           on:click="{() => showConfirmDeletePlayerModal(data.player)}"
           class:disabled="{$user.username === data.player.username ||
             (data.player.permissionGroup === 'admin' && !$user.admin)}">
           <i class="fas fa-trash"></i>
-        </a>
+        </button>
         {#if data.player.isBanned}
-          <a
+          <button
             class="btn btn-link link-danger"
-            href="javascript:void(0);"
-            use:tooltip="{[$_('pages.player-detail.un-ban'), { placement: 'bottom' }]}"
+            use:tooltip="{[
+              $_('pages.player-detail.un-ban'),
+              { placement: 'bottom' },
+            ]}"
             on:click="{() => showUnbanPlayerModal(data.player)}"
             class:disabled="{$user.username === data.player.username ||
               (data.player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-gavel"></i>
-          </a>
+          </button>
         {:else}
-          <a
+          <button
             class="btn btn-link link-danger"
-            href="javascript:void(0);"
-            use:tooltip="{[$_('pages.player-detail.ban'), { placement: 'bottom' }]}"
+            use:tooltip="{[
+              $_('pages.player-detail.ban'),
+              { placement: 'bottom' },
+            ]}"
             on:click="{() => showConfirmBanPlayerModal(data.player)}"
             class:disabled="{$user.username === data.player.username ||
               (data.player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-gavel"></i>
-          </a>
+          </button>
         {/if}
         {#if !data.player.isEmailVerified}
-          <a
+          <button
             class="btn btn-link"
             use:tooltip="{[
               $_('pages.player-detail.send-verification-mail'),
               { placement: 'bottom' },
             ]}"
-            href="javascript:void(0);"
             on:click="{sendVerification}"
             class:disabled="{sendingVerificationMail ||
               $user.username === data.player.username ||
               (data.player.permissionGroup === 'admin' && !$user.admin)}">
             <i class="fas fa-envelope"></i>
-          </a>
+          </button>
         {/if}
 
-        <a
+        <button
           class="btn btn-link"
-          href="javascript:void(0);"
-          use:tooltip="{[$_('pages.player-detail.authorize'), { placement: 'bottom' }]}"
+          use:tooltip="{[
+            $_('pages.player-detail.authorize'),
+            { placement: 'bottom' },
+          ]}"
           on:click="{() => showAuthorizePlayerModal(data.player)}"
           class:disabled="{$user.username === data.player.username ||
             (data.player.permissionGroup === 'admin' && !$user.admin)}">
           <i class="fas fa-user-circle"></i>
-        </a>
+        </button>
       {/if}
       {#if hasPermission(Permissions.MANAGE_PLAYERS) || $user.username === data.player.username}
-        <a
+        <button
           class="btn btn-primary"
-          href="javascript:void(0);"
           on:click="{() => showEditPlayerModal(data.player)}"
           class:disabled="{data.player.permissionGroup === 'admin' &&
             !$user.admin}">
-          <i class="fas fa-pencil-alt me-2"></i> {$_('pages.player-detail.edit')}
-        </a>
+          <i class="fas fa-pencil-alt me-2"></i>
+          {$_("pages.player-detail.edit")}
+        </button>
       {/if}
     </div>
   </div>
@@ -95,12 +102,21 @@
             height="128"
             class:border="{isOnline}"
             class:border-5="{isOnline}"
-            class:border-secondary="{isOnline}"
+            class:border-success="{isOnline}"
             src="https://minotar.net/avatar/{data.player.username}"
             use:tooltip="{[
               isOnline
-                ? $_('pages.player-detail.online-text',{values:{whereOnline:data.player.inGame ? $_('pages.player-detail.in-game') : $_('pages.player-detail.in-website')}})
-                : getOfflineRelativeDateText(checkTime, locales[$currentLanguage['date-fns-code']]),
+                ? $_('pages.player-detail.online-text', {
+                    values: {
+                      whereOnline: data.player.inGame
+                        ? $_('pages.player-detail.in-game')
+                        : $_('pages.player-detail.in-website'),
+                    },
+                  })
+                : getOfflineRelativeDateText(
+                    checkTime,
+                    locales[$currentLanguage['date-fns-code']],
+                  ),
               { placement: 'bottom' },
             ]}" />
 
@@ -108,7 +124,7 @@
           <h6 class="text-muted">{data.player.email}</h6>
 
           {#if data.player.isBanned}
-            <div class="text-danger">{$_('pages.player-detail.banned')}</div>
+            <div class="text-danger">{$_("pages.player-detail.banned")}</div>
           {:else}
             <PlayerPermissionBadge
               permissionGroup="{data.player.permissionGroup}" />
@@ -121,7 +137,7 @@
         <!-- User's Tickets -->
         <div class="card bg-white mb-3">
           <div class="card-body">
-            <h5 class="card-title">{$_('pages.player-detail.last-tickets')}</h5>
+            <h5 class="card-title">{$_("pages.player-detail.last-tickets")}</h5>
 
             {#if data.ticketCount === 0}
               <NoContent />
@@ -133,14 +149,15 @@
                       <td class="align-middle text-nowrap">
                         <a
                           href="{base}/tickets/ticket/{ticket.id}"
-                          title="{$_('pages.player-detail.view')}">#{ticket.id} {ticket.title}</a>
+                          title="{$_('pages.player-detail.view')}"
+                          >#{ticket.id} {ticket.title}</a>
                       </td>
                       <td class="align-middle text-nowrap">
                         <a
                           title="{$_('pages.player-detail.filter')}"
                           href="/tickets/category/{ticket.category.url}">
                           {ticket.category.title === "-"
-                            ? $_('pages.player-detail.no-category')
+                            ? $_("pages.player-detail.no-category")
                             : ticket.category.title}
                         </a>
                       </td>
@@ -169,25 +186,25 @@
       {/if}
       <div class="card bg-white">
         <div class="card-body">
-          <h5 class="card-title">{$_('pages.player-detail.statistics')}</h5>
+          <h5 class="card-title">{$_("pages.player-detail.statistics")}</h5>
           <table class="table mb-0">
             <tbody>
               <tr>
-                <td>{$_('pages.player-detail.email')}</td>
+                <td>{$_("pages.player-detail.email")}</td>
                 <td>
                   {#if data.player.isEmailVerified}
-                    {$_('pages.player-detail.email-verified')}
+                    {$_("pages.player-detail.email-verified")}
                   {:else}
-                    {$_('pages.player-detail.email-not-verified')}
+                    {$_("pages.player-detail.email-not-verified")}
                   {/if}
                 </td>
               </tr>
               <tr>
-                <td>{$_('pages.player-detail.last-entrance')}</td>
+                <td>{$_("pages.player-detail.last-entrance")}</td>
                 <td><DateComponent time="{data.player.lastLoginDate}" /></td>
               </tr>
               <tr>
-                <td>{$_('pages.player-detail.register-date')}</td>
+                <td>{$_("pages.player-detail.register-date")}</td>
                 <td><DateComponent time="{data.player.registerDate}" /></td>
               </tr>
             </tbody>
@@ -300,9 +317,7 @@
     show as showUnbanPlayerModal,
     setCallback as setUnbanPlayerModalCallback,
   } from "$lib/component/modals/UnbanPlayerModal.svelte";
-  import {
-    show as showConfirmDeletePlayerModal,
-  } from "$lib/component/modals/ConfirmDeletePlayerModal.svelte";
+  import { show as showConfirmDeletePlayerModal } from "$lib/component/modals/ConfirmDeletePlayerModal.svelte";
 
   import TicketStatusBadge from "$lib/component/badges/TicketStatusBadge.svelte";
   import DateComponent from "$lib/component/Date.svelte";
@@ -314,6 +329,7 @@
 
   import NoContent from "$lib/component/NoContent.svelte";
   import PlayerPermissionBadge from "$lib/component/badges/PlayerPermissionBadge.svelte";
+  import { Button } from "bootstrap";
 
   export let data;
 
@@ -413,7 +429,7 @@
     return formatRelative(
       new Date(parseInt(data.player.lastActivityTime)),
       new Date(),
-      {locale}
+      { locale },
     ).capitalize();
   }
 

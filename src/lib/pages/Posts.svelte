@@ -22,53 +22,9 @@
 
   <!-- All Posts -->
 
-  <div class="card bg-white">
+  <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between align-items-center">
-        <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title">
-            {$_("pages.posts.table-title", {
-              values: {
-                postCount: data.postCount,
-                pageType:
-                  data.pageType === PageTypes.PUBLISHED
-                    ? $_("pages.posts.published") + " "
-                    : data.pageType === PageTypes.DRAFT
-                      ? $_("pages.posts.draft") + " "
-                      : data.pageType === PageTypes.BANNED
-                        ? $_("pages.posts.banned") + " "
-                        : "",
-              },
-            })}
-          </h5>
-        </div>
-        <div class="col-md-auto col-12 text-md-right text-center">
-          <div class="btn-group">
-            <a
-              class:active="{data.pageType === PageTypes.PUBLISHED}"
-              class="btn btn-sm btn-outline-primary"
-              role="button"
-              href="{base}/posts/published">
-              {$_("pages.posts.published")}
-            </a>
-            <a
-              class:active="{data.pageType === PageTypes.DRAFT}"
-              class="btn btn-sm btn-outline-primary"
-              role="button"
-              href="{base}/posts/draft">
-              {$_("pages.posts.draft")}
-            </a>
-
-            <a
-              class:active="{data.pageType === PageTypes.TRASH}"
-              class="btn btn-sm btn-outline-primary"
-              role="button"
-              href="{base}/posts/trash">
-              {$_("pages.posts.trash")}
-            </a>
-          </div>
-        </div>
-      </div>
+      
 
       <!-- No Posts -->
       {#if data.postCount === 0}

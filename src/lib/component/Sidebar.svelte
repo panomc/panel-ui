@@ -3,7 +3,7 @@
   <ConnectServerModal />
 {/if}
 
-<div class="sidebar vh-100 bg-primary" class:active="{$isSidebarOpen}">
+<div class="sidebar bg-dark min-vh-100" class:active="{$isSidebarOpen}">
   <div class="container">
     <!-- Sidebar Toggler & Logo -->
     <div class="navbar navbar-expand navbar-dark bg-body-primary">
@@ -25,34 +25,28 @@
     </div>
 
     <!-- Sidebar Tabs -->
-    <div class="navbar navbar-expand navbar-dark w-100">
-      <ul class="navbar-nav d-flex flex-row justify-content-evenly w-100">
+    <div class="navbar-dark">
+      <ul class="navbar-nav flex-row nav-fill">
         <li class="nav-item">
-          <a
-            href="javascript:void(0);"
-            class="nav-link"
-            use:tooltip="{[
-              $_('components.sidebar.website'),
-              { placement: 'bottom' },
-            ]}"
+          <button
+            class="nav-link text-center"
             on:click="{onWebsiteMenuClick}"
             class:active="{$sidebarTabsState === 'website'}">
-            <i class="fas fa-globe fa-lg"></i>
-          </a>
+            <i class="fas fa-globe fa-lg mb-3"></i>
+            <br />
+            {$_("components.sidebar.website")}
+          </button>
         </li>
         {#if hasPermission(Permissions.MANAGE_SERVERS)}
           <li class="nav-item">
-            <a
-              href="javascript:void(0);"
-              class="nav-link"
-              use:tooltip="{[
-                $_('components.sidebar.server'),
-                { placement: 'bottom' },
-              ]}"
+            <button
+              class="nav-link text-center"
               on:click="{onGameMenuClick}"
               class:active="{$sidebarTabsState === 'game'}">
-              <i class="fas fa-cube fa-lg"></i>
-            </a>
+              <i class="fas fa-cube fa-lg mb-3"></i>
+              <br />
+              {$_("components.sidebar.server")}
+            </button>
           </li>
         {/if}
       </ul>
@@ -66,6 +60,7 @@
         class="btn btn-sm btn-secondary w-100"
         target="_blank">
         {$_("components.sidebar.show-website")}
+        <i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
       </a>
     {/if}
 

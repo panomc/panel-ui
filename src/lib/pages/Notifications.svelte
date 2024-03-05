@@ -16,16 +16,16 @@
 
   <!-- All Notifications -->
 
-  <div class="card bg-white">
+  <div class="card">
     <div class="card-body">
-      {#each $notifications as notification, index (notification)}
-        <div class="list-group list-group-flush">
+      <div class="list-group list-group-flush">
+        {#each $notifications as notification, index (notification)}
           <a
             href="javascript:void(0);"
             on:click="{() => onNotificationClick(notification)}"
-            class="list-group-item list-group-item-action"
+            class="list-group-item list-group-item-action text-wrap"
             class:notification-unread="{notification.status === 'NOT_READ'}">
-            <span class="text-wrap">{notification.type}</span>
+            {notification.type}
             <br />
             <small class="text-muted">
               {getTime(
@@ -35,8 +35,8 @@
               )}
             </small>
           </a>
-        </div>
-      {/each}
+        {/each}
+      </div>
 
       {#if $notifications.length === 0}
         <NoContent />

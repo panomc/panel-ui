@@ -18,7 +18,7 @@
 
   export let dark = false;
   export let icon = "fa-solid fa-ghost fa-3x";
-  export let text = $_('components.no-content.here-is-empty');
+  export let text = $_("components.no-content.here-is-empty");
 
   const dispatch = createEventDispatcher();
 
