@@ -6,7 +6,7 @@
     <div class="col-auto">
       <a class="btn btn-link" role="button" href="{base}/tickets">
         <i class="fas fa-arrow-left me-2"></i>
-        {$_('pages.ticket-categories.tickets')}
+        {$_("pages.ticket-categories.tickets")}
       </a>
     </div>
     <div class="col-auto">
@@ -14,19 +14,23 @@
         class="btn btn-secondary"
         type="button"
         on:click="{onCreateCategoryClick}">
-        <i class="fas fa-plus me-2"></i>{$_('pages.ticket-categories.create-category-button')}
+        <i class="fas fa-plus me-2"></i>{$_(
+          "pages.ticket-categories.create-category-button",
+        )}
       </button>
     </div>
   </div>
 
   <!-- Ticket Categories -->
 
-  <div class="card bg-white">
+  <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between mb-3 align-items-center">
+      <div class="row justify-content-between align-items-center mb-3">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title text-sm-left text-center">
-            {$_('pages.ticket-categories.card-title', {values: {count: data.categoryCount}})}
+            {$_("pages.ticket-categories.card-title", {
+              values: { count: data.categoryCount },
+            })}
           </h5>
         </div>
       </div>
@@ -43,8 +47,10 @@
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th class="align-middle" scope="col">{$_('pages.ticket-categories.category')}</th>
-                <th scope="col" class="align-middle">{$_('pages.ticket-categories.description')}</th>
+                <th class="align-middle" scope="col"
+                  >{$_("pages.ticket-categories.category")}</th>
+                <th scope="col" class="align-middle"
+                  >{$_("pages.ticket-categories.description")}</th>
               </tr>
             </thead>
             <tbody>
@@ -56,7 +62,7 @@
                     onShowEditCategoryButtonClick(event.detail.index)}"
                   on:deleteClick="{(event) =>
                     onShowDeleteTicketCategoryModalClick(
-                      event.detail.index
+                      event.detail.index,
                     )}" />
               {/each}
             </tbody>

@@ -22,7 +22,7 @@
   <!-- Post categories -->
   <div class="card bg-white">
     <div class="card-body">
-      <div class="row justify-content-between mb-3 align-items-center">
+      <div class="row justify-content-between align-items-center mb-3">
         <div class="col-md-auto col-12 text-md-left text-center">
           <h5 class="card-title text-sm-left text-center">
             {$_('pages.post-categories.card-title', {values:{count: data.categoryCount}})}
