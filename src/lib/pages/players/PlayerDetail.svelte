@@ -329,7 +329,6 @@
 
   import NoContent from "$lib/component/NoContent.svelte";
   import PlayerPermissionBadge from "$lib/component/badges/PlayerPermissionBadge.svelte";
-  import { Button } from "bootstrap";
 
   export let data;
 
