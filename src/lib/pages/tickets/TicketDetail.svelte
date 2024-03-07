@@ -2,6 +2,10 @@
   .answer > p {
     margin-bottom: 0;
   }
+
+  .border-5 {
+    border-style: dashed;
+  }
 </style>
 
 <article class="container">
@@ -32,12 +36,12 @@
     </div>
   </div>
 
-  <div class="card bg-white mb-3">
-    <div
-      class="card-header bg-opacity-25 py-3 rounded-top"
-      class:bg-secondary="{data.ticket.status === TicketStatuses.NEW}"
-      class:bg-warning="{data.ticket.status === TicketStatuses.REPLIED}"
-      class:bg-danger="{data.ticket.status === TicketStatuses.CLOSED}">
+  <div
+    class="card bg-white mb-3 border-5"
+    class:border-success="{data.ticket.status === TicketStatuses.NEW}"
+    class:border-warning="{data.ticket.status === TicketStatuses.REPLIED}"
+    class:border-danger="{data.ticket.status === TicketStatuses.CLOSED}">
+    <div class="card-header py-3">
       <div class="row">
         <div class="col">
           <h5 class="card-title">{data.ticket.title}</h5>
