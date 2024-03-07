@@ -51,7 +51,7 @@
             isEditorEmpty ||
             data.post.title.length === 0}"
           on:click="{() => submit(false)}">
-          <span>{$_('pages.post-editor.save')}</span>
+          {$_('pages.post-editor.save')}
         </button>
       {/if}
       <button
@@ -61,9 +61,7 @@
           isEditorEmpty ||
           data.post.title.length === 0}"
         on:click="{() => submit(true)}">
-        <span>
-          {data.post.status === StatusTypes.PUBLISHED ? $_('pages.post-editor.update') : $_('pages.post-editor.publish')}
-        </span>
+        {data.post.status === StatusTypes.PUBLISHED ? $_('pages.post-editor.update') : $_('pages.post-editor.publish')}
       </button>
     </div>
   </section>

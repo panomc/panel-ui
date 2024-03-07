@@ -58,7 +58,7 @@
             <div class="card-body">
               <div class="row h-100">
                 <div class="col-md-4 d-md-flex d-none">
-                  <a href="/">
+                  <a href="/panel/addons/detail">
                     <img
                       src="https://bitcoin.org/img/home/bitcoin-img.svg"
                       class="img-thumbnail animate__animated animate__zoomIn"
@@ -69,7 +69,7 @@
                   <div>
                     <div class="row">
                       <div class="col">
-                        <a href="/">
+                        <a href="/panel/addons/detail">
                           <h5 class="card-title">Bitcoin Payment</h5>
                         </a>
                       </div>
@@ -102,9 +102,9 @@
                       consectetur...
                     </p>
                   </div>
-                  <a href="#" class="card-link">
+                  <a href="#" target="_blank" class="card-link">
                     <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Kaynak</a>
-                  <a href="#" class="card-link">
+                  <a href="#" target="_blank" class="card-link">
                     <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Mağazada
                     Görüntüle</a>
                 </div>
