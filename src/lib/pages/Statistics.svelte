@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <div class="card bg-white mb-3">
+  <div class="card mb-3">
     <div class="card-body">
       <div class="row justify-content-between mb-3">
         <div class="col">
@@ -74,7 +74,7 @@
   </div>
 
   <!-- Statistic Table -->
-  <div class="card bg-white">
+  <div class="card">
     <div class="card-body">
       <h5 class="card-title">
         {$_("pages.statistics.total-statistics.title")}

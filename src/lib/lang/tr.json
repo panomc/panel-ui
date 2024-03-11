@@ -3,19 +3,19 @@
     "dashboard": {
       "title": "Panel",
       "welcome-card": {
-        "description": "Pano başarıyla kuruldu ve kullanıma hazır. \uD83D\uDE80 <br /> İşte başlarken yapabilecekleriniz:",
-        "connect-server": "Sunucu Bağlayın",
-        "connect-server-description": "Oyun sunucunuzu bağlayın ve daha fazla yönetim özelliklerine erişin.",
-        "discover-title": "Menüyü Keşfedin",
-        "more-title": "Daha Fazlası",
-        "publish-your-first-post": "İlk Yazınızı Yayınlayın",
-        "change-theme": "Sitenizin Görünümünü Belirleyin",
-        "manage-tools": "Araçları Yönetin",
-        "review-players": "Oyuncularınızı İnceleyin",
-        "discover-extensions": "Pano Eklentilerini Keşfedin",
-        "discover-themes": "Pano Temalarını Keşfedin",
-        "discover-documentations": "Dokümantasyonları İnceleyin",
-        "join-discord": "Discord Topluluğumuza Katılın",
+        "description": "Pano başarıyla kuruldu ve kullanıma hazır. \uD83D\uDE80 <br /> İşte başlarken yapabileceklerin:",
+        "connect-server": "Sunucu Bağla",
+        "connect-server-description": "Oyun sunucunu bağla ve daha fazla yönetim özelliklerine eriş.",
+        "menu-title": "Menü",
+        "links-title": "Bağlantılar",
+        "publish-your-first-post": "İlk Yazıyı Yayınla",
+        "change-theme": "Tema Görünümünü Değiştir",
+        "manage-addons": "Eklentleri Yönet",
+        "manage-players": "Oyuncuları Yönet",
+        "themes-and-extensions": "Temalar ve Eklentiler",
+        "documentations": "Dokümantasyon",
+        "website": "Website",
+        "discord": "Discord",
         "close-button": "Kapat"
       },
       "last-tickets": {
@@ -68,7 +68,7 @@
       "draft": "Taslak",
       "trash": "Çöp",
       "table-title": "{postCount} {pageType} Yazı",
-      "post-categories-button": "Yazı Kategorileri",
+      "post-categories-button": "Kategoriler",
       "create-post-button": "Yazı Oluştur",
       "table": {
         "title": "Başlık",
@@ -417,7 +417,7 @@
       "monitoring": "İzleme",
       "settings": "Ayarlar",
       "no-selected-server": "Seçili sunucu yok.",
-      "no-server-text": "Bağlı sunucu yok. Sunucu menüsünü görebilmek için sunucu bağlayın.",
+      "no-server-text": "Sunucu menüsünü görüntülemek için bir sunucu bağla.",
       "connect-server": "Sunucu Bağla"
     },
     "post-row": {
@@ -579,7 +579,7 @@
         "title": "Sunucu Bağla",
         "close": "Kapat",
         "steps": {
-          "1": "Pano Eklentisini Oyun Sunucuna Kur",
+          "1": "Oyun Eklentisini Sunucuna Kur",
           "2": "Bağlantı Komutunu Çalıştır",
           "3": "Bağlantı İsteğini Onayla"
         },

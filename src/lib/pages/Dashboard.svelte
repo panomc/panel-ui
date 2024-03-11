@@ -1,107 +1,103 @@
 <!-- Dashboard Page -->
 <div class="container">
   <!-- Welcome Alerts -->
-  {#if data.gettingStartedBlocks.welcomeBoard}
-    <div
-      class="alert alert-success alert-dismissible animate__animated animate__zoomIn mb-3">
-      <div class="row">
-        <div class="col">
-          <p>
-            {@html $_("pages.dashboard.welcome-card.description")}
-          </p>
-        </div>
-        <div class="w-100"></div>
-        <div class="col-lg-3 mb-lg-0 mb-3">
-          <p>{$_("pages.dashboard.welcome-card.connect-server")}</p>
-          <p>
-            {$_("pages.dashboard.welcome-card.connect-server-description")}
-          </p>
-          <button
-            class="btn btn-sm btn-outline-dark w-100"
-            data-bs-target="#connectServer"
-            data-bs-toggle="modal">
-            <i class="fas fa-plus me-2"></i>
-            {$_("pages.dashboard.welcome-card.connect-server")}
-          </button>
-        </div>
-        <div class="col-lg-3 mb-lg-0 mb-3">
-          <ul class="list-unstyled">
-            <p>{$_("pages.dashboard.welcome-card.discover-title")}</p>
-            <li>
-              <a class="alert-link" href="{base}/posts/create-post">
-                <i class="fas fa-pen me-2"></i>
-                {$_("pages.dashboard.welcome-card.publish-your-first-post")}
-              </a>
-            </li>
-            <li>
-              <a class="alert-link" href="{base}/view">
-                <i class="fas fa-brush me-2"></i>
-                {$_("pages.dashboard.welcome-card.change-theme")}
-              </a>
-            </li>
-            <li>
-              <a class="alert-link" href="{base}/tools">
-                <i class="fas fa-tools me-2"></i>
-                {$_("pages.dashboard.welcome-card.manage-tools")}
-              </a>
-            </li>
-            <li>
-              <a class="alert-link" href="{base}/players">
-                <i class="fas fa-user-cog me-2"></i>{$_(
-                  "pages.dashboard.welcome-card.review-players",
-                )}
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-3 mb-lg-0 mb-3">
-          <ul class="list-unstyled">
-            <h5>{$_("pages.dashboard.welcome-card.more-title")}</h5>
-            <li>
-              <a class="alert-link" href="javascript:void(0);">
-                <i class="fas fa-puzzle-piece me-2"></i>
-                {$_("pages.dashboard.welcome-card.discover-extensions")}
-              </a>
-            </li>
-            <li>
-              <a class="alert-link" href="javascript:void(0);">
-                <i class="fas fa-palette me-2"></i>
-                {$_("pages.dashboard.welcome-card.discover-themes")}
-              </a>
-            </li>
-            <li>
-              <a class="alert-link" href="javascript:void(0);" target="_blank">
-                <i class="fas fa-book-open me-2"></i>
-                {$_("pages.dashboard.welcome-card.discover-documentations")}
-              </a>
-            </li>
-            <li>
+  {#if data.gettingStartedBlocks.welcomeBoard}{/if}
+  <div
+    class="alert alert-success alert-dismissible animate__animated animate__zoomIn mb-3">
+    <div class="row">
+      <h5 class="mb-3">
+        {@html $_("pages.dashboard.welcome-card.description")}
+      </h5>
+      <div class="col-lg-4 mb-lg-0 mb-3">
+        <p>
+          {$_("pages.dashboard.welcome-card.connect-server-description")}
+        </p>
+        <button
+          class="btn btn-sm btn-primary"
+          data-bs-target="#connectServer"
+          data-bs-toggle="modal">
+          <i class="fa-solid fa-plus me-2"></i>
+          {$_("pages.dashboard.welcome-card.connect-server")}
+        </button>
+      </div>
+      <div class="col-lg-4 mb-lg-0 mb-3">
+        <ul class="list-unstyled">
+          <li>
+            <a class="alert-link" href="{base}/posts/create-post">
+              <i class="fa-solid fa-pen me-2"></i>
+              {$_("pages.dashboard.welcome-card.publish-your-first-post")}
+            </a>
+          </li>
+          <li>
+            <a class="alert-link" href="{base}/view">
+              <i class="fa-solid fa-brush me-2"></i>
+              {$_("pages.dashboard.welcome-card.change-theme")}
+            </a>
+          </li>
+          <li>
+            <a class="alert-link" href="{base}/addons">
+              <i class="fa-solid fa-puzzle-piece me-2"></i>
+              {$_("pages.dashboard.welcome-card.manage-addons")}
+            </a>
+          </li>
+          <li>
+            <a class="alert-link" href="{base}/players">
+              <i class="fa-solid fa-user-cog me-2"></i>{$_(
+                "pages.dashboard.welcome-card.manage-players",
+              )}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-4 mb-lg-0">
+        <ul class="list-unstyled">
+          <li>
+            <a class="alert-link" href="javascript:void(0);">
+              <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>
+              {$_("pages.dashboard.welcome-card.themes-and-extensions")}
+            </a>
+          </li>
+          <li>
+            <a class="alert-link" href="javascript:void(0);" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>
+              {$_("pages.dashboard.welcome-card.documentations")}
+            </a>
+          </li>
+          <li>
+            <div class="btn-group pt-3">
               <a
-                class="alert-link"
+                class="btn btn-sm btn-outline-primary"
+                href="https://panomc.com/discord"
+                target="_blank">
+                <i class="fa-solid fa-globe me-2"></i>
+                {$_("pages.dashboard.welcome-card.website")}
+              </a>
+              <a
+                class="btn btn-sm btn-outline-primary"
                 href="https://panomc.com/discord"
                 target="_blank">
                 <i class="fab fa-discord me-2"></i>
-                {$_("pages.dashboard.welcome-card.join-discord")}
+                {$_("pages.dashboard.welcome-card.discord")}
               </a>
-            </li>
-          </ul>
-        </div>
+            </div>
+          </li>
+        </ul>
       </div>
-
-      <button
-        type="button"
-        title="{$_('pages.dashboard.welcome-card.close-button')}"
-        class="btn-close"
-        data-bs-dismiss="alert"
-        on:click="{onCloseGettingStartedCard}"></button>
     </div>
-  {/if}
+
+    <button
+      type="button"
+      title="{$_('pages.dashboard.welcome-card.close-button')}"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      on:click="{onCloseGettingStartedCard}"></button>
+  </div>
 
   <div class="row">
     <div class="col-lg-6">
       <!-- Latest Tickets -->
       {#if hasPermission(Permissions.MANAGE_TICKETS)}
-        <div class="card bg-white mb-3">
+        <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title">
               {$_("pages.dashboard.last-tickets.title")}
@@ -156,7 +152,7 @@
       {/if}
     </div>
     <div class="col-lg-6">
-      <div class="card bg-white mb-3">
+      <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">Logs</h5>
         </div>

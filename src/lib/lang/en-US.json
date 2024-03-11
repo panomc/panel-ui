@@ -6,16 +6,16 @@
         "description": "The Pano is successfully installed and ready for use. \uD83D\uDE80 <br /> Here's what you can do to get started:",
         "connect-server": "Connect Server",
         "connect-server-description": "Connect your game server and access more management features.",
-        "discover-title": "Discover The Menu",
-        "more-title": "More",
-        "publish-your-first-post": "Publish Your First Post",
-        "change-theme": "Change The Appearance",
-        "manage-tools": "Manage Tools",
-        "review-players": "Review Your Players",
-        "discover-extensions": "Discover The Pano Extensions",
-        "discover-themes": "Discover The Pano Themes",
-        "discover-documentations": "Review Documentations",
-        "join-discord": "Join Our Discord Community",
+        "menu-title": "The Menu",
+        "links-title": "Links",
+        "publish-your-first-post": "Publish First Post",
+        "change-theme": "Change Theme Appearance",
+        "manage-addons": "Manage Addons",
+        "manage-players": "Manage Players",
+        "themes-and-extensions": "Themes & Extensions",
+        "documentations": "Documentation",
+        "website": "Website",
+        "discord": "Discord",
         "close-button": "Close"
       },
       "last-tickets": {
@@ -68,7 +68,7 @@
       "draft": "Draft",
       "trash": "Trash",
       "table-title": "{postCount} {pageType} Post",
-      "post-categories-button": "Post Categories",
+      "post-categories-button": "Categories",
       "create-post-button": "Create Post",
       "table": {
         "title": "Title",
@@ -390,7 +390,7 @@
       "monitoring": "Monitoring",
       "settings": "Settings",
       "no-selected-server": "No selected server.",
-      "no-server-text": "No server connected. Connect a server to see the server menu.",
+      "no-server-text": "Connect a server to view the server menu.",
       "connect-server": "Connect Server"
     },
     "post-row": {
@@ -552,7 +552,7 @@
         "title": "Connect Server",
         "close": "Close",
         "steps": {
-          "1": "Install Pano Plugin on Game Server",
+          "1": "Install the Game Plugin on Your Server",
           "2": "Run Connection Command",
           "3": "Confirm Connection Request"
         },
