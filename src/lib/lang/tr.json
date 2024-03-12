@@ -106,7 +106,7 @@
       "about": {
         "title": "Hakkında",
         "version": "Versiyon",
-        "release-type": "Sürüm Türü",
+        "release": "Sürüm",
         "website": "Website",
         "discord": "Discord",
         "open-source-licenses": "Açık Kaynak Lisanslar"

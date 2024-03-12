@@ -15,7 +15,7 @@
   </div>
   <div class="col-4 d-flex justify-content-center">
     <!-- Page Title -->
-    <h5 class="text-black mb-1">
+    <h5 class="text-black text-truncate mb-1">
       {$pageTitle ? $_($pageTitle) : options.DEFAULT_PAGE_TITLE}
     </h5>
   </div>
@@ -51,14 +51,21 @@
             <NoContent />
           {:else}
             {#each $quickNotifications as notification, index (notification)}
-              <a
-                href="javascript:void(0);"
+              <button
+                type="button"
                 on:click="{() => onNotificationClick(notification)}"
-                class="dropdown-item"
+                class="dropdown-item d-flex align-items-center"
                 class:notification-unread="{notification.status ===
                   'NOT_READ'}">
-                <p class="mb-0">{notification.type}</p>
-              </a>
+                <i class="fa-solid fa-circle fa-lg me-2"></i>
+                <img
+                  src="https://minotar.net/avatar/Username"
+                  width="32"
+                  height="32"
+                  class="rounded me-2"
+                  alt="Username" />
+                <p class="mb-0 d-inline">{notification.type}</p>
+              </button>
             {/each}
           {/if}
 

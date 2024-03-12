@@ -91,7 +91,7 @@
 
   <div class="row">
     <div class="col-lg-3">
-      <div class="card bg-white mb-3">
+      <div class="card mb-3">
         <div
           class="card-body d-flex flex-column justify-content-center
           align-items-center">
@@ -135,43 +135,45 @@
     <div class="col-lg-9">
       {#if hasPermission(Permissions.MANAGE_TICKETS)}
         <!-- User's Tickets -->
-        <div class="card bg-white mb-3">
+        <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title">{$_("pages.player-detail.last-tickets")}</h5>
 
             {#if data.ticketCount === 0}
               <NoContent />
             {:else}
-              <table class="table table-hover mb-0">
-                {#each data.tickets as ticket, index (ticket)}
-                  <tbody>
-                    <tr>
-                      <td class="align-middle text-nowrap">
-                        <a
-                          href="{base}/tickets/ticket/{ticket.id}"
-                          title="{$_('pages.player-detail.view')}"
-                          >#{ticket.id} {ticket.title}</a>
-                      </td>
-                      <td class="align-middle text-nowrap">
-                        <a
-                          title="{$_('pages.player-detail.filter')}"
-                          href="/tickets/category/{ticket.category.url}">
-                          {ticket.category.title === "-"
-                            ? $_("pages.player-detail.no-category")
-                            : ticket.category.title}
-                        </a>
-                      </td>
-                      <td class="align-middle text-nowrap">
-                        <TicketStatusBadge status="{ticket.status}" />
-                      </td>
-                      <td class="align-middle text-nowrap"
-                        ><span
-                          ><DateComponent time="{ticket.lastUpdate}" /></span
-                        ></td>
-                    </tr>
-                  </tbody>
-                {/each}
-              </table>
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  {#each data.tickets as ticket, index (ticket)}
+                    <tbody>
+                      <tr>
+                        <td class="align-middle text-nowrap">
+                          <a
+                            href="{base}/tickets/ticket/{ticket.id}"
+                            title="{$_('pages.player-detail.view')}"
+                            >#{ticket.id} {ticket.title}</a>
+                        </td>
+                        <td class="align-middle text-nowrap">
+                          <a
+                            title="{$_('pages.player-detail.filter')}"
+                            href="/tickets/category/{ticket.category.url}">
+                            {ticket.category.title === "-"
+                              ? $_("pages.player-detail.no-category")
+                              : ticket.category.title}
+                          </a>
+                        </td>
+                        <td class="align-middle text-nowrap">
+                          <TicketStatusBadge status="{ticket.status}" />
+                        </td>
+                        <td class="align-middle text-nowrap"
+                          ><span
+                            ><DateComponent time="{ticket.lastUpdate}" /></span
+                          ></td>
+                      </tr>
+                    </tbody>
+                  {/each}
+                </table>
+              </div>
             {/if}
 
             <!-- Pagination -->
@@ -184,7 +186,7 @@
           </div>
         </div>
       {/if}
-      <div class="card bg-white">
+      <div class="card">
         <div class="card-body">
           <h5 class="card-title">{$_("pages.player-detail.statistics")}</h5>
           <table class="table mb-0">

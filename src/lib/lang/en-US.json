@@ -106,7 +106,7 @@
       "about": {
         "title": "About",
         "version": "Version",
-        "release-type": "Release Type",
+        "release": "Release",
         "website": "Website",
         "discord": "Discord",
         "open-source-licenses": "Open Source Licenses"
