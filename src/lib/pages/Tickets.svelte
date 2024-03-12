@@ -39,7 +39,7 @@
   </div>
 
   <!-- All Tickets -->
-  <div class="card bg-white">
+  <div class="card">
     <div class="card-body">
       <div class="row justify-content-between align-items-center mb-3">
         <div class="col-md-auto col-12 text-md-left text-center">

@@ -26,7 +26,7 @@
         : ticket.category.title}
     </a>
   </td>
-  <td class="align-middle">
+  <td class="align-middle text-nowrap">
     <a
       href="{base}/players/player/{ticket.writer.username}"
       title="{$_('components.ticket-row.view')}">

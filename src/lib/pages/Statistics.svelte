@@ -3,7 +3,7 @@
   <div
     class="row pb-3 justify-content-between animate__animated animate__slideInUp">
     <div class="col-4">
-      <div class="card bg-success">
+      <div class="card bg-success h-100">
         <div class="card-body">
           <p class="mb-0 text-white">
             {$_("pages.statistics.online-player-text", {
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card bg-primary">
+      <div class="card bg-primary h-100">
         <div class="card-body">
           <p class="mb-0 text-white">
             {$_("pages.statistics.new-register-text", {
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card bg-warning">
+      <div class="card bg-warning h-100">
         <div class="card-body">
           <p class="mb-0 text-white">
             {$_("pages.statistics.total-player-text", {

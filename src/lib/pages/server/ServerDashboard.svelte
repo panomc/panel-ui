@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="card bg-white">
+      <div class="card">
         <div class="card-body">
           <p class="mb-0 text-dark">
             {#if data.server.status === ServerStatus.ONLINE}
@@ -56,7 +56,7 @@
   </div>
 
   <!-- Statistic Table -->
-  <div class="card bg-white">
+  <div class="card">
     <div class="card-body">
       <h5 class="card-title">{$_("pages.server.dashboard.statistics")}</h5>
       <div class="table-responsive">

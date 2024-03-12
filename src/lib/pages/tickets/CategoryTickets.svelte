@@ -40,7 +40,7 @@
   </div>
 
   <!-- All Tickets -->
-  <div class="card bg-white">
+  <div class="card">
     <div class="card-body">
       <div class="row justify-content-between pb-3 align-items-center">
         <div class="col-md-auto col-12 text-md-left text-center">
@@ -75,7 +75,7 @@
                       type="checkbox" />
                   </div>
                 </th>
-                <th class="min-w-200px align-middle" scope="col">{$_('pages.category-tickets.table.title')}</th>
+                <th class="align-middle" scope="col">{$_('pages.category-tickets.table.title')}</th>
                 <th class="align-middle" scope="col">{$_('pages.category-tickets.table.status')}</th>
                 <th class="align-middle table-primary" scope="col">{$_('pages.category-tickets.table.category')}</th>
                 <th class="align-middle" scope="col">{$_('pages.category-tickets.table.player')}</th>

@@ -11,7 +11,7 @@
   </div>
 
   <!-- All Players -->
-  <div class="card bg-white">
+  <div class="card">
     <div class="card-body">
       <div class="row justify-content-between">
         <div class="col-md-auto col-12 text-md-left text-center">

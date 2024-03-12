@@ -48,11 +48,11 @@
       </div>
     </div>
   </th>
-  <td class="min-w-200px align-middle text-nowrap">
+  <td class="align-middle text-nowrap">
     <a title="{$_('components.player-row.view')}" href="{base}/players/player/{player.username}">
       <img
         alt="{player.username}"
-        class="rounded-circle mr-3 animate__animated animate__zoomIn me-2"
+        class="rounded-circle animate__animated animate__zoomIn me-2"
         height="32"
         src="https://minotar.net/avatar/{player.username}"
         width="32" />

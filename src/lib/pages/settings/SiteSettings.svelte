@@ -1,5 +1,5 @@
 <!-- Site Settings Sub Page -->
-<div class="card bg-white">
+<div class="card">
   <div class="card-body animate__animated animate__fadeIn">
     <div class="row mb-3">
       <label class="col-md-4 col-form-label col-form-label-lg" for="siteTitle"

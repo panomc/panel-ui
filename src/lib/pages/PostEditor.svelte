@@ -70,7 +70,7 @@
   <section class="row animate__animated animate__fadeIn">
     <!-- Post -->
     <div class="col-lg-9">
-      <div class="card h-100 bg-white w-100">
+      <div class="card h-100 w-100">
         <div class="card-body">
           <input
             class="form-control form-control-lg"
@@ -91,7 +91,7 @@
 
     <!-- Post Option Cards -->
     <div class="col-lg-3">
-      <div class="card bg-white">
+      <div class="card">
         <div class="card-body">
           <ul class="list-group p-0 m-0">
             <li class="list-group-item">

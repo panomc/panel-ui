@@ -36,7 +36,7 @@
                   <p class="card-text text-muted">
                     {$server.playerCount}/{$server.maxPlayerCount}
                   </p>
-                  <small class="badge bg-white text-black rounded-pill"
+                  <small class="badge text-black rounded-pill"
                     >{$server.type}</small>
                 </div>
               </div>

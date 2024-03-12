@@ -1,4 +1,5 @@
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div
+  class="toast-container position-fixed bottom-0 end-0 p-3 d-xl-block d-none">
   {#each $notifications as notification, index (notification)}
     <div
       id="notificationToast{notification.id}"
@@ -7,9 +8,15 @@
       aria-live="assertive"
       aria-atomic="true"
       on:click="{() => onClick(notification)}">
-      <div class="toast-header bg-primary text-white">
-        <strong class="me-auto">{$_('components.notification-container.notification')}</strong>
-        <small>{getTime(checkTime, parseInt(notification.date), locales[$currentLanguage['date-fns-code']])}</small>
+      <div class="toast-header text-bg-primary">
+        <strong class="me-auto"
+          >{$_("components.notification-container.notification")}</strong>
+        <small
+          >{getTime(
+            checkTime,
+            parseInt(notification.date),
+            locales[$currentLanguage["date-fns-code"]],
+          )}</small>
         <button
           type="button"
           class="btn-close btn-close-white"
@@ -46,7 +53,7 @@
   function deleteFromNotifications(id) {
     notifications.update((notifications) => {
       const foundNotification = notifications.find(
-        (notification) => notification.id === id
+        (notification) => notification.id === id,
       );
 
       notifications.remove(notifications.indexOf(foundNotification));
@@ -64,7 +71,7 @@
     await tick();
 
     const notificationElement = document.getElementById(
-      "notificationToast" + id
+      "notificationToast" + id,
     );
 
     if (notificationElement) {
@@ -135,7 +142,7 @@
 
     newNotifications.forEach((item, index) => {
       listOfFilterIsNotificationExists[index] = get(quickNotifications).filter(
-        (filterItem) => filterItem.id === item.id
+        (filterItem) => filterItem.id === item.id,
       );
     });
 
@@ -151,7 +158,7 @@
 
     get(quickNotifications).forEach((item, index) => {
       const newArrayOfFilter = newNotifications.filter(
-        (filterItem) => filterItem.id === item.id
+        (filterItem) => filterItem.id === item.id,
       );
 
       if (newArrayOfFilter.length === 0) {

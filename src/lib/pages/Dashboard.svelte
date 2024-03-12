@@ -20,8 +20,8 @@
           {$_("pages.dashboard.welcome-card.connect-server")}
         </button>
       </div>
-      <div class="col-lg-4 mb-lg-0 mb-3">
-        <ul class="list-unstyled">
+      <div class="col-lg-4">
+        <ul class="list-unstyled mb-0">
           <li>
             <a class="alert-link" href="{base}/posts/create-post">
               <i class="fa-solid fa-pen me-2"></i>
@@ -49,7 +49,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-lg-4 mb-lg-0">
+      <div class="col-lg-4">
         <ul class="list-unstyled">
           <li>
             <a class="alert-link" href="javascript:void(0);">

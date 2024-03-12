@@ -1,5 +1,5 @@
 <!-- Site Settings Sub Page -->
-<div class="card bg-white animate__animated animate__fadeIn">
+<div class="card animate__animated animate__fadeIn">
   <div class="card-body">
     <h5 class="card-title">
       {$selectedServer.name} ({$selectedServer.host}:{$selectedServer.port})

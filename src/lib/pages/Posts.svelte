@@ -1,18 +1,13 @@
 <!-- Posts Page -->
 <article class="container">
   <!-- Action Menu -->
-  <div
-    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
-    <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/posts/categories">
-        <i class="fas fa-list-alt me-2"></i>
-        {$_("pages.posts.post-categories-button")}
-      </a>
-    </div>
-    <div class="col-auto">
+  <div class="row mb-3 align-items-center animate__animated animate__slideInUp">
+    <div class="col-lg-4">a</div>
+    <div class="col-lg-4">a</div>
+    <div class="col-lg-4 d-flex justify-content-end">
       <a
         href="{base}/posts/create-post"
-        class="btn btn-secondary ml-auto"
+        class="btn btn-secondary ms-auto"
         role="button">
         <i class="fas fa-plus me-2"></i>
         {$_("pages.posts.create-post-button")}
@@ -25,8 +20,8 @@
   <div class="card">
     <div class="card-body">
       <div class="row justify-content-between align-items-center mb-3">
-        <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title">
+        <div class="col-xl-3 col-12">
+          <h5 class="card-title text-xl-start text-center">
             {$_("pages.posts.table-title", {
               values: {
                 postCount: data.postCount,
@@ -42,8 +37,28 @@
             })}
           </h5>
         </div>
-        <div class="col-md-auto col-12 text-md-right text-center">
-          <div class="btn-group">
+        <div class="col-xl-6 col d-flex justify-content-xl-center">
+          <!-- Submenu -->
+          <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Yazılar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{base}/posts/categories">
+                {$_("pages.posts.post-categories-button")}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Etiketler</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Yorumlar</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-xl-3 col d-flex justify-content-end">
+          <!-- Filters -->
+          <div class="btn-group col-sm-auto col">
             <a
               class:active="{data.pageType === PageTypes.PUBLISHED}"
               class="btn btn-sm btn-outline-primary"
@@ -108,12 +123,14 @@
         </div>
       {/if}
       <!-- Pagination -->
-      <Pagination
-        page="{data.page}"
-        totalPage="{data.totalPage}"
-        on:firstPageClick="{() => reloadData(1)}"
-        on:lastPageClick="{() => reloadData(data.totalPage)}"
-        on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+      <div class="d-flex justify-content-sm-start justify-content-center">
+        <Pagination
+          page="{data.page}"
+          totalPage="{data.totalPage}"
+          on:firstPageClick="{() => reloadData(1)}"
+          on:lastPageClick="{() => reloadData(data.totalPage)}"
+          on:pageLinkClick="{(event) => reloadData(event.detail.page)}" />
+      </div>
       <!-- Pagination End -->
     </div>
   </div>

@@ -57,7 +57,6 @@
                 class="dropdown-item d-flex align-items-center"
                 class:notification-unread="{notification.status ===
                   'NOT_READ'}">
-                <i class="fa-solid fa-circle fa-lg me-2"></i>
                 <img
                   src="https://minotar.net/avatar/Username"
                   width="32"

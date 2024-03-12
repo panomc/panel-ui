@@ -2,10 +2,6 @@
   .answer > p {
     margin-bottom: 0;
   }
-
-  .border-5 {
-    border-style: dashed;
-  }
 </style>
 
 <article class="container">
@@ -36,12 +32,12 @@
     </div>
   </div>
 
-  <div
-    class="card bg-white mb-3 border-5"
-    class:border-success="{data.ticket.status === TicketStatuses.NEW}"
-    class:border-warning="{data.ticket.status === TicketStatuses.REPLIED}"
-    class:border-danger="{data.ticket.status === TicketStatuses.CLOSED}">
-    <div class="card-header py-3">
+  <div class="card mb-3">
+    <div
+      class="card-header py-3 rounded-top"
+      class:bg-success="{data.ticket.status === TicketStatuses.NEW}"
+      class:bg-warning="{data.ticket.status === TicketStatuses.REPLIED}"
+      class:bg-danger="{data.ticket.status === TicketStatuses.CLOSED}">
       <div class="row">
         <div class="col">
           <h5 class="card-title">{data.ticket.title}</h5>
@@ -94,7 +90,7 @@
       {#each data.ticket.messages as message, index (message)}
         {#if message.panel}
           <div class="row py-2 flex-nowrap justify-content-end">
-            <div class="col-auto d-flex align-items-center">
+            <div class="col d-flex justify-content-end align-items-center">
               <div class="card text-bg-primary">
                 <div class="card-header small">
                   <Date time="{message.date}" />
@@ -129,7 +125,7 @@
                   height="48" />
               </a>
             </div>
-            <div class="col-auto d-flex flex-nowrap align-items-center">
+            <div class="col d-flex flex-nowrap align-items-center">
               <div class="card text-bg-light">
                 <div class="card-header small">
                   <Date time="{message.date}" />

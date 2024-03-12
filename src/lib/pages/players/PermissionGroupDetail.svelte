@@ -27,7 +27,7 @@
 
   <div class="row">
     <div class="col mb-xl-0 mb-3">
-      <div class="card bg-white h-100">
+      <div class="card h-100">
         <div class="card-body">
           <input
             class:text-danger="{errors.name}"

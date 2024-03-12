@@ -13,7 +13,7 @@
   </a>
   <a
     class="nav-link text-light"
-    href="https://panomc.com/discord"
+    href="https://discord.panomc.com"
     target="_blank"
     use:tooltip="{[$_('components.bottom.discord'), { placement: 'top' }]}">
     <i class="fab fa-discord"></i>
