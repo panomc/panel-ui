@@ -1,7 +1,7 @@
 <!-- Dashboard Page -->
 <div class="container">
   <!-- Welcome Alerts -->
-  {#if data.gettingStartedBlocks.welcomeBoard}{/if}
+  {#if data.gettingStartedBlocks.welcomeBoard}
   <div
     class="alert alert-success alert-dismissible animate__animated animate__zoomIn mb-3">
     <div class="row">
@@ -92,7 +92,7 @@
       data-bs-dismiss="alert"
       on:click="{onCloseGettingStartedCard}"></button>
   </div>
-
+  {/if}
   <div class="row">
     <div class="col-lg-6">
       <!-- Latest Tickets -->
