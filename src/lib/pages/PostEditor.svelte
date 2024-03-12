@@ -434,7 +434,7 @@
       ApiUtil.put({
         path: `/api/panel/posts/${data.post.id}/status`,
         body: {
-          to: "draft",
+          to: "DRAFT",
         },
       })
         .then((body) => {

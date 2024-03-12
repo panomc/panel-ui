@@ -123,7 +123,7 @@
       ApiUtil.put({
         path: `/api/panel/posts/${get(post).id}/status`,
         body: {
-          to: "trash",
+          to: "TRASH",
         },
       })
         .then(bodyHandler)
