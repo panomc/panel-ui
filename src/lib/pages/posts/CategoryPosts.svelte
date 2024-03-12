@@ -208,7 +208,7 @@
       ApiUtil.put({
         path: `/api/panel/posts/${id}/status`,
         body: {
-          to: "PUBLISH",
+          to: "PUBLISHED",
         },
       })
         .then((body) => {
