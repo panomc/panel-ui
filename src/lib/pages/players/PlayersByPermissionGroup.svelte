@@ -1,14 +1,12 @@
 <!-- All Players Page -->
 <div class="container">
   <!-- Action Menu -->
-  <div class="row mb-3 animate__animated animate__slideInUp">
-    <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/players">
-        <i class="fas fa-arrow-left me-2"></i>
-        {$_('pages.players-by-permission-group.players')}
-      </a>
-    </div>
-  </div>
+  <PageActions>
+    <a class="btn btn-link" role="button" href="{base}/players" slot="left">
+      <i class="fas fa-arrow-left me-2"></i>
+      {$_('pages.players-by-permission-group.players')}
+    </a>
+  </PageActions>
 
   <!-- All Players -->
   <div class="card">
@@ -156,6 +154,7 @@
 
   import PlayerRow from "$lib/component/rows/PlayerRow.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
+  import PageActions from "$lib/component/PageActions.svelte";
 
   export let data;
 

@@ -1,23 +1,18 @@
 <div class="container">
   <!-- Action Menu -->
-  <div
-    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
-    <div class="col-auto">
-      <a class="btn btn-link d-none" role="button" href="/addons/categories">
-        <i class="fas fa-puzzle-piece me-2"></i>
-        Eklenti Kategorileri
-      </a>
-    </div>
-    <div class="col-auto">
-      <a
-        href="/posts/create-post"
-        class="btn btn-secondary ml-auto"
-        role="button">
-        <i class="fas fa-plus me-2"></i>
-        Eklenti Ekle
-      </a>
-    </div>
-  </div>
+  <PageActions>
+    <a class="btn btn-link d-none" role="button" href="/addons/categories" slot="left">
+      <i class="fas fa-puzzle-piece me-2"></i>
+      Eklenti Kategorileri
+    </a>
+    <a
+      href="/posts/create-post"
+      class="btn btn-secondary ml-auto"
+      role="button" slot="right">
+      <i class="fas fa-plus me-2"></i>
+      Eklenti Ekle
+    </a>
+  </PageActions>
 
   <!-- All Addons -->
   <div class="card">
@@ -119,6 +114,8 @@
 
 <script>
   import { getContext } from "svelte";
+  import { _ } from "svelte-i18n";
+  import PageActions from "$lib/component/PageActions.svelte";
 
   const pageTitle = getContext("pageTitle");
 

@@ -1,19 +1,15 @@
 <!-- Posts Page -->
 <article class="container">
   <!-- Action Menu -->
-  <div class="row mb-3 align-items-center animate__animated animate__slideInUp">
-    <div class="col-lg-4">a</div>
-    <div class="col-lg-4">a</div>
-    <div class="col-lg-4 d-flex justify-content-end">
-      <a
-        href="{base}/posts/create-post"
-        class="btn btn-secondary ms-auto"
-        role="button">
-        <i class="fas fa-plus me-2"></i>
-        {$_("pages.posts.create-post-button")}
-      </a>
-    </div>
-  </div>
+  <PageActions>
+    <a
+      href="{base}/posts/create-post"
+      class="btn btn-secondary ms-auto"
+      role="button" slot="right">
+      <i class="fas fa-plus me-2"></i>
+      {$_("pages.posts.create-post-button")}
+    </a>
+  </PageActions>
 
   <!-- All Posts -->
 
@@ -230,6 +226,7 @@
   import PostMovedToDraftToast from "$lib/component/toasts/PostMovedToDraftToast.svelte";
   import PostPublishedToast from "$lib/component/toasts/PostPublishedToast.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
+  import PageActions from "$lib/component/PageActions.svelte";
 
   export let data;
 

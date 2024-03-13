@@ -1,23 +1,18 @@
 <!-- Categories Page -->
 <article class="container">
   <!-- Action Menu -->
-  <div
-    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
-    <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/posts">
-        <i class="fas fa-arrow-left me-2"></i>
-        {$_('pages.post-categories.posts')}
-      </a>
-    </div>
-    <div class="col-auto">
-      <button
-        class="btn btn-secondary"
-        type="button"
-        on:click="{onCreateCategoryClick}">
-        <i class="fas fa-plus me-2"></i>{$_('pages.post-categories.create-category-button')}
-      </button>
-    </div>
-  </div>
+  <PageActions>
+    <a class="btn btn-link" role="button" href="{base}/posts" slot="left">
+      <i class="fas fa-arrow-left me-2"></i>
+      {$_('pages.post-categories.posts')}
+    </a>
+    <button
+      class="btn btn-secondary"
+      type="button"
+      on:click="{onCreateCategoryClick}" slot="right">
+      <i class="fas fa-plus me-2"></i>{$_('pages.post-categories.create-category-button')}
+    </button>
+  </PageActions>
 
   <!-- Post categories -->
   <div class="card">
@@ -160,6 +155,7 @@
 
   import NoContent from "$lib/component/NoContent.svelte";
   import PostCategoryRow from "$lib/component/rows/PostCategoryRow.svelte";
+  import PageActions from "$lib/component/PageActions.svelte";
 
   export let data;
 

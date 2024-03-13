@@ -1,24 +1,19 @@
 <!-- Posts Page -->
 <article class="container">
   <!-- Action Menu -->
-  <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
-    <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/posts">
-        <i class="fas fa-arrow-left ms-2"></i>
-        {$_('pages.category-posts.posts')}
-      </a>
-    </div>
-    <div class="col-auto">
-      <a
-        class="btn btn-secondary"
-        role="button"
-        href="{base}/posts/create-post">
-        <i class="fas fa-plus"></i>
-        <span class="d-md-inline d-none ms-2">{$_('pages.category-posts.create-post')}</span>
-      </a>
-    </div>
-  </div>
+  <PageActions>
+    <a class="btn btn-link" role="button" href="{base}/posts" slot="left">
+      <i class="fas fa-arrow-left ms-2"></i>
+      {$_('pages.category-posts.posts')}
+    </a>
+    <a
+      class="btn btn-secondary"
+      role="button"
+      href="{base}/posts/create-post" slot="right">
+      <i class="fas fa-plus"></i>
+      <span class="d-md-inline d-none ms-2">{$_('pages.category-posts.create-post')}</span>
+    </a>
+  </PageActions>
 
   <!-- All Posts -->
 
@@ -163,6 +158,7 @@
   import NoContent from "$lib/component/NoContent.svelte";
   import { getContext } from "svelte";
   import { _ } from "svelte-i18n";
+  import PageActions from "$lib/component/PageActions.svelte";
 
   export let data;
 

@@ -1,20 +1,15 @@
 <div class="container">
   <!-- Action Menu -->
-  <div
-    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
-    <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/players">
-        <i class="fas fa-arrow-left me-2"></i>
-        {$_('pages.permission-groups.players')}
-      </a>
-    </div>
-    <div class="col-auto">
-      <a href="{base}/players/perm-groups/create" class="btn btn-secondary">
-        <i class="fas fa-plus me-2"></i>
-        {$_('pages.permission-groups.create-permission-group-button')}
-      </a>
-    </div>
-  </div>
+  <PageActions>
+    <a class="btn btn-link" role="button" href="{base}/players" slot="left">
+      <i class="fas fa-arrow-left me-2"></i>
+      {$_('pages.permission-groups.players')}
+    </a>
+    <a href="{base}/players/perm-groups/create" class="btn btn-secondary" slot="right">
+      <i class="fas fa-plus me-2"></i>
+      {$_('pages.permission-groups.create-permission-group-button')}
+    </a>
+  </PageActions>
 
   <div class="card">
     <div class="card-body">
@@ -134,6 +129,7 @@
 
   import Pagination from "$lib/component/Pagination.svelte";
   import PermissionGroupRow from "$lib/component/rows/PermissionGroupRow.svelte";
+  import PageActions from "$lib/component/PageActions.svelte";
 
   export let data;
 

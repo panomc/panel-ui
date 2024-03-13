@@ -1,42 +1,38 @@
 <!-- Tickets Page -->
 <article class="container">
   <!-- Action Menu -->
-  <div
-    class="row justify-content-between mb-3 animate__animated animate__slideInUp">
-    <div class="col-auto">
-      <a class="btn btn-link" role="button" href="{base}/tickets/categories">
-        <i class="fas fa-list-alt me-2"></i>
-        {$_("pages.tickets.ticket-categories")}
-      </a>
-    </div>
-    <div class="col-auto">
-      <div
-        class:d-none="{firstLoad}"
-        class="animate__animated animate__faster {getListOfChecked($checkedList)
+  <PageActions>
+    <a class="btn btn-link" role="button" href="{base}/tickets/categories" slot="left">
+      <i class="fas fa-list-alt me-2"></i>
+      {$_("pages.tickets.ticket-categories")}
+    </a>
+    <div
+      class:d-none="{firstLoad}"
+      class="animate__animated animate__faster {getListOfChecked($checkedList)
           .length > 0
           ? 'animate__slideInUp'
           : 'animate__slideOutDown'}
-    faster">
-        <a
-          class="btn btn-link link-danger"
-          class:disabled="{getListOfChecked($checkedList).length === 0}"
-          role="button"
-          href="javascript:void(0);"
-          on:click="{onShowDeleteTicketsModalClick}">
-          <i class="fas fa-trash"></i>
-        </a>
-        <a
-          class="btn btn-danger"
-          class:disabled="{getListOfChecked($checkedList).length === 0}"
-          role="button"
-          href="javascript:void(0);"
-          on:click="{onShowCloseTicketsModalClick}">
-          <i class="fas fa-times me-2"></i>
-          {$_("pages.tickets.close-ticket-button")}
-        </a>
-      </div>
+    faster"
+    slot="right">
+      <a
+        class="btn btn-link link-danger"
+        class:disabled="{getListOfChecked($checkedList).length === 0}"
+        role="button"
+        href="javascript:void(0);"
+        on:click="{onShowDeleteTicketsModalClick}">
+        <i class="fas fa-trash"></i>
+      </a>
+      <a
+        class="btn btn-danger"
+        class:disabled="{getListOfChecked($checkedList).length === 0}"
+        role="button"
+        href="javascript:void(0);"
+        on:click="{onShowCloseTicketsModalClick}">
+        <i class="fas fa-times me-2"></i>
+        {$_("pages.tickets.close-ticket-button")}
+      </a>
     </div>
-  </div>
+  </PageActions>
 
   <!-- All Tickets -->
   <div class="card">
@@ -248,6 +244,7 @@
 
   import TicketRow from "$lib/component/rows/TicketRow.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
+  import PageActions from "$lib/component/PageActions.svelte";
 
   export let data;
 

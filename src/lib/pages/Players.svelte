@@ -1,8 +1,8 @@
 <!-- All Players Page -->
 <div class="container">
   <!-- Action Menu -->
-  <div class="row mb-3 animate__animated animate__slideInUp">
-    <div class="col-auto">
+  <PageActions>
+    <div slot="left">
       {#if hasPermission(Permissions.MANAGE_PERMISSION_GROUPS)}
         <a class="btn btn-link" role="button" href="{base}/players/perm-groups">
           <i class="fas fa-user-circle me-2"></i>
@@ -10,7 +10,7 @@
         </a>
       {/if}
     </div>
-  </div>
+  </PageActions>
 
   <!-- All Players -->
   <div class="card">
@@ -218,6 +218,7 @@
 
   import NoContent from "$lib/component/NoContent.svelte";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
+  import PageActions from "$lib/component/PageActions.svelte";
 
   export let data;
 
