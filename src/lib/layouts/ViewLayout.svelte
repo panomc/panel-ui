@@ -4,23 +4,14 @@
 <article class="container">
   <!-- View Categories Navigation -->
   <nav>
-    <div class="nav nav-pills d-flex flex-row w-100 mb-3">
-      <a
-        class="nav-item nav-link"
-        href="{base}/view"
-        class:active="{matching($page.url.pathname, base + '/view')}">
+    <CardMenu>
+      <CardMenuItem href="/view">
         Temalar
-      </a>
-      <a
-        class="nav-item nav-link"
-        href="{base}/view/theme-options"
-        class:active="{matching(
-          $page.url.pathname,
-          base + '/view/theme-options'
-        )}">
+      </CardMenuItem>
+      <CardMenuItem href="/view/theme-options">
         Tema Seçenekleri
-      </a>
-    </div>
+      </CardMenuItem>
+    </CardMenu>
   </nav>
 
   <slot />
@@ -48,6 +39,8 @@
 <script>
   import { base } from "$app/paths";
   import { page } from "$app/stores";
+  import CardMenu from "$lib/component/CardMenu.svelte";
+  import CardMenuItem from "$lib/component/CardMenuItem.svelte";
 
   function matching(path, pathName, startsWith = false) {
     return (

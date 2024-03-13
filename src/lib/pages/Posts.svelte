@@ -33,22 +33,12 @@
         </h5>
 
         <!-- Submenu -->
-        <ul class="nav nav-pills nav-fill" slot="middle">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"
-            >Yazılar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{base}/posts/categories">
-              {$_("pages.posts.post-categories-button")}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Etiketler</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Yorumlar</a>
-          </li>
-        </ul>
+        <CardMenu slot="middle">
+          <CardMenuItem href="/posts" startsWith>Yazılar</CardMenuItem>
+          <CardMenuItem href="/posts/categories" startsWith>{$_("pages.posts.post-categories-button")}</CardMenuItem>
+          <CardMenuItem disabled>Etiketler</CardMenuItem>
+          <CardMenuItem disabled>Yorumlar</CardMenuItem>
+        </CardMenu>
 
         <!-- Filters -->
         <div class="btn-group col-sm-auto col" slot="right">
@@ -225,6 +215,8 @@
   import NoContent from "$lib/component/NoContent.svelte";
   import PageActions from "$lib/component/PageActions.svelte";
   import CardHeader from "$lib/component/CardHeader.svelte";
+  import CardMenu from "$lib/component/CardMenu.svelte";
+  import CardMenuItem from "$lib/component/CardMenuItem.svelte";
 
   export let data;
 
