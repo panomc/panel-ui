@@ -1,21 +1,19 @@
 <article class="container">
   <!-- Action Menu -->
-  <section
-    class="row justify-content-between align-items-center mb-3 animate__animated animate__slideInUp">
-    <div class="col-auto">
-      <a
-        href="{base}/posts{data.post.status === StatusTypes.TRASH
+  <PageActions>
+    <a
+      href="{base}/posts{data.post.status === StatusTypes.TRASH
           ? '/trash'
           : data.post.status === StatusTypes.DRAFT
             ? '/draft'
             : ''}"
-        class="btn btn-link"
-        role="button">
-        <i class="fas fa-arrow-left me-2"></i>
-        {$_("pages.post-editor.posts")}
-      </a>
-    </div>
-    <div class="col-auto">
+      class="btn btn-link"
+      role="button" slot="left">
+      <i class="fas fa-arrow-left me-2"></i>
+      {$_("pages.post-editor.posts")}
+    </a>
+
+    <div slot="right">
       {#if data.mode === Modes.EDIT}
         <button
           class="btn btn-link text-danger"
@@ -72,7 +70,7 @@
           : $_("pages.post-editor.publish")}
       </button>
     </div>
-  </section>
+  </PageActions>
 
   <!-- Post & Post Options -->
   <section class="row animate__animated animate__fadeIn">
@@ -318,6 +316,7 @@
   import PostMovedToDraftToast from "$lib/component/toasts/PostMovedToDraftToast.svelte";
   import PostSavedToast from "$lib/component/toasts/PostSavedToast.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
+  import PageActions from "$lib/component/PageActions.svelte";
 
   export let data;
 
