@@ -15,48 +15,45 @@
   <!-- All Players -->
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between mb-3">
-        <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title">
-            {$_("pages.players.table-title", {
-              values: {
-                playerCount: data.playerCount,
-                pageType:
-                  data.pageType === PageTypes.HAS_PERM
-                    ? $_("pages.players.authorized") + " "
-                    : data.pageType === PageTypes.BANNED
-                      ? $_("pages.players.banned") + " "
-                      : "",
-              },
-            })}
-          </h5>
+      <CardHeader>
+        <h5 class="card-title" slot="left">
+          {$_("pages.players.table-title", {
+            values: {
+              playerCount: data.playerCount,
+              pageType:
+                data.pageType === PageTypes.HAS_PERM
+                  ? $_("pages.players.authorized") + " "
+                  : data.pageType === PageTypes.BANNED
+                    ? $_("pages.players.banned") + " "
+                    : "",
+            },
+          })}
+        </h5>
+
+        <div class="btn-group" slot="right">
+          <a
+            class:active="{data.pageType === PageTypes.ALL}"
+            class="btn btn-sm btn-outline-primary"
+            role="button"
+            href="{base}/players/all">
+            {$_("pages.players.all")}
+          </a>
+          <a
+            class:active="{data.pageType === PageTypes.HAS_PERM}"
+            class="btn btn-sm btn-outline-primary"
+            role="button"
+            href="{base}/players/hasPerm">
+            {$_("pages.players.authorized")}
+          </a>
+          <a
+            class:active="{data.pageType === PageTypes.BANNED}"
+            class="btn btn-sm btn-outline-primary"
+            role="button"
+            href="{base}/players/banned">
+            {$_("pages.players.banned")}
+          </a>
         </div>
-        <div class="col-md-auto col-12 text-md-right text-center">
-          <div class="btn-group">
-            <a
-              class:active="{data.pageType === PageTypes.ALL}"
-              class="btn btn-sm btn-outline-primary"
-              role="button"
-              href="{base}/players/all">
-              {$_("pages.players.all")}
-            </a>
-            <a
-              class:active="{data.pageType === PageTypes.HAS_PERM}"
-              class="btn btn-sm btn-outline-primary"
-              role="button"
-              href="{base}/players/hasPerm">
-              {$_("pages.players.authorized")}
-            </a>
-            <a
-              class:active="{data.pageType === PageTypes.BANNED}"
-              class="btn btn-sm btn-outline-primary"
-              role="button"
-              href="{base}/players/banned">
-              {$_("pages.players.banned")}
-            </a>
-          </div>
-        </div>
-      </div>
+      </CardHeader>
 
       <!-- No Players -->
       {#if data.playerCount === 0}
@@ -219,6 +216,7 @@
   import NoContent from "$lib/component/NoContent.svelte";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
   import PageActions from "$lib/component/PageActions.svelte";
+  import CardHeader from "$lib/component/CardHeader.svelte";
 
   export let data;
 

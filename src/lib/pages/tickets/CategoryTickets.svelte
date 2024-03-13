@@ -38,16 +38,14 @@
   <!-- All Tickets -->
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between pb-3 align-items-center">
-        <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title mb-md-0">
-            {$_('pages.category-tickets.table-title', {values: {ticketCount: data.ticketCount
-              }}) + (getListOfChecked($checkedList).length > 0
-              ? ", " + $_('pages.category-tickets.amount-selected', {values: {amount: getListOfChecked($checkedList).length}})
-              : "")}
-          </h5>
-        </div>
-      </div>
+      <CardHeader>
+        <h5 class="card-title mb-md-0" slot="left">
+          {$_('pages.category-tickets.table-title', {values: {ticketCount: data.ticketCount
+            }}) + (getListOfChecked($checkedList).length > 0
+            ? ", " + $_('pages.category-tickets.amount-selected', {values: {amount: getListOfChecked($checkedList).length}})
+            : "")}
+        </h5>
+      </CardHeader>
 
       <!-- No Tickets -->
       {#if data.ticketCount === 0}
@@ -202,6 +200,7 @@
   import TicketRow from "$lib/component/rows/TicketRow.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
   import PageActions from "$lib/component/PageActions.svelte";
+  import CardHeader from "$lib/component/CardHeader.svelte";
 
   export let data;
 

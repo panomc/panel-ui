@@ -14,9 +14,11 @@
   <div class="card">
     <div class="card-body">
       <!-- Permissions Table -->
-      <h5 class="card-title">
-        {$_('pages.permission-groups.card-title', {values:{count: data.permissionGroupCount}})}
-      </h5>
+      <CardHeader>
+        <h5 class="card-title" slot="left">
+          {$_('pages.permission-groups.card-title', {values:{count: data.permissionGroupCount}})}
+        </h5>
+      </CardHeader>
 
       <div class="table-responsive">
         <table class="table table-hover mb-0">
@@ -130,6 +132,7 @@
   import Pagination from "$lib/component/Pagination.svelte";
   import PermissionGroupRow from "$lib/component/rows/PermissionGroupRow.svelte";
   import PageActions from "$lib/component/PageActions.svelte";
+  import CardHeader from "$lib/component/CardHeader.svelte";
 
   export let data;
 

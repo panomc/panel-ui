@@ -37,54 +37,52 @@
   <!-- All Tickets -->
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between align-items-center mb-3">
-        <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title">
-            {$_("pages.tickets.table-title", {
-              values: {
-                ticketCount: data.ticketCount,
-                pageType:
-                  data.pageType === PageTypes.WAITING_REPLY
-                    ? $_("pages.tickets.waiting-reply")
-                    : data.pageType === PageTypes.CLOSED
-                      ? $_("pages.tickets.closed")
-                      : "",
-              },
-            }) +
-              (getListOfChecked($checkedList).length > 0
-                ? ", " +
-                  $_("pages.tickets.amount-selected", {
-                    values: { amount: getListOfChecked($checkedList).length },
-                  })
-                : "")}
-          </h5>
+
+      <CardHeader>
+        <h5 class="card-title" slot="left">
+          {$_("pages.tickets.table-title", {
+            values: {
+              ticketCount: data.ticketCount,
+              pageType:
+                data.pageType === PageTypes.WAITING_REPLY
+                  ? $_("pages.tickets.waiting-reply")
+                  : data.pageType === PageTypes.CLOSED
+                    ? $_("pages.tickets.closed")
+                    : "",
+            },
+          }) +
+          (getListOfChecked($checkedList).length > 0
+            ? ", " +
+            $_("pages.tickets.amount-selected", {
+              values: { amount: getListOfChecked($checkedList).length },
+            })
+            : "")}
+        </h5>
+
+        <div class="btn-group" slot="right">
+          <a
+            class="btn btn-sm btn-outline-primary"
+            class:active="{data.pageType === PageTypes.ALL}"
+            role="button"
+            href="{base}/tickets/all">
+            {$_("pages.tickets.all")}
+          </a>
+          <a
+            class="btn btn-sm btn-outline-primary"
+            class:active="{data.pageType === PageTypes.WAITING_REPLY}"
+            role="button"
+            href="{base}/tickets/waitingReply">
+            {$_("pages.tickets.waiting-reply")}
+          </a>
+          <a
+            class="btn btn-sm btn-outline-primary"
+            class:active="{data.pageType === PageTypes.CLOSED}"
+            role="button"
+            href="{base}/tickets/closed">
+            {$_("pages.tickets.closed")}
+          </a>
         </div>
-        <div class="col-md-auto col-12 text-md-right text-center">
-          <div class="btn-group">
-            <a
-              class="btn btn-sm btn-outline-primary"
-              class:active="{data.pageType === PageTypes.ALL}"
-              role="button"
-              href="{base}/tickets/all">
-              {$_("pages.tickets.all")}
-            </a>
-            <a
-              class="btn btn-sm btn-outline-primary"
-              class:active="{data.pageType === PageTypes.WAITING_REPLY}"
-              role="button"
-              href="{base}/tickets/waitingReply">
-              {$_("pages.tickets.waiting-reply")}
-            </a>
-            <a
-              class="btn btn-sm btn-outline-primary"
-              class:active="{data.pageType === PageTypes.CLOSED}"
-              role="button"
-              href="{base}/tickets/closed">
-              {$_("pages.tickets.closed")}
-            </a>
-          </div>
-        </div>
-      </div>
+      </CardHeader>
 
       <!-- No Tickets -->
       {#if data.ticketCount === 0}
@@ -245,6 +243,7 @@
   import TicketRow from "$lib/component/rows/TicketRow.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
   import PageActions from "$lib/component/PageActions.svelte";
+  import CardHeader from "$lib/component/CardHeader.svelte";
 
   export let data;
 

@@ -11,13 +11,11 @@
   <!-- All Players -->
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between">
-        <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title">
-            {$_('pages.players-by-permission-group.table-title', {values: {count: data.playerCount}})}
-          </h5>
-        </div>
-      </div>
+      <CardHeader>
+        <h5 class="card-title" slot="left">
+          {$_('pages.players-by-permission-group.table-title', {values: {count: data.playerCount}})}
+        </h5>
+      </CardHeader>
 
       <!-- No Players -->
       {#if data.playerCount === 0}
@@ -155,6 +153,7 @@
   import PlayerRow from "$lib/component/rows/PlayerRow.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
   import PageActions from "$lib/component/PageActions.svelte";
+  import CardHeader from "$lib/component/CardHeader.svelte";
 
   export let data;
 

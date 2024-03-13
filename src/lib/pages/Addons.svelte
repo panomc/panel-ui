@@ -17,34 +17,29 @@
   <!-- All Addons -->
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between align-items-center mb-3">
-        <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title">7 Yüklü Eklenti</h5>
+      <CardHeader>
+        <h5 class="card-title" slot="left">7 Yüklü Eklenti</h5>
+        <div class="btn-group" slot="right">
+          <a
+            class="btn btn-sm btn-outline-primary active"
+            role="button"
+            href="/tickets/all">
+            Tümü
+          </a>
+          <a
+            class="btn btn-sm btn-outline-primary"
+            role="button"
+            href="/tickets/waitingReply">
+            Aktif
+          </a>
+          <a
+            class="btn btn-sm btn-outline-primary"
+            role="button"
+            href="/tickets/closed">
+            Devre Dışı
+          </a>
         </div>
-
-        <div class="col-md-auto col-12 text-md-right text-center">
-          <div class="btn-group">
-            <a
-              class="btn btn-sm btn-outline-primary active"
-              role="button"
-              href="/tickets/all">
-              Tümü
-            </a>
-            <a
-              class="btn btn-sm btn-outline-primary"
-              role="button"
-              href="/tickets/waitingReply">
-              Aktif
-            </a>
-            <a
-              class="btn btn-sm btn-outline-primary"
-              role="button"
-              href="/tickets/closed">
-              Devre Dışı
-            </a>
-          </div>
-        </div>
-      </div>
+      </CardHeader>
 
       <div class="row row-cols-xl-2 g-4">
         <div class="col">
@@ -116,6 +111,7 @@
   import { getContext } from "svelte";
   import { _ } from "svelte-i18n";
   import PageActions from "$lib/component/PageActions.svelte";
+  import CardHeader from "$lib/component/CardHeader.svelte";
 
   const pageTitle = getContext("pageTitle");
 

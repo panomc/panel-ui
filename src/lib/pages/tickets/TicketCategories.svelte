@@ -21,15 +21,13 @@
 
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between align-items-center mb-3">
-        <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title text-sm-left text-center">
-            {$_("pages.ticket-categories.card-title", {
-              values: { count: data.categoryCount },
-            })}
-          </h5>
-        </div>
-      </div>
+      <CardHeader>
+        <h5 class="card-title text-sm-left text-center" slot="left">
+          {$_("pages.ticket-categories.card-title", {
+            values: { count: data.categoryCount },
+          })}
+        </h5>
+      </CardHeader>
 
       <!-- No Category -->
       {#if data.categoryCount === 0}
@@ -165,6 +163,7 @@
   import NoContent from "$lib/component/NoContent.svelte";
   import TicketCategoryRow from "$lib/component/rows/TicketCategoryRow.svelte";
   import PageActions from "$lib/component/PageActions.svelte";
+  import CardHeader from "$lib/component/CardHeader.svelte";
 
   export let data;
 

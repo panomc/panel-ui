@@ -15,71 +15,68 @@
 
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between align-items-center mb-3">
-        <div class="col-xl-3 col-12">
-          <h5 class="card-title text-xl-start text-center">
-            {$_("pages.posts.table-title", {
-              values: {
-                postCount: data.postCount,
-                pageType:
-                  data.pageType === PageTypes.PUBLISHED
-                    ? $_("pages.posts.published") + " "
-                    : data.pageType === PageTypes.DRAFT
-                      ? $_("pages.posts.draft") + " "
-                      : data.pageType === PageTypes.BANNED
-                        ? $_("pages.posts.banned") + " "
-                        : "",
-              },
-            })}
-          </h5>
-        </div>
-        <div class="col-xl-6 col d-flex justify-content-xl-center">
-          <!-- Submenu -->
-          <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                >Yazılar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{base}/posts/categories">
-                {$_("pages.posts.post-categories-button")}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Etiketler</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Yorumlar</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-xl-3 col d-flex justify-content-end">
-          <!-- Filters -->
-          <div class="btn-group col-sm-auto col">
-            <a
-              class:active="{data.pageType === PageTypes.PUBLISHED}"
-              class="btn btn-sm btn-outline-primary"
-              role="button"
-              href="{base}/posts/published">
-              {$_("pages.posts.published")}
-            </a>
-            <a
-              class:active="{data.pageType === PageTypes.DRAFT}"
-              class="btn btn-sm btn-outline-primary"
-              role="button"
-              href="{base}/posts/draft">
-              {$_("pages.posts.draft")}
-            </a>
+      <CardHeader>
+        <h5 class="card-title text-xl-start text-center" slot="left">
+          {$_("pages.posts.table-title", {
+            values: {
+              postCount: data.postCount,
+              pageType:
+                data.pageType === PageTypes.PUBLISHED
+                  ? $_("pages.posts.published") + " "
+                  : data.pageType === PageTypes.DRAFT
+                    ? $_("pages.posts.draft") + " "
+                    : data.pageType === PageTypes.BANNED
+                      ? $_("pages.posts.banned") + " "
+                      : "",
+            },
+          })}
+        </h5>
 
-            <a
-              class:active="{data.pageType === PageTypes.TRASH}"
-              class="btn btn-sm btn-outline-primary"
-              role="button"
-              href="{base}/posts/trash">
-              {$_("pages.posts.trash")}
-            </a>
-          </div>
+        <!-- Submenu -->
+        <ul class="nav nav-pills nav-fill" slot="middle">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"
+            >Yazılar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{base}/posts/categories">
+              {$_("pages.posts.post-categories-button")}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Etiketler</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Yorumlar</a>
+          </li>
+        </ul>
+
+        <!-- Filters -->
+        <div class="btn-group col-sm-auto col" slot="right">
+          <a
+            class:active="{data.pageType === PageTypes.PUBLISHED}"
+            class="btn btn-sm btn-outline-primary"
+            role="button"
+            href="{base}/posts/published">
+            {$_("pages.posts.published")}
+          </a>
+          <a
+            class:active="{data.pageType === PageTypes.DRAFT}"
+            class="btn btn-sm btn-outline-primary"
+            role="button"
+            href="{base}/posts/draft">
+            {$_("pages.posts.draft")}
+          </a>
+
+          <a
+            class:active="{data.pageType === PageTypes.TRASH}"
+            class="btn btn-sm btn-outline-primary"
+            role="button"
+            href="{base}/posts/trash">
+            {$_("pages.posts.trash")}
+          </a>
         </div>
-      </div>
+
+      </CardHeader>
 
       <!-- No Posts -->
       {#if data.postCount === 0}
@@ -227,6 +224,7 @@
   import PostPublishedToast from "$lib/component/toasts/PostPublishedToast.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
   import PageActions from "$lib/component/PageActions.svelte";
+  import CardHeader from "$lib/component/CardHeader.svelte";
 
   export let data;
 

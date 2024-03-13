@@ -19,13 +19,11 @@
 
   <div class="card">
     <div class="card-body">
-      <div class="row justify-content-between pb-3 align-items-center">
-        <div class="col-md-auto col-12 text-md-left text-center">
-          <h5 class="card-title mb-md-0">
-            {$_('pages.category-posts.table-title', {values: {count: data.postCount}})}
-          </h5>
-        </div>
-      </div>
+      <CardHeader>
+        <h5 class="card-title mb-md-0" slot="left">
+          {$_('pages.category-posts.table-title', {values: {count: data.postCount}})}
+        </h5>
+      </CardHeader>
 
       <!-- No Posts -->
       {#if data.postCount === 0}
@@ -159,6 +157,7 @@
   import { getContext } from "svelte";
   import { _ } from "svelte-i18n";
   import PageActions from "$lib/component/PageActions.svelte";
+  import CardHeader from "$lib/component/CardHeader.svelte";
 
   export let data;
 
