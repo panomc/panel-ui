@@ -19,26 +19,18 @@
     <div class="card-body">
       <CardHeader>
         <h5 class="card-title" slot="left">7 Yüklü Eklenti</h5>
-        <div class="btn-group" slot="right">
-          <a
-            class="btn btn-sm btn-outline-primary active"
-            role="button"
-            href="/tickets/all">
+        <!-- Filters -->
+        <CardFilters slot="right">
+          <CardFiltersItem href="/addons/all" active>
             Tümü
-          </a>
-          <a
-            class="btn btn-sm btn-outline-primary"
-            role="button"
-            href="/tickets/waitingReply">
+          </CardFiltersItem>
+          <CardFiltersItem href="/addons/active">
             Aktif
-          </a>
-          <a
-            class="btn btn-sm btn-outline-primary"
-            role="button"
-            href="/tickets/closed">
+          </CardFiltersItem>
+          <CardFiltersItem href="/addons/disabled">
             Devre Dışı
-          </a>
-        </div>
+          </CardFiltersItem>
+        </CardFilters>
       </CardHeader>
 
       <div class="row row-cols-xl-2 g-4">
@@ -112,6 +104,8 @@
   import { _ } from "svelte-i18n";
   import PageActions from "$lib/component/PageActions.svelte";
   import CardHeader from "$lib/component/CardHeader.svelte";
+  import CardFiltersItem from "$lib/component/CardFiltersItem.svelte";
+  import CardFilters from "$lib/component/CardFilters.svelte";
 
   const pageTitle = getContext("pageTitle");
 

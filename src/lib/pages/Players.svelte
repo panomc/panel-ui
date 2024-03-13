@@ -30,29 +30,18 @@
           })}
         </h5>
 
-        <div class="btn-group" slot="right">
-          <a
-            class:active="{data.pageType === PageTypes.ALL}"
-            class="btn btn-sm btn-outline-primary"
-            role="button"
-            href="{base}/players/all">
+        <!-- Filters -->
+        <CardFilters slot="right">
+          <CardFiltersItem href="/players/all" active="{data.pageType === PageTypes.ALL}">
             {$_("pages.players.all")}
-          </a>
-          <a
-            class:active="{data.pageType === PageTypes.HAS_PERM}"
-            class="btn btn-sm btn-outline-primary"
-            role="button"
-            href="{base}/players/hasPerm">
+          </CardFiltersItem>
+          <CardFiltersItem href="/players/hasPerm" active="{data.pageType === PageTypes.HAS_PERM}">
             {$_("pages.players.authorized")}
-          </a>
-          <a
-            class:active="{data.pageType === PageTypes.BANNED}"
-            class="btn btn-sm btn-outline-primary"
-            role="button"
-            href="{base}/players/banned">
+          </CardFiltersItem>
+          <CardFiltersItem href="/players/banned" active="{data.pageType === PageTypes.BANNED}">
             {$_("pages.players.banned")}
-          </a>
-        </div>
+          </CardFiltersItem>
+        </CardFilters>
       </CardHeader>
 
       <!-- No Players -->
@@ -217,6 +206,8 @@
   import { hasPermission, Permissions } from "$lib/auth.util.js";
   import PageActions from "$lib/component/PageActions.svelte";
   import CardHeader from "$lib/component/CardHeader.svelte";
+  import CardFiltersItem from "$lib/component/CardFiltersItem.svelte";
+  import CardFilters from "$lib/component/CardFilters.svelte";
 
   export let data;
 

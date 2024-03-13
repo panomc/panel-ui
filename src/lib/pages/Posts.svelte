@@ -41,31 +41,17 @@
         </CardMenu>
 
         <!-- Filters -->
-        <div class="btn-group col-sm-auto col" slot="right">
-          <a
-            class:active="{data.pageType === PageTypes.PUBLISHED}"
-            class="btn btn-sm btn-outline-primary"
-            role="button"
-            href="{base}/posts/published">
+        <CardFilters slot="right">
+          <CardFiltersItem href="/posts/published" active="{data.pageType === PageTypes.PUBLISHED}">
             {$_("pages.posts.published")}
-          </a>
-          <a
-            class:active="{data.pageType === PageTypes.DRAFT}"
-            class="btn btn-sm btn-outline-primary"
-            role="button"
-            href="{base}/posts/draft">
+          </CardFiltersItem>
+          <CardFiltersItem href="/posts/draft" active="{data.pageType === PageTypes.DRAFT}">
             {$_("pages.posts.draft")}
-          </a>
-
-          <a
-            class:active="{data.pageType === PageTypes.TRASH}"
-            class="btn btn-sm btn-outline-primary"
-            role="button"
-            href="{base}/posts/trash">
+          </CardFiltersItem>
+          <CardFiltersItem href="/posts/trash" active="{data.pageType === PageTypes.TRASH}">
             {$_("pages.posts.trash")}
-          </a>
-        </div>
-
+          </CardFiltersItem>
+        </CardFilters>
       </CardHeader>
 
       <!-- No Posts -->
@@ -217,6 +203,8 @@
   import CardHeader from "$lib/component/CardHeader.svelte";
   import CardMenu from "$lib/component/CardMenu.svelte";
   import CardMenuItem from "$lib/component/CardMenuItem.svelte";
+  import CardFilters from "$lib/component/CardFilters.svelte";
+  import CardFiltersItem from "$lib/component/CardFiltersItem.svelte";
 
   export let data;
 

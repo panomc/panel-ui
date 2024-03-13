@@ -59,29 +59,18 @@
             : "")}
         </h5>
 
-        <div class="btn-group" slot="right">
-          <a
-            class="btn btn-sm btn-outline-primary"
-            class:active="{data.pageType === PageTypes.ALL}"
-            role="button"
-            href="{base}/tickets/all">
+        <!-- Filters -->
+        <CardFilters slot="right">
+          <CardFiltersItem href="/tickets/all" active="{data.pageType === PageTypes.ALL}">
             {$_("pages.tickets.all")}
-          </a>
-          <a
-            class="btn btn-sm btn-outline-primary"
-            class:active="{data.pageType === PageTypes.WAITING_REPLY}"
-            role="button"
-            href="{base}/tickets/waitingReply">
+          </CardFiltersItem>
+          <CardFiltersItem href="/tickets/waitingReply" active="{data.pageType === PageTypes.WAITING_REPLY}">
             {$_("pages.tickets.waiting-reply")}
-          </a>
-          <a
-            class="btn btn-sm btn-outline-primary"
-            class:active="{data.pageType === PageTypes.CLOSED}"
-            role="button"
-            href="{base}/tickets/closed">
+          </CardFiltersItem>
+          <CardFiltersItem href="/tickets/closed" active="{data.pageType === PageTypes.CLOSED}">
             {$_("pages.tickets.closed")}
-          </a>
-        </div>
+          </CardFiltersItem>
+        </CardFilters>
       </CardHeader>
 
       <!-- No Tickets -->
@@ -244,6 +233,8 @@
   import NoContent from "$lib/component/NoContent.svelte";
   import PageActions from "$lib/component/PageActions.svelte";
   import CardHeader from "$lib/component/CardHeader.svelte";
+  import CardFiltersItem from "$lib/component/CardFiltersItem.svelte";
+  import CardFilters from "$lib/component/CardFilters.svelte";
 
   export let data;
 
