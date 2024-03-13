@@ -7,12 +7,12 @@
         href="{base}/posts{data.post.status === StatusTypes.TRASH
           ? '/trash'
           : data.post.status === StatusTypes.DRAFT
-          ? '/draft'
-          : ''}"
+            ? '/draft'
+            : ''}"
         class="btn btn-link"
         role="button">
         <i class="fas fa-arrow-left me-2"></i>
-        {$_('pages.post-editor.posts')}
+        {$_("pages.post-editor.posts")}
       </a>
     </div>
     <div class="col-auto">
@@ -21,7 +21,10 @@
           class="btn btn-link text-danger"
           type="button"
           on:click="{showDeletePostModal(data.post)}"
-          use:tooltip="{[$_('pages.post-editor.trash'), { placement: 'bottom' }]}">
+          use:tooltip="{[
+            $_('pages.post-editor.trash'),
+            { placement: 'bottom' },
+          ]}">
           <i class="fas fa-trash"></i>
         </button>
       {/if}
@@ -31,7 +34,10 @@
           type="button"
           class:disabled="{loading}"
           on:click="{onDraftClick}"
-          use:tooltip="{[$_('pages.post-editor.move-to-drafts'), { placement: 'bottom' }]}">
+          use:tooltip="{[
+            $_('pages.post-editor.move-to-drafts'),
+            { placement: 'bottom' },
+          ]}">
           <i class="fa-solid fa-box-archive"></i>
         </button>
       {/if}
@@ -39,7 +45,7 @@
         class="btn btn-link"
         role="button"
         target="_blank"
-        href="{UI_URL === '/' ? '': UI_URL}/preview/post/{data.post.id}"
+        href="{UI_URL === '/' ? '' : UI_URL}/preview/post/{data.post.id}"
         use:tooltip="{[$_('pages.post-editor.view'), { placement: 'bottom' }]}">
         <i class="fas fa-eye"></i>
       </a>
@@ -51,7 +57,7 @@
             isEditorEmpty ||
             data.post.title.length === 0}"
           on:click="{() => submit(false)}">
-          {$_('pages.post-editor.save')}
+          {$_("pages.post-editor.save")}
         </button>
       {/if}
       <button
@@ -61,7 +67,9 @@
           isEditorEmpty ||
           data.post.title.length === 0}"
         on:click="{() => submit(true)}">
-        {data.post.status === StatusTypes.PUBLISHED ? $_('pages.post-editor.update') : $_('pages.post-editor.publish')}
+        {data.post.status === StatusTypes.PUBLISHED
+          ? $_("pages.post-editor.update")
+          : $_("pages.post-editor.publish")}
       </button>
     </div>
   </section>
@@ -96,7 +104,7 @@
           <ul class="list-group p-0 m-0">
             <li class="list-group-item">
               <div class="d-flex justify-content-between align-items-center">
-                {$_('pages.post-editor.status')}
+                {$_("pages.post-editor.status")}
                 <div>
                   {$_(getStatusByPostStatus(data.post.status))}
                 </div>
@@ -104,20 +112,20 @@
             </li>
             <li class="list-group-item">
               <div class="d-flex justify-content-between align-items-center">
-                {$_('pages.post-editor.views')}
+                {$_("pages.post-editor.views")}
                 <div>{data.mode === Modes.CREATE ? "0" : data.post.views}</div>
               </div>
             </li>
             <li class="list-group-item">
               <div class="d-flex justify-content-between align-items-center">
-                {$_('pages.post-editor.category')}
+                {$_("pages.post-editor.category")}
 
                 <form>
                   <select
                     class="form-control form-control-sm"
                     bind:value="{data.post.category}">
                     <option class="text-primary" value="{-1}"
-                      >{$_('pages.post-editor.no-category')}</option>
+                      >{$_("pages.post-editor.no-category")}</option>
 
                     {#each data.categories as category, index (category)}
                       <option value="{category.id}">{category.title}</option>
@@ -128,26 +136,33 @@
             </li>
             <li class="list-group-item form-group">
               <div class="d-flex justify-content-between align-items-center">
-                {$_('pages.post-editor.thumbnail')}
+                {$_("pages.post-editor.thumbnail")}
 
                 {#if !isThumbnailRemoved && (thumbnail || data.post.thumbnailUrl)}
                   <button
                     class="btn btn-link link-danger"
-                    on:click="{onRemoveThumbnailClick}">{$_('pages.post-editor.clear')}</button>
+                    on:click="{onRemoveThumbnailClick}"
+                    >{$_("pages.post-editor.clear")}</button>
                 {:else}
                   <button
-                    class="btn btn-link"
-                    on:click="{() => thumbnailInput.click()}">{$_('pages.post-editor.add')}</button>
+                    class="btn btn-sm btn-primary"
+                    on:click="{() => thumbnailInput.click()}"
+                    >{$_("pages.post-editor.add")}</button>
                 {/if}
               </div>
               {#if !isThumbnailRemoved && (thumbnail || data.post.thumbnailUrl)}
-                <img
-                  src="{thumbnail || data.post.thumbnailUrl}"
-                  class="border rounded img-fluid"
-                  title="{$_('pages.post-editor.small-image')}"
-                  alt="{$_('pages.post-editor.small-image')}"
-                  use:tooltip="{[$_('pages.post-editor.change'), { placement: 'bottom' }]}"
-                  on:click="{() => thumbnailInput.click()}" />
+                <a
+                  href="javascript:void(0);"
+                  use:tooltip="{[
+                    $_('pages.post-editor.change'),
+                    { placement: 'bottom' },
+                  ]}"
+                  on:click="{() => thumbnailInput.click()}">
+                  <img
+                    src="{thumbnail || data.post.thumbnailUrl}"
+                    class="border rounded img-fluid"
+                    title="{$_('pages.post-editor.small-image')}"
+                    alt="{$_('pages.post-editor.small-image')}" /></a>
               {:else}
                 <NoContent
                   icon="fas fa-image fa-3x"
@@ -320,7 +335,9 @@
   const pageTitle = getContext("pageTitle");
 
   pageTitle.set(
-    data.mode === Modes.EDIT ? "pages.post-editor.title-edit" : "pages.post-editor.title-create"
+    data.mode === Modes.EDIT
+      ? "pages.post-editor.title-edit"
+      : "pages.post-editor.title-create",
   );
 
   function onThumbnailChange(event) {
@@ -341,10 +358,10 @@
     return status === StatusTypes.TRASH
       ? "pages.post-editor.trash"
       : status === StatusTypes.PUBLISHED
-      ? "pages.post-editor.published"
-      : status === StatusTypes.DRAFT
-      ? "pages.post-editor.draft"
-      : "pages.post-editor.new";
+        ? "pages.post-editor.published"
+        : status === StatusTypes.DRAFT
+          ? "pages.post-editor.draft"
+          : "pages.post-editor.new";
   }
 
   function submit(publish) {
