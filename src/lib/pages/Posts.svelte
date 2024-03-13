@@ -9,6 +9,14 @@
       <i class="fas fa-plus me-2"></i>
       {$_("pages.posts.create-post-button")}
     </a>
+
+    <!-- Submenu -->
+    <CardMenu slot="middle">
+      <CardMenuItem href="/posts" startsWith>Yazılar</CardMenuItem>
+      <CardMenuItem href="/posts/categories" startsWith>{$_("pages.posts.post-categories-button")}</CardMenuItem>
+      <CardMenuItem disabled>Etiketler</CardMenuItem>
+      <CardMenuItem disabled>Yorumlar</CardMenuItem>
+    </CardMenu>
   </PageActions>
 
   <!-- All Posts -->
@@ -31,14 +39,6 @@
             },
           })}
         </h5>
-
-        <!-- Submenu -->
-        <CardMenu slot="middle">
-          <CardMenuItem href="/posts" startsWith>Yazılar</CardMenuItem>
-          <CardMenuItem href="/posts/categories" startsWith>{$_("pages.posts.post-categories-button")}</CardMenuItem>
-          <CardMenuItem disabled>Etiketler</CardMenuItem>
-          <CardMenuItem disabled>Yorumlar</CardMenuItem>
-        </CardMenu>
 
         <!-- Filters -->
         <CardFilters slot="right">
