@@ -1,3 +1,3 @@
 [submodule "src/pano"]
 	path = src/pano-ui
-	url = https://github.com/panocms/pano-dev-ui.git
+	url = https://github.com/panomc/pano-dev-ui.git
