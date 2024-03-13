@@ -14,14 +14,14 @@ export const Languages = Object.freeze({
     locale: "en-US",
     file: () => import("$lib/lang/en-US.json"),
     name: "English (US)",
-    "date-fns-code": "en-US"
+    "date-fns-code": "en-US",
   },
   TR: {
     locale: "tr",
     file: () => import("$lib/lang/tr.json"),
     derivatives: ["tr-tr"],
     name: "Türkçe (TR)",
-    "date-fns-code": "tr"
+    "date-fns-code": "tr",
   },
 });
 
@@ -102,7 +102,7 @@ export function getLanguageByLocale(locale) {
   let foundLanguage = null;
 
   Object.keys(Languages).forEach((key) => {
-    const language = Languages[key]
+    const language = Languages[key];
 
     if (language.locale === locale) {
       foundLanguage = language;

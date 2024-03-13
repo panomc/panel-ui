@@ -73,7 +73,7 @@ export async function resumeAfterNetworkError() {
         calledList.push(callback);
 
         networkErrorCallbacks.update((list) =>
-          list.filter((item) => item !== callback)
+          list.filter((item) => item !== callback),
         );
 
         check();

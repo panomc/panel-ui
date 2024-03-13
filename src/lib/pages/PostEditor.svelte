@@ -151,8 +151,7 @@
               {:else}
                 <NoContent
                   icon="fas fa-image fa-3x"
-                  text="{$_('pages.post-editor.thumbnail-not-determined')}"
-                  on:click="{() => thumbnailInput.click()}" />
+                  text="{$_('pages.post-editor.thumbnail-not-determined')}" />
               {/if}
               <input
                 class="d-none"
