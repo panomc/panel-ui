@@ -1,3 +1,4 @@
+<AddPluginModal/>
 <div class="container">
   <!-- Action Menu -->
   <PageActions>
@@ -6,11 +7,12 @@
       Eklenti Kategorileri
     </a>
     <a
-      href="/posts/create-post"
+      href="javascript:void(0);"
       class="btn btn-secondary ml-auto"
-      role="button" slot="right">
+      role="button" slot="right"
+    on:click={showAddPluginModal}>
       <i class="fas fa-plus me-2"></i>
-      Eklenti Ekle
+      Eklenti Yükle
     </a>
   </PageActions>
 
@@ -101,11 +103,11 @@
 
 <script>
   import { getContext } from "svelte";
-  import { _ } from "svelte-i18n";
   import PageActions from "$lib/component/PageActions.svelte";
   import CardHeader from "$lib/component/CardHeader.svelte";
   import CardFiltersItem from "$lib/component/CardFiltersItem.svelte";
   import CardFilters from "$lib/component/CardFilters.svelte";
+  import AddPluginModal, {show as showAddPluginModal} from "$lib/component/modals/AddPluginModal.svelte";
 
   const pageTitle = getContext("pageTitle");
 
