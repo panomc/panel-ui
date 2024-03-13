@@ -218,10 +218,10 @@
     ? `${$_($pageTitle)} \u2014 ${options.DEFAULT_PAGE_TITLE}`
     : options.DEFAULT_PAGE_TITLE;
 
-  let showSplash = false;
+  let showSplash = true;
   let showSplashAlways = false;
   let showLoading = false;
-  let waitAnimation = true;
+  let waitAnimation = false;
   let mounted = false;
 
   function getCurrentSidebarState() {
