@@ -260,9 +260,6 @@
     ) {
       showSplash = false;
     }
-
-    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-    popoverTriggerList.forEach(popoverTriggerEl => new window.bootstrap.Popover(popoverTriggerEl))
   });
 
   onDestroy(

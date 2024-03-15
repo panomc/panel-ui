@@ -9,5 +9,10 @@
 
   if (browser) {
     import("$lib/init.libs.js");
+
+    window.onload = () => {
+      const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+      popoverTriggerList.forEach(popoverTriggerEl => new window.bootstrap.Popover(popoverTriggerEl))
+    }
   }
 </script>
