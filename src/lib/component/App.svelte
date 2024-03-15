@@ -10,8 +10,15 @@
   import { onDestroy } from "svelte";
 
   function loadPopOver() {
-    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-    popoverTriggerList.forEach(popoverTriggerEl => new window.bootstrap.Popover(popoverTriggerEl))
+    if (window) {
+      const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+      popoverTriggerList.forEach(popoverTriggerEl => new window.bootstrap.Popover(popoverTriggerEl))
+      return
+    }
+
+    setTimeout(() => {
+      loadPopOver()
+    }, 1)
   }
 
   if (browser) {
@@ -21,6 +28,7 @@
       loadPopOver()
     }
   }
+
   onDestroy(page.subscribe(() => {
     if (browser) {
       loadPopOver()
