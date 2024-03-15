@@ -10,7 +10,7 @@
   import { onDestroy } from "svelte";
 
   function loadPopOver() {
-    if (window) {
+    if (window.bootstrap) {
       const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
       popoverTriggerList.forEach(popoverTriggerEl => new window.bootstrap.Popover(popoverTriggerEl))
       return
