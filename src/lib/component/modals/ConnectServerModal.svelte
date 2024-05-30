@@ -1,7 +1,7 @@
 <!-- Connect Server Modal -->
 <div
   aria-hidden="true"
-  class="modal fade"
+  class="modal modal fade"
   id="connectServer"
   role="document"
   tabindex="-1">
@@ -20,43 +20,54 @@
       </div>
       <div class="modal-body">
         <ol class="list-group list-group-numbered">
-          <a
-            href="#"
-            class="list-group-item list-group-item-action"
-            use:tooltip="{[
-              $_('components.modals.connect-server.download'),
-              { placement: 'bottom' },
-            ]}">
+          <div class="list-group-item">
             {$_("components.modals.connect-server.steps.1")}
+            <br />
+            <small class="text-muted"
+              >Paper 1.20, Spigot 1.20, Velocity, 1.2, Bungeecord 1.2
+            </small>
+            <a class="btn btn-secondary mt-2 d-block" href="#" target="_blank"
+              >Download</a>
+          </div>
 
-            <small class="text-muted d-block"
-              >Paper 1.20, Spigot 1.20, Velocity, 1.2, Bungeecord 1.2</small>
-          </a>
-
-          <button
-            type="button"
-            class="list-group-item list-group-item-action fw-normal"
-            on:click="{onCopyCommandTextClick}"
-            id="copyPlatformToken"
-            use:tooltip="{[
-              isCommandTextCopied
-                ? $_('components.modals.connect-server.copied')
-                : $_('components.modals.connect-server.copy'),
-              { placement: 'bottom', hideOnClick: false },
-            ]}">
+          <div class="list-group-item">
             {$_("components.modals.connect-server.steps.2")}
-            <span class="d-block user-select-all font-monospace"
-              >{commandText}</span>
+            <br />
             <small class="text-muted">
               {$_("components.modals.connect-server.code-refresh", {
                 values: { timeToRefreshKey },
               })}
             </small>
-          </button>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                value="
+                {commandText}" />
+              <button
+                class="btn btn-link border"
+                type="button"
+                id="button-addon2"
+                on:click="{onCopyCommandTextClick}"
+                use:tooltip="{[
+                  isCommandTextCopied
+                    ? $_('components.modals.connect-server.copied')
+                    : $_('components.modals.connect-server.copy'),
+                  { placement: 'bottom', hideOnClick: false },
+                ]}">
+                <i class="fa-regular fa-clipboard"></i>
+              </button>
+            </div>
+          </div>
 
-          <a href="#" class="list-group-item list-group-item-action">
+          <div class="list-group-item">
             {$_("components.modals.connect-server.steps.3")}
-          </a>
+
+            <a
+              class="btn btn-outline-primary mt-2 d-block"
+              href="#"
+              target="_blank">Open Notifications</a>
+          </div>
         </ol>
       </div>
     </div>
@@ -175,19 +186,19 @@
 
           startCountDown();
         }
-      })
+      }),
     );
 
     onDestroy(
       platformHostAddress.subscribe(() => {
         updateCommandText();
-      })
+      }),
     );
 
     onDestroy(
       platformServerMatchKey.subscribe(() => {
         updateCommandText();
-      })
+      }),
     );
   }
 </script>
