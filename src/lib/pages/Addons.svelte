@@ -94,11 +94,11 @@
                     <div class="vr mx-2"></div>
                         {/if}
                       {#if plugin.verifyStatus === "VERIFIED"}
-                        <span class="text-success">
+                        <span class="text-success" use:tooltip="{['Verified by Pano', { placement: 'bottom' }]}">
                       <i class="fa-regular fa-circle-check me-1"></i>
                         </span>
                         {:else if plugin.verifyStatus === "NOT_VERIFIED"}
-                        <span class="text-warning">
+                        <span class="text-warning" use:tooltip="{['Not verified by Pano, use at your own risk!', { placement: 'bottom' }]}">
                         <i class="fa-solid fa-circle-exclamation me-1"></i>
                         </span>
                       {/if}
@@ -181,6 +181,7 @@
   import { base } from "$app/paths";
 
   import { API_URL } from "$lib/variables";
+  import tooltip from "$lib/tooltip.util";
 
   import PageActions from "$lib/component/PageActions.svelte";
   import CardHeader from "$lib/component/CardHeader.svelte";
