@@ -93,9 +93,15 @@
                     <span class="font-monospace">{plugin.license}</span>
                     <div class="vr mx-2"></div>
                       {/if}
-                    <span class="text-success">
+                      {#if plugin.verifyStatus === "VERIFIED"}
+                        <span class="text-success">
                       <i class="fa-regular fa-circle-check me-1"></i>
-                    </span>
+                        </span>
+                        {:else if plugin.verifyStatus === "NOT_VERIFIED"}
+                        <span class="text-warning">
+                        <i class="fa-solid fa-circle-exclamation me-1"></i>
+                        </span>
+                      {/if}
                   </small>
                   <p class="pt-2">
                     {@html plugin.description}
