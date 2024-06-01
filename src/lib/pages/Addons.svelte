@@ -63,7 +63,9 @@
                           type="checkbox"
                           role="switch"
                           id="addonStatusSwitch"
-                          checked="{plugin.status === 'STARTED'}" />
+                          checked="{plugin.status === 'STARTED'}"
+                          disabled="{plugin.loading}"
+                          on:click={(e) => {e.preventDefault(); onTogglePluginStateClick(plugin)}}/>
                       </div>
                     </div>
                     {#if plugin.status === 'FAILED'}
@@ -190,10 +192,62 @@
   import AddPluginModal, {
     show as showAddPluginModal,
   } from "$lib/component/modals/AddPluginModal.svelte";
+  import { showNetworkErrorOnCatch } from "$lib/Store.js";
 
   export let data;
 
   const pageTitle = getContext("pageTitle");
 
   pageTitle.set("Eklentiler");
+
+  function onTogglePluginStateClick(plugin) {
+    updatePlugin(plugin, (plugin) => {
+      plugin.loading = true;
+      plugin.error = null;
+      if (plugin.status === "FAILED") {
+        plugin.status = "RESOLVING"
+      }
+    })
+
+    showNetworkErrorOnCatch((resolve, reject) => {
+      ApiUtil.put({
+        path: `/api/panel/plugins/${plugin.id}`,
+        body: {status: plugin.status !== "STARTED" }
+      })
+        .then((body) => {
+          updateLoading(plugin, false)
+
+          if (body.result !== "ok") {
+            reject();
+
+            return
+          }
+
+          updatePlugin(plugin, (plugin) => {
+            plugin.status = body.status
+
+            if (body.error) {
+              plugin.error = body.error
+            }
+          })
+
+          resolve();
+        })
+        .catch(e => reject(e))
+    })
+  }
+
+  function updateLoading(plugin, loading) {
+    updatePlugin(plugin, (plugin) => {plugin.loading = loading})
+  }
+
+  function updatePlugin(plugin, handler = () => {}) {
+    data.plugins.forEach((eachPlugin) => {
+      if (eachPlugin.id === plugin.id) {
+        handler(eachPlugin);
+      }
+    });
+
+    data.plugins = data.plugins
+  }
 </script>
