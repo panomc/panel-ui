@@ -64,8 +64,6 @@
                           role="switch"
                           id="addonStatusSwitch"
                           checked="{plugin.status === 'STARTED'}" />
-                        <label class="form-check-label" for="addonStatusSwitch"
-                          >Aktif</label>
                       </div>
                     </div>
                     {#if plugin.status === 'FAILED'}
