@@ -25,7 +25,7 @@
   <div class="card">
     <div class="card-body">
       <CardHeader>
-        <h5 class="card-title" slot="left">{data.plugins.length} Yüklü Eklenti</h5>
+        <h5 class="card-title" slot="left">{data.plugins.length} {data.pageType === PageTypes.ACTIVE ? "Aktif" : data.pageType === PageTypes.DISABLED ? "Devre Dışı" : "Yüklü" } Eklenti</h5>
         <!-- Filters -->
         <CardFilters slot="right">
           <CardFiltersItem href="/addons/all" active="{data.pageType === PageTypes.ALL}">Tümü</CardFiltersItem>
