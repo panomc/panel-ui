@@ -35,6 +35,9 @@
       </CardHeader>
 
       <div class="row row-cols-xl-2 row-cols-1 g-3">
+        {#if data.plugins.length === 0}
+          <NoContent/>
+        {/if}
         {#each data.plugins as plugin, index (plugin)}
         <div class="col">
           <!-- Installed Addon Card -->
@@ -202,6 +205,7 @@
   import EnablingAddonFailedByDependencyErrorToast
     from "$lib/component/toasts/EnablingAddonFailedByDependencyErrorToast.svelte";
   import FailedToEnableAddonToast from "$lib/component/toasts/FailedToEnableAddonToast.svelte";
+  import NoContent from "$lib/component/NoContent.svelte";
 
   export let data;
 
