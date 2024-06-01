@@ -722,7 +722,7 @@
       "verification-email-sent-error": "Failed to send verification e-mail to user \"{username}\". Error: {errorCode}",
       "verification-email-sent-successful": "A verification e-mail was sent to the user \"{username}\".",
       "enabling-addon-failed-by-dependency-error": "Failed to enable \"{addon}\" addon due to failed dependency plugins!",
-      "failed-to-enable-addon-error": "Failed to enable \"{addon}\". Checkout addon logs!"
+      "failed-to-enable-addon-error": "Failed to enable \"{addon}\". Check out the addon logs!"
     }
   },
   "page-error": {
