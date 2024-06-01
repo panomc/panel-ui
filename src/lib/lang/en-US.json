@@ -537,6 +537,12 @@
         "cancel": "Cancel",
         "yes": "Yes"
       },
+      "confirm-disable-addon-will-cause-more-disable": {
+        "title": "Are you sure to disable \"{pluginId}\" addon?",
+        "description": "Disabling \"{pluginId}\" will cause disable these addons too:",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
       "confirm-delete-ticket": {
         "title-single": "Are you sure you want to permanently delete this ticket?",
         "title-multi": "Are you sure you want to permanently delete these tickets?",
@@ -714,7 +720,9 @@
         "single": "Ticket is permanently deleted."
       },
       "verification-email-sent-error": "Failed to send verification e-mail to user \"{username}\". Error: {errorCode}",
-      "verification-email-sent-successful": "A verification e-mail was sent to the user \"{username}\"."
+      "verification-email-sent-successful": "A verification e-mail was sent to the user \"{username}\".",
+      "enabling-addon-failed-by-dependency-error": "Failed to enable \"{addon}\" addon due to failed dependency plugins!",
+      "failed-to-enable-addon-error": "Failed to enable \"{addon}\". Checkout addon logs!"
     }
   },
   "page-error": {

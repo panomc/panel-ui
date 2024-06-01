@@ -126,6 +126,8 @@
   </div>
 </div>
 
+<ConfirmDisableAddonWillCauseMoreDisableModal/>
+
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
 
@@ -184,6 +186,9 @@
 
   import { API_URL } from "$lib/variables";
   import tooltip from "$lib/tooltip.util";
+  import { showNetworkErrorOnCatch } from "$lib/Store.js";
+
+  import { show as showToast } from "$lib/component/ToastContainer.svelte";
 
   import PageActions from "$lib/component/PageActions.svelte";
   import CardHeader from "$lib/component/CardHeader.svelte";
@@ -192,7 +197,11 @@
   import AddPluginModal, {
     show as showAddPluginModal,
   } from "$lib/component/modals/AddPluginModal.svelte";
-  import { showNetworkErrorOnCatch } from "$lib/Store.js";
+  import ConfirmDisableAddonWillCauseMoreDisableModal, {show as showConfirmDisableAddonModal, setCallback as setCallbackConfirmDisableAddonModal}
+    from "$lib/component/modals/ConfirmDisableAddonWillCauseMoreDisableModal.svelte";
+  import EnablingAddonFailedByDependencyErrorToast
+    from "$lib/component/toasts/EnablingAddonFailedByDependencyErrorToast.svelte";
+  import FailedToEnableAddonToast from "$lib/component/toasts/FailedToEnableAddonToast.svelte";
 
   export let data;
 
@@ -200,54 +209,51 @@
 
   pageTitle.set("Eklentiler");
 
-  function onTogglePluginStateClick(plugin) {
-    updatePlugin(plugin, (plugin) => {
-      plugin.loading = true;
-      plugin.error = null;
-      if (plugin.status === "FAILED") {
-        plugin.status = "RESOLVING"
-      }
+  setCallbackConfirmDisableAddonModal((plugin, hideModal) => {
+    togglePluginState(plugin, false, () => {
+      hideModal();
     })
+  })
 
+  function onTogglePluginStateClick(plugin) {
+    if (plugin.status === "STARTED" && plugin.dependents.length > 0) {
+      showConfirmDisableAddonModal(plugin)
+      return;
+    }
+
+    togglePluginState(plugin, plugin.status !== "STARTED")
+  }
+
+  function togglePluginState(plugin, status, callback = () => {}) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.put({
         path: `/api/panel/plugins/${plugin.id}`,
-        body: {status: plugin.status !== "STARTED" }
+        body: {status}
       })
-        .then((body) => {
-          updateLoading(plugin, false)
-
+        .then(async (body) => {
           if (body.result !== "ok") {
-            reject();
-
+            reject(body.error)
             return
           }
 
-          updatePlugin(plugin, (plugin) => {
-            plugin.status = body.status
+          if (body.status === "CREATED") {
+            showToast(EnablingAddonFailedByDependencyErrorToast, {
+              addon: plugin.id,
+            });
+          }
 
-            if (body.error) {
-              plugin.error = body.error
-            }
-          })
+          if (body.status === "FAILED") {
+            showToast(FailedToEnableAddonToast, {
+              addon: plugin.id,
+            });
+          }
 
+          data = {...data, ...await loadData({ pageType: data.pageType })}
+
+          callback();
           resolve();
         })
         .catch(e => reject(e))
     })
-  }
-
-  function updateLoading(plugin, loading) {
-    updatePlugin(plugin, (plugin) => {plugin.loading = loading})
-  }
-
-  function updatePlugin(plugin, handler = () => {}) {
-    data.plugins.forEach((eachPlugin) => {
-      if (eachPlugin.id === plugin.id) {
-        handler(eachPlugin);
-      }
-    });
-
-    data.plugins = data.plugins
   }
 </script>

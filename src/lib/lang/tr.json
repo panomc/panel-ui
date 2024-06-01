@@ -564,6 +564,12 @@
         "cancel": "İptal",
         "yes": "Evet"
       },
+      "confirm-disable-addon-will-cause-more-disable": {
+        "title": "\"{pluginId}\" eklentisini devre dışı bırakmak istediğinizden emin misiniz?",
+        "description": "\"{pluginId}\" eklentisini devre dışı bırakmak bu eklentileri de devre dışı bırakacaktır:",
+        "cancel": "İptal",
+        "yes": "Evet"
+      },
       "confirm-delete-ticket": {
         "title-single": "Bu talebi kalıcı olarak silmek istediğinizden emin misiniz?",
         "title-multi": "Bu talepleri kalıcı olarak silmek istediğinizden emin misiniz?",
@@ -741,7 +747,9 @@
         "single": "Talep kalıcı olarak silindi."
       },
       "verification-email-sent-error": "\"{username}\" kullanıcısına doğrulama e-mail gönderilemedi. Hata: {errorCode}",
-      "verification-email-sent-successful": "\"{username}\" kullanıcısına doğrulama e-mail'i gönderildi."
+      "verification-email-sent-successful": "\"{username}\" kullanıcısına doğrulama e-mail'i gönderildi.",
+      "enabling-addon-failed-by-dependency-error": "\"{addon}\" eklentisi bağımlı eklenti hatası sebebiyle etkinleştirilemedi!",
+      "failed-to-enable-addon-error": "\"{addon}\" eklentisi etkinleştirilemedi. Eklenti hatalarını kontrol edin!"
     }
   },
   "page-error": {
