@@ -88,11 +88,13 @@
                     Yapımcı: <a href="/" target="_blank">{plugin.author}</a>
                     <div class="vr mx-2"></div>
                     <span class="font-monospace">{plugin.version}</span>
-                    <div class="vr mx-2"></div>
                     {#if plugin.license}
+                      <div class="vr mx-2"></div>
                     <span class="font-monospace">{plugin.license}</span>
+                    {/if}
+                      {#if plugin.verifyStatus !== "UNKNOWN"}
                     <div class="vr mx-2"></div>
-                      {/if}
+                        {/if}
                       {#if plugin.verifyStatus === "VERIFIED"}
                         <span class="text-success">
                       <i class="fa-regular fa-circle-check me-1"></i>
