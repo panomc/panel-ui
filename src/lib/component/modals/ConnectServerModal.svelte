@@ -62,11 +62,10 @@
 
           <div class="list-group-item">
             {$_("components.modals.connect-server.steps.3")}
-
-            <a
-              class="btn btn-outline-primary mt-2 d-block"
-              href="#"
-              target="_blank">Open Notifications</a>
+            <br />
+            <small class="text-muted">
+              {$_("components.modals.connect-server.notification-will-come")}
+            </small>
           </div>
         </ol>
       </div>
