@@ -376,7 +376,7 @@
           }
 
           if (data.mode === Modes.EDIT && publish) {
-            data.post.status = 1;
+            data.post.status = StatusTypes.PUBLISHED;
           }
 
           if (publish) {
