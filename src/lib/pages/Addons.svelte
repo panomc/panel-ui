@@ -115,14 +115,16 @@
                       <a href="/" target="_blank">{plugin.author}</a>
                       <div class="vr mx-2"></div>
                       <span class="font-monospace">{plugin.version}</span>
-                      <div class="vr mx-2"></div>
-                      <a
-                        href="https://panomc.com/addons/detail/{plugin.id}"
-                        target="_blank"
-                        title="Mağaza Adresi"
-                        class="card-link">
-                        <i class="fa-solid fa-store"></i>
-                      </a>
+                      {#if plugin.verifyStatus !== "UNKNOWN"}
+                        <div class="vr mx-2"></div>
+                        <a
+                          href="https://panomc.com/addons/detail/{plugin.id}"
+                          target="_blank"
+                          title="Mağaza Adresi"
+                          class="card-link">
+                          <i class="fa-solid fa-store"></i>
+                        </a>
+                      {/if}
                       {#if plugin.sourceUrl}
                         <div class="vr mx-2"></div>
                         <a
