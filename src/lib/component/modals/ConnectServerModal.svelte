@@ -39,11 +39,7 @@
               })}
             </small>
             <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                value="
-                {commandText}" />
+              <input type="text" class="form-control" value="{commandText}" />
               <button
                 class="btn btn-link border"
                 type="button"
