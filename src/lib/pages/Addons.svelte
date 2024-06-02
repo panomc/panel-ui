@@ -257,9 +257,7 @@
             const newPluginData = newPluginsData.plugins.find(newPluginData => newPluginData.id === plugin.id)
 
             if (newPluginData == null) {
-              const index = data.plugins.indexOf(plugin)
-
-              data.plugins.splice(index, 1);
+              data.plugins = data.plugins.filter(filterPlugin => filterPlugin.id !== plugin.id)
             }
           else {
               Object.keys(newPluginData).forEach((key) => {
