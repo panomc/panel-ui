@@ -130,6 +130,7 @@
 </div>
 
 <ConfirmDisableAddonWillCauseMoreDisableModal/>
+<ConfirmEnablingAddonWillCauseMoreEnableModal/>
 
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
@@ -202,6 +203,8 @@
   } from "$lib/component/modals/AddPluginModal.svelte";
   import ConfirmDisableAddonWillCauseMoreDisableModal, {show as showConfirmDisableAddonModal, setCallback as setCallbackConfirmDisableAddonModal}
     from "$lib/component/modals/ConfirmDisableAddonWillCauseMoreDisableModal.svelte";
+  import ConfirmEnablingAddonWillCauseMoreEnableModal, {show as showConfirmEnablingAddonModal, setCallback as setCallbackConfirmEnablingAddonModal}
+    from "$lib/component/modals/ConfirmEnablingAddonWillCauseMoreEnableModal.svelte";
   import EnablingAddonFailedByDependencyErrorToast
     from "$lib/component/toasts/EnablingAddonFailedByDependencyErrorToast.svelte";
   import FailedToEnableAddonToast from "$lib/component/toasts/FailedToEnableAddonToast.svelte";
@@ -219,9 +222,20 @@
     })
   })
 
+  setCallbackConfirmEnablingAddonModal((plugin, hideModal) => {
+    togglePluginState(plugin, true, () => {
+      hideModal();
+    })
+  })
+
   function onTogglePluginStateClick(plugin) {
     if (plugin.status === "STARTED" && plugin.dependents.length > 0) {
       showConfirmDisableAddonModal(plugin)
+      return;
+    }
+
+    if (plugin.status !== "STARTED" && plugin.notStartedDependencies.length > 0) {
+      showConfirmEnablingAddonModal(plugin)
       return;
     }
 

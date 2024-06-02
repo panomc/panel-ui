@@ -543,6 +543,12 @@
         "cancel": "Cancel",
         "yes": "Yes"
       },
+      "confirm-enabling-addon-will-cause-more-enable": {
+        "title": "Are you sure to enable \"{pluginId}\" addon?",
+        "description": "Enabling \"{pluginId}\" will cause enable these addons too:",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      },
       "confirm-delete-ticket": {
         "title-single": "Are you sure you want to permanently delete this ticket?",
         "title-multi": "Are you sure you want to permanently delete these tickets?",

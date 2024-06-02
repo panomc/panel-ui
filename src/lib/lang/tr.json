@@ -570,6 +570,12 @@
         "cancel": "İptal",
         "yes": "Evet"
       },
+      "confirm-enabling-addon-will-cause-more-enable": {
+        "title": "\"{pluginId}\" eklentisini ektinleştirmek istediğinizden emin misiniz?",
+        "description": "\"{pluginId}\" eklentisini etkinleştirmek bu eklentileri de etkinleştirecektir:",
+        "cancel": "İptal",
+        "yes": "Evet"
+      },
       "confirm-delete-ticket": {
         "title-single": "Bu talebi kalıcı olarak silmek istediğinizden emin misiniz?",
         "title-multi": "Bu talepleri kalıcı olarak silmek istediğinizden emin misiniz?",
