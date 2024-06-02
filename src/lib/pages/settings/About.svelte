@@ -60,20 +60,10 @@
       {$_("pages.settings.about.open-source-licenses")} ❤️
     </h5>
 
-    <!-- Bootstrap 4.3 License -->
-    <details>
-      <summary class="h6 text-primary">Bootstrap 4.3</summary>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quisquam
-        assumenda dolor eligendi fugit, architecto ab vero possimus minus
-        consequatur delectus aut quam voluptatem debitis ullam ea voluptate
-        inventore rem!
-      </p>
-    </details>
+    <!-- Software License -->
 
-    <!-- Another Software License -->
     <details>
-      <summary class="h6 text-primary">Another Software</summary>
+      <summary class="h6 text-primary">Title</summary>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quisquam
         assumenda dolor eligendi fugit, architecto ab vero possimus minus

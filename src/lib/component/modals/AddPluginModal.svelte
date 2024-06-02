@@ -1,6 +1,10 @@
 <!-- Add Plugin Modal -->
-<div class="modal fade" id="{dialogID}" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+<div
+  class="modal modal-xl fade"
+  id="{dialogID}"
+  tabindex="-1"
+  aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       {#if $loading}
         <div class="modal-body">
@@ -10,9 +14,7 @@
         </div>
       {:else}
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Add plugin
-          </h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add plugin</h5>
           <button
             type="button"
             class="btn-close"
@@ -20,12 +22,8 @@
             aria-label="Close"
             on:click="{hide}"></button>
         </div>
-        <div class="modal-body">
-          test
-        </div>
-        <div class="modal-footer">
-          Footer
-        </div>
+        <div class="modal-body">test</div>
+        <div class="modal-footer">Footer</div>
       {/if}
     </div>
   </div>

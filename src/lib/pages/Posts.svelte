@@ -5,17 +5,19 @@
     <a
       href="{base}/posts/create-post"
       class="btn btn-secondary ms-auto"
-      role="button" slot="right">
+      role="button"
+      slot="right">
       <i class="fas fa-plus me-2"></i>
       {$_("pages.posts.create-post-button")}
     </a>
 
     <!-- Submenu -->
     <CardMenu slot="middle">
-      <CardMenuItem href="/posts" startsWith>Yazılar</CardMenuItem>
-      <CardMenuItem href="/posts/categories" startsWith>{$_("pages.posts.post-categories-button")}</CardMenuItem>
+      <CardMenuItem href="/posts" startsWith
+        >{$_("pages.post-categories.posts")}</CardMenuItem>
+      <CardMenuItem href="/posts/categories" startsWith
+        >{$_("pages.posts.post-categories-button")}</CardMenuItem>
       <CardMenuItem disabled>Etiketler</CardMenuItem>
-      <CardMenuItem disabled>Yorumlar</CardMenuItem>
     </CardMenu>
   </PageActions>
 
@@ -24,7 +26,7 @@
   <div class="card">
     <div class="card-body">
       <CardHeader>
-        <h5 class="card-title text-xl-start text-center" slot="left">
+        <h5 class="card-title" slot="left">
           {$_("pages.posts.table-title", {
             values: {
               postCount: data.postCount,
@@ -42,13 +44,19 @@
 
         <!-- Filters -->
         <CardFilters slot="right">
-          <CardFiltersItem href="/posts/published" active="{data.pageType === PageTypes.PUBLISHED}">
+          <CardFiltersItem
+            href="/posts/published"
+            active="{data.pageType === PageTypes.PUBLISHED}">
             {$_("pages.posts.published")}
           </CardFiltersItem>
-          <CardFiltersItem href="/posts/draft" active="{data.pageType === PageTypes.DRAFT}">
+          <CardFiltersItem
+            href="/posts/draft"
+            active="{data.pageType === PageTypes.DRAFT}">
             {$_("pages.posts.draft")}
           </CardFiltersItem>
-          <CardFiltersItem href="/posts/trash" active="{data.pageType === PageTypes.TRASH}">
+          <CardFiltersItem
+            href="/posts/trash"
+            active="{data.pageType === PageTypes.TRASH}">
             {$_("pages.posts.trash")}
           </CardFiltersItem>
         </CardFilters>

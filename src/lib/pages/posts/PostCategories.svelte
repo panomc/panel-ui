@@ -2,28 +2,36 @@
 <article class="container">
   <!-- Action Menu -->
   <PageActions>
-    <a class="btn btn-link" role="button" href="{base}/posts" slot="left">
-      <i class="fas fa-arrow-left me-2"></i>
-      {$_('pages.post-categories.posts')}
-    </a>
     <button
       class="btn btn-secondary"
       type="button"
-      on:click="{onCreateCategoryClick}" slot="right">
-      <i class="fas fa-plus me-2"></i>{$_('pages.post-categories.create-category-button')}
+      on:click="{onCreateCategoryClick}"
+      slot="right">
+      <i class="fas fa-plus me-2"></i>{$_(
+        "pages.post-categories.create-category-button",
+      )}
     </button>
+    <CardMenu slot="middle">
+      <CardMenuItem href="/posts"
+        >{$_("pages.post-categories.posts")}</CardMenuItem>
+      <CardMenuItem href="/posts/categories" startsWith
+        >{$_("pages.posts.post-categories-button")}</CardMenuItem>
+      <CardMenuItem disabled>Etiketler</CardMenuItem>
+    </CardMenu>
   </PageActions>
 
-  <!-- Post categories -->
+  <!-- Post Categories -->
   <div class="card">
     <div class="card-body">
       <CardHeader>
-        <h5 class="card-title text-sm-left text-center" slot="left">
-          {$_('pages.post-categories.card-title', {values:{count: data.categoryCount}})}
+        <h5 class="card-title" slot="left">
+          {$_("pages.post-categories.card-title", {
+            values: { count: data.categoryCount },
+          })}
         </h5>
       </CardHeader>
 
-      <!-- No Category -->
+      <!-- No Content -->
       {#if data.categoryCount === 0}
         <NoContent />
       {/if}
@@ -35,10 +43,14 @@
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th class="align-middle" scope="col">{$_('pages.post-categories.category')}</th>
-                <th scope="col" class="align-middle">{$_('pages.post-categories.description')}</th>
-                <th scope="col" class="align-middle">{$_('pages.post-categories.url')}</th>
-                <th scope="col" class="d-none align-middle">{$_('pages.post-categories.color')}</th>
+                <th class="align-middle" scope="col"
+                  >{$_("pages.post-categories.category")}</th>
+                <th scope="col" class="align-middle"
+                  >{$_("pages.post-categories.description")}</th>
+                <th scope="col" class="align-middle"
+                  >{$_("pages.post-categories.url")}</th>
+                <th scope="col" class="d-none align-middle"
+                  >{$_("pages.post-categories.color")}</th>
               </tr>
             </thead>
             <tbody>
@@ -156,6 +168,8 @@
   import PostCategoryRow from "$lib/component/rows/PostCategoryRow.svelte";
   import PageActions from "$lib/component/PageActions.svelte";
   import CardHeader from "$lib/component/CardHeader.svelte";
+  import CardMenu from "$lib/component/CardMenu.svelte";
+  import CardMenuItem from "$lib/component/CardMenuItem.svelte";
 
   export let data;
 

@@ -22,7 +22,7 @@
   <div class="card">
     <div class="card-body">
       <CardHeader>
-        <h5 class="card-title text-sm-left text-center" slot="left">
+        <h5 class="card-title" slot="left">
           {$_("pages.ticket-categories.card-title", {
             values: { count: data.categoryCount },
           })}

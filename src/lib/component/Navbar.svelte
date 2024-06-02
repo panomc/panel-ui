@@ -41,7 +41,7 @@
         </a>
 
         <div
-          class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
+          class="dropdown-menu dropdown-menu-end animate__animated animate__zoomIn">
           <h6 class="dropdown-header">
             {$_("components.navbar.notifications")}
             {$notificationCount === 0 ? "" : "(" + $notificationCount + ")"}
@@ -90,7 +90,7 @@
             alt="{$user.username}" />
         </button>
         <ul
-          class="dropdown-menu dropdown-menu-end animate__animated animate__zoomInUp">
+          class="dropdown-menu dropdown-menu-end animate__animated animate__zoomIn">
           <h6 class="dropdown-header">{$user.username}</h6>
           <li>
             <a

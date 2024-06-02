@@ -24,7 +24,7 @@
     </div>
   </PageActions>
 
-  <div class="alert alert-warning mb-3" role="alert">
+  <div class="alert alert-warning mb-3 animate__animated animate__bounceInDown animate__slower" role="alert">
     <h5 class="alert-heading">
       Platform güncellemesini uygulamak için yeniden başlatın
     </h5>

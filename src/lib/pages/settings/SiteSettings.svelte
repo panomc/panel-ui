@@ -2,13 +2,13 @@
 <div class="card">
   <div class="card-body animate__animated animate__fadeIn">
     <div class="row mb-3">
-      <label class="col-md-4 col-form-label col-form-label-lg" for="siteTitle"
+      <label class="col-md-4 col-form-label" for="siteTitle"
         >{$_("pages.settings.site-settings.inputs.website-name.label")}</label>
       <div class="col">
         <input
           bind:value="{data.websiteName}"
           aria-describedby="siteTitle"
-          class="form-control form-control-lg"
+          class="form-control"
           placeholder="{$_(
             'pages.settings.site-settings.inputs.website-name.placeholder',
           )}"

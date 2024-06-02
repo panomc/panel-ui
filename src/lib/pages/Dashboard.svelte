@@ -64,22 +64,23 @@
             </a>
           </li>
           <li>
-            <div class="btn-group pt-3">
-              <a
-                class="btn btn-sm btn-outline-primary"
-                href="https://panomc.com/discord"
-                target="_blank">
-                <i class="fa-solid fa-globe me-2"></i>
-                {$_("pages.dashboard.welcome-card.website")}
-              </a>
-              <a
-                class="btn btn-sm btn-outline-primary"
-                href="https://panomc.com/discord"
-                target="_blank">
-                <i class="fab fa-discord me-2"></i>
-                {$_("pages.dashboard.welcome-card.discord")}
-              </a>
-            </div>
+            
+            <a
+            class="alert-link"
+            href="https://panomc.com/discord"
+            target="_blank">
+            <i class="fa-solid fa-globe me-2"></i>
+            {$_("pages.dashboard.welcome-card.website")}
+          </a>
+          </li>
+          <li>
+            <a
+              class="alert-link"
+              href="https://panomc.com/discord"
+              target="_blank">
+              <i class="fab fa-discord me-2"></i>
+              {$_("pages.dashboard.welcome-card.discord")}
+            </a>
           </li>
         </ul>
       </div>

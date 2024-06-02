@@ -1,6 +1,8 @@
 <!-- General Settings Sub Page -->
-<div class="card">
+<div class="card mb-3">
   <div class="card-body animate__animated animate__fadeIn">
+    <h5 class="card-title">
+      {$_("pages.settings.platform.preferences")}</h5>
     <div class="row mb-3">
       <label class="col-md-4" for="platformDevMode"> Geliştirici Modu: </label>
       <div class="col">
@@ -30,9 +32,6 @@
       </div>
     </div>
 
-    <h5 class="card-title">
-      {$_("pages.settings.platform.update-preferences")}
-    </h5>
     <div class="row mb-3">
       <label class="col-md-4 col-form-label" for="updatePeriod">
         {$_("pages.settings.platform.check-auto-updates")}
@@ -44,20 +43,20 @@
           id="updatePeriod">
           <option value="{UpdatePeriod.NEVER}"
             >{$_(
-              "pages.settings.platform.inputs.check-auto-updates.never"
+              "pages.settings.platform.inputs.check-auto-updates.never",
             )}</option>
           <option value="{UpdatePeriod.ONCE_PER_DAY}"
             >{$_(
-              "pages.settings.platform.inputs.check-auto-updates.once-in-a-day"
+              "pages.settings.platform.inputs.check-auto-updates.once-in-a-day",
             )}</option>
           <option value="{UpdatePeriod.ONCE_PER_WEEK}"
             >{$_(
-              "pages.settings.platform.inputs.check-auto-updates.once-in-a-week"
+              "pages.settings.platform.inputs.check-auto-updates.once-in-a-week",
             )}
           </option>
           <option value="{UpdatePeriod.ONCE_PER_MONTH}"
             >{$_(
-              "pages.settings.platform.inputs.check-auto-updates.once-in-a-month"
+              "pages.settings.platform.inputs.check-auto-updates.once-in-a-month",
             )}</option>
         </select>
       </div>
@@ -70,6 +69,25 @@
       on:click="{save}"
       >{$_("pages.settings.platform.save-button")}
     </button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">
+      {$_("pages.settings.platform.smtp-settings")}</h5>
+    <div class="row mb-3">
+      <label class="col-md-4 col-form-label" for="mailUsernameAdress">
+        {$_("pages.settings.platform.mail-username-address")}
+      </label>
+      <div class="col-md-4">
+        <input
+          id="mailUsernameAdress"
+          class="form-control"
+          type="email"
+          name="mailUsernameAdress" />
+      </div>
+    </div>
   </div>
 </div>
 

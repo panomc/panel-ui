@@ -150,8 +150,8 @@
       },
       "platform": {
         "title": "Genel Ayarlar",
+        "preferences": "Tercihler",
         "display-language": "Görüntüleme Dili:",
-        "update-preferences": "Güncelleme Tercihleri",
         "check-auto-updates": "Otomatik güncellemeleri denetle:",
         "inputs": {
           "check-auto-updates": {
@@ -161,6 +161,9 @@
             "once-in-a-month": "Ayda bir kez"
           }
         },
+        "smtp-settings": "SMTP Ayarları",
+        "mail-username-address": "Kullanıcı Adı (Adres)",
+        "smtp-password": "Şifre",
         "save-button": "Kaydet"
       }
     },

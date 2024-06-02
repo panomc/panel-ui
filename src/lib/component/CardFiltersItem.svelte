@@ -1,9 +1,9 @@
 <a
   class:active="{active}"
-  class="btn btn-sm btn-outline-primary"
+  class="btn btn-sm btn-outline-primary text-truncate"
   role="button"
   href="{base + href}">
-  <slot/>
+  <slot />
 </a>
 
 <script>
@@ -11,6 +11,6 @@
   import { base } from "$app/paths";
   import { _ } from "svelte-i18n";
 
-  export let href
-  export let active
+  export let href;
+  export let active;
 </script>

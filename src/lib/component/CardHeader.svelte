@@ -1,13 +1,13 @@
-<div class="row justify-content-between align-items-center mb-3">
-  <div class="col-xl-3 col-12">
-    <slot name="left"/>
+<div class="row align-items-center mb-3">
+  <div class="col-xl-4 col-6 order-1">
+    <slot name="left" />
   </div>
-  <div class="col-xl-6 col d-flex justify-content-xl-center">
+  <div class="col-xl-4 col-12 order-xl-2 order-first">
     <!-- Submenu -->
-    <slot name="middle"/>
+    <slot name="middle" />
   </div>
-  <div class="col-xl-3 col d-flex justify-content-end">
+  <div class="col-xl-4 col-6 d-flex justify-content-end order-3">
     <!-- Filters -->
-    <slot name="right"/>
+    <slot name="right" />
   </div>
 </div>

@@ -3,7 +3,7 @@
   <!-- Action Menu -->
   <PageActions>
     <a
-      class="btn btn-link d-none"
+      class="btn btn-link"
       role="button"
       href="/addons/categories"
       slot="left">
@@ -69,7 +69,7 @@
                         height="128"
                         width="128"
                         src="{API_URL}/panel/plugins/{plugin.id}/logo"
-                        class="img-thumbnail animate__animated animate__zoomIn img-fluid"
+                        class="img-thumbnail animate__animated animate__zoomIn d-block"
                         alt="{plugin.id}" />
                     </a>
                   </div>

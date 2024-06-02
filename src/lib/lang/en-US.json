@@ -3,7 +3,7 @@
     "dashboard": {
       "title": "Panel",
       "welcome-card": {
-        "description": "The Pano is successfully installed and ready for use. \uD83D\uDE80 <br /> Here's what you can do to get started:",
+        "description": "Pano is successfully installed and ready for use. \uD83D\uDE80 <br /> Here's what you can do to get started:",
         "connect-server": "Connect Server",
         "connect-server-description": "Connect your game server and access more management features.",
         "menu-title": "The Menu",
@@ -150,8 +150,8 @@
       },
       "platform": {
         "title": "General Settings",
+        "preferences": "Preferences",
         "display-language": "Display Language:",
-        "update-preferences": "Update Preferences",
         "check-auto-updates": "Check for automatic updates:",
         "inputs": {
           "check-auto-updates": {
@@ -161,6 +161,21 @@
             "once-in-a-month": "Once in a month"
           }
         },
+        "smtp": {
+          "username": "Username (Address)",
+          "password": "Password",
+          "details-button": "Details",
+          "use-ssl": "Use SSL",
+          "use-tls": "Use TLS",
+          "sending-address": "Sending Address",
+          "host": "Host",
+          "port": "Port",
+          "auth-method": "Auth Method"
+        },
+        "smtp-settings": "SMTP Settings",
+        "description": "Pano requires an email provider to be able to send emails. Please log in with the e-mail service you want to use.",
+        "help-link-text": "More about setting e-mail",
+
         "save-button": "Save"
       }
     },
@@ -564,7 +579,7 @@
         "title": "Connect Server",
         "close": "Close",
         "steps": {
-          "1": "Install the Game Plugin on Your Server",
+          "1": "Install Game Server Plugin",
           "2": "Run Connection Command",
           "3": "Confirm Connection Request"
         },
