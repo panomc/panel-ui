@@ -25,105 +25,150 @@
   <div class="card">
     <div class="card-body">
       <CardHeader>
-        <h5 class="card-title" slot="left">{data.plugins.length} {data.pageType === PageTypes.ACTIVE ? "Aktif" : data.pageType === PageTypes.DISABLED ? "Devre Dışı" : "Yüklü" } Eklenti</h5>
+        <h5 class="card-title" slot="left">
+          {data.plugins.length}
+          {data.pageType === PageTypes.ACTIVE
+            ? "Aktif"
+            : data.pageType === PageTypes.DISABLED
+              ? "Devre Dışı"
+              : "Yüklü"} Eklenti
+        </h5>
         <!-- Filters -->
         <CardFilters slot="right">
-          <CardFiltersItem href="/addons/all" active="{data.pageType === PageTypes.ALL}">Tümü</CardFiltersItem>
-          <CardFiltersItem href="/addons/active" active="{data.pageType === PageTypes.ACTIVE}">Aktif</CardFiltersItem>
-          <CardFiltersItem href="/addons/disabled" active="{data.pageType === PageTypes.DISABLED}">Devre Dışı</CardFiltersItem>
+          <CardFiltersItem
+            href="/addons/all"
+            active="{data.pageType === PageTypes.ALL}">Tümü</CardFiltersItem>
+          <CardFiltersItem
+            href="/addons/active"
+            active="{data.pageType === PageTypes.ACTIVE}"
+            >Aktif</CardFiltersItem>
+          <CardFiltersItem
+            href="/addons/disabled"
+            active="{data.pageType === PageTypes.DISABLED}"
+            >Devre Dışı</CardFiltersItem>
         </CardFilters>
       </CardHeader>
 
       <div class="row row-cols-xl-2 row-cols-1 g-3">
         {#if data.plugins.length === 0}
-          <NoContent/>
+          <NoContent />
         {/if}
         {#each data.plugins as plugin, index (plugin)}
-        <div class="col">
-          <!-- Installed Addon Card -->
-          <div class="card border {plugin.status === 'FAILED' && 'border-danger border-3'} h-100">
-            <div class="card-body">
-              <div class="row h-100">
-                <div class="col-md-4 d-md-flex d-none">
-                  <a href="{base}/addons/detail/{plugin.id}">
-                    <img
-                      src="{API_URL}/panel/plugins/{plugin.id}/logo"
-                      class="img-thumbnail animate__animated animate__zoomIn"
-                      alt="{plugin.id}" />
-                  </a>
-                </div>
-                <div class="col">
-                  <div class="row">
-                    <div class="col">
-                      <a href="{base}/addons/detail/{plugin.id}">
-                        <h5 class="card-title">{plugin.id}</h5>
-                      </a>
-                    </div>
-                    <div class="col-auto">
-                      <div class="form-check form-switch">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          role="switch"
-                          id="addonStatusSwitch"
-                          checked="{plugin.status === 'STARTED'}"
-                          disabled="{plugin.loading}"
-                          on:click={(e) => {e.preventDefault(); onTogglePluginStateClick(plugin)}}/>
-                      </div>
-                    </div>
-                    {#if plugin.status === 'FAILED'}
-                    <div class="col-auto">
-                      <a
-                        href="#"
-                        tabindex="0"
-                        class="link-danger"
-                        data-bs-toggle="popover"
-                        data-bs-trigger="focus"
-                        data-bs-custom-class="font-monospace"
-                        data-bs-title="Error Log"
-                        data-bs-content="{plugin.error}">
-                        <i class="fa-solid fa-circle-exclamation fa-1x"></i>
-                      </a>
-                    </div>
-                      {/if}
+          <div
+            class="col {plugin.status === 'FAILED' &&
+              'animate__animated animate__shakeX animate__slower'}">
+            <!-- Installed Addon Card -->
+            <div
+              class="card border {plugin.status === 'FAILED' &&
+                'border-danger border-3'}">
+              <div class="card-body">
+                <div class="row d-flex flex-nowrap">
+                  <div class="col-auto d-md-flex d-none">
+                    <a href="{base}/addons/detail/{plugin.id}">
+                      <img
+                        height="128"
+                        width="128"
+                        src="{API_URL}/panel/plugins/{plugin.id}/logo"
+                        class="img-thumbnail animate__animated animate__zoomIn img-fluid"
+                        alt="{plugin.id}" />
+                    </a>
                   </div>
-                  <small class="text-muted">
-                    Yapımcı: <a href="/" target="_blank">{plugin.author}</a>
-                    <div class="vr mx-2"></div>
-                    <span class="font-monospace">{plugin.version}</span>
-                    {#if plugin.license}
+                  <div class="col">
+                    <div class="row">
+                      <div class="col">
+                        <a href="{base}/addons/detail/{plugin.id}">
+                          <h5 class="card-title">{plugin.id}</h5>
+                        </a>
+                      </div>
+                      <div class="col-auto">
+                        <div class="form-check form-switch">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            role="switch"
+                            id="addonStatusSwitch"
+                            checked="{plugin.status === 'STARTED'}"
+                            disabled="{plugin.loading}"
+                            on:click="{(e) => {
+                              e.preventDefault();
+                              onTogglePluginStateClick(plugin);
+                            }}" />
+                        </div>
+                      </div>
+                      {#if plugin.status === "FAILED"}
+                        <div class="col-auto ps-0">
+                          <a
+                            href="#"
+                            tabindex="0"
+                            class="link-danger"
+                            data-bs-toggle="popover"
+                            data-bs-trigger="focus"
+                            data-bs-custom-class="font-monospace"
+                            data-bs-title="Error Log"
+                            data-bs-content="{plugin.error}">
+                            <i class="fa-solid fa-circle-exclamation fa-1x"></i>
+                          </a>
+                        </div>
+                      {/if}
+                    </div>
+                    <small class="text-muted">
+                      <a href="/" target="_blank">{plugin.author}</a>
                       <div class="vr mx-2"></div>
-                    <span class="font-monospace">{plugin.license}</span>
-                    {/if}
+                      <span class="font-monospace">{plugin.version}</span>
+                      <div class="vr mx-2"></div>
+                      <a
+                        href="https://panomc.com/addons/detail/{plugin.id}"
+                        target="_blank"
+                        title="Mağaza Adresi"
+                        class="card-link">
+                        <i class="fa-solid fa-store"></i>
+                      </a>
+                      {#if plugin.sourceUrl}
+                        <div class="vr mx-2"></div>
+                        <a
+                          href="{plugin.sourceUrl}"
+                          target="_blank"
+                          title="Kaynak Adresi"
+                          class="card-link">
+                          <i class="fa-solid fa-link"></i>
+                        </a>
+                      {/if}
+                      {#if plugin.license}
+                        <div class="vr mx-2"></div>
+                        <span class="font-monospace">{plugin.license}</span>
+                      {/if}
                       {#if plugin.verifyStatus !== "UNKNOWN"}
-                    <div class="vr mx-2"></div>
-                        {/if}
+                        <div class="vr mx-2"></div>
+                      {/if}
                       {#if plugin.verifyStatus === "VERIFIED"}
-                        <span class="text-success" use:tooltip="{['Verified by Pano', { placement: 'bottom' }]}">
-                      <i class="fa-regular fa-circle-check me-1"></i>
+                        <span
+                          class="text-success"
+                          use:tooltip="{[
+                            'Verified by Pano',
+                            { placement: 'bottom' },
+                          ]}">
+                          <i class="fa-regular fa-circle-check me-1"></i>
                         </span>
-                        {:else if plugin.verifyStatus === "NOT_VERIFIED"}
-                        <span class="text-warning" use:tooltip="{['Not verified by Pano, use at your own risk!', { placement: 'bottom' }]}">
-                        <i class="fa-solid fa-circle-exclamation me-1"></i>
+                      {:else if plugin.verifyStatus === "NOT_VERIFIED"}
+                        <span
+                          class="text-warning"
+                          use:tooltip="{[
+                            'Not verified by Pano, use at your own risk!',
+                            { placement: 'bottom' },
+                          ]}">
+                          <i class="fa-solid fa-circle-exclamation me-1"></i>
                         </span>
                       {/if}
-                  </small>
-                  <p class="pt-2">
-                    {@html plugin.description}
-                  </p>
-                  {#if plugin.sourceUrl}
-                  <a href="{plugin.sourceUrl}" target="_blank" class="card-link">
-                    <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Kaynak</a>
-                    {/if}
-                  <a href="https://panomc.com/addons/detail/{plugin.id}" target="_blank" class="card-link">
-                    <i class="fa-solid fa-arrow-up-right-from-square me-2"></i> Mağazada
-                    Görüntüle</a>
+                    </small>
+                    <p class="pt-2">
+                      {@html plugin.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-          {/each}
+        {/each}
       </div>
     </div>
   </div>
@@ -165,7 +210,7 @@
 
     let data = {
       plugins: [],
-      pageType
+      pageType,
     };
 
     if (parentData.NETWORK_ERROR) {
@@ -198,12 +243,15 @@
   import AddPluginModal, {
     show as showAddPluginModal,
   } from "$lib/component/modals/AddPluginModal.svelte";
-  import {show as showConfirmDisableAddonModal, setCallback as setCallbackConfirmDisableAddonModal}
-    from "$lib/component/modals/ConfirmDisableAddonWillCauseMoreDisableModal.svelte";
-  import {show as showConfirmEnablingAddonModal, setCallback as setCallbackConfirmEnablingAddonModal}
-    from "$lib/component/modals/ConfirmEnablingAddonWillCauseMoreEnableModal.svelte";
-  import EnablingAddonFailedByDependencyErrorToast
-    from "$lib/component/toasts/EnablingAddonFailedByDependencyErrorToast.svelte";
+  import {
+    show as showConfirmDisableAddonModal,
+    setCallback as setCallbackConfirmDisableAddonModal,
+  } from "$lib/component/modals/ConfirmDisableAddonWillCauseMoreDisableModal.svelte";
+  import {
+    show as showConfirmEnablingAddonModal,
+    setCallback as setCallbackConfirmEnablingAddonModal,
+  } from "$lib/component/modals/ConfirmEnablingAddonWillCauseMoreEnableModal.svelte";
+  import EnablingAddonFailedByDependencyErrorToast from "$lib/component/toasts/EnablingAddonFailedByDependencyErrorToast.svelte";
   import FailedToEnableAddonToast from "$lib/component/toasts/FailedToEnableAddonToast.svelte";
   import NoContent from "$lib/component/NoContent.svelte";
 
@@ -216,65 +264,73 @@
   setCallbackConfirmDisableAddonModal((plugin, hideModal) => {
     togglePluginState(plugin, false, () => {
       hideModal();
-    })
-  })
+    });
+  });
 
   setCallbackConfirmEnablingAddonModal((plugin, hideModal) => {
     togglePluginState(plugin, true, () => {
       hideModal();
-    })
-  })
+    });
+  });
 
   function onTogglePluginStateClick(plugin) {
     if (plugin.status === "STARTED" && plugin.dependents.length > 0) {
-      showConfirmDisableAddonModal(plugin)
+      showConfirmDisableAddonModal(plugin);
       return;
     }
 
-    if (plugin.status !== "STARTED" && plugin.notStartedDependencies.length > 0) {
-      showConfirmEnablingAddonModal(plugin)
+    if (
+      plugin.status !== "STARTED" &&
+      plugin.notStartedDependencies.length > 0
+    ) {
+      showConfirmEnablingAddonModal(plugin);
       return;
     }
 
-    togglePluginState(plugin, plugin.status !== "STARTED")
+    togglePluginState(plugin, plugin.status !== "STARTED");
   }
 
   function togglePluginState(plugin, status, callback = () => {}) {
     showNetworkErrorOnCatch((resolve, reject) => {
       ApiUtil.put({
         path: `/api/panel/plugins/${plugin.id}`,
-        body: {status}
+        body: { status },
       })
         .then(async (body) => {
           if (body.result !== "ok") {
-            reject(body.error)
-            return
+            reject(body.error);
+            return;
           }
 
-          const newPluginsData = await loadData({ pageType: data.pageType })
+          const newPluginsData = await loadData({ pageType: data.pageType });
 
           data.plugins.forEach((plugin) => {
-            const newPluginData = newPluginsData.plugins.find(newPluginData => newPluginData.id === plugin.id)
+            const newPluginData = newPluginsData.plugins.find(
+              (newPluginData) => newPluginData.id === plugin.id,
+            );
 
             if (newPluginData == null) {
-              data.plugins = data.plugins.filter(filterPlugin => filterPlugin.id !== plugin.id)
-            }
-          else {
+              data.plugins = data.plugins.filter(
+                (filterPlugin) => filterPlugin.id !== plugin.id,
+              );
+            } else {
               Object.keys(newPluginData).forEach((key) => {
-                plugin[key] = newPluginData[key]
-              })
+                plugin[key] = newPluginData[key];
+              });
             }
-          })
+          });
 
-          newPluginsData.plugins.forEach(newPluginData => {
-            const pluginData = data.plugins.find(plugin => newPluginData.id === plugin.id)
+          newPluginsData.plugins.forEach((newPluginData) => {
+            const pluginData = data.plugins.find(
+              (plugin) => newPluginData.id === plugin.id,
+            );
 
             if (pluginData == null) {
-              data.plugins.push(newPluginData)
+              data.plugins.push(newPluginData);
             }
-          })
+          });
 
-          data.plugins = data.plugins
+          data.plugins = data.plugins;
 
           if (body.status === "CREATED") {
             showToast(EnablingAddonFailedByDependencyErrorToast, {
@@ -291,7 +347,7 @@
           callback();
           resolve();
         })
-        .catch(e => reject(e))
-    })
+        .catch((e) => reject(e));
+    });
   }
 </script>
