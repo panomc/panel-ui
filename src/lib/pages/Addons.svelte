@@ -252,7 +252,17 @@
             });
           }
 
-          data = {...data, ...await loadData({ pageType: data.pageType })}
+          const newPluginsData = await loadData({ pageType: data.pageType })
+
+          data.plugins.forEach((plugin) => {
+            const newPluginData = newPluginsData.plugins.find(newPluginData => newPluginData.id === plugin.id)
+
+            Object.keys(newPluginData).forEach((key) => {
+              plugin[key] = newPluginData[key]
+            })
+          })
+
+          data.plugins = data.plugins
 
           callback();
           resolve();
