@@ -15,7 +15,7 @@
   </td>
   <td class="align-middle text-nowrap">{category.description}</td>
   <td class="align-middle">
-    <a href="/category/{category.url}" target="_blank" title="{$_('components.post-category-row.view')}">
+    <a href="{UI_URL === '/' ? '' : UI_URL}/blog/category/{category.url}" target="_blank" title="{$_('components.post-category-row.view')}">
       /category/{category.url}
     </a>
   </td>
@@ -31,6 +31,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import { _ } from "svelte-i18n";
+  import { UI_URL } from "../../../pano-ui/js/variables.js";
 
   export let category;
   export let index;
