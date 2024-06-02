@@ -156,7 +156,7 @@
                         <td class="align-middle text-nowrap">
                           <a
                             title="{$_('pages.player-detail.filter')}"
-                            href="/tickets/category/{ticket.category.url}">
+                            href="{base}/tickets/category/{ticket.category.url}">
                             {ticket.category.title === "-"
                               ? $_("pages.player-detail.no-category")
                               : ticket.category.title}
