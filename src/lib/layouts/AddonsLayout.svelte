@@ -1,8 +1,15 @@
 <slot />
 
+<ConfirmDisableAddonWillCauseMoreDisableModal/>
+<ConfirmEnablingAddonWillCauseMoreEnableModal/>
+
 <script context="module">
   import { redirect } from "@sveltejs/kit";
   import { hasPermission, Permissions } from "$lib/auth.util.js";
+  import ConfirmDisableAddonWillCauseMoreDisableModal
+    from "$lib/component/modals/ConfirmDisableAddonWillCauseMoreDisableModal.svelte";
+  import ConfirmEnablingAddonWillCauseMoreEnableModal
+    from "$lib/component/modals/ConfirmEnablingAddonWillCauseMoreEnableModal.svelte";
 
   /**
    * @type {import('@sveltejs/kit').LayoutLoad}

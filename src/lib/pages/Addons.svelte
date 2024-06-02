@@ -129,9 +129,6 @@
   </div>
 </div>
 
-<ConfirmDisableAddonWillCauseMoreDisableModal/>
-<ConfirmEnablingAddonWillCauseMoreEnableModal/>
-
 <script context="module">
   import ApiUtil from "$lib/api.util.js";
 
@@ -201,9 +198,9 @@
   import AddPluginModal, {
     show as showAddPluginModal,
   } from "$lib/component/modals/AddPluginModal.svelte";
-  import ConfirmDisableAddonWillCauseMoreDisableModal, {show as showConfirmDisableAddonModal, setCallback as setCallbackConfirmDisableAddonModal}
+  import {show as showConfirmDisableAddonModal, setCallback as setCallbackConfirmDisableAddonModal}
     from "$lib/component/modals/ConfirmDisableAddonWillCauseMoreDisableModal.svelte";
-  import ConfirmEnablingAddonWillCauseMoreEnableModal, {show as showConfirmEnablingAddonModal, setCallback as setCallbackConfirmEnablingAddonModal}
+  import {show as showConfirmEnablingAddonModal, setCallback as setCallbackConfirmEnablingAddonModal}
     from "$lib/component/modals/ConfirmEnablingAddonWillCauseMoreEnableModal.svelte";
   import EnablingAddonFailedByDependencyErrorToast
     from "$lib/component/toasts/EnablingAddonFailedByDependencyErrorToast.svelte";
@@ -254,6 +251,33 @@
             return
           }
 
+          const newPluginsData = await loadData({ pageType: data.pageType })
+
+          data.plugins.forEach((plugin) => {
+            const newPluginData = newPluginsData.plugins.find(newPluginData => newPluginData.id === plugin.id)
+
+            if (newPluginData == null) {
+              const index = data.plugins.indexOf(plugin)
+
+              data.plugins.splice(index, 1);
+            }
+          else {
+              Object.keys(newPluginData).forEach((key) => {
+                plugin[key] = newPluginData[key]
+              })
+            }
+          })
+
+          newPluginsData.plugins.forEach(newPluginData => {
+            const pluginData = data.plugins.find(plugin => newPluginData.id === plugin.id)
+
+            if (pluginData == null) {
+              data.plugins.push(newPluginData)
+            }
+          })
+
+          data.plugins = data.plugins
+
           if (body.status === "CREATED") {
             showToast(EnablingAddonFailedByDependencyErrorToast, {
               addon: plugin.id,
@@ -265,18 +289,6 @@
               addon: plugin.id,
             });
           }
-
-          const newPluginsData = await loadData({ pageType: data.pageType })
-
-          data.plugins.forEach((plugin) => {
-            const newPluginData = newPluginsData.plugins.find(newPluginData => newPluginData.id === plugin.id)
-
-            Object.keys(newPluginData).forEach((key) => {
-              plugin[key] = newPluginData[key]
-            })
-          })
-
-          data.plugins = data.plugins
 
           callback();
           resolve();
