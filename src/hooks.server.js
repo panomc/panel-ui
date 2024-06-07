@@ -6,8 +6,8 @@ import {
 
 import ApiUtil, { networkErrorBody } from "$lib/api.util.js";
 
-async function fetchBasicData(token, CSRFToken) {
-  return ApiUtil.get({ path: "/api/panel/basicData", token, CSRFToken }).catch(
+async function fetchBasicData(token, csrfToken) {
+  return ApiUtil.get({ path: "/api/panel/basicData", token, csrfToken }).catch(
     () => networkErrorBody,
   );
 }
@@ -17,12 +17,12 @@ export async function handle({ event, event: { cookies }, resolve }) {
   const locals = {};
 
   const jwt = cookies.get([COOKIE_PREFIX + JWT_COOKIE_NAME]);
-  const CSRFToken = cookies.get([COOKIE_PREFIX + CSRF_TOKEN_COOKIE_NAME]);
+  const csrfToken = cookies.get([COOKIE_PREFIX + CSRF_TOKEN_COOKIE_NAME]);
 
-  locals.basicData = await fetchBasicData(jwt, CSRFToken);
+  locals.basicData = await fetchBasicData(jwt, csrfToken);
 
   locals.jwt = jwt;
-  locals.CSRFToken = CSRFToken;
+  locals.csrfToken = csrfToken;
 
   event.locals = locals;
 

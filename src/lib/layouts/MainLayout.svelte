@@ -84,18 +84,18 @@
    */
   export async function loadServer(event) {
     const {
-      locals: { basicData, CSRFToken },
+      locals: { basicData, csrfToken },
     } = event;
 
     let siteInfo = await ApiUtil.get({
       path: "/api/siteInfo",
       request: event,
-      CSRFToken,
+      csrfToken,
     });
 
     siteInfo = await prepareSiteInfo(siteInfo)
 
-    return { basicData, CSRFToken, siteInfo };
+    return { basicData, csrfToken, siteInfo };
   }
 
   /**
@@ -103,7 +103,7 @@
    */
   export async function load(event) {
     const {
-      data: { basicData, CSRFToken, siteInfo },
+      data: { basicData, csrfToken, siteInfo },
       parent,
     } = event;
     await parent();
@@ -119,7 +119,7 @@
     const output = {
       session: {
         basicData,
-        CSRFToken,
+        csrfToken,
       },
       user: basicData.user || {},
       website: basicData.website || {},
